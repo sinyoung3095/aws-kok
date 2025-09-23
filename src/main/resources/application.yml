@@ -34,5 +34,5 @@ mybatis:
     map-underscore-to-camel-case: true
 
 # openssl rand -base64 32
-jwt:
-  secret: X6boTs4ejNABCquznMAuLFUvu3yMvu7ICL/X+/tGzus=
+#jwt:
+#  secret: X6boTs4ejNABCquznMAuLFUvu3yMvu7ICL/X+/tGzus=

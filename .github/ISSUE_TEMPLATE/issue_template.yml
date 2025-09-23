@@ -10,11 +10,3 @@ body:
               예: 로그인 페이지 구현
       validations:
           required: true
-
-    - type: input
-      attributes:
-          label: 🔗 벤치마킹 사이트 URL (Reference URL)
-          description: 클론할 대상 웹사이트 또는 디자인의 URL을 입력해 주세요.
-          placeholder: https://www.example.com/login
-      validations:
-          required: true
