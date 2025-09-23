@@ -1,0 +1,18 @@
+CREATE TABLE tbl_experience_notice (
+    id   bigint generated always as identity primary key,
+    experience_notice_title   varchar(255) not null,
+    experience_notice_subtitle   varchar(255) not null,
+    experience_notice_introduce_job   varchar(255) not null,
+    experience_notice_etc   varchar(255) not null,
+    --     start_experience_date   varchar(255) not null,
+    --     end_experience_date   varchar(255) not null,
+    experience_start_date date not null,
+    experience_end_date date not null,
+    experience_notice_notes   varchar(255) not null,
+    experience_notice_status  request_status default 'await' not null,
+    created_datetime   timestamp default now(),
+    updated_datetime   timestamp default now(),
+    company_id   bigint not null,
+    constraint fk_experience_notice_company foreign key(company_id)
+        references tbl_company(user_id)
+);
