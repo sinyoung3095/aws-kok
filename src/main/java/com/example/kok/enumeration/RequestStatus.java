@@ -1,11 +1,11 @@
 package com.example.kok.enumeration;
 
-public enum UserRole {
-    MEMBER("member"), COMPANY("company"), ADMIN("admin");
+public enum RequestStatus {
+    AWAIT("await"), ACCEPT("accept"), REJECT("reject");
 
     private final String value;
 
-    UserRole(String value) {
+    RequestStatus(String value) {
         this.value = value;
     }
 
