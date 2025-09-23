@@ -319,6 +319,10 @@ button:not(:disabled) {
     text-rendering: auto;
 }
 
+.mdi-account-box-outline:before {
+    content: "\F0007";
+}
+
 .mdi-credit-card-plus-outline:before {
     content: "\F0676";
 }
