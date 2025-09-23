@@ -10,12 +10,5 @@ import lombok.experimental.SuperBuilder;
 @ToString(callSuper=true)
 @EqualsAndHashCode(of="id", callSuper = false)
 @SuperBuilder
-public class UserVO extends Period {
-    private long id;
-    private String userName;
-    private String userPassword;
-    private String userEmail;
-    private String userPhone;
-    private Role userRole;
-    private Status userStatus;
+public class RequestInternFileVO extends Period{
 }
