@@ -1,5 +1,6 @@
 package com.example.kok.mybatis.converter;
 
+import com.example.kok.enumeration.Provider;
 import com.example.kok.enumeration.UserRole;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
@@ -11,13 +12,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-public class StringToUserRoleConverter implements Converter<String, UserRole> {
+public class StringToProvider implements Converter<String, Provider> {
     @Override
-    public UserRole convert(@NonNull String source) {
-        Map<String, UserRole> userRoleMap =
-                Stream.of(UserRole.values())
-                        .collect(Collectors.toMap(UserRole::getValue, Function.identity()));
+    public Provider convert(@NonNull String source) {
+        Map<String, Provider> providerMap =
+                Stream.of(Provider.values())
+                        .collect(Collectors.toMap(Provider::getValue, Function.identity()));
 
-        return userRoleMap.get(source);
+        return providerMap.get(source);
     }
 }

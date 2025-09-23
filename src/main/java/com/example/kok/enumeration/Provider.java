@@ -1,11 +1,11 @@
 package com.example.kok.enumeration;
 
-public enum UserRole {
-    MEMBER("member"), COMPANY("company"), ADMIN("admin");
+public enum Provider {
+    GOOGLE("google"), KAKAO("kakao"), NAVER("naver"), KOK("kok");
 
     private final String value;
 
-    UserRole(String value) {
+    Provider(String value) {
         this.value = value;
     }
 
