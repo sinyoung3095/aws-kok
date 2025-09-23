@@ -1,6 +1,8 @@
 package com.example.kok.domain;
 
 import com.example.kok.audit.Period;
+import com.example.kok.enumeration.Status;
+import com.example.kok.enumeration.UserRole;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -16,6 +18,6 @@ public class UserVO extends Period {
     private String userPassword;
     private String userEmail;
     private String userPhone;
-    private Role userRole;
+    private UserRole userRole;
     private Status userStatus;
 }
