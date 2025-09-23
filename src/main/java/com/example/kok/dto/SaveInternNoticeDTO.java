@@ -10,14 +10,9 @@ import org.springframework.stereotype.Component;
 @ToString
 @NoArgsConstructor
 @EqualsAndHashCode(of ="id")
-public class UserDTO {
-    private long id;
-    private String userName;
-    private String userPassword;
-    private String userEmail;
-    private String userPhone;
-    private UserRole userRole;
-    private Status userStatus;
+public class SaveInternNoticeDTO {
+    private long memberId;
+    private long internNoticeId;
     private String createdDateTime;
     private String updatedDateTime;
 }
