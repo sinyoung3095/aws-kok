@@ -12,10 +12,9 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-#    url: jdbc:postgresql://localhost:5432/test?serverTimezone=Asia/Seoul
-#    각자 쓰는 데이터베이스로 수정해주세요!
-#    username: spring
-#    password: 1234
+    url: jdbc:postgresql://localhost:5432/app?serverTimezone=Asia/Seoul
+    username: kok
+    password: 1234
   session:
     redis:
       repository-type: indexed
@@ -35,5 +34,5 @@ mybatis:
     map-underscore-to-camel-case: true
 
 # openssl rand -base64 32
-jwt:
-  secret:
+#jwt:
+#  secret: X6boTs4ejNABCquznMAuLFUvu3yMvu7ICL/X+/tGzus=

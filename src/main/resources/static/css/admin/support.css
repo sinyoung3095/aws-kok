@@ -1,6 +1,6 @@
 @font-face {
     font-family: Material Design Icons;
-    src: url(../../font/materialdesignicons-webfont-d5cba82059f88bfa469e.woff2);
+    src: url(/font/materialdesignicons-webfont-d5cba82059f88bfa469e.woff2);
 }
 
 :root {
@@ -317,6 +317,10 @@ button:not(:disabled) {
     font-size: inherit;
     line-height: inherit;
     text-rendering: auto;
+}
+
+.mdi-account-box-outline:before {
+    content: "\F0007";
 }
 
 .mdi-credit-card-plus-outline:before {
