@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/enterprise-console/console-profile.css">
+    <link rel="stylesheet" href="../../static/css/enterprise-console/console-sidebar.css">
+    <link rel="stylesheet" href="../../static/css/enterprise-console/console-header.css">
+    <link rel="stylesheet" href="../../static/font/font.css">
+    <link rel="shorcut icon" href="../../static/images/member/kok_favicon.png" type="image/x-icon">
+    <title>프로필 수정 | 콕</title>
+</head>
+<body>
+    <div class="wrap-enter">
+        <!-- 사이드바 시작 -->
+        <div class="sidebar-wrap">
+            <div class="sidebar-hidden"></div>
+            <div class="sidebar-main">
+                <div class="sidebar-main-inner">
+                    <div class="sidebar-logo">
+                        <ul class="logo-ul">
+                            <li class="logo-li">
+                                <button class="logo-button" id="ser-ch-button">
+                                    <div class="logo-img-div">
+                                        <img src="../../static/images/console/console-logo.png" alt="" class="logo">
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-svg"><path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path></svg>
+                                </button>
+                            </li>
+                        </ul>
+                        <div>
+                            <span class="logo-span">콕 기업용 콘솔</span>
+                        </div>
+                    </div>
+                    <div class="sidebar-list">
+                        <div>
+                            <div class="home-div">
+                                <ul class="sidebar-ul">
+                                    <li class="sidebar-li">
+                                        <a href="" class="sidebar-a side-hov">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="home-svg"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                                            <span class="sidebar-span">홈</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="bar-line"></div>
+                        </div>
+                        <div>
+                            <div class="prof-wrap">
+                                <div class="sidebar-text">기본 정보</div>
+                                <ul class="sidebar-ul">
+                                    <li class="sidebar-li">
+                                        <a href="" class="sidebar-a side-hov">
+                                            <img src="../../static/images/member/kok_logo.png" alt="" class="prof-img">
+                                            <span class="sidebar-span">기업 프로필</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="bar-line"></div>
+                        </div>
+                        <div>
+                            <div class="exp-wrap">
+                                <div class="sidebar-text">체험</div>
+                                <ul class="sidebar-ul">
+                                    <li class="sidebar-li">
+                                        <button class="side-list-button side-hov" id="list-exp-button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="home-svg"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect></svg>
+                                            <span class="sidebar-span">체험 공고</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-updown"><path d="m9 18 6-6-6-6"></path></svg>
+                                        </button>
+                                        <div class="sidebar-sub-div" id="list-exp">
+                                            <ul class="sidebar-sub-ul">
+                                                <li class="sidebar-sub-li">
+                                                    <a href="" class="sidebar-sub-a">
+                                                        <span class="sidebar-span">체험 공고 목록</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-sub-li">
+                                                    <a href="" class="sidebar-sub-a">
+                                                        <span class="sidebar-span">체험 공고 등록</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="bar-line"></div>
+                        </div>
+                        <div>
+                            <div class="hire-wrap">
+                                <div class="sidebar-text">인턴</div>
+                                <ul class="sidebar-ul">
+                                    <li class="sidebar-li">
+                                        <button class="side-list-button side-hov" id="list-intern-button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="home-svg"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg>
+                                            <span class="sidebar-span">인턴 고용 공고</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-updown"><path d="m9 18 6-6-6-6"></path></svg>
+                                        </button>
+                                        <div class="sidebar-sub-div" id="list-intern">
+                                            <ul class="sidebar-sub-ul">
+                                                <li class="sidebar-sub-li">
+                                                    <a href="" class="sidebar-sub-a">
+                                                        <span class="sidebar-span">인턴 고용 공고 목록</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-sub-li">
+                                                    <a href="" class="sidebar-sub-a">
+                                                        <span class="sidebar-span">인턴 고용 공고 등록</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="bar-line"></div>
+                        </div>
+                        <div>
+                            <div class="prof-wrap">
+                                <div class="sidebar-text">광고</div>
+                                <ul class="sidebar-ul">
+                                    <li class="sidebar-li">
+                                        <a href="" class="sidebar-a side-hov">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="home-svg"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                                            <span class="sidebar-span">광고 목록</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="bar-line"></div>
+                        </div>
+                        <div>
+                            <div class="prof-wrap">
+                                <div class="sidebar-text">결제</div>
+                                <ul class="sidebar-ul">
+                                    <li class="sidebar-li">
+                                        <a href="" class="sidebar-a side-hov">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="home-svg"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg>
+                                            <span>결제 관리</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <div class="bar-line"></div>
+                            <div class="footer-title">콕 기업용 콘솔</div>
+                            <div class="footer-main-wrap">
+                                <div class="footer-main">
+                                    <p class="footer-p">© 2025 KOK, 주식회사 콕, 콕 팀, 대한민국 서울특별시 테헤란로, 00000, test@rocketpunch.com, +82 10-0000-00000</p>
+                                    <div class="footer-sub">
+                                        <p class="footer-p">사업자등록번호 000-00-00000</p>
+                                        <p class="footer-p">통신판매업신고번호 2025-지역이름-0000</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-profile">
+                        <ul class="side-prof-ul">
+                            <li class="side-prof-li">
+                                <button class="side-prof-button side-hov">
+                                    <span class="side-prof-span">
+                                        <img src="../../static/images/main-page/image.png" alt="" class="side-prof-img">
+                                    </span>
+                                    <div class="side-prof-div">
+                                        <span class="side-name">홍길동</span>
+                                        <span class="side-job">회사 산업 분야</span>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-svg"><path d="m7 15 5 5 5-5"></path><path d="m7 9 5-5 5 5"></path></svg>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="service-change-wrap" id="ser-ch-div" style="display: none;">
+            <div class="service-change">
+                <div class="ser-ch-title">서비스 전환</div>
+                <div class="bar-line-ch"></div>
+                <div class="home-ch">
+                    <div class="home-ch-inner">
+                        <span class="home-ch-title">KOK</span>
+                        <span class="home-ch-sub-title">콕</span>
+                    </div>
+                </div>
+                <div class="console-ch">
+                    <div class="console-ch-inner">
+                        <span class="console-ch-title">Enterprise console</span>
+                        <span class="console-ch-sub-title">기업 콘솔</span>
+                    </div>
+                    <div class="active-service"></div>
+                </div>
+            </div>
+        </div>
+        <!-- 사이드바 끝 -->
+        <main class="main">
+            <header class="header">
+                <div class="header-wrap">
+                    <nav class="breadcrumb">
+                        <ol class="header-ol">
+                            <li class="header-li">
+                                <span class="header-span">기업용 콘솔</span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </header>
+            <div class="home-wrap">
+                <div class="home-wrap-2">
+                    <div class="home-wrap-inner">
+                        <div class="home-wrap-inner-2">
+                            <div class="home-top">
+                                <div>
+                                    <h1 class="top-h1">기업 프로필 관리</h1>
+                                    <p class="top-p">플랫폼에 노출될 기업 정보를 관리하세요</p>
+                                </div>
+                            </div>  
+                            <div class="profile-main">
+                                <div class="profile-main-inner">
+                                    <div class="profile-main-inner-2">
+                                        <div class="profile-head">
+                                            <div class="profile-head-inner">
+                                                <div>
+                                                    <div class="head-text-main">기본 정보</div>
+                                                    <div class="head-text-sub">기업의 기본 정보를 입력하세요</div>
+                                                </div>
+                                                <div class="button-wrap">
+                                                    <button class="cancle" style="display: none;" id="cancle-btn">취소</button>
+                                                    <button class="edit-profile" id="edit-btn">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="edit-icon"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg>
+                                                        편집
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="profile-content">
+                                            <div class="contents">
+                                                <label for="" class="profile-label">배경 이미지</label>
+                                                <div class="img-wrap">
+                                                    <div class="back-wrap">
+                                                        <div class="back-img-div">
+                                                            <img src="../../static/images/mypage/banner.jpg" alt="" class="back-img">
+                                                        </div>
+                                                    </div>
+                                                    <div class="img-up-btn-wrap" style="display: none;">
+                                                        <button class="img-up" id="back-file-btn">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="img-up-svg"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+                                                            이미지 변경
+                                                        </button>
+                                                    </div>
+                                                    <input type="file" class="back-input">
+                                                </div>
+                                            </div>
+                                            <div class="contents">
+                                                <label for="" class="profile-label">프로필 이미지</label>
+                                                <div class="img-wrap">
+                                                    <div class="pro-wrap">
+                                                        <img src="../../static/images/member/kok_logo.png" alt="" class="profile-img">
+                                                    </div>
+                                                    <div class="img-up-btn-wrap" style="display: none;">
+                                                        <button class="img-up" id="prof-file-btn">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="img-up-svg"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+                                                            이미지 변경
+                                                        </button>
+                                                    </div>
+                                                    <input type="file" class="pro-input">
+                                                </div>
+                                            </div>
+                                            <div class="contents">
+                                                <label for="" class="profile-label">기업명</label>
+                                                <input type="text" class="name not-allowed" value="기업 이름" disabled>
+                                                <p class="explain">기업을 찾기 쉽도록 회사명이나 운영 중인 서비스 이름을 사용하세요 / 예: 비바리퍼블리카(토스)</p>
+                                            </div>
+                                            <div class="contents">
+                                                <label for="" class="profile-label">기업 소개</label>
+                                                <input type="text" class="name not-allowed" value="어쩌고 기업 소개 적는 칸" disabled>
+                                                <p class="explain">기업에 대한 간단한 소개를 설정하세요</p>
+                                            </div>
+                                            <div class="contents">
+                                                <label for="" class="profile-label">프로필 URL</label>
+                                                <input type="text" class="name not-allowed" value="1234kokgogo" disabled>
+                                                <p class="explain">http://kok/(여기에 url이 오도록)</p>
+                                                <p class="explain" style="display: none;" id="explain-hide1">영문, 숫자, 언더스코어(_), 하이픈(-)만 사용 가능</p>
+                                                <p class="explain" style="display: none;" id="explain-hide2">프로필 URL의 잦은 변경은 추천하지 않습니다</p>
+                                            </div>
+                                            <div class="contents">
+                                                <label for="" class="profile-label">홈페이지 URL</label>
+                                                <input type="text" class="name not-allowed" value="https://kok.com" disabled>
+                                                <p class="explain">홈페이지나 기업 sns 등의 링크</p>
+                                            </div>
+                                            <div class="contents">
+                                                <label for="" class="profile-label">산업 분야</label>
+                                                <div class="category">
+                                                    <button class="category-button not-allowed">
+                                                        <span class="selected">IT/웹/통신</span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="down-svg" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+                                                        <div class="job">
+                                                            <div class="job-1">
+                                                                <div class="job-2">
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">IT/웹/통신</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">서비스업</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">제조/화학</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">의료/제약/복지</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">유통/무역/운송</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">교육업</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">건설업</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">미디어/디자인</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">은행/금융업</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">기관/협회</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                                <p class="explain">기업이 속한 산업분야를 선택해주세요</p>
+                                            </div>
+                                            <div class="contents">
+                                                <label for="" class="profile-label">기업 규모</label>
+                                                <div class="category">
+                                                    <button class="category-button not-allowed">
+                                                        <span class="selected">매우 작은 규모(30명 이하)</span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="down-svg" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+                                                        <div class="job">
+                                                            <div class="job-1">
+                                                                <div class="job-2">
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">매우 작은 규모(30명 이하)</p>
+                                                                        </div>
+                                                                        <!-- <div class="setting-31">
+                                                                            <svg aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="24" role="img" width="24">
+                                                                                <path clip-rule="evenodd" d="M20.066 5.935a.8.8 0 0 1 0 1.13l-11 11a.8.8 0 0 1-1.131 0l-4-4a.8.8 0 0 1 1.13-1.13L8.5 16.369 18.935 5.935a.8.8 0 0 1 1.13 0" fill-rule="evenodd"></path>
+                                                                            </svg>
+                                                                        </div> -->
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">작은 규묘(300-100명)</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">중간 규모(100-400명)</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">큰 규모(400-2,000명)</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="job-3">
+                                                                        <div class="job-5">
+                                                                            <p class="job-6">매우 큰 규모(2,000명 초과)</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                                <p class="explain">기업의 규모를 선택해주세요</p>
+                                            </div>
+                                            <div class="contents">
+                                                <label for="" class="profile-label">대표자명</label>
+                                                <input type="text" class="name not-allowed" value="홍길동" disabled>
+                                                <p class="explain">대표자명을 입력하세요</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+<script src="../../static/js/console/sidebar/event.js"></script>
+<script src="../../static/js/console/profile/event.js"></script>
+</html>

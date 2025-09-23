@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kok</title>
+    <link href="../../static/images/member/kok_favicon.png" rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="../../static/css/reset.css">
+    <link rel="stylesheet" href="../../static/css/main-page/login-header.css">
+    <link rel="stylesheet" href="../../static/font/font.css">
+</head>
+<body>
+    <div class="header-wrap">
+        <div class="header">
+            <div class="header-space"></div>
+            <div class="header-login-box">
+                <button type="button" class="header-login avatar">
+                    <img class="account-info-popover" src="../../static/images/main-page/image3.png">
+                </button>
+
+                <!-- 프로필 드롭다운 -->
+                <div class="profile-modal">
+                    <div class="profile-modal-header">
+                        <div class="member-name">정희준님</div>
+                    </div>
+                    <div class="profile-modal-body">
+                        <div class="list-wrap">
+                            <div class="list">
+                                <!-- 내 프로필 -->
+                                <a href="">
+                                    <div class="profile-modal-list-section">
+                                        <div class="profile-modal-list-content-wrap">
+                                            <div class="profile-modal-list-content">
+                                                <div class="profile-modal-icon-wrap">
+                                                    <div class="profile-modal-icon">
+                                                        <svg color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24" viewBox="0 0 24 24">
+                                                            <path clip-rule="evenodd" d="M12 3.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4M7.2 7a4.8 4.8 0 1 1 9.6 0 4.8 4.8 0 0 1-9.6 0M9 15.8A3.2 3.2 0 0 0 5.8 19v2a.8.8 0 0 1-1.6 0v-2A4.8 4.8 0 0 1 9 14.2h6a4.8 4.8 0 0 1 4.8 4.8v2a.8.8 0 0 1-1.6 0v-2a3.2 3.2 0 0 0-3.2-3.2z" fill-rule="evenodd"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="profile-modal-text-wrap">
+                                                    <p class="profile-modal-text">내 프로필</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- 지원 내역 -->
+                                <button type="button" class="profile-modal-list-section-history">
+                                    <div class="profile-modal-list-content-wrap">
+                                        <div class="profile-modal-list-content">
+                                            <div class="profile-modal-icon-wrap">
+                                                <div class="profile-modal-icon">
+                                                    <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24" viewBox="0 0 24 24">
+                                                        <path clip-rule="evenodd" d="m5.603 11.798.82-.853a.8.8 0 1 1 1.153 1.11L5.541 14.17l-.014.014-.165.163a.8.8 0 0 1-1.125 0l-2.3-2.278a.8.8 0 1 1 1.126-1.137L4 11.86c.076-4.804 4.041-8.66 8.9-8.66 4.906 0 8.9 3.93 8.9 8.8 0 4.869-3.994 8.8-8.9 8.8a8.92 8.92 0 0 1-6.919-3.265.8.8 0 1 1 1.238-1.014A7.32 7.32 0 0 0 12.9 19.2c4.041 0 7.3-3.233 7.3-7.2s-3.259-7.2-7.3-7.2c-3.972 0-7.189 3.124-7.297 6.998M13 8.2a.8.8 0 0 1 .8.8v3.072l2.644 1.763a.8.8 0 1 1-.888 1.33l-3-2a.8.8 0 0 1-.356-.665V9a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="profile-modal-text-wrap">
+                                                <p class="profile-modal-text">지원 내역</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                                <button type="button" class="profile-modal-list-section-setting">
+                                    <div class="profile-modal-list-content-wrap">
+                                        <div class="profile-modal-list-content">
+                                            <div class="profile-modal-icon-wrap">
+                                                <div class="profile-modal-icon">
+                                                    <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24" viewBox="0 0 24 24">
+                                                        <path clip-rule="evenodd" d="M9.219 2.827a.8.8 0 0 1 .78-.627h4a.8.8 0 0 1 .781.627l.462 2.077q.679.311 1.28.74l2.032-.639a.8.8 0 0 1 .933.363l2 3.464a.8.8 0 0 1-.152.99l-1.57 1.44a8 8 0 0 1 0 1.477l1.57 1.44a.8.8 0 0 1 .152.99l-2 3.463a.8.8 0 0 1-.933.363l-2.032-.64q-.601.43-1.28.741l-.462 2.078a.8.8 0 0 1-.78.626h-4a.8.8 0 0 1-.781-.626l-.462-2.078a8 8 0 0 1-1.28-.74l-2.032.64a.8.8 0 0 1-.933-.364l-2-3.464a.8.8 0 0 1 .153-.99l1.57-1.44a8 8 0 0 1 0-1.476l-1.57-1.44a.8.8 0 0 1-.153-.99l2-3.464a.8.8 0 0 1 .933-.363l2.032.64q.601-.43 1.28-.74zm1.422.973-.411 1.853a.8.8 0 0 1-.49.571 6.2 6.2 0 0 0-1.61.932.8.8 0 0 1-.74.138l-1.813-.57L4.22 9.076l1.4 1.284a.8.8 0 0 1 .25.709 6.3 6.3 0 0 0 0 1.862.8.8 0 0 1-.25.71l-1.4 1.283 1.358 2.352 1.813-.57a.8.8 0 0 1 .74.138 6.2 6.2 0 0 0 1.61.932.8.8 0 0 1 .49.571l.411 1.853h2.717l.412-1.853a.8.8 0 0 1 .489-.571 6.2 6.2 0 0 0 1.61-.931.8.8 0 0 1 .74-.139l1.813.57 1.358-2.352-1.4-1.284a.8.8 0 0 1-.25-.708 6.3 6.3 0 0 0 0-1.863.8.8 0 0 1 .25-.709l1.4-1.284-1.358-2.352-1.813.57a.8.8 0 0 1-.74-.138 6.2 6.2 0 0 0-1.61-.932.8.8 0 0 1-.49-.57L13.359 3.8zM12 9.8a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4M8.2 12a3.8 3.8 0 1 1 7.6 0 3.8 3.8 0 0 1-7.6 0" fill-rule="evenodd"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="profile-modal-text-wrap">
+                                                <p class="profile-modal-text">설정</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                                <div class="profile-modal-list-section">
+                                    <div class="profile-modal-list-content-wrap">
+                                        <div class="profile-modal-list-content">
+                                            <div class="profile-modal-icon-wrap">
+                                                <div class="profile-modal-icon">
+                                                    <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24" viewBox="0 0 24 24">
+                                                        <path clip-rule="evenodd" d="M8.2 3a.8.8 0 0 1 .8-.8h8A2.8 2.8 0 0 1 19.8 5v14a2.8 2.8 0 0 1-2.8 2.8H9a.8.8 0 0 1 0-1.6h8a1.2 1.2 0 0 0 1.2-1.2V5A1.2 1.2 0 0 0 17 3.8H9a.8.8 0 0 1-.8-.8m2.234 4.435a.8.8 0 0 1 1.132 0l4 4a.8.8 0 0 1 0 1.13l-4 4a.8.8 0 1 1-1.132-1.13L13.07 12.8H5a.8.8 0 0 1 .001-1.6h8.069l-2.635-2.634a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="profile-modal-text-wrap">
+                                                <p class="profile-modal-text">로그아웃</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 지원 내역 모달창 -->
+    <div class="history-modal-background">
+        <div class="history-modal-wrap">
+            <div class="history-modal">
+                <div class="history-modal-top">
+                    <div class="history-modal-top-content-wrap">
+                        <div class="history-modal-top-content">
+                            <div class="history-modal-top-section-active">
+                                <p class="history-modal-top-section-text-active">체험</p>
+                            </div>
+                            <div class="history-modal-top-section">
+                                <p class="history-modal-top-section-text">인턴</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="history-modal-space"></div>
+                    <div class="history-modal-close-wrap">
+                        <button class="history-modal-close-button">
+                            <p class="history-modal-close-text">닫기</p>
+                        </button>
+                    </div>
+                </div>
+                <!-- 체험 지원내역 -->
+                <div class="history-modal-main history-modal-main-experience">
+                    <!-- 합격 or 접수중 -->
+                    <div class="history-modal-main-section">
+                        <div class="history-modal-main-company-wrap">
+                            <!-- 기업 프로필 이미지 -->
+                            <img alt="image" width="32" height="32" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                            <div class="history-modal-main-section-info">
+                                <span class="history-modal-main-company-name">기업명</span>
+                                <span class="history-modal-main-announce-title">체험공고 제목</span>
+                                <p class="history-modal-main-apply-date">지원일: 2025년 09월 12일</p>
+                            </div>
+                            <div class="history-modal-main-apply-status-wrap">
+                                <div class="history-modal-main-apply-status">
+                                    <span class="history-modal-main-apply-status-text">서류 접수</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="history-modal-main-section">
+                        <div class="history-modal-main-company-wrap">
+                            <!-- 기업 프로필 이미지 -->
+                            <img alt="image" width="32" height="32" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                            <div class="history-modal-main-section-info">
+                                <span class="history-modal-main-company-name">기업명</span>
+                                <span class="history-modal-main-announce-title">체험공고 제목</span>
+                                <p class="history-modal-main-apply-date">지원일: 2025년 09월 12일</p>
+                            </div>
+                            <div class="history-modal-main-apply-status-wrap">
+                                <div class="history-modal-main-apply-status">
+                                    <span class="history-modal-main-apply-status-text">합격</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 불합격 시 상세보기 막기 -->
+                    <div class="history-modal-main-section fail">
+                        <div class="history-modal-main-company-wrap-fail">
+                            <!-- 기업 프로필 이미지 -->
+                            <img alt="image" width="32" height="32" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                            <div class="history-modal-main-section-info">
+                                <span class="history-modal-main-company-name">기업명</span>
+                                <span class="history-modal-main-announce-title">체험공고 제목</span>
+                                <p class="history-modal-main-apply-date">지원일: 2025년 09월 12일</p>
+                            </div>
+                            <div class="history-modal-main-apply-status-wrap">
+                                <div class="history-modal-main-apply-status">
+                                    <span class="history-modal-main-apply-status-text">불합격</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 인턴 지원내역 -->
+                <div class="history-modal-main history-modal-main-employ" style="display:none;">
+                    <!-- 합격 or 접수중 -->
+                    <div class="history-modal-main-section">
+                        <div class="history-modal-main-company-wrap">
+                            <!-- 기업 프로필 이미지 -->
+                            <img alt="image" width="32" height="32" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                            <div class="history-modal-main-section-info">
+                                <span class="history-modal-main-company-name">기업명</span>
+                                <span class="history-modal-main-announce-title">인턴공고 제목</span>
+                                <p class="history-modal-main-apply-date">지원일: 2025년 09월 12일</p>
+                            </div>
+                            <div class="history-modal-main-apply-status-wrap">
+                                <div class="history-modal-main-apply-status">
+                                    <span class="history-modal-main-apply-status-text">서류 접수</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="history-modal-main-section">
+                        <div class="history-modal-main-company-wrap">
+                            <!-- 기업 프로필 이미지 -->
+                            <img alt="image" width="32" height="32" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                            <div class="history-modal-main-section-info">
+                                <span class="history-modal-main-company-name">기업명</span>
+                                <span class="history-modal-main-announce-title">인턴공고 제목</span>
+                                <p class="history-modal-main-apply-date">지원일: 2025년 09월 12일</p>
+                            </div>
+                            <div class="history-modal-main-apply-status-wrap">
+                                <div class="history-modal-main-apply-status">
+                                    <span class="history-modal-main-apply-status-text">합격</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 불합격 시 상세보기 막기 -->
+                    <div class="history-modal-main-section fail">
+                        <div class="history-modal-main-company-wrap-fail">
+                            <!-- 기업 프로필 이미지 -->
+                            <img alt="image" width="32" height="32" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                            <div class="history-modal-main-section-info">
+                                <span class="history-modal-main-company-name">기업명</span>
+                                <span class="history-modal-main-announce-title">인턴공고 제목</span>
+                                <p class="history-modal-main-apply-date">지원일: 2025년 09월 12일</p>
+                            </div>
+                            <div class="history-modal-main-apply-status-wrap">
+                                <div class="history-modal-main-apply-status">
+                                    <span class="history-modal-main-apply-status-text">불합격</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 지원내역 상세 모달창 -->
+    <div class="history-detail-modal-background">
+        <div class="history-detail-modal-wrap">
+            <div class="history-detail-modal">
+                <div class="history-detail-modal-top">
+                    <div class="history-detail-modal-top-section">
+                        <div class="history-detail-modal-top-left">
+                            <button class="history-detail-modal-top-left-button">
+                                <div class="history-detail-modal-top-left-icon">
+                                    <svg color="foregrounds.neutral.primary" fill="currentColor" height="20" role="img" width="20" viewBox="0 0 24 24">
+                                        <path clip-rule="evenodd" d="M11.566 5.435a.8.8 0 0 0-1.132 0l-6 6a.8.8 0 0 0 0 1.13l6 6a.8.8 0 1 0 1.132-1.13L6.93 12.8H19a.8.8 0 1 0 0-1.6H6.931l4.635-4.634a.8.8 0 0 0 0-1.131" fill-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <p class="history-detail-modal-top-left-text">목록으로</p>
+                            </button>
+                        </div>
+                        <div class="history-detail-modal-top-middle">
+                            <div class="history-detail-modal-main-text">지원서</div>
+                            <div class="history-detail-modal-sub-text">지원일: 2025년 09월 12일</div>
+                        </div>
+                        <div class="history-detail-modal-top-right">
+                            <button class="history-detail-modal-top-right-button">
+                                <p class="history-detail-modal-top-right-text">닫기</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="history-detail-modal-body-wrap">
+                    <div class="history-detail-modal-body">
+                        <!-- 신청한 공고의 상세 페이지로 이동 -->
+                        <a href="" class="history-detail-modal-body-content">
+                            <div class="history-detail-modal-info-wrap">
+                                <img alt="image" width="32" height="32" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                                <div class="history-detail-modal-info">
+                                    <span class="info-company-name">기업명</span>
+                                    <span class="info-experience-title">공고 제목</span>
+                                    <p class="info-apply-date">지원일: 2025년 09월 12일</p>
+                                </div>
+                                <div class="history-detail-modal-status-wrap">
+                                    <div class="history-detail-modal-status">
+                                        <span class="history-detail-modal-status-text">서류 접수</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="history-detail-modal-body-section-wrap">
+                            <div class="history-detail-modal-body-section">
+                                <div class="body-section-info-wrap">
+                                    <p class="body-section-info-text">이름</p>
+                                </div>
+                                <div class="body-section-user-info-wrap">
+                                    <div class="body-section-user-info-text-wrap">
+                                        <p class="body-section-user-info-text">정희준</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="history-detail-modal-body-section">
+                                <div class="body-section-info-wrap">
+                                    <p class="body-section-info-text">이메일</p>
+                                </div>
+                                <div class="body-section-user-info-wrap">
+                                    <div class="body-section-user-info-text-wrap">
+                                        <p class="body-section-user-info-text">test@gmail.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="history-detail-modal-body-section">
+                                <div class="body-section-info-wrap">
+                                    <p class="body-section-info-text">전화번호</p>
+                                </div>
+                                <div class="body-section-user-info-wrap">
+                                    <div class="body-section-user-info-text-wrap">
+                                        <p class="body-section-user-info-text">010 1234 5678</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="history-detail-modal-body-section-wrap">
+                            <div class="history-detail-modal-body-section">
+                                <div class="body-section-info-wrap">
+                                    <p class="body-section-info-text">이력서</p>
+                                </div>
+                                <div class="body-section-user-info-wrap">
+                                    <div class="body-section-user-info-text-wrap">
+                                        <!-- 이력서 링크 이동 -->
+                                        <a href="" class="body-section-user-url-text">https://github.com/hjjung990927</p>
+                                    </div>
+                                    <div class="body-section-user-url">
+                                        <svg color="foregrounds.neutral.tertiary" fill="currentColor" height="20" role="img" width="20" viewBox="0 0 24 24">
+                                            <path clip-rule="evenodd" d="M9.434 6.435a.8.8 0 0 1 1.132 0l5 5a.8.8 0 0 1 0 1.13l-5 5a.8.8 0 1 1-1.132-1.13L13.87 12 9.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="history-detail-modal-body-section-wrap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 설정 모달창 -->
+    <div class="sidebar-setting-modal">
+        <div class="sidebar-setting-modal-wrap1">
+            <div class="sidebar-setting-modal-wrap2">
+                <div class="sidebar-setting-modal-wrap3">
+                    <div class="sidebar-setting-modal-top-wrap">
+                        <div class="sidebar-setting-modal-top">
+                            <div class="sidebar-setting-modal-title-wrap">
+                                <div class="sidebar-setting-modal-title">
+                                    <div class="sidebar-setting-modal-title-text">설정</div>
+                                </div>
+                            </div>
+                            <div class="setting-modal-empty-area"></div>
+                            <div class="sidebar-setting-modal-close-wrap">
+                                <button class="sidebar-setting-modal-close-button">
+                                    <p class="sidebar-setting-modal-close-text">닫기</p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setting-modal-main">
+                        <div class="setting-modal-left-list-wrap">
+                            <div class="setting-modal-left-list">
+                                <div class="setting-modal-left-section">
+                                    <div class="setting-modal-account-wrap">
+                                        <div class="setting-modal-account">
+                                            <span class="setting-modal-account-text">계정</span>
+                                        </div>
+                                    </div>
+                                    <div class="setting-modal-member-profile-wrap">
+                                        <img alt="image" width="32" height="32" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                                        <div class="setting-modal-profile">
+                                            <p class="setting-modal-member-name">회원이름</p>
+                                            <p class="setting-modal-member-set">내 정보 및 로그인</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="setting-modal-left-section">
+                                    <div class="setting-modal-account-wrap">
+                                        <div class="setting-modal-account">
+                                            <span class="setting-modal-account-text">활동</span>
+                                        </div>
+                                    </div>
+                                    <div class="start-line">
+                                        <div class="setting-modal-alarm-wrap">
+                                            <div class="setting-modal-alarm-icon">
+                                                <svg color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24" viewBox="0 0 24 24">
+                                                    <path clip-rule="evenodd" d="M12 1.2a.8.8 0 0 1 .8.8v1.236c2.215.202 3.71 1.242 4.65 2.547C18.467 7.198 18.8 8.873 18.8 10v3c0 1.499.313 2.32.607 2.744.294.423.565.456.593.456a.8.8 0 0 1 0 1.6h-4.2v.2a4.15 4.15 0 0 1-.75 2.343c-.6.83-1.59 1.457-3.05 1.457s-2.451-.626-3.05-1.457A4.15 4.15 0 0 1 8.2 18v-.2H4a.8.8 0 0 1 0-1.6c.028 0 .3-.033.593-.456.294-.423.607-1.245.607-2.744v-3c0-2.66 1.127-4.4 2.583-5.449 1.109-.799 2.377-1.175 3.417-1.3V2a.8.8 0 0 1 .8-.8m-5.827 15h11.654c-.382-.766-.627-1.822-.627-3.2v-3c0-.872-.268-2.198-1.05-3.282C15.4 5.674 14.14 4.8 12 4.8c-.872 0-2.198.268-3.283 1.05C7.673 6.6 6.8 7.86 6.8 10v3c0 1.378-.245 2.434-.627 3.2M9.8 17.8v.2c0 .372.118.948.45 1.408.3.419.81.792 1.75.792s1.449-.373 1.75-.792A2.55 2.55 0 0 0 14.2 18v-.2z" fill-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="setting-modal-alarm-text-wrap">
+                                                <p class="setting-modal-alarm-text">알림</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 설정 모달 내 계정 클릭 시 -->
+                        <div class="setting-modal-right-list-wrap" style="display: none;">
+                            <div class="setting-modal-right-list">
+                                <div class="setting-modal-right-section">
+                                    <div class="setting-modal-info-wrap">
+                                        <div class="setting-modal-info-top">
+                                            <div class="setting-modal-info">
+                                                <span class="setting-modal-info-text">내 정보</span>
+                                            </div>
+                                        </div>
+                                        <div class="setting-modal-my-profile">
+                                            <div class="setting-modal-move-wrap">
+                                                <img alt="image" width="32" height="32" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                                                <div class="setting-modal-text-wrap">
+                                                    <p class="setting-modal-text-info">프로필 수정을 찾고 계신가요?</p>
+                                                    <p class="setting-modal-text-move">내 프로필에서 관리할 수 있습니다.</p>
+                                                </div>
+                                                <a href="">
+                                                    <button class="setting-modal-move-button">
+                                                        <span class="setting-modal-move-button-text">이동</span>
+                                                    </button>
+                                                </a>
+                                            </div>
+                                            <div class="setting-modal-my-profile-section">
+                                                <div class="setting-modal-profile-text-wrap">
+                                                    <span class="setting-modal-profile-text">이름</span>
+                                                    <span class="setting-modal-profile-my-info-text">회원이름</span>
+                                                </div>
+                                            </div>
+                                            <div class="setting-modal-my-profile-section">
+                                                <div class="setting-modal-profile-text-wrap">
+                                                    <span class="setting-modal-profile-text">전화번호</span>
+                                                    <span class="setting-modal-profile-my-info-text">01012345678</span>
+                                                </div>
+                                            </div>
+                                            <div class="setting-modal-my-profile-section">
+                                                <div class="setting-modal-profile-text-wrap">
+                                                    <span class="setting-modal-profile-text">이메일</span>
+                                                    <span class="setting-modal-profile-my-info-text">test@gmail.com</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="middle-line-wrap">
+                                        <div class="middle-line"></div>
+                                    </div>
+                                    <div class="setting-modal-info-wrap">
+                                        <div class="setting-modal-info-top">
+                                            <div class="setting-modal-info">
+                                                <span class="setting-modal-info-text">연결된 로그인 방식</span>
+                                            </div>
+                                        </div>
+                                        <div class="setting-modal-account-email-wrap">
+                                            <div class="setting-modal-account-email">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40" height="24" width="24">
+                                                    <path fill="#1E1E1E" fill-rule="evenodd" d="M5 18.027c-.019-6.544 6.682-11.87 14.966-11.893S34.98 11.396 35 17.94s-6.682 11.87-14.966 11.893a19 19 0 0 1-2.697-.183l-6.07 4.122a.43.43 0 0 1-.675-.474l1.399-5.286C7.8 25.923 5.012 22.235 5 18.027m6.721 3.87c.443-.002.717-.29.716-.754l-.015-5.211 1.508-.004c.475-.002.642-.353.641-.654a.636.636 0 0 0-.645-.652l-4.452.013a.633.633 0 0 0-.64.656c.001.3.17.652.644.65l1.509-.004.015 5.21c.001.463.276.75.72.75m7.22-.143c.127.091.284.134.44.12a.63.63 0 0 0 .654-.621 1.2 1.2 0 0 0-.083-.369l-2.034-5.502c-.189-.53-.58-.833-1.071-.832-.56.002-.917.435-1.065.84l-2.067 5.523a.8.8 0 0 0-.065.315.68.68 0 0 0 .708.661.655.655 0 0 0 .689-.512l.318-.97 2.998-.01.317.981c.04.152.132.285.26.376m5.89-.353a.7.7 0 0 0 .06-.25.64.64 0 0 0-.17-.479.69.69 0 0 0-.517-.198l-1.99.006-.014-5.196c-.002-.462-.277-.748-.72-.747-.442 0-.717.289-.715.75l.016 5.709c.002.497.284.793.753.792l2.674-.008a.65.65 0 0 0 .624-.38m5.321.442c.154 0 .66-.043.714-.565.038-.293-.137-.52-.349-.794v-.001l-2.052-2.67 1.723-1.747q.091-.105.17-.191l.005-.006c.234-.26.351-.39.351-.588.008-.422-.341-.651-.688-.66a.8.8 0 0 0-.57.264l-2.52 2.642-.006-2.3a.675.675 0 0 0-.72-.704.69.69 0 0 0-.716.709l.017 5.939c.001.41.29.685.72.683a.687.687 0 0 0 .716-.687l-.006-1.932.514-.527 1.893 2.564c.277.373.427.54.692.566q.056.005.112.005m-14.388-2.71 1.071-3.268.003-.005.003-.002a.015.015 0 0 1 .022.007l1.092 3.262z" clip-rule="evenodd" style="fill: color(display-p3 0.1176 0.1176 0.1176); fill-opacity: 1;"></path><path fill="#FEE300" d="M12.437 21.143c.001.463-.273.752-.716.753s-.718-.286-.719-.749l-.015-5.21-1.51.004c-.473.002-.642-.35-.642-.65a.634.634 0 0 1 .64-.656l4.451-.013a.634.634 0 0 1 .645.652c0 .3-.166.652-.641.654l-1.508.004z" style="fill: color(display-p3 0.9961 0.8902 0); fill-opacity: 1;"></path><path fill="#FEE300" fill-rule="evenodd" d="M19.381 21.875a.67.67 0 0 1-.701-.497l-.317-.98-2.998.009-.318.97a.655.655 0 0 1-.689.512.68.68 0 0 1-.708-.661.8.8 0 0 1 .065-.316l2.067-5.522c.148-.405.505-.838 1.065-.84.491-.001.882.302 1.07.832l2.035 5.502q.07.178.083.369a.63.63 0 0 1-.654.622m-3.617-2.741 1.071-3.269.003-.005.003-.002a.015.015 0 0 1 .022.007l1.092 3.262z" clip-rule="evenodd" style="fill: color(display-p3 0.9961 0.8902 0); fill-opacity: 1;"></path><path fill="#FEE300" d="M24.892 21.152a.654.654 0 0 1-.684.628l-2.674.008c-.47.001-.751-.295-.753-.792l-.016-5.708c-.002-.462.273-.75.715-.751.443-.002.718.285.72.747l.015 5.196 1.99-.006a.7.7 0 0 1 .517.198.64.64 0 0 1 .17.48M30.866 21.278c-.054.522-.56.564-.714.565q-.056 0-.112-.005c-.265-.027-.415-.193-.692-.566l-1.893-2.564-.514.527.006 1.932a.687.687 0 0 1-.716.687c-.43.002-.719-.273-.72-.683l-.017-5.94a.69.69 0 0 1 .717-.708.676.676 0 0 1 .719.705l.006 2.3 2.52-2.643a.8.8 0 0 1 .57-.263c.347.008.696.237.688.66 0 .197-.117.327-.351.587l-.005.006q-.079.085-.17.19l-1.723 1.748 2.051 2.67h.001c.212.275.387.502.35.795" style="fill: color(display-p3 0.9961 0.8902 0); fill-opacity: 1;"></path>
+                                                </svg>
+                                                <div class="setting-modal-account-email-text-wrap">
+                                                    <span class="setting-modal-account-email-text">kakao@naver.com</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="setting-modal-account-email-wrap">
+                                            <div class="setting-modal-account-email">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40" height="24" width="24">
+                                                    <path fill="#FC4C53" d="M33.813 17.334H20v5.68h7.893c-.346 1.826-1.386 3.373-2.946 4.413-1.307.88-2.974 1.413-4.947 1.413-3.813 0-7.053-2.573-8.213-6.04h-.018l.018-.013A8.8 8.8 0 0 1 11.32 20c0-.973.173-1.907.467-2.786 1.16-3.467 4.4-6.04 8.213-6.04 2.16 0 4.08.746 5.613 2.186l4.2-4.2C27.267 6.787 23.96 5.333 20 5.333c-5.733 0-10.68 3.294-13.093 8.094-1 1.973-1.574 4.2-1.574 6.573s.574 4.6 1.574 6.573v.014c2.413 4.787 7.36 8.08 13.093 8.08 3.96 0 7.28-1.307 9.707-3.547 2.773-2.56 4.373-6.32 4.373-10.786 0-1.04-.093-2.04-.267-3" style="fill: color(display-p3 0.9882 0.298 0.3255); fill-opacity: 1;"></path>
+                                                    <mask id="google_svg__a" width="30" height="30" x="5" y="5" maskUnits="userSpaceOnUse" style="mask-type: luminance;">
+                                                        <path fill="#fff" d="M33.814 17.334H20v5.68h7.894c-.347 1.826-1.387 3.373-2.947 4.413-1.307.88-2.973 1.413-4.947 1.413-3.813 0-7.053-2.573-8.213-6.04h-.017l.017-.013A8.8 8.8 0 0 1 11.32 20c0-.973.174-1.907.467-2.786 1.16-3.467 4.4-6.04 8.213-6.04 2.16 0 4.08.746 5.614 2.186l4.2-4.2C27.267 6.787 23.96 5.333 20 5.333c-5.733 0-10.68 3.294-13.093 8.094-1 1.973-1.573 4.2-1.573 6.573s.573 4.6 1.573 6.573v.014c2.413 4.787 7.36 8.08 13.093 8.08 3.96 0 7.28-1.307 9.707-3.547 2.773-2.56 4.373-6.32 4.373-10.786 0-1.04-.093-2.04-.266-3" style="fill: rgb(255, 255, 255); fill-opacity: 1;"></path>
+                                                    </mask>
+                                                    <g mask="url(#google_svg__a)">
+                                                        <path fill="url(#google_svg__b)" d="M8.862 36.055c5.71 0 10.34-6.25 10.34-13.958 0-7.71-4.63-13.959-10.34-13.959s-10.34 6.25-10.34 13.959 4.63 13.958 10.34 13.958"></path>
+                                                        <path fill="url(#google_svg__c)" d="M26.695 50.215c11.52-1.44 19.972-9.693 18.88-18.436S34.259 17.116 22.74 18.555 2.768 28.247 3.86 36.99s11.316 14.664 22.835 13.225"></path>
+                                                        <path fill="url(#google_svg__d)" d="m18.807 15.04.654 7.461.832 4.996 9.816 9.131 11.476-21.196z"></path>
+                                                    </g>
+                                                    <defs>
+                                                        <radialGradient id="google_svg__b" cx="0" cy="0" r="1" gradientTransform="matrix(10.3404 0 0 13.958 8.862 22.096)" gradientUnits="userSpaceOnUse">
+                                                            <stop offset="0.368" stop-color="#FFCF09" style="stop-color: color(display-p3 1 0.8118 0.0353); stop-opacity: 1;"></stop>
+                                                            <stop offset="0.718" stop-color="#FFCF09" stop-opacity="0.7" style="stop-color: color(display-p3 1 0.8118 0.0353); stop-opacity: 0.7;"></stop>
+                                                            <stop offset="1" stop-color="#FFCF09" stop-opacity="0" style="stop-opacity: 0;"></stop>
+                                                        </radialGradient>
+                                                        <radialGradient id="google_svg__c" cx="0" cy="0" r="1" gradientTransform="matrix(20.8579 -2.60538 1.9774 15.83048 24.718 34.385)" gradientUnits="userSpaceOnUse">
+                                                            <stop offset="0.383" stop-color="#34A853" style="stop-color: color(display-p3 0.2039 0.6588 0.3255); stop-opacity: 1;"></stop>
+                                                            <stop offset="0.706" stop-color="#34A853" stop-opacity="0.7" style="stop-color: color(display-p3 0.2039 0.6588 0.3255); stop-opacity: 0.7;"></stop>
+                                                            <stop offset="1" stop-color="#34A853" stop-opacity="0" style="stop-opacity: 0;"></stop>
+                                                        </radialGradient>
+                                                        <linearGradient id="google_svg__d" x1="35.412" x2="20.198" y1="12.382" y2="31.066" gradientUnits="userSpaceOnUse">
+                                                            <stop offset="0.671" stop-color="#4285F4" style="stop-color: color(display-p3 0.2588 0.5216 0.9569); stop-opacity: 1;"></stop>
+                                                            <stop offset="0.885" stop-color="#4285F4" stop-opacity="0" style="stop-opacity: 0;"></stop>
+                                                        </linearGradient>
+                                                    </defs>
+                                                </svg>
+                                                <div class="setting-modal-account-email-text-wrap">
+                                                    <span class="setting-modal-account-email-text">gmail@gmail.com</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="middle-line-wrap">
+                                        <div class="middle-line"></div>
+                                    </div>
+                                    <div class="setting-modal-info-wrap">
+                                        <div class="setting-modal-info-top">
+                                            <div class="setting-modal-info">
+                                                <span class="setting-modal-info-text">기타</span>
+                                            </div>
+                                        </div>
+                                        <div class="setting-modal-account-check-wrap">
+                                            <div class="setting-modal-account-check-text">
+                                                <span class="setting-modal-account-check-main">가입일</span>
+                                                <span class="setting-modal-account-check-sub">2025년 9월 12일 (함께한지 1일째)</span>
+                                            </div>     
+                                        </div>
+                                    </div>                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 설정 모달 내 알림 클릭 시 -->
+                        <div class="setting-modal-right-list-wrap">
+                            <div class="setting-modal-right-list">
+                                <div class="setting-modal-right-section">
+                                    <div class="setting-modal-info-wrap">
+                                        <div class="setting-modal-info-top">
+                                            <div class="setting-modal-info">
+                                                <span class="setting-modal-info-text">알림 설정 - 등록된 이메일로 전송됩니다.</span>
+                                            </div>
+                                        </div>      
+                                        <!-- 알림 설정 할 리스트 -->
+                                        <div class="setting-modal-alarm-list-wrap">
+                                            <div class="setting-modal-alarm-section">
+                                                <div class="setting-modal-alarm-text-wrap">
+                                                    <span class="setting-modal-alarm-main-text">내 게시글 좋아요 알림</span>
+                                                    <p class="setting-modal-alarm-sub-text">내 글에 누군가 좋아요를 누르면 알려드립니다</p>
+                                                </div>
+                                                <div class="setting-modal-alarm-button-wrap">
+                                                    <button class="setting-modal-alarm-button">
+                                                        <div class="setting-modal-alarm-button-check"></div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="setting-modal-alarm-section">
+                                                <div class="setting-modal-alarm-text-wrap">
+                                                    <span class="setting-modal-alarm-main-text">내 게시글 댓글 알림</span>
+                                                    <p class="setting-modal-alarm-sub-text">내 글에 댓글이 달리면 알려드립니다</p>
+                                                </div>
+                                                <div class="setting-modal-alarm-button-wrap">
+                                                    <button class="setting-modal-alarm-button">
+                                                        <div class="setting-modal-alarm-button-check"></div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="setting-modal-alarm-section">
+                                                <div class="setting-modal-alarm-text-wrap">
+                                                    <span class="setting-modal-alarm-main-text">내 댓글 답변 알림</span>
+                                                    <p class="setting-modal-alarm-sub-text">내가 단 댓글에 답변이 달리면 알려드립니다</p>
+                                                </div>
+                                                <div class="setting-modal-alarm-button-wrap">
+                                                    <button class="setting-modal-alarm-button">
+                                                        <div class="setting-modal-alarm-button-check"></div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="setting-modal-alarm-section">
+                                                <div class="setting-modal-alarm-text-wrap">
+                                                    <span class="setting-modal-alarm-main-text">체험 · 인턴 결과 알림</span>
+                                                    <p class="setting-modal-alarm-sub-text">합격/불합격 여부를 알려드립니다</p>
+                                                </div>
+                                                <div class="setting-modal-alarm-button-wrap">
+                                                    <button class="setting-modal-alarm-button">
+                                                        <div class="setting-modal-alarm-button-check"></div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="setting-modal-alarm-section">
+                                                <div class="setting-modal-alarm-text-wrap">
+                                                    <span class="setting-modal-alarm-main-text">팔로우 기업 공고 알림</span>
+                                                    <p class="setting-modal-alarm-sub-text">팔로우한 기업의 새로운 공고를 알려드립니다</p>
+                                                </div>
+                                                <div class="setting-modal-alarm-button-wrap">
+                                                    <button class="setting-modal-alarm-button">
+                                                        <div class="setting-modal-alarm-button-check"></div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>                    
+                                    </div>                                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../static/js/main-page/header/event.js"></script>
+</html>

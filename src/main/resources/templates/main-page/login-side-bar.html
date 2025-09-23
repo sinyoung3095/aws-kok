@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kok</title>
+    <link href="../../static/images/member/kok_favicon.png" rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="../../static/css/reset.css">
+    <link rel="stylesheet" href="../../static/css/main-page/login-side-bar.css">
+    <link rel="stylesheet" href="../../static/font/font.css">
+</head>
+<body>
+    <div class="pc"><!--나중에 서버하기전에 삭제 해야함-->
+        <!-- sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-top">
+                <div class="sidebar-top-content">
+                    <a style="align-items:center; display:flex" href="">
+                        <div class="sidebar-logo">
+                            <img alt="image" width="40" height="40" srcset="" src="../../static/images/member/kok_logo.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                        </div>
+                    </a>
+                    <button class="sidebar-search">
+                        <div class="sidebar-search-text">
+                            <p class="sidebar-search-placeholder">기업, 체험공고, 고용공고</p>
+                        </div>
+                        <div class="sidebar-search-shortcut">
+                            <div class="sidebar-search-key">
+                                <p class="sidebar-search-key-text">⌘</p>
+                            </div>
+                            <div class="sidebar-search-key">
+                                <p class="sidebar-search-key-text">K</p>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <!-- sidebar 리스트 -->
+            <div class="sidebar-menu">
+                <div class="sidebar-menu-section">
+                    <div class="sidebar-menu-list">
+                        <div class="start-line">
+                            <!-- 체험공고 -->
+                            <a href="">
+                                <div class="sidebar-item-active">
+                                    <div class="sidebar-item-icon-active">
+                                        <svg color="foregrounds.surface.inverted" fill="currentColor" height="19.2" role="img" width="19.2" viewBox="0 0 24 24">
+                                            <path d="M11 4.85c-2.195-1.022-5.52-1.565-8.633.979A1 1 0 0 0 2 6.603V19a1 1 0 0 0 1.633.774c2.736-2.237 5.734-1.31 7.367-.255zm2 14.669c1.633-1.056 4.63-1.982 7.367.255A1 1 0 0 0 22 19V6.603a1 1 0 0 0-.367-.774C18.52 3.285 15.195 3.828 13 4.849z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="sidebar-item-text">
+                                        <p class="sidebar-item-title">체험공고</p>
+                                        <p class="sidebar-item-subtitle">새로운 체험 탐색</p>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </a>
+                            <!-- 인턴공고 -->
+                            <a href="">
+                                <div class="sidebar-item">
+                                    <div class="sidebar-item-icon">
+                                        <svg color="foregrounds.neutral.tertiary" fill="currentColor" height="19.2" role="img" width="19.2" viewBox="0 0 24 24">
+                                            <path clip-rule="evenodd" d="M11 3a3 3 0 0 0-3 3v1H5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-8a3 3 0 0 0-3-3h-3V6a3 3 0 0 0-3-3zm3 4V6a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v1z" fill-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="sidebar-item-text">
+                                        <p class="sidebar-item-title">인턴공고</p>
+                                        <p class="sidebar-item-subtitle">새로운 기회 탐색</p>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </a>
+                            <!-- 커뮤니티 -->
+                            <a href="">
+                                <div class="sidebar-item">
+                                    <div class="sidebar-item-icon">
+                                        <svg color="foregrounds.neutral.tertiary" fill="currentColor" height="19.2" role="img" width="19.2" viewBox="0 0 24 24">
+                                            <path d="M15 5a3 3 0 0 0-3-3H5a3 3 0 0 0-3 3v9a1 1 0 0 0 1.555.832l2.496-1.664A1 1 0 0 1 6.606 13H7v-1a5 5 0 0 1 5-5h3z"></path>
+                                            <path d="M12 9a3 3 0 0 0-3 3v5a3 3 0 0 0 3 3h5.394a1 1 0 0 1 .555.168l2.496 1.664A1 1 0 0 0 22 21v-9a3 3 0 0 0-3-3z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="sidebar-item-text">
+                                        <p class="sidebar-item-title">커뮤니티</p>
+                                        <p class="sidebar-item-subtitle">가장 빠른 소식</p>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </a>
+                            <!-- 기업 --> 
+                            <a href="">
+                                <div class="sidebar-item">
+                                    <div class="sidebar-item-icon">
+                                        <svg color="foregrounds.neutral.tertiary" fill="currentColor" height="19.2" role="img" width="19.2" viewBox="0 0 24 24">
+                                            <path clip-rule="evenodd" d="M16.088 2.134a1 1 0 0 1 1.366.366l4 6.928a1 1 0 1 1-1.732 1l-5.196 3a2 2 0 0 1-2 0l-1.545.892 2.892 5.194a1 1 0 1 1-1.747.973l-2.37-4.255-1.736 4.154a1 1 0 0 1-1.845-.772L7.59 16.23a2 2 0 0 1-1.627-.168l-1.097.634a2 2 0 1 1-2-3.464l1.097-.634a2 2 0 0 1 1-1.732l4.562-2.634a2 2 0 0 1 1-1.732l5.197-3a1 1 0 0 1 .366-1.366" fill-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="sidebar-item-text">
+                                        <p class="sidebar-item-title">기업</p>
+                                        <p class="sidebar-item-subtitle">기업 모아보기</p>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </a> 
+                        </div>
+                    </div>
+                </div>
+                <div class="start-line">
+                    <!-- 비로그인시 메뉴 삭제 -->
+                    <div class="sidebar-setting-wrap">
+                        <div class="sidebar-setting">
+                            <p class="sidebar-setting-text">설정</p>
+                        </div>
+                    </div>
+                    <!-- 비로그인시 메뉴 삭제 -->
+                    <div class="sidebar-support-wrap">
+                        <div class="sidebar-support">
+                            <p class="sidebar-support-text">고객지원</p>
+                        </div>
+                    </div>
+                    <div class="sidebar-service-wrap">
+                        <a href="" class="sidebar-service">
+                            <p class="sidebar-service-text">서비스 소개</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="sidebar-notice">
+                    <div class="start-line">
+                        <div class="sidebar-line"></div>
+                    </div>
+                    <div class="sidebar-legal">
+                        <p class="sidebar-legal-text">
+                            본 서비스에서 제공하는 사용자의 개인정보 데이터를 포함하여 각 정보주체의 동의 없이 데이터를 무단으로 수집하는 행위를 금지 및 거부합니다. 공개된 데이터도 크롤링 등 기술적 장치를 이용해 허가 없이 수집하는 경우 개인정보 보호법에 따라 형사처벌 될 수 있음을 알려드립니다.
+                        </p>
+                    </div>
+                    <div class="sidebar-address">
+                        <p class="sidebar-address-text">
+                            © 2025 Rocketpunch, 주식회사 더블에이스, 홍원표, 대한민국 서울특별시 성동구 성수일로10길 12, 12층 1호, 04793, support@rocketpunch.com, +82 10-2710-7121
+                        </p>
+                    </div>
+                    <!-- 사업자 번호 더보기/접기 -->
+                    <div class="sidebar-business collapsed">
+                        <div class="sidebar-business-text">
+                            <p>
+                                사업자등록번호 206-87-09615 <br>
+                                <span class="extra-text">
+                                    통신판매업신고번호 2025-서울성동-0105 <br>
+                                    직업정보제공사업신고번호: J1202020240015 <br>
+                                    유료직업소개사업등록번호: 제2025-3030135-14-5-00002
+                                </span>
+                            </p>
+                        </div>
+                        <div class="sidebar-business-text">
+                            <p><span class="sidebar-business-toggle">더보기</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 로그인 한 회원 버튼 -->
+            <div class="sidebar-login-user">
+                <div class="sidebar-login-inner">
+                    <div class="start-line">
+                        <div class="sidebar-line"></div>
+                    </div>
+                    <div class="sidebar-login-user-btn-wrap">
+                        <a href="">
+                            <div class="sidebar-login-user-btn">
+                                <img alt="image" width="32" height="32" style="color:transparent;border-radius:999px;cursor:default;max-height:32px;max-width:32px;min-height:32px;min-width:32px;object-fit:contain" srcset="" src="../../static/images/main-page/image.png">
+                                <div class="sidebar-login-user-wrap">
+                                    <span class="sidebar-login-user-name">회원이름</span>
+                                    <!-- 기업회원 경우에 기업명, 일반 회원은 공백 -->
+                                    <p class="sidebar-login-user-company">기업명</p>
+                                </div>
+                                <div class="sidebar-login-user-icon-wrap">
+                                    <div class="sidebar-login-user-icon">
+                                        <svg color="foregrounds.neutral.primary" fill="currentColor" height="20" role="img" width="20" viewBox="0 0 24 24">
+                                            <path clip-rule="evenodd" d="M9.434 6.435a.8.8 0 0 1 1.132 0l5 5a.8.8 0 0 1 0 1.13l-5 5a.8.8 0 1 1-1.132-1.13L13.87 12 9.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 검색 모달창 -->
+    <div class="search-modal-wrap">
+        <div class="search-modal">
+            <div>
+                <div class="search-modal-height-auto">
+                    <!-- 모달창 헤더 -->
+                    <div class="search-modal-header-wrap">
+                        <div class="search-modal-header">
+                            <svg color="foregrounds.neutral.primary" fill="currentColor" height="20" role="img" width="20" class="search-magnify-icon" viewBox="0 0 24 24">
+                                <path clip-rule="evenodd" d="M11 4.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4M3.2 11a7.8 7.8 0 1 1 13.852 4.921l3.514 3.514a.8.8 0 1 1-1.132 1.13l-3.513-3.513A7.8 7.8 0 0 1 3.2 11" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <input maxlength="50" placeholder="기업, 체험공고, 고용공고, 관심직무" class="search-modal-input" value="">
+                        <button class="close-search-modal">
+                            <div class="close-search-modal-icon">
+                                <svg color="foregrounds.neutral.primary" fill="currentColor" height="20" role="img" width="20" viewBox="0 0 24 24">
+                                    <path clip-rule="evenodd" d="M6.434 6.435a.8.8 0 0 1 1.132 0L12 10.869l4.434-4.434a.8.8 0 1 1 1.132 1.13L13.13 12l4.435 4.435a.8.8 0 1 1-1.132 1.13L12 13.133l-4.434 4.434a.8.8 0 0 1-1.132-1.131L10.87 12 6.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                    <!-- 왼쪽 리스트 -->
+                    <div class="search-modal-main-wrap">
+                        <div class="search-modal-list-wrap">
+                            <div class="search-modal-list-wrap2">                               
+                                <div class="search-modal-body-wrap">
+                                    <div class="search-modal-group">
+                                        <div class="search-modal-group-section-active">
+                                            <p class="search-modal-group-context-active">회원</p>
+                                        </div>
+                                        <div class="search-modal-group-section">
+                                            <p class="search-modal-group-context">기업</p>
+                                        </div>
+                                    </div>
+                                    <!-- 회원 클릭 시 -->
+                                    <div class="search-modal-list member-list">
+                                        <div class="search-modal-list-section">
+                                            <span class="search-modal-list-number">1</span>
+                                            <img alt="image" width="40" height="40" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            <div class="search-modal-list-member">
+                                                <span class="search-modal-list-name">테스트</span>
+                                                <p class="search-modal-list-job">직군</p>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-list-section">
+                                            <span class="search-modal-list-number">1</span>
+                                            <img alt="image" width="40" height="40" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            <div class="search-modal-list-member">
+                                                <span class="search-modal-list-name">테스트</span>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-list-section">
+                                            <span class="search-modal-list-number">1</span>
+                                            <img alt="image" width="40" height="40" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            <div class="search-modal-list-member">
+                                                <span class="search-modal-list-name">테스트</span>
+                                                <p class="search-modal-list-job">직군</p>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-list-section">
+                                            <span class="search-modal-list-number">1</span>
+                                            <img alt="image" width="40" height="40" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            <div class="search-modal-list-member">
+                                                <span class="search-modal-list-name">테스트</span>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-list-section">
+                                            <span class="search-modal-list-number">1</span>
+                                            <img alt="image" width="40" height="40" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            <div class="search-modal-list-member">
+                                                <span class="search-modal-list-name">테스트</span>
+                                                <p class="search-modal-list-job">직군</p>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-list-section">
+                                            <span class="search-modal-list-number">1</span>
+                                            <img alt="image" width="40" height="40" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            <div class="search-modal-list-member">
+                                                <span class="search-modal-list-name">테스트</span>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-list-section">
+                                            <span class="search-modal-list-number">1</span>
+                                            <img alt="image" width="40" height="40" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            <div class="search-modal-list-member">
+                                                <span class="search-modal-list-name">테스트</span>
+                                                <p class="search-modal-list-job">직군</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 기업 클릭 시(체험공고 순) -->
+                                    <div class="search-modal-list company-list">
+                                        <div class="search-modal-list-section">
+                                            <span class="search-modal-list-number">1</span>
+                                            <img alt="image" width="40" height="40" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            <div class="search-modal-list-member">
+                                                <span class="search-modal-list-name">삼성</span>
+                                                <p class="search-modal-list-job">체험공고 70</p>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-list-section">
+                                            <span class="search-modal-list-number">1</span>
+                                            <img alt="image" width="40" height="40" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            <div class="search-modal-list-member">
+                                                <span class="search-modal-list-name">삼성</span>
+                                                <p class="search-modal-list-job">체험공고 60</p>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-list-section">
+                                            <span class="search-modal-list-number">1</span>
+                                            <img alt="image" width="40" height="40" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            <div class="search-modal-list-member">
+                                                <span class="search-modal-list-name">삼성</span>
+                                                <p class="search-modal-list-job">체험공고 50</p>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-list-section">
+                                            <span class="search-modal-list-number">1</span>
+                                            <img alt="image" width="40" height="40" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            <div class="search-modal-list-member">
+                                                <span class="search-modal-list-name">삼성</span>
+                                                <p class="search-modal-list-job">체험공고 40</p>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-list-section">
+                                            <span class="search-modal-list-number">1</span>
+                                            <img alt="image" width="40" height="40" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            <div class="search-modal-list-member">
+                                                <span class="search-modal-list-name">삼성</span>
+                                                <p class="search-modal-list-job">체험공고 30</p>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-list-section">
+                                            <span class="search-modal-list-number">1</span>
+                                            <img alt="image" width="40" height="40" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            <div class="search-modal-list-member">
+                                                <span class="search-modal-list-name">삼성</span>
+                                                <p class="search-modal-list-job">체험공고 20</p>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-list-section">
+                                            <span class="search-modal-list-number">1</span>
+                                            <img alt="image" width="40" height="40" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            <div class="search-modal-list-member">
+                                                <span class="search-modal-list-name">삼성</span>
+                                                <p class="search-modal-list-job">체험공고 10</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                               
+                                <!-- 오른쪽 리스트 -->
+                                <div class="search-modal-company-wrap">
+                                    <div class="search-modal-company-wrap-top">
+                                        <div class="search-modal-company-text-wrap">
+                                            <span class="search-modal-company-text">가장 주목받는 기업</span>
+                                        </div>
+                                        <div class="search-modal-company-all-wrap">
+                                            <button class="search-modal-company-all-button">
+                                                <p class="search-modal-company-all-text">모두 보기</p>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- 6개 기업 팔로워 순 -->
+                                    <div class="search-modal-company-list-wrap">
+                                        <div class="search-modal-company-list">
+                                            <img alt="image" width="36" height="36" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 5.4px; cursor: default; max-height: 36px; max-width: 36px; min-height: 36px; min-width: 36px; object-fit: contain;">
+                                            <div class="search-modal-company-section">
+                                                <span class="search-modal-company-name">삼성</span>
+                                                <p class="search-modal-company-experience">팔로워 3.1천</p>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-company-list">
+                                            <img alt="image" width="36" height="36" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 5.4px; cursor: default; max-height: 36px; max-width: 36px; min-height: 36px; min-width: 36px; object-fit: contain;">
+                                            <div class="search-modal-company-section">
+                                                <span class="search-modal-company-name">삼성</span>
+                                                <p class="search-modal-company-experience">팔로워 2.8천</p>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-company-list">
+                                            <img alt="image" width="36" height="36" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 5.4px; cursor: default; max-height: 36px; max-width: 36px; min-height: 36px; min-width: 36px; object-fit: contain;">
+                                            <div class="search-modal-company-section">
+                                                <span class="search-modal-company-name">삼성</span>
+                                                <p class="search-modal-company-experience">팔로워 2.1천</p>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-company-list">
+                                            <img alt="image" width="36" height="36" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 5.4px; cursor: default; max-height: 36px; max-width: 36px; min-height: 36px; min-width: 36px; object-fit: contain;">
+                                            <div class="search-modal-company-section">
+                                                <span class="search-modal-company-name">삼성</span>
+                                                <p class="search-modal-company-experience">팔로워 2천</p>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-company-list">
+                                            <img alt="image" width="36" height="36" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 5.4px; cursor: default; max-height: 36px; max-width: 36px; min-height: 36px; min-width: 36px; object-fit: contain;">
+                                            <div class="search-modal-company-section">
+                                                <span class="search-modal-company-name">삼성</span>
+                                                <p class="search-modal-company-experience">팔로워 1.5천</p>
+                                            </div>
+                                        </div>
+                                        <div class="search-modal-company-list">
+                                            <img alt="image" width="36" height="36" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 5.4px; cursor: default; max-height: 36px; max-width: 36px; min-height: 36px; min-width: 36px; object-fit: contain;">
+                                            <div class="search-modal-company-section">
+                                                <span class="search-modal-company-name">삼성</span>
+                                                <p class="search-modal-company-experience">팔로워 921</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 설정 모달창 -->
+    <div class="sidebar-setting-modal">
+        <div class="sidebar-setting-modal-wrap1">
+            <div class="sidebar-setting-modal-wrap2">
+                <div class="sidebar-setting-modal-wrap3">
+                    <div class="sidebar-setting-modal-top-wrap">
+                        <div class="sidebar-setting-modal-top">
+                            <div class="sidebar-setting-modal-title-wrap">
+                                <div class="sidebar-setting-modal-title">
+                                    <div class="sidebar-setting-modal-title-text">설정</div>
+                                </div>
+                            </div>
+                            <div class="setting-modal-empty-area"></div>
+                            <div class="sidebar-setting-modal-close-wrap">
+                                <button class="sidebar-setting-modal-close-button">
+                                    <p class="sidebar-setting-modal-close-text">닫기</p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setting-modal-main">
+                        <div class="setting-modal-left-list-wrap">
+                            <div class="setting-modal-left-list">
+                                <div class="setting-modal-left-section">
+                                    <div class="setting-modal-account-wrap">
+                                        <div class="setting-modal-account">
+                                            <span class="setting-modal-account-text">계정</span>
+                                        </div>
+                                    </div>
+                                    <div class="setting-modal-member-profile-wrap">
+                                        <img alt="image" width="32" height="32" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                                        <div class="setting-modal-profile">
+                                            <p class="setting-modal-member-name">회원이름</p>
+                                            <p class="setting-modal-member-set">내 정보 및 로그인</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="setting-modal-left-section">
+                                    <div class="setting-modal-account-wrap">
+                                        <div class="setting-modal-account">
+                                            <span class="setting-modal-account-text">활동</span>
+                                        </div>
+                                    </div>
+                                    <div class="start-line">
+                                        <div class="setting-modal-alarm-wrap">
+                                            <div class="setting-modal-alarm-icon">
+                                                <svg color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24" viewBox="0 0 24 24">
+                                                    <path clip-rule="evenodd" d="M12 1.2a.8.8 0 0 1 .8.8v1.236c2.215.202 3.71 1.242 4.65 2.547C18.467 7.198 18.8 8.873 18.8 10v3c0 1.499.313 2.32.607 2.744.294.423.565.456.593.456a.8.8 0 0 1 0 1.6h-4.2v.2a4.15 4.15 0 0 1-.75 2.343c-.6.83-1.59 1.457-3.05 1.457s-2.451-.626-3.05-1.457A4.15 4.15 0 0 1 8.2 18v-.2H4a.8.8 0 0 1 0-1.6c.028 0 .3-.033.593-.456.294-.423.607-1.245.607-2.744v-3c0-2.66 1.127-4.4 2.583-5.449 1.109-.799 2.377-1.175 3.417-1.3V2a.8.8 0 0 1 .8-.8m-5.827 15h11.654c-.382-.766-.627-1.822-.627-3.2v-3c0-.872-.268-2.198-1.05-3.282C15.4 5.674 14.14 4.8 12 4.8c-.872 0-2.198.268-3.283 1.05C7.673 6.6 6.8 7.86 6.8 10v3c0 1.378-.245 2.434-.627 3.2M9.8 17.8v.2c0 .372.118.948.45 1.408.3.419.81.792 1.75.792s1.449-.373 1.75-.792A2.55 2.55 0 0 0 14.2 18v-.2z" fill-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="setting-modal-alarm-text-wrap">
+                                                <p class="setting-modal-alarm-text">알림</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 설정 모달 내 계정 클릭 시 -->
+                        <div class="setting-modal-right-list-wrap" style="display: none;">
+                            <div class="setting-modal-right-list">
+                                <div class="setting-modal-right-section">
+                                    <div class="setting-modal-info-wrap">
+                                        <div class="setting-modal-info-top">
+                                            <div class="setting-modal-info">
+                                                <span class="setting-modal-info-text">내 정보</span>
+                                            </div>
+                                        </div>
+                                        <div class="setting-modal-my-profile">
+                                            <div class="setting-modal-move-wrap">
+                                                <img alt="image" width="32" height="32" srcset="" src="../../static/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                                                <div class="setting-modal-text-wrap">
+                                                    <p class="setting-modal-text-info">프로필 수정을 찾고 계신가요?</p>
+                                                    <p class="setting-modal-text-move">내 프로필에서 관리할 수 있습니다.</p>
+                                                </div>
+                                                <a href="">
+                                                    <button class="setting-modal-move-button">
+                                                        <span class="setting-modal-move-button-text">이동</span>
+                                                    </button>
+                                                </a>
+                                            </div>
+                                            <div class="setting-modal-my-profile-section">
+                                                <div class="setting-modal-profile-text-wrap">
+                                                    <span class="setting-modal-profile-text">이름</span>
+                                                    <span class="setting-modal-profile-my-info-text">회원이름</span>
+                                                </div>
+                                            </div>
+                                            <div class="setting-modal-my-profile-section">
+                                                <div class="setting-modal-profile-text-wrap">
+                                                    <span class="setting-modal-profile-text">전화번호</span>
+                                                    <span class="setting-modal-profile-my-info-text">01012345678</span>
+                                                </div>
+                                            </div>
+                                            <div class="setting-modal-my-profile-section">
+                                                <div class="setting-modal-profile-text-wrap">
+                                                    <span class="setting-modal-profile-text">이메일</span>
+                                                    <span class="setting-modal-profile-my-info-text">test@gmail.com</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="middle-line-wrap">
+                                        <div class="middle-line"></div>
+                                    </div>
+                                    <div class="setting-modal-info-wrap">
+                                        <div class="setting-modal-info-top">
+                                            <div class="setting-modal-info">
+                                                <span class="setting-modal-info-text">연결된 로그인 방식</span>
+                                            </div>
+                                        </div>
+                                        <!-- 카카오 로그인 -->
+                                        <div class="setting-modal-account-email-wrap">
+                                            <div class="setting-modal-account-email">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40" height="24" width="24">
+                                                    <path fill="#1E1E1E" fill-rule="evenodd" d="M5 18.027c-.019-6.544 6.682-11.87 14.966-11.893S34.98 11.396 35 17.94s-6.682 11.87-14.966 11.893a19 19 0 0 1-2.697-.183l-6.07 4.122a.43.43 0 0 1-.675-.474l1.399-5.286C7.8 25.923 5.012 22.235 5 18.027m6.721 3.87c.443-.002.717-.29.716-.754l-.015-5.211 1.508-.004c.475-.002.642-.353.641-.654a.636.636 0 0 0-.645-.652l-4.452.013a.633.633 0 0 0-.64.656c.001.3.17.652.644.65l1.509-.004.015 5.21c.001.463.276.75.72.75m7.22-.143c.127.091.284.134.44.12a.63.63 0 0 0 .654-.621 1.2 1.2 0 0 0-.083-.369l-2.034-5.502c-.189-.53-.58-.833-1.071-.832-.56.002-.917.435-1.065.84l-2.067 5.523a.8.8 0 0 0-.065.315.68.68 0 0 0 .708.661.655.655 0 0 0 .689-.512l.318-.97 2.998-.01.317.981c.04.152.132.285.26.376m5.89-.353a.7.7 0 0 0 .06-.25.64.64 0 0 0-.17-.479.69.69 0 0 0-.517-.198l-1.99.006-.014-5.196c-.002-.462-.277-.748-.72-.747-.442 0-.717.289-.715.75l.016 5.709c.002.497.284.793.753.792l2.674-.008a.65.65 0 0 0 .624-.38m5.321.442c.154 0 .66-.043.714-.565.038-.293-.137-.52-.349-.794v-.001l-2.052-2.67 1.723-1.747q.091-.105.17-.191l.005-.006c.234-.26.351-.39.351-.588.008-.422-.341-.651-.688-.66a.8.8 0 0 0-.57.264l-2.52 2.642-.006-2.3a.675.675 0 0 0-.72-.704.69.69 0 0 0-.716.709l.017 5.939c.001.41.29.685.72.683a.687.687 0 0 0 .716-.687l-.006-1.932.514-.527 1.893 2.564c.277.373.427.54.692.566q.056.005.112.005m-14.388-2.71 1.071-3.268.003-.005.003-.002a.015.015 0 0 1 .022.007l1.092 3.262z" clip-rule="evenodd" style="fill: color(display-p3 0.1176 0.1176 0.1176); fill-opacity: 1;"></path><path fill="#FEE300" d="M12.437 21.143c.001.463-.273.752-.716.753s-.718-.286-.719-.749l-.015-5.21-1.51.004c-.473.002-.642-.35-.642-.65a.634.634 0 0 1 .64-.656l4.451-.013a.634.634 0 0 1 .645.652c0 .3-.166.652-.641.654l-1.508.004z" style="fill: color(display-p3 0.9961 0.8902 0); fill-opacity: 1;"></path><path fill="#FEE300" fill-rule="evenodd" d="M19.381 21.875a.67.67 0 0 1-.701-.497l-.317-.98-2.998.009-.318.97a.655.655 0 0 1-.689.512.68.68 0 0 1-.708-.661.8.8 0 0 1 .065-.316l2.067-5.522c.148-.405.505-.838 1.065-.84.491-.001.882.302 1.07.832l2.035 5.502q.07.178.083.369a.63.63 0 0 1-.654.622m-3.617-2.741 1.071-3.269.003-.005.003-.002a.015.015 0 0 1 .022.007l1.092 3.262z" clip-rule="evenodd" style="fill: color(display-p3 0.9961 0.8902 0); fill-opacity: 1;"></path><path fill="#FEE300" d="M24.892 21.152a.654.654 0 0 1-.684.628l-2.674.008c-.47.001-.751-.295-.753-.792l-.016-5.708c-.002-.462.273-.75.715-.751.443-.002.718.285.72.747l.015 5.196 1.99-.006a.7.7 0 0 1 .517.198.64.64 0 0 1 .17.48M30.866 21.278c-.054.522-.56.564-.714.565q-.056 0-.112-.005c-.265-.027-.415-.193-.692-.566l-1.893-2.564-.514.527.006 1.932a.687.687 0 0 1-.716.687c-.43.002-.719-.273-.72-.683l-.017-5.94a.69.69 0 0 1 .717-.708.676.676 0 0 1 .719.705l.006 2.3 2.52-2.643a.8.8 0 0 1 .57-.263c.347.008.696.237.688.66 0 .197-.117.327-.351.587l-.005.006q-.079.085-.17.19l-1.723 1.748 2.051 2.67h.001c.212.275.387.502.35.795" style="fill: color(display-p3 0.9961 0.8902 0); fill-opacity: 1;"></path>
+                                                </svg>
+                                                <div class="setting-modal-account-email-text-wrap">
+                                                    <span class="setting-modal-account-email-text">kakao@naver.com</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 구글 로그인 -->
+                                        <div class="setting-modal-account-email-wrap">
+                                            <div class="setting-modal-account-email">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40" height="24" width="24">
+                                                    <path fill="#FC4C53" d="M33.813 17.334H20v5.68h7.893c-.346 1.826-1.386 3.373-2.946 4.413-1.307.88-2.974 1.413-4.947 1.413-3.813 0-7.053-2.573-8.213-6.04h-.018l.018-.013A8.8 8.8 0 0 1 11.32 20c0-.973.173-1.907.467-2.786 1.16-3.467 4.4-6.04 8.213-6.04 2.16 0 4.08.746 5.613 2.186l4.2-4.2C27.267 6.787 23.96 5.333 20 5.333c-5.733 0-10.68 3.294-13.093 8.094-1 1.973-1.574 4.2-1.574 6.573s.574 4.6 1.574 6.573v.014c2.413 4.787 7.36 8.08 13.093 8.08 3.96 0 7.28-1.307 9.707-3.547 2.773-2.56 4.373-6.32 4.373-10.786 0-1.04-.093-2.04-.267-3" style="fill: color(display-p3 0.9882 0.298 0.3255); fill-opacity: 1;"></path>
+                                                    <mask id="google_svg__a" width="30" height="30" x="5" y="5" maskUnits="userSpaceOnUse" style="mask-type: luminance;">
+                                                        <path fill="#fff" d="M33.814 17.334H20v5.68h7.894c-.347 1.826-1.387 3.373-2.947 4.413-1.307.88-2.973 1.413-4.947 1.413-3.813 0-7.053-2.573-8.213-6.04h-.017l.017-.013A8.8 8.8 0 0 1 11.32 20c0-.973.174-1.907.467-2.786 1.16-3.467 4.4-6.04 8.213-6.04 2.16 0 4.08.746 5.614 2.186l4.2-4.2C27.267 6.787 23.96 5.333 20 5.333c-5.733 0-10.68 3.294-13.093 8.094-1 1.973-1.573 4.2-1.573 6.573s.573 4.6 1.573 6.573v.014c2.413 4.787 7.36 8.08 13.093 8.08 3.96 0 7.28-1.307 9.707-3.547 2.773-2.56 4.373-6.32 4.373-10.786 0-1.04-.093-2.04-.266-3" style="fill: rgb(255, 255, 255); fill-opacity: 1;"></path>
+                                                    </mask>
+                                                    <g mask="url(#google_svg__a)">
+                                                        <path fill="url(#google_svg__b)" d="M8.862 36.055c5.71 0 10.34-6.25 10.34-13.958 0-7.71-4.63-13.959-10.34-13.959s-10.34 6.25-10.34 13.959 4.63 13.958 10.34 13.958"></path>
+                                                        <path fill="url(#google_svg__c)" d="M26.695 50.215c11.52-1.44 19.972-9.693 18.88-18.436S34.259 17.116 22.74 18.555 2.768 28.247 3.86 36.99s11.316 14.664 22.835 13.225"></path>
+                                                        <path fill="url(#google_svg__d)" d="m18.807 15.04.654 7.461.832 4.996 9.816 9.131 11.476-21.196z"></path>
+                                                    </g>
+                                                    <defs>
+                                                        <radialGradient id="google_svg__b" cx="0" cy="0" r="1" gradientTransform="matrix(10.3404 0 0 13.958 8.862 22.096)" gradientUnits="userSpaceOnUse">
+                                                            <stop offset="0.368" stop-color="#FFCF09" style="stop-color: color(display-p3 1 0.8118 0.0353); stop-opacity: 1;"></stop>
+                                                            <stop offset="0.718" stop-color="#FFCF09" stop-opacity="0.7" style="stop-color: color(display-p3 1 0.8118 0.0353); stop-opacity: 0.7;"></stop>
+                                                            <stop offset="1" stop-color="#FFCF09" stop-opacity="0" style="stop-opacity: 0;"></stop>
+                                                        </radialGradient>
+                                                        <radialGradient id="google_svg__c" cx="0" cy="0" r="1" gradientTransform="matrix(20.8579 -2.60538 1.9774 15.83048 24.718 34.385)" gradientUnits="userSpaceOnUse">
+                                                            <stop offset="0.383" stop-color="#34A853" style="stop-color: color(display-p3 0.2039 0.6588 0.3255); stop-opacity: 1;"></stop>
+                                                            <stop offset="0.706" stop-color="#34A853" stop-opacity="0.7" style="stop-color: color(display-p3 0.2039 0.6588 0.3255); stop-opacity: 0.7;"></stop>
+                                                            <stop offset="1" stop-color="#34A853" stop-opacity="0" style="stop-opacity: 0;"></stop>
+                                                        </radialGradient>
+                                                        <linearGradient id="google_svg__d" x1="35.412" x2="20.198" y1="12.382" y2="31.066" gradientUnits="userSpaceOnUse">
+                                                            <stop offset="0.671" stop-color="#4285F4" style="stop-color: color(display-p3 0.2588 0.5216 0.9569); stop-opacity: 1;"></stop>
+                                                            <stop offset="0.885" stop-color="#4285F4" stop-opacity="0" style="stop-opacity: 0;"></stop>
+                                                        </linearGradient>
+                                                    </defs>
+                                                </svg>
+                                                <div class="setting-modal-account-email-text-wrap">
+                                                    <span class="setting-modal-account-email-text">gmail@gmail.com</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="middle-line-wrap">
+                                        <div class="middle-line"></div>
+                                    </div>
+                                    <div class="setting-modal-info-wrap">
+                                        <div class="setting-modal-info-top">
+                                            <div class="setting-modal-info">
+                                                <span class="setting-modal-info-text">기타</span>
+                                            </div>
+                                        </div>
+                                        <div class="setting-modal-account-check-wrap">
+                                            <div class="setting-modal-account-check-text">
+                                                <span class="setting-modal-account-check-main">가입일</span>
+                                                <span class="setting-modal-account-check-sub">2025년 9월 12일 (함께한지 1일째)</span>
+                                            </div>     
+                                        </div>
+                                    </div>                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 설정 모달 내 알림 클릭 시 -->
+                        <div class="setting-modal-right-list-wrap">
+                            <div class="setting-modal-right-list">
+                                <div class="setting-modal-right-section">
+                                    <div class="setting-modal-info-wrap">
+                                        <div class="setting-modal-info-top">
+                                            <div class="setting-modal-info">
+                                                <span class="setting-modal-info-text">알림 설정 - 등록된 이메일로 전송됩니다.</span>
+                                            </div>
+                                        </div>      
+                                        <!-- 알림 설정 할 리스트 -->
+                                        <div class="setting-modal-alarm-list-wrap">
+                                            <div class="setting-modal-alarm-section">
+                                                <div class="setting-modal-alarm-text-wrap">
+                                                    <span class="setting-modal-alarm-main-text">내 게시글 좋아요 알림</span>
+                                                    <p class="setting-modal-alarm-sub-text">내 글에 누군가 좋아요를 누르면 알려드립니다</p>
+                                                </div>
+                                                <div class="setting-modal-alarm-button-wrap">
+                                                    <button class="setting-modal-alarm-button">
+                                                        <div class="setting-modal-alarm-button-check"></div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="setting-modal-alarm-section">
+                                                <div class="setting-modal-alarm-text-wrap">
+                                                    <span class="setting-modal-alarm-main-text">내 게시글 댓글 알림</span>
+                                                    <p class="setting-modal-alarm-sub-text">내 글에 댓글이 달리면 알려드립니다</p>
+                                                </div>
+                                                <div class="setting-modal-alarm-button-wrap">
+                                                    <button class="setting-modal-alarm-button">
+                                                        <div class="setting-modal-alarm-button-check"></div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="setting-modal-alarm-section">
+                                                <div class="setting-modal-alarm-text-wrap">
+                                                    <span class="setting-modal-alarm-main-text">내 댓글 답변 알림</span>
+                                                    <p class="setting-modal-alarm-sub-text">내가 단 댓글에 답변이 달리면 알려드립니다</p>
+                                                </div>
+                                                <div class="setting-modal-alarm-button-wrap">
+                                                    <button class="setting-modal-alarm-button">
+                                                        <div class="setting-modal-alarm-button-check"></div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="setting-modal-alarm-section">
+                                                <div class="setting-modal-alarm-text-wrap">
+                                                    <span class="setting-modal-alarm-main-text">체험 · 인턴 결과 알림</span>
+                                                    <p class="setting-modal-alarm-sub-text">합격/불합격 여부를 알려드립니다</p>
+                                                </div>
+                                                <div class="setting-modal-alarm-button-wrap">
+                                                    <button class="setting-modal-alarm-button">
+                                                        <div class="setting-modal-alarm-button-check"></div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="setting-modal-alarm-section">
+                                                <div class="setting-modal-alarm-text-wrap">
+                                                    <span class="setting-modal-alarm-main-text">팔로우 기업 공고 알림</span>
+                                                    <p class="setting-modal-alarm-sub-text">팔로우한 기업의 새로운 공고를 알려드립니다</p>
+                                                </div>
+                                                <div class="setting-modal-alarm-button-wrap">
+                                                    <button class="setting-modal-alarm-button">
+                                                        <div class="setting-modal-alarm-button-check"></div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>                      
+                                    </div>                                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 고객지원 모달창 -->
+    <div class="crisp-chatbox-chat" id="crisp-chatbox-chat">
+        <div class="customer-support-wrap">
+            <div class="customer-support">
+                <!-- 고객지원 모달 top -->
+                <div class="customer-support-top-wrap">
+                    <div class="customer-support-top">
+                        <span class="customer-support-top-section">
+                            <div class="customer-support-talk-wrap" role="button" tabindex="0">
+                                <span class="customer-support-talk-icon"></span>
+                                <span class="customer-support-talk-text">대화</span>
+                            </div>
+                            <div class="customer-support-center-wrap" role="button" tabindex="0">
+                                <span class="customer-support-center-icon"></span>
+                                <span class="customer-support-center-text">지원 센터</span>
+                            </div>
+                        </span>
+                        <div class="customer-support-top-title-wrap">
+                            <span class="customer-support-top-title">
+                                <span class="customer-support-top-text">공지사항</span>
+                            </span>
+                        </div>
+                        <span class="customer-support-top-close-wrap">
+                            <span class="customer-support-top-close-button" role="button" tabindex="0">
+                                <span class="customer-support-top-close-icon"></span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="customer-support-body-wrap1">
+                    <div class="customer-support-body-wrap2">
+                        <div class="customer-support-body-wrap3">
+                            <div class="customer-support-body-wrap4">
+                                <div class="customer-support-body-wrap5">
+                                    <div class="customer-support-body-wrap6">                                        
+                                        <ul class="customer-support-list">
+                                            <!-- 자주 묻는 질문 list -->
+                                            <li class="customer-support-list-section">
+                                                <div class="customer-support-list-content">
+                                                    <span class="customer-support-list-title-wrap">
+                                                        <span class="customer-support-list-title-icon"></span>로켓펀치 고유계정 원칙 안내
+                                                    </span>
+                                                    <span class="customer-support-list-text">
+                                                        고유계정 원칙이란?
+                                                        로켓펀치는 원활한 서비스 운영과 부정 이용 방지를 위해 본인인증을 기반으로 한 1인 1계정(프로필) 정책을 운영하고 있습니다.
+                                                        이는 서비스의 신뢰성과 안전한 커뮤니티 운영을 위한 조치입니다.
+                                                        매번 본인인증을 통해 서비스에 로그인하는 것도 가능하지만, 이를 더 빠르게 수행하기 위해 원하는 소셜 미디어 계정(Google, Apple, 네이버, 카카오)을 통해 간편하게 가입 및 로그인이 가능합니다.
+                                                    </span>
+                                                </div>
+                                            </li>                                           
+                                        </ul>
+                                    </div>
+                                    <!-- 검색 -->
+                                    <div class="customer-support-bottom">
+                                        <form class="customer-support-search" name="form_helpdesk" action="">
+                                            <span class="customer-support-search-icon"></span>
+                                            <input class="customer-support-search-text" placeholder="도움말 센터 검색..." type="text" name="helpdesk_search" maxlength="100">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 고객지원 상세 모달창 -->
+    <div class="crisp-chatbox-chat-detail" id="crisp-chatbox-chat-detail">
+        <div class="customer-support-detail-wrap">
+            <div class="customer-support-detail">
+                <div class="customer-support-detail-top-wrap">
+                    <div class="customer-support-detail-top">
+                        <span class="detail-top-title-wrap">
+                            <div class="detail-top-title-section1" tabindex="0" role="button">
+                                <span class="detail-top-title-icon1"></span>
+                                <span class="detail-top-title-text">대화</span>
+                            </div>
+                            <div class="detail-top-title-section2" tabindex="0" role="button">
+                                <span class="detail-top-title-icon2"></span>
+                                <span class="detail-top-title-text">지원 센터</span>
+                            </div>
+                        </span>
+                        <div class="detail-top-center"></div>
+                        <span class="detail-top-close-wrap">
+                            <span class="detail-top-close-button" tabindex="0" role="button">
+                                <span class="detail-top-close-icon"></span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="customer-support-detail-wrap1">
+                    <div class="customer-support-detail-wrap2">
+                        <div class="customer-support-detail-wrap3">
+                            <div class="customer-support-detail-wrap4">
+                                <div class="customer-support-detail-wrap5">
+                                    <div class="detail-sub-top">
+                                        <span class="detail-back-wrap" tabindex="0" role="button">
+                                            <span class="detail-back-icon"></span>
+                                        </span>
+                                        <span class="detail-title-wrap">
+                                            <span class="detail-title">
+                                                <span class="detail-title-section">계정 및 프로필</span>
+                                                <span class="detail-title-section-icon">/</span>
+                                                <span class="detail-title-text">로켓펀치 고유계정 원칙 안내</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="detail-main-body-wrap">
+                                        <div class="detail-main-body" id="detail-main-body">
+                                            <div class="detail-main-content-wrap1">
+                                                <div class="detail-main-content-wrap2">
+                                                    <div class="detail-main-content-wrap3" role="main">
+                                                        <article class="detail-main-article-wrap">
+                                                            <div class="detail-main-article" role="article">
+                                                                <h3 onclick="" id="detail-main-title" class="detail-main-title">
+                                                                    <span class="detail-main-title-text">고유계정 원칙이란?</span>
+                                                                </h3>
+                                                                <span class="detail-main-content-text">
+                                                                    <br>
+                                                                    로켓펀치는 원활한 서비스 운영과 부정 이용 방지를 위해 본인인증을 기반으로 한 1인 1계정(프로필) 정책을 운영하고 있습니다.
+                                                                    이는 서비스의 신뢰성과 안전한 커뮤니티 운영을 위한 조치입니다.
+                                                                    <br>
+                                                                    매번 본인인증을 통해 서비스에 로그인하는 것도 가능하지만, 이를 더 빠르게 수행하기 위해 원하는 소셜 미디어 계정(Google, Apple, 네이버, 카카오)을 통해 간편하게 가입 및 로그인이 가능합니다.
+                                                                    <br>
+                                                                    계정 생성 후,  메뉴에서 본인 인증 여부, 로그인 방식, 연결된 소셜 계정 등을 확인하고 변경할 수 있습니다.
+                                                                    계정과 관련된 문제가 발생했거나 문의 사항이 있는 경우, [지원 센터]를 통해 도움을 받으실 수 있습니다.
+                                                                </span>
+                                                                <span class="detail-main-content-space"></span>
+                                                                <p class="detail-main-update-date">업데이트 날짜: 2025/09/15</p>
+                                                            </div>
+                                                        </article>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../static/js/main-page/side-bar/event.js"></script>
+</html>

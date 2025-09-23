@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shorcut icon" href="../../static/images/member/kok_favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../static/css/reset.css">
+    <link rel="stylesheet" href="../../static/font/font.css">
+    <link rel="stylesheet" href="../../static/css/experience/list.css">
+    <title>기업정보 | 콕</title>
+</head>
+<body>
+    <div id="main-content" class="main-content">
+        <main class="main">
+            <div class="content-layout">
+                <div class="content">
+                    <div class="main-wrapper">
+                        <div class="content-section">
+                            <div class="search-container wide">
+                                <div class="search-box">
+                                    <div class="search-list">
+                                        <div class="search-item search-input-item">
+                                            <input type="text" id="keyword-input" placeholder="기업명">
+                                            <button type="button" class="keyword-delete">
+                                                <svg aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="24" role="img" width="24">
+                                                    <path clip-rule="evenodd" d="M6.434 6.435a.8.8 0 0 1 1.132 0L12 10.869l4.434-4.434a.8.8 0 1 1 1.132 1.13L13.13 12l4.435 4.435a.8.8 0 1 1-1.132 1.13L12 13.133l-4.434 4.434a.8.8 0 0 1-1.132-1.131L10.87 12 6.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="search-item">
+                                            <div class="search-label">
+                                                <p class="search-name">직군</p>
+                                            </div>
+
+                                            <div class="dropdown-container">
+                                                <button class="dropdown-open-btn">전체</button>
+
+                                                <div class="dropdown-menu">
+                                                    <p class="dropdown-name">직군</p>
+                                                    <div class="dropdown-content">
+                                                        <ul class="dropdown-list">
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>SW 개발</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>데이터/AI</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>기획/전략</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>디자인/UX</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>마케팅/PR</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>경영/운영</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>HR/인사</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>회계/재무</p>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>법률/법무</p>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="dropdown-actions">
+                                                            <button class="select-all-btn">전체 선택</button>
+                                                            <button class="apply-btn">적용</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="search-item">
+                                            <div class="search-label">
+                                                <p class="search-name">기업 규모</p>
+                                            </div>
+                                            
+                                            <div class="dropdown-container">
+                                                <button class="dropdown-open-btn">전체</button>
+
+                                                <div class="dropdown-menu">
+                                                    <p class="dropdown-name">기업 규모</p>
+                                                    <div class="dropdown-content">
+                                                        <ul class="dropdown-list">
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>매우 작은 규모</p>
+                                                                    <span>30명 미만</span>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>작은 규모</p>
+                                                                    <span>30-100명</span>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>중간 규모</p>
+                                                                    <span>100-400명</span>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>큰 규모</p>
+                                                                    <span>400-2,000명</span>
+                                                                </button>
+                                                            </li>
+                                                            <li class="dropdown-item">
+                                                                <button class="dropdown-btn">
+                                                                    <p>매우 큰 규모</p>
+                                                                    <span>2,000명 초과</span>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="dropdown-actions">
+                                                            <button class="select-all-btn">전체 선택</button>
+                                                            <button class="apply-btn">적용</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="pc"> -->
+                                        <button class="search-button">
+                                            <svg viewBox="0 0 24 24" fill="#fff" height="24" role="img" width="24">
+                                                <path clip-rule="evenodd" d="M11 4.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4M3.2 11a7.8 7.8 0 1 1 13.852 4.921l3.514 3.514a.8.8 0 1 1-1.132 1.13l-3.513-3.513A7.8 7.8 0 0 1 3.2 11" fill-rule="evenodd"></path>
+                                            </svg>
+                                        </button>
+                                    <!-- </div> -->
+                                </div>
+                            </div>
+                            <div class="content-box pd-0">
+                                <div class="list-container pd-0">
+                                    <!-- 데이터 없을때 -->
+                                    <div class="no-data">
+                                        <p class="title">조건에 맞는 기업이 없습니다.</p>
+                                        <p class="description">조건을 변경하여 다시 검색해 보세요.</p>
+                                    </div>
+
+                                    <div class="list-item">
+                                        <button class="list-item-btn">
+                                            <div class="list-item-background">
+                                                <img src="/static/images/mypage/banner.jpg" alt="">
+                                            </div>
+                                            <div class="list-item-header">
+                                                <div class="list-item-thumb">
+                                                    <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&amp;w=64&amp;q=75" alt="">
+                                                </div>
+                                                <div class="list-item-content">
+                                                    <p class="list-item-category">포털/인터넷/콘텐츠</p>
+                                                    <p class="list-item-name">로켓펀치</p>
+                                                    <p class="list-item-description">한국 최대 비즈니스 소셜 네트워크</p>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <div class="list-item">
+                                        <button class="list-item-btn">
+                                            <div class="list-item-background">
+                                                <img src="/static/images/mypage/banner2.jpg" alt="">
+                                            </div>
+                                            <div class="list-item-header">
+                                                <div class="list-item-thumb">
+                                                    <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&amp;w=64&amp;q=75" alt="">
+                                                </div>
+                                                <div class="list-item-content">
+                                                    <p class="list-item-category">포털/인터넷/콘텐츠</p>
+                                                    <p class="list-item-name">로켓펀치</p>
+                                                    <p class="list-item-description">한국 최대 비즈니스 소셜 네트워크</p>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <div class="list-item">
+                                        <button class="list-item-btn">
+                                            <div class="list-item-background">
+                                                <img src="/static/images/mypage/banner3.jpg" alt="">
+                                            </div>
+                                            <div class="list-item-header">
+                                                <div class="list-item-thumb">
+                                                    <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&amp;w=64&amp;q=75" alt="">
+                                                </div>
+                                                <div class="list-item-content">
+                                                    <p class="list-item-category">포털/인터넷/콘텐츠</p>
+                                                    <p class="list-item-name">로켓펀치</p>
+                                                    <p class="list-item-description">한국 최대 비즈니스 소셜 네트워크</p>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <div class="list-item">
+                                        <button class="list-item-btn">
+                                            <div class="list-item-background">
+                                                <img src="/static/images/mypage/banner4.jpg" alt="">
+                                            </div>
+                                            <div class="list-item-header">
+                                                <div class="list-item-thumb">
+                                                    <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&amp;w=64&amp;q=75" alt="">
+                                                </div>
+                                                <div class="list-item-content">
+                                                    <p class="list-item-category">포털/인터넷/콘텐츠</p>
+                                                    <p class="list-item-name">로켓펀치</p>
+                                                    <p class="list-item-description">한국 최대 비즈니스 소셜 네트워크</p>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <div class="list-item">
+                                        <button class="list-item-btn">
+                                            <div class="list-item-background">
+                                                <img src="/static/images/mypage/banner5.jpg" alt="">
+                                            </div>
+                                            <div class="list-item-header">
+                                                <div class="list-item-thumb">
+                                                    <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&amp;w=64&amp;q=75" alt="">
+                                                </div>
+                                                <div class="list-item-content">
+                                                    <p class="list-item-category">포털/인터넷/콘텐츠</p>
+                                                    <p class="list-item-name">로켓펀치</p>
+                                                    <p class="list-item-description">한국 최대 비즈니스 소셜 네트워크</p>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <div class="list-item">
+                                        <button class="list-item-btn">
+                                            <div class="list-item-background">
+                                                <img src="/static/images/mypage/banner.jpg" alt="">
+                                            </div>
+                                            <div class="list-item-header">
+                                                <div class="list-item-thumb">
+                                                    <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&amp;w=64&amp;q=75" alt="">
+                                                </div>
+                                                <div class="list-item-content">
+                                                    <p class="list-item-category">포털/인터넷/콘텐츠</p>
+                                                    <p class="list-item-name">로켓펀치</p>
+                                                    <p class="list-item-description">한국 최대 비즈니스 소셜 네트워크</p>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <div class="list-item">
+                                        <button class="list-item-btn">
+                                            <div class="list-item-background">
+                                                <img src="/static/images/mypage/banner2.jpg" alt="">
+                                            </div>
+                                            <div class="list-item-header">
+                                                <div class="list-item-thumb">
+                                                    <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&amp;w=64&amp;q=75" alt="">
+                                                </div>
+                                                <div class="list-item-content">
+                                                    <p class="list-item-category">포털/인터넷/콘텐츠</p>
+                                                    <p class="list-item-name">로켓펀치</p>
+                                                    <p class="list-item-description">한국 최대 비즈니스 소셜 네트워크</p>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <div class="list-item">
+                                        <button class="list-item-btn">
+                                            <div class="list-item-background">
+                                                <img src="/static/images/mypage/banner3.jpg" alt="">
+                                            </div>
+                                            <div class="list-item-header">
+                                                <div class="list-item-thumb">
+                                                    <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&amp;w=64&amp;q=75" alt="">
+                                                </div>
+                                                <div class="list-item-content">
+                                                    <p class="list-item-category">포털/인터넷/콘텐츠</p>
+                                                    <p class="list-item-name">로켓펀치</p>
+                                                    <p class="list-item-description">한국 최대 비즈니스 소셜 네트워크</p>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <div class="list-item">
+                                        <button class="list-item-btn">
+                                            <div class="list-item-background">
+                                                <img src="/static/images/mypage/banner4.jpg" alt="">
+                                            </div>
+                                            <div class="list-item-header">
+                                                <div class="list-item-thumb">
+                                                    <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&amp;w=64&amp;q=75" alt="">
+                                                </div>
+                                                <div class="list-item-content">
+                                                    <p class="list-item-category">포털/인터넷/콘텐츠</p>
+                                                    <p class="list-item-name">로켓펀치</p>
+                                                    <p class="list-item-description">한국 최대 비즈니스 소셜 네트워크</p>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="side-wrapper">
+                        <!-- 로그인시 -->
+                        <div class="content-box">
+                            <div class="profile-card">
+                                <div class="profile-avatar">
+                                    <img alt="image" draggable="false" loading="lazy" width="60" height="60" decoding="async" data-nimg="1" srcset="" src="/static/images/mypage/default.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+                                </div>
+                                <div class="profile-info">
+                                    <div class="profile-name">
+                                        <a href="" class="member-name">홍길동</a>
+                                    </div>
+                                    <p class="member-role">SW 개발</p>
+                                </div>
+                                <div class="stats-list">
+                                    <div class="stat-item">
+                                        <p class="stat-value">0</p>
+                                        <p class="stat-label">게시물</p>
+                                    </div>
+                                    <div class="stat-item">
+                                        <p class="stat-value">0</p>
+                                        <p class="stat-label">팔로잉</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 비로그인시 -->
+                        <div class="content-box">
+                            <div class="profile-card">
+                                <div class="profile-message">
+                                    <p class="title">콕! 찍으면, <br/>오늘은 내가 그 회사의 직원</p>
+                                    <p class="desc">지금 프로필을 만들고 기회를 찾아보세요.</p>
+                                </div>
+                                <button type="button" class="btn-login btn-primary">로그인</button>
+                            </div>
+                        </div>
+                        
+                        <div class="content-box pd-0">
+                            <div class="banner-list">
+                                <div class="ad-banner">
+                                    <div class="ad-text-box">
+                                        <p class="title">1차세대 글로벌 광고 플랫폼 <br/>엔지니어 모집</p>
+                                        <p class="desc">최신 기술 환경에서 전문성을 키워나가세요.</p>
+                                    </div>
+                                    <div class="ad-img">
+                                        <img src="/static/images/experience/ad_bg_img.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="ad-banner">
+                                    <div class="ad-text-box">
+                                        <p class="title">2차세대 글로벌 광고 플랫폼 <br/>엔지니어 모집</p>
+                                        <p class="desc">최신 기술 환경에서 전문성을 키워나가세요.</p>
+                                    </div>
+                                    <div class="ad-img">
+                                        <img src="/static/images/experience/ad_bg_img.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="ad-banner">
+                                    <div class="ad-text-box">
+                                        <p class="title">3차세대 글로벌 광고 플랫폼 <br/>엔지니어 모집</p>
+                                        <p class="desc">최신 기술 환경에서 전문성을 키워나가세요.</p>
+                                    </div>
+                                    <div class="ad-img">
+                                        <img src="/static/images/experience/ad_bg_img.jpg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- toast - red -->
+    <div id="toast-red" class="toast-warning">
+        <div class="toast-warning-content">
+            <div class="toast-inner">
+                <div class="toast-icon">
+                    <svg viewBox="0 0 24 24" fill="#f04452" height="20" role="img" width="20">
+                        <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <p class="toast-text">키워드는 50자 이내로 입력해주세요</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../static/js/experience/event.js"></script>
+</body>
+</html>
