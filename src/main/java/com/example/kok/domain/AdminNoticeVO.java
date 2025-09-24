@@ -11,4 +11,7 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(of="id", callSuper = false)
 @SuperBuilder
 public class AdminNoticeVO extends Period{
+    private Long id;
+    private String adminNoticeTitle;
+    private String adminNoticeContent;
 }

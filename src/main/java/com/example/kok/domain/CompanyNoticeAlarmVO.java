@@ -11,4 +11,10 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(of="id", callSuper = false)
 @SuperBuilder
 public class CompanyNoticeAlarmVO extends Period{
+    private Long id;
+    private Long memberAlarmSettingId;
+    private Long followId;
+    private Long experienceNoticeId;
+    private Long internNoticeId;
+    private Long memberId;
 }
