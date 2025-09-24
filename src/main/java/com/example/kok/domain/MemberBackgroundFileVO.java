@@ -11,4 +11,6 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(of="id", callSuper = false)
 @SuperBuilder
 public class MemberBackgroundFileVO extends Period{
+    private Long fileId;
+    private Long memberId;
 }
