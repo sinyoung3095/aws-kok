@@ -8,11 +8,15 @@ CREATE TABLE tbl_experience_notice (
     --     end_experience_date   varchar(255) not null,
     experience_start_date date not null,
     experience_end_date date not null,
-    experience_notice_notes   varchar(255) not null,
+--     experience_notice_notes   varchar(255) not null,
     experience_notice_status  request_status default 'await' not null,
+    company_id   bigint not null,
     created_datetime   timestamp default now(),
     updated_datetime   timestamp default now(),
-    company_id   bigint not null,
     constraint fk_experience_notice_company foreign key(company_id)
         references tbl_company(user_id)
 );
+
+ALTER TABLE tbl_experience_notice add COLUMN experience_start_date;
+
+select * from tbl_experience_notice;

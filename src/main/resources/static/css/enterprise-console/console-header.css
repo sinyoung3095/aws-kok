@@ -50,7 +50,7 @@ li {
 }
 
 main.main{
-    box-shadow: #0000;
+    /*box-shadow: 0 0 0 #000;*/
     border-radius: 14px;
     margin-left: 0px;
     margin: 8px;

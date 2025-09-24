@@ -78,7 +78,7 @@ button, input, optgroup, select, textarea {
     letter-spacing: inherit;
     color: inherit;
     opacity: 1;
-    background-color: 0 0 #0000;
+    background-color: #000;
     border-radius: 0;
 }
 
@@ -136,8 +136,8 @@ div.wrap-enter{
     background-color: #fafafa;
     overflow: hidden;
     width: 100%;
-    min-height: 898px;
-    height: 898px;
+    min-height: 100vh;
+    height: 100vh;
     display: flex;
 }
 
@@ -291,7 +291,7 @@ button.card-btn{
     line-height: 1.42857;
     padding-inline: 12px;
     background-color: #ffffff;
-    border-color: e5e5e5;
+    border-color: #e5e5e5;
     border-style: solid;
     border-width: 1px;
     border-radius: 8px;
@@ -748,7 +748,7 @@ button.appli-active-btn{
     border-color: #0000;
     border-style: solid;
     border-width: 1px;
-    border-radius: 3.40282e+38px;
+    /*border-radius: 3.40282e+38px;*/
     align-items: center;
     flex-shrink: 0;
     width: 32px;
@@ -771,7 +771,7 @@ span.circle{
     transition-duration: .15s;
     box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 0 calc(0px + 0) currentColor, 0 0 #0000;
     background-color: #ffffff;
-    border-radius: 3.40282e+38px;
+    /*border-radius: 3.40282e+38px;*/
     width: 16px;
     height: 16px;
     display: block;
