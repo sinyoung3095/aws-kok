@@ -11,4 +11,6 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(of="id", callSuper = false)
 @SuperBuilder
 public class PostFileVO extends Period{
+    private long fileId;
+    private long postId;
 }

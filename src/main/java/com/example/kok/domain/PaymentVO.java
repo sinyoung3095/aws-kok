@@ -11,4 +11,9 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(of="id", callSuper = false)
 @SuperBuilder
 public class PaymentVO extends Period{
+    private long id;
+    private long paymentPrice;
+    private long advertisementId;
+    private long requestExperienceId;
+    private long userId;
 }
