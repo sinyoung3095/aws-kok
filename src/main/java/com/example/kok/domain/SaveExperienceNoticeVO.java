@@ -8,7 +8,9 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @ToString(callSuper=true)
-@EqualsAndHashCode(of="id", callSuper = false)
+@EqualsAndHashCode(of="memberId", callSuper = false)
 @SuperBuilder
 public class SaveExperienceNoticeVO extends Period{
+    private long memberId;
+    private long experienceNoticeId;
 }
