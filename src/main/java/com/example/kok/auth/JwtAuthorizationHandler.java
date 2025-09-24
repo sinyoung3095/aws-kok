@@ -15,6 +15,15 @@ import java.io.IOException;
 public class JwtAuthorizationHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
+        log.error("AccessDeniedException: {}", accessDeniedException.getMessage());
 
+        if(request.getRequestURI().startsWith("/api/")){
+//            REST 요청인 경우
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Unauthorized: Access Denied");
+
+        }else{
+//            일반 웹 요청인 경우
+            response.sendRedirect("/member/login");
+        }
     }
 }
