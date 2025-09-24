@@ -11,4 +11,9 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(of="id", callSuper = false)
 @SuperBuilder
 public class MemberCommentAlarmVO extends Period{
+    private Long id;
+    private Long memberId;
+    private Long postId;
+    private Long commentId;
+    private Long memberAlarmSettingId;
 }
