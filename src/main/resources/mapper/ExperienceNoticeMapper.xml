@@ -5,11 +5,11 @@
     <select id="selectAllExperienceNotice">
         select id, experience_notice_title, experience_notice_subtitle, experience_notice_introduce_job, experience_notice_etc, experience_start_date, experience_end_date, experience_notice_status, created_datetime, updated_datetime, company_id
         from tbl_experience_notice
-        where experience_notice_status='active'
+        where experience_notice_status='accept'
     </select>
 <!--    전체 개수 조회-->
     <select id="selectCountAll">
         select count(*) from tbl_experience_notice
-        where experience_notice_status='active'
+        where experience_notice_status='accept'
     </select>
 </mapper>
