@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @ToString(callSuper=true)
-@EqualsAndHashCode(of="id", callSuper = false)
+@EqualsAndHashCode(of="userId", callSuper = false)
 @SuperBuilder
 public class MemberVO extends Period{
     private Long userId;
