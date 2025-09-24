@@ -7,3 +7,7 @@ create table tbl_company (
     constraint fk_company_user foreign key(user_id)
         references tbl_user(id)
 );
+
+select * from tbl_company;
+
+insert into tbl_company(user_id, company_business_number, company_name) values (1, '123456789', '회사명1');

@@ -155,6 +155,10 @@ function searchDropdownFn() {
 }
 searchDropdownFn();
 
+const noData=document.querySelector(".no-data");
+
+
+
 // function categoryTagFn() {
 //     const box = document.querySelector(".categoty-tag-box");
 //     if (!box) return;
