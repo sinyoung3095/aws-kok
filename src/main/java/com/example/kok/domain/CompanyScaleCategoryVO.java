@@ -11,4 +11,6 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(of="id", callSuper = false)
 @SuperBuilder
 public class CompanyScaleCategoryVO extends Period{
+    private Long id;
+    private String companyScaleName;
 }
