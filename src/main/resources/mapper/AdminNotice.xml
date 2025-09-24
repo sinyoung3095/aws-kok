@@ -14,9 +14,12 @@
     <update id="updateNoticeFromId">
         update tbl_admin_notice
         set admin_notice_title = #{adminNoticeTitle}, admin_notice_content = #{adminNoticeContent}
-        where id = #{id}
+        where notice_status = 'active' and id = #{id}
     </update>
     
     <update id="deleteNoticeFromId">
+        update tbl_admin_notice
+        set notice_status = 'inactive'
+        where notice_status = 'active' and id = #{id}
     </update>
 </mapper>
