@@ -1,9 +1,13 @@
 package com.example.kok.repository;
 
 import com.example.kok.domain.AdminNoticeVO;
+import com.example.kok.dto.AdminNoticeDTO;
 import com.example.kok.mapper.AdminNoticeMapper;
+import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -16,8 +20,22 @@ public class AdminNoticeDAO {
     }
 
 //    목록
+    public List<AdminNoticeDTO> selectAll (Criteria criteria) {
+        return adminNoticeMapper.selectNoticeAll(criteria);
+    }
+
+//    전체 개수
+    public int countAll () {
+        return adminNoticeMapper.countNoticeAll();
+    }
 
 //    수정
+    public void updateNotice (AdminNoticeVO adminNoticeVO){
+        adminNoticeMapper.updateNoticeFromId(adminNoticeVO);
+    }
 
 //    삭제
+    public void deleteNotice (Long id){
+        adminNoticeMapper.deleteNoticeFromId(id);
+    }
 }
