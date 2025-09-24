@@ -8,7 +8,9 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @ToString(callSuper=true)
-@EqualsAndHashCode(of="id", callSuper = false)
+@EqualsAndHashCode(of="companyId", callSuper = false)
 @SuperBuilder
 public class CompanyScaleCategoryBridgeVO extends Period{
+    private Long companyId;
+    private Long companyScaleCategoryId;
 }

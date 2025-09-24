@@ -15,6 +15,14 @@ import java.io.IOException;
 public class JwtAuthenticationHandler implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+        log.error("AuthenticationEntryPoint Exception: {}", authException.getMessage());
+        if(request.getRequestURI().startsWith("/api/")){
+//            REST 요청인 경우
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
 
+        }else{
+//            일반 웹 요청인 경우
+            response.sendRedirect("/member/login");
+        }
     }
 }
