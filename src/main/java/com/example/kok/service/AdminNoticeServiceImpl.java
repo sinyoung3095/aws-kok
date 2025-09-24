@@ -1,0 +1,61 @@
+package com.example.kok.service;
+
+import com.example.kok.dto.AdminNoticeCriteriaDTO;
+import com.example.kok.dto.AdminNoticeDTO;
+import com.example.kok.repository.AdminNoticeDAO;
+import com.example.kok.util.Criteria;
+import com.example.kok.util.DateUtils;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+@Primary
+public class AdminNoticeServiceImpl implements AdminNoticeService {
+    private final AdminNoticeDAO adminNoticeDAO;
+
+//    등록
+    @Override
+    public void write(AdminNoticeDTO adminNoticeDTO) {
+        adminNoticeDAO.insert(toVO(adminNoticeDTO));
+    }
+
+//    목록
+    @Override
+    public AdminNoticeCriteriaDTO getList(int page) {
+        AdminNoticeCriteriaDTO adminNoticeCriteriaDTO = new AdminNoticeCriteriaDTO();
+        Criteria criteria = new Criteria(page, adminNoticeDAO.countAll());
+        List<AdminNoticeDTO> noticeList = adminNoticeDAO.selectAll(criteria);
+        noticeList.forEach((notice) -> {
+            notice.setRelativeDate(DateUtils.toRelativeTime(notice.getCreatedDateTime()));
+        });
+
+        criteria.setHasMore(noticeList.size() > criteria.getRowCount());
+
+        //  11개 가져왔으면, 마지막 1개 삭제
+        if(criteria.isHasMore()){
+            noticeList.remove(noticeList.size() - 1);
+        }
+
+        adminNoticeCriteriaDTO.setNoticeList(noticeList);
+        adminNoticeCriteriaDTO.setCriteria(criteria);
+
+        return adminNoticeCriteriaDTO;
+    }
+
+//    수정
+    @Override
+    public void update(AdminNoticeDTO adminNoticeDTO) {
+        adminNoticeDAO.updateNotice(toVO(adminNoticeDTO));
+    }
+
+//    삭제
+    @Override
+    public void delete(Long id) {
+        adminNoticeDAO.deleteNotice(id);
+    }
+
+}

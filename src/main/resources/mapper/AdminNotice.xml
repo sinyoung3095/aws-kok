@@ -6,17 +6,25 @@
         values (#{adminNoticeTitle}, #{adminNoticeContent})
     </insert>
     
-    <select id="selectnoticeAll">
+    <select id="selectNoticeAll">
         select id, admin_notice_title, admin_notice_content, created_datetime, updated_datetime
         from tbl_admin_notice
     </select>
 
+    <select id="countNoticeAll">
+        select count(*) from tbl_admin_notice
+        where notice_status = 'active'
+    </select>
+
     <update id="updateNoticeFromId">
         update tbl_admin_notice
-        set admin_notice_title = #{adminNoticeTitle}, admin_notice_content = #{adminNoticeContent}
-        where id = #{id}
+        set admin_notice_title = #{adminNoticeTitle}, admin_notice_content = #{adminNoticeContent}, updated_datetime = current_timestamp
+        where notice_status = 'active' and id = #{id}
     </update>
     
     <update id="deleteNoticeFromId">
+        update tbl_admin_notice
+        set notice_status = 'inactive'
+        where notice_status = 'active' and id = #{id}
     </update>
 </mapper>
