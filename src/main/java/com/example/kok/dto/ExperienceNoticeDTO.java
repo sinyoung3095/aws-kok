@@ -1,26 +1,30 @@
-package com.example.kok.domain;
+package com.example.kok.dto;
 
 import com.example.kok.audit.Period;
 import com.example.kok.enumeration.Status;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
-@Getter
-@ToString(callSuper=true)
-@EqualsAndHashCode(of="id", callSuper = false)
-@SuperBuilder
-public class ExperienceNoticeVO extends Period{
+@Component
+@Getter @Setter
+@ToString
+@EqualsAndHashCode(of="id")
+@NoArgsConstructor
+public class ExperienceNoticeDTO{
     private Long id;
     private String experienceNoticeTitle;
     private String experienceNoticeSubtitle;
     private String experienceNoticeIntroduceJob;
     private String experienceNoticeEtc;
-    private LocalDate ExperienceStartDate;
-    private LocalDate ExperienceEndDate;
+    private LocalDate experienceStartDate;
+    private LocalDate experienceEndDate;
     private Status experienceNoticeStatus;
     private Long companyId;
+    private String createdDate;
+    private String updatedDate;
+
+    private Long remainingDays;
 }

@@ -4,8 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+<<<<<<< HEAD
+@Getter @Setter
+=======
 @Getter
 @Setter
+>>>>>>> 54408aa33139ed5b5a8b4e6dd2e6fd871df63d1b
 @ToString
 public class Criteria {
     private int page;
