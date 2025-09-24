@@ -2142,6 +2142,10 @@ input:-internal-autofill-selected {
     }
 }
 
+.display-none{
+    display: none;
+}
+
 
 
 

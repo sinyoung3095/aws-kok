@@ -23,11 +23,11 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
         experiences.forEach(experience -> {
             LocalDate endDate = experience.getExperienceEndDate();
             LocalDate today = LocalDate.now();
-            if (endDate != null) {
+            if (endDate.isBefore(today)) {
                 long days = ChronoUnit.DAYS.between(today, endDate);
                 experience.setRemainingDays(days);
             } else {
-                experience.setRemainingDays(0L); // endDate 없으면 0일
+                experience.setRemainingDays(0L); // endDate보다 today가 이전일 경우 0
             }
         });
 
