@@ -15,3 +15,7 @@ create table tbl_user (
     created_datetime timestamp default now(),
     updated_datetime timestamp default now()
 );
+
+select * from tbl_user;
+
+insert into tbl_user(user_name, user_phone, user_email, user_password, user_role) values ('테스트', '01011111111', 'test1@gmail.com', '1234', 'company');

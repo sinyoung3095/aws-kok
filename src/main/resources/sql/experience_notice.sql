@@ -16,3 +16,10 @@ CREATE TABLE tbl_experience_notice (
     constraint fk_experience_notice_company foreign key(company_id)
         references tbl_company(user_id)
 );
+
+alter table tbl_experience_notice drop experience_notice_notes;
+
+select * from tbl_experience_notice;
+
+insert into tbl_experience_notice(experience_notice_title, experience_notice_subtitle, experience_notice_introduce_job, experience_notice_etc, experience_start_date, experience_end_date, company_id)
+values ('공고 제목1', '공고 부제목1', '직무 소개1', '참고사항1', '2025-09-25', '2025-09-26', 1);
