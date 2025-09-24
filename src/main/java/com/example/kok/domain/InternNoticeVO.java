@@ -13,11 +13,20 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class InternNoticeVO extends Period{
     private Long id;
+<<<<<<< HEAD
     private String internNoticeTitle;
     private String internNoticeSubtitle;
+=======
+    private Long companyId;
+    private String internNoticeTitle;
+    private String internNoticeSubTitle;
+>>>>>>> bdafb4d4166f31f0a8b225dd743fdec9aed058a3
     private String internNoticeIntroduceJob;
     private String internNoticeMajorWork;
     private String internNoticeNotes;
     private Status internNoticeStatus;
+<<<<<<< HEAD
     private String companyId;
+=======
+>>>>>>> bdafb4d4166f31f0a8b225dd743fdec9aed058a3
 }
