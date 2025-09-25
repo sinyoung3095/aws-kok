@@ -18,9 +18,15 @@ public class ConsoleExperienceController {
         return "enterprise-console/console-experience-list";
     }
 
+//    기업 콘솔 체험 공고 등록
+    @GetMapping("/create")
+    public String goToCreate() {
+        return "enterprise-console/console-experience-update";
+    }
+
 //    기업 콘솔 체험 공고 수정
-    @GetMapping("/update")
-    public String goToUpdate() {
+    @GetMapping("/edit/{id}")
+    public String goToEdit() {
         return "enterprise-console/console-experience-update";
     }
 

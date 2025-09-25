@@ -6,3 +6,5 @@ CREATE TABLE tbl_user_job_category (
     constraint fk_user_job_category_job_category foreign key(job_category)
        references tbl_job_category(id)
 );
+
+select * from tbl_user_job_category;

@@ -4,6 +4,8 @@ import com.example.kok.enumeration.Status;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Getter
 @Setter
@@ -17,4 +19,6 @@ public class PostDTO {
     private long memberId;
     private String createdDateTime;
     private String updatedDateTime;
+    private String relativeDate;
+    private List<PostFileDTO> postFiles;
 }
