@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class PostCriteriaDTO {
+public class PostsCriteriaDTO {
     private List<PostDTO> posts;
     private Criteria criteria;
 }
