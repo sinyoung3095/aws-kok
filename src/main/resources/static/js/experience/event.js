@@ -1206,3 +1206,45 @@ function bannerActiveFn() {
     timer = setInterval(showRandomBanner, 5000);
 }
 bannerActiveFn();
+
+
+
+// 무한스크롤
+
+let page = 1;
+const showList = async (page = 1) => {
+    const loading = document.getElementById("loading");
+
+    loading.style.display = "block";
+    const experienceNoticeCriteria = await experienceService.getExperienceNotice(page, experienceLayout.showList);
+    setTimeout(() => {
+        loading.style.display = "none";
+    }, 1000)
+
+    return experienceNoticeCriteria;
+}
+showList();
+
+let checkScroll = true;
+let experienceNoticeCriteria;
+
+window.addEventListener("scroll", async (e) => {
+    // 현재 스크롤 위치
+    const scrollTop = window.scrollY
+    // 화면 높이
+    const windowHeight = window.innerHeight;
+    // 문서 전체 높이
+    const documentHeight = document.documentElement.scrollHeight
+    if(scrollTop + windowHeight >= documentHeight - 2) {
+    //     바닥에 닿았을 때
+        if(checkScroll){
+            experienceNoticeCriteria = await showList(++page);
+            checkScroll = false;
+        }
+        setTimeout(() => {
+            if(experienceNoticeCriteria !== null && experienceNoticeCriteria.criteria.hasMore){
+                checkScroll = true
+            }
+        }, 1100);
+    }
+})

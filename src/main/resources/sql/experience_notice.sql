@@ -24,4 +24,4 @@ select * from tbl_experience_notice;
 delete from tbl_experience_notice where id=1;
 
 insert into tbl_experience_notice(experience_notice_title, experience_notice_subtitle, experience_notice_introduce_job, experience_notice_etc, experience_start_date, experience_end_date, company_id, experience_notice_status)
-values ('공고 제목1', '공고 부제목1', '직무 소개1', '참고사항1', '2025-09-25', '2025-09-26', 1, 'accept');
+values ('공고 제목5', '공고 부제목5', '직무 소개5', '참고사항5', '2025-09-25', '2025-09-26', 2, 'accept');

@@ -10,4 +10,4 @@ create table tbl_company (
 
 select * from tbl_company;
 
-insert into tbl_company(user_id, company_business_number, company_name) values (1, '123456789', '회사명1');
+insert into tbl_company(user_id, company_business_number, company_name) values (2, '123456781', '회사명2');

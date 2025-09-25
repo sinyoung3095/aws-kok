@@ -26,5 +26,6 @@ public class ExperienceNoticeDTO{
     private String createdDate;
     private String updatedDate;
 
+    private String companyScaleName;
     private Long remainingDays;
 }

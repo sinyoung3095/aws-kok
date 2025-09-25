@@ -18,7 +18,7 @@ public class ExperiencesController {
     private final ExperienceNoticeService experienceNoticeService;
 
 //    목록
-    @GetMapping("list")
+    @GetMapping("{page}")
     public ResponseEntity<?> expList(@PathVariable("page") int page) {
         ExperienceNoticeCriteriaDTO experienceNoticeCriteriaDTO = experienceNoticeService.selectAllExperienceNotice(page);
         if(experienceNoticeCriteriaDTO.getExperiences().size()==0||experienceNoticeCriteriaDTO==null){
