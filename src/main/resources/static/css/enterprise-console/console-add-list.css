@@ -170,7 +170,7 @@ div.add-list-wrap-inner2{
     padding: 24px;
     margin-inline: auto;
     max-width: 96rem;
-    width: 100%;
+    width: 80%;
 }
 
 div.add-list-top{
@@ -194,7 +194,8 @@ p.top-p{
     margin-top: 4px;
 }
 
-button.new-add{
+button.new-add,
+a.new-add{
     padding-inline: 12px;
     outline-style: none;
     transition-property: color, box-shadow;
@@ -292,6 +293,7 @@ div.search-area{
     display: flex;
     margin-block-start: 0px;
     margin-block-end: 32px;
+    gap: 16px;
 }
 
 div.search-div{
@@ -689,7 +691,7 @@ div.top-wrap{
     margin-block-end: 24px;
 }
 
-button.new-exp{
+.new-exp{
     padding-inline: 12px;
     outline-style: none;
     transition-property: color, box-shadow;
@@ -718,6 +720,10 @@ svg.new-exp-svg{
     height:16px;
     flex-shrink: 0;
     pointer-events: none;
+}
+
+.page-div {
+    margin-top: 30px;
 }
 
 nav.page-nav{

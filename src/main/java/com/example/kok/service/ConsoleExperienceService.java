@@ -1,9 +1,7 @@
 package com.example.kok.service;
 
-import com.example.kok.dto.ConsoleExperienceNoticeDTO;
-
-import java.util.List;
+import com.example.kok.dto.ConsoleExperienceNoticeCriteriaDTO;
 
 public interface ConsoleExperienceService {
-//    public <ConsoleExperienceNoticeDTO> findAll();
+    public ConsoleExperienceNoticeCriteriaDTO getList(int page, String keyword);
 }

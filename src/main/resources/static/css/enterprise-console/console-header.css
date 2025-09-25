@@ -96,6 +96,7 @@ ol.header-ol{
     line-height: 1.42857;
     align-items: center;
     flex-wrap: wrap;
+    padding-left: 0;
 }
 
 li.header-li{

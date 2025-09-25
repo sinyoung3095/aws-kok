@@ -347,7 +347,7 @@ img.prof-img{
     height: 16px;
     color: transparent;
     object-fit: contain;
-    /*border-radius: 3.40282e+38px;*/
+    border-radius: 999px;
 }
 
 div.exp-wrap{
@@ -695,7 +695,7 @@ span.console-ch-sub-title{
 
 div.active-service{
     background-color: #171717;
-    /*border-radius: 3.40282e+38px;*/
+    border-radius: 999px;
     width: 8px;
     height: 8px;
     user-select: none;

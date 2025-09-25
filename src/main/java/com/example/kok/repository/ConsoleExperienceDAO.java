@@ -1,6 +1,6 @@
 package com.example.kok.repository;
 
-import com.example.kok.dto.ConsoleExperienceNoticeDTO;
+import com.example.kok.dto.ConsoleExperienceNoticeCriteriaDTO;
 import com.example.kok.mapper.ConsoleExperienceMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -13,7 +13,11 @@ public class ConsoleExperienceDAO {
     private final ConsoleExperienceMapper consoleExperienceMapper;
 
 //    공고 전체 조회
-    public List<ConsoleExperienceNoticeDTO> findAll() {
-        return consoleExperienceMapper.selectProductAll();
+    public List<ConsoleExperienceNoticeCriteriaDTO> findAll(com.example.youeatieat.util.Criteria criteria) {
+        return consoleExperienceMapper.selectExperienceAll(criteria);
     }
+
+//    공고 개수 조회(전체)
+//    public int findCountAll()
+
 }

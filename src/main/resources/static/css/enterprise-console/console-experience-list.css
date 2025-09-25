@@ -170,7 +170,7 @@ div.list-wrap-inner2{
     padding: 24px;
     margin-inline: auto;
     max-width: 96rem;
-    width: 100%;
+    width: 80%;
 }
 
 div.list-head{
@@ -194,7 +194,7 @@ p.head-p{
     margin-top: 4px;
 }
 
-button.new-exp{
+.new-exp{
     padding-inline: 12px;
     outline-style: none;
     transition-property: color, box-shadow;
@@ -223,6 +223,46 @@ svg.new-exp-svg{
     height:16px;
     flex-shrink: 0;
     pointer-events: none;
+}
+
+.page-div {
+    margin-top: 30px;
+}
+
+nav.page-nav{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+ul.page-ul{
+    border-radius: .25rem;
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+li.page-li{
+    padding: 2.5px;
+}
+
+a.page-a{
+    border-color: transparent;
+    border-radius: 4px;
+    color: #8b9298;
+    font-size: 15px;
+    line-height: 15px;
+    min-width: 32px;
+    padding: 7px 10px;
+    text-align: center;
+}
+
+li.page-li.page-on>a{
+    color: #171717;
+    font-weight: 700;
 }
 
 div.card1-wrap{
@@ -279,7 +319,8 @@ p.card-body-sub{
     line-height: 1.33333;
 }
 
-button.card-btn{
+button.card-btn,
+a.card-btn{
     outline-style: none;
     transition-property: color, box-shadow;
     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
@@ -584,6 +625,7 @@ div.list-list{
     padding-block: 24px;
     background-color: #ffffff;
     border-style: solid;
+    border-width: 1px;
     border-radius: 14px;
     gap: 24px;
     flex-direction: column;
@@ -748,7 +790,7 @@ button.appli-active-btn{
     border-color: #0000;
     border-style: solid;
     border-width: 1px;
-    /*border-radius: 3.40282e+38px;*/
+    border-radius: 999px;
     align-items: center;
     flex-shrink: 0;
     width: 32px;
@@ -769,9 +811,9 @@ span.circle{
     transition-property: transform, translate, scale, rotate;
     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     transition-duration: .15s;
-    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 0 calc(0px + 0) currentColor, 0 0 #0000;
-    background-color: #ffffff;
-    /*border-radius: 3.40282e+38px;*/
+    box-shadow: 0 0 #000, 0 0 #000, 0 0 #000, 0 0 0 calc(0px + 0) #000, 0 0 #000;
+    background-color: #fff;
+    border-radius: 999px;
     width: 16px;
     height: 16px;
     display: block;
@@ -853,6 +895,13 @@ div.hambuger-list{
     cursor: default;
     display: flex;
     position: relative;
+}
+
+.hambuger-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
 }
 
 div.hambuger-list:hover{

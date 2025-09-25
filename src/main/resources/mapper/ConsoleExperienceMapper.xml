@@ -6,18 +6,29 @@
                en.experience_end_date, en.experience_notice_status, en.company_id, en.created_datetime, en.updated_datetime,
                jc.job_name as job_category_name,
                count(distinct re.id) as applicant_count,
-               count(distinct se.id) as save_count
+               count(distinct sen.member_id) as save_count
         from tbl_experience_notice en
-        join tbl_user_job_category ujc
-            on en.company_id = ujc.user_id
-        join tbl_job_category jc
-            on ujc.job_category = jc.id
-        left join tbl_request_experience re
-            on en.id = re.experience_notice_id
-        left join tbl_save_experience_notice sen
-            on en.id = sen.experience_notice_id
+                 join tbl_experience_job_category ejc
+                      on en.id = ejc.experience_notice_id
+                 join tbl_job_category jc
+                      on ejc.job_category = jc.id
+                 left join tbl_request_experience re
+                           on en.id = re.experience_notice_id
+                 left join tbl_save_experience_notice sen
+                           on en.id = sen.experience_notice_id
+        where en.company_id = {id}
         group by en.id, jc.job_name
-        order by m.id desc
-#         limit #{criteria.count} offset #{criteria.offset}
-        </select>
+        order by en.id desc;
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <select id="selectCountAll">
+        select count(distinct en.id)
+        from tbl_experience_notice en
+             join tbl_experience_job_category ejc
+                  on en.id = ejc.experience_notice_id
+             join tbl_job_category jc
+                  on ejc.job_category = jc.id
+        where en.company_id = #{id}
+    </select>
 </mapper>

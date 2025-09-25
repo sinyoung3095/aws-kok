@@ -170,7 +170,7 @@ div.home-wrap-inner-2{
     padding: 24px;
     margin-inline: auto;
     max-width: 96rem;
-    width: 100%;
+    width: 80%;
 }
 
 div.home-top{
@@ -195,7 +195,7 @@ p.top-p{
 }
 
 div.profile-main{
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    /*grid-template-columns: repeat(3, minmax(0, 1fr));*/
     gap: 16px;
     display: grid;
     margin-block-start: 0px;
@@ -340,7 +340,7 @@ img.profile-img{
     object-fit: cover;
     border-style: solid;
     border-width: 1px;
-    /*border-radius: 3.40282e+38px;*/
+    border-radius: 999px;
     width: 96px;
     height: 96px;
 }

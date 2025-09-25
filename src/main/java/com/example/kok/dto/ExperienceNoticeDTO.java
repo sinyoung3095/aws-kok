@@ -5,13 +5,13 @@ import lombok.*;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Component
 @Getter @Setter
 @ToString
 @EqualsAndHashCode(of="id")
-public class ConsoleExperienceNoticeDTO {
+@NoArgsConstructor
+public class ExperienceNoticeDTO {
     private Long id;
     private String experienceNoticeTitle;
     private String experienceNoticeSubtitle;
@@ -24,8 +24,4 @@ public class ConsoleExperienceNoticeDTO {
     private Long companyId;
     private String createdDateTime;
     private String updatedDateTime;
-
-    private String jobCategoryName;
-    private int applicantCount;
-    private int saveCount;
 }
