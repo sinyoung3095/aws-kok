@@ -194,7 +194,7 @@ p.head-p{
     margin-top: 4px;
 }
 
-button.new-exp{
+.new-exp{
     padding-inline: 12px;
     outline-style: none;
     transition-property: color, box-shadow;
