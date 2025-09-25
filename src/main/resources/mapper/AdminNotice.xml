@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kok.mapper.AdminNoticeMapper">
-    <insert id="insertNotice">
+    <insert id="insertNotice" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_admin_notice (admin_notice_title, admin_notice_content)
         values (#{adminNoticeTitle}, #{adminNoticeContent})
     </insert>
@@ -9,6 +9,8 @@
     <select id="selectNoticeAll">
         select id, admin_notice_title, admin_notice_content, created_datetime, updated_datetime
         from tbl_admin_notice
+        order by id desc
+        limit #{count} offset #{offset}
     </select>
 
     <select id="countNoticeAll">
