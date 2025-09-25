@@ -4,6 +4,7 @@ import com.example.kok.dto.ExperienceNoticeCriteriaDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.repository.ExperienceNoticeDAO;
 import com.example.kok.util.Criteria;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.DateUtils;
 
@@ -12,8 +13,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
-    private ExperienceNoticeDAO experienceNoticeDAO;
+    private final ExperienceNoticeDAO experienceNoticeDAO;
 
     @Override
     public ExperienceNoticeCriteriaDTO selectAllExperienceNotice(int page) {

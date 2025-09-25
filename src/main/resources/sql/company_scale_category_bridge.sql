@@ -6,3 +6,8 @@ CREATE TABLE tbl_company_scale_category_bridge (
     constraint fk_company_scale_category_bridge_company_scale_category foreign key(company_scale_category_id)
         references tbl_company_scale_category(id)
 );
+
+select * from tbl_company_scale_category_bridge;
+
+insert into tbl_company_scale_category_bridge(company_id, company_scale_category_id)
+values(2, 4);

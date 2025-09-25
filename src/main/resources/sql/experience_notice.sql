@@ -28,6 +28,12 @@ CREATE TABLE tbl_experience_notice (
 
 select * from tbl_experience_notice;
 
+<<<<<<< HEAD
+delete from tbl_experience_notice where id=1;
+
+insert into tbl_experience_notice(experience_notice_title, experience_notice_subtitle, experience_notice_introduce_job, experience_notice_etc, experience_start_date, experience_end_date, company_id, experience_notice_status)
+values ('공고 제목5', '공고 부제목5', '직무 소개5', '참고사항5', '2025-09-25', '2025-09-26', 2, 'accept');
+=======
 insert into tbl_experience_notice
 (experience_notice_title, experience_notice_subtitle, experience_notice_introduce_job, experience_notice_etc,
  experience_start_date, experience_end_date, experience_notice_status, company_id)
@@ -66,3 +72,4 @@ values
      '2025-11-20', '2026-02-20', 'await', 1),
     ('경영 지원 인턴', '문서 정리 및 보고서 작성', '경영/운영', 'MS Office 가능자',
      '2025-11-25', '2026-02-25', 'await', 1);
+>>>>>>> 4aa3c6900275d3dc8af1fe5191a99562a83ad372
