@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.CommunityPostMapper">
+<!-- 게시글 전체 목록 -->
+    <select id="selectAll">
+        select u.id, u.user_name, m.member_profile_url, p.id, p.post_content, p.post_status, p.created_datetime, p.updated_datetime, ujc.job_category
+        from tbl_user u
+        join tbl_member m on u.id = m.user_id
+        join tbl_post p on m.user_id = p.member_id
+        join tbl_user_job_category ujc on u.id = ujc.user_id
+        where p.post_status = 'active'
+    </select>
+</mapper>
