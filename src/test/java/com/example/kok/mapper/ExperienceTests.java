@@ -16,8 +16,9 @@ public class ExperienceTests {
 
     @Test
     public void testSelectAllExperienceNotice(){
-        Criteria criteria = new Criteria(1, 100);
-        log.info(criteria.toString());
-        experienceNoticeMapper.selectAllExperienceNotice(criteria).stream().map(ExperienceNoticeDTO::toString).forEach(log::info);
+        Criteria criteria = new Criteria(1, 1);
+        System.out.println("######################################");
+        System.out.println(criteria);
+        System.out.println(experienceNoticeMapper.selectAllExperienceNotice(criteria));
     }
 }

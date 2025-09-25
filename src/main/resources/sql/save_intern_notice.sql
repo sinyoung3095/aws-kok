@@ -9,3 +9,9 @@ CREATE TABLE tbl_save_intern_notice (
         references tbl_intern_notice(id)
 );
 
+ALTER TABLE tbl_save_intern_notice
+    DROP CONSTRAINT tbl_save_intern_notice_pkey;
+
+ALTER TABLE tbl_save_intern_notice
+    ADD CONSTRAINT pk_save_intern_notice
+        PRIMARY KEY (member_id, intern_notice_id);
