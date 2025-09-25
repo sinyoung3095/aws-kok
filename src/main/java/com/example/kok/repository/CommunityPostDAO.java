@@ -1,4 +1,4 @@
 package com.example.kok.repository;
 
-public class PostDAO {
+public class CommunityPostDAO {
 }
