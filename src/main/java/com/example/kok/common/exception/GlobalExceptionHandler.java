@@ -8,4 +8,8 @@ public class GlobalExceptionHandler {
     public RedirectView handleMemberLoginFailException(MemberLoginFailException e) {
         return new RedirectView("");
     }
+    @ExceptionHandler({PostNotFoundException.class})
+    public RedirectView handlePostNotFoundException(PostNotFoundException e){
+        return new RedirectView("/post/list/1");
+    }
 }

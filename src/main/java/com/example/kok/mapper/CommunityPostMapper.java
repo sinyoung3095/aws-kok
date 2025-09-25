@@ -1,8 +1,26 @@
 package com.example.kok.mapper;
 
+import com.example.kok.domain.PostVO;
+import com.example.kok.dto.PostDTO;
+import com.example.kok.util.Criteria;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface CommunityPostMapper {
-//    게시글 전체 조회
+    //    목록
+    public List<PostDTO> selectCommunityPosts(@Param("criteria") Criteria criteria);
+    //    전체 개수
+    public int selectCommunityPostCount();
+    //    조회
+    public Optional<PostDTO> selectCommunityPost(Long id);
+    //    추가
+    public void insert(PostDTO postDTO);
+    //    삭제
+    public void delete(Long id);
+    //    수정
+    public void update(PostVO postVO);
 }
