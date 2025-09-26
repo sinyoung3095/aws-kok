@@ -18,9 +18,15 @@ public class ConsoleInternController {
         return "enterprise-console/console-hire-list";
     }
 
-    //    기업 콘솔 인턴 공고 등록/수정
-    @GetMapping("/update")
-    public String goToUpdate() {
+    //    기업 콘솔 인턴 공고 등록
+    @GetMapping("/create")
+    public String goToCreate() {
+        return "enterprise-console/console-hire-update";
+    }
+
+    //    기업 콘솔 인턴 공고 수정
+    @GetMapping("/edit/{id}")
+    public String goToEdit() {
         return "enterprise-console/console-hire-update";
     }
 

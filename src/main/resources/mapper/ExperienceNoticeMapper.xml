@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kok.mapper.ExperienceNoticeMapper">
-<!--    목록 조회-->
+<!--    조회-->
     <select id="selectAllExperienceNotice">
-        select id, experience_notice_title, experience_notice_subtitle, experience_notice_introduce_job, experience_notice_etc, experience_start_date, experience_end_date, experience_notice_status, created_datetime, updated_datetime, company_id
-        from tbl_experience_notice
-        where experience_notice_status='active'
+        select e.id, e.experience_notice_title, e.experience_notice_subtitle, e.experience_notice_introduce_job, e.experience_notice_etc, e.experience_start_date, e.experience_end_date, e.experience_notice_status, e.created_datetime, e.updated_datetime, e.company_id, s.company_scale_name
+        from tbl_experience_notice e
+        JOIN tbl_company_scale_category_bridge b
+            ON e.company_id = b.company_id
+        JOIN tbl_company_scale_category s
+            ON b.company_scale_category_id = s.id
+        WHERE e.experience_notice_status = 'accept';
     </select>
 <!--    전체 개수 조회-->
     <select id="selectCountAll">
         select count(*) from tbl_experience_notice
-        where experience_notice_status='active'
+        where experience_notice_status='accept'
     </select>
 </mapper>

@@ -347,7 +347,7 @@ img.prof-img{
     height: 16px;
     color: transparent;
     object-fit: contain;
-    border-radius: 3.40282e+38px;
+    border-radius: 999px;
 }
 
 div.exp-wrap{
@@ -507,7 +507,7 @@ button.side-prof-button{
     line-height: 1.42857;
     text-align: left;
     padding: 8px;
-    border-radius 8px;
+    border-radius: 8px;
     overflow: hidden;
     gap: 8px;
     align-items: center;
@@ -580,7 +580,7 @@ div.service-change-wrap{
 div.service-change{
     outline: none;
     pointer-events: auto;
-    box-shadow: 0 0 #0000;
+    box-shadow: 0 0 0 0 #0000;
     color: #0a0a0a;
     padding: 4px;
     background-color: white;
@@ -589,7 +589,7 @@ div.service-change{
     border-radius: 10px;
     overflow-y: auto;
     overflow-x: hidden;
-    transform-origin: 0px 0% 50%;
+    /*transform-origin: 0px 0% 50%;*/
     min-width: 256px;
     max-height: 898px;
     z-index: 50;
@@ -695,7 +695,7 @@ span.console-ch-sub-title{
 
 div.active-service{
     background-color: #171717;
-    border-radius: 3.40282e+38px;
+    border-radius: 999px;
     width: 8px;
     height: 8px;
     user-select: none;
