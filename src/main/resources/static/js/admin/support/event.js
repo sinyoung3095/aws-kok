@@ -2,8 +2,9 @@ const sideMenuButtons = document.querySelectorAll(".menu-btn");
 const icons = document.querySelectorAll(".icon-wrapper i");
 const userMenuWrapper = document.querySelector(".user-menu-wrapper");
 const userMenuContent = document.querySelector(".user-menu-content");
-const pageNums = document.querySelectorAll(".page-num");
-const pageItemNums = document.querySelectorAll(".page-item-num");
+
+// 목록
+service.getNotice(layout.showList);
 
 // 사이드바 펼침/접힘
 sideMenuButtons.forEach((menu) => {
@@ -37,22 +38,38 @@ document.addEventListener("click", (e) => {
     }
 });
 
-// 페이지 번호
-pageItemNums.forEach((pageItemNum) => {
-    pageItemNum.addEventListener("click", (e) => {
-        e.preventDefault();
-        pageNums.forEach((pageNum) => pageNum.classList.remove("active"));
-        pageItemNum.parentElement.classList.add("active");
+// 목록
+const pagination = document.querySelector(".pagination.kok-pagination");
+pagination.addEventListener("click", async (e) => {
+    e.preventDefault();
+    await service.getNotice(layout.showList, e.target.dataset.page);
+
+    // 페이지 번호
+    const clickNum = e.target.closest("a[data-page]");
+    const pageNumber = parseInt(clickNum.dataset.page);
+
+    const pageNumsList = pagination.querySelectorAll("li.page-num");
+    pageNumsList.forEach((pageNum) => {
+        pageNum.classList.remove("active");
     });
+
+    const currentList = Array.from(pageNumsList).find((pageNum) => {
+        const activeList = pageNum.querySelector("a.page-item-num");
+        return activeList && parseInt(activeList.dataset.page) === pageNumber;
+    });
+
+    if(currentList){
+        currentList.classList.add("active");
+    }
 });
 
-// 목록
-const noticeListContainer = document.querySelector(".table-notice tbody");
-let page = 1;
-
-const showList = async (page = 1) => {
-    const postsCriteria = await service.getNotice(page, layout.showList);
-    return postsCriteria;
-}
-
-showList();
+// 페이지 번호
+// const pageNums = document.querySelectorAll(".page-num");
+// const pageItemNums = document.querySelectorAll(".page-item-num");
+//
+// pageItemNums.forEach((pageItemNum) => {
+//     pageNums.addEventListener("click", (e) => {
+//         pageNums.forEach((pageNum) => pageNum.classList.remove("active"));
+//         pageNum.parentElement.classList.add("active");
+//     });
+// });
