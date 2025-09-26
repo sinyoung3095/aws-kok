@@ -12,3 +12,4 @@ CREATE TABLE tbl_post_like (
     constraint fk_post_like_member_alarm_setting foreign key(member_alarm_setting_id)
         references tbl_member_alarm_setting(id)
 );
+

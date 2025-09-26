@@ -6,4 +6,16 @@
         select id, user_name, user_phone, user_email, user_password, user_role, user_status, created_datetime, updated_datetime
         from tbl_user
     </select>
+
+    <!--  일반 회원 가입  -->
+    <insert id="insertMember" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_user(user_name, user_phone, user_email, user_password, user_role)
+        values (#{userName},#{userPhone},#{userEmail},#{userPassword},'member')
+    </insert>
+    <!--  이메일로 회원 조회  -->
+    <select id="selectByEmail">
+        select count(*) from tbl_user
+        where user_email = #{userEmail}
+    </select>
+
 </mapper>

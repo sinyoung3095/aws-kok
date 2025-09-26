@@ -16,11 +16,11 @@ const isValidEmail = (value) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 };
 // 전화번호 포맷팅
-function formatPhoneNumber(input) {
-    input.value = input.value
-        .replace(/[^0-9]/g, '')
-        .replace(/(^02|^01[0-9]|[0-9]{3})([0-9]+)?([0-9]{4})$/, '$1 $2 $3');
-}
+// function formatPhoneNumber(input) {
+//     input.value = input.value
+//         .replace(/[^0-9]/g, '')
+//         .replace(/(^02|^01[0-9]|[0-9]{3})([0-9]+)?([0-9]{4})$/, '$1 $2 $3');
+// }
 
 // 이름 오류 토스트
 function showNameErrorToast() {

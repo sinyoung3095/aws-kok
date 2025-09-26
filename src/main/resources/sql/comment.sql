@@ -1,3 +1,4 @@
+
 CREATE TABLE tbl_comment (
     id bigint generated always as identity primary key,
     comment_content text not null,
@@ -11,3 +12,4 @@ CREATE TABLE tbl_comment (
     constraint fk_comment_post foreign key(post_id)
         references tbl_post(id)
 );
+

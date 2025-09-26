@@ -1,3 +1,4 @@
+
 CREATE TABLE tbl_member_comment_alarm (
     id bigint generated always as identity primary key,
     member_id bigint not null,
@@ -15,3 +16,4 @@ CREATE TABLE tbl_member_comment_alarm (
     constraint fk_member_comment_alarm_member_alarm_setting foreign key(member_alarm_setting_id)
         references tbl_member_alarm_setting(id)
 );
+
