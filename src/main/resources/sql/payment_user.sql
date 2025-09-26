@@ -14,3 +14,4 @@ CREATE TABLE tbl_payment_user (
     constraint fk_payment_user_advertisement foreign key(advertisement_id)
         references tbl_advertisement(id)
 );
+

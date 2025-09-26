@@ -6,7 +6,7 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @ToString(callSuper=true)
-@EqualsAndHashCode(of="id", callSuper = false)
+@EqualsAndHashCode(of="userId")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

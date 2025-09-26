@@ -6,3 +6,4 @@ CREATE TABLE tbl_company_sector_category (
      constraint fk_company_sector_category_company_sector foreign key(company_sector_id)
          references tbl_company_sector(id)
 );
+
