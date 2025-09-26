@@ -13,7 +13,7 @@
         values (#{userName},#{userPhone},#{userEmail},#{userPassword},'member')
     </insert>
     <!--  이메일로 회원 조회  -->
-    <select id="selectByEmail">
+    <select id="selectCountByEmail">
         select count(*) from tbl_user
         where user_email = #{userEmail}
     </select>

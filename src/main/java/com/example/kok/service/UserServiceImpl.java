@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     private final MemberDAO memberDAO;
     private final UserDAO  userDAO;
-    private final PasswordEncoder passwordEncoder;
+//    private final PasswordEncoder passwordEncoder;
     @Override
     public void joinUser(UserDTO userDTO) {
         int count;
@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
         if(count==0){
 
             userDAO.saveUser(userDTO);
-            memberDAO.saveMember();
+//            memberDAO.saveMember();
         }
 
     }
