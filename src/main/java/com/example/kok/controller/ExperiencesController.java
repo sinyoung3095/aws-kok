@@ -2,6 +2,7 @@ package com.example.kok.controller;
 
 import com.example.kok.dto.ExperienceNoticeCriteriaDTO;
 import com.example.kok.service.ExperienceNoticeService;
+import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,8 @@ public class ExperiencesController {
 
 //    목록
     @GetMapping("{page}")
-    public ResponseEntity<?> expList(@PathVariable("page") int page) {
-        ExperienceNoticeCriteriaDTO experienceNoticeCriteriaDTO = experienceNoticeService.selectAllExperienceNotice(page);
+    public ResponseEntity<?> expList(@PathVariable("page") int page, Search search) {
+        ExperienceNoticeCriteriaDTO experienceNoticeCriteriaDTO = experienceNoticeService.selectAllExperienceNotice(page, search);
         if(experienceNoticeCriteriaDTO.getExperiences().size()==0||experienceNoticeCriteriaDTO==null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(experienceNoticeCriteriaDTO);
         }

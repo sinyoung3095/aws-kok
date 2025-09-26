@@ -201,20 +201,6 @@ const noData=document.querySelector(".no-data");
 // }
 // categoryTagFn();
 
-// 접합순, 인기순, 최신순 - 필터 버튼 클릭 시 active 클래스 토글
-function sortBtnFn() {
-    const sortBtns = document.querySelectorAll(".sort-options .sort-btn");
-
-    if (!sortBtns) return;
-
-    sortBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            sortBtns.forEach((b) => b.classList.remove("active"));
-            btn.classList.add("active");
-        });
-    });
-}
-sortBtnFn();
 
 // 키워드 입력 시 50자 초과하면 토스트 메시지 노출
 function keywordInputValidate() {
@@ -1207,23 +1193,62 @@ function bannerActiveFn() {
 }
 bannerActiveFn();
 
+// 접합순, 인기순, 최신순 - 필터 버튼 클릭 시 active 클래스 토글
+function sortBtnFn() {
+    const sortBtns = document.querySelectorAll(".sort-options .sort-btn");
+    if (!sortBtns || sortBtns.length === 0) return;
+
+    sortBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            // active 토글 (한 개만 active 유지)
+            sortBtns.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            // 정렬 변경이므로 페이지는 보통 1로 리셋
+            showList(1);
+        });
+    });
+}
+sortBtnFn();
+
 
 
 // 무한스크롤
 
 let page = 1;
+
 const showList = async (page = 1) => {
     const loading = document.getElementById("loading");
+    const populBtn = document.getElementById("populBtn");
+    const scaleBtn = document.getElementById("scaleBtn");
 
     loading.style.display = "block";
-    const experienceNoticeCriteria = await experienceService.getExperienceNotice(page, experienceLayout.showList);
-    setTimeout(() => {
-        loading.style.display = "none";
-    }, 1000)
+    const experienceNoticeCriteria = await experienceService.getExperienceNotice(page, experienceLayout.showList(experienceData));
+    let expList=experienceNoticeCriteria.experiences;
 
-    return experienceNoticeCriteria;
-}
-showList();
+    if (populBtn && populBtn.classList.contains("active")) {
+        expList.sort((a, b) => (b.saveCount || 0) - (a.saveCount || 0));
+    } else if (scaleBtn && scaleBtn.classList.contains("active")) {
+        // console.log("규모순 버튼 눌림");
+        expList.sort((a, b) => (b.scaleId || 0) - (a.scaleId || 0));
+    } else {
+        expList.sort((a, b) => (b.id || 0) - (a.id || 0));
+    }
+
+    setTimeout(() => {
+        loading && (loading.style.display = "none");
+    }, 1000);
+
+    experienceLayout.showList(expList);
+
+    return expList;
+
+    //
+    // return { ...experienceNoticeCriteria, experiences };
+};
+
+showList(page);
+
 
 let checkScroll = true;
 let experienceNoticeCriteria;

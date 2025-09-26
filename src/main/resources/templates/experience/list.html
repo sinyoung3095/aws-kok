@@ -14,433 +14,174 @@
         <main class="main">
             <div class="content-layout">
                 <div class="search-container wide">
-                    <div class="search-box">
-                        <div class="search-list">
-                            <div class="search-item search-input-item">
-                                <div class="search-label">
-                                    <label for="keyword-input" class="search-name">키워드</label>
-                                    <div class="info-container">
-                                        <div class="info-icon">
-                                            <svg viewBox="0 0 24 24" fill="currentColor" height="12" role="img" width="12">
-                                                <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
-                                            </svg>
+                    <form th:action="@{/experience/list}" class="search-form" method="get" th:object="${search}">
+                        <div class="search-box">
+                            <div class="search-list">
+                                <div class="search-item search-input-item">
+                                    <div class="search-label">
+                                        <label for="keyword-input" class="search-name">키워드</label>
+                                        <div class="info-container">
+                                            <div class="info-icon">
+                                                <svg viewBox="0 0 24 24" fill="currentColor" height="12" role="img" width="12">
+                                                    <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="info-box">
+                                                <strong>키워드 검색</strong>
+                                                <p>기업명, 직무명을 비롯해 공고 내 포함된 단어를 찾을 수 있습니다. 쉼표&#40;,&#41;를 이용해 여러 키워드를 한 번에 검색할 수 있습니다.
+                                                    <br/>예&#41; Next.js, 파워포인트, 점심식대, 대출이자지원, 성과급 등
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="info-box">
-                                            <strong>키워드 검색</strong>
-                                            <p>기업명, 직무명을 비롯해 공고 내 포함된 단어를 찾을 수 있습니다. 쉼표&#40;,&#41;를 이용해 여러 키워드를 한 번에 검색할 수 있습니다. 
-                                                <br/>예&#41; Next.js, 파워포인트, 점심식대, 대출이자지원, 성과급 등
-                                            </p>
+                                    </div>
+                                    <input type="text" th:field="*{keyword}" id="keyword-input" placeholder="기업명, 직무명, 기술스택, 담당 업무">
+                                    <button type="button" class="keyword-delete">
+                                        <svg viewBox="0 0 24 24" fill="currentColor" height="24" role="img" width="24">
+                                            <path clip-rule="evenodd" d="M6.434 6.435a.8.8 0 0 1 1.132 0L12 10.869l4.434-4.434a.8.8 0 1 1 1.132 1.13L13.13 12l4.435 4.435a.8.8 0 1 1-1.132 1.13L12 13.133l-4.434 4.434a.8.8 0 0 1-1.132-1.131L10.87 12 6.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="search-item">
+                                    <div class="search-label">
+                                        <p class="search-name">직군</p>
+                                    </div>
+
+                                    <div class="dropdown-container">
+                                        <button class="dropdown-open-btn">전체</button>
+
+                                        <div class="dropdown-menu">
+                                            <p class="dropdown-name">직군</p>
+                                            <div class="dropdown-content">
+                                                <ul class="dropdown-list">
+                                                    <li class="dropdown-item">
+                                                        <button class="dropdown-btn">
+                                                            <p>SW 개발</p>
+                                                        </button>
+                                                    </li>
+                                                    <li class="dropdown-item">
+                                                        <button class="dropdown-btn">
+                                                            <p>데이터/AI</p>
+                                                        </button>
+                                                    </li>
+                                                    <li class="dropdown-item">
+                                                        <button class="dropdown-btn">
+                                                            <p>기획/전략</p>
+                                                        </button>
+                                                    </li>
+                                                    <li class="dropdown-item">
+                                                        <button class="dropdown-btn">
+                                                            <p>디자인/UX</p>
+                                                        </button>
+                                                    </li>
+                                                    <li class="dropdown-item">
+                                                        <button class="dropdown-btn">
+                                                            <p>마케팅/PR</p>
+                                                        </button>
+                                                    </li>
+                                                    <li class="dropdown-item">
+                                                        <button class="dropdown-btn">
+                                                            <p>경영/운영</p>
+                                                        </button>
+                                                    </li>
+                                                    <li class="dropdown-item">
+                                                        <button class="dropdown-btn">
+                                                            <p>HR/인사</p>
+                                                        </button>
+                                                    </li>
+                                                    <li class="dropdown-item">
+                                                        <button class="dropdown-btn">
+                                                            <p>회계/재무</p>
+                                                        </button>
+                                                    </li>
+                                                    <li class="dropdown-item">
+                                                        <button class="dropdown-btn">
+                                                            <p>법률/법무</p>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                                <div class="dropdown-actions">
+                                                    <button class="select-all-btn">전체 선택</button>
+                                                    <button class="apply-btn">적용</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <input type="text" id="keyword-input" placeholder="기업명, 직무명, 기술스택, 담당 업무">
-                                <button type="button" class="keyword-delete">
-                                    <svg viewBox="0 0 24 24" fill="currentColor" height="24" role="img" width="24">
-                                        <path clip-rule="evenodd" d="M6.434 6.435a.8.8 0 0 1 1.132 0L12 10.869l4.434-4.434a.8.8 0 1 1 1.132 1.13L13.13 12l4.435 4.435a.8.8 0 1 1-1.132 1.13L12 13.133l-4.434 4.434a.8.8 0 0 1-1.132-1.131L10.87 12 6.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div class="search-item">
-                                <div class="search-label">
-                                    <p class="search-name">직군</p>
-                                </div>
+                                <div class="search-item">
+                                    <div class="search-label">
+                                        <p class="search-name">기업 규모</p>
+                                    </div>
 
-                                <div class="dropdown-container">
-                                    <button class="dropdown-open-btn">전체</button>
+                                    <div class="dropdown-container">
+                                        <button class="dropdown-open-btn">전체</button>
 
-                                    <div class="dropdown-menu">
-                                        <p class="dropdown-name">직군</p>
-                                        <div class="dropdown-content">
-                                            <ul class="dropdown-list">
-                                                <li class="dropdown-item">
-                                                    <button class="dropdown-btn">
-                                                        <p>SW 개발</p>
-                                                    </button>
-                                                </li>
-                                                <li class="dropdown-item">
-                                                    <button class="dropdown-btn">
-                                                        <p>데이터/AI</p>
-                                                    </button>
-                                                </li>
-                                                <li class="dropdown-item">
-                                                    <button class="dropdown-btn">
-                                                        <p>기획/전략</p>
-                                                    </button>
-                                                </li>
-                                                <li class="dropdown-item">
-                                                    <button class="dropdown-btn">
-                                                        <p>디자인/UX</p>
-                                                    </button>
-                                                </li>
-                                                <li class="dropdown-item">
-                                                    <button class="dropdown-btn">
-                                                        <p>마케팅/PR</p>
-                                                    </button>
-                                                </li>
-                                                <li class="dropdown-item">
-                                                    <button class="dropdown-btn">
-                                                        <p>경영/운영</p>
-                                                    </button>
-                                                </li>
-                                                <li class="dropdown-item">
-                                                    <button class="dropdown-btn">
-                                                        <p>HR/인사</p>
-                                                    </button>
-                                                </li>
-                                                <li class="dropdown-item">
-                                                    <button class="dropdown-btn">
-                                                        <p>회계/재무</p>
-                                                    </button>
-                                                </li>
-                                                <li class="dropdown-item">
-                                                    <button class="dropdown-btn">
-                                                        <p>법률/법무</p>
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                            <div class="dropdown-actions">
-                                                <button class="select-all-btn">전체 선택</button>
-                                                <button class="apply-btn">적용</button>
+                                        <div class="dropdown-menu">
+                                            <p class="dropdown-name">기업 규모</p>
+                                            <div class="dropdown-content">
+                                                <ul class="dropdown-list">
+                                                    <li class="dropdown-item">
+                                                        <button class="dropdown-btn">
+                                                            <p>매우 작은 규모</p>
+                                                            <span>30명 미만</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="dropdown-item">
+                                                        <button class="dropdown-btn">
+                                                            <p>작은 규모</p>
+                                                            <span>30-100명</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="dropdown-item">
+                                                        <button class="dropdown-btn">
+                                                            <p>중간 규모</p>
+                                                            <span>100-400명</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="dropdown-item">
+                                                        <button class="dropdown-btn">
+                                                            <p>큰 규모</p>
+                                                            <span>400-2,000명</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="dropdown-item">
+                                                        <button class="dropdown-btn">
+                                                            <p>매우 큰 규모</p>
+                                                            <span>2,000명 초과</span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                                <div class="dropdown-actions">
+                                                    <button class="select-all-btn">전체 선택</button>
+                                                    <button class="apply-btn">적용</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="search-item">
-                                <div class="search-label">
-                                    <p class="search-name">기업 규모</p>
-                                </div>
-                                
-                                <div class="dropdown-container">
-                                    <button class="dropdown-open-btn">전체</button>
-
-                                    <div class="dropdown-menu">
-                                        <p class="dropdown-name">기업 규모</p>
-                                        <div class="dropdown-content">
-                                            <ul class="dropdown-list">
-                                                <li class="dropdown-item">
-                                                    <button class="dropdown-btn">
-                                                        <p>매우 작은 규모</p>
-                                                        <span>30명 미만</span>
-                                                    </button>
-                                                </li>
-                                                <li class="dropdown-item">
-                                                    <button class="dropdown-btn">
-                                                        <p>작은 규모</p>
-                                                        <span>30-100명</span>
-                                                    </button>
-                                                </li>
-                                                <li class="dropdown-item">
-                                                    <button class="dropdown-btn">
-                                                        <p>중간 규모</p>
-                                                        <span>100-400명</span>
-                                                    </button>
-                                                </li>
-                                                <li class="dropdown-item">
-                                                    <button class="dropdown-btn">
-                                                        <p>큰 규모</p>
-                                                        <span>400-2,000명</span>
-                                                    </button>
-                                                </li>
-                                                <li class="dropdown-item">
-                                                    <button class="dropdown-btn">
-                                                        <p>매우 큰 규모</p>
-                                                        <span>2,000명 초과</span>
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                            <div class="dropdown-actions">
-                                                <button class="select-all-btn">전체 선택</button>
-                                                <button class="apply-btn">적용</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <button type="submit" class="search-button">
+                                <svg viewBox="0 0 24 24" fill="#fff" height="24" role="img" width="24">
+                                    <path clip-rule="evenodd" d="M11 4.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4M3.2 11a7.8 7.8 0 1 1 13.852 4.921l3.514 3.514a.8.8 0 1 1-1.132 1.13l-3.513-3.513A7.8 7.8 0 0 1 3.2 11" fill-rule="evenodd"></path>
+                                </svg>
+                            </button>
                         </div>
-                        <button class="search-button">
-                            <svg viewBox="0 0 24 24" fill="#fff" height="24" role="img" width="24">
-                                <path clip-rule="evenodd" d="M11 4.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4M3.2 11a7.8 7.8 0 1 1 13.852 4.921l3.514 3.514a.8.8 0 1 1-1.132 1.13l-3.513-3.513A7.8 7.8 0 0 1 3.2 11" fill-rule="evenodd"></path>
-                            </svg>
-                        </button>
-                    </div>
+                    </form>
                 </div>
                 <div class="content-container">
                     <div class="content-main">
                         <div class="sort-options">
                             <div class="sort-options-item">
-                                <button class="sort-btn active">적합순</button>
+                                <button class="sort-btn active" id="latestBtn">최신순</button>
                             </div>
                             <div class="sort-options-item">
-                                <button class="sort-btn">인기순</button>
+                                <button class="sort-btn" id="populBtn">인기순</button>
                             </div>
                             <div class="sort-options-item">
-                                <button class="sort-btn">최신순</button>
-                            </div>
-                            <div class="sort-options-item">
-                                <button class="sort-btn">규모순</button>
+                                <button class="sort-btn" id="scaleBtn">규모순</button>
                             </div>
                         </div>
-                        <div>
-                        <div class="list-container">
-                            <!-- 데이터 없을때 -->
-<!--                            <div class="no-data display-none">-->
-<!--                                <p class="title">조건에 맞는 체험공고가 없습니다.</p>-->
-<!--                                <p class="description">조건을 변경하여 다시 검색해 보세요.</p>-->
-<!--                            </div>-->
-
-<!--                            <div class="list-item">-->
-<!--                                <button class="list-item-btn">-->
-<!--                                    <div class="list-item-header">-->
-<!--                                        <div class="list-item-thumb">-->
-<!--                                            <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&w=64&q=75" alt="">-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-content">-->
-<!--                                            <p class="list-item-title">애니포인트미디어</p>-->
-<!--                                            <p class="list-item-subtitle">SDK 개발자 (Kotlin Multiplatform)</p>-->
-<!--                                            <p class="list-item-description">크로스 플랫폼 광고 SDK 개발로 전문성을 쌓아갈 개발자 모집</p>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="list-item-meta">-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">직군</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>SW 개발</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">규모</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>매우 작은 규모</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                            <div class="list-item">-->
-<!--                                <button class="list-item-btn">-->
-<!--                                    <div class="list-item-header">-->
-<!--                                        <div class="list-item-thumb">-->
-<!--                                            <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&w=64&q=75" alt="">-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-content">-->
-<!--                                            <p class="list-item-title">애니포인트미디어</p>-->
-<!--                                            <p class="list-item-subtitle">SDK 개발자 (Kotlin Multiplatform)</p>-->
-<!--                                            <p class="list-item-description">크로스 플랫폼 광고 SDK 개발로 전문성을 쌓아갈 개발자 모집</p>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="list-item-meta">-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">직군</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>데이터/AI</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">규모</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>작은 규모</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                            <div class="list-item">-->
-<!--                                <button class="list-item-btn">-->
-<!--                                    <div class="list-item-header">-->
-<!--                                        <div class="list-item-thumb">-->
-<!--                                            <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&w=64&q=75" alt="">-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-content">-->
-<!--                                            <p class="list-item-title">애니포인트미디어</p>-->
-<!--                                            <p class="list-item-subtitle">SDK 개발자 (Kotlin Multiplatform)</p>-->
-<!--                                            <p class="list-item-description">크로스 플랫폼 광고 SDK 개발로 전문성을 쌓아갈 개발자 모집</p>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="list-item-meta">-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">직군</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>마케팅/PR</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">규모</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>중간 규모</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                            <div class="list-item">-->
-<!--                                <button class="list-item-btn">-->
-<!--                                    <div class="list-item-header">-->
-<!--                                        <div class="list-item-thumb">-->
-<!--                                            <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&w=64&q=75" alt="">-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-content">-->
-<!--                                            <p class="list-item-title">애니포인트미디어</p>-->
-<!--                                            <p class="list-item-subtitle">SDK 개발자 (Kotlin Multiplatform)</p>-->
-<!--                                            <p class="list-item-description">크로스 플랫폼 광고 SDK 개발로 전문성을 쌓아갈 개발자 모집</p>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="list-item-meta">-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">직군</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>경영/운영</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">규모</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>매우 큰 규모</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                            <div class="list-item">-->
-<!--                                <button class="list-item-btn">-->
-<!--                                    <div class="list-item-header">-->
-<!--                                        <div class="list-item-thumb">-->
-<!--                                            <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&w=64&q=75" alt="">-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-content">-->
-<!--                                            <p class="list-item-title">애니포인트미디어</p>-->
-<!--                                            <p class="list-item-subtitle">SDK 개발자 (Kotlin Multiplatform)</p>-->
-<!--                                            <p class="list-item-description">크로스 플랫폼 광고 SDK 개발로 전문성을 쌓아갈 개발자 모집</p>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="list-item-meta">-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">직군</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>회계/재무</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">규모</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>매우 작은 규모</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                            <div class="list-item">-->
-<!--                                <button class="list-item-btn">-->
-<!--                                    <div class="list-item-header">-->
-<!--                                        <div class="list-item-thumb">-->
-<!--                                            <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&w=64&q=75" alt="">-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-content">-->
-<!--                                            <p class="list-item-title">애니포인트미디어</p>-->
-<!--                                            <p class="list-item-subtitle">SDK 개발자 (Kotlin Multiplatform)</p>-->
-<!--                                            <p class="list-item-description">크로스 플랫폼 광고 SDK 개발로 전문성을 쌓아갈 개발자 모집</p>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="list-item-meta">-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">직군</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>SW 개발</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">규모</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>매우 작은 규모</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                            <div class="list-item">-->
-<!--                                <button class="list-item-btn">-->
-<!--                                    <div class="list-item-header">-->
-<!--                                        <div class="list-item-thumb">-->
-<!--                                            <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&w=64&q=75" alt="">-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-content">-->
-<!--                                            <p class="list-item-title">애니포인트미디어</p>-->
-<!--                                            <p class="list-item-subtitle">SDK 개발자 (Kotlin Multiplatform)</p>-->
-<!--                                            <p class="list-item-description">크로스 플랫폼 광고 SDK 개발로 전문성을 쌓아갈 개발자 모집</p>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="list-item-meta">-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">직군</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>SW 개발</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">규모</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>매우 작은 규모</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                            <div class="list-item">-->
-<!--                                <button class="list-item-btn">-->
-<!--                                    <div class="list-item-header">-->
-<!--                                        <div class="list-item-thumb">-->
-<!--                                            <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&w=64&q=75" alt="">-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-content">-->
-<!--                                            <p class="list-item-title">애니포인트미디어</p>-->
-<!--                                            <p class="list-item-subtitle">SDK 개발자 (Kotlin Multiplatform)</p>-->
-<!--                                            <p class="list-item-description">크로스 플랫폼 광고 SDK 개발로 전문성을 쌓아갈 개발자 모집</p>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="list-item-meta">-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">직군</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>SW 개발</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">규모</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>매우 작은 규모</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                            <div class="list-item">-->
-<!--                                <button class="list-item-btn">-->
-<!--                                    <div class="list-item-header">-->
-<!--                                        <div class="list-item-thumb">-->
-<!--                                            <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&w=64&q=75" alt="">-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-content">-->
-<!--                                            <p class="list-item-title">애니포인트미디어</p>-->
-<!--                                            <p class="list-item-subtitle">SDK 개발자 (Kotlin Multiplatform)</p>-->
-<!--                                            <p class="list-item-description">크로스 플랫폼 광고 SDK 개발로 전문성을 쌓아갈 개발자 모집</p>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="list-item-meta">-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">직군</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>SW 개발</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="list-item-meta-field">-->
-<!--                                            <p class="list-item-label">규모</p>-->
-<!--                                            <div class="list-item-value">-->
-<!--                                                <p>매우 작은 규모</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </button>-->
-<!--                            </div>-->
+                        <div class="exp-wrapper">
+                            <div class="list-container">
                             </div>
                             <div id="loading" style="display: none; width: 100px; height: 100px; margin: 0 auto; position: fixed; right: 5px; top: 15px;">-->
                                 <img src="/images/experience/loading.gif" style="width: 100%; height: 100%">
@@ -932,8 +673,13 @@
             </div>
         </div>
     </div>
-    <script src="/js/experience/module/service.js"></script>
-    <script src="/js/experience/module/layout.js"></script>
-    <script src="/js/experience/event.js"></script>
 </body>
+<script th:inline="javascript">
+    const experienceData = [[${experienceNoticeCriteria}]];
+    const search = [[${search}]];
+    const keyword = keyword;
+</script>
+<script src="/js/experience/module/service.js"></script>
+<script src="/js/experience/module/layout.js"></script>
+<script src="/js/experience/event.js"></script>
 </html>

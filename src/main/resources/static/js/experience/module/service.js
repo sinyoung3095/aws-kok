@@ -1,6 +1,6 @@
 const experienceService = (() => {
     const getExperienceNotice = async (page=1, callback) => {
-        const response = await fetch(`/api/experiences/${page}`);
+        const response = await fetch(`/api/experiences/?keyword=`+keyword);
         const experienceNoticeCriteria = await response.json();
         if(callback){
             setTimeout(() => {

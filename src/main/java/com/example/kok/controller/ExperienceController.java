@@ -1,15 +1,14 @@
 package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
+import com.example.kok.dto.ExperienceNoticeCriteriaDTO;
 import com.example.kok.service.ExperienceNoticeService;
+import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/experience/**")
@@ -19,9 +18,15 @@ public class ExperienceController {
 //    체험 목록으로 이동
     @GetMapping("list")
     public String goToExpList(@RequestParam(defaultValue = "1") int page, Model model,
-                              @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        model.addAttribute("experienceNoticeCriteria", experienceNoticeService.selectAllExperienceNotice(page));
+                              @AuthenticationPrincipal CustomUserDetails customUserDetails,
+                              @ModelAttribute("search") Search search) {
+        System.out.println("컨트롤러 실행해용");
+        System.out.println("keyword = " + search.getKeyword());
+        ExperienceNoticeCriteriaDTO dto =experienceNoticeService.selectAllExperienceNotice(page, search);
+        System.out.println(dto);
+        model.addAttribute("experienceNoticeCriteria", dto);
         model.addAttribute("user", customUserDetails);
+        model.addAttribute("search", search);
         return "experience/list";
     }
 }
