@@ -8,4 +8,4 @@ CREATE TABLE tbl_admin_notice (
 );
 
 drop table tbl_admin_notice;
-select * from tbl_admin_notice;
+select * from tbl_admin_notice order by id;

@@ -1,3 +1,4 @@
+
 CREATE TABLE tbl_member_reply_alarm (
     id bigint generated always as identity primary key,
     member_id bigint not null,
