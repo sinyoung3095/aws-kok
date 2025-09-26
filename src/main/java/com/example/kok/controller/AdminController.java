@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
@@ -67,43 +68,43 @@ public class AdminController {
     }
 
 //    결제 - 광고
-    @GetMapping("paymentAdvertise")
+    @GetMapping("payment/advertise")
     public String goToPaymentAdvertisePage() {
         return "admin/payment-advertise";
     }
 
 //    결제 - 체험비
-    @GetMapping("paymentExperience")
+    @GetMapping("payment/experience")
     public String goToPaymentExperiencePage() {
         return "admin/payment-experience";
     }
 
 //    신고 게시글
-    @GetMapping("notifyPost")
+    @GetMapping("notify/post")
     public String goToNotifyPostPage() {
         return "admin/notify-post";
     }
 
 //    고객지원 - 공지사항
-    @GetMapping("support")
+    @GetMapping("support/{page}")
     public String goToSupportPage() {
         return "admin/support";
     }
 
 //    고객지원 - 공지사항 상세
-    @GetMapping("supportDetail")
+    @GetMapping("support/detail/{id}")
     public String goToSupportDetailPage() {
         return "admin/support-detail";
     }
 
 //    고객지원 - 공지사항 수정
-    @GetMapping("supportUpdate")
+    @GetMapping("suppor/update")
     public String goToSupportUpdatePage() {
         return "admin/support-update";
     }
 
 //    고객지원 - 공지사항 등록
-    @GetMapping("supportWrite")
+    @GetMapping("support/write")
     public String goToSupportWritePage() {
         return "admin/support-write";
     }
