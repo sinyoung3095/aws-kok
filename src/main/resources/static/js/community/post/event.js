@@ -199,7 +199,7 @@ const showList = async (page = 1) => {
     const postsCriteria = await postService.getPost(postLayout.showList, page);
     setTimeout(() => {
         loading.style.display = "none";
-    }, 1000)
+    }, 500)
 
     return postsCriteria;
 }
@@ -225,6 +225,6 @@ window.addEventListener("scroll", async (e) => {
             if(postsCriteria !== null && postsCriteria.criteria.hasMore){
                 checkScroll = true
             }
-        }, 1200);
+        }, 700);
     }
 })

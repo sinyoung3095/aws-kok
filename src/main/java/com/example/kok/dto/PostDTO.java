@@ -21,4 +21,9 @@ public class PostDTO {
     private String updatedDateTime;
     private String relativeDate;
     private List<PostFileDTO> postFiles;
+    private int likeCount;
+    private int commentCount;
+    private String userName;
+    private String jobName;
+    private String memberProfileUrl;
 }
