@@ -30,7 +30,7 @@ div {
     unicode-bidi: isolate;
 }
 .heart{
-    fill:red;
+    fill:white;
     stroke: red;
     stroke-width: 2px;
 }
