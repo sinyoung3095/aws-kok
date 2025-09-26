@@ -11,17 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/posts/**")
+@RequestMapping("/api/community")
 @RequiredArgsConstructor
 public class CommunityPostController {
     private final CommunityPostService communityPostService;
 
-    //    목록
-    @GetMapping("{page}")
+    @GetMapping("/{page}")
     public ResponseEntity<?> list(@PathVariable("page") int page) {
         PostsCriteriaDTO postCriteriaDTO = communityPostService.getList(page);
-        if (postCriteriaDTO == null || postCriteriaDTO.getPosts().size() == 0) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(postCriteriaDTO);
+        if (postCriteriaDTO == null || postCriteriaDTO.getPosts().isEmpty()) {
+            return ResponseEntity.ok(postCriteriaDTO);
         }
         return ResponseEntity.ok(postCriteriaDTO);
     }

@@ -5,17 +5,22 @@ import com.example.kok.dto.PostDTO;
 import com.example.kok.dto.PostFileDTO;
 import com.example.kok.dto.PostsCriteriaDTO;
 import com.example.kok.repository.CommunityPostDAO;
+import com.example.kok.repository.CommunityPostFileDAO;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -23,6 +28,8 @@ import java.util.List;
 @Slf4j
 public class CommunityPostServiceImpl implements CommunityPostService {
     private final CommunityPostDAO communityPostDAO;
+    private final CommunityPostFileDAO communityPostFileDAO;
+    private final S3Service s3Service;
 
     @Override
     public PostsCriteriaDTO getList(int page) {
@@ -66,20 +73,20 @@ public class CommunityPostServiceImpl implements CommunityPostService {
                 return;
             }
 
-//            PostFileDTO postFileDTO = new PostFileDTO();
-//            try {
-//                String s3Key = s3Service.uploadPostFile(multipartFile, getPath());
-//
-//                postFileDTO.setPostId(postDTO.getId());
-//                postFileDTO.setPostFileName(multipartFile.getOriginalFilename());
-//                postFileDTO.setPostFilePath(s3Key);
-//                postFileDTO.setPostFileSize(String.valueOf(multipartFile.getSize()));
-//
-//                postFileDAO.save(toVO(postFileDTO));
-//
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
+            PostFileDTO postFileDTO = new PostFileDTO();
+            try {
+                String s3Key = s3Service.uploadPostFile(multipartFile, getPath());
+
+                postFileDTO.setPostId(postDTO.getId());
+                postFileDTO.setPostFileName(multipartFile.getOriginalFilename());
+                postFileDTO.setPostFilePath(s3Key);
+                postFileDTO.setPostFileSize(String.valueOf(multipartFile.getSize()));
+
+                communityPostFileDAO.save(postFileDTO);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 
@@ -87,19 +94,56 @@ public class CommunityPostServiceImpl implements CommunityPostService {
     @Transactional(rollbackFor = Exception.class)
     @CacheEvict(value="posts", key = "'post_' + #id")
     public void delete(Long id) {
-//        List<PostFileDTO> postFiles = postFileDAO.findAllByPostId(id);
-//        postFiles.forEach((postFile) -> {
-//            s3Service.deleteFile(postFile.getPostFilePath());
-//        });
-//
-//        postDAO.delete(id);
+        List<PostFileDTO> postFiles = communityPostFileDAO.findAllByPostId(id);
+        postFiles.forEach((postFile) -> {
+            s3Service.deleteFile(postFile.getPostFilePath());
+        });
+
+        communityPostDAO.delete(id);
     }
 
     @Override
-    public PostDTO update(PostDTO postDTO, Long[] deleteFiles, List<MultipartFile> files) {
+    public PostDTO update(PostDTO postDTO, Long[] deleteFilesIds, List<MultipartFile> multipartFiles) {
         communityPostDAO.update(toPostVO(postDTO));
-        return null;
+
+        if(deleteFilesIds != null){
+            Arrays.stream(deleteFilesIds).forEach((id) -> {
+                PostFileDTO postFile =
+                        communityPostFileDAO.findPostFilePathByPostFileId(id)
+                                .orElseThrow(PostNotFoundException::new);
+                s3Service.deleteFile(postFile.getPostFilePath());
+                communityPostFileDAO.deleteById(id);
+            });
+        }
+
+        multipartFiles.forEach((multipartFile) -> {
+            if(multipartFile.getOriginalFilename().equals("")){
+                return;
+            }
+
+            PostFileDTO postFileDTO = new PostFileDTO();
+            try {
+                String s3Key = s3Service.uploadPostFile(multipartFile, getPath());
+
+                postFileDTO.setPostId(postDTO.getId());
+                postFileDTO.setPostFileName(multipartFile.getOriginalFilename());
+                postFileDTO.setPostFilePath(s3Key);
+                postFileDTO.setPostFileSize(String.valueOf(multipartFile.getSize()));
+
+                communityPostFileDAO.save(postFileDTO);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        return postDTO;
     }
 
+    public String getPath() {
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        return today.format(formatter);
+    }
 
 }
