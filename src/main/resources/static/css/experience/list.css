@@ -374,7 +374,7 @@
 }
 
 /* 리스트 */
-.list-container {
+.list-container, .exp-wrapper {
     overflow-y: auto;
 }
 
@@ -443,7 +443,7 @@
     transform: scale(1.3);
 } */
 
-.sort-options + .list-container {
+.sort-options + .list-container, .sort-options + .exp-wrapper {
     height: calc(100% - 56px);
 }
 
@@ -2177,3 +2177,4 @@ input:-internal-autofill-selected {
         display: block !important;
     }
 }
+

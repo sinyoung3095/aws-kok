@@ -4,6 +4,7 @@ import com.example.kok.dto.ExperienceNoticeCriteriaDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.repository.ExperienceNoticeDAO;
 import com.example.kok.util.Criteria;
+import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.DateUtils;
@@ -18,10 +19,11 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
     private final ExperienceNoticeDAO experienceNoticeDAO;
 
     @Override
-    public ExperienceNoticeCriteriaDTO selectAllExperienceNotice(int page) {
+    public ExperienceNoticeCriteriaDTO selectAllExperienceNotice(int page, Search search) {
+        System.out.println("서비스임플 실행해용");
         ExperienceNoticeCriteriaDTO experienceNoticeCriteriaDTO = new ExperienceNoticeCriteriaDTO();
         Criteria criteria = new Criteria(page, experienceNoticeDAO.findCountAll());
-        List<ExperienceNoticeDTO> experiences=experienceNoticeDAO.findAll(criteria);
+        List<ExperienceNoticeDTO> experiences=experienceNoticeDAO.findAll(criteria, search);
         experiences.forEach(experience -> {
             LocalDate endDate = experience.getExperienceEndDate();
             LocalDate today = LocalDate.now();

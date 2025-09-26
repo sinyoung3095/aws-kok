@@ -1,15 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kok.mapper.ExperienceNoticeMapper">
+    <sql id="search">
+        <if test="search.keyword != null">
+            and (
+                lower(e.experience_notice_title) like concat('%', lower(#{search.keyword}), '%') or
+                lower(e.experience_notice_subtitle) like concat('%', lower(#{search.keyword}), '%') or
+                lower(e.experience_notice_etc) like concat('%', lower(#{search.keyword}), '%') or
+                lower(j.job_name) like concat('%', lower(#{search.keyword}), '%') or
+                lower(c.company_name) like concat('%', lower(#{search.keyword}), '%')
+            )
+        </if>
+    </sql>
 <!--    조회-->
     <select id="selectAllExperienceNotice">
-        select e.id, e.experience_notice_title, e.experience_notice_subtitle, e.experience_notice_introduce_job, e.experience_notice_etc, e.experience_start_date, e.experience_end_date, e.experience_notice_status, e.created_datetime, e.updated_datetime, e.company_id, s.company_scale_name
+        select e.id,
+        e.experience_notice_title,
+        e.experience_notice_subtitle,
+        e.experience_notice_etc,
+        e.experience_start_date,
+        e.experience_end_date,
+        e.experience_notice_status,
+        e.created_datetime,
+        e.updated_datetime,
+        e.company_id,
+        c.company_name,
+        s.id as scale_id,
+        s.company_scale_name,
+        j.job_name,
+        count(sv.experience_notice_id) as save_count
         from tbl_experience_notice e
-        JOIN tbl_company_scale_category_bridge b
-            ON e.company_id = b.company_id
-        JOIN tbl_company_scale_category s
-            ON b.company_scale_category_id = s.id
-        WHERE e.experience_notice_status = 'accept';
+        join tbl_company c on c.user_id=e.company_id
+        join tbl_company_scale_category_bridge b on e.company_id = b.company_id
+        join tbl_company_scale_category s on b.company_scale_category_id = s.id
+        left join tbl_experience_job_category ej on ej.experience_notice_id=e.id
+        left join tbl_job_category j on j.id=ej.job_category
+        left join tbl_save_experience_notice sv on e.id = sv.experience_notice_id
+        where e.experience_notice_status='accept'
+        <include refid="search"></include>
+        group by e.id,
+                 e.experience_notice_title,
+                 e.experience_notice_subtitle,
+                 e.experience_notice_etc,
+                 e.experience_start_date,
+                 e.experience_end_date,
+                 e.experience_notice_status,
+                 e.created_datetime,
+                 e.updated_datetime,
+                 e.company_id,
+                 c.company_name,
+                 s.id,
+                 s.company_scale_name,
+                 j.job_name;
     </select>
 <!--    전체 개수 조회-->
     <select id="selectCountAll">
