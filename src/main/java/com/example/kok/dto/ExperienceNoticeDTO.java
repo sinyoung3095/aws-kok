@@ -23,8 +23,8 @@ public class ExperienceNoticeDTO{
     private LocalDate experienceEndDate;
     private Status experienceNoticeStatus;
     private Long companyId;
-    private String createdDate;
-    private String updatedDate;
+    private String createdDatetime;
+    private String updatedDatetime;
 
     private String companyScaleName;
     private Long remainingDays;

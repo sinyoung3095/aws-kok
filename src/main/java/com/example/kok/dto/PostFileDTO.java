@@ -12,4 +12,10 @@ import org.springframework.stereotype.Component;
 public class PostFileDTO {
     private long fileId;
     private long postId;
+    private String postFileName;
+    private String postFilePath;
+    private String downloadUrl;
+    private String postFileSize;
+    private String createdDatetime;
+    private String updatedDatetime;
 }
