@@ -17,7 +17,7 @@
                     <div class="form-layout">
                         
                         <!-- 로그인 페이지로 돌아가는 버튼 -->
-                        <a href="">
+                        <a onclick="window.location.href='/member/login'">
                             <button class="btn-back">
                                 <div draggable="false" class="btn-icon">
                                     <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="20" role="img" width="20">
@@ -64,7 +64,7 @@
                                         </div>
                                         <div class="input-box">
                                             <div style="cursor:text" class="input-wrapper">
-                                                <input id="input-certi" class="form-group-input" type="text" inputmode="numeric" placeholder="인증번호 6자리 숫자 입력" style="cursor:text" class="form-group-input" value="" maxlength="6" oninput="formatCertiNumber(this)">
+                                                <input id="input-certi" class="form-group-input" type="text" inputmode="numeric" placeholder="인증번호 6자리 숫자 입력" style="cursor:text"  value="" maxlength="6" oninput="formatCertiNumber(this)">
                                             </div>
                                         </div>
                                     </div>
@@ -72,12 +72,12 @@
                             </div>
         
                             <!-- 인증번호 받기 버튼 -->
-                            <button class="btn-submit inactive" style="backdrop-filter:blur(calc(var(--blurs-standard) / 2))" type="button">
+                            <button class="btn-submit inactive"  type="button">
                                 <span class="btn-submit-text">인증번호 받기</span>
                             </button>
 
                             <!-- 확인 버튼 -->
-                            <button class="btn-check inactive none" style="backdrop-filter:blur(calc(var(--blurs-standard) / 2))" type="button">
+                            <button class="btn-check inactive none"  type="button">
                                 <span class="btn-submit-text">확인</span>
                             </button>
         

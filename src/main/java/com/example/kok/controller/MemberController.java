@@ -25,7 +25,7 @@ public class MemberController {
     @PostMapping("join-member")
     public RedirectView joinMember(UserDTO userDTO) {
         userService.joinUser(userDTO);
-        return new RedirectView("/member/join-member");
+        return new RedirectView("/member/login");
     }
 
     @GetMapping("join-social")
@@ -50,7 +50,7 @@ public class MemberController {
 
     @GetMapping("find-password-new")
     public String goToFindPasswordNewPage() {
-        return "find-password-new";
+        return "member/find-password-new";
     }
 
     @GetMapping("find-password-ok")

@@ -60,6 +60,17 @@ passwordInput.addEventListener("keyup", (e) => {
     }
 });
 
+loginButton.addEventListener("click",async (e)=>{
+    const email = emailInput.value;
+    const password = passwordInput.value;
+
+    const result = await memberService.login({userEmail:email,userPassword:password});
+
+        if(result.accessToken){
+            location.href='/community/page';
+        }
+
+});
 
 // 토스트 - 로그인 오류(이메일)
 const isValidEmail = (value) => {
@@ -128,4 +139,19 @@ loginButton.addEventListener("click", (e) => {
     }
     
 });
+// 카카오 로그인
+const kakaoLoginButton = document.getElementById("kakao-login");
+kakaoLoginButton.addEventListener("click", (e) => {
+    window.location.href = "http://localhost:10000/oauth2/authorization/kakao";
+});
+// 네이버 로그인
+const naverLoginButton = document.getElementById("naver-login");
+naverLoginButton.addEventListener("click", (e) => {
+    window.location.href = "http://localhost:10000/oauth2/authorization/naver";
+});
 
+// 구글 로그인
+const googleLoginButton = document.getElementById("google-login");
+googleLoginButton.addEventListener("click", (e) => {
+    window.location.href = "http://localhost:10000/oauth2/authorization/google";
+});
