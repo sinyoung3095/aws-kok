@@ -45,3 +45,14 @@ pageItemNums.forEach((pageItemNum) => {
         pageItemNum.parentElement.classList.add("active");
     });
 });
+
+// 목록
+const noticeListContainer = document.querySelector(".table-notice tbody");
+let page = 1;
+
+const showList = async (page = 1) => {
+    const postsCriteria = await service.getNotice(page, layout.showList);
+    return postsCriteria;
+}
+
+showList();
