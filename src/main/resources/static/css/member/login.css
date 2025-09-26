@@ -1,11 +1,13 @@
 body {
-    background: #fff;
-    color: 46px;
+    background-color: #fff;
 }
 
 body {
     height: 100%;
     line-height: inherit;
+}
+a{
+	cursor: pointer;
 }
 
 img, video {
@@ -703,7 +705,7 @@ p.general-p {
     	transform: translateY(10px);
 	}
 	.personal-information-container {
-		margin-bottom: 20px 0 20px 0;
+		margin-bottom: 20px;
 	}
 	#toast-password.show-red {
 		transform: translate(-50%, -256%);

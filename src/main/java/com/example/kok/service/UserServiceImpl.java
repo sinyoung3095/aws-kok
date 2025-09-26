@@ -1,5 +1,6 @@
 package com.example.kok.service;
 
+import com.example.kok.domain.MemberVO;
 import com.example.kok.domain.UserVO;
 import com.example.kok.dto.UserDTO;
 import com.example.kok.repository.MemberDAO;
@@ -15,15 +16,16 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     private final MemberDAO memberDAO;
     private final UserDAO  userDAO;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
     @Override
     public void joinUser(UserDTO userDTO) {
         int count;
         count = userDAO.findUserByEmail(userDTO.getUserEmail());
         if(count==0){
+            userDTO.setUserPassword(passwordEncoder.encode(userDTO.getUserPassword()));
 
             userDAO.saveUser(userDTO);
-//            memberDAO.saveMember();
+            memberDAO.saveMember(MemberVO.builder().userId(userDTO.getId()).build());
         }
 
     }

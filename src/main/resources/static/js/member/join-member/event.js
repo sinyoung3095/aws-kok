@@ -57,7 +57,7 @@ submitButton.addEventListener("click", (e) => {
     if (inputName.value.length === 0) {
         showNameErrorToast();
     // 전화번호 공란 또는 길이 오류
-    } else if (inputNumber.value.trim().length < 13) {
+    } else if (inputNumber.value.trim().length < 11) {
         showNumberErrorToast();
     // 이메일 공란 또는 형식 오류
     } else if (inputEmail.value.length === 0 || !isValidEmail(inputEmail.value)) {
