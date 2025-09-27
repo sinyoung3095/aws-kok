@@ -1314,6 +1314,7 @@ border-radius: 8px;
     justify-content: center;
     align-items: center;
     display: flex;
+    cursor: pointer;
 }
 .leply-8{
     column-gap: 4px;
