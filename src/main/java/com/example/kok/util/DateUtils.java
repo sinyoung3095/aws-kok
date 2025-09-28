@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 public class DateUtils {
     public static String toRelativeTime(String date) {
+        date = date.split("\\.")[0];
         if (date == null || date.isEmpty()) {
             return "";
         }

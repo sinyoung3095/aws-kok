@@ -112,7 +112,7 @@ public class AdminNoticeTests {
 //    Service
     @Test
     public void testWrite() {
-        for(int i = 0; i < 10; i++) {
+        for(int i = 0; i < 80; i++) {
             AdminNoticeDTO adminNoticeDTO = new AdminNoticeDTO();
             adminNoticeDTO.setAdminNoticeTitle("공지 제목" + (i + 1));
             adminNoticeDTO.setAdminNoticeContent("공지 게시글 내용" + (i + 1));
@@ -124,9 +124,10 @@ public class AdminNoticeTests {
 
     @Test
     public void testGetList(){
-        Criteria criteria = new Criteria(1, 79);
+        int page = 5;
+        Criteria criteria = new Criteria(page, 80);
         log.info(criteria.toString());
-        AdminNoticeCriteriaDTO adminNoticeCriteriaDTO = adminNoticeService.getList(1);
+        AdminNoticeCriteriaDTO adminNoticeCriteriaDTO = adminNoticeService.getList(page);
         log.info(adminNoticeCriteriaDTO.toString());
     }
 
