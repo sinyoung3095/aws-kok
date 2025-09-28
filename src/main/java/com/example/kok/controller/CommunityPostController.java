@@ -17,11 +17,7 @@ public class CommunityPostController {
     private final CommunityPostService communityPostService;
 
     @GetMapping("/{page}")
-    public ResponseEntity<?> list(@PathVariable("page") int page) {
-        PostsCriteriaDTO postCriteriaDTO = communityPostService.getList(page);
-        if (postCriteriaDTO == null || postCriteriaDTO.getPosts().isEmpty()) {
-            return ResponseEntity.ok(postCriteriaDTO);
-        }
-        return ResponseEntity.ok(postCriteriaDTO);
+    public PostsCriteriaDTO getPosts(@PathVariable("page") int page) {
+        return communityPostService.getList(page);
     }
 }

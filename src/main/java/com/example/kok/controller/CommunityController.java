@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
 @Controller
-@RequestMapping("/community/**")
+@RequestMapping("/community")
 @RequiredArgsConstructor
 public class CommunityController {
     private final CommunityPostService communityPostService;
 
 //    커뮤니티
-    @GetMapping("page")
+    @GetMapping("/page")
     public String goToCommunityPage(Model model) {
         model.addAttribute("posts", communityPostService.getList(1).getPosts());
         return "community/page";
