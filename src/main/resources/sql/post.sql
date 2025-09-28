@@ -11,14 +11,25 @@ CREATE TABLE tbl_post (
 
 select * from tbl_file;
 
+insert into tbl_file (file_origin_name, file_name, file_path, file_size, file_content_type)
+values ('test', 'test', '/upload/2025/09/28',
+        12345,
+        'image/png');
+
+insert into tbl_post_file (file_id, post_id)
+values (1, 37);
+
 insert into tbl_post (post_content, member_id)
-values ('test13', 1);
+values ('testing', 1);
 
 insert into tbl_user (user_name, user_phone, user_email, user_password, user_role)
 values ('test05', '01012345678', 'test05@gmail.com', '1234', 'member');
 
 insert into tbl_member (user_id)
 values (6);
+
+delete from tbl_post_file where file_id = 1;
+delete from tbl_post where member_id = 1;
 
 select * from tbl_post;
 select * from tbl_member;
