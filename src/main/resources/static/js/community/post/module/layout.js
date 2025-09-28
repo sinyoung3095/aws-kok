@@ -3,9 +3,9 @@ const postLayout = (() => {
         const postContainer = document.querySelector("#post-container");
         let text = ``;
 
-        if (!postsCriteria.posts) {
+        if (!postsCriteria.posts || postsCriteria.posts.length === 0) {
             text += `
-            <div class="post-8">
+            <div class="post-list-content post-8">
                 <div class="post-16" style="padding-left: 0; justify-content: center; display: flex;">
                     <div class="post-17" style="margin: 0 auto;">
                         <div class="post-16" style="padding-left: 0;">
