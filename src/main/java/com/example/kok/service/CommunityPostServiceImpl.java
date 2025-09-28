@@ -43,8 +43,11 @@ public class CommunityPostServiceImpl implements CommunityPostService {
 
         criteria.setHasMore(posts.size() > criteria.getRowCount());
 
-        if(criteria.isHasMore()){
+        if(posts.size() > criteria.getRowCount()) {
+            criteria.setHasMore(true);
             posts.remove(posts.size() - 1);
+        } else {
+            criteria.setHasMore(false);
         }
 
         postsCriteriaDTO.setPosts(posts);
