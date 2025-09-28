@@ -5,10 +5,14 @@ import com.example.kok.dto.AdminNoticeCriteriaDTO;
 import com.example.kok.dto.AdminNoticeDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AdminNoticeService {
 //    등록
     public void write (AdminNoticeDTO adminNoticeDTO);
+
+//    상세
+    public Optional<AdminNoticeDTO> getNotice (Long id);
 
 //    목록
     public AdminNoticeCriteriaDTO getList (int page);

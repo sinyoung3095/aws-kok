@@ -9,8 +9,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -23,6 +25,17 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
     @Override
     public void write(AdminNoticeDTO adminNoticeDTO) {
         adminNoticeDAO.insert(toVO(adminNoticeDTO));
+    }
+
+//    상세
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Optional<AdminNoticeDTO> getNotice (Long id) {
+        Optional<AdminNoticeDTO> foundNotice = adminNoticeDAO.selectNotice(id);
+        foundNotice.ifPresent(notice -> {
+            notice.setCreatedDateTime(DateUtils.getCreatedDate(notice.getCreatedDateTime()));
+        });
+        return foundNotice;
     }
 
 //    목록
