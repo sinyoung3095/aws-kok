@@ -5,7 +5,13 @@
         insert into tbl_admin_notice (admin_notice_title, admin_notice_content)
         values (#{adminNoticeTitle}, #{adminNoticeContent})
     </insert>
-    
+
+    <select id="selectNoticeFromId">
+        select id, admin_notice_title, admin_notice_content, notice_status, created_datetime, updated_datetime
+        from tbl_admin_notice
+        where id = #{id} and notice_status = 'active'
+    </select>
+
     <select id="selectNoticeAll">
         select id, admin_notice_title, admin_notice_content, created_datetime, updated_datetime
         from tbl_admin_notice

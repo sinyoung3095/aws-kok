@@ -4,7 +4,7 @@ const layout = (() => {
         let text = ``;
         adminNoticesCriteriaDTO.noticeList.forEach((notice) => {
             text += `
-                <tr class="support-notice-list">
+                <tr class="support-notice-list" onclick="window.location.href='/admin/support/detail/${notice.id}';">
                     <td class="td-date text-grey">${notice.relativeDate}</td>
                     <td class="td-title">
                         <span class="notice-title">${notice.adminNoticeTitle}</span>

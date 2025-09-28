@@ -1,11 +1,16 @@
 package com.example.kok.controller;
 
+import com.example.kok.common.exception.PostNotFoundException;
+import com.example.kok.service.AdminNoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -13,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class AdminController {
 
-//    관리자 등록
+    private final AdminNoticeService adminNoticeService;
+
+    //    관리자 등록
     @GetMapping("join")
     public String goToJoinPage() {
         return "admin/join";
@@ -85,7 +92,7 @@ public class AdminController {
         return "admin/notify-post";
     }
 
-//    고객지원 - 공지사항
+//    고객지원 - 공지사항 목록
     @GetMapping("support/{page}")
     public String goToSupportPage() {
         return "admin/support";
@@ -93,12 +100,14 @@ public class AdminController {
 
 //    고객지원 - 공지사항 상세
     @GetMapping("support/detail/{id}")
-    public String goToSupportDetailPage() {
+    public String goToSupportDetailPage(@PathVariable Long id, Model model) {
+        model.addAttribute("notice", adminNoticeService.getNotice(id).orElseThrow(PostNotFoundException::new));
+        log.info("noticeModel: {}", model);
         return "admin/support-detail";
     }
 
 //    고객지원 - 공지사항 수정
-    @GetMapping("suppor/update")
+    @GetMapping("support/update")
     public String goToSupportUpdatePage() {
         return "admin/support-update";
     }

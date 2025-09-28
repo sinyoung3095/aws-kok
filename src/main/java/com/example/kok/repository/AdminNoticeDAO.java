@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -17,6 +18,11 @@ public class AdminNoticeDAO {
 //    등록
     public void insert (AdminNoticeVO adminNoticeVO){
         adminNoticeMapper.insertNotice(adminNoticeVO);
+    }
+
+//    상세
+    public Optional<AdminNoticeDTO> selectNotice (Long id){
+        return adminNoticeMapper.selectNoticeFromId(id);
     }
 
 //    목록
