@@ -5,7 +5,7 @@ const postLayout = (() => {
 
         postsCriteria.posts.forEach((post) => {
             text += `
-            <div class="post-8">
+            <div class="post-8" data-post-id="${post.id}">
                 <div class="post-9">
                     <div>
                         <img alt="image" draggable="false" loading="lazy" width="40" height="40"
@@ -78,14 +78,14 @@ const postLayout = (() => {
                     <div class="post-20">
                         <div class="post-21">
                             <div class="post-22">
-                                <button class="post-23">
+                                <button class="post-23 like-btn" data-post-id="${post.id}" data-liked="${post.liked}">
                                     <div class="post-24">
-                                        <svg class="heart" viewBox="0 0 24 24" fill="currentColor" stroke="red" height="20" role="img" width="20">
+                                        <svg class="heart" viewBox="0 0 24 24" fill="${post.liked ? 'red' : 'white'}" stroke="red" height="20" role="img" width="20">
                                             <path d="M17.668 16.4c2.028-1.76 4.328-3.755 4.328-6.902a6.07 6.07 0 0 0-5.831-6.274 5.25 5.25 0 0 0-2.296.447l-.267.128a5.3 5.3 0 0 0-1.606 1.274 5.26 5.26 0 0 0-4.161-1.85 6.07 6.07 0 0 0-4.211 1.934l-.2.225a6.07 6.07 0 0 0-1.42 4.116l.005.29c.132 2.968 2.278 4.833 4.353 6.637v.001l.742.65.893.797a39 39 0 0 0 3.057 2.623l.109.065c.22.12.462.193.712.21l.125.005c.293 0 .58-.075.837-.215l.108-.065a39 39 0 0 0 3.151-2.707l.802-.716z"></path>
                                         </svg>
                                     </div>
                                     <div style="margin-left: 5px;">
-                                        <p class="post-25">${post.likeCount}</p>
+                                        <p class="post-25">${post.likesCount}</p>
                                     </div>
                                 </button>
 
@@ -96,7 +96,7 @@ const postLayout = (() => {
                                         </svg>
                                     </div>
                                     <div style="margin-left: 5px;">
-                                        <p class="post-25">${post.commentCount}</p>
+                                        <p class="post-25">${post.commentsCount}</p>
                                     </div>
                                 </button>
                             </div>

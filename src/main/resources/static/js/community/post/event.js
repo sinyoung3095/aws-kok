@@ -206,46 +206,32 @@ document.body.addEventListener("click", async (e) => {
     }
 
     // 좋아요 (댓글, 게시글)
-    const replyHeartBtn = target.closest(".reply-31");
-    if (replyHeartBtn) {
-        const replyHeartIcon = replyHeartBtn.querySelector(".heart");
-        if (replyHeartIcon) {
-            if (!replyHeartIcon.dataset.clicked) {
-                replyHeartIcon.style.fill = "red";
-                replyHeartIcon.style.stroke = "red";
-                replyHeartIcon.dataset.clicked = "true";
-            } else {
-                if (replyHeartIcon.style.fill === "red") {
-                    replyHeartIcon.style.fill = "white";
-                    replyHeartIcon.style.stroke = "red";
-                } else {
-                    replyHeartIcon.style.fill = "red";
-                    replyHeartIcon.style.stroke = "red";
-                }
-            }
-        }
-        return;
-    }
+    const likeBtn = target.closest(".like-btn");
+    if (likeBtn) {
+        const postId = likeBtn.dataset.postId;
+        const likeCountEl = likeBtn.querySelector(".post-25");
+        const heartIcon = likeBtn.querySelector(".heart");
 
-    const postHeartBtn = target.closest(".post-24");
-    if (postHeartBtn) {
-        const postHeartIcon = postHeartBtn.querySelector(".heart");
-        if (postHeartIcon) {
-            if (!postHeartIcon.dataset.clicked) {
-                postHeartIcon.style.fill = "red";
-                postHeartIcon.style.stroke = "red";
-                postHeartIcon.dataset.clicked = "true";
-            } else {
-                if (postHeartIcon.style.fill === "red") {
-                    postHeartIcon.style.fill = "white";
-                    postHeartIcon.style.stroke = "red";
-                } else {
-                    postHeartIcon.style.fill = "red";
-                    postHeartIcon.style.stroke = "red";
-                }
+        let liked = likeBtn.dataset.liked === "true";
+        let current = parseInt(likeCountEl.textContent) || 0;
+
+        if (!liked) {
+            const success = await postService.postLike(postId);
+            if (success) {
+                likeBtn.dataset.liked = "true";
+                likeCountEl.textContent = current + 1;
+                heartIcon.style.fill = "red";
+                heartIcon.style.stroke = "red";
+            }
+        } else {
+            const success = await postService.removeLike(postId);
+            if (success) {
+                likeBtn.dataset.liked = "false";
+                likeCountEl.textContent = Math.max(0, current - 1);
+                heartIcon.style.fill = "white";
+                heartIcon.style.stroke = "red";
             }
         }
-        return;
     }
 });
 

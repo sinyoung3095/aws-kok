@@ -3,12 +3,13 @@
 <mapper namespace="com.example.kok.mapper.CommunityPostMapper">
 <!-- 게시글 전체 목록 -->
     <select id="selectCommunityPosts">
-        select u.id as member_id, u.user_name, m.member_profile_url, p.id as id, p.post_content, p.post_status, p.created_datetime, p.updated_datetime, ujc.job_category, jc.job_name
+        select u.id as member_id, u.user_name, m.member_profile_url, p.id as id, p.post_content, p.post_status, p.created_datetime, p.updated_datetime, ujc.job_category, jc.job_name, p.likes_count
         from tbl_user u
         join tbl_member m on u.id = m.user_id
         join tbl_post p on m.user_id = p.member_id
         join tbl_user_job_category ujc on u.id = ujc.user_id
         join tbl_job_category jc on ujc.job_category = jc.id
+        left join tbl_post_like pl on p.id = pl.post_id
         where p.post_status = 'active'
         order by created_datetime desc
         limit #{rowCount} offset #{offset}
@@ -50,5 +51,20 @@
         update tbl_post
         set post_content = #{postContent}, updated_datetime = now()
         where id = #{id}
+    </update>
+
+<!-- 게시글 좋아요 증가 -->
+    <update id="increaseLikesCount">
+        update tbl_post
+        set likes_count = likes_count + 1
+        where id = #{id}
+    </update>
+
+<!-- 게시글 좋아요 감소 -->
+    <update id="decreaseLikesCount">
+        update tbl_post
+        set likes_count = likes_count - 1
+        where id = #{id}
+        and likes_count > 0
     </update>
 </mapper>
