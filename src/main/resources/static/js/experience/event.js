@@ -155,6 +155,7 @@ function searchDropdownFn() {
 }
 searchDropdownFn();
 
+
 const noData=document.querySelector(".no-data");
 
 
@@ -201,20 +202,6 @@ const noData=document.querySelector(".no-data");
 // }
 // categoryTagFn();
 
-// 접합순, 인기순, 최신순 - 필터 버튼 클릭 시 active 클래스 토글
-function sortBtnFn() {
-    const sortBtns = document.querySelectorAll(".sort-options .sort-btn");
-
-    if (!sortBtns) return;
-
-    sortBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            sortBtns.forEach((b) => b.classList.remove("active"));
-            btn.classList.add("active");
-        });
-    });
-}
-sortBtnFn();
 
 // 키워드 입력 시 50자 초과하면 토스트 메시지 노출
 function keywordInputValidate() {
@@ -277,66 +264,6 @@ function keywordInputValidate() {
 }
 keywordInputValidate();
 
-// 채용상세페이지 - 레이아웃
-function layoutDetail() {
-    const listItemBtns = document.querySelectorAll(".list-item-btn");
-    const contentDetail = document.querySelector(".content-detail");
-    const contentSide = document.querySelector(".content-side");
-    const detailArrowBtn = document.querySelector(".detail-arrow-btn");
-    const listItemMetas = document.querySelectorAll(".list-item-meta");
-    const contentMain = document.querySelector(".content-main");
-    const searchContainer = document.querySelector(".search-container");
-
-    if (!contentDetail) return;
-
-    listItemBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            contentDetail.classList.add("active");
-            contentSide.style.display = "none";
-
-            // 껍데기 애니메이션 끝난 뒤 내용 보여주기
-            contentDetail.addEventListener(
-                "transitionend",
-                () => {
-                    if (contentDetail.classList.contains("active")) {
-                        contentDetail
-                            .querySelector(".content-detail-inner")
-                            .classList.add("active");
-                    }
-                },
-                { once: true }
-            );
-
-            if (window.matchMedia("(max-width: 1023px)").matches) {
-                contentMain.style.display = "none";
-                searchContainer.style.display = "none";
-                contentSide.style.display = "none";
-            }
-        });
-
-        detailArrowBtn.addEventListener("click", () => {
-            // 내용 먼저 숨김
-            contentDetail
-                .querySelector(".content-detail-inner")
-                .classList.remove("active");
-            contentDetail.classList.remove("active");
-        });
-    });
-
-    detailArrowBtn.addEventListener("click", () => {
-        contentSide.style.display = "flex";
-        contentDetail
-            .querySelector(".content-detail-inner")
-            .classList.remove("active");
-        contentDetail.classList.remove("active");
-
-        if (window.matchMedia("(max-width: 1023px)").matches) {
-            contentMain.style.display = "";
-            searchContainer.style.display = "";
-        }
-    });
-}
-layoutDetail();
 
 // 채용 - 공고 저장/저장 취소, 공유하기  버튼 클릭 시 토스트 메시지 노출
 function toastPopupFn() {
@@ -1207,44 +1134,139 @@ function bannerActiveFn() {
 }
 bannerActiveFn();
 
+let experiences = [];
+const PAGE = 1;
 
+// ------------------------------
+// 1. 렌더링 + 정렬
+// ------------------------------
+function showList(list) {
+    if (!Array.isArray(list)) list = [];
 
-// 무한스크롤
+    const populBtn = document.getElementById("populBtn");
+    const scaleBtn = document.getElementById("scaleBtn");
 
-let page = 1;
-const showList = async (page = 1) => {
-    const loading = document.getElementById("loading");
+    const sortedList = [...list];
 
-    loading.style.display = "block";
-    const experienceNoticeCriteria = await experienceService.getExperienceNotice(page, experienceLayout.showList);
-    setTimeout(() => {
-        loading.style.display = "none";
-    }, 1000)
-
-    return experienceNoticeCriteria;
-}
-showList();
-
-let checkScroll = true;
-let experienceNoticeCriteria;
-
-window.addEventListener("scroll", async (e) => {
-    // 현재 스크롤 위치
-    const scrollTop = window.scrollY
-    // 화면 높이
-    const windowHeight = window.innerHeight;
-    // 문서 전체 높이
-    const documentHeight = document.documentElement.scrollHeight
-    if(scrollTop + windowHeight >= documentHeight - 2) {
-    //     바닥에 닿았을 때
-        if(checkScroll){
-            experienceNoticeCriteria = await showList(++page);
-            checkScroll = false;
-        }
-        setTimeout(() => {
-            if(experienceNoticeCriteria !== null && experienceNoticeCriteria.criteria.hasMore){
-                checkScroll = true
-            }
-        }, 1100);
+    if (populBtn && populBtn.classList.contains("active")) {
+        sortedList.sort((a, b) => (b.saveCount || 0) - (a.saveCount || 0));
+    } else if (scaleBtn && scaleBtn.classList.contains("active")) {
+        sortedList.sort((a, b) => (b.scaleId || b.companyScaleId || 0) - (a.scaleId || a.companyScaleId || 0));
+    } else {
+        sortedList.sort((a, b) => (b.id || 0) - (a.id || 0));
     }
-})
+
+    experienceLayout.showList(sortedList);
+}
+
+// ------------------------------
+// 2. 검색 fetch
+// ------------------------------
+async function fetchExperiences() {
+    try {
+        const keywordInput = document.getElementById("keyword-input");
+        const keyword = keywordInput ? keywordInput.value.trim() : "";
+
+        const data = await experienceService.getExperienceNotice(PAGE, keyword);
+
+        experiences = Array.isArray(data) ? data : (data.experiences || []);
+        showList(experiences);
+    } catch (e) {
+        console.error("데이터 로드 오류:", e);
+        experiences = [];
+        showList(experiences);
+    }
+}
+
+// ------------------------------
+// 3. 검색 버튼 + Enter 처리
+// ------------------------------
+function initSearch() {
+    const searchBtn = document.getElementById("searchBtn");
+    if (searchBtn) searchBtn.addEventListener("click", fetchExperiences);
+
+    const keywordInput = document.getElementById("keyword-input");
+    if (keywordInput) {
+        keywordInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                fetchExperiences();
+            }
+        });
+    }
+}
+
+// ------------------------------
+// 4. 정렬 버튼
+// ------------------------------
+function initSortButtons() {
+    const sortButtons = document.querySelectorAll(".sort-btn");
+    if (!sortButtons || sortButtons.length === 0) return;
+
+    sortButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            sortButtons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            showList(experiences);
+        });
+    });
+}
+
+// ------------------------------
+// 5. 초기화
+// ------------------------------
+function initExperienceModule() {
+    initSearch();
+    initSortButtons();
+    fetchExperiences();
+}
+
+initExperienceModule();
+
+
+// 필터 적용
+
+const sectorComplBtn = document.getElementById("sector-compl-btn");
+const scaleComplBtn = document.getElementById("scale-compl-btn");
+
+// 필터 적용 함수
+function applyFilters() {
+    const listItems = document.querySelectorAll(".list-item");
+
+    // active 직군 버튼 p 텍스트
+    const activeJobs = Array.from(document.querySelectorAll(".sector-dropdown .dropdown-btn.active > p"))
+                            .map(p => p.innerText.trim());
+
+    // active 규모 버튼 p 텍스트
+    const activeScales = Array.from(document.querySelectorAll(".scale-dropdown .dropdown-btn.active > p"))
+                              .map(p => p.innerText.trim());
+
+    // 검색 키워드 가져오기
+    const keyword = document.getElementById("keyword-input")?.value.trim() || "";
+
+    listItems.forEach(item => {
+        const jobEl = item.querySelector(".list-item-meta-field:first-child .list-item-value > p");
+        const jobName = jobEl ? jobEl.innerText.trim() : "";
+
+        // console.log(jobEl);
+        // console.log(jobName);
+        // console.log(activeJobs);
+
+        const scaleEl = item.querySelector(".list-item-meta-field:nth-child(2) .list-item-value > p");
+        const scaleName = scaleEl ? scaleEl.innerText.trim() : "";
+
+        const jobMatch = activeJobs.length === 0 || activeJobs.some(text => jobName.includes(text));
+        const scaleMatch = activeScales.length === 0 || activeScales.some(text => scaleName.includes(text));
+        const keywordMatch = true;
+
+        item.style.display = (jobMatch && scaleMatch && keywordMatch) ? "" : "none";
+    });
+}
+
+// 이벤트 등록
+sectorComplBtn.addEventListener("click", applyFilters);
+scaleComplBtn.addEventListener("click", applyFilters);
+document.getElementById("search-form")?.addEventListener("submit", e => {
+    e.preventDefault();
+    showList();
+});

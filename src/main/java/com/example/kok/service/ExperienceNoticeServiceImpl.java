@@ -1,27 +1,39 @@
 package com.example.kok.service;
 
+import com.example.kok.dto.CompanyProfileFileDTO;
 import com.example.kok.dto.ExperienceNoticeCriteriaDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
+import com.example.kok.dto.FileDTO;
+import com.example.kok.repository.CompanyProfileFileDAO;
 import com.example.kok.repository.ExperienceNoticeDAO;
+import com.example.kok.repository.FileDAO;
 import com.example.kok.util.Criteria;
+import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.util.DateUtils;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
     private final ExperienceNoticeDAO experienceNoticeDAO;
+    private final FileService fileService;
+    private final CompanyProfileFileDAO companyProfileFileDAO;
+    private final S3Service s3Service;
+    private final FileDAO fileDAO;
+    private final FileDTO fileDTO;
 
     @Override
-    public ExperienceNoticeCriteriaDTO selectAllExperienceNotice(int page) {
+    public ExperienceNoticeCriteriaDTO selectAllExperienceNotice(int page, Search search) {
+//        System.out.println("서비스임플 실행해용");
         ExperienceNoticeCriteriaDTO experienceNoticeCriteriaDTO = new ExperienceNoticeCriteriaDTO();
         Criteria criteria = new Criteria(page, experienceNoticeDAO.findCountAll());
-        List<ExperienceNoticeDTO> experiences=experienceNoticeDAO.findAll(criteria);
+        List<ExperienceNoticeDTO> experiences=experienceNoticeDAO.findAll(criteria, search);
         experiences.forEach(experience -> {
             LocalDate endDate = experience.getExperienceEndDate();
             LocalDate today = LocalDate.now();
@@ -31,6 +43,14 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
             } else {
                 experience.setRemainingDays(0L); // endDate보다 today가 이전일 경우 0
             }
+            fileService.findFileByCompanyId(experience.getCompanyId())
+                    .ifPresentOrElse(fileDTO -> {
+                        experience.setFileName(fileDTO.getFileName());
+                        experience.setFilePath(fileDTO.getFilePath());
+                    }, ()->{
+                        experience.setFileName("image.png");
+                        experience.setFilePath("");
+                    });
         });
 
         if(criteria.isHasMore()){
@@ -40,5 +60,43 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
         experienceNoticeCriteriaDTO.setExperiences(experiences);
         experienceNoticeCriteriaDTO.setCriteria(criteria);
         return experienceNoticeCriteriaDTO;
+    }
+
+    @Override
+    public void setPreSignedUrl(CompanyProfileFileDTO companyProfileFileDTO) {
+        // 회사 ID로 파일 조회
+        CompanyProfileFileDTO profile = companyProfileFileDAO.findFileByCompanyId(companyProfileFileDTO.getCompanyId());
+
+        if (profile != null && profile.getFilePath() != null && !profile.getFilePath().isEmpty()) {
+            String presignedUrl = s3Service.getPreSignedUrl(profile.getFilePath(), Duration.ofMinutes(5));
+            companyProfileFileDTO.setFilePath(presignedUrl);
+        } else {
+            companyProfileFileDTO.setFilePath("/images/main-page/image.png");
+        }
+    }
+
+
+    @Override
+    public ExperienceNoticeDTO findNoticeById(Long id) {
+        ExperienceNoticeDTO result= experienceNoticeDAO.findById(id);
+        String jobName= experienceNoticeDAO.findJobNameByID(id);
+        result.setJobName(jobName);
+        LocalDate endDate = result.getExperienceEndDate();
+            LocalDate today = LocalDate.now();
+            if (endDate.isBefore(today)) {
+                long days = ChronoUnit.DAYS.between(today, endDate);
+                result.setRemainingDays(days);
+            } else {
+                result.setRemainingDays(0L); // endDate보다 today가 이전일 경우 0
+            }
+            fileService.findFileByCompanyId(result.getCompanyId())
+                    .ifPresentOrElse(fileDTO -> {
+                        result.setFileName(fileDTO.getFileName());
+                        result.setFilePath(fileDTO.getFilePath());
+                    }, ()->{
+                        result.setFileName("image.png");
+                        result.setFilePath("");
+                    });
+        return result;
     }
 }

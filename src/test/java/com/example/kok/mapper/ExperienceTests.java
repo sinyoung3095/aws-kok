@@ -1,8 +1,13 @@
 package com.example.kok.mapper;
 
+import com.example.kok.dto.CompanyDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
+import com.example.kok.repository.CompanyDAO;
+import com.example.kok.repository.ExperienceNoticeDAO;
+import com.example.kok.service.CompanyService;
 import com.example.kok.service.ExperienceNoticeService;
 import com.example.kok.util.Criteria;
+import com.example.kok.util.Search;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +18,39 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class ExperienceTests {
     @Autowired
     private ExperienceNoticeMapper experienceNoticeMapper;
+    @Autowired
+    private CompanyMapper companyMapper;
+    @Autowired
+    private ExperienceNoticeService experienceNoticeService;
+    @Autowired
+    private CompanyService companyService;
+    @Autowired
+    private ExperienceNoticeDAO experienceNoticeDAO;
+    @Autowired
+    private CompanyDAO companyDAO;
 
     @Test
     public void testSelectAllExperienceNotice(){
         Criteria criteria = new Criteria(1, 1);
+        Search search = new Search();
+        search.setKeyword("회사명1");
         System.out.println("######################################");
         System.out.println(criteria);
-        System.out.println(experienceNoticeMapper.selectAllExperienceNotice(criteria));
+        experienceNoticeMapper.selectAllExperienceNotice(criteria, search).forEach(System.out::println);
+    }
+
+    @Test
+    public void testSelectCompany(){
+        System.out.println(companyMapper.selectCompanyById(8L));
+        System.out.println(experienceNoticeMapper.selectById(21L));
+    }
+
+    @Test
+    public void testSelectDAOService(){
+        System.out.println("다오 회사: "+companyDAO.findCompanyById(8L));
+        System.out.println("다오 공고: "+experienceNoticeDAO.findById(21L));
+        CompanyDTO companys=companyService.findCompanyById(8L);
+        System.out.println(companys);
+        System.out.println("서비스 공고: "+experienceNoticeService.findNoticeById(21L));
     }
 }

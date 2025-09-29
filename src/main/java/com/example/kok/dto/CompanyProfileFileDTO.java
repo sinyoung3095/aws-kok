@@ -11,4 +11,6 @@ import org.springframework.stereotype.Component;
 public class CompanyProfileFileDTO{
     private Long fileId;
     private Long companyId;
+
+    private String filePath;
 }

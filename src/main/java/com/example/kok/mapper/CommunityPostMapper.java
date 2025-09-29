@@ -11,16 +11,27 @@ import java.util.Optional;
 
 @Mapper
 public interface CommunityPostMapper {
-    //    목록
-    public List<PostDTO> selectCommunityPosts(@Param("criteria") Criteria criteria);
-    //    전체 개수
+//    목록
+    public List<PostDTO> selectCommunityPosts(Criteria criteria);
+
+//    전체 개수
     public int selectCommunityPostCount();
-    //    조회
+
+//    조회
     public Optional<PostDTO> selectCommunityPost(Long id);
-    //    추가
+
+//    추가
     public void insert(PostDTO postDTO);
-    //    삭제
+
+//    삭제
     public void delete(Long id);
-    //    수정
+
+//    수정
     public void update(PostVO postVO);
+
+//    좋아요 수 증가
+    public void increaseLikesCount(Long id);
+
+//    좋아요 수 감수
+    public void decreaseLikesCount(Long id);
 }

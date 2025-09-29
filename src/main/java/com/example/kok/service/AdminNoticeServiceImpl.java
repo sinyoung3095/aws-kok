@@ -6,11 +6,15 @@ import com.example.kok.repository.AdminNoticeDAO;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.DateUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Primary
@@ -23,6 +27,17 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
         adminNoticeDAO.insert(toVO(adminNoticeDTO));
     }
 
+//    상세
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Optional<AdminNoticeDTO> getNotice (Long id) {
+        Optional<AdminNoticeDTO> foundNotice = adminNoticeDAO.selectNotice(id);
+        foundNotice.ifPresent(notice -> {
+            notice.setCreatedDateTime(DateUtils.getCreatedDate(notice.getCreatedDateTime()));
+        });
+        return foundNotice;
+    }
+
 //    목록
     @Override
     public AdminNoticeCriteriaDTO getList(int page) {
@@ -30,7 +45,9 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
         Criteria criteria = new Criteria(page, adminNoticeDAO.countAll());
         List<AdminNoticeDTO> noticeList = adminNoticeDAO.selectAll(criteria);
         noticeList.forEach((notice) -> {
-            notice.setRelativeDate(DateUtils.toRelativeTime(notice.getCreatedDateTime()));
+            String relativeDate = DateUtils.getCreatedDate(notice.getCreatedDateTime());
+            String[] dateTime = relativeDate.split(" ");
+            notice.setRelativeDate(dateTime[0]);
         });
 
         criteria.setHasMore(noticeList.size() > criteria.getRowCount());
