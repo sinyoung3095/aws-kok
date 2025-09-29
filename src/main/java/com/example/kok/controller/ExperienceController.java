@@ -20,10 +20,10 @@ public class ExperienceController {
     public String goToExpList(@RequestParam(defaultValue = "1") int page, Model model,
                               @AuthenticationPrincipal CustomUserDetails customUserDetails,
                               @ModelAttribute("search") Search search) {
-        System.out.println("컨트롤러 실행해용");
-        System.out.println("keyword = " + search.getKeyword());
+//        System.out.println("컨트롤러 실행해용");
+//        System.out.println("keyword = " + search.getKeyword());
         ExperienceNoticeCriteriaDTO dto =experienceNoticeService.selectAllExperienceNotice(page, search);
-        System.out.println(dto);
+//        System.out.println(dto);
         model.addAttribute("experienceNoticeCriteria", dto);
         model.addAttribute("user", customUserDetails);
         model.addAttribute("search", search);

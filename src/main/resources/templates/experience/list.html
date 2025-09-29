@@ -46,62 +46,62 @@
                                         <p class="search-name">직군</p>
                                     </div>
 
-                                    <div class="dropdown-container">
-                                        <button class="dropdown-open-btn">전체</button>
+                                    <div class="dropdown-container sector-dropdown">
+                                        <button type="button" class="dropdown-open-btn">전체</button>
 
                                         <div class="dropdown-menu">
                                             <p class="dropdown-name">직군</p>
                                             <div class="dropdown-content">
                                                 <ul class="dropdown-list">
                                                     <li class="dropdown-item">
-                                                        <button class="dropdown-btn">
+                                                        <button type="button" class="dropdown-btn">
                                                             <p>SW 개발</p>
                                                         </button>
                                                     </li>
                                                     <li class="dropdown-item">
-                                                        <button class="dropdown-btn">
+                                                        <button type="button" class="dropdown-btn">
                                                             <p>데이터/AI</p>
                                                         </button>
                                                     </li>
                                                     <li class="dropdown-item">
-                                                        <button class="dropdown-btn">
+                                                        <button type="button" class="dropdown-btn">
                                                             <p>기획/전략</p>
                                                         </button>
                                                     </li>
                                                     <li class="dropdown-item">
-                                                        <button class="dropdown-btn">
+                                                        <button type="button" class="dropdown-btn">
                                                             <p>디자인/UX</p>
                                                         </button>
                                                     </li>
                                                     <li class="dropdown-item">
-                                                        <button class="dropdown-btn">
+                                                        <button type="button" class="dropdown-btn">
                                                             <p>마케팅/PR</p>
                                                         </button>
                                                     </li>
                                                     <li class="dropdown-item">
-                                                        <button class="dropdown-btn">
+                                                        <button type="button" class="dropdown-btn">
                                                             <p>경영/운영</p>
                                                         </button>
                                                     </li>
                                                     <li class="dropdown-item">
-                                                        <button class="dropdown-btn">
+                                                        <button type="button" class="dropdown-btn">
                                                             <p>HR/인사</p>
                                                         </button>
                                                     </li>
                                                     <li class="dropdown-item">
-                                                        <button class="dropdown-btn">
+                                                        <button type="button" class="dropdown-btn">
                                                             <p>회계/재무</p>
                                                         </button>
                                                     </li>
                                                     <li class="dropdown-item">
-                                                        <button class="dropdown-btn">
+                                                        <button type="button" class="dropdown-btn">
                                                             <p>법률/법무</p>
                                                         </button>
                                                     </li>
                                                 </ul>
                                                 <div class="dropdown-actions">
                                                     <button class="select-all-btn">전체 선택</button>
-                                                    <button class="apply-btn">적용</button>
+                                                    <button type="button" class="apply-btn" id="sector-compl-btn">적용</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -112,39 +112,39 @@
                                         <p class="search-name">기업 규모</p>
                                     </div>
 
-                                    <div class="dropdown-container">
-                                        <button class="dropdown-open-btn">전체</button>
+                                    <div class="dropdown-container scale-dropdown">
+                                        <button type="button" class="dropdown-open-btn">전체</button>
 
                                         <div class="dropdown-menu">
                                             <p class="dropdown-name">기업 규모</p>
                                             <div class="dropdown-content">
                                                 <ul class="dropdown-list">
                                                     <li class="dropdown-item">
-                                                        <button class="dropdown-btn">
+                                                        <button type="button" class="dropdown-btn">
                                                             <p>매우 작은 규모</p>
                                                             <span>30명 미만</span>
                                                         </button>
                                                     </li>
                                                     <li class="dropdown-item">
-                                                        <button class="dropdown-btn">
+                                                        <button type="button" class="dropdown-btn">
                                                             <p>작은 규모</p>
                                                             <span>30-100명</span>
                                                         </button>
                                                     </li>
                                                     <li class="dropdown-item">
-                                                        <button class="dropdown-btn">
+                                                        <button type="button" class="dropdown-btn">
                                                             <p>중간 규모</p>
                                                             <span>100-400명</span>
                                                         </button>
                                                     </li>
                                                     <li class="dropdown-item">
-                                                        <button class="dropdown-btn">
+                                                        <button type="button" class="dropdown-btn">
                                                             <p>큰 규모</p>
                                                             <span>400-2,000명</span>
                                                         </button>
                                                     </li>
                                                     <li class="dropdown-item">
-                                                        <button class="dropdown-btn">
+                                                        <button type="button" class="dropdown-btn">
                                                             <p>매우 큰 규모</p>
                                                             <span>2,000명 초과</span>
                                                         </button>
@@ -152,7 +152,7 @@
                                                 </ul>
                                                 <div class="dropdown-actions">
                                                     <button class="select-all-btn">전체 선택</button>
-                                                    <button class="apply-btn">적용</button>
+                                                    <button type="button" class="apply-btn" id="scale-compl-btn">적용</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -189,116 +189,7 @@
                         </div>
                     </div>
                     <div class="content-detail">
-                        <div class="content-detail-inner">
-                            <div class="content-detail-header">
-                                <button class="detail-arrow-btn">
-                                    <svg fill="currentColor" height="20" role="img" width="20">
-                                        <path clip-rule="evenodd" d="M11.566 5.435a.8.8 0 0 0-1.132 0l-6 6a.8.8 0 0 0 0 1.13l6 6a.8.8 0 1 0 1.132-1.13L6.93 12.8H19a.8.8 0 1 0 0-1.6H6.931l4.635-4.634a.8.8 0 0 0 0-1.131" fill-rule="evenodd"></path>
-                                    </svg>
-                                    <p>목록</p>
-                                </button>
-                            </div>
-                            <div class="content-detail-body">
-                                <button class="list-item-header">
-                                    <div class="list-item-thumb">
-                                        <img src="https://www.rocketpunch.com/_next/image?url=https%3A%2F%2Fimage.rocketpunch.com%2Fcompany_profile%2F210280%2F2025%2F09%2F09%2Flogo_1757380047672.jpg&amp;w=64&amp;q=75" alt="">
-                                    </div>
-                                    <div class="list-item-content">
-                                        <p class="list-item-title">애니포인트미디어</p>
-                                        <ul class="profile-stats">
-                                            <li class="profile-stat-item">팔로워 <i class="num">47</i></li>
-                                            <li class="profile-stat-item">채험공고 <i class="num">3</i></li>
-                                            <li class="profile-stat-item">인턴공고 <i class="num">3</i></li>
-                                        </ul>
-                                    </div>
-                                </button>
-                                
-                                <div class="detail-content">
-                                    <div class="detail-header">
-                                        <strong class="detail-title">SDK 개발자 (Kotlin Multiplatform)</strong>
-                                        <p class="detail-subtitle">크로스 플랫폼 광고 SDK 개발로 전문성을 쌓아갈 개발자 모집</p>
-                                    </div>
 
-                                    <div class="detail-actions">
-                                        <!-- popup-trigger 클래스가 있으면 열림 -->
-                                        <button class="detail-action-btn detail-apply-btn popup-trigger" data-target="#quick-apply-popup">간편 지원하기</button>
-                                        <button class="detail-action-btn detail-save-btn">저장함</button>
-                                        <button class="detail-action-btn detail-share-btn">공유하기</button>
-                                    </div>
-
-                                    <ul class="detail-meta">
-                                        <li class="detail-meta-item">
-                                            <p class="meta-label">직군</p>
-                                            <p class="meta-value">SW 개발</p>
-                                        </li>
-                                        <li class="detail-meta-item">
-                                            <p class="meta-label">숙련도</p>
-                                            <p class="meta-value">주니어, 신입</p>
-                                        </li>
-                                        <li class="detail-meta-item">
-                                            <p class="meta-label">고용형태</p>
-                                            <p class="meta-value">정규직</p>
-                                        </li>
-                                        <li class="detail-meta-item">
-                                            <p class="meta-label">근무방식</p>
-                                            <p class="meta-value">상시 출근</p>
-                                        </li>
-                                    </ul>
-
-                                    <div class="deadline-info">
-                                        <p class="deadline-remain">지원 마감까지 18일 남음</p>
-                                        <p class="deadline-description">2025년 9월 30일까지 지원할 수 있습니다.</p>
-                                    </div>
-
-                                    <div class="detail-description">
-                                        <div class="detail-item">
-                                            <p class="detail-item-title">직무소개</p>
-                                            <p class="detail-item-content">글로벌 CTV 광고 플랫폼을 선도하는 애니포인트 미디어에서 Kotlin Multiplatform을 활용한 크로스 플랫폼 광고 SDK 개발을 담당하실 개발자를 모집합니다.
-                                                20+ 국가에서 사용되는 SDK 개발 경험을 쌓으며 전문성을 키워나가세요.</p>
-                                        </div>
-                                        <div class="detail-item">
-                                            <p class="detail-item-title">주요업무</p>
-                                            <p class="detail-item-content">- Kotlin Multiplatform을 활용한 광고 SDK(Javascript, iOS, Android) 개발 및 유지 보수
-                                                - SDK 통합 가이드 작성 및 지원
-                                            </p>
-                                        </div>
-                                        <div class="detail-item">
-                                            <p class="detail-item-title">자격요건</p>
-                                            <p class="detail-item-content">- 관련 분야에서 1년 이상 3년 이하의 실무 경력을 보유하신 분
-                                                - 전문학사 이상의 학력을 보유하신 분(학력, 전공, 자격증 및 외국어는 별도 제한 없음)
-                                                - 다양한 환경, 플랫폼에서 새로운 기술을 습득하는 데 적극적이며, 성장에 대한 의지가 강한 분
-                                                - 문제 해결을 위해 논리적으로 사고하며 적극적으로 협업할 수 있는 분
-                                                - 빠르게 변화하는 트렌드와 새로운 기술에 대해 열린 마음으로 도전하는 것을 즐기는 분
-                                            </p>
-                                        </div>
-                                        <div class="detail-item">
-                                            <p class="detail-item-title">우대사항</p>
-                                            <p class="detail-item-content">- 컴퓨터공학, 소프트웨어 공학 등 관련 학과 우대
-                                                - 하나의 기술에만 매몰되지 않고 새로운 기술을 배우는 데 두려움이 없는 사람
-                                                - 유연한 사고와 방식으로 팀원 또는 타팀과 원활한 커뮤니케이션이 가능한 분
-                                            </p>
-                                        </div>
-                                        <div class="detail-item">
-                                            <p class="detail-item-title">복지 및 근무환경</p>
-                                            <p class="detail-item-content">- 시차출근제 (07:00~10:00 중 자율출근), 기본 근무시간 8H
-                                                - 자유복장, 개인별 캐비닛 제공, 요청 장비/사무용품 지급
-                                                - 자유로운 연차 사용 (1일, 0.5일, 0.25일 단위), 연차 선사용 제도
-                                            </p>
-                                        </div>
-                                        <div class="detail-item">
-                                            <p class="detail-item-title">진행절차</p>
-                                            <p class="detail-item-content">- 서류평가 → 코딩테스트(프로그래머스) → 1차 면접(팀장) → 2차 면접(본부장) → 채용 확정
-                                                - 이력서 제출 필요
-                                            </p>
-                                        </div>
-                                        <div class="detail-item">
-                                            <p class="detail-item-title">참고사항</p>
-                                            <p class="detail-item-content">근무지 : 서울 강남구 테헤란로87길 21 6층</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="content-side active">
                         <div class="content-side-top">
@@ -677,7 +568,7 @@
 <script th:inline="javascript">
     const experienceData = [[${experienceNoticeCriteria}]];
     const search = [[${search}]];
-    const keyword = keyword;
+    const keyword = [[${search.keyword}]];
 </script>
 <script src="/js/experience/module/service.js"></script>
 <script src="/js/experience/module/layout.js"></script>
