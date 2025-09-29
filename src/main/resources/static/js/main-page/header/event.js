@@ -196,3 +196,8 @@ if (historyDetailModal) {
         }
     });
 }
+const logout = document.getElementById("logout");
+logout.addEventListener("click",(e)=>{
+    service.logout;
+    location.href='/community/page';
+});

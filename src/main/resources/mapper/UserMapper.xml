@@ -4,7 +4,7 @@
 <!--    이메일로 조회-->
     <select id="selectByEmail">
         select id, user_name, user_phone, user_email, user_password, user_role, user_status, created_datetime, updated_datetime
-        from tbl_user
+        from tbl_user where user_email = #{userEmail}
     </select>
 
     <!--  일반 회원 가입  -->
