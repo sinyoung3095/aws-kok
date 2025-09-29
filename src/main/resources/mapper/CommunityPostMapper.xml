@@ -3,7 +3,7 @@
 <mapper namespace="com.example.kok.mapper.CommunityPostMapper">
 <!-- 게시글 전체 목록 -->
     <select id="selectCommunityPosts">
-        select u.id, u.user_name, m.member_profile_url, p.id, p.post_content, p.post_status, p.created_datetime, p.updated_datetime, ujc.job_category, jc.job_name
+        select u.id as member_id, u.user_name, m.member_profile_url, p.id as id, p.post_content, p.post_status, p.created_datetime, p.updated_datetime, ujc.job_category, jc.job_name
         from tbl_user u
         join tbl_member m on u.id = m.user_id
         join tbl_post p on m.user_id = p.member_id
