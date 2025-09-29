@@ -393,7 +393,6 @@ div.filter-search{
 div.search-main{
     flex: 1;
     margin-inline-start: 0px;
-    margin-inline-end: 16px;
     margin-block-start:0px;
     margin-block-end: 16px;
 }
@@ -461,6 +460,7 @@ button.search-btn{
     display: flex;
     position: relative; /* 기준점이 됨 */
     z-index: 1;
+    cursor: pointer;
 }
 
 .job {
@@ -704,6 +704,11 @@ tr.body-tr{
     cursor: pointer;
 }
 
+tr.body-tr.no-data td{
+    padding: 40px;
+    text-align: center;
+}
+
 body tr.body-tr.disnone{
     display: none;
 }
@@ -895,7 +900,8 @@ div.pop-head{
     padding-inline: 8px;
 }
 
-div.hambuger-list{
+div.hambuger-list,
+a.hambuger-list{
     user-select: none;
     outline-style: none;
     font-size: 14px;
@@ -905,7 +911,7 @@ div.hambuger-list{
     border-radius: 6px;
     gap: 8px;
     align-items: center;
-    cursor: default;
+    cursor: pointer;
     display: flex;
     position: relative;
 }

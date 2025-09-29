@@ -1,8 +1,9 @@
 // 목록
-const exprienceNoticeService = (() => {
+const experienceNoticeService = (() => {
     // 목록
-    const getList = async (companyId, page, callback) => {
-        const response = await fetch(`/api/enterprise-console/experience/list/${companyId}/${page}`);
+    const getList = async (companyId, page, status, keyword, callback) => {
+        console.log("보내는 keyword:", keyword);
+        const response = await fetch(`/api/enterprise-console/experience/list/${companyId}/${page}?status=${status ?? ""}&keyword=${keyword ?? ""}`);
         const data = await response.json();
 
         if (callback) {

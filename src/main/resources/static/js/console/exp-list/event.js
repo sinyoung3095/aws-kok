@@ -1,16 +1,16 @@
-const searchBtn = document.querySelector(".search-btn");
+// const searchBtn = document.querySelector(".search-btn");
 const jobMenu = document.querySelector(".job");
 const jobItems = document.querySelectorAll(".job-3");
 const checkIcon = document.querySelector(".setting-31");
 const searchSpan = document.querySelector(".search-span");
-const cateBtns = document.querySelectorAll(".category-sub");
+// const cateBtns = document.querySelectorAll(".category-sub");
 
 // 버튼 클릭 → 메뉴 표시/숨김 토글
-searchBtn.addEventListener("click", (e) => {
-    e.stopPropagation(); // 외부 클릭 이벤트 막기
-    jobMenu.style.display =
-        jobMenu.style.display === "block" ? "none" : "block";
-});
+// searchBtn.addEventListener("click", (e) => {
+//     e.stopPropagation(); // 외부 클릭 이벤트 막기
+//     jobMenu.style.display =
+//         jobMenu.style.display === "block" ? "none" : "block";
+// });
 
 // job-3 선택
 jobItems.forEach((item) => {
@@ -34,18 +34,7 @@ jobItems.forEach((item) => {
     });
 });
 
-// 외부 클릭 시 메뉴 숨김
-document.addEventListener("click", () => {
-    jobMenu.style.display = "none";
-});
 
-const categoryButtons = document.querySelectorAll(".category-sub");
-categoryButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        categoryButtons.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-    });
-});
 
 // 여러 개의 tr.body-tr에 대해 각각 적용
 // document.querySelectorAll("tr.body-tr").forEach((tr) => {
@@ -123,52 +112,46 @@ if (experienceTable) {
             }
 
             // 상태 버튼 클릭시 확인
-            // const isActive = activeExp.classList.contains("active");
-            // const statusValue = isActive ? "active" : "inactive";
             const noticeId = tr.dataset.id;
-            console.log(statusValue, noticeId)
-
             try {
-                const data = await exprienceNoticeService.updateExperienceStatus(noticeId, statusValue);
+                const data = await experienceNoticeService.updateExperienceStatus(noticeId, statusValue);
                 console.log("DB 반영 성공:", data);
             } catch (err) {
                 console.error("DB 반영 실패:", err);
             }
-
-            // return;
         }
 
+
+        const trs = document.querySelectorAll("#experience-list-table tr.body-tr");
+        trs.forEach((tr) => {
+            const hambugerBtn = tr.querySelector("button.hambuger");
+            const hambugerPopWrap = hambugerBtn
+                ? hambugerBtn.querySelector(".hambuger-pop-wrap")
+                : null;
+
+            if (!hambugerBtn || !hambugerPopWrap) return;
+
+            hambugerBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+
+                // 모든 팝업 닫기
+                document
+                    .querySelectorAll(".hambuger-pop-wrap")
+                    .forEach((pop) => (pop.style.display = "none"));
+
+                // 버튼 옆에 위치시키기
+                const btnOffsetLeft = hambugerBtn.offsetLeft;
+                const btnOffsetTop = hambugerBtn.offsetTop;
+
+                hambugerPopWrap.style.right =
+                    btnOffsetLeft + hambugerBtn.offsetWidth + "px"; // 버튼 오른쪽 옆
+                hambugerPopWrap.style.top = btnOffsetTop + "px"; // 버튼 상단 기준
+
+                hambugerPopWrap.style.display = "block";
+            });
+        });
     });
 }
-
-
-document.querySelectorAll("tr.body-tr").forEach((tr) => {
-    const hambugerBtn = tr.querySelector("button.hambuger");
-    const hambugerPopWrap = hambugerBtn
-        ? hambugerBtn.querySelector(".hambuger-pop-wrap")
-        : null;
-
-    if (!hambugerBtn || !hambugerPopWrap) return;
-
-    hambugerBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-
-        // 모든 팝업 닫기
-        document
-            .querySelectorAll(".hambuger-pop-wrap")
-            .forEach((pop) => (pop.style.display = "none"));
-
-        // 버튼 옆에 위치시키기
-        const btnOffsetLeft = hambugerBtn.offsetLeft;
-        const btnOffsetTop = hambugerBtn.offsetTop;
-
-        hambugerPopWrap.style.right =
-            btnOffsetLeft + hambugerBtn.offsetWidth + "px"; // 버튼 오른쪽 옆
-        hambugerPopWrap.style.top = btnOffsetTop + "px"; // 버튼 상단 기준
-
-        hambugerPopWrap.style.display = "block";
-    });
-});
 
 // 외부 클릭 시 모든 팝업 닫기
 document.addEventListener("click", (e) => {
@@ -181,7 +164,12 @@ document.addEventListener("click", (e) => {
 
 
 // ######################### 공고목록 ############################
-const bindPaginationEvent = (companyId) => {
+const companyId = 1;
+const page = 1;
+let status = null;
+let keyword ="";
+
+const bindPaginationEvent = (companyId, status) => {
     const paginationArea = document.querySelector("#experience-list-table .page-ul");
     if (!paginationArea) return;
 
@@ -197,24 +185,83 @@ const bindPaginationEvent = (companyId) => {
 
         const page = parseInt(link.dataset.page, 10);
 
-        exprienceNoticeService.getList(companyId, page, (data) => {
+        experienceNoticeService.getList(companyId, page, status, keyword,(data) => {
             experienceLayout.contentLayout();
             experienceLayout.rowTemplate(data.experienceLists);
             experienceLayout.totalCount(data);
             experienceLayout.listTotalCount(data);
             experienceLayout.renderPagination(data.criteria);
 
-            bindPaginationEvent(companyId);
+            bindPaginationEvent(companyId, status, keyword);
         });
     });
 };
 
-exprienceNoticeService.getList(1, 1, (data) => {
+experienceNoticeService.getList(companyId, page, status, keyword,(data) => {
     experienceLayout.contentLayout();
     experienceLayout.rowTemplate(data.experienceLists);
     experienceLayout.totalCount(data);
     experienceLayout.listTotalCount(data);
     experienceLayout.renderPagination(data.criteria);
-    bindPaginationEvent(1);
+    bindPaginationEvent(companyId, status, keyword);
 });
 
+
+// ######################### 검색 ############################
+// 요소 가져오기
+const searchInput = document.querySelector(".search-input");     // 검색어
+// const jobButtons = document.querySelectorAll(".job-3 .job-6");   // 직군 선택
+const statusButtons = document.querySelectorAll(".category-sub"); // 전체/모집중/종료
+
+// 현재 선택 상태 저장
+// let selectedJob = "";     // 직군
+
+// 직군 선택 이벤트
+// jobButtons.forEach(btn => {
+//     btn.addEventListener("click", () => {
+//         selectedJob = btn.textContent.trim();
+//         document.querySelector(".search-span").textContent = selectedJob; // 버튼에 표시 업데이트
+//     });
+// });
+
+// 상태 버튼 이벤트 (전체/모집중/모집종료)
+statusButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        // active 스타일 토글
+        statusButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        if (btn.classList.contains("ing")) {
+            status = "active";
+        } else if (btn.classList.contains("end")) {
+            status = "inactive";
+        } else {
+            status = ""; // 전체
+        }
+
+        // 상태 탭 누르면 바로 검색 실행
+        doSearch(1);
+    });
+});
+
+// 검색 실행 함수
+function doSearch(page = 1) {
+    keyword = searchInput.value.trim();
+
+    // getList 호출 (필요하다면 service.js 에서 job 파라미터도 추가)
+    experienceNoticeService.getList(companyId, page, status, keyword, (data) => {
+        experienceLayout.contentLayout();
+        experienceLayout.rowTemplate(data.experienceLists);
+        experienceLayout.totalCount(data);
+        experienceLayout.listTotalCount(data);
+        experienceLayout.renderPagination(data.criteria);
+        bindPaginationEvent(companyId, page, status, keyword);
+    });
+}
+
+// 엔터 입력 시 실행
+searchInput.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") {
+        doSearch();
+    }
+});

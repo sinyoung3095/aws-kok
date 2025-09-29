@@ -15,17 +15,21 @@ public interface ConsoleExperienceListMapper {
 
 //    공고 목록
     public List<ConsoleExperienceListDTO> selectExperienceByCompany(@Param("companyId") Long companyId,
-                                                                    @Param("criteria") Criteria criteria);
-//    공고 개수
-    public int selectCountByCompany(Long companyId);
+                                                                    @Param("criteria") Criteria criteria,
+                                                                    @Param("status") Status status,
+                                                                    @Param("keyword") String keyword);
 
-//    모집중인 공고 개수
-    public int selectActiveCountByCompany(Long companyId);
+//    공고 개수(전체, 모집중)
+    public int selectCountByCompany(@Param("companyId") Long companyId,
+                                    @Param("status") Status status,
+                                    @Param("keyword") String keyword);
 
+//    공고 상태 변경
     public void updateListStatus(@Param("noticeId") Long noticeId,
-                          @Param("status") Status status);
+                                 @Param("status") Status status);
 
-//    활성화된 공고의 지원자, 누적 지원자
-    public ConsoleExperienceListCriteriaDTO selectRequestStatsByCompany(Long companyId);
+//    지원자개수(활성화 공고 지원자, 누적 지원자)
+    public int selectRequestCountByCompany(@Param("companyId") Long companyId,
+                                           @Param("active") boolean active);
 
 }

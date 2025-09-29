@@ -17,14 +17,17 @@ public class ConsoleExperienceListServiceImpl implements ConsoleExperienceListSe
     private final ConsoleExperienceListDAO consoleExperienceDAO;
 
     @Override
-    public ConsoleExperienceListCriteriaDTO getList(Long companyId, int page) {
+    public ConsoleExperienceListCriteriaDTO getList(Long companyId, int page, Status status, String keyword) {
         ConsoleExperienceListCriteriaDTO consoleExperienceNoticeCriteriaDTO = new ConsoleExperienceListCriteriaDTO();
 
-        int totalCount = consoleExperienceDAO.findCountByCompany(companyId);
-        int activeCount = consoleExperienceDAO.findActiveByCompany(companyId);
+        int totalCount = consoleExperienceDAO.findCountByCompany(companyId, status, keyword);
+        int activeCount = consoleExperienceDAO.findActiveCountByCompany(companyId, Status.ACTIVE, keyword);
+        int requestCount = consoleExperienceDAO.findRequestCountByCompany(companyId);
+        int activeRequestCount = consoleExperienceDAO.findRequestActiveCountByCompany(companyId);
+
         Criteria criteria = new Criteria(page, totalCount);
 
-        List<ConsoleExperienceListDTO> notices = consoleExperienceDAO.findAllByCompany(companyId, criteria);
+        List<ConsoleExperienceListDTO> notices = consoleExperienceDAO.findAllByCompany(companyId, criteria, status, keyword);
 
         criteria.setHasMore(notices.size() > criteria.getRowCount());
         if(criteria.isHasMore()){
@@ -35,12 +38,8 @@ public class ConsoleExperienceListServiceImpl implements ConsoleExperienceListSe
         consoleExperienceNoticeCriteriaDTO.setCriteria(criteria);
         consoleExperienceNoticeCriteriaDTO.setTotalCount(totalCount);
         consoleExperienceNoticeCriteriaDTO.setActiveTotalCount(activeCount);
-
-        ConsoleExperienceListCriteriaDTO stats = consoleExperienceDAO.getRequestStats(companyId);
-        if (stats != null) {
-            consoleExperienceNoticeCriteriaDTO.setTotalRequestCount(stats.getTotalRequestCount());
-            consoleExperienceNoticeCriteriaDTO.setActiveRequestCount(stats.getActiveRequestCount());
-        }
+        consoleExperienceNoticeCriteriaDTO.setTotalRequestCount(requestCount);
+        consoleExperienceNoticeCriteriaDTO.setActiveRequestCount(activeRequestCount);
 
         return consoleExperienceNoticeCriteriaDTO;
     }

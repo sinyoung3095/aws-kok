@@ -16,28 +16,34 @@ import java.util.Map;
 public class ConsoleExperienceListDAO {
     private final ConsoleExperienceListMapper consoleExperienceMapper;
 
-//    공고 목록
-    public List<ConsoleExperienceListDTO> findAllByCompany(Long companyId, Criteria criteria) {
-        return consoleExperienceMapper.selectExperienceByCompany(companyId, criteria);
+//    공고 목록(전체)
+    public List<ConsoleExperienceListDTO> findAllByCompany(Long companyId, Criteria criteria, Status status, String keyword) {
+        return consoleExperienceMapper.selectExperienceByCompany(companyId, criteria, status, keyword);
     }
 
 //    공고 개수
-    public int findCountByCompany(Long companyId) {
-        return consoleExperienceMapper.selectCountByCompany(companyId);
+    public int findCountByCompany(Long companyId, Status status, String keyword) {
+        return consoleExperienceMapper.selectCountByCompany(companyId, status, keyword);
     }
 
 //    모집중인 공고 개수
-    public int findActiveByCompany(Long companyId) {
-        return consoleExperienceMapper.selectActiveCountByCompany(companyId);
+    public int findActiveCountByCompany(Long companyId, Status status, String keyword) {
+        return consoleExperienceMapper.selectCountByCompany(companyId, status, keyword);
     }
 
+//    공고 상태 변경
     public void updateListStatus(Long noticeId, Status status) {
         consoleExperienceMapper.updateListStatus(noticeId, status);
     }
 
-//    활성화된 공고의 지원자, 누적 지원자
-    public ConsoleExperienceListCriteriaDTO getRequestStats(Long companyId) {
-        return consoleExperienceMapper.selectRequestStatsByCompany(companyId);
+//    활성화된 공고의 지원자
+    public int findRequestCountByCompany(Long companyId) {
+        return consoleExperienceMapper.selectRequestCountByCompany(companyId, true);
+    }
+
+//    누적 지원자
+    public int findRequestActiveCountByCompany(Long companyId) {
+        return consoleExperienceMapper.selectRequestCountByCompany(companyId, false);
     }
 
 }

@@ -43,7 +43,7 @@ const experienceLayout = (() => {
         tbody.innerHTML = "";
         if (!lists || lists.length === 0) {
             tbody.innerHTML = `
-                <tr class="body-tr-none">
+                <tr class="body-tr no-data">
                     <td class="body-td" colspan="9">
                         <div class="text">조건에 맞는 공고가 없습니다.</div>
                     </td>
@@ -76,7 +76,27 @@ const experienceLayout = (() => {
                         </div>
                     </td>
                     <td class="body-td">
-                        <button class="hambuger">⋮</button>
+                        <button class="hambuger">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hambuger-svg"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                            <div class="hambuger-pop-wrap">
+                                <div class="hambuger-pop">
+                                    <div class="pop-head">작업</div>
+                                    <a href="/enterprise-console/experience/applicate-list" class="hambuger-list">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hambuger-svg"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                        상세보기
+                                    </a>
+                                    <a href="/enterprise-console/experience/create" class="hambuger-list">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hambuger-svg"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg>
+                                        수정하기
+                                    </a>
+                                    <div class="bar-hambuger"></div>
+                                    <div class="red-ham-list">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hambuger-svg"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                                        삭제하기
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
                     </td>
                 </tr>
             `;
