@@ -14,33 +14,43 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CommunityPostDAO {
     private final CommunityPostMapper communityPostMapper;
-    //    목록
+//    목록
     public List<PostDTO> findAll(Criteria criteria){
         return communityPostMapper.selectCommunityPosts(criteria);
     }
 
-    //    전체 개수
+//    전체 개수
     public int findCountAll() {
         return communityPostMapper.selectCommunityPostCount();
     }
 
-    //    조회
+//    조회
     public Optional<PostDTO> findById(Long id) {
         return communityPostMapper.selectCommunityPost(id);
     }
 
-    //    추가
+//    추가
     public void save(PostDTO postDTO) {
         communityPostMapper.insert(postDTO);
     }
 
-    //    삭제
+//    삭제
     public void delete(Long id) {
         communityPostMapper.delete(id);
     }
 
-    //    수정
+//    수정
     public void update(PostVO postVO) {
         communityPostMapper.update(postVO);
+    }
+
+//    좋아요 수 증가
+    public void increaseLikesCount(Long id) {
+        communityPostMapper.increaseLikesCount(id);
+    }
+
+//    좋아요 수 감소
+    public void decreaseLikesCount(Long id) {
+        communityPostMapper.decreaseLikesCount(id);
     }
 }

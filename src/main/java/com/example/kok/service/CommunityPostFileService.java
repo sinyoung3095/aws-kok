@@ -1,19 +1,27 @@
 package com.example.kok.service;
 
+import com.example.kok.dto.FileDTO;
 import com.example.kok.dto.PostFileDTO;
-import com.example.kok.repository.CommunityPostFileDAO;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
-@Service
-@RequiredArgsConstructor
-public class CommunityPostFileService {
-    private final CommunityPostFileDAO communityPostFileDAO;
+public interface CommunityPostFileService {
+    // 파일 저장
+    void saveFile(FileDTO fileDTO);
 
-//    조회
-    public Optional<PostFileDTO> getPostFile(Long id) {
-        return communityPostFileDAO.findById(id);
-    }
+    // 게시글 파일 매핑 저장
+    void savePostFile(PostFileDTO postFileDTO);
+
+    // 게시글 ID로 파일 목록 조회
+    List<PostFileDTO> getFilesByPostId(Long postId);
+
+    // 파일 경로 조회
+    Optional<PostFileDTO> getFilePathByFileId(Long fileId);
+
+    // 단일 파일 조회
+    Optional<PostFileDTO> getPostFile(Long id);
+
+    // 게시글 파일 삭제
+    void deleteFile(Long id);
 }

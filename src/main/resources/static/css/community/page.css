@@ -209,7 +209,6 @@ div {
     align-items: center;
     max-width: 100%;
     min-width: 0rem;
-    cursor: pointer;
     display: flex;
 }
 .post-13{
@@ -1564,6 +1563,28 @@ div {
     justify-content: center;
     align-items: center;
     z-index: 9999;
+}
+
+.preview-remove {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: rgba(17, 24, 39, .6);
+    color: #FFFFFF;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background .15s ease;
+}
+.preview-remove:hover { background: rgba(17, 24, 39, .8); }
+
+.preview-remove svg {
+    pointer-events: none;
 }
 
 .enter{

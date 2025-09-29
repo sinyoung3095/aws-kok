@@ -76,7 +76,7 @@
                                 <p class="etc-7">지금 프로필을 만들고 기회를 찾아보세요.</p>
                             </div>
                         </div>
-                        <a class="etc-12" th:href="@{member/login}">
+                        <a class="etc-12" href="">
                             <button class="set etc-13">
                                 <span class="etc-14">로그인</span>
                             </button>
@@ -223,7 +223,7 @@
                             </a>
                         </div>
                         <!-- 더보기 버튼 -->
-                        <a class="etc-22" th:href="@{experience/list}">
+                        <a class="etc-22" href="">
                             <button class="etc-23">
                                 <span class="etc-24">체험 공고 더보기</span>
                             </button>
@@ -670,21 +670,24 @@
                                 <div class="popup-close-box">
                                     <button type="button" class="popup-write-close">
                                         <svg viewBox="0 0 24 24" aria-label="icon" fill="currentColor" height="20" role="img" width="20">
-                                            <path clip-rule="evenodd" d="M6.434 6.435a.8.8 0 0 1 1.132 0L12 10.869l4.434-4.434a.8.8 0 1 1 1.132 1.13L13.13 12l4.435 4.435a.8.8 0 1 1-1.132 1.13L12 13.133l-4.434 4.434a.8.8 0 0 1-1.132-1.131L10.87 12 6.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                            <path clip-rule="evenodd"
+                                                  d="M6.434 6.435a.8.8 0 0 1 1.132 0L12 10.869l4.434-4.434a.8.8 0 1 1 1.132 1.13L13.13 12l4.435 4.435a.8.8 0 1 1-1.132 1.13L12 13.133l-4.434 4.434a.8.8 0 0 1-1.132-1.131L10.87 12 6.434 7.566a.8.8 0 0 1 0-1.131"
+                                                  fill-rule="evenodd"></path>
                                         </svg>
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <form action="">
+                        <form id="post-write-form" enctype="multipart/form-data" onsubmit="return false;">
                             <div class="popup-body">
                                 <div class="popup-input">
-                                    <textarea class="popup-textarea" name="" id="" placeholder="오늘의 생각, 일에 대한 통찰, 커리어 궁금증을 남겨보세요"></textarea>
+                                    <textarea class="popup-textarea" name="postContent" id="postContent"
+                                              placeholder="최소 파일 1개 혹은 10자 이상 작성 해야 업로드 가능합니다."></textarea>
                                 </div>
 
                                 <div class="popup-preview">
                                     <div class="popup-preview-inner">
-                                        <!-- 이미지 들어오는곳 -->
+                                        <!-- 이미지 미리보기 들어오는 영역 -->
                                     </div>
                                 </div>
                             </div>
@@ -692,17 +695,22 @@
                                 <div class="popup-action-left">
                                     <label for="btn-add-photo" class="popup-btn-photo">
                                         <div class="phot-icon">
-                                            <svg viewBox="0 0 24 24" aria-label="icon" fill="currentColor" height="20" role="img" width="20">
-                                                <path d="M19 2.2H5C3.45 2.2 2.2 3.45 2.2 5v14c0 1.55 1.25 2.8 2.8 2.8h14c1.55 0 2.8-1.25 2.8-2.8V5c0-1.55-1.25-2.8-2.8-2.8m-14 18c-.66 0-1.2-.54-1.2-1.2v-5.17c1.83.11 3.56.59 5.11 1.37a14.8 14.8 0 0 0-2.92 5h-1zM20.2 19c0 .66-.54 1.2-1.2 1.2H7.7c.69-1.76 1.74-3.33 3.07-4.63l.46-.43c2.33-2.08 5.41-3.34 8.78-3.34h.2V19zm0-8.8H20c-3.81 0-7.29 1.44-9.91 3.81a14.9 14.9 0 0 0-6.29-1.79V5c0-.66.54-1.2 1.2-1.2h14c.66 0 1.2.54 1.2 1.2zM9.96 8.636c-.31-.22-.67-.29-.91-.29s-.6.07-.91.29c-.35.25-.59.66-.59 1.21s.24.96.59 1.21c.31.22.67.29.91.29s.6-.07.91-.29c.35-.25.59-.66.59-1.21s-.24-.96-.59-1.21"></path>
+                                            <svg viewBox="0 0 24 24" aria-label="icon" fill="currentColor" height="20" role="img"
+                                                 width="20">
+                                                <path
+                                                        d="M19 2.2H5C3.45 2.2 2.2 3.45 2.2 5v14c0 1.55 1.25 2.8 2.8 2.8h14c1.55 0 2.8-1.25 2.8-2.8V5c0-1.55-1.25-2.8-2.8-2.8m-14 18c-.66 0-1.2-.54-1.2-1.2v-5.17c1.83.11 3.56.59 5.11 1.37a14.8 14.8 0 0 0-2.92 5h-1zM20.2 19c0 .66-.54 1.2-1.2 1.2H7.7c.69-1.76 1.74-3.33 3.07-4.63l.46-.43c2.33-2.08 5.41-3.34 8.78-3.34h.2V19zm0-8.8H20c-3.81 0-7.29 1.44-9.91 3.81a14.9 14.9 0 0 0-6.29-1.79V5c0-.66.54-1.2 1.2-1.2h14c.66 0 1.2.54 1.2 1.2zM9.96 8.636c-.31-.22-.67-.29-.91-.29s-.6.07-.91.29c-.35.25-.59.66-.59 1.21s.24.96.59 1.21c.31.22.67.29.91.29s.6-.07.91-.29c.35-.25.59-.66.59-1.21s-.24-.96-.59-1.21"></path>
                                             </svg>
                                         </div>
                                         <p class="popup-tool-label">사진</p>
                                     </label>
-
-                                    <input type="file" name="" id="btn-add-photo" multiple hidden>
+                                    <input type="file" name="files" id="btn-add-photo" multiple hidden>
+                                    <div class="popup-preview-inner"></div>
+                                    <!-- multiple로 썸네일 js를 이용해 뿌려주기 -->
                                 </div>
                                 <div class="popup-action-right">
-                                    <button type="button" class="pop-btn btn-primary pop-btn-write" data-target="#post-write-popup">글쓰기</button>
+                                    <button type="button" class="pop-btn btn-primary pop-btn-write"
+                                            data-target="#post-write-popup">글쓰기
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -715,7 +723,9 @@
                         <div class="toast-inner">
                             <div class="toast-icon">
                                 <svg viewBox="0 0 24 24" fill="#fff" height="20" role="img" width="20">
-                                    <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                                    <path clip-rule="evenodd"
+                                          d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8"
+                                          fill-rule="evenodd"></path>
                                 </svg>
                             </div>
                             <p class="toast-text">업로드하려면 10자 이상 입력하거나 파일을 하나 이상 첨부해야 합니다.</p>
@@ -738,6 +748,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="hide-1">
                     <button type="button" class="btn-write btn-primary popup-trigger" data-target="#post-write-popup" style="width: 70px;height: 40px;">글쓰기</button>
                 </div>

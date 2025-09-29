@@ -1,5 +1,6 @@
 package com.example.kok.repository;
 
+import com.example.kok.dto.FileDTO;
 import com.example.kok.dto.PostFileDTO;
 import com.example.kok.mapper.CommunityPostFileMapper;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,12 @@ import java.util.Optional;
 public class CommunityPostFileDAO {
     private final CommunityPostFileMapper communityPostFileMapper;
 
-//    추가
+//    파일 추가
+    public void saveFile(FileDTO fileDTO) {
+        communityPostFileMapper.insertFile(fileDTO);
+    }
+
+//    게시글 파일 추가
     public void save(PostFileDTO postFileDTO){
         communityPostFileMapper.insertPostFile(postFileDTO);
     }
