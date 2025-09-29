@@ -1,5 +1,5 @@
 const postService = (() => {
-    // 게시글 목록 조회
+    // 게시글 전체 조회
     const getList = async (page = 1, callback) => {
         const response = await fetch(`/api/community/${page}`);
         const postsCriteria = await response.json();
@@ -28,7 +28,7 @@ const postService = (() => {
         });
 
         if (!response.ok) throw new Error(await response.text());
-        return await response.json(); // postId 반환
+        return await response.json();
     };
 
     // 수정
@@ -85,6 +85,20 @@ const postService = (() => {
         return response.ok;
     };
 
-    return { getList : getList, getOne : getOne, write : write, update : update, remove : remove, postLike : postLike, removeLike : removeLike};
+    // 게시글 신고
+    const reportPost = async (postId) => {
+        const response = await fetch(`/api/report/${postId}`, {
+            method: "POST"
+        });
+
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(errorMessage);
+        }
+        return true;
+    };
+
+    return { getList : getList, getOne : getOne, write : write, update : update, remove : remove,
+        postLike : postLike, removeLike : removeLike, reportPost : reportPost};
 
 })();
