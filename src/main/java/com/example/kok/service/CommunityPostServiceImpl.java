@@ -31,6 +31,7 @@ public class CommunityPostServiceImpl implements CommunityPostService {
     private final CommunityPostDAO communityPostDAO;
     private final CommunityPostFileDAO communityPostFileDAO;
     private final S3Service s3Service;
+    private final CommunityLikeService communityLikeService;
 
     @Override
     public PostsCriteriaDTO getList(int page) {

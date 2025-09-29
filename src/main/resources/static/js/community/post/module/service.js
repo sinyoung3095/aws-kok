@@ -1,5 +1,5 @@
 const postService = (() => {
-    // 목록 조회
+    // 게시글 목록 조회
     const getList = async (page = 1, callback) => {
         const response = await fetch(`/api/community/${page}`);
         const postsCriteria = await response.json();
@@ -7,7 +7,7 @@ const postService = (() => {
         return postsCriteria;
     };
 
-    // 단건 조회
+    // 게시글 조회
     const getOne = async (id) => {
         const response = await fetch(`/api/community/post/${id}`);
         if (!response.ok) throw new Error("게시글을 불러올 수 없습니다.");
@@ -54,5 +54,37 @@ const postService = (() => {
         return response.ok;
     };
 
-    return { getList : getList, getOne : getOne, write : write, update : update, remove : remove};
+    // 게시글 좋아요
+    const postLike = async (postId) => {
+        const postLikeDTO = {
+            postId: postId
+        };
+
+        const response = await fetch("/api/likes", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(postLikeDTO)
+        });
+
+        if(response.ok) {
+            console.log("좋아요 성공");
+            return true;
+        } else{
+            const errorMessage = await response.text();
+            console.log(errorMessage)
+            alert("이미 좋아요를 누른 게시글 입니다.");
+            return false;
+        }
+    };
+
+    // 게시글 좋아요 취소
+    const removeLike = async (postId) => {
+        const response = await fetch(`/api/likes/${postId}`, {
+            method: "DELETE"
+        });
+        return response.ok;
+    };
+
+    return { getList : getList, getOne : getOne, write : write, update : update, remove : remove, postLike : postLike, removeLike : removeLike};
+
 })();
