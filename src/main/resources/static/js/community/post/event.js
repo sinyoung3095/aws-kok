@@ -2,36 +2,28 @@
 let page = 1;
 let checkScroll = true;
 let postsCriteria;
-
 const showList = async (page = 1) => {
     const loading = document.getElementById("loading");
     if (loading) loading.style.display = "block";
 
-    const postsCriteria = await postService.getPost(postLayout.showList, page);
+    postsCriteria = await postService.getList(page, postLayout.showList);
 
-    setTimeout(() => {
-        if (loading) loading.style.display = "none";
-    }, 1000);
-
+    if (loading) setTimeout(() => loading.style.display = "none", 500);
     return postsCriteria;
 };
 showList();
 
 window.addEventListener("scroll", async () => {
-    const scrollTop = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-
-    if (scrollTop + windowHeight >= documentHeight - 100) {
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 100) {
+        console.log("현재 페이지: ", page);
         if (checkScroll) {
             postsCriteria = await showList(++page);
+            console.log("다음 페이지: ", page);
             checkScroll = false;
         }
         setTimeout(() => {
-            if (postsCriteria !== null && postsCriteria.criteria.hasMore) {
-                checkScroll = true;
-            }
-        }, 1200);
+            if (postsCriteria && postsCriteria.criteria.hasMore) checkScroll = true;
+        }, 800);
     }
 });
 
@@ -39,15 +31,15 @@ window.addEventListener("scroll", async () => {
 const popup = document.getElementById("post-write-popup");
 const writeBtn = document.querySelector(".popup-trigger");
 const closeBtn = document.querySelector(".popup-write-close");
+const writeTextarea = document.querySelector(".popup-textarea");
+const writeFiles = document.querySelector("#btn-add-photo");
 
-// 글쓰기 모달 열기
+// 모달 열기
 if (writeBtn) {
-    writeBtn.addEventListener("click", () => {
-        popup.classList.add("active");
-    });
+    writeBtn.addEventListener("click", () => popup.classList.add("active"));
 }
 
-// 글쓰기 모달 닫기 → '게시하지 않고 나가시겠어요?' 모달 띄우기
+// 모달 닫기
 if (closeBtn) {
     closeBtn.addEventListener("click", () => {
         popup.classList.remove("active");
@@ -55,43 +47,59 @@ if (closeBtn) {
     });
 }
 
-// 바디 이벤트 위임
-document.body.addEventListener("click", (e) => {
+document.body.addEventListener("click", async (e) => {
     const target = e.target;
 
-    // 글쓰기 관련
-    // 나가기 선택
+    // 글쓰기
     if (target.closest(".popup-all-close")) {
         document.querySelector("#message-popup2").style.display = "none";
         popup.classList.remove("active");
         return;
     }
 
-    // 계속 작성하기 선택
     if (target.closest(".popup-continue")) {
         document.querySelector("#message-popup2").style.display = "none";
         popup.classList.add("active");
         return;
     }
 
-    // 글쓰기 유효성 검사
     if (target.closest(".pop-btn-write")) {
-        const input = document.querySelector(".popup-textarea");
-        const files = document.querySelector("#btn-add-photo");
+        const content = writeTextarea.value.trim();
+        const files = writeFiles.files;
 
-        if ((!input || input.value.trim().length < 10) && (!files || files.files.length === 0)) {
+        if (content.length < 10 && files.length === 0) {
             const toast = document.getElementById("toast-white");
             if (toast) {
                 toast.style.display = "flex";
-                setTimeout(() => {
-                    toast.style.display = "none";
-                }, 2000);
+                setTimeout(() => toast.style.display = "none", 2000);
             }
             return;
         }
+
+        try {
+            const postId = await postService.write(content, files);
+            console.log("글쓰기 성공:", postId);
+
+            popup.classList.remove("active");
+            writeTextarea.value = "";
+            writeFiles.value = "";
+
+            const previewContainer = document.querySelector(".popup-preview-inner");
+            if (previewContainer) previewContainer.innerHTML = "";
+
+            const postContainer = document.querySelector("#post-container");
+            if (postContainer) postContainer.innerHTML = "";
+            page = 1;
+            checkScroll = true;
+            await showList(page);
+        } catch (err) {
+            console.error("글쓰기 실패:", err.message);
+            alert("글쓰기에 실패했습니다.");
+        }
+        return;
     }
 
-    // 댓글창
+    // 댓글창 열기
     if (target.closest(".replys")) {
         document.querySelector(".reply").style.display = "flex";
         return;
@@ -125,7 +133,7 @@ document.body.addEventListener("click", (e) => {
         return;
     }
 
-    // 신고 관련
+    // 신고
     if (target.closest(".btn")) {
         const btn = target.closest(".btn");
         const reportMenu = btn.parentElement.querySelector(".report-1");
@@ -155,9 +163,7 @@ document.body.addEventListener("click", (e) => {
     // 댓글 삭제
     if (target.closest(".delbtn")) {
         const menu = target.closest(".comment-wrap")?.querySelector(".delbtn-1");
-        if (menu) {
-            menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-        }
+        if (menu) menu.style.display = menu.style.display === "flex" ? "none" : "flex";
         return;
     }
 
@@ -169,12 +175,11 @@ document.body.addEventListener("click", (e) => {
     }
 
     if (target.closest(".del .del-12") || target.closest(".del .del-10")) {
-        const delModal = document.querySelector(".del");
-        if (delModal) delModal.style.display = "none";
+        document.querySelector(".del").style.display = "none";
         return;
     }
 
-    // 답글
+    // 답글 토글
     if (target.closest(".comment")) {
         const comments = target.closest(".comment-wrap")?.querySelector(".comments");
         if (comments) {
@@ -185,9 +190,7 @@ document.body.addEventListener("click", (e) => {
 
     if (target.closest(".delbtn-0")) {
         const menu = target.closest(".reply-wrap")?.querySelector(".delbtn-2");
-        if (menu) {
-            menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-        }
+        if (menu) menu.style.display = menu.style.display === "flex" ? "none" : "flex";
         return;
     }
 
@@ -202,7 +205,7 @@ document.body.addEventListener("click", (e) => {
         return;
     }
 
-    // 좋아요 (하트)
+    // 좋아요 (댓글, 게시글)
     const replyHeartBtn = target.closest(".reply-31");
     if (replyHeartBtn) {
         const replyHeartIcon = replyHeartBtn.querySelector(".heart");
@@ -245,3 +248,84 @@ document.body.addEventListener("click", (e) => {
         return;
     }
 });
+
+(() => {
+    const input = document.getElementById('btn-add-photo');
+    const previewContainer = document.querySelector('.popup-preview-inner');
+
+    const MAX_FILES = 8;
+    const MAX_SIZE = 20 * 1024 * 1024;
+
+    let fileBuffer = [];
+
+    const toKey = (f) => `${f.name}|${f.size}|${f.lastModified}`;
+
+    const syncInput = () => {
+        const dt = new DataTransfer();
+        fileBuffer.forEach(f => dt.items.add(f));
+        input.files = dt.files;
+    };
+
+    const render = () => {
+        previewContainer.innerHTML = '';
+        fileBuffer.forEach((file, idx) => {
+            const item = document.createElement('div');
+            item.className = 'preview-item';
+
+            if (file.type && file.type.startsWith('image/')) {
+                const img = document.createElement('img');
+                img.className = 'preview-thumb';
+                const reader = new FileReader();
+                reader.onload = (e) => { img.src = e.target.result; };
+                reader.readAsDataURL(file);
+                item.appendChild(img);
+            } else {
+                const box = document.createElement('div');
+                box.className = 'preview-generic';
+                box.textContent = file.name;
+                item.appendChild(box);
+            }
+
+            const rm = document.createElement('button');
+            rm.type = 'button';
+            rm.className = 'preview-remove';
+            rm.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                              <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>`;
+            rm.addEventListener('click', () => {
+                fileBuffer.splice(idx, 1);
+                syncInput();
+                render();
+            });
+
+            item.appendChild(rm);
+            previewContainer.appendChild(item);
+        });
+    };
+
+    const addFiles = (files) => {
+        const existingKeys = new Set(fileBuffer.map(toKey));
+        const arFile = Array.from(files);
+
+        for (const f of arFile) {
+            if (fileBuffer.length >= MAX_FILES) {
+                alert(`최대 ${MAX_FILES}개까지 업로드할 수 있습니다.`);
+                break;
+            }
+            if (f.size > MAX_SIZE) {
+                alert(`"${f.name}" 파일이 용량 제한(20MB)을 초과했습니다.`);
+                continue;
+            }
+            if (existingKeys.has(toKey(f))) {
+                continue;
+            }
+            fileBuffer.push(f);
+            existingKeys.add(toKey(f));
+        }
+        syncInput();
+        render();
+    };
+
+    // 이벤트 바인딩
+    input.addEventListener('change', () => addFiles(input.files));
+})();
