@@ -28,8 +28,10 @@ values ('test05', '01012345678', 'test05@gmail.com', '1234', 'member');
 insert into tbl_member (user_id)
 values (6);
 
-delete from tbl_post_like where post_id =55;
-delete from tbl_post where member_id = 1;
+delete from tbl_post_like where post_id = 57;
+delete from tbl_post where post_status = 'active';
+delete from tbl_post_file where post_id = 54;
+delete from tbl_file where file_content_type = 'image/png';
 
 select * from tbl_post;
 select * from tbl_post_like;

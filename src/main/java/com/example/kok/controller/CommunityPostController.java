@@ -53,7 +53,7 @@ public class CommunityPostController {
                                    @RequestParam(value="files", required=false) List<MultipartFile> files) {
         PostDTO postDTO = new PostDTO();
         postDTO.setPostContent(postContent);
-        postDTO.setMemberId(3L); // 임시회원 아이디 설정
+        postDTO.setMemberId(1L); // 임시회원 아이디 설정
         communityPostService.write(postDTO, files != null ? files : List.of());
         return ResponseEntity.status(HttpStatus.CREATED).body(postDTO.getId());
     }
