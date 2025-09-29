@@ -237,10 +237,12 @@
                             <button class="btn btn-default mr-4">돌아가기</button>
                         </a>
                         <div class="btn-group">
-                            <a href="/admin/support/update">
+                            <a th:href="@{/admin/support/update/{id}(id=${notice.id})}">
                                 <button class="btn btn-default mr-4">수정</button>
                             </a>
-                            <button class="btn btn-default mr-4">삭제</button>
+                            <a th:href="@{/admin/support/delete/{id}(id=${notice.id})}">
+                                <button class="btn btn-default mr-4">삭제</button>
+                            </a>
                         </div>
                     </div>
                 </div>

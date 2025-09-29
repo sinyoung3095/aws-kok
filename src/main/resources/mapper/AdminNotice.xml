@@ -15,6 +15,7 @@
     <select id="selectNoticeAll">
         select id, admin_notice_title, admin_notice_content, created_datetime, updated_datetime
         from tbl_admin_notice
+        where notice_status = 'active'
         order by id desc
         limit #{count} offset #{offset}
     </select>
