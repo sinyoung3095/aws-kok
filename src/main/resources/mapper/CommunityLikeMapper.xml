@@ -21,10 +21,9 @@
     </select>
 
 <!-- 좋아요 확인 -->
-    <select id="checkPostLiked">
-        select id, member_id, post_id, created_datetime, updated_datetime
+    <select id="checkPostLiked" resultType="boolean">
+        select count(*) > 0
         from tbl_post_like
         where member_id = #{memberId} and post_id = #{postId}
-        limit 1
     </select>
 </mapper>

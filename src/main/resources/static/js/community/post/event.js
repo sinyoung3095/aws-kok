@@ -15,10 +15,10 @@ showList();
 
 window.addEventListener("scroll", async () => {
     if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 100) {
-        console.log("현재 페이지: ", page);
+        // console.log("현재 페이지: ", page);
         if (checkScroll) {
             postsCriteria = await showList(++page);
-            console.log("다음 페이지: ", page);
+            // console.log("다음 페이지: ", page);
             checkScroll = false;
         }
         setTimeout(() => {

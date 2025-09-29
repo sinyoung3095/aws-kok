@@ -19,33 +19,18 @@ public class CommunityLikeController {
 //    게시글 좋아요
     @PostMapping
     public ResponseEntity<?> postLike(@RequestBody PostLikeDTO postLikeDTO) {
-        postLikeDTO.setMemberId(1L);
+        postLikeDTO.setMemberId(5L);
         communityLikeService.postLike(postLikeDTO);
+        return ResponseEntity.ok(postLikeDTO);
 
-        int likesCount = communityLikeService.getPostLikeCount(postLikeDTO.getPostId());
-        boolean liked = communityLikeService.checkedPostLike(postLikeDTO.getPostId(), postLikeDTO.getMemberId());
-
-        return ResponseEntity.ok(Map.of(
-                "postId", postLikeDTO.getPostId(),
-                "likesCount", likesCount,
-                "liked", liked
-        ));
     }
 
 //    게시글 좋아요 취소
     @DeleteMapping("/{postId}")
     public ResponseEntity<?> removePostLike(@PathVariable Long postId) {
-        Long memberId = 1L;
+        Long memberId = 5L;
         communityLikeService.removePostLike(postId, memberId);
-
-        int likesCount = communityLikeService.getPostLikeCount(postId);
-        boolean liked = communityLikeService.checkedPostLike(postId, memberId);
-
-        return ResponseEntity.ok(Map.of(
-                "postId", postId,
-                "likesCount", likesCount,
-                "liked", liked
-        ));
+        return ResponseEntity.ok().build();
     }
 
     // 추천 갯수 조회
@@ -57,8 +42,7 @@ public class CommunityLikeController {
     // 추천 여부 확인
     @GetMapping("/{postId}/check")
     public ResponseEntity<?> checkedPostLike(@PathVariable Long postId) {
-        Long memberId = 1L;
-        boolean liked = communityLikeService.checkedPostLike(postId, memberId);
-        return ResponseEntity.ok(liked);
+        Long memberId = 5L;
+        return ResponseEntity.ok(communityLikeService.checkedPostLike(postId, memberId));
     }
 }
