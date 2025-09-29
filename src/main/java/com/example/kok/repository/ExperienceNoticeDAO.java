@@ -17,12 +17,21 @@ public class ExperienceNoticeDAO {
 
 //    목록 조회
     public List<ExperienceNoticeDTO> findAll(Criteria criteria, Search search) {
-        System.out.println("다오에 들어왔어용");
+//        System.out.println("다오에 들어왔어용");
         return experienceNoticeMapper.selectAllExperienceNotice(criteria, search);
     }
 
 //    개수 조회
     public int findCountAll(){
         return experienceNoticeMapper.selectCountAll();
+    }
+
+//    단일 조회
+    public ExperienceNoticeDTO findById(Long id){
+        return experienceNoticeMapper.selectById(id);
+    }
+//    직군 조회
+    public String findJobNameByID(Long id){
+        return experienceNoticeMapper.selectJobNameByExpId(id);
     }
 }

@@ -12,3 +12,21 @@ create table tbl_intern_notice (
     constraint fk_intern_notice_company foreign key(company_id)
         references tbl_company(user_id)
 );
+
+alter table tbl_intern_notice
+    alter column intern_notice_status drop default;
+
+alter table tbl_intern_notice
+    alter column intern_notice_status type text
+        using intern_notice_status::text;
+
+alter table tbl_intern_notice
+    alter column intern_notice_status type status
+        using intern_notice_status::status;
+
+alter table tbl_intern_notice
+    alter column intern_notice_status set default 'active',
+    alter column intern_notice_status set not null;
+
+alter table tbl_intern_notice
+    add column intern_request_status request_status default 'await' not null;

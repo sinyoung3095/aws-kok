@@ -36,3 +36,21 @@ values ('공고 제목11', '공고 부제목11', '직무 소개11', '참고사�
        ('공고 제목13', '공고 부제목13', '직무 소개13', '참고사항13', '2025-09-25', '2025-09-26', 2, 'accept'),
        ('공고 제목14', '공고 부제목14', '직무 소개14', '참고사항14', '2025-09-25', '2025-09-26', 7, 'accept'),
        ('공고 제목15', '공고 부제목15', '직무 소개15', '참고사항15', '2025-09-25', '2025-09-26', 8, 'accept');
+
+alter table tbl_experience_notice
+    alter column experience_notice_status drop default;
+
+alter table tbl_experience_notice
+    alter column experience_notice_status type text
+        using experience_notice_status::text;
+
+alter table tbl_experience_notice
+    alter column experience_notice_status type status
+        using experience_notice_status::status;
+
+alter table tbl_experience_notice
+    alter column experience_notice_status set default 'active',
+    alter column experience_notice_status set not null;
+
+alter table tbl_experience_notice
+    add column experience_request_status request_status default 'await' not null;

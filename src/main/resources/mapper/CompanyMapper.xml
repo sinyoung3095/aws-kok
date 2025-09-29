@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.CompanyMapper">
+<!--    id로 회사 조회-->
+    <select id="selectCompanyById" resultType="CompanyDTO">
+        select *
+        from tbl_company
+        where user_id=#{id}
+    </select>
+<!--    팔로워 수 조회-->
+    <select id="selectFollowerCountByCompanyId" resultType="int">
+        select count(*)
+        from tbl_follow f
+        join tbl_company c
+        on f.company_id=c.user_id
+        where f.follow_status='active'
+        and f.company_id=#{companyId}
+    </select>
+<!--    체험 공고 수 조회-->
+    <select id="selectExperienceById" resultType="int">
+        select count(*)
+        from tbl_experience_notice e
+        join tbl_company c
+        on e.company_id=c.user_id
+        where e.experience_request_status='accept'
+        and e.experience_notice_status='active'
+        and e.company_id=#{companyId}
+    </select>
+<!--    인턴 공고 수 조회-->
+    <select id="selectInternById" resultType="int">
+        select count(*)
+        from tbl_intern_notice i
+        join tbl_company c
+        on i.company_id=c.user_id
+        where i.intern_request_status='accept'
+        and i.intern_notice_status='active'
+        and i.company_id=#{companyId}
+    </select>
+<!--    회사 규모 조회-->
+    <select id="selectScaleById" resultType="String">
+        select s.company_scale_name
+        from tbl_company_scale_category s
+        join tbl_company_scale_category_bridge sb
+        on s.id=sb.company_scale_category_id
+        join tbl_company c
+        on c.user_id=sb.company_id
+        where sb.company_id=#{companyId}
+    </select>
+</mapper>

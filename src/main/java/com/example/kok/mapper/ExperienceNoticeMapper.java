@@ -16,4 +16,10 @@ public interface ExperienceNoticeMapper {
 
 //    전체 개수 조회
     public int selectCountAll();
+
+//    단일 조회
+    public ExperienceNoticeDTO selectById(Long id);
+
+//    직군 조회
+    public String selectJobNameByExpId(Long id);
 }
