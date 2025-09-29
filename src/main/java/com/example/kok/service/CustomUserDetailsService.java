@@ -42,7 +42,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 //        이메일로 전체 정보 조회
             userDTO = userDAO.findByEmail(username)
                     .orElseThrow(() -> new UsernameNotFoundException("소유자를 찾을 수 없습니다."));
-            log.info("userDTO{}",userDTO);
         }else {
 
         }

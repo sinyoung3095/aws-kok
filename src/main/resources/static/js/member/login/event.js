@@ -67,7 +67,7 @@ loginButton.addEventListener("click",async (e)=>{
     const result = await memberService.login({userEmail:email,userPassword:password});
 
         if(result.accessToken){
-            location.href='/community/page';
+            location.href='/main-page/login-header';
         }
 
 });

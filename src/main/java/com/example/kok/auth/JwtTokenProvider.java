@@ -65,6 +65,26 @@ public class JwtTokenProvider {
 
         return accessToken;
     }
+    public String createAccessToken(String username ,String provider) {
+        long ACCESS_TOKEN_VALIDITY = 1000L * 60 * 30;
+        String accessToken = Jwts.builder()
+                .setSubject(username)
+                .claim("memberEmail", username)
+                .claim("provider", provider)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY))
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
+
+        Cookie accessTokenCookie = new Cookie("accessToken", accessToken);
+        accessTokenCookie.setHttpOnly(true);
+        accessTokenCookie.setSecure(true);
+        accessTokenCookie.setPath("/");
+        accessTokenCookie.setMaxAge(60 * 10);
+        response.addCookie(accessTokenCookie);
+
+        return accessToken;
+    }
 
     public boolean validateToken(String token) {
         try {
@@ -102,6 +122,25 @@ public class JwtTokenProvider {
 
         redisTemplate.opsForValue().set(
                 REFRESH_TOKEN_PREFIX + username,
+                refreshToken,
+                REFRESH_TOKEN_VALIDITY,
+                TimeUnit.MILLISECONDS
+        );
+
+        return refreshToken;
+    }
+    public String createRefreshToken(String username ,String provider) {
+        long REFRESH_TOKEN_VALIDITY = 1000L * 60 * 60 * 24 * 1;
+        String refreshToken = Jwts.builder()
+                .setSubject(username)
+                .claim("provider",provider)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + REFRESH_TOKEN_VALIDITY))
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
+
+        redisTemplate.opsForValue().set(
+                REFRESH_TOKEN_PREFIX +provider +"_"+ username,
                 refreshToken,
                 REFRESH_TOKEN_VALIDITY,
                 TimeUnit.MILLISECONDS

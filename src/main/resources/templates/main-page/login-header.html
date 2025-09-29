@@ -21,7 +21,7 @@
                 <!-- 프로필 드롭다운 -->
                 <div class="profile-modal">
                     <div class="profile-modal-header">
-                        <div class="member-name">정희준님</div>
+                        <div class="member-name" th:text="님" ></div>
                     </div>
                     <div class="profile-modal-body">
                         <div class="list-wrap">
@@ -78,9 +78,9 @@
                                         </div>
                                     </div>
                                 </button>
-                                <div id="logout" class="profile-modal-list-section">
+                                <div  class="profile-modal-list-section">
                                     <div class="profile-modal-list-content-wrap">
-                                        <div class="profile-modal-list-content">
+                                        <div id="logout" class="profile-modal-list-content">
                                             <div class="profile-modal-icon-wrap">
                                                 <div class="profile-modal-icon">
                                                     <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24" viewBox="0 0 24 24">
@@ -587,5 +587,6 @@
         </div>
     </div>
 </body>
+<script src="/js/main-page/header/module/service.js"></script>
 <script src="/js/main-page/header/event.js"></script>
 </html>

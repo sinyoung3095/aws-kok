@@ -37,20 +37,18 @@ public class AuthController {
 //    로그인
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
-        log.info("Login User: {}", userDTO);
         try {
             Authentication authentication =
                     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDTO.getUserEmail(), userDTO.getUserPassword()));
-            log.info("로그인 들어옴");
+
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String accessToken = jwtTokenProvider.createAccessToken(((UserDetails) authentication.getPrincipal()).getUsername());
             String refreshToken = jwtTokenProvider.createRefreshToken(((UserDetails) authentication.getPrincipal()).getUsername());
 
+            log.info(refreshToken);
             Map<String, String> tokens = new HashMap<>();
             tokens.put("accessToken", accessToken);
             tokens.put("refreshToken", refreshToken);
-
-
 
 
             return ResponseEntity.ok(tokens);
@@ -64,6 +62,8 @@ public class AuthController {
 //    로그아웃
     @PostMapping("logout")
     public void logout(@CookieValue(value = "accessToken", required = false) String token) {
+        log.info("들어옴");
+        log.info("Logout User: {}", token);
         String username = jwtTokenProvider.getUserName(token);
         String provider = (String) jwtTokenProvider.getClaims(token).get("provider");
         if(provider == null){

@@ -19,19 +19,20 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     @Override
     public void joinUser(UserDTO userDTO) {
-        int count;
-        count = userDAO.findUserByEmail(userDTO.getUserEmail());
-        if(count==0){
-            userDTO.setUserPassword(passwordEncoder.encode(userDTO.getUserPassword()));
 
+            userDTO.setUserPassword(passwordEncoder.encode(userDTO.getUserPassword()));
             userDAO.saveUser(userDTO);
             memberDAO.saveMember(MemberVO.builder().userId(userDTO.getId()).build());
-        }
-
     }
 
     @Override
     public int searchUserByEmail(String email) {
         return userDAO.findUserByEmail(email);
+    }
+
+    @Override
+    public void joinSnsUser(UserDTO userDTO) {
+        userDAO.saveSnsUser(userDTO);
+        memberDAO.saveMember(MemberVO.builder().userId(userDTO.getId()).build());
     }
 }

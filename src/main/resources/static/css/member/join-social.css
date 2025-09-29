@@ -93,11 +93,14 @@ button {
     justify-content: center;
     align-items: center;
     padding: 6px;
-    display: inline-flex;
+    display: none;
     border-radius: 8px;
     background: rgba(86,105,143,0.0600);
     cursor: pointer;
 } /* 구글 */
+.social-box.active {
+    display: inline-flex;
+}
 
 .social-email {
     user-select: none;

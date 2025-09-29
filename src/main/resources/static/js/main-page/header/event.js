@@ -197,7 +197,9 @@ if (historyDetailModal) {
     });
 }
 const logout = document.getElementById("logout");
-logout.addEventListener("click",(e)=>{
-    service.logout;
-    location.href='/community/page';
+logout.addEventListener("click",async (e)=>{
+
+    await service.logout();
+
+    location.href='/member/login';
 });
