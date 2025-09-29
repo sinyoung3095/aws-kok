@@ -1,5 +1,6 @@
 package com.example.kok.service;
 
+import com.example.kok.domain.AdminNoticeVO;
 import com.example.kok.dto.AdminNoticeCriteriaDTO;
 import com.example.kok.dto.AdminNoticeDTO;
 import com.example.kok.repository.AdminNoticeDAO;
@@ -24,7 +25,9 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
 //    등록
     @Override
     public void write(AdminNoticeDTO adminNoticeDTO) {
-        adminNoticeDAO.insert(toVO(adminNoticeDTO));
+        AdminNoticeVO adminNoticeVO = toVO(adminNoticeDTO);
+        adminNoticeDAO.insert(adminNoticeVO);
+        adminNoticeDTO.setId(adminNoticeVO.getId());
     }
 
 //    상세
@@ -66,7 +69,9 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
 //    수정
     @Override
     public void update(AdminNoticeDTO adminNoticeDTO) {
-        adminNoticeDAO.updateNotice(toVO(adminNoticeDTO));
+        AdminNoticeVO adminNoticeVO = toVO(adminNoticeDTO);
+        adminNoticeDAO.updateNotice(adminNoticeVO);
+        adminNoticeDTO.setId(adminNoticeVO.getId());
     }
 
 //    삭제
