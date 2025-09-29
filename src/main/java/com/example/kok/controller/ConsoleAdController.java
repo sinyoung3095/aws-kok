@@ -23,4 +23,5 @@ public class ConsoleAdController {
     public String goToUpload() {
         return "enterprise-console/console-add-upload";
     }
+
 }
