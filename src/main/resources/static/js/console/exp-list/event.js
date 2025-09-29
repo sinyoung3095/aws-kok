@@ -5,14 +5,14 @@ const checkIcon = document.querySelector(".setting-31");
 const searchSpan = document.querySelector(".search-span");
 const cateBtns = document.querySelectorAll(".category-sub");
 
-// 1️⃣ 버튼 클릭 → 메뉴 표시/숨김 토글
+// 버튼 클릭 → 메뉴 표시/숨김 토글
 searchBtn.addEventListener("click", (e) => {
     e.stopPropagation(); // 외부 클릭 이벤트 막기
     jobMenu.style.display =
         jobMenu.style.display === "block" ? "none" : "block";
 });
 
-// 2️⃣ job-3 선택
+// job-3 선택
 jobItems.forEach((item) => {
     item.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -34,7 +34,7 @@ jobItems.forEach((item) => {
     });
 });
 
-// 3️⃣ 외부 클릭 시 메뉴 숨김
+// 외부 클릭 시 메뉴 숨김
 document.addEventListener("click", () => {
     jobMenu.style.display = "none";
 });
@@ -48,49 +48,99 @@ categoryButtons.forEach((btn) => {
 });
 
 // 여러 개의 tr.body-tr에 대해 각각 적용
-document.querySelectorAll("tr.body-tr").forEach((tr) => {
-    const activeExp = tr.querySelector("button.appli-active-btn");
-    const activeCircle = activeExp ? activeExp.querySelector(".circle") : null;
-    const expStatus = tr.querySelector("span.exp-status");
+// document.querySelectorAll("tr.body-tr").forEach((tr) => {
+//     const activeExp = tr.querySelector("button.appli-active-btn");
+//     const activeCircle = activeExp ? activeExp.querySelector(".circle") : null;
+//     const expStatus = tr.querySelector("span.exp-status");
+//
+//     if (!activeExp || !activeCircle || !expStatus) return;
+//
+//     activeExp.style.transition = "background-color 0.5s";
+//     activeCircle.style.transition = "transform 0.5s";
+//     expStatus.style.transition = "background-color 0.5s, color 0.5s";
+//
+//     activeExp.addEventListener("click", () => {
+//         if (expStatus.classList.contains("gray")) {
+//             activeExp.classList.remove("gray");
+//             expStatus.classList.remove("gray");
+//             expStatus.innerText = "모집 중";
+//         } else {
+//             activeExp.classList.add("gray");
+//             expStatus.classList.add("gray");
+//             expStatus.innerText = "모집 완료";
+//         }
+//     });
+//
+//     cateBtns.forEach((btn) => {
+//         btn.addEventListener("click", (e) => {
+//             if (e.target.classList.contains("all")) {
+//                 tr.classList.remove("disnone");
+//             } else if (e.target.classList.contains("ing")) {
+//                 if (expStatus.classList.contains("gray")) {
+//                     tr.classList.add("disnone");
+//                 } else {
+//                     tr.classList.remove("disnone");
+//                 }
+//             } else if (e.target.classList.contains("end")) {
+//                 if (expStatus.classList.contains("gray")) {
+//                     tr.classList.remove("disnone");
+//                 } else {
+//                     tr.classList.add("disnone");
+//                 }
+//             }
+//         });
+//     });
+// });
 
-    if (!activeExp || !activeCircle || !expStatus) return;
+const experienceTable = document.querySelector("#experience-list-table");
+if (experienceTable) {
+    experienceTable.addEventListener("click", async (e) => {
+        // 모집 활성/비활성 토글 버튼
+        const activeExp = e.target.closest("button.appli-active-btn");
+        if (activeExp) {
+            const tr = activeExp.closest("tr.body-tr");
+            const activeCircle = activeExp.querySelector(".circle");
+            const expStatus = tr.querySelector("span.exp-status");
 
-    activeExp.style.transition = "background-color 0.5s";
-    activeCircle.style.transition = "transform 0.5s";
-    expStatus.style.transition = "background-color 0.5s, color 0.5s";
+            if (!activeCircle || !expStatus) return;
 
-    activeExp.addEventListener("click", () => {
-        if (expStatus.classList.contains("gray")) {
-            activeExp.classList.remove("gray");
-            expStatus.classList.remove("gray");
-            expStatus.innerText = "모집 중";
-        } else {
-            activeExp.classList.add("gray");
-            expStatus.classList.add("gray");
-            expStatus.innerText = "모집 완료";
-        }
-    });
+            tr.querySelectorAll(".appli-active-btn").forEach(btn => {
+                btn.classList.remove("active");
+            });
+            activeExp.classList.add("active");
+            expStatus.classList.add("active");
 
-    cateBtns.forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-            if (e.target.classList.contains("all")) {
-                tr.classList.remove("disnone");
-            } else if (e.target.classList.contains("ing")) {
-                if (expStatus.classList.contains("gray")) {
-                    tr.classList.add("disnone");
-                } else {
-                    tr.classList.remove("disnone");
-                }
-            } else if (e.target.classList.contains("end")) {
-                if (expStatus.classList.contains("gray")) {
-                    tr.classList.remove("disnone");
-                } else {
-                    tr.classList.add("disnone");
-                }
+            if (expStatus.classList.contains("gray")) {
+                activeExp.classList.remove("gray");
+                expStatus.classList.remove("gray");
+                expStatus.innerText = "모집 중";
+                statusValue = "active";
+            } else {
+                activeExp.classList.add("gray");
+                expStatus.classList.add("gray");
+                expStatus.innerText = "모집 완료";
+                statusValue = "inactive";
             }
-        });
+
+            // 상태 버튼 클릭시 확인
+            // const isActive = activeExp.classList.contains("active");
+            // const statusValue = isActive ? "active" : "inactive";
+            const noticeId = tr.dataset.id;
+            console.log(statusValue, noticeId)
+
+            try {
+                const data = await exprienceNoticeService.updateExperienceStatus(noticeId, statusValue);
+                console.log("DB 반영 성공:", data);
+            } catch (err) {
+                console.error("DB 반영 실패:", err);
+            }
+
+            // return;
+        }
+
     });
-});
+}
+
 
 document.querySelectorAll("tr.body-tr").forEach((tr) => {
     const hambugerBtn = tr.querySelector("button.hambuger");
@@ -128,3 +178,43 @@ document.addEventListener("click", (e) => {
         }
     });
 });
+
+
+// ######################### 공고목록 ############################
+const bindPaginationEvent = (companyId) => {
+    const paginationArea = document.querySelector("#experience-list-table .page-ul");
+    if (!paginationArea) return;
+
+    paginationArea.addEventListener("click",(e) => {
+        const link = e.target.closest(".page-a");
+        if (!link) return;
+
+        e.preventDefault();
+        paginationArea.querySelectorAll(".page-a").forEach(a => {
+            a.classList.remove("active");
+        });
+        link.classList.add("active");
+
+        const page = parseInt(link.dataset.page, 10);
+
+        exprienceNoticeService.getList(companyId, page, (data) => {
+            experienceLayout.contentLayout();
+            experienceLayout.rowTemplate(data.experienceLists);
+            experienceLayout.totalCount(data);
+            experienceLayout.listTotalCount(data);
+            experienceLayout.renderPagination(data.criteria);
+
+            bindPaginationEvent(companyId);
+        });
+    });
+};
+
+exprienceNoticeService.getList(1, 1, (data) => {
+    experienceLayout.contentLayout();
+    experienceLayout.rowTemplate(data.experienceLists);
+    experienceLayout.totalCount(data);
+    experienceLayout.listTotalCount(data);
+    experienceLayout.renderPagination(data.criteria);
+    bindPaginationEvent(1);
+});
+

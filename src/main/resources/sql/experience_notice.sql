@@ -9,7 +9,9 @@ CREATE TABLE tbl_experience_notice (
     experience_start_date date not null,
     experience_end_date date not null,
 --     experience_notice_notes   varchar(255) not null,
-    experience_notice_status  request_status default 'await' not null,
+--     experience_notice_status  request_status default 'await' not null,
+    experience_notice_status  status default 'inactive' not null,
+    experience_request_status  request_status default 'await' not null,
     company_id   bigint not null,
     created_datetime   timestamp default now(),
     updated_datetime   timestamp default now(),
@@ -18,22 +20,53 @@ CREATE TABLE tbl_experience_notice (
 );
 
 -- alter table tbl_experience_notice drop experience_notice_notes;
---
--- select * from tbl_experience_notice;
---
--- delete from tbl_experience_notice where id=1;
---
--- insert into tbl_experience_notice(experience_notice_title, experience_notice_subtitle, experience_notice_introduce_job, experience_notice_etc, experience_start_date, experience_end_date, company_id, experience_notice_status)
--- values ('공고 제목1', '공고 부제목1', '직무 소개1', '참고사항1', '2025-09-25', '2025-09-26', 1, 'accept');
+
+alter table tbl_experience_notice
+    alter column experience_notice_status drop default;
+
+alter table tbl_experience_notice
+    alter column experience_notice_status type text
+        using experience_notice_status::text;
+
+update tbl_experience_notice
+set experience_notice_status = 'active'
+where id between 1 and 17;
+
+alter table tbl_experience_notice
+    alter column experience_notice_status type status
+        using experience_notice_status::status;
+
+alter table tbl_experience_notice
+    alter column experience_notice_status set default 'inactive',
+    alter column experience_notice_status set not null;
+
+alter table tbl_experience_notice
+    add column experience_request_status request_status default 'await' not null;
+
+update tbl_experience_notice
+set experience_notice_status = 'inactive'
+where id between 1 and 17;
+
+update tbl_experience_notice
+set experience_request_status = 'reject'
+where id = 7;
+
+update tbl_experience_notice
+set experience_notice_status = 'active'
+where id = 7;
 
 select * from tbl_experience_notice;
 
-<<<<<<< HEAD
-delete from tbl_experience_notice where id=1;
+
+
+
+
+-- insert into tbl_experience_notice(experience_notice_title, experience_notice_subtitle, experience_notice_introduce_job, experience_notice_etc, experience_start_date, experience_end_date, company_id, experience_notice_status)
+-- values ('공고 제목1', '공고 부제목1', '직무 소개1', '참고사항1', '2025-09-25', '2025-09-26', 1, 'accept');
 
 insert into tbl_experience_notice(experience_notice_title, experience_notice_subtitle, experience_notice_introduce_job, experience_notice_etc, experience_start_date, experience_end_date, company_id, experience_notice_status)
 values ('공고 제목5', '공고 부제목5', '직무 소개5', '참고사항5', '2025-09-25', '2025-09-26', 2, 'accept');
-=======
+
 insert into tbl_experience_notice
 (experience_notice_title, experience_notice_subtitle, experience_notice_introduce_job, experience_notice_etc,
  experience_start_date, experience_end_date, experience_notice_status, company_id)
@@ -72,4 +105,3 @@ values
      '2025-11-20', '2026-02-20', 'await', 1),
     ('경영 지원 인턴', '문서 정리 및 보고서 작성', '경영/운영', 'MS Office 가능자',
      '2025-11-25', '2026-02-25', 'await', 1);
->>>>>>> 4aa3c6900275d3dc8af1fe5191a99562a83ad372

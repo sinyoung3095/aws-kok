@@ -10,9 +10,9 @@ create table tbl_company (
 
 select * from tbl_company;
 
-<<<<<<< HEAD
+
 insert into tbl_company(user_id, company_business_number, company_name) values (2, '123456781', '회사명2');
-=======
+
 insert into tbl_company (user_id, company_business_number, company_name, company_info, company_url)
 values
     (1, '123-45-67890', '그린테크', '친환경 에너지 솔루션 기업', 'https://www.greentech.co.kr'),
@@ -24,4 +24,4 @@ values
 -- select * from tbl_company;
 --
 -- insert into tbl_company(user_id, company_business_number, company_name) values (1, '123456789', '회사명1');
->>>>>>> 4aa3c6900275d3dc8af1fe5191a99562a83ad372
+

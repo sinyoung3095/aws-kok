@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.ConsoleExperienceListMapper">
+    <select id="selectExperienceByCompany">
+        select en.id,
+               en.experience_notice_title,
+               en.experience_notice_subtitle,
+               en.experience_start_date,
+               en.experience_end_date,
+               en.experience_notice_status,
+               en.experience_request_status,
+               en.company_id,
+               en.created_datetime,
+               en.updated_datetime,
+               jc.job_name as job_category_name,
+               count(distinct re.id) as applicant_count,
+               count(distinct sen.member_id) as save_count
+        from tbl_experience_notice en
+             join tbl_experience_job_category ejc
+                  on en.id = ejc.experience_notice_id
+             join tbl_job_category jc
+                  on ejc.job_category = jc.id
+             left join tbl_request_experience re
+                       on en.id = re.experience_notice_id
+             left join tbl_save_experience_notice sen
+                       on en.id = sen.experience_notice_id
+        where en.company_id = #{companyId}
+            and en.experience_request_status = 'accept'
+        group by en.id, jc.job_name
+        order by en.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <select id="selectCountByCompany">
+        select count(distinct id)
+        from tbl_experience_notice
+        where company_id = #{companyId}
+            and experience_request_status = 'accept'
+    </select>
+
+    <select id="selectActiveCountByCompany">
+        select count(distinct id)
+        from tbl_experience_notice
+        where company_id = #{companyId}
+            and experience_request_status = 'accept'
+            and experience_notice_status = 'active'
+    </select>
+
+    <update id="updateListStatus">
+        update tbl_experience_notice
+        set experience_notice_status = #{status}::status,
+            updated_datetime = now()
+        where id = #{noticeId}
+    </update>
+
+<!--    <select id="selectActiveApplicantCountByCompany">-->
+<!--        select count(distinct re.id)-->
+<!--        from tbl_experience_notice en-->
+<!--            left join tbl_request_experience re-->
+<!--                on en.id = re.experience_notice_id-->
+<!--        where en.company_id = #{companyId}-->
+<!--          and en.experience_request_status = 'accept'-->
+<!--          and en.experience_notice_status = 'active'-->
+<!--    </select>-->
+
+<!--    <select id="selectTotalApplicantCountByCompany">-->
+<!--        select count(distinct re.id)-->
+<!--        from tbl_experience_notice en-->
+<!--            left join tbl_request_experience re-->
+<!--                on en.id = re.experience_notice_id-->
+<!--        where en.company_id = 1-->
+<!--          and en.experience_request_status = 'accept'-->
+<!--    </select>-->
+
+    <select id="selectRequestStatsByCompany">
+        select
+            count(distinct re.id) as totalRequestCount,
+            count(distinct case
+                when en.experience_notice_status = 'active'
+                    and en.experience_request_status = 'accept'
+                    then re.id end) as activeRequestCount
+        from tbl_experience_notice en
+            left join tbl_request_experience re
+                on en.id = re.experience_notice_id
+        where en.company_id = #{companyId}
+            and en.experience_request_status = 'accept'
+    </select>
+
+
+</mapper>

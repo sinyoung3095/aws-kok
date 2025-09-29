@@ -5,13 +5,12 @@ import lombok.*;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Component
 @Getter @Setter
 @ToString
 @EqualsAndHashCode(of="id")
-public class ConsoleExperienceNoticeDTO {
+public class ConsoleExperienceListDTO {
     private Long id;
     private String experienceNoticeTitle;
     private String experienceNoticeSubtitle;
@@ -26,6 +25,6 @@ public class ConsoleExperienceNoticeDTO {
     private String updatedDateTime;
 
     private String jobCategoryName;
-    private int applicantCount;
-    private int saveCount;
+    private int applicantCount; //지원자수
+    private int saveCount; //저장한 사람수
 }
