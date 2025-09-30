@@ -1,9 +1,9 @@
 const service = (() => {
     const getNotice = async (callback, page = 1) => {
         const response = await fetch(`/api/support/${page}`);
-        const adminNoticesCriteriaDTO = await response.json();
+        const adminNoticeCriteriaDTO = await response.json();
         if(callback){
-            callback(adminNoticesCriteriaDTO);
+            callback(adminNoticeCriteriaDTO);
         }
 
         if(response.ok) {
@@ -15,7 +15,7 @@ const service = (() => {
             console.log(error);
         }
 
-        return adminNoticesCriteriaDTO;
+        return adminNoticeCriteriaDTO;
     }
 
     return {getNotice: getNotice}

@@ -869,6 +869,10 @@ body #kok {
     padding-top: 30px;
 }
 
+.content p {
+    white-space: pre-wrap;
+}
+
 .content-footer {
     display: flex;
     justify-content: space-between;
