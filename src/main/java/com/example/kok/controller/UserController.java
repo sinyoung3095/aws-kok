@@ -78,6 +78,7 @@ public class UserController {
     public String goToJoinCompanyPage() {
         return "member/join-company";
     }
+    public void joinCompany(UserDTO userDTO) {}
 
     @GetMapping("login")
     public String goToLoginPage(UserDTO userDTO, Model model) {

@@ -199,7 +199,7 @@ if (historyDetailModal) {
 const logout = document.getElementById("logout");
 logout.addEventListener("click",async (e)=>{
     console.log("로그아웃 누름")
-    await service.logout;
+    await service.logout();
 
     location.href='/member/login';
 });

@@ -37,6 +37,7 @@ public class AuthController {
 //    로그인
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
+        log.info(userDTO.toString());
         try {
             Authentication authentication =
                     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDTO.getUserEmail(), userDTO.getUserPassword()));
@@ -62,17 +63,19 @@ public class AuthController {
 //    로그아웃
     @PostMapping("logout")
     public void logout(@CookieValue(value = "accessToken", required = false) String token) {
-        log.info("들어옴");
+
         log.info("Logout User: {}", token);
         String username = jwtTokenProvider.getUserName(token);
         String provider = (String) jwtTokenProvider.getClaims(token).get("provider");
+        log.info(username);
+
         if(provider == null){
             jwtTokenProvider.deleteRefreshToken(username);
-            jwtTokenProvider.addToBlacklist(token);
         }else{
-            jwtTokenProvider.deleteRefreshToken(username);
-            jwtTokenProvider.addToBlacklist(token);
+            jwtTokenProvider.deleteRefreshToken(username,provider);
         }
+
+        jwtTokenProvider.addToBlacklist(token);
 
         Cookie deleteAccessCookie = new Cookie("accessToken", null);
         deleteAccessCookie.setHttpOnly(true);
@@ -90,22 +93,22 @@ public class AuthController {
 
         response.addCookie(deleteRefreshCookie);
 
-        Cookie memberEmailCookie = new Cookie("memberEmail", null);
-        memberEmailCookie.setHttpOnly(true);
-        memberEmailCookie.setSecure(true);
-        memberEmailCookie.setPath("/");
-        memberEmailCookie.setMaxAge(0);
+        Cookie memberNameCookie = new Cookie("memberName", null);
+        memberNameCookie.setHttpOnly(true);
+        memberNameCookie.setSecure(true);
+        memberNameCookie.setPath("/");
+        memberNameCookie.setMaxAge(0);
 
-        response.addCookie(memberEmailCookie);
+        response.addCookie(memberNameCookie);
 
 
-        Cookie roleCookie = new Cookie("role", null);
-        roleCookie.setHttpOnly(true);
-        roleCookie.setSecure(true);
-        roleCookie.setPath("/");
-        roleCookie.setMaxAge(0);
+        Cookie userEmailCookie = new Cookie("userEmail", null);
+        userEmailCookie.setHttpOnly(true);
+        userEmailCookie.setSecure(true);
+        userEmailCookie.setPath("/");
+        userEmailCookie.setMaxAge(0);
 
-        response.addCookie(roleCookie);
+        response.addCookie(userEmailCookie);
     }
 
 //    리프레시 토큰으로 엑세스 토큰 발급
