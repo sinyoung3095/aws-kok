@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.RequestExperienceMapper">
+<!--    지원서 넣기-->
+    <insert id="insertRequest">
+        insert into tbl_request_experience(experience_notice_id, member_id, member_alarm_setting_id)
+        values(#{experienceNoticeId}, #{memberId}, #{memberAlarmSettingId})
+    </insert>
+</mapper>

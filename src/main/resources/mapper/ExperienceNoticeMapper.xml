@@ -38,6 +38,7 @@
         left join tbl_job_category j on j.id=ej.job_category
         left join tbl_save_experience_notice sv on e.id = sv.experience_notice_id
         where e.experience_request_status='accept'
+        and e.experience_end_date &gt;= now()
         and e.experience_notice_status='active'
         <include refid="search"></include>
         group by e.id,
