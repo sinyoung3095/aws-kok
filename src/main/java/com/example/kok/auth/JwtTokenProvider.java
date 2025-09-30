@@ -107,7 +107,7 @@ public class JwtTokenProvider {
 
 
     public String getUserName(String token) {
-        return Jwts.parserBuilder() .setSigningKey(key).build()
+        return Jwts.parserBuilder().setSigningKey(key).build()
                 .parseClaimsJws(token).getBody().getSubject();
     }
 
@@ -152,6 +152,9 @@ public class JwtTokenProvider {
 
     public void deleteRefreshToken(String username) {
         redisTemplate.delete(REFRESH_TOKEN_PREFIX + username);
+    }
+    public void deleteRefreshToken(String username,String provider) {
+        redisTemplate.delete(REFRESH_TOKEN_PREFIX +provider+"_"+ username);
     }
 
 
