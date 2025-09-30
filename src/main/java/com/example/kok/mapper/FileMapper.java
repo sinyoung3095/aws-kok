@@ -7,6 +7,8 @@ import java.util.Optional;
 
 @Mapper
 public interface FileMapper {
+//    파일 넣기
+    public void insertFile(FileDTO fileDTO);
 //    기업 아이디로 프사 조회
     public Optional<FileDTO> selectFileByCompanyId(Long userId);
 }

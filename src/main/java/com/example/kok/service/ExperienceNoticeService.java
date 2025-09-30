@@ -3,6 +3,7 @@ package com.example.kok.service;
 import com.example.kok.dto.CompanyProfileFileDTO;
 import com.example.kok.dto.ExperienceNoticeCriteriaDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
+import com.example.kok.dto.SaveExperienceNoticeDTO;
 import com.example.kok.util.Search;
 
 public interface ExperienceNoticeService {
@@ -15,4 +16,10 @@ public interface ExperienceNoticeService {
 
 //    공고 단일 조회
     public ExperienceNoticeDTO findNoticeById(Long id);
+
+//    공고 저장
+    public void saveExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO);
+
+//    공고 저장 취소
+    public void deleteExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO);
 }

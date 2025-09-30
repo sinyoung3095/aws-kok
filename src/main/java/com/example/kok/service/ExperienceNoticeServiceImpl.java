@@ -1,12 +1,10 @@
 package com.example.kok.service;
 
-import com.example.kok.dto.CompanyProfileFileDTO;
-import com.example.kok.dto.ExperienceNoticeCriteriaDTO;
-import com.example.kok.dto.ExperienceNoticeDTO;
-import com.example.kok.dto.FileDTO;
+import com.example.kok.dto.*;
 import com.example.kok.repository.CompanyProfileFileDAO;
 import com.example.kok.repository.ExperienceNoticeDAO;
 import com.example.kok.repository.FileDAO;
+import com.example.kok.repository.SaveExperienceNoticeDAO;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +23,7 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
     private final FileService fileService;
     private final CompanyProfileFileDAO companyProfileFileDAO;
     private final S3Service s3Service;
-    private final FileDAO fileDAO;
-    private final FileDTO fileDTO;
+    private final SaveExperienceNoticeDAO saveExperienceNoticeDAO;
 
     @Override
     public ExperienceNoticeCriteriaDTO selectAllExperienceNotice(int page, Search search) {
@@ -83,7 +80,7 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
         result.setJobName(jobName);
         LocalDate endDate = result.getExperienceEndDate();
             LocalDate today = LocalDate.now();
-            if (endDate.isBefore(today)) {
+            if (!endDate.isBefore(today)) {
                 long days = ChronoUnit.DAYS.between(today, endDate);
                 result.setRemainingDays(days);
             } else {
@@ -98,5 +95,15 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
                         result.setFilePath("");
                     });
         return result;
+    }
+
+    @Override
+    public void saveExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO) {
+        saveExperienceNoticeDAO.saveExp(saveExperienceNoticeDTO);
+    }
+
+    @Override
+    public void deleteExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO) {
+        saveExperienceNoticeDAO.deleteExp(saveExperienceNoticeDTO);
     }
 }

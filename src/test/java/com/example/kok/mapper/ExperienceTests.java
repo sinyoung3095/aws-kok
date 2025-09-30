@@ -2,8 +2,10 @@ package com.example.kok.mapper;
 
 import com.example.kok.dto.CompanyDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
+import com.example.kok.dto.SaveExperienceNoticeDTO;
 import com.example.kok.repository.CompanyDAO;
 import com.example.kok.repository.ExperienceNoticeDAO;
+import com.example.kok.repository.SaveExperienceNoticeDAO;
 import com.example.kok.service.CompanyService;
 import com.example.kok.service.ExperienceNoticeService;
 import com.example.kok.util.Criteria;
@@ -28,6 +30,8 @@ public class ExperienceTests {
     private ExperienceNoticeDAO experienceNoticeDAO;
     @Autowired
     private CompanyDAO companyDAO;
+    @Autowired
+    private SaveExperienceNoticeDAO saveExperienceNoticeDAO;
 
     @Test
     public void testSelectAllExperienceNotice(){
@@ -52,5 +56,22 @@ public class ExperienceTests {
         CompanyDTO companys=companyService.findCompanyById(8L);
         System.out.println(companys);
         System.out.println("서비스 공고: "+experienceNoticeService.findNoticeById(21L));
+    }
+
+    @Test
+    public void testSaveExperienceNotice(){
+        SaveExperienceNoticeDTO saveExp=new SaveExperienceNoticeDTO();
+        saveExp.setExperienceNoticeId(2L);
+        saveExp.setMemberId(6L);
+        experienceNoticeService.saveExp(saveExp);
+
+        System.out.println(saveExp);
+
+//        SaveExperienceNoticeDTO deleteExp=new SaveExperienceNoticeDTO();
+//        deleteExp.setExperienceNoticeId(2L);
+//        deleteExp.setMemberId(6L);
+//        experienceNoticeService.deleteExp(deleteExp);
+//
+//        System.out.println(deleteExp);
     }
 }
