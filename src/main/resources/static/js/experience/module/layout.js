@@ -67,9 +67,6 @@ function applyFilters() {
         const jobEl = item.querySelector(".list-item-meta-field:first-child .list-item-value > p");
         const jobName = jobEl ? jobEl.innerText.trim() : "";
 
-        // console.log(jobEl);
-        // console.log(jobName);
-        // console.log(activeJobs);
 
         const scaleEl = item.querySelector(".list-item-meta-field:nth-child(2) .list-item-value > p");
         const scaleName = scaleEl ? scaleEl.innerText.trim() : "";
