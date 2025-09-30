@@ -22,4 +22,14 @@ public class CommunityCommentDAO {
     public List<CommentDTO> findAll(Long postId, Criteria criteria) {
         return communityCommentMapper.selectCommentsByPostId(postId, criteria);
     }
+
+//    댓글 수정
+    public void update(CommentDTO commentDTO) {
+        communityCommentMapper.updateComment(commentDTO);
+    }
+
+//    댓글 삭제
+    public void delete(Long id) {
+        communityCommentMapper.deleteComment(id);
+    }
 }

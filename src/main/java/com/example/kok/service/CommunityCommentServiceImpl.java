@@ -23,4 +23,16 @@ public class CommunityCommentServiceImpl implements CommunityCommentService {
     public CommentsCriteriaDTO getComments(Long postId, int page) {
         return null;
     }
+
+//    댓글 수정
+    @Override
+    public void update(CommentDTO commentDTO) {
+        communityCommentDAO.update(commentDTO);
+    }
+
+//    댓글 삭제
+    @Override
+    public void delete(Long id) {
+        communityCommentDAO.delete(id);
+    }
 }

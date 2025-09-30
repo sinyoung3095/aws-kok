@@ -15,4 +15,10 @@ public interface CommunityCommentMapper {
 
 //    게시글 내 댓글 목록
     public List<CommentDTO> selectCommentsByPostId(@Param("postId") Long postId, @Param("criteria") Criteria criteria);
+
+//    댓글 수정
+    public void updateComment(CommentDTO commentDTO);
+
+//    댓글 삭제
+    public void deleteComment(Long id);
 }

@@ -21,4 +21,17 @@
         order by c.created_datetime desc
     </select>
 
+<!-- 댓글 수정 -->
+    <update id="updateComment">
+        update tbl_comment
+        set comment_content = #{commentContent}, updated_datetime = now()
+        where id = #{id}
+    </update>
+
+<!-- 댓글 삭제 -->
+    <update id="deleteComment">
+        update tbl_comment
+        set comment_status = 'inactive'
+        where id = #{id}
+    </update>
 </mapper>
