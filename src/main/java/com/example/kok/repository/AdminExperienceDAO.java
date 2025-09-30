@@ -31,7 +31,7 @@ public class AdminExperienceDAO {
     }
     
 //    상세
-    public ExperienceNoticeDTO selectAdminExperience(Long id) {
+    public AdminExperienceDTO selectAdminExperience(Long id) {
         return adminExperienceMapper.selectAdminExperienceById(id);
     }
 }

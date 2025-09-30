@@ -21,5 +21,5 @@ public interface AdminExperienceMapper {
     public int selectAdminExperienceCountAll();
 
 //    상세
-    public ExperienceNoticeDTO selectAdminExperienceById(Long id);
+    public AdminExperienceDTO selectAdminExperienceById(Long id);
 }

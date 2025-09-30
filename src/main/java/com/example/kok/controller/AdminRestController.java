@@ -23,13 +23,5 @@ public class AdminRestController {
         return adminService.getList(page);
     }
 
-//    체험 목록
-//    @GetMapping("{page}")
-//    public ExperienceNoticeDTO listExperience(@PathVariable("page") int page){
-//        log.info("page = {}", page);
-//        return
-//    }
-
-
 
 }
