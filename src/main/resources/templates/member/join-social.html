@@ -59,14 +59,14 @@
                                         </linearGradient>
                                     </defs>
                                 </svg>
-                                <p class="social-email" th:text="${userDTO.userEmail}"></p>
+                                <p class="social-email" th:text="${userDTO.snsEmail}"></p>
                             </div>
                             <!-- 네이버 -->
                              <div id="naver-box" class="social-box">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#03CF5D;" viewBox="0 0 40 40" height="28" width="28">
                                     <path fill="#03CF5D" d="m24.136 31.9-8.394-12.313v12.314H7V8.099h8.864l8.394 12.322V8.1H33v23.802z"></path>
                                 </svg>
-                                <p class="social-email" th:text="${userDTO.userEmail}"></p>
+                                <p class="social-email" th:text="${userDTO.snsEmail}"></p>
                             </div>
                             <!-- 카카오 -->
                             <div id="kakao-box" class="social-box" >
@@ -76,7 +76,7 @@
                                     <path fill="#FEE300" fill-rule="evenodd" d="M19.381 21.875a.67.67 0 0 1-.701-.497l-.317-.98-2.998.009-.318.97a.655.655 0 0 1-.689.512.68.68 0 0 1-.708-.661.8.8 0 0 1 .065-.316l2.067-5.522c.148-.405.505-.838 1.065-.84.491-.001.882.302 1.07.832l2.035 5.502q.07.178.083.369a.63.63 0 0 1-.654.622m-3.617-2.741 1.071-3.269.003-.005.003-.002a.015.015 0 0 1 .022.007l1.092 3.262z" clip-rule="evenodd" style="fill: color(display-p3 0.9961 0.8902 0); fill-opacity: 1;"></path>
                                     <path fill="#FEE300" d="M24.892 21.152a.654.654 0 0 1-.684.628l-2.674.008c-.47.001-.751-.295-.753-.792l-.016-5.708c-.002-.462.273-.75.715-.751.443-.002.718.285.72.747l.015 5.196 1.99-.006a.7.7 0 0 1 .517.198.64.64 0 0 1 .17.48M30.866 21.278c-.054.522-.56.564-.714.565q-.056 0-.112-.005c-.265-.027-.415-.193-.692-.566l-1.893-2.564-.514.527.006 1.932a.687.687 0 0 1-.716.687c-.43.002-.719-.273-.72-.683l-.017-5.94a.69.69 0 0 1 .717-.708.676.676 0 0 1 .719.705l.006 2.3 2.52-2.643a.8.8 0 0 1 .57-.263c.347.008.696.237.688.66 0 .197-.117.327-.351.587l-.005.006q-.079.085-.17.19l-1.723 1.748 2.051 2.67h.001c.212.275.387.502.35.795" style="fill: color(display-p3 0.9961 0.8902 0); fill-opacity: 1;"></path>
                                 </svg>
-                                <p class="social-email" th:text="${userDTO.userEmail}"></p>
+                                <p class="social-email" th:text="${userDTO.snsEmail}"></p>
                             </div>
                             <div class="signup-title">추가 정보를 입력해주세요.</div>
                         </div>
@@ -109,7 +109,9 @@
                                     </div>
                                 </div>
                             </div>
-        
+
+                            <input name="memberProvider"  style="display: none" th:value="${provider}">
+                            <input id="snsEmail" name="snsEmail"  style="display: none" th:value="${userDTO.snsEmail}">
                             <!-- 회원가입 버튼 -->
                             <button class="submit-button">
                                 <span class="submit-text">회원가입하기</span>

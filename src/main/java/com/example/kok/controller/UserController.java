@@ -5,6 +5,7 @@ import com.example.kok.auth.JwtTokenProvider;
 import com.example.kok.dto.UserDTO;
 import com.example.kok.enumeration.Provider;
 import com.example.kok.enumeration.UserRole;
+import com.example.kok.mybatis.handler.ProviderHandler;
 import com.example.kok.repository.UserDAO;
 import com.example.kok.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ import org.springframework.web.servlet.view.RedirectView;
 public class UserController {
     private final UserService userService;
     private final UserDAO userDAO;
-    private JwtTokenProvider  jwtTokenProvider;
+    private final JwtTokenProvider  jwtTokenProvider;
 
     @GetMapping("join-member")
     public String goToJoinPage() {
@@ -37,6 +38,7 @@ public class UserController {
         int count;
         count = userDAO.findUserByEmail(userDTO.getUserEmail());
         if(count==0) {
+            userDTO.setMemberProvider(Provider.KOK);
             userService.joinUser(userDTO);
             return new RedirectView("/member/login");
         }else{
@@ -45,31 +47,30 @@ public class UserController {
     }
 
     @GetMapping("join-social")
-    public String goToJoinSocialPage(@CookieValue(value = "memberEmail", required = false) String userEmail,
+    public String goToJoinSocialPage(@CookieValue(value = "userEmail", required = false) String userEmail,
                                      @CookieValue(value = "memberName", required = false) String userName,
-                                     UserDTO userDTO, Model model) {
+                                     UserDTO userDTO, Model model,String provider) {
 
-        userDTO.setUserEmail(userEmail);
+        userDTO.setSnsEmail(userEmail);
         userDTO.setUserName(userName);
         model.addAttribute("userDTO", userDTO);
+        model.addAttribute("provider", provider);
         log.info("Get userDTO:"+userDTO);
         return "member/join-social";
     }
     @PostMapping("join-social")
-    public RedirectView joinSocial(@CookieValue(value = "role",required = false) String role,
-                             String provider, UserDTO userDTO) {
-        log.info("userDTO:"+userDTO);
-        log.info("role:"+role);
-        log.info("provider:"+provider);
+    public RedirectView joinSocial(@CookieValue(value = "role",required = false) String role, UserDTO userDTO) {
+        String kind = userDTO.getMemberProvider().getValue();
         userDTO.setUserRole(role.equals("ROLE_MEMBER") ? UserRole.MEMBER : UserRole.ADMIN);
-        userDTO.setMemberProvider(Provider.valueOf(provider));
-        log.info("userDTO:"+userDTO);
-//        memberService.joinSns(userDTO);
-//
-//        jwtTokenProvider.createAccessToken(userDTO.getSnsEmail(), provider);
-//        jwtTokenProvider.createRefreshToken(userDTO.getSnsEmail(), provider);
 
-        return new RedirectView("/post/list/1");
+        userService.joinSnsUser(userDTO);
+        log.info("userDTO:"+userDTO);
+        log.info("kind:"+kind);
+
+        jwtTokenProvider.createAccessToken(userDTO.getSnsEmail(), kind);
+        jwtTokenProvider.createRefreshToken(userDTO.getSnsEmail(), kind);
+
+        return new RedirectView("/community/page");
     }
 
 

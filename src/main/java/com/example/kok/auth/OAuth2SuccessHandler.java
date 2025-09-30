@@ -46,13 +46,13 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             path = "/member/join-social?provider=" + provider;
         }
 
-        Cookie memberEmailCookie = new Cookie("memberEmail", email);
-        memberEmailCookie.setHttpOnly(true);
-        memberEmailCookie.setSecure(false);
-        memberEmailCookie.setPath("/");
-        memberEmailCookie.setMaxAge(60 * 60);
+        Cookie userEmailCookie = new Cookie("userEmail", email);
+        userEmailCookie.setHttpOnly(true);
+        userEmailCookie.setSecure(false);
+        userEmailCookie.setPath("/");
+        userEmailCookie.setMaxAge(60 * 60);
 
-        response.addCookie(memberEmailCookie);
+        response.addCookie(userEmailCookie);
 
         Cookie memberNameCookie = new Cookie("memberName", name);
         memberNameCookie.setHttpOnly(true);

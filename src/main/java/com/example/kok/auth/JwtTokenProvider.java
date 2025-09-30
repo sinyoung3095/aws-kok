@@ -66,10 +66,11 @@ public class JwtTokenProvider {
         return accessToken;
     }
     public String createAccessToken(String username ,String provider) {
+        log.info("username:"+username+",provider:"+provider);
         long ACCESS_TOKEN_VALIDITY = 1000L * 60 * 30;
         String accessToken = Jwts.builder()
                 .setSubject(username)
-                .claim("memberEmail", username)
+                .claim("userEmail", username)
                 .claim("provider", provider)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY))
@@ -106,7 +107,7 @@ public class JwtTokenProvider {
 
 
     public String getUserName(String token) {
-        return Jwts.parserBuilder().setSigningKey(key).build()
+        return Jwts.parserBuilder() .setSigningKey(key).build()
                 .parseClaimsJws(token).getBody().getSubject();
     }
 

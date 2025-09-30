@@ -24,6 +24,8 @@ alter table tbl_user alter column user_email DROP not null;
 
 select * from tbl_user;
 
+
+
 insert into tbl_user (user_name, user_phone, user_email, user_password, user_role)
 values
     ('홍사장', '010-1111-1111', 'hong@example.com', '1234', 'company'),
