@@ -1,10 +1,9 @@
 package com.example.kok.mapper;
 
-import com.example.kok.domain.AdminNoticeVO;
 import com.example.kok.dto.AdminNoticeCriteriaDTO;
 import com.example.kok.dto.AdminNoticeDTO;
 import com.example.kok.repository.AdminNoticeDAO;
-import com.example.kok.service.AdminNoticeService;
+import com.example.kok.service.AdminService;
 import com.example.kok.util.Criteria;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,7 @@ public class AdminNoticeTests {
     @Autowired
     private AdminNoticeDAO adminNoticeDAO;
     @Autowired
-    private AdminNoticeService adminNoticeService;
+    private AdminService adminService;
     @Autowired
     private AdminNoticeDTO adminNoticeDTO;
 
@@ -33,7 +32,7 @@ public class AdminNoticeTests {
             adminNoticeDTO.setAdminNoticeTitle("공지 제목" + (i + 1));
             adminNoticeDTO.setAdminNoticeContent("공지 게시글 내용" + (i + 1));
 
-            adminNoticeMapper.insertNotice(adminNoticeService.toVO(adminNoticeDTO));
+            adminNoticeMapper.insertNotice(adminService.toVO(adminNoticeDTO));
             log.info("{}", adminNoticeDTO);
         }
     }
@@ -57,7 +56,7 @@ public class AdminNoticeTests {
         adminNoticeDTO.setAdminNoticeContent("수정된 공지 게시글 내용3");
         adminNoticeDTO.setId(3L);
 
-        adminNoticeMapper.updateNoticeFromId(adminNoticeService.toVO(adminNoticeDTO));
+        adminNoticeMapper.updateNoticeFromId(adminService.toVO(adminNoticeDTO));
         log.info("{}", adminNoticeDTO);
     }
 
@@ -76,7 +75,7 @@ public class AdminNoticeTests {
             adminNoticeDTO.setAdminNoticeTitle("공지 제목0" + (i + 1));
             adminNoticeDTO.setAdminNoticeContent("공지 게시글 내용0" + (i + 1));
 
-            adminNoticeDAO.insert(adminNoticeService.toVO(adminNoticeDTO));
+            adminNoticeDAO.insert(adminService.toVO(adminNoticeDTO));
             log.info("{}\n", adminNoticeDTO);
         }
     }
@@ -100,7 +99,7 @@ public class AdminNoticeTests {
         adminNoticeDTO.setAdminNoticeContent("수정된 공지 게시글 내용4");
         adminNoticeDTO.setId(4L);
 
-        adminNoticeDAO.updateNotice(adminNoticeService.toVO(adminNoticeDTO));
+        adminNoticeDAO.updateNotice(adminService.toVO(adminNoticeDTO));
         log.info("수정된 게시글: {}", adminNoticeDTO);
     }
 
@@ -117,7 +116,7 @@ public class AdminNoticeTests {
             adminNoticeDTO.setAdminNoticeTitle("공지 제목" + (i + 1));
             adminNoticeDTO.setAdminNoticeContent("공지 게시글 내용" + (i + 1));
 
-            adminNoticeService.write(adminNoticeDTO);
+            adminService.write(adminNoticeDTO);
             log.info("{}\n", adminNoticeDTO);
         }
     }
@@ -127,7 +126,7 @@ public class AdminNoticeTests {
         int page = 5;
         Criteria criteria = new Criteria(page, 80);
         log.info(criteria.toString());
-        AdminNoticeCriteriaDTO adminNoticeCriteriaDTO = adminNoticeService.getList(page);
+        AdminNoticeCriteriaDTO adminNoticeCriteriaDTO = adminService.getList(page);
         log.info(adminNoticeCriteriaDTO.toString());
     }
 
@@ -138,14 +137,14 @@ public class AdminNoticeTests {
         adminNoticeDTO.setAdminNoticeContent("수정된 공지 게시글 내용5");
         adminNoticeDTO.setId(5L);
 
-        adminNoticeService.update(adminNoticeDTO);
+        adminService.update(adminNoticeDTO);
         log.info("수정된 게시글: {}", adminNoticeDTO);
     }
 
     @Test
     public void testDelete(){
         log.info("삭제 전 전체 개수: {}", adminNoticeDAO.countAll());
-        adminNoticeService.delete(80L);
+        adminService.delete(80L);
         log.info("삭제 후 전체 개수: {}", adminNoticeDAO.countAll());
     }
 }

@@ -1,12 +1,9 @@
 package com.example.kok.service;
 
 import com.example.kok.domain.AdminNoticeVO;
-import com.example.kok.dto.AdminNoticeCriteriaDTO;
-import com.example.kok.dto.AdminNoticeDTO;
-import com.example.kok.dto.ExperienceNoticeCriteriaDTO;
-import com.example.kok.dto.ExperienceNoticeDTO;
+import com.example.kok.dto.*;
+import com.example.kok.repository.AdminExperienceDAO;
 import com.example.kok.repository.AdminNoticeDAO;
-import com.example.kok.repository.ExperienceNoticeDAO;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.DateUtils;
 import com.example.kok.util.Search;
@@ -16,8 +13,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,13 +21,27 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Primary
-public class AdminNoticeServiceImpl implements AdminNoticeService {
+public class AdminServiceImpl implements AdminService {
     private final AdminNoticeDAO adminNoticeDAO;
-    private final ExperienceNoticeDAO experienceNoticeDAO;
-    private final FileService fileService;
+    private final AdminExperienceDAO adminExperienceDAO;
 
 //    체험 목록
+    @Override
+    public AdminExperienceCriteriaDTO getExperienceNotice(int page, Search search) {
+        AdminExperienceCriteriaDTO adminExperienceCriteriaDTO = new AdminExperienceCriteriaDTO();
+        Criteria criteria = new Criteria(page, adminExperienceDAO.adminExperienceCountAll());
+        List<AdminExperienceDTO> experiences = adminExperienceDAO.adminExperienceAll(criteria, search);
 
+        criteria.setHasMore(experiences.size() > criteria.getRowCount());
+
+//        11개 가져왔으면, 마지막 1개 삭제
+        if(criteria.isHasMore()){
+            experiences.remove(experiences.size()-1);
+        }
+
+        adminExperienceCriteriaDTO.setExperienceList(experiences);
+        return adminExperienceCriteriaDTO;
+    }
 
 //    공지 등록
     @Override

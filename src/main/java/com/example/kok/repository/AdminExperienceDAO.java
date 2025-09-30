@@ -1,5 +1,6 @@
 package com.example.kok.repository;
 
+import com.example.kok.dto.AdminExperienceDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.mapper.AdminExperienceMapper;
 import com.example.kok.util.Criteria;
@@ -15,7 +16,7 @@ public class AdminExperienceDAO {
     private final AdminExperienceMapper adminExperienceMapper;
 
 //    전체(목록)
-    public List<ExperienceNoticeDTO> adminExperienceAll(Criteria criteria, Search search) {
+    public List<AdminExperienceDTO> adminExperienceAll(Criteria criteria, Search search) {
         return adminExperienceMapper.selectAdminExperienceAll(criteria, search);
     }
 
