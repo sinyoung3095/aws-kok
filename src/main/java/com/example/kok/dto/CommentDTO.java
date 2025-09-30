@@ -26,4 +26,5 @@ public class CommentDTO{
     private String jobName;
     private String memberProfileUrl;
     private boolean liked;
+    private List<ReplyDTO> replies;
 }

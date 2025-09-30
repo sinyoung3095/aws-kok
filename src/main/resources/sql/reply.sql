@@ -14,3 +14,7 @@ CREATE TABLE tbl_reply (
     constraint fk_reply_member_alarm_setting foreign key(member_alarm_setting_id)
         references tbl_member_alarm_setting(id)
 );
+
+alter table tbl_reply drop member_alarm_setting_id;
+alter table tbl_reply add member_alarm_setting_id bigint;
+select * from tbl_reply;

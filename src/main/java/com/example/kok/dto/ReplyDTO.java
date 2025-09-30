@@ -18,4 +18,11 @@ public class ReplyDTO {
     private long memberAlarmSettingId;
     private String createdDateTime;
     private String updatedDateTime;
+
+    private String relativeDate;
+    private int likesCount;
+    private String userName;
+    private String jobName;
+    private String memberProfileUrl;
+    private boolean liked;
 }

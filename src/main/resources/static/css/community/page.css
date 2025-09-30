@@ -1249,7 +1249,7 @@ div {
     display: flex;
     align-items: stretch;
     /* 확인용 height */
-    height: calc(100vh - 200px);
+    /*height: calc(100vh - 200px);*/
 }
 .reply-left{
     background-color: #ffffff;
