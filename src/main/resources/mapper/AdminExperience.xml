@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.AdminExperienceMapper">
+    <sql id="search">
+        <if test="search.keyword != null">
+            and (
+            c.company_name like concat('%', #{search.keyword}, '%') or
+            en.experience_notice_title like concat('%', #{search.keyword}, '%') or
+            en.experience_notice_subtitle like concat('%', #{search.keyword}, '%') or
+            jc.job_name like concat('%', #{search.keyword}, '%')
+            )
+        </if>
+    </sql>
+
+    <select id="selectAdminExperienceAll">
+        select c.company_name,
+               en.id,
+               en.experience_notice_title,
+               en.experience_notice_subtitle,
+               en.experience_notice_introduce_job,
+               en.experience_notice_etc,
+               en.experience_end_date,
+               en.experience_notice_status,
+               en.created_datetime,
+               en.updated_datetime,
+               en.company_id,
+               jc.job_name
+        from tbl_experience_notice en
+            join tbl_company c
+                on en.company_id = c.user_id
+            join tbl_experience_job_category ejc
+                on en.id = ejc.experience_notice_id
+            join tbl_job_category jc
+                on ejc.job_category = jc.id
+        <include refid="search"></include>
+        order by en.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <select id="selectAdminExperienceSearchCountAll">
+        select count(*)
+        from tbl_experience_notice en
+            join tbl_company c
+                on en.company_id = c.user_id
+            join tbl_experience_job_category ejc
+                on en.id = ejc.experience_notice_id
+            join tbl_job_category jc
+                on ejc.job_category = jc.id
+        <include refid="search"></include>
+    </select>
+
+    <select id="selectAdminExperienceCountAll">
+        select count(*) from tbl_experience_notice
+    </select>
+
+    <select id="selectAdminExperienceById">
+        select en.id,
+               en.experience_notice_etc,
+               en.experience_start_date,
+               en.experience_end_date,
+               en.experience_notice_start_date,
+               en.experience_notice_end_date,
+               en.experience_notice_title,
+               en.experience_notice_subtitle,
+               en.experience_notice_introduce_job,
+               en.experience_main_tasks,
+               en.experience_notice_etc,
+               en.created_datetime,
+               en.updated_datetime,
+               en.company_id,
+               c.company_name
+        from tbl_experience_notice en
+                 join tbl_company c
+                      on en.company_id = c.user_id
+        where en.id = #{id}
+    </select>
+</mapper>

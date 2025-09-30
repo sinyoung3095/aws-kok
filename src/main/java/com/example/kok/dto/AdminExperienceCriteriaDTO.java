@@ -1,6 +1,7 @@
 package com.example.kok.dto;
 
 import com.example.kok.util.Criteria;
+import com.example.kok.util.Search;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class AdminNoticeCriteriaDTO {
-    private List<AdminNoticeDTO> noticeList;
-    private Criteria noticeCriteria;
+public class AdminExperienceCriteriaDTO {
+    private List<AdminExperienceDTO> experienceList;
+    private Criteria criteria;
 }
