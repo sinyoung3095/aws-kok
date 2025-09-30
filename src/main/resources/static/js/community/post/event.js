@@ -29,15 +29,17 @@ window.addEventListener("scroll", async () => {
 
 // 글쓰기 모달
 const popup = document.getElementById("post-write-popup");
-const writeBtn = document.querySelector(".popup-trigger");
+const writeBtns = document.querySelectorAll(".popup-trigger");
 const closeBtn = document.querySelector(".popup-write-close");
 const writeTextarea = document.querySelector(".popup-textarea");
 const writeFiles = document.querySelector("#btn-add-photo");
 
-// 모달 열기
-if (writeBtn) {
-    writeBtn.addEventListener("click", () => popup.classList.add("active"));
-}
+// 글쓰기 모달 열기
+writeBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        popup.classList.add("active");
+    });
+});
 
 // 모달 닫기
 if (closeBtn) {
@@ -93,8 +95,8 @@ document.body.addEventListener("click", async (e) => {
             checkScroll = true;
             await showList(page);
         } catch (err) {
-            console.error("글쓰기 실패:", err.message);
-            alert("글쓰기에 실패했습니다.");
+            console.error("업로드 실패:", err.message);
+            alert("업로드를 실패했습니다.");
         }
         return;
     }
@@ -143,12 +145,6 @@ document.body.addEventListener("click", async (e) => {
         return;
     }
 
-    if (target.closest(".report-1")) {
-        document.querySelectorAll(".report-1").forEach((r) => (r.style.display = "none"));
-        document.querySelector(".report-7").style.display = "flex";
-        return;
-    }
-
     if (target.closest(".report-19")) {
         document.querySelector(".report-7").style.display = "none";
         return;
@@ -162,7 +158,7 @@ document.body.addEventListener("click", async (e) => {
 
     // 댓글 삭제
     if (target.closest(".delbtn")) {
-        const menu = target.closest(".comment-wrap")?.querySelector(".delbtn-1");
+        const menu = target.closest(".comment-wrap").querySelector(".delbtn-1");
         if (menu) menu.style.display = menu.style.display === "flex" ? "none" : "flex";
         return;
     }
@@ -180,16 +176,19 @@ document.body.addEventListener("click", async (e) => {
     }
 
     // 답글 토글
-    if (target.closest(".comment")) {
-        const comments = target.closest(".comment-wrap")?.querySelector(".comments");
-        if (comments) {
-            comments.style.display = comments.style.display === "flex" ? "none" : "flex";
+    if (target.closest(".post-25.comment")) {
+        const postCard = target.closest(".post-23");
+        if (postCard) {
+            const comments = postCard.closest(".post-8").querySelector(".comments");
+            if (comments) {
+                comments.style.display = (comments.style.display === "flex") ? "none" : "flex";
+            }
         }
         return;
     }
 
     if (target.closest(".delbtn-0")) {
-        const menu = target.closest(".reply-wrap")?.querySelector(".delbtn-2");
+        const menu = target.closest(".reply-wrap").querySelector(".delbtn-2");
         if (menu) menu.style.display = menu.style.display === "flex" ? "none" : "flex";
         return;
     }
@@ -205,7 +204,7 @@ document.body.addEventListener("click", async (e) => {
         return;
     }
 
-    // 좋아요 (댓글, 게시글)
+    // 좋아요 (게시글)
     const likeBtn = target.closest(".like-btn");
     if (likeBtn) {
         const postId = likeBtn.dataset.postId;
@@ -233,8 +232,45 @@ document.body.addEventListener("click", async (e) => {
             }
         }
     }
+
+    // 게시글 신고
+    if (target.closest(".report-1")) {
+        const postCard = target.closest(".post-8");
+        const postId = postCard.dataset.postId;
+        const reportModal = document.querySelector(".report-7");
+
+        if (postId && reportModal) {
+            reportModal.dataset.postId = postId;
+        }
+
+        document.querySelectorAll(".report-1").forEach((r) => (r.style.display = "none"));
+        reportModal.style.display = "flex";
+        return;
+    }
+
+    if (target.closest(".report-17")) {
+        const reportModal = document.querySelector(".report-7");
+        const postId = reportModal.dataset.postId;
+
+        if (!postId) {
+            alert("게시글 ID를 찾을 수 없습니다.");
+            return;
+        }
+
+        try {
+            await postService.reportPost(postId);
+            alert("신고가 접수되었습니다.");
+            reportModal.style.display = "none";
+        } catch (err) {
+            console.error("신고 실패:", err);
+            alert(err.message);
+            reportModal.style.display = "none";
+        }
+    }
 });
 
+
+// 파일 썸네일
 (() => {
     const input = document.getElementById('btn-add-photo');
     const previewContainer = document.querySelector('.popup-preview-inner');

@@ -260,7 +260,7 @@ a.page-a{
     text-align: center;
 }
 
-li.page-li.page-on>a{
+li.page-li > a.active{
     color: #171717;
     font-weight: 700;
 }
@@ -393,7 +393,6 @@ div.filter-search{
 div.search-main{
     flex: 1;
     margin-inline-start: 0px;
-    margin-inline-end: 16px;
     margin-block-start:0px;
     margin-block-end: 16px;
 }
@@ -461,6 +460,7 @@ button.search-btn{
     display: flex;
     position: relative; /* 기준점이 됨 */
     z-index: 1;
+    cursor: pointer;
 }
 
 .job {
@@ -526,7 +526,7 @@ button.search-btn{
 }
 
 .job-3.selected {
-  background-color: #e5e5e5;
+    background-color: #e5e5e5;
 }
 
 .job-5 {
@@ -652,7 +652,7 @@ div.list-list-wrap{
 }
 
 div.list-list-main{
-    overflow-x: auto;
+    /*overflow-x: auto;*/
     width: 100%;
     position: relative;
 }
@@ -702,6 +702,11 @@ tr.body-tr{
     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     transition-duration: .15s;
     cursor: pointer;
+}
+
+tr.body-tr.no-data td{
+    padding: 40px;
+    text-align: center;
 }
 
 body tr.body-tr.disnone{
@@ -769,6 +774,10 @@ span.exp-status{
     display: inline-flex;
 }
 
+span.exp-status.active {
+    transition: background-color 0.5s, color 0.5s;
+}
+
 span.exp-status.gray{
     background-color: #f5f5f5;
     color: #171717;
@@ -806,6 +815,14 @@ button.appli-active-btn.gray>span.circle{
     transform: translateX(calc(100% - 30px));
 }
 
+button.appli-active-btn.active {
+    transition: background-color 0.5s;
+}
+
+button.appli-active-btn.active .circle {
+    transition: transform 0.5s;
+}
+
 span.circle{
     translate: calc(100% - 2px);
     transition-property: transform, translate, scale, rotate;
@@ -818,6 +835,7 @@ span.circle{
     height: 16px;
     display: block;
     pointer-events: none;
+    cursor: pointer;
 }
 
 button.hambuger{
@@ -853,25 +871,25 @@ div.hambuger-pop-wrap {
     display: none;
     min-width: max-content;
     z-index: 1000;
-    top: 0; 
+    top: 0;
 }
 
 div.hambuger-pop{
     outline: none;
     pointer-events: auto;
     animation: enter .15s ease;
-	box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000;
-	color: #0a0a0a;
-	padding: 4px;
-	background-color: #ffffff;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: 8px;
-	overflow-y: auto;
-	overflow-x: hidden;
-	transform-origin: 100% 50% 179px;
-	min-width: 8rem;
-	max-height: 728.5px;
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000;
+    color: #0a0a0a;
+    padding: 4px;
+    background-color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transform-origin: 100% 50% 179px;
+    min-width: 8rem;
+    max-height: 728.5px;
 }
 
 div.pop-head{
@@ -882,7 +900,8 @@ div.pop-head{
     padding-inline: 8px;
 }
 
-div.hambuger-list{
+div.hambuger-list,
+a.hambuger-list{
     user-select: none;
     outline-style: none;
     font-size: 14px;
@@ -892,7 +911,7 @@ div.hambuger-list{
     border-radius: 6px;
     gap: 8px;
     align-items: center;
-    cursor: default;
+    cursor: pointer;
     display: flex;
     position: relative;
 }

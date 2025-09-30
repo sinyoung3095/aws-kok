@@ -5,6 +5,8 @@ import com.example.kok.dto.ExperienceNoticeCriteriaDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.util.Search;
 
+import java.util.List;
+
 public interface ExperienceNoticeService {
 
 //    목록 조회
@@ -15,4 +17,7 @@ public interface ExperienceNoticeService {
 
 //    공고 단일 조회
     public ExperienceNoticeDTO findNoticeById(Long id);
+
+//    최신 체험 공고 4개 조회
+    public List<ExperienceNoticeDTO> findLatestFour();
 }

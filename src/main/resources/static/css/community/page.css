@@ -1600,6 +1600,7 @@ div {
     width: 100%;
     display: none;
 }
+
 @media (max-width: 1023px) {
     .main-0{
         padding: 0;}
@@ -1671,5 +1672,8 @@ div {
     }
     .mobile{
         display: flex;
+    }
+    .popup-container.pop-center {
+        align-items: end;
     }
 }
