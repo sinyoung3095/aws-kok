@@ -2,7 +2,7 @@ package com.example.kok.dto;
 
 import com.example.kok.util.Criteria;
 import lombok.*;
-import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 @Getter
@@ -10,7 +10,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostsCriteriaDTO {
-    private List<PostDTO> posts;
+public class CommentsCriteriaDTO {
+    private List<CommentDTO> comments;
     private Criteria criteria;
 }
