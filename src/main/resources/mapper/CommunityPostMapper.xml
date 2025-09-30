@@ -30,12 +30,19 @@
 
 <!-- 게시글 조회 -->
     <select id="selectCommunityPost">
-        select u.id, u.user_name, m.member_profile_url, p.id, p.post_content, p.post_status, p.created_datetime, p.updated_datetime, ujc.job_category
+        select distinct u.id as member_id, u.user_name, m.member_profile_url, p.id as id, p.post_content, p.post_status, p.created_datetime, p.updated_datetime, ujc.job_category, jc.job_name, p.likes_count,
+                        exists (
+                            select 1
+                            from tbl_post_like pl
+                            where pl.post_id = p.id
+                              and pl.member_id = 5
+                        ) as liked
         from tbl_user u
                  join tbl_member m on u.id = m.user_id
                  join tbl_post p on m.user_id = p.member_id
                  join tbl_user_job_category ujc on u.id = ujc.user_id
-            and p.post_status = 'active' and p.id = #{id}
+                 join tbl_job_category jc on ujc.job_category = jc.id
+        where p.post_status = 'active' and p.id = #{id}
     </select>
 
 <!-- 게시글 작성 -->

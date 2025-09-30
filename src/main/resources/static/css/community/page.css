@@ -180,7 +180,7 @@ div {
     align-items: flex-start;
     flex-direction: column;
     border-bottom: 1px solid #e0e0e0;
-    gap: 12px;
+    gap: 15px;
     width: 100%;
     display: flex;
     padding: 16px;
@@ -243,6 +243,7 @@ div {
     flex-direction: column;
     width: 100%;
     display: flex;
+    margin-top: 6px;
     margin-bottom: 6px;
 }
 .post-17{
@@ -255,11 +256,11 @@ div {
 .post-18{
     gap: 4px;
     width: 100%;
-    flex: 1 0 0px;
+    flex: 1 0 0;
     display: flex;
 }
 .post-19{
-    display: block;
+    display: flex;
     white-space: pre-line;
     color: rgba(18,19,20,1);
     font-size: 16px;
@@ -269,6 +270,12 @@ div {
     font-weight: 400;
 }
 .post-20{
+    padding-left: 52px;
+    width: 100%;
+    display: flex;
+}
+
+.detail-post-20{
     width: 100%;
     display: flex;
 }
@@ -290,7 +297,6 @@ div {
     align-items: center;
     padding-inline: 4px;
     display: inline-flex;
-    cursor: pointer;
 }
 .post-24{
     border-radius: 0px;
@@ -1242,15 +1248,17 @@ div {
     position: fixed;
     display: flex;
     align-items: stretch;
+    /* 확인용 height */
+    height: calc(100vh - 200px);
 }
 .reply-left{
     background-color: #ffffff;
     align-items: flex-start;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
     width: 600px;
     display: flex;
-    padding: 10px;
+    padding: 16px;
     border-bottom-left-radius: 16px;
     border-top-left-radius: 16px;
 }
