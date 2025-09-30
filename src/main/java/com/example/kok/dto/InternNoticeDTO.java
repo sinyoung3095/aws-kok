@@ -1,5 +1,6 @@
 package com.example.kok.dto;
 
+import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.enumeration.Status;
 import lombok.*;
 import org.springframework.stereotype.Component;

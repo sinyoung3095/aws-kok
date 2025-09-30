@@ -7,3 +7,7 @@ CREATE TABLE tbl_report (
     constraint fk_report_member foreign key(member_id)
         references tbl_member(user_id)
 );
+
+
+select * from tbl_report;
+delete from tbl_report;
