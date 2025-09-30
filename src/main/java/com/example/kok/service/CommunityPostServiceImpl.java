@@ -34,17 +34,27 @@ public class CommunityPostServiceImpl implements CommunityPostService {
     private final CommunityLikeService communityLikeService;
 
     @Override
+    public void setPreSignedUrl(PostDTO postDTO) {
+        List<PostFileDTO> postFiles = communityPostFileDAO.findAllByPostId(postDTO.getId());
+        postFiles.forEach((postFile) -> {
+            postFile.setPostFilePath(s3Service.getPreSignedUrl(postFile.getPostFilePath(), Duration.ofMinutes(5)));
+        });
+
+        postDTO.setPostFiles(postFiles);
+    }
+
+    @Override
     public PostsCriteriaDTO getList(int page) {
         Criteria criteria = new Criteria(page, communityPostDAO.findCountAll());
         List<PostDTO> posts = communityPostDAO.findAll(criteria);
 
         posts.forEach(post -> {
             post.setRelativeDate(DateUtils.toRelativeTime(post.getCreatedDateTime()));
-            List<PostFileDTO> files = communityPostFileDAO.findAllByPostId(post.getId());
-            files.forEach(f -> {
-                f.setDownloadUrl(s3Service.getPreSignedUrl(f.getPostFilePath(), Duration.ofMinutes(5)));
+            List<PostFileDTO> postFiles = communityPostFileDAO.findAllByPostId(post.getId());
+            postFiles.forEach(postFile -> {
+                postFile.setPostFilePath(s3Service.getPreSignedUrl(postFile.getPostFilePath(), Duration.ofMinutes(5)));
             });
-            post.setPostFiles(files);
+            post.setPostFiles(postFiles);
         });
 
         criteria.setHasMore(criteria.getPage() < criteria.getRealEnd());
@@ -68,7 +78,7 @@ public class CommunityPostServiceImpl implements CommunityPostService {
 
         List<PostFileDTO> files = communityPostFileDAO.findAllByPostId(postDTO.getId());
         files.forEach(f -> {
-            f.setDownloadUrl(s3Service.getPreSignedUrl(f.getPostFilePath(), Duration.ofMinutes(5)));
+            f.setPostFilePath(s3Service.getPreSignedUrl(f.getPostFilePath(), Duration.ofMinutes(5)));
         });
         postDTO.setPostFiles(files);
 

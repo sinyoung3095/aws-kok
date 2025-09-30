@@ -6,6 +6,8 @@ import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.dto.SaveExperienceNoticeDTO;
 import com.example.kok.util.Search;
 
+import java.util.List;
+
 public interface ExperienceNoticeService {
 
 //    목록 조회
@@ -22,4 +24,7 @@ public interface ExperienceNoticeService {
 
 //    공고 저장 취소
     public void deleteExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO);
+
+//    최신 체험 공고 4개 조회
+    public List<ExperienceNoticeDTO> findLatestFour();
 }

@@ -106,4 +106,35 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
     public void deleteExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO) {
         saveExperienceNoticeDAO.deleteExp(saveExperienceNoticeDTO);
     }
+
+    @Override
+    public List<ExperienceNoticeDTO> findLatestFour() {
+        List<ExperienceNoticeDTO> experiences = experienceNoticeDAO.findLatestFour();
+
+        experiences.forEach(experience -> {
+            LocalDate endDate = experience.getExperienceEndDate();
+            LocalDate today = LocalDate.now();
+
+            if (endDate != null) {
+                if (endDate.isBefore(today)) {
+                    long days = ChronoUnit.DAYS.between(today, endDate);
+                    experience.setRemainingDays(days);
+                } else {
+                    experience.setRemainingDays(0L);
+                }
+            } else {
+                experience.setRemainingDays(0L);
+            }
+
+            fileService.findFileByCompanyId(experience.getCompanyId())
+                    .ifPresentOrElse(fileDTO -> {
+                        experience.setFileName(fileDTO.getFileName());
+                        experience.setFilePath(fileDTO.getFilePath());
+                    }, () -> {
+                        experience.setFileName("image.png");
+                        experience.setFilePath("/images/mypage/logo_1757380047672.webp"); // 임시 이미지 설정
+                    });
+        });
+        return experiences;
+    }
 }

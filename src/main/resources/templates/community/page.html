@@ -23,7 +23,7 @@
                             <div class="post-3">
                                 <p class="post-4">커뮤니티</p>
                             </div>
-                        </div >
+                        </div>
                     </div>
                     <div class="post-5">
                         <div class="post-6">
@@ -76,7 +76,7 @@
                                 <p class="etc-7">지금 프로필을 만들고 기회를 찾아보세요.</p>
                             </div>
                         </div>
-                        <a class="etc-12" href="">
+                        <a class="etc-12" th:href="@{/member/login}">
                             <button class="set etc-13">
                                 <span class="etc-14">로그인</span>
                             </button>
@@ -95,97 +95,27 @@
                         </div>
                         <div class="etc-21">
                             <!-- 신규 체험 공고 4개-->
-                            <a href="">
+                            <a th:each="notice : ${latestFour}" th:href="@{/experience/list}">
                                 <div class="post-8" style="border-bottom: 0;">
                                     <div class="post-9">
                                         <div>
-                                            <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="/images/mypage/logo_1757380047672.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            <img alt="image" width="40" height="40"
+                                                 th:src="${notice.filePath}"
+                                                 style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
                                         </div>
                                         <div class="post-10">
                                             <div class="post-14">
-                                                <p class="post-15">애니포인트 미디어</p>
+                                                <p class="post-15" th:text="${notice.companyName}"></p>
                                             </div>
                                             <div class="post-11">
                                                 <div class="post-12">
                                                     <div>
-                                                        <p class="post-13">주니어 백엔드 개발자</p>
+                                                        <p class="post-13" th:text="${notice.experienceNoticeTitle}"></p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="post-14">
-                                                <p class="post-15">백엔드 개발 체험자를 모집합니다.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="">
-                                <div class="post-8" style="border-bottom: 0;">
-                                    <div class="post-9">
-                                        <div>
-                                            <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="/images/mypage/logo_1757380047672.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                        </div>
-                                        <div class="post-10">
-                                            <div class="post-14">
-                                                <p class="post-15">애니포인트 미디어</p>
-                                            </div>
-                                            <div class="post-11">
-                                                <div class="post-12">
-                                                    <div>
-                                                        <p class="post-13">주니어 백엔드 개발자</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="post-14">
-                                                <p class="post-15">백엔드 개발 체험자를 모집합니다.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="">
-                                <div class="post-8" style="border-bottom: 0;">
-                                    <div class="post-9">
-                                        <div>
-                                            <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="/images/mypage/logo_1757380047672.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                        </div>
-                                        <div class="post-10">
-                                            <div class="post-14">
-                                                <p class="post-15">애니포인트 미디어</p>
-                                            </div>
-                                            <div class="post-11">
-                                                <div class="post-12">
-                                                    <div>
-                                                        <p class="post-13">주니어 백엔드 개발자</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="post-14">
-                                                <p class="post-15">백엔드 개발 체험자를 모집합니다.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="">
-                                <div class="post-8" style="border-bottom: 0;">
-                                    <div class="post-9">
-                                        <div>
-                                            <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="/images/mypage/logo_1757380047672.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                        </div>
-                                        <div class="post-10">
-                                            <div class="post-14">
-                                                <p class="post-15">애니포인트 미디어</p>
-                                            </div>
-                                            <div class="post-11">
-                                                <div class="post-12">
-                                                    <div>
-                                                        <p class="post-13">주니어 백엔드 개발자</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="post-14">
-                                                <p class="post-15">백엔드 개발 체험자를 모집합니다.</p>
+                                                <p class="post-15" th:text="${notice.experienceNoticeSubtitle}"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -193,7 +123,7 @@
                             </a>
                         </div>
                         <!-- 더보기 버튼 -->
-                        <a class="etc-22" href="">
+                        <a class="etc-22" th:href="@{/experience/list}">
                             <button class="etc-23">
                                 <span class="etc-24">체험 공고 더보기</span>
                             </button>
@@ -215,96 +145,11 @@
                     </div>
                 </div>
                 <!-- 게시글 상세 모달 -->
-                <div class="reply">
+                <div id="post-detail-modal" class="reply" style="display:none;">
                     <div class="reply-contain">
-                        <!-- 게시글 상세 -->
                         <div class="reply-left">
-                            <!-- 좌측상단 -->
-                            <div class="post-9">
-                                <div>
-                                    <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="/images/mypage/default.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                </div>
-                                <div class="post-10">
-                                    <div class="post-11">
-                                        <div class="post-12">
-                                            <div>
-                                                <p class="post-13">지원자</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="post-14">
-                                        <p class="post-15">SW개발자</p>
-                                        <p class="post-15">11분 전</p>
-                                    </div>
-                                </div>
-                                <!-- 신고 버튼 -->
-                                <div class="report">
-                                    <button class="post-28" style="width: 70px; color: #e0e0e0; font-size: 15px; font-weight: 500;">
-                                        <svg class="btn" aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="20" role="img" width="20" >
-                                            <path clip-rule="evenodd" d="M12 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5m0-4c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5m0 11c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5" fill-rule="evenodd"></path>
-                                        </svg>
-                                        <div class="report-1">
-                                            <div class="report-2">
-                                                <div class="report-3">
-                                                    <div class="report-4">
-                                                        <div class="report-5">
-                                                            <p class="report-6">게시물 신고</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="post-16">
-                                <div class="post-17">
-                                    <div class="post-18">
-                                        <div class="post-19">
-                                            <span>테스트용 글 확인</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- 이미지파일 -->
-                                <div class="file">
-                                    <div class="file-1">
-                                        <div class="file-2">
-                                            <!-- 이미지 모음 -->
-                                            <div class="file-9">
-                                                <!-- 이미지들 -->
-                                                <div class="file-10">
-                                                    <img class="img" alt="첨부 이미지 1" draggable="false" loading="eager" width="0" height="0" decoding="async" data-nimg="1" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="/images/mypage/IMG_4127_2025_09_11T05_25_47_988Z.webp" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
-                                                </div>
-                                                <div class="file-10">
-                                                    <img class="img" alt="첨부 이미지 1" draggable="false" loading="eager" width="0" height="0" decoding="async" data-nimg="1" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="/images/mypage/2.webp" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
-                                                </div>
-                                                <div class="file-10">
-                                                    <img class="img" alt="첨부 이미지 1" draggable="false" loading="eager" width="0" height="0" decoding="async" data-nimg="1" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="/images/mypage/3.webp" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="post-20">
-                                    <div class="post-21">
-                                        <div class="post-22">
-                                            <!-- 좋아요 -->
-                                            <button class="post-23">
-                                                <div class="post-24">
-                                                    <svg class="heart" viewBox="0 0 24 24" fill="red" stroke="red" height="20" role="img" width="20">
-                                                        <path d="M17.668 16.4c2.028-1.76 4.328-3.755 4.328-6.902a6.07 6.07 0 0 0-5.831-6.274 5.25 5.25 0 0 0-2.296.447l-.267.128a5.3 5.3 0 0 0-1.606 1.274 5.26 5.26 0 0 0-4.161-1.85 6.07 6.07 0 0 0-4.211 1.934l-.2.225a6.07 6.07 0 0 0-1.42 4.116l.005.29c.132 2.968 2.278 4.833 4.353 6.637v.001l.742.65.893.797a39 39 0 0 0 3.057 2.623l.109.065c.22.12.462.193.712.21l.125.005c.293 0 .58-.075.837-.215l.108-.065a39 39 0 0 0 3.151-2.707l.802-.716z"></path>
-                                                    </svg>
-                                                </div>
-                                                <div style="margin-left: 5px;">
-                                                    <p class="post-25">0</p>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- 게시글 상세 우측 -->
                         </div>
-                        <!-- 상세보기 우측 -->
                         <div class="reply-right">
                             <div class="reply-2">
                                 <!-- 댓글 상단 -->
@@ -334,9 +179,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- 댓글 메인 -->
+                                <!-- 댓글 모음 -->
                                 <div class="reply-10">
-                                    <!-- 게시글 상세 모음 -->
                                     <div class="post-8 " style="padding: 8px; border-bottom:none; gap:5px;">
                                         <div class="post-9">
                                             <div>
@@ -382,7 +226,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="post-20">
+                                            <div class="detail-post-20">
                                                 <div class="post-21">
                                                     <div class="post-22">
                                                         <button class="post-23">
@@ -643,7 +487,7 @@
                             <div class="popup-body">
                                 <div class="popup-input">
                                     <textarea class="popup-textarea" name="postContent" id="postContent"
-                                              placeholder="최소 파일 1개 혹은 10자 이상 작성 해야 업로드 가능합니다."></textarea>
+                                              placeholder="최소 파일 1개, 10자 이상 혹은 5000자 미만으로 작성 해야 업로드 가능합니다."></textarea>
                                 </div>
 
                                 <div class="popup-preview">

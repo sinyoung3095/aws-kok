@@ -6,16 +6,13 @@ import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
 import org.apache.ibatis.type.TypeHandler;
 
-import java.sql.CallableStatement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 @MappedTypes(Provider.class)
 public class ProviderHandler implements TypeHandler<Provider> {
     @Override
     public void setParameter(PreparedStatement ps, int i, Provider parameter, JdbcType jdbcType) throws SQLException {
-        ps.setString(i, parameter.getValue());
+        ps.setObject(i, parameter.getValue(), Types.OTHER);
     }
 
     @Override

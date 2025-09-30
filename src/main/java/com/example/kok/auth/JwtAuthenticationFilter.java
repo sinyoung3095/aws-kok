@@ -39,12 +39,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken authentication =
                         (UsernamePasswordAuthenticationToken) jwtTokenProvider.getAuthentication(token);
 
-//                HTTP 요청에서 IP, 세션ID 등 세부 정보 추출
-//                웹 요청 정보를 바탕으로 세부 정보 저장
-//                인증 객체에 세부 정보까지 추가
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+                log.info("Authentication:"+authentication);
                 log.info("Authentication name: {}", authentication.getName());
                 log.info("Authentication details: {}", authentication.getAuthorities());
                 log.info("Authentication in SecurityContext: {}", SecurityContextHolder.getContext().getAuthentication());

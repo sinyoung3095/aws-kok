@@ -37,6 +37,7 @@ public class AuthController {
 //    로그인
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
+        log.info(userDTO.toString());
         try {
             Authentication authentication =
                     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDTO.getUserEmail(), userDTO.getUserPassword()));
@@ -45,66 +46,70 @@ public class AuthController {
             String accessToken = jwtTokenProvider.createAccessToken(((UserDetails) authentication.getPrincipal()).getUsername());
             String refreshToken = jwtTokenProvider.createRefreshToken(((UserDetails) authentication.getPrincipal()).getUsername());
 
+            log.info(refreshToken);
             Map<String, String> tokens = new HashMap<>();
             tokens.put("accessToken", accessToken);
             tokens.put("refreshToken", refreshToken);
 
 
-
-
             return ResponseEntity.ok(tokens);
 
         } catch(AuthenticationException e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "로그인 실패: " + e.getMessage()));
         }
     }
 
 //    로그아웃
-//    @PostMapping("logout")
-//    public void logout(@CookieValue(value = "accessToken", required = false) String token) {
-//        String username = jwtTokenProvider.getUserName(token);
-//        String provider = (String) jwtTokenProvider.getClaims(token).get("provider");
-//        if(provider == null){
-//            jwtTokenProvider.deleteRefreshToken(username);
-//            jwtTokenProvider.addToBlacklist(token);
-//        }else{
-//            jwtTokenProvider.deleteRefreshToken(username, provider);
-//            jwtTokenProvider.addToBlacklist(token);
-//        }
-//
-//        Cookie deleteAccessCookie = new Cookie("accessToken", null);
-//        deleteAccessCookie.setHttpOnly(true);
-//        deleteAccessCookie.setSecure(true);
-//        deleteAccessCookie.setPath("/");
-//        deleteAccessCookie.setMaxAge(0);
-//
-//        response.addCookie(deleteAccessCookie);
-//
-//        Cookie deleteRefreshCookie = new Cookie("refreshToken", null);
-//        deleteRefreshCookie.setHttpOnly(true);
-//        deleteRefreshCookie.setSecure(true);
-//        deleteRefreshCookie.setPath("/");
-//        deleteRefreshCookie.setMaxAge(0);
-//
-//        response.addCookie(deleteRefreshCookie);
-//
-//        Cookie memberEmailCookie = new Cookie("memberEmail", null);
-//        memberEmailCookie.setHttpOnly(true);
-//        memberEmailCookie.setSecure(true);
-//        memberEmailCookie.setPath("/");
-//        memberEmailCookie.setMaxAge(0);
-//
-//        response.addCookie(memberEmailCookie);
-//
-//
-//        Cookie roleCookie = new Cookie("role", null);
-//        roleCookie.setHttpOnly(true);
-//        roleCookie.setSecure(true);
-//        roleCookie.setPath("/");
-//        roleCookie.setMaxAge(0);
-//
-//        response.addCookie(roleCookie);
-//    }
+    @PostMapping("logout")
+    public void logout(@CookieValue(value = "accessToken", required = false) String token) {
+
+        log.info("Logout User: {}", token);
+        String username = jwtTokenProvider.getUserName(token);
+        String provider = (String) jwtTokenProvider.getClaims(token).get("provider");
+        log.info(username);
+
+        if(provider == null){
+            jwtTokenProvider.deleteRefreshToken(username);
+        }else{
+            jwtTokenProvider.deleteRefreshToken(username,provider);
+        }
+
+        jwtTokenProvider.addToBlacklist(token);
+
+        Cookie deleteAccessCookie = new Cookie("accessToken", null);
+        deleteAccessCookie.setHttpOnly(true);
+        deleteAccessCookie.setSecure(true);
+        deleteAccessCookie.setPath("/");
+        deleteAccessCookie.setMaxAge(0);
+
+        response.addCookie(deleteAccessCookie);
+
+        Cookie deleteRefreshCookie = new Cookie("refreshToken", null);
+        deleteRefreshCookie.setHttpOnly(true);
+        deleteRefreshCookie.setSecure(true);
+        deleteRefreshCookie.setPath("/");
+        deleteRefreshCookie.setMaxAge(0);
+
+        response.addCookie(deleteRefreshCookie);
+
+        Cookie memberNameCookie = new Cookie("memberName", null);
+        memberNameCookie.setHttpOnly(true);
+        memberNameCookie.setSecure(true);
+        memberNameCookie.setPath("/");
+        memberNameCookie.setMaxAge(0);
+
+        response.addCookie(memberNameCookie);
+
+
+        Cookie userEmailCookie = new Cookie("userEmail", null);
+        userEmailCookie.setHttpOnly(true);
+        userEmailCookie.setSecure(true);
+        userEmailCookie.setPath("/");
+        userEmailCookie.setMaxAge(0);
+
+        response.addCookie(userEmailCookie);
+    }
 
 //    리프레시 토큰으로 엑세스 토큰 발급
 //    @GetMapping("refresh")

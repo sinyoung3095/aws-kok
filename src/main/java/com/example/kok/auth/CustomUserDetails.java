@@ -11,8 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-// Spring Security에서는 기본으로 최소 정보만 제공한다.
-// 추가 정보를 토큰에 담고 싶다면 CustomUserDetails를 구성하여 활용한다.
 @Getter
 @ToString
 public class CustomUserDetails implements UserDetails {

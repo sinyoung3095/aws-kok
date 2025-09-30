@@ -6,6 +6,7 @@ import com.example.kok.dto.UserDTO;
 public interface UserService {
     public void joinUser(UserDTO userDTO);
     public int searchUserByEmail(String email);
+    public void joinSnsUser(UserDTO userDTO);
 
     default UserVO toVO(UserDTO userDTO) {
        return UserVO.builder()

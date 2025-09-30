@@ -10,7 +10,9 @@ const inputName = document.getElementById("input-name");
 const inputNumber = document.getElementById("input-number");
 const inputEmail = document.getElementById("input-email");
 const inputPassword = document.getElementById("input-password");
-
+if(window.location.search.includes("error")){
+    alert("중복된 이메일 입니다.")
+}
 // 이메일 검사
 const isValidEmail = (value) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());

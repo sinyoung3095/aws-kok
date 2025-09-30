@@ -2,7 +2,7 @@ package com.example.kok.controller;
 
 import com.example.kok.common.exception.PostNotFoundException;
 import com.example.kok.dto.AdminNoticeDTO;
-import com.example.kok.service.AdminNoticeService;
+import com.example.kok.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -13,14 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.Optional;
-
 @Slf4j
 @Controller
 @RequestMapping("/admin/**")
 @RequiredArgsConstructor
 public class AdminController {
-    private final AdminNoticeService adminNoticeService;
+    private final AdminService adminService;
 
 //    관리자 등록
     @GetMapping("join")
@@ -103,7 +101,7 @@ public class AdminController {
 //    고객지원 - 공지사항 상세
     @GetMapping("support/detail/{id}")
     public String goToSupportDetailPage(@PathVariable Long id, Model model) {
-        model.addAttribute("notice", adminNoticeService.getNotice(id).orElseThrow(PostNotFoundException::new));
+        model.addAttribute("notice", adminService.getNotice(id).orElseThrow(PostNotFoundException::new));
         log.info("noticeModel: {}", model);
         return "admin/support-detail";
     }
@@ -111,13 +109,13 @@ public class AdminController {
 //    고객지원 - 공지사항 수정
     @GetMapping("support/update/{id}")
     public String goToSupportUpdatePage(@PathVariable Long id, Model model) {
-        model.addAttribute("adminNotice", adminNoticeService.getNotice(id).orElseThrow(PostNotFoundException::new));
+        model.addAttribute("adminNotice", adminService.getNotice(id).orElseThrow(PostNotFoundException::new));
         return "admin/support-update";
     }
 
     @PostMapping("support/update")
     public RedirectView update(AdminNoticeDTO adminNoticeDTO) {
-        adminNoticeService.update(adminNoticeDTO);
+        adminService.update(adminNoticeDTO);
         return new RedirectView("/admin/support/detail/" + adminNoticeDTO.getId());
     }
 
@@ -130,14 +128,14 @@ public class AdminController {
 
     @PostMapping("support/write")
     public RedirectView write(AdminNoticeDTO adminNoticeDTO) {
-        adminNoticeService.write(adminNoticeDTO);
+        adminService.write(adminNoticeDTO);
         return new RedirectView("/admin/support/detail/" + adminNoticeDTO.getId());
     }
 
 //    고객지원 - 공지사항 삭제
     @GetMapping("support/delete/{id}")
     public RedirectView delete (@PathVariable Long id) {
-        adminNoticeService.delete(id);
+        adminService.delete(id);
         return new RedirectView("/admin/support/1");
     }
 }

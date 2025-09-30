@@ -10,6 +10,10 @@ const socialLoginContainer = document.querySelector('.social-login-container');
 const joinMember = document.querySelector('.join-member');
 const joinCompany = document.querySelector('.join-company');
 
+if(window.location.search.includes("error")){
+    alert("입력하신 아이디가 없습니다.")
+}
+
 // 일반 로그인
 generalMember.addEventListener("click", (e) => {
     inputContainer.classList.add('member');
@@ -67,7 +71,7 @@ loginButton.addEventListener("click",async (e)=>{
     const result = await memberService.login({userEmail:email,userPassword:password});
 
         if(result.accessToken){
-            location.href='/community/page';
+            location.href='/main-page/login-header';
         }
 
 });

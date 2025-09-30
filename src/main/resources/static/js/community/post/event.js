@@ -101,9 +101,25 @@ document.body.addEventListener("click", async (e) => {
         return;
     }
 
-    // 댓글창 열기
-    if (target.closest(".replys")) {
-        document.querySelector(".reply").style.display = "flex";
+    // 게시글 상세 모달 열기
+    if (target.closest(".check-detail-post")) {
+        const postCard = target.closest(".post-8");
+        const postId = postCard.dataset.postId;
+
+        try {
+            const post = await postService.getOne(postId);
+            console.log("게시글 :", post);
+            postLayout.showDetail(post);
+        } catch (err) {
+            console.error("상세보기 불러오기 실패:", err);
+            alert("게시글을 불러올 수 없습니다.");
+        }
+        return;
+    }
+
+    // 게시글 상세 모달 닫기
+    if (target.id === "post-detail-modal" || target.closest(".close-modal")) {
+        document.getElementById("post-detail-modal").style.display = "none";
         return;
     }
 

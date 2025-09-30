@@ -14,5 +14,5 @@ import java.util.List;
 @ToString
 public class AdminNoticeCriteriaDTO {
     private List<AdminNoticeDTO> noticeList;
-    private Criteria criteria;
+    private Criteria noticeCriteria;
 }

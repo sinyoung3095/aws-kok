@@ -1,8 +1,8 @@
 const layout = (() => {
-    const showList = (adminNoticesCriteriaDTO) => {
+    const showList = (adminNoticeCriteriaDTO) => {
         const noticeListContainer = document.querySelector(".table-notice tbody");
         let text = ``;
-        adminNoticesCriteriaDTO.noticeList.forEach((notice) => {
+        adminNoticeCriteriaDTO.noticeList.forEach((notice) => {
             text += `
                 <tr class="support-notice-list" onclick="window.location.href='/admin/support/detail/${notice.id}';">
                     <td class="td-date text-grey">${notice.relativeDate}</td>
@@ -16,23 +16,31 @@ const layout = (() => {
         noticeListContainer.innerHTML = text;
 
         const pagination = document.querySelector(".pagination.kok-pagination");
-        let criteria = adminNoticesCriteriaDTO.criteria;
+        let criteria = adminNoticeCriteriaDTO.noticeCriteria;
         let textNumber = ``;
 
         if(criteria.hasPreviousPage){
-            textNumber += `<a href="/admin/support/${criteria.startPage - 1}" data-page="${criteria.startPage - 1}">이전</a>`
+            textNumber = `
+                <li class="page-item page-num">
+                    <a class="page-item-link" data-page="${criteria.page - 1}">이전</a>
+                </li>
+            `;
         }
 
         for(let i = criteria.startPage; i <= criteria.endPage; i++){
             textNumber += `
                 <li class="page-item page-num">
-                    <a href="/admin/support/${i}" class="page-item-link page-item-num" data-page="${i}">${i}</a>
+                    <a href="/admin/support/${i}" data-page="${i}">${i}</a>
                 </li>
            `;
         }
 
         if(criteria.hasNextPage){
-            textNumber += `<a href="/admin/support/${criteria.endPage + 1}" data-page="${criteria.endPage + 1}">다음</a>`
+            textNumber += `
+                <li class="page-item page-num">
+                    <a class="page-item-link" data-page="${criteria.page + 1}">다음</a>
+                </li>
+            `;
         }
 
         pagination.innerHTML = textNumber;
