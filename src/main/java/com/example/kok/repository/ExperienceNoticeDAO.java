@@ -34,4 +34,9 @@ public class ExperienceNoticeDAO {
     public String findJobNameByID(Long id){
         return experienceNoticeMapper.selectJobNameByExpId(id);
     }
+
+//    최신 체험 공고 4개 조회
+    public List<ExperienceNoticeDTO> findLatestFour() {
+        return experienceNoticeMapper.selectLatestFour();
+    }
 }

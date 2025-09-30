@@ -63,7 +63,7 @@ const postLayout = (() => {
                 post.postFiles.forEach((file) => {
                     text += `
                     <div class="file-10">
-                        <img class="img" src="${file.downloadUrl}" alt="첨부 이미지"
+                        <img class="img" src="${file.postFilePath}" alt="첨부 이미지"
                              style="color: transparent; height: 320px; object-fit: cover; width: auto;">
                     </div>`;
                 });

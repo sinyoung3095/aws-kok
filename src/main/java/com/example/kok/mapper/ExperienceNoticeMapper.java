@@ -22,4 +22,7 @@ public interface ExperienceNoticeMapper {
 
 //    직군 조회
     public String selectJobNameByExpId(Long id);
+
+//    최신 체험 공고 4개 조회
+    public List<ExperienceNoticeDTO> selectLatestFour();
 }

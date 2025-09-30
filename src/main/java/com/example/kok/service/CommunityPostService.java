@@ -12,6 +12,7 @@ public interface CommunityPostService {
     public PostsCriteriaDTO getList(int page);
     //    조회
     public PostDTO getPost(Long id);
+    public void setPreSignedUrl(PostDTO postDTO);
     //    추가
     public void write(PostDTO postDTO, List<MultipartFile> multipartFiles);
     //    삭제
