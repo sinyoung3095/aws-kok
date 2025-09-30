@@ -198,8 +198,8 @@ if (historyDetailModal) {
 }
 const logout = document.getElementById("logout");
 logout.addEventListener("click",async (e)=>{
-
-    await service.logout();
+    console.log("로그아웃 누름")
+    await service.logout;
 
     location.href='/member/login';
 });

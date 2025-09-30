@@ -43,7 +43,8 @@ public class CustomUserDetailsService implements UserDetailsService {
             userDTO = userDAO.findByEmail(username)
                     .orElseThrow(() -> new UsernameNotFoundException("소유자를 찾을 수 없습니다."));
         }else {
-
+            userDTO = userDAO.findUserBySnsEmail(username)
+                    .orElseThrow(() -> new UsernameNotFoundException("sns 소유자를 찾을 수 없습니다."));
         }
 
         return new CustomUserDetails(userDTO);

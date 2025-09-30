@@ -25,6 +25,6 @@
     <!--  sns 이메일로 회원가입  -->
     <insert id="insertSnsMember" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_user(user_name, user_phone, sns_email, user_role)
-        values (#{userName},#{userPhone},#{snsEmail},'member')
+        values (#{userName},#{userPhone},#{snsEmail},#{userRole})
     </insert>
 </mapper>
