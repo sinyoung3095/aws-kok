@@ -78,7 +78,7 @@ public class CommunityPostServiceImpl implements CommunityPostService {
 
         List<PostFileDTO> files = communityPostFileDAO.findAllByPostId(postDTO.getId());
         files.forEach(f -> {
-            f.setDownloadUrl(s3Service.getPreSignedUrl(f.getPostFilePath(), Duration.ofMinutes(5)));
+            f.setPostFilePath(s3Service.getPreSignedUrl(f.getPostFilePath(), Duration.ofMinutes(5)));
         });
         postDTO.setPostFiles(files);
 

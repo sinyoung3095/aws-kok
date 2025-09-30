@@ -28,11 +28,11 @@ public class CommunityPostController {
     }
 
 //    게시글 조회
-//    @GetMapping("/post/{id}")
-//    public ResponseEntity<PostDTO> getOne(@PathVariable("id") Long id) {
-//        PostDTO postDTO = communityPostService.getPost(id);
-//        return ResponseEntity.ok(postDTO);
-//    }
+    @GetMapping("/post/{id}")
+    public ResponseEntity<PostDTO> getOne(@PathVariable("id") Long id) {
+        PostDTO postDTO = communityPostService.getPost(id);
+        return ResponseEntity.ok(postDTO);
+    }
 
 //    게시글 작성
 //    @PostMapping
@@ -53,7 +53,7 @@ public class CommunityPostController {
                                    @RequestParam(value="files", required=false) List<MultipartFile> files) {
         PostDTO postDTO = new PostDTO();
         postDTO.setPostContent(postContent);
-        postDTO.setMemberId(1L); // 임시회원 아이디 설정
+        postDTO.setMemberId(3L); // 임시회원 아이디 설정
         communityPostService.write(postDTO, files != null ? files : List.of());
         return ResponseEntity.status(HttpStatus.CREATED).body(postDTO.getId());
     }
