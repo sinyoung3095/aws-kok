@@ -1,5 +1,6 @@
 package com.example.kok.dto;
 
+import com.example.kok.enumeration.Provider;
 import com.example.kok.enumeration.Status;
 import com.example.kok.enumeration.UserRole;
 import lombok.*;
@@ -17,6 +18,8 @@ public class UserDTO {
     private String userEmail;
     private String userPhone;
     private UserRole userRole;
+    private Provider memberProvider;
+    private String snsEmail;
     private Status userStatus;
     private String createdDateTime;
     private String updatedDateTime;

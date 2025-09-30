@@ -8,19 +8,23 @@ create table tbl_user (
     id bigint generated always as identity primary key,
     user_name varchar(255) not null,
     user_phone varchar(255) not null,
-    user_email varchar(255) not null unique,
+    user_email varchar(255) unique,
     user_password varchar(255),
     user_role role not null,
+    sns_email varchar(255),
     user_status status default 'active' not null,
     created_datetime timestamp default now(),
     updated_datetime timestamp default now()
 );
-
+alter table tbl_user add sns_email varchar(255);
+alter table tbl_user alter column user_email DROP not null;
 -- select * from tbl_user;
 --
 -- insert into tbl_user(user_name, user_phone, user_email, user_password, user_role) values ('테스트', '01011111111', 'test1@gmail.com', '1234', 'company');
 
 select * from tbl_user;
+
+
 
 insert into tbl_user (user_name, user_phone, user_email, user_password, user_role)
 values

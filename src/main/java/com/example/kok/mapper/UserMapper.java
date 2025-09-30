@@ -14,4 +14,8 @@ public interface UserMapper {
     public void insertMember(UserDTO userDTO);
 //    이메일로 회원 수 조회
     public int selectCountByEmail(String userEmail);
+//    sns 이메일 조회
+    public Optional<UserDTO> selectBySnsEmail(String snsEmail);
+//    sns 이메일로 회원 가입
+    public void insertSnsMember(UserDTO userDTO);
 }

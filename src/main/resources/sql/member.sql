@@ -18,3 +18,4 @@ values
     (8, 'google', null, '여행 덕후'),
     (9, 'naver', null, '사진 취미'),
     (10, 'kok', null, '간단 프로필 없음');
+

@@ -3,7 +3,7 @@
 <mapper namespace="com.example.kok.mapper.MemberMapper">
     <insert id="insertMember">
         insert into tbl_member(user_id,member_provider)
-        values(#{userId},'kok')
+        values(#{userId},#{memberProvider})
     </insert>
 
 </mapper>

@@ -18,7 +18,16 @@ public class UserDAO {
     public void saveUser(UserDTO userDTO) {
         userMapper.insertMember(userDTO);
     }
+//    이메일로 조회
     public int findUserByEmail(String email) {
         return userMapper.selectCountByEmail(email);
+    }
+//    sns 이메일로 조회
+    public Optional<UserDTO> findUserBySnsEmail(String snsEmail) {
+        return userMapper.selectBySnsEmail(snsEmail);
+    }
+//    sns 이메일로 회원가입
+    public void saveSnsUser(UserDTO userDTO) {
+        userMapper.insertSnsMember(userDTO);
     }
 }
