@@ -4,7 +4,7 @@
 <!--    이메일로 조회-->
     <select id="selectByEmail">
         select id, user_name, user_phone, user_email, user_password, user_role, user_status, created_datetime, updated_datetime
-        from tbl_user
+        from tbl_user where user_email = #{userEmail}
     </select>
 
     <!--  일반 회원 가입  -->
@@ -15,7 +15,16 @@
     <!--  이메일로 회원 조회  -->
     <select id="selectCountByEmail">
         select count(*) from tbl_user
-        where user_email = #{userEmail}
+        where user_email = #{userEmail} and user_status = 'active'
     </select>
-
+    <!--  sns 이메일로 조회  -->
+    <select id="selectBySnsEmail">
+        select * from tbl_user
+        where sns_email = #{snsEmail} and user_status = 'active'
+    </select>
+    <!--  sns 이메일로 회원가입  -->
+    <insert id="insertSnsMember" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_user(user_name, user_phone, sns_email, user_role)
+        values (#{userName},#{userPhone},#{snsEmail},#{userRole})
+    </insert>
 </mapper>

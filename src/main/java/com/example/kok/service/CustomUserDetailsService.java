@@ -24,16 +24,27 @@ public class CustomUserDetailsService implements UserDetailsService {
         String userEmail = null;
         UserDTO userDTO = null;
 
+
         if(request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
                 if("userEmail".equals(cookie.getName())){
                     userEmail = cookie.getValue();
                 }
             }
-        } else {
+        }
+
+        if(userEmail == null){
+//            if(기업?){
+//
+//            }else{
+//
+//            }
 //        이메일로 전체 정보 조회
             userDTO = userDAO.findByEmail(username)
                     .orElseThrow(() -> new UsernameNotFoundException("소유자를 찾을 수 없습니다."));
+        }else {
+            userDTO = userDAO.findUserBySnsEmail(username)
+                    .orElseThrow(() -> new UsernameNotFoundException("sns 소유자를 찾을 수 없습니다."));
         }
 
         return new CustomUserDetails(userDTO);

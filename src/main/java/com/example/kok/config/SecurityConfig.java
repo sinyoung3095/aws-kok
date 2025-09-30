@@ -1,8 +1,6 @@
 package com.example.kok.config;
 
-import com.example.kok.auth.JwtAuthenticationFilter;
-import com.example.kok.auth.JwtAuthenticationHandler;
-import com.example.kok.auth.JwtAuthorizationHandler;
+import com.example.kok.auth.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +13,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -26,6 +25,9 @@ public class SecurityConfig {
     private final JwtAuthenticationHandler jwtAuthenticationHandler;
     private final JwtAuthorizationHandler jwtAuthorizationHandler;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final OAuth2UserService oAuth2UserService;
+    private final OAuth2SuccessHandler oAuth2SuccessHandler;
+    private final OAuth2FailureHandler oAuth2FailureHandler;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -49,6 +51,10 @@ public class SecurityConfig {
                         exceptions.authenticationEntryPoint(jwtAuthenticationHandler)
                                 .accessDeniedHandler(jwtAuthorizationHandler)
                 )
+                .oauth2Login(oauth -> oauth
+                        .userInfoEndpoint(userInfo->userInfo.userService(oAuth2UserService))
+                        .successHandler(oAuth2SuccessHandler)
+                        .failureHandler(oAuth2FailureHandler))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
