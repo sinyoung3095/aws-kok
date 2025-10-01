@@ -94,7 +94,7 @@ public class CommunityPostServiceImpl implements CommunityPostService {
             if(multipartFile.isEmpty()) return;
 
             try {
-                String s3Key = s3Service.uploadPostFile(multipartFile, getPath());
+                String s3Key = s3Service.uploadFile(multipartFile, getPath());
                 FileDTO fileDTO = new FileDTO();
                 fileDTO.setFileOriginName(multipartFile.getOriginalFilename());
                 fileDTO.setFileName(s3Key.substring(s3Key.lastIndexOf("/") + 1));
@@ -150,7 +150,7 @@ public class CommunityPostServiceImpl implements CommunityPostService {
 
             PostFileDTO postFileDTO = new PostFileDTO();
             try {
-                String s3Key = s3Service.uploadPostFile(multipartFile, getPath());
+                String s3Key = s3Service.uploadFile(multipartFile, getPath());
 
                 postFileDTO.setPostId(postDTO.getId());
                 postFileDTO.setPostFileName(multipartFile.getOriginalFilename());

@@ -16,4 +16,8 @@ public class FileDAO {
     public Optional<FileDTO> findFileByCompanyId(Long userId) {
         return fileMapper.selectFileByCompanyId(userId);
     }
+//    파일 작성
+    public void saveFile(FileDTO fileDTO) {
+        fileMapper.insertFile(fileDTO);
+    }
 }

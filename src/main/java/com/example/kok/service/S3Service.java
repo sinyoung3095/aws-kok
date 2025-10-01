@@ -25,7 +25,7 @@ public class S3Service {
     @Value("${aws.s3.bucket-name}")
     private String bucketName;
 
-    public String uploadPostFile(MultipartFile file, String path) throws IOException {
+    public String uploadFile(MultipartFile file, String path) throws IOException {
         String fileName = getFileName(file, path);
         PutObjectRequest request = PutObjectRequest.builder()
                 .bucket(bucketName)

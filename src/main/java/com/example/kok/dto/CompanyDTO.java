@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class CompanyDTO{
     private Long userId;
-    private String companyBusinessNumber;
     private String companyName;
     private String companyInfo;
     private String companyUrl;

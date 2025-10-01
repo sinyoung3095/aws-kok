@@ -1,5 +1,6 @@
 package com.example.kok.repository;
 
+import com.example.kok.domain.CompanyVO;
 import com.example.kok.domain.UserVO;
 import com.example.kok.dto.UserDTO;
 import com.example.kok.mapper.UserMapper;
@@ -18,10 +19,18 @@ public class UserDAO {
     public void saveUser(UserDTO userDTO) {
         userMapper.insertMember(userDTO);
     }
+//    기업 회원 가입
+    public void saveCompany(UserDTO userDTO) {
+        userMapper.insertCompany(userDTO);
+    }
 //    이메일로 조회
     public int findUserByEmail(String email) {
         return userMapper.selectCountByEmail(email);
     }
+//
+    public Optional<UserDTO> findUserByMemberEmail(String email) { return userMapper.selectByMemberEmail(email); }
+//
+    public Optional<UserDTO> findUserByCompanyEmail(String email) { return userMapper.selectByCompanyEmail(email); }
 //    sns 이메일로 조회
     public Optional<UserDTO> findUserBySnsEmail(String snsEmail) {
         return userMapper.selectBySnsEmail(snsEmail);

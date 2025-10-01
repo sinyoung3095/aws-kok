@@ -9,6 +9,7 @@ const socialLoginTitle = document.querySelector('.social-login-title');
 const socialLoginContainer = document.querySelector('.social-login-container');
 const joinMember = document.querySelector('.join-member');
 const joinCompany = document.querySelector('.join-company');
+const checkRole = document.getElementById("role");
 
 if(window.location.search.includes("error")){
     alert("입력하신 아이디가 없습니다.")
@@ -26,6 +27,7 @@ generalMember.addEventListener("click", (e) => {
     socialLoginContainer.classList.remove('hide');
     joinMember.classList.add('show');
     joinCompany.classList.remove('show');
+    checkRole.setAttribute("value","member")
 });
 
 // 기업 로그인
@@ -40,6 +42,7 @@ companyMember.addEventListener("click", (e) => {
     socialLoginContainer.classList.add('hide');
     joinMember.classList.remove('show');
     joinCompany.classList.add('show');
+    checkRole.setAttribute("value","company")
 });
 
 
@@ -67,8 +70,9 @@ passwordInput.addEventListener("keyup", (e) => {
 loginButton.addEventListener("click",async (e)=>{
     const email = emailInput.value;
     const password = passwordInput.value;
+    const role = checkRole.value;
 
-    const result = await memberService.login({userEmail:email,userPassword:password});
+    const result = await memberService.login({userEmail:email,userPassword:password,userRole:role});
 
         if(result.accessToken){
             location.href='/main-page/login-header';

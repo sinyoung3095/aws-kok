@@ -1,5 +1,6 @@
 package com.example.kok.repository;
 
+import com.example.kok.domain.CompanyVO;
 import com.example.kok.dto.CompanyDTO;
 import com.example.kok.mapper.CompanyMapper;
 import lombok.RequiredArgsConstructor;
@@ -34,4 +35,8 @@ public class CompanyDAO {
     public String findScaleById(Long companyId){
         return companyMapper.selectScaleById(companyId);
     }
+    //    기업회원 회원 가입
+    public void saveCompany(CompanyDTO  companyDTO){
+        companyMapper.insertCompany(companyDTO);
+    };
 }

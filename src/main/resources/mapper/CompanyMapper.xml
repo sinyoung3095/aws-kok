@@ -46,4 +46,8 @@
         on c.user_id=sb.company_id
         where sb.company_id=#{companyId}
     </select>
+    <insert id="insertCompany" useGeneratedKeys="true" keyProperty="userId">
+        insert into tbl_company(user_id,company_name)
+        values (#{userId},#{companyName})
+    </insert>
 </mapper>
