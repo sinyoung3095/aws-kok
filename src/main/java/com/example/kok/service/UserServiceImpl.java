@@ -1,8 +1,6 @@
 package com.example.kok.service;
 
-import com.example.kok.domain.CompanyVO;
 import com.example.kok.domain.MemberVO;
-import com.example.kok.domain.UserVO;
 import com.example.kok.dto.CompanyDTO;
 import com.example.kok.dto.CompanyLicenseFileDTO;
 import com.example.kok.dto.FileDTO;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -82,6 +79,12 @@ public class UserServiceImpl implements UserService {
         memberDAO.saveMember(MemberVO.builder().userId(userDTO.getId()).memberProvider(userDTO.getMemberProvider()).build());
         memberAlarmSettingDAO.save(userDTO.getId());
     }
+
+    @Override
+    public UserDTO findById(Long id) {
+        return userDAO.findById(id);
+    }
+
     public String getPath() {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");

@@ -237,11 +237,21 @@ dropdownBtns.forEach(btn => {
     });
 });
 
+// 입력 중 border 해제 (textarea)
+document.querySelectorAll(".contents .textarea").forEach(textarea => {
+    textarea.addEventListener("input", () => {
+        if (textarea.value.trim() !== "") {
+            textarea.style.border = "";
+        }
+    });
+});
+
 // 달력 input
 dateInputs.forEach(input => {
-    input.addEventListener("input", (e) => {
-        let value = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 허용
-        if (value.length > 8) value = value.substring(0, 8);
+    document.querySelectorAll(".date-input").forEach(input => {
+        input.addEventListener("input", (e) => {
+            let value = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 허용
+            if (value.length > 8) value = value.substring(0, 8);
 
         if (value.length >= 5) {
             value = value.substring(0,4) + "-" + value.substring(4,6) +
@@ -255,11 +265,12 @@ dateInputs.forEach(input => {
 });
 
 // 입력 중 border 해제 (textarea)
-textareas.forEach(textarea => {
-    textarea.addEventListener("input", () => {
-        if (textarea.value.trim() !== "") {
-            textarea.style.border = "";
-        }
+    textareas.forEach(textarea => {
+        textarea.addEventListener("input", () => {
+            if (textarea.value.trim() !== "") {
+                textarea.style.border = "";
+            }
+        });
     });
 });
 

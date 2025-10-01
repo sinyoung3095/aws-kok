@@ -20,7 +20,7 @@
         set reply_status = 'inactive'
         where id = #{id}
     </update>
-    
+
 <!-- 대댓글 목록 -->
     <select id="selectRepliesByCommentId">
         select r.comment_id, r.member_id, r.reply_content ,r.created_datetime, r.updated_datetime, u.user_name, m.member_profile_url, jc.job_name
