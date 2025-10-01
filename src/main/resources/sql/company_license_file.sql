@@ -7,3 +7,4 @@ create table tbl_company_license_file(
     references tbl_company(user_id)
  );
 
+select * from tbl_company_license_file;

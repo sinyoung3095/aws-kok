@@ -7,17 +7,19 @@ import com.example.kok.enumeration.Provider;
 import com.example.kok.enumeration.UserRole;
 import com.example.kok.mybatis.handler.ProviderHandler;
 import com.example.kok.repository.UserDAO;
+import com.example.kok.service.S3Service;
 import com.example.kok.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -78,7 +80,25 @@ public class UserController {
     public String goToJoinCompanyPage() {
         return "member/join-company";
     }
-    public void joinCompany(UserDTO userDTO) {}
+
+    @PostMapping("join-company")
+    public RedirectView joinCompany(UserDTO userDTO, @RequestParam("file") MultipartFile multipartFiles ) {
+        log.info("post들어옴");
+        int count;
+        count = userDAO.findUserByEmail(userDTO.getUserEmail());
+        if(count==0) {
+            userDTO.setMemberProvider(Provider.KOK);
+            try {
+                userService.joinCompany(userDTO,multipartFiles);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            return new RedirectView("/member/login");
+        }else{
+            return new RedirectView("/member/join-company?error");
+        }
+    }
 
     @GetMapping("login")
     public String goToLoginPage(UserDTO userDTO, Model model) {

@@ -17,6 +17,8 @@ public class UserDTO {
     private String userPassword;
     private String userEmail;
     private String userPhone;
+    private String companyName;
+    private String companyUrl;
     private UserRole userRole;
     private Provider memberProvider;
     private String snsEmail;

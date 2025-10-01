@@ -1,6 +1,7 @@
 package com.example.kok.config;
 
 import com.example.kok.auth.*;
+import com.example.kok.enumeration.UserRole;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -38,12 +39,15 @@ public class SecurityConfig {
 //                                "/api/auth/**",
 //                                "/member/join",
 //                                "/member/login",
+//                                "/admin/login",
 //                                "/css/**",
 //                                "/js/**",
+//                                "/fonts/**",
 //                                "/images/**").permitAll()
-//                        .requestMatchers("/admin/**").hasRole(MemberRole.ADMIN.name())
+//                        .requestMatchers("/admin/**").hasRole(UserRole.ADMIN.name())
+//                        .requestMatchers("/enterprise-console/**").hasRole(UserRole.COMPANY.name())
 //                        .anyRequest().authenticated()
-//                ) 강사님 코드
+//                )
                 .authorizeHttpRequests(auth -> auth
                         .anyRequest().permitAll()   // 임시 모든 요청 허용
                 )

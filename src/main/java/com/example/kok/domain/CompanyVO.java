@@ -12,7 +12,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class CompanyVO extends Period{
     private Long userId;
-    private String companyBusinessNumber;
     private String companyName;
     private String companyInfo;
     private String companyUrl;

@@ -7,6 +7,12 @@ const loginButton = document.querySelector(".btn-login");
 const email = document.querySelector('input[name="kok"]');
 const pw = document.querySelector('input[name="password"]');
 const modalBody = document.querySelector(".modal-body");
+if(window.location.search.includes("error")) {
+    modalBody.textContent =
+        "가입된 회원정보가 없거나 비밀번호가 잘못 입력되었습니다.";
+    modal.classList.add("active");
+    modal_Inner.style.animation = "popUp 0.1s";
+}
 
 // 자동로그인 클릭 이벤트
 auto_login_checkbox.addEventListener("change", () => {
@@ -14,8 +20,7 @@ auto_login_checkbox.addEventListener("change", () => {
         ? "block"
         : "none";
 });
-
-loginButton.addEventListener("click", (e) => {
+loginButton.addEventListener("click", async (e) => {
     // js 확인용
     e.preventDefault();
 
@@ -33,10 +38,15 @@ loginButton.addEventListener("click", (e) => {
         return;
     }
 
-    modalBody.textContent =
-        "가입된 회원정보가 없거나 비밀번호가 잘못 입력되었습니다.";
-    modal.classList.add("active");
-    modal_Inner.style.animation = "popUp 0.1s";
+    if(email.value.trim()&&pw.value.trim()){
+        const userEmail = email.value;
+        const password = pw.value;
+        const role = 'admin'
+        await adminService.login({userEmail: userEmail,userPassword:password,userRole: role});
+
+        location.href='/admin/main-page'
+    }
+
 });
 
 // 모달 확인 버튼 닫기

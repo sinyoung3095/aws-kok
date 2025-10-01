@@ -114,6 +114,8 @@ public class JwtTokenProvider {
 
     public String createRefreshToken(String username) {
         long REFRESH_TOKEN_VALIDITY = 1000L * 60 * 60 * 24 * 1;
+        log.info(username);
+        log.info("리플레쉬 토큰 들어옴");
         String refreshToken = Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
@@ -127,6 +129,12 @@ public class JwtTokenProvider {
                 REFRESH_TOKEN_VALIDITY,
                 TimeUnit.MILLISECONDS
         );
+        Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
+        refreshTokenCookie.setHttpOnly(true);
+        refreshTokenCookie.setSecure(true);
+        refreshTokenCookie.setPath("/");
+        refreshTokenCookie.setMaxAge(60 * 60 * 24 * 1); // 1일
+        response.addCookie(refreshTokenCookie);
 
         return refreshToken;
     }
@@ -146,6 +154,12 @@ public class JwtTokenProvider {
                 REFRESH_TOKEN_VALIDITY,
                 TimeUnit.MILLISECONDS
         );
+        Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
+        refreshTokenCookie.setHttpOnly(true);
+        refreshTokenCookie.setSecure(true);
+        refreshTokenCookie.setPath("/");
+        refreshTokenCookie.setMaxAge(60 * 60 * 24 * 1); // 1일
+        response.addCookie(refreshTokenCookie);
 
         return refreshToken;
     }

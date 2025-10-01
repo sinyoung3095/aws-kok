@@ -51,17 +51,16 @@
                             </span>
                             <div class="subtitle text-center text-grey">콕(KOK) 관리자 로그인</div>
                         </div>
-                        <form>
                             <div class="login-box center-box">
                                 <div class="box-title roboto">
                                     <span class="text-primary">LOG</span>IN
                                 </div>
                                 <div class="box-subtitle">콕(KOK) 관리자에 로그인하세요</div>
                                 <div class="form-group">
-                                    <input class="form-control h65" placeholder="이메일 계정을 입력해주세요" name="kok">
+                                    <input id="userEmail" class="form-control h65" placeholder="이메일 계정을 입력해주세요" name="kok">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control h65" placeholder="패스워드를 입력해주세요" name="password">
+                                    <input id="userPassword" class="form-control h65" placeholder="패스워드를 입력해주세요" name="password">
                                 </div>
                                 <div class="form-group form-kok-check">
                                     <!-- 자동 로그인 체크 -->
@@ -82,15 +81,15 @@
 <!--                                    </div>-->
                                 </div>
                                 <div class="btn-wrapper">
-                                    <button class="btn btn-primary btn-login h65 btn-block">로그인</button>
+                                    <button class="btn btn-primary btn-login h65 btn-block" type="button">로그인</button>
                                 </div>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<script src="/js/admin/login/module/service.js"></script>
 <script src="/js/admin/login/event.js"></script>
 </html>

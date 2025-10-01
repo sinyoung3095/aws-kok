@@ -22,8 +22,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         String userEmail = null;
+        String userRole = null;
         UserDTO userDTO = null;
-
 
         if(request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
@@ -32,14 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 }
             }
         }
-
         if(userEmail == null){
-//            if(기업?){
-//
-//            }else{
-//
-//            }
-//        이메일로 전체 정보 조회
             userDTO = userDAO.findByEmail(username)
                     .orElseThrow(() -> new UsernameNotFoundException("소유자를 찾을 수 없습니다."));
         }else {

@@ -1,9 +1,11 @@
 package com.example.kok.controller;
 
 
+import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.auth.JwtTokenProvider;
 import com.example.kok.dto.MemberDTO;
 import com.example.kok.dto.UserDTO;
+import com.example.kok.service.CustomUserDetailsService;
 import com.example.kok.service.MemberService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,10 +39,14 @@ public class AuthController {
 //    로그인
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
-        log.info(userDTO.toString());
+            log.info(userDTO.toString());
         try {
             Authentication authentication =
                     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDTO.getUserEmail(), userDTO.getUserPassword()));
+            CustomUserDetails user = (CustomUserDetails) authentication.getPrincipal();
+            if(!user.getUserRole().getValue().equals(userDTO.getUserRole().getValue())){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "로그인 실패"));
+            }
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String accessToken = jwtTokenProvider.createAccessToken(((UserDetails) authentication.getPrincipal()).getUsername());
@@ -67,7 +73,7 @@ public class AuthController {
         log.info("Logout User: {}", token);
         String username = jwtTokenProvider.getUserName(token);
         String provider = (String) jwtTokenProvider.getClaims(token).get("provider");
-        log.info(username);
+        log.info(provider);
 
         if(provider == null){
             jwtTokenProvider.deleteRefreshToken(username);

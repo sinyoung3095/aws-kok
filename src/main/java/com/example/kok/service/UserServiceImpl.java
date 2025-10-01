@@ -1,16 +1,24 @@
 package com.example.kok.service;
 
+import com.example.kok.domain.CompanyVO;
 import com.example.kok.domain.MemberVO;
 import com.example.kok.domain.UserVO;
+import com.example.kok.dto.CompanyDTO;
+import com.example.kok.dto.CompanyLicenseFileDTO;
+import com.example.kok.dto.FileDTO;
 import com.example.kok.dto.UserDTO;
-import com.example.kok.repository.MemberAlarmSettingDAO;
-import com.example.kok.repository.MemberDAO;
-import com.example.kok.repository.UserDAO;
+import com.example.kok.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Service
 @RequiredArgsConstructor
@@ -18,8 +26,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl implements UserService {
     private final MemberDAO memberDAO;
     private final UserDAO  userDAO;
+    private final CompanyDAO companyDAO;
     private final PasswordEncoder passwordEncoder;
     private final MemberAlarmSettingDAO memberAlarmSettingDAO;
+    private final S3Service s3Service;
+    private final FileDAO fileDAO;
+    private final CompanyLicenseFileDAO companyLicenseFileDAO;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void joinUser(UserDTO userDTO) {
@@ -28,6 +41,33 @@ public class UserServiceImpl implements UserService {
             userDAO.saveUser(userDTO);
             memberDAO.saveMember(MemberVO.builder().userId(userDTO.getId()).memberProvider(userDTO.getMemberProvider()).build());
             memberAlarmSettingDAO.save(userDTO.getId());
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void joinCompany(UserDTO userDTO, MultipartFile multipartFiles) throws IOException {
+        String path = getPath();
+        userDTO.setUserPassword(passwordEncoder.encode(userDTO.getUserPassword()));
+        userDAO.saveCompany(userDTO);
+        CompanyDTO companyDTO = new CompanyDTO();
+        companyDTO.setCompanyName(userDTO.getCompanyName());
+        companyDTO.setUserId(userDTO.getId());
+        companyDAO.saveCompany(companyDTO);
+        FileDTO fileDTO = new FileDTO();
+        fileDTO.setFileOriginName(multipartFiles.getOriginalFilename());
+        fileDTO.setFileName(multipartFiles.getOriginalFilename());
+        fileDTO.setFilePath(path);
+        fileDTO.setFileContentType(multipartFiles.getContentType());
+        fileDTO.setFileSize(multipartFiles.getSize()+"");
+        fileDAO.saveFile(fileDTO);
+        CompanyLicenseFileDTO companyLicenseFileDTO = new CompanyLicenseFileDTO();
+        companyLicenseFileDTO.setCompanyId(userDTO.getId());
+        companyLicenseFileDTO.setFileId(fileDTO.getId());
+
+        companyLicenseFileDAO.saveCompanyLicenseFile(companyLicenseFileDTO);
+
+
+        s3Service.uploadFile(multipartFiles,path);
     }
 
     @Override
@@ -41,5 +81,10 @@ public class UserServiceImpl implements UserService {
         userDAO.saveSnsUser(userDTO);
         memberDAO.saveMember(MemberVO.builder().userId(userDTO.getId()).memberProvider(userDTO.getMemberProvider()).build());
         memberAlarmSettingDAO.save(userDTO.getId());
+    }
+    public String getPath() {
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        return today.format(formatter);
     }
 }

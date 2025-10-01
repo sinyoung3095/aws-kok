@@ -8,3 +8,5 @@ CREATE TABLE tbl_file (
       created_datetime timestamp default now(),
       updated_datetime timestamp default now()
 );
+
+select * from tbl_file;
