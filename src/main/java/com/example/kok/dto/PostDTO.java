@@ -27,4 +27,5 @@ public class PostDTO {
     private String jobName;
     private String memberProfileUrl;
     private boolean liked;
+    private List<CommentDTO> comments;
 }

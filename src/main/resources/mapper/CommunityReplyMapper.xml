@@ -20,4 +20,24 @@
         set reply_status = 'inactive'
         where id = #{id}
     </update>
+    
+<!-- 대댓글 목록 -->
+    <select id="selectRepliesByCommentId">
+        select *
+        from tbl_reply r
+        join tbl_member m on r.member_id = m.user_id
+        join tbl_user u on m.user_id = u.id
+        join tbl_user_job_category ujc on u.id = ujc.user_id
+        join tbl_job_category jc on ujc.job_category = jc.id
+        where r.reply_status = 'active'
+        and r.comment_id = #{commentId}
+        order by r.created_datetime asc
+    </select>
+
+<!-- 대댓글 갯수 -->
+    <select id="countRepliesByCommentId">
+        select count(*)
+        from tbl_reply
+        where comment_id = #{commentId}
+    </select>
 </mapper>
