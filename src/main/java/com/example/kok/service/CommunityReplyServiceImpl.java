@@ -5,6 +5,8 @@ import com.example.kok.repository.CommunityReplyDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CommunityReplyServiceImpl implements CommunityReplyService {
@@ -26,5 +28,17 @@ public class CommunityReplyServiceImpl implements CommunityReplyService {
     @Override
     public void delete(Long id) {
         communityReplyDAO.delete(id);
+    }
+
+//    댓글 내 대댓글 목록
+    @Override
+    public List<ReplyDTO> getReplies(Long commentId) {
+        return communityReplyDAO.findAll(commentId);
+    }
+
+//    대댓글 갯수
+    @Override
+    public int getRepliesCount(Long commentId) {
+        return communityReplyDAO.countByCommentId(commentId);
     }
 }

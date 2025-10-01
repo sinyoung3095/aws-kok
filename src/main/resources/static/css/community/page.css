@@ -1248,8 +1248,6 @@ div {
     position: fixed;
     display: flex;
     align-items: stretch;
-    /* 확인용 height */
-    /*height: calc(100vh - 200px);*/
 }
 .reply-left{
     background-color: #ffffff;
@@ -1286,8 +1284,6 @@ div {
     max-width: 400px;
     background: #ffffff;
     position: relative;
-
-    justify-content: space-between;
 }
 .reply-3{
     justify-content: space-between;
@@ -1377,7 +1373,7 @@ div {
 }
 .reply-14{
     flex-direction: column;
-    padding: 0px 12px 12px;
+    padding: 12px 12px;
     bottom: 0;
     width: 100%;
     display: flex;
@@ -1402,7 +1398,7 @@ div {
     cursor: text;
     padding: 8px;
     width: 100%;
-    flex: 1 0 0px;
+    flex: 1 0 0;
     display: flex;
 }
 .reply-18{

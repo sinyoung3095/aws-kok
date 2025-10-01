@@ -31,7 +31,7 @@ public class CommunityPostServiceImpl implements CommunityPostService {
     private final CommunityPostDAO communityPostDAO;
     private final CommunityPostFileDAO communityPostFileDAO;
     private final S3Service s3Service;
-    private final CommunityLikeService communityLikeService;
+    private final CommunityCommentService communityCommentService;
 
     @Override
     public void setPreSignedUrl(PostDTO postDTO) {
@@ -50,6 +50,7 @@ public class CommunityPostServiceImpl implements CommunityPostService {
 
         posts.forEach(post -> {
             post.setRelativeDate(DateUtils.toRelativeTime(post.getCreatedDateTime()));
+            post.setCommentsCount(communityCommentService.commentsCountByPostId(post.getId()));
             List<PostFileDTO> postFiles = communityPostFileDAO.findAllByPostId(post.getId());
             postFiles.forEach(postFile -> {
                 postFile.setPostFilePath(s3Service.getPreSignedUrl(postFile.getPostFilePath(), Duration.ofMinutes(5)));

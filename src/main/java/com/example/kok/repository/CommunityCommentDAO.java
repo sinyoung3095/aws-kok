@@ -18,11 +18,6 @@ public class CommunityCommentDAO {
         communityCommentMapper.insertComment(commentDTO);
     }
 
-//    게시글 내 댓글 목록
-    public List<CommentDTO> findAll(Long postId, Criteria criteria) {
-        return communityCommentMapper.selectCommentsByPostId(postId, criteria);
-    }
-
 //    댓글 수정
     public void update(CommentDTO commentDTO) {
         communityCommentMapper.updateComment(commentDTO);
@@ -31,5 +26,15 @@ public class CommunityCommentDAO {
 //    댓글 삭제
     public void delete(Long id) {
         communityCommentMapper.deleteComment(id);
+    }
+
+//    게시글 내 댓글 목록
+    public List<CommentDTO> findAll(Long postId) {
+        return communityCommentMapper.selectCommentsByPostId(postId);
+    }
+
+//    댓글 갯수
+    public int getTotal(Long postId) {
+        return communityCommentMapper.countCommentsByPostId(postId);
     }
 }
