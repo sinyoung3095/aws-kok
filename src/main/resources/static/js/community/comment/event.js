@@ -70,6 +70,8 @@ document.body.addEventListener("click", async (e) => {
 
             textarea.value = "";
 
+            await showComments(postId);
+
         } catch (err) {
             console.error("답글 작성 실패:", err);
             alert("답글 작성 중 오류가 발생했습니다.");
