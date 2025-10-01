@@ -1,6 +1,6 @@
-const experienceLayout = (() => {
+const internLayout = (() => {
     const contentLayout = () => {
-        const contentArea = document.querySelector("#experience-list-table");
+        const contentArea = document.querySelector("#intern-list-table");
         contentArea.innerHTML = `
             <div class="list-list-head">
             </div>
@@ -37,7 +37,7 @@ const experienceLayout = (() => {
 
     // 리스트
     const rowTemplate = (lists) => {
-        const tbody = document.querySelector("#experience-list-table .list-list-tbody");
+        const tbody = document.querySelector("#intern-list-table .list-list-tbody");
         if (!tbody) return;
 
         tbody.innerHTML = "";
@@ -56,21 +56,21 @@ const experienceLayout = (() => {
                 <tr class="body-tr" data-id="${list.id}">
                     <td class="body-td">
                         <div>
-                            <div class="td-title">${list.experienceNoticeTitle}</div>
-                            <div class="td-sub">${list.experienceNoticeSubtitle ?? ""}</div>
+                            <div class="td-title">${list.internNoticeTitle}</div>
+                            <div class="td-sub">${list.internNoticeSubtitle ?? ""}</div>
                         </div>
                     </td>
                     <td class="body-td">${list.jobCategoryName ?? "-"}</td>
                     <td class="body-td"><span class="span-number">${list.applicantCount}</span> 명</td>
                     <td class="body-td"><span class="span-number">${list.saveCount}</span> 명</td>
-                    <td class="body-td">${list.experienceStartDate}</td>
-                    <td class="body-td">${list.experienceEndDate}</td>
+                    <td class="body-td">${list.internNoticeStartDate}</td>
+                    <td class="body-td">${list.internNoticeEndDate}</td>
                     <td class="body-td">
-                        <span class="exp-status ${list.experienceNoticeStatus === "active" ? "active" : "gray"}"">${list.experienceNoticeStatus == "inactive" ? "모집 완료" : "모집 중"}</span>
+                        <span class="exp-status ${list.internNoticeStatus === "active" ? "active" : "gray"}"">${list.internNoticeStatus == "inactive" ? "모집 완료" : "모집 중"}</span>
                     </td>
                     <td class="body-td">
                         <div class="appli-active">
-                            <button class="appli-active-btn ${list.experienceNoticeStatus === "active" ? "active" : "gray"}"">
+                            <button class="appli-active-btn ${list.internNoticeStatus === "active" ? "active" : "gray"}"">
                                 <span class="circle"></span>
                             </button>
                         </div>
@@ -81,11 +81,11 @@ const experienceLayout = (() => {
                             <div class="hambuger-pop-wrap">
                                 <div class="hambuger-pop">
                                     <div class="pop-head">작업</div>
-                                    <a href="/enterprise-console/experience/applicate-list" id="detail-btn" class="hambuger-list">
+                                    <a href="/enterprise-console/intern/applicate-list" id="detail-btn" class="hambuger-list">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hambuger-svg"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                         상세보기
                                     </a>
-                                    <a href="/enterprise-console/experience/edit/${list.id}" id="edit-btn" class="hambuger-list">
+                                    <a href="/enterprise-console/intern/edit/${list.id}" id="edit-btn" class="hambuger-list">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hambuger-svg"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg>
                                         수정하기
                                     </a>
@@ -105,7 +105,7 @@ const experienceLayout = (() => {
 
     // 페이지네이션 - layout
     const renderPagination = (criteria) => {
-        const paginationArea  = document.querySelector("#experience-list-table .page-ul");
+        const paginationArea  = document.querySelector("#intern-list-table .page-ul");
         if (!paginationArea) return;
 
         let html = ``;
@@ -123,7 +123,7 @@ const experienceLayout = (() => {
 
     // 페이지네이션 - 총개수
     const listTotalCount = (data) => {
-        const countArea = document.querySelector("#experience-list-table .list-list-head");
+        const countArea = document.querySelector("#intern-list-table .list-list-head");
         if (!countArea) return;
 
         countArea.innerHTML = `
@@ -133,20 +133,20 @@ const experienceLayout = (() => {
 
     // 모집 중인 체험 공고 개수, 활성화된 공고의 지원자 개수, 누적 지원자 개수
     const totalCount = (data) => {
-        const countArea = document.querySelector("#experience-total-wrap");
+        const countArea = document.querySelector("#intern-total-wrap");
         if (!countArea) return;
 
         countArea.innerHTML = `
             <div class="cards">
                 <div class="card-top">
                     <div class="card-top-text">
-                    모집 중인 체험 공고
+                    모집 중인 인턴 공고
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="active-total">
                         <div class="card-body-title"><span class="count">${data.activeTotalCount}</span>개</div>
-                            <p class="card-body-sub">전체 체험 공고: <span class="count">${data.totalCount}</span>개</p>
+                            <p class="card-body-sub">전체 인턴 공고: <span class="count">${data.totalCount}</span>개</p>
                         </div>
                     </div>
                 </div>
@@ -160,7 +160,7 @@ const experienceLayout = (() => {
                 <div class="card-body">
                     <div class="request-total">
                         <div class="card-body-title"><span class="count">${data.activeRequestCount}</span>명</div>
-                        <p class="card-body-sub">활성화 상태인 체험 공고의 지원자</p>
+                        <p class="card-body-sub">활성화 상태인 인턴 공고의 지원자</p>
                     </div>
                 </div>
             </div>
@@ -173,7 +173,7 @@ const experienceLayout = (() => {
                 <div class="card-body">
                     <div>
                         <div class="card-body-title"><span class="count">${data.totalRequestCount}</span>명</div>
-                        <p class="card-body-sub">전체 공고 누적 지원자 수</p>
+                        <p class="card-body-sub">전체 인턴 누적 지원자 수</p>
                     </div>
                 </div>
             </div>

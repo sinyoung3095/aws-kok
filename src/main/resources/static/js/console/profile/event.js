@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const editBtn = document.getElementById("edit-btn");
     const cancelBtn = document.getElementById("cancle-btn");
     const buttonWrap = document.querySelector(".button-wrap");
-    const explainHide1 = document.getElementById("explain-hide1");
-    const explainHide2 = document.getElementById("explain-hide2");
+    // const explainHide1 = document.getElementById("explain-hide1");
+    // const explainHide2 = document.getElementById("explain-hide2");
     const nameInputs = document.querySelectorAll(".name");
     const imgUpBtns = document.querySelectorAll(".img-up-btn-wrap");
     const categoryBtns = document.querySelectorAll(".category-button");
@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
         // 편집 버튼 숨기기
         editBtn.style.display = "none";
         // p태그 보이기
-        explainHide1.style.display = "block";
-        explainHide2.style.display = "block";
+        // explainHide1.style.display = "block";
+        // explainHide2.style.display = "block";
         // not-allowed 삭제
         nameInputs.forEach((nameInput) => {
             nameInput.classList.remove("not-allowed");
@@ -52,8 +52,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     saveBtn = null;
                 }
                 // p태그 숨기기
-                explainHide1.style.display = "none";
-                explainHide2.style.display = "none";
+                // explainHide1.style.display = "none";
+                // explainHide2.style.display = "none";
                 // 편집 버튼 보이기
                 editBtn.style.display = "";
                 // not-allowed 추가
@@ -129,3 +129,36 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+// 공통 함수: 버튼, 인풋, 이미지 연결
+function bindImageUpload(btnSelector, inputSelector, imgSelector) {
+    const btn = document.querySelector(btnSelector);
+    const input = document.querySelector(inputSelector);
+    const img = document.querySelector(imgSelector);
+
+    if (!btn || !input || !img) return;
+
+    // 버튼 클릭 시 → 파일 선택창 열기
+    btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        input.click();
+    });
+
+    // 파일 선택 시 → 미리보기 교체
+    input.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+}
+
+// 배너 이미지 바인딩
+bindImageUpload("#back-file-btn", ".back-input", ".back-img");
+
+// 프로필 이미지 바인딩
+bindImageUpload("#prof-file-btn", ".pro-input", ".profile-img");
