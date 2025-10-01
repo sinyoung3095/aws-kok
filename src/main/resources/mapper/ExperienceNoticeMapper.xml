@@ -38,6 +38,7 @@
         left join tbl_job_category j on j.id=ej.job_category
         left join tbl_save_experience_notice sv on e.id = sv.experience_notice_id
         where e.experience_request_status='accept'
+        and e.experience_end_date &gt;= now()
         and e.experience_notice_status='active'
         <include refid="search"></include>
         group by e.id,
@@ -87,8 +88,7 @@
         join tbl_experience_notice en on c.user_id = en.company_id
         left join tbl_company_profile_file cpf on c.user_id = cpf.company_id
         left join tbl_file f on cpf.file_id = f.id
-        where experience_request_status = 'accept'
-        and experience_notice_status = 'active'
+        where experience_notice_status = 'active'
         order by created_datetime desc
         limit 4
     </select>

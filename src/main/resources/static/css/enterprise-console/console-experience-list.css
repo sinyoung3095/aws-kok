@@ -192,6 +192,7 @@ p.head-p{
     line-height: 1.5;
     color: #737373;
     margin-top: 4px;
+    font-weight: 400;
 }
 
 .new-exp{
@@ -701,7 +702,7 @@ tr.body-tr{
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     transition-duration: .15s;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 tr.body-tr.no-data td{
@@ -731,7 +732,7 @@ td.body-td{
     white-space: nowrap;
     vertical-align: middle;
     padding: 8px;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 div.td-title{
@@ -902,7 +903,7 @@ div.pop-head{
 
 div.hambuger-list,
 a.hambuger-list{
-    user-select: none;
+    /*user-select: none;*/
     outline-style: none;
     font-size: 14px;
     line-height: 1.42857;
@@ -943,7 +944,7 @@ div.bar-hambuger{
 }
 
 div.red-ham-list{
-    user-select: none;
+    /*user-select: none;*/
     outline-style: none;
     color: #e7000b;
     font-size: 14px;

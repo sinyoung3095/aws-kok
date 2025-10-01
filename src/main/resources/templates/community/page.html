@@ -148,10 +148,77 @@
                 <div id="post-detail-modal" class="reply" style="display:none;">
                     <div class="reply-contain">
                         <div class="reply-left">
-                            <!-- 게시글 상세 우측 -->
+                            <!-- 게시글 상세 좌측 -->
                         </div>
                         <div class="reply-right">
-                            <!-- 댓글 목록 우측 -->
+                            <div class="reply-2">
+                                <!-- 댓글 상단 -->
+                                <div class="reply-3">
+                                    <div class="reply-4">
+                                        <div class="reply-5">
+                                            <span class="reply-6">댓글</span>
+                                        </div>
+                                        <div class="leply-7">
+                                            <button id="down" class="leply-8">
+                                                <p class="leply-9">닫기</p>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="reply-10">
+                                    <!-- 댓글, 대댓글 모음 -->
+                                </div>
+                                <!-- 댓글 작성 -->
+                                <div class="reply-14">
+                                    <div class="reply-15">
+                                        <div class="reply-16">
+                                            <div class="reply-17">
+                                                <textarea maxlength="2000" placeholder="댓글을 남겨보세요." rows="1" class="reply-18 replytext"></textarea>
+                                                <svg class="enter" aria-label="icon" color="foregrounds.neutral.secondary" fill="currentColor" height="24" role="img" width="24">
+                                                    <path clip-rule="evenodd" d="M9.434 6.435a.8.8 0 0 1 1.132 0l5 5a.8.8 0 0 1 0 1.13l-5 5a.8.8 0 1 1-1.132-1.13L13.87 12 9.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 모바일 댓글 작성 -->
+                                <div class="reply-mobile">
+                                    <div class="reply-15">
+                                        <div class="reply-16">
+                                            <div class="reply-17">
+                                                <textarea maxlength="2000" placeholder="댓글을 남겨보세요." rows="1" class="reply-18 replytext"></textarea>
+                                                <svg class="enter" aria-label="icon" color="foregrounds.neutral.secondary" fill="currentColor" height="24" role="img" width="24">
+                                                    <path clip-rule="evenodd" d="M9.434 6.435a.8.8 0 0 1 1.132 0l5 5a.8.8 0 0 1 0 1.13l-5 5a.8.8 0 1 1-1.132-1.13L13.87 12 9.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 댓글 삭제모달 -->
+                                <div class="del">
+                                    <div class="del-1">
+                                        <div class="del-2">
+                                            <div class="del-3">
+                                                <div class="del-4">
+                                                    <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="40px" role="img" width="40px">
+                                                        <path clip-rule="evenodd" d="M8.284 6.2H4a.8.8 0 1 0 0 1.6h1.2V18A2.8 2.8 0 0 0 8 20.8h8a2.8 2.8 0 0 0 2.8-2.8V7.8H20a.8.8 0 0 0 0-1.6h-4.284a3.801 3.801 0 0 0-7.432 0m1.666 0h4.1a2.2 2.2 0 0 0-4.1 0m7.25 1.6H6.8V18A1.2 1.2 0 0 0 8 19.2h8a1.2 1.2 0 0 0 1.2-1.2z" fill-rule="evenodd"></path>
+                                                    </svg>
+                                                </div>
+                                                <div class="del-5">
+                                                    <p class="del-6">댓글을 삭제하시겠습니까?</p>
+                                                    <div class="del-7">
+                                                        <p class="del-8">삭제된 댓글은 다시 복구할 수 없으며, 게시물에서 발생한 다른 사용자의 좋아요, 댓글도 함께 삭제됩니다.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="del-9">
+                                                <button class="del-10"><span class="del-11">삭제하기</span></button>
+                                                <button class="del-12"><span class="del-11">닫기</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -179,6 +246,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- 글쓰기 창 -->
                 <div id="post-write-popup" class="popup-container">
                     <div class="popup-inner">
@@ -211,7 +279,6 @@
                                     <textarea class="popup-textarea" name="postContent" id="postContent"
                                               placeholder="최소 파일 1개, 10자 이상 혹은 5000자 미만으로 작성 해야 업로드 가능합니다."></textarea>
                                 </div>
-
                                 <div class="popup-preview">
                                     <div class="popup-preview-inner">
                                         <!-- 이미지 미리보기 들어오는 영역 -->
@@ -241,22 +308,6 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
-                </div>
-
-                <!-- 글쓰기 경고 모달 -->
-                <div id="toast-white" class="toast-warning">
-                    <div class="toast-warning-content">
-                        <div class="toast-inner">
-                            <div class="toast-icon">
-                                <svg viewBox="0 0 24 24" fill="#fff" height="20" role="img" width="20">
-                                    <path clip-rule="evenodd"
-                                          d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8"
-                                          fill-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <p class="toast-text">업로드하려면 10자 이상 입력하거나 파일을 하나 이상 첨부해야 합니다.</p>
-                        </div>
                     </div>
                 </div>
 
@@ -330,4 +381,5 @@
 <script src="/js/community/comment/module/layout.js"></script>
 <script src="/js/community/comment/module/service.js"></script>
 <script src="/js/community/post/event.js"></script>
+<script src="/js/community/comment/event.js"></script>
 </html>

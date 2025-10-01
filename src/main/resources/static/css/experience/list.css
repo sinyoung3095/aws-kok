@@ -706,7 +706,7 @@
     max-width: 90vw;
     min-width: 360px;
     position: fixed;
-    bottom: 30px;
+    bottom: 15%;
     left: 50%;
     transform: translate(-50%, 100px);
     background-color: rgba(18,19,20,1);
@@ -729,6 +729,12 @@
     letter-spacing: -.28px;
     flex-direction: column;
     align-items: baseline;
+}
+
+.no-results{
+    justify-content: center;
+    display: flex;
+    padding-top: 50%;
 }
 
 .toast-inner {

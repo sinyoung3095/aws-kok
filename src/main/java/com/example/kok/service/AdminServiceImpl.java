@@ -1,17 +1,19 @@
 package com.example.kok.service;
 
 import com.example.kok.domain.AdminNoticeVO;
-import com.example.kok.dto.AdminNoticeCriteriaDTO;
-import com.example.kok.dto.AdminNoticeDTO;
+import com.example.kok.dto.*;
+import com.example.kok.repository.AdminExperienceDAO;
 import com.example.kok.repository.AdminNoticeDAO;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.DateUtils;
+import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +21,29 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Primary
-public class AdminNoticeServiceImpl implements AdminNoticeService {
+public class AdminServiceImpl implements AdminService {
     private final AdminNoticeDAO adminNoticeDAO;
+    private final AdminExperienceDAO adminExperienceDAO;
 
-//    등록
+//    체험 목록
+    @Override
+    public AdminExperienceCriteriaDTO getExperienceNotice(int page, Search search) {
+        AdminExperienceCriteriaDTO adminExperienceCriteriaDTO = new AdminExperienceCriteriaDTO();
+        Criteria criteria = new Criteria(page, adminExperienceDAO.adminExperienceCountAll());
+        List<AdminExperienceDTO> experiences = adminExperienceDAO.adminExperienceAll(criteria, search);
+
+        criteria.setHasMore(experiences.size() > criteria.getRowCount());
+
+//        11개 가져왔으면, 마지막 1개 삭제
+        if(criteria.isHasMore()){
+            experiences.remove(experiences.size()-1);
+        }
+
+        adminExperienceCriteriaDTO.setExperienceList(experiences);
+        return adminExperienceCriteriaDTO;
+    }
+
+//    공지 등록
     @Override
     public void write(AdminNoticeDTO adminNoticeDTO) {
         AdminNoticeVO adminNoticeVO = toVO(adminNoticeDTO);
@@ -30,7 +51,7 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
         adminNoticeDTO.setId(adminNoticeVO.getId());
     }
 
-//    상세
+//    공지 상세
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Optional<AdminNoticeDTO> getNotice (Long id) {
@@ -41,7 +62,7 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
         return foundNotice;
     }
 
-//    목록
+//    공지 목록
     @Override
     public AdminNoticeCriteriaDTO getList(int page) {
         AdminNoticeCriteriaDTO adminNoticeCriteriaDTO = new AdminNoticeCriteriaDTO();
@@ -54,6 +75,8 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
         });
 
         criteria.setHasMore(noticeList.size() > criteria.getRowCount());
+        criteria.setHasPreviousPage(page > 1);
+        criteria.setHasNextPage(page < criteria.getRealEnd());
 
         //  11개 가져왔으면, 마지막 1개 삭제
         if(criteria.isHasMore()){
@@ -61,12 +84,12 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
         }
 
         adminNoticeCriteriaDTO.setNoticeList(noticeList);
-        adminNoticeCriteriaDTO.setCriteria(criteria);
+        adminNoticeCriteriaDTO.setNoticeCriteria(criteria);
 
         return adminNoticeCriteriaDTO;
     }
 
-//    수정
+//    공지 수정
     @Override
     public void update(AdminNoticeDTO adminNoticeDTO) {
         AdminNoticeVO adminNoticeVO = toVO(adminNoticeDTO);
@@ -74,8 +97,9 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
         adminNoticeDTO.setId(adminNoticeVO.getId());
     }
 
-//    삭제
+//    공지 삭제
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Long id) {
         adminNoticeDAO.deleteNotice(id);
     }

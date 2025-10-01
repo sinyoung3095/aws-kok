@@ -1,9 +1,12 @@
 package com.example.kok.mapper;
 
 import com.example.kok.dto.CompanyDTO;
+import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
+import com.example.kok.dto.SaveExperienceNoticeDTO;
 import com.example.kok.repository.CompanyDAO;
 import com.example.kok.repository.ExperienceNoticeDAO;
+import com.example.kok.repository.SaveExperienceNoticeDAO;
 import com.example.kok.service.CompanyService;
 import com.example.kok.service.ExperienceNoticeService;
 import com.example.kok.util.Criteria;
@@ -17,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Slf4j
 public class ExperienceTests {
     @Autowired
+<<<<<<< HEAD
     private ExperienceNoticeMapper experienceNoticeMapper;
     @Autowired
     private CompanyMapper companyMapper;
@@ -28,17 +32,23 @@ public class ExperienceTests {
     private ExperienceNoticeDAO experienceNoticeDAO;
     @Autowired
     private CompanyDAO companyDAO;
+    @Autowired
+    private SaveExperienceNoticeDAO saveExperienceNoticeDAO;
+=======
+    private ConsoleExperienceListMapper consoleExperienceListMapper;
+>>>>>>> ex/apply
 
     @Test
-    public void testSelectAllExperienceNotice(){
-        Criteria criteria = new Criteria(1, 1);
-        Search search = new Search();
-        search.setKeyword("회사명1");
-        System.out.println("######################################");
-        System.out.println(criteria);
-        experienceNoticeMapper.selectAllExperienceNotice(criteria, search).forEach(System.out::println);
+    void testSelectById() {
+        ConsoleExperienceNoticeRequestDTO dto = consoleExperienceListMapper.selectById(1L);
+
+        System.out.println("id: " + dto.getId());
+        System.out.println("제목: " + dto.getExperienceNoticeTitle());
+        System.out.println("직군 ID: " + dto.getJobCategoryId());
+        System.out.println("직군 이름: " + dto.getJobCategoryName());
     }
 
+<<<<<<< HEAD
     @Test
     public void testSelectCompany(){
         System.out.println(companyMapper.selectCompanyById(8L));
@@ -53,4 +63,23 @@ public class ExperienceTests {
         System.out.println(companys);
         System.out.println("서비스 공고: "+experienceNoticeService.findNoticeById(21L));
     }
+
+    @Test
+    public void testSaveExperienceNotice(){
+        SaveExperienceNoticeDTO saveExp=new SaveExperienceNoticeDTO();
+        saveExp.setExperienceNoticeId(2L);
+        saveExp.setMemberId(6L);
+        experienceNoticeService.saveExp(saveExp);
+
+        System.out.println(saveExp);
+
+//        SaveExperienceNoticeDTO deleteExp=new SaveExperienceNoticeDTO();
+//        deleteExp.setExperienceNoticeId(2L);
+//        deleteExp.setMemberId(6L);
+//        experienceNoticeService.deleteExp(deleteExp);
+//
+//        System.out.println(deleteExp);
+    }
+=======
+>>>>>>> ex/apply
 }

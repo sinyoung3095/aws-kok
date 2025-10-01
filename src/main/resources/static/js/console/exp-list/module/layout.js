@@ -81,11 +81,11 @@ const experienceLayout = (() => {
                             <div class="hambuger-pop-wrap">
                                 <div class="hambuger-pop">
                                     <div class="pop-head">작업</div>
-                                    <a href="/enterprise-console/experience/applicate-list" class="hambuger-list">
+                                    <a href="/enterprise-console/experience/applicate-list" id="detail-btn" class="hambuger-list">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hambuger-svg"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                         상세보기
                                     </a>
-                                    <a href="/enterprise-console/experience/create" class="hambuger-list">
+                                    <a href="/enterprise-console/experience/edit/${list.id}" id="edit-btn" class="hambuger-list">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hambuger-svg"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg>
                                         수정하기
                                     </a>
@@ -148,7 +148,6 @@ const experienceLayout = (() => {
                         <div class="card-body-title"><span class="count">${data.activeTotalCount}</span>개</div>
                             <p class="card-body-sub">전체 체험 공고: <span class="count">${data.totalCount}</span>개</p>
                         </div>
-                        <a href="/enterprise-console/experience/create" class="card-btn">새 체험 공고 등록</a>
                     </div>
                 </div>
                 <div class="cards">
@@ -162,7 +161,6 @@ const experienceLayout = (() => {
                             <div class="card-body-title"><span class="count">${data.activeRequestCount}</span>명</div>
                             <p class="card-body-sub">활성화 상태인 체험 공고의 지원자</p>
                         </div>
-                        <button class="card-btn">진행 중인 지원자 보기</button>
                     </div>
                 </div>
                 <div class="cards">
@@ -176,7 +174,6 @@ const experienceLayout = (() => {
                             <div class="card-body-title"><span class="count">${data.totalRequestCount}</span>명</div>
                             <p class="card-body-sub">전체 공고 누적 지원자 수</p>
                         </div>
-                        <button class="card-btn">지원자 전체 보기</button>
                     </div>
                 </div>
             </div>

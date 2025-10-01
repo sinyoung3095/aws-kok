@@ -12,6 +12,11 @@ import java.util.Optional;
 public class FileDAO {
     private final FileMapper fileMapper;
 
+//    파일 insert
+    public void saveFile(FileDTO fileDTO) {
+        fileMapper.insertFile(fileDTO);
+    }
+
 //    기업 id로 프사 조회
     public Optional<FileDTO> findFileByCompanyId(Long userId) {
         return fileMapper.selectFileByCompanyId(userId);

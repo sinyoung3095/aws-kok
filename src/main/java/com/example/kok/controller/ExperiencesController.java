@@ -1,23 +1,23 @@
 package com.example.kok.controller;
 
-import com.example.kok.dto.CompanyDTO;
-import com.example.kok.dto.CompanyProfileFileDTO;
-import com.example.kok.dto.ExperienceNoticeCriteriaDTO;
-import com.example.kok.dto.ExperienceNoticeDTO;
+import com.example.kok.auth.CustomUserDetails;
+import com.example.kok.dto.*;
 import com.example.kok.repository.CompanyProfileFileDAO;
 import com.example.kok.service.CompanyService;
 import com.example.kok.service.ExperienceNoticeService;
+import com.example.kok.service.RequestExperienceService;
 import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -27,6 +27,7 @@ public class ExperiencesController {
     private final ExperienceNoticeService experienceNoticeService;
     private final CompanyProfileFileDAO companyProfileFileDAO;
     private final CompanyService companyService;
+    private final RequestExperienceService requestExperienceService;
 
 //    목록
     @GetMapping("{page}")
@@ -57,4 +58,38 @@ public class ExperiencesController {
         result.put("company", companyService.findCompanyById(companyId));
         return result;
     }
+
+//    간편지원 넣기
+    @PostMapping("/request")
+    public void requestExperience(Long experienceId,
+            @AuthenticationPrincipal CustomUserDetails customUserDetails,
+            @RequestParam List<Long> fileIds) {
+
+        RequestExperienceDTO reqDTO = new RequestExperienceDTO();
+        reqDTO.setExperienceNoticeId(experienceId);
+        reqDTO.setMemberId(customUserDetails.getId());
+//        reqDTO.setMemberAlarmSettingId();
+        requestExperienceService.applyForExperience(reqDTO, fileIds);
+    }
+
+//    공고 저장하기
+    @PostMapping("/save")
+    public void saveExperience(@RequestParam Long experienceId,
+            @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        SaveExperienceNoticeDTO saveExp=new SaveExperienceNoticeDTO();
+        saveExp.setExperienceNoticeId(experienceId);
+        saveExp.setMemberId(customUserDetails.getId());
+        experienceNoticeService.saveExp(saveExp);
+    }
+
+//    공고 저장 취소하기
+    @PostMapping("/unsave")
+    public void unsaveExperience(@RequestParam Long experienceId,
+             @AuthenticationPrincipal CustomUserDetails customUserDetails){
+        SaveExperienceNoticeDTO deleteExp=new SaveExperienceNoticeDTO();
+        deleteExp.setExperienceNoticeId(experienceId);
+        deleteExp.setMemberId(customUserDetails.getId());
+        experienceNoticeService.deleteExp(deleteExp);
+    }
+
 }

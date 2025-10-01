@@ -2,6 +2,7 @@ package com.example.kok.repository;
 
 import com.example.kok.dto.ConsoleExperienceListCriteriaDTO;
 import com.example.kok.dto.ConsoleExperienceListDTO;
+import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
 import com.example.kok.enumeration.Status;
 import com.example.kok.mapper.ConsoleExperienceListMapper;
 import com.example.kok.util.Criteria;
@@ -32,8 +33,8 @@ public class ConsoleExperienceListDAO {
     }
 
 //    공고 상태 변경
-    public void updateListStatus(Long noticeId, Status status) {
-        consoleExperienceMapper.updateListStatus(noticeId, status);
+    public void updateNoticeStatus(Long noticeId, Status status) {
+        consoleExperienceMapper.updateNoticeStatus(noticeId, status);
     }
 
 //    활성화된 공고의 지원자
@@ -45,5 +46,36 @@ public class ConsoleExperienceListDAO {
     public int findRequestActiveCountByCompany(Long companyId) {
         return consoleExperienceMapper.selectRequestCountByCompany(companyId, false);
     }
+
+//    공고 등록
+    public void createNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
+        consoleExperienceMapper.insertNotice(noticeRequestDTO);
+    }
+
+//    직군 등록
+    public void createNoticeJobCategory(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
+        consoleExperienceMapper.insertNoticeJobCategory(noticeRequestDTO);
+    }
+
+//    공고 상세
+    public ConsoleExperienceNoticeRequestDTO findDetailById(Long id) {
+        return consoleExperienceMapper.selectExperienceDetailById(id);
+    }
+
+//    공고 수정 등록
+    public void editNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
+        consoleExperienceMapper.updateNotice(noticeRequestDTO);
+    }
+
+//    직군 수정
+public void editNoticeJobCategory(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
+    consoleExperienceMapper.updateNoticeJobCategory(noticeRequestDTO);
+}
+
+//    공고 수정 상세
+    public ConsoleExperienceNoticeRequestDTO findById(Long id) {
+        return consoleExperienceMapper.selectById(id);
+    }
+
 
 }

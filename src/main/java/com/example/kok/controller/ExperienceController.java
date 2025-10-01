@@ -18,6 +18,8 @@ public class ExperienceController {
 //    체험 목록으로 이동
     @GetMapping("list")
     public String goToExpList(@RequestParam(defaultValue = "1") int page, Model model,
+                              @RequestParam(required = false) String sharedCompanyId,
+                              @RequestParam(required = false) String sharedExperienceId,
                               @AuthenticationPrincipal CustomUserDetails customUserDetails,
                               @ModelAttribute("search") Search search) {
 //        System.out.println("컨트롤러 실행해용");
@@ -27,6 +29,8 @@ public class ExperienceController {
         model.addAttribute("experienceNoticeCriteria", dto);
         model.addAttribute("user", customUserDetails);
         model.addAttribute("search", search);
+        model.addAttribute("sharedCompanyId", sharedCompanyId);
+        model.addAttribute("sharedExperienceId", sharedExperienceId);
         return "experience/list";
     }
 }

@@ -13,3 +13,12 @@ CREATE TABLE tbl_comment (
         references tbl_post(id)
 );
 
+select * from tbl_comment;
+select * from tbl_reply;
+delete from tbl_reply;
+delete from tbl_comment;
+select * from tbl_post;
+select * from tbl_member;
+insert into tbl_comment (comment_content, comment_status, member_id, post_id)
+values ('댓글 테스트', 'active', 4, 63);
+

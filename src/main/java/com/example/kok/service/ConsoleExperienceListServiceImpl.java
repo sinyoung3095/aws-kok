@@ -2,14 +2,15 @@ package com.example.kok.service;
 
 import com.example.kok.dto.ConsoleExperienceListCriteriaDTO;
 import com.example.kok.dto.ConsoleExperienceListDTO;
+import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
 import com.example.kok.enumeration.Status;
 import com.example.kok.repository.ConsoleExperienceListDAO;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -46,7 +47,39 @@ public class ConsoleExperienceListServiceImpl implements ConsoleExperienceListSe
 
     @Override
     public void updateListStatus(Long noticeId, Status status) {
-        consoleExperienceDAO.updateListStatus(noticeId, status);
+        consoleExperienceDAO.updateNoticeStatus(noticeId, status);
+    }
+
+//    공고 상세
+    @Override
+    public ConsoleExperienceNoticeRequestDTO getExperienceDetail(Long id) {
+        return consoleExperienceDAO.findDetailById(id);
+    }
+
+    @Override
+    @Transactional
+    public void registerNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
+//        공고 등록
+        consoleExperienceDAO.createNotice(noticeRequestDTO);
+
+//        직군 등록
+        consoleExperienceDAO.createNoticeJobCategory(noticeRequestDTO);
+    }
+
+    @Override
+    @Transactional
+    public void modifyNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
+//        공고 수정
+        consoleExperienceDAO.editNotice(noticeRequestDTO);
+
+//        직군 수정
+        consoleExperienceDAO.editNoticeJobCategory(noticeRequestDTO);
+    }
+
+//    공고 수정 상세
+    @Override
+    public ConsoleExperienceNoticeRequestDTO getNotice(Long id) {
+        return consoleExperienceDAO.findById(id);
     }
 
 }

@@ -11,4 +11,9 @@ import org.springframework.stereotype.Component;
 public class RequestExperienceFileDTO {
     private long fileId;
     private long requestExperienceId;
+
+    public RequestExperienceFileDTO(Long fileId, Long requestId) {
+        this.fileId=fileId;
+        this.requestExperienceId=requestId;
+    }
 }
