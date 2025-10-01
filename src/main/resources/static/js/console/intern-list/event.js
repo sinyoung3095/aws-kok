@@ -25,9 +25,9 @@ jobItems.forEach((item) => {
     });
 });
 
-const experienceTable = document.querySelector("#experience-list-table");
-if (experienceTable) {
-    experienceTable.addEventListener("click", async (e) => {
+const internTable = document.querySelector("#intern-list-table");
+if (internTable) {
+    internTable.addEventListener("click", async (e) => {
         // 모집 활성/비활성 토글 버튼
         const activeExp = e.target.closest("button.appli-active-btn");
         if (activeExp) {
@@ -58,15 +58,14 @@ if (experienceTable) {
             // 상태 버튼 클릭시 확인
             const noticeId = tr.dataset.id;
             try {
-                const data = await experienceNoticeService.updateExperienceStatus(noticeId, statusValue);
+                const data = await internNoticeService.updateInternStatus(noticeId, statusValue);
                 console.log("DB 반영 성공:", data);
             } catch (err) {
                 console.error("DB 반영 실패:", err);
             }
         }
 
-
-        const trs = document.querySelectorAll("#experience-list-table tr.body-tr");
+        const trs = document.querySelectorAll("#intern-list-table tr.body-tr");
         trs.forEach((tr) => {
             const hambugerBtn = tr.querySelector("button.hambuger");
             const hambugerPopWrap = hambugerBtn
@@ -114,7 +113,7 @@ let status = null;
 let keyword ="";
 
 const bindPaginationEvent = (companyId, status) => {
-    const paginationArea = document.querySelector("#experience-list-table .page-ul");
+    const paginationArea = document.querySelector("#intern-list-table .page-ul");
     if (!paginationArea) return;
 
     paginationArea.addEventListener("click",(e) => {
@@ -129,24 +128,24 @@ const bindPaginationEvent = (companyId, status) => {
 
         const page = parseInt(link.dataset.page, 10);
 
-        experienceNoticeService.getList(companyId, page, status, keyword,(data) => {
-            experienceLayout.contentLayout();
-            experienceLayout.rowTemplate(data.experienceLists);
-            experienceLayout.totalCount(data);
-            experienceLayout.listTotalCount(data);
-            experienceLayout.renderPagination(data.criteria);
+        internNoticeService.getList(companyId, page, status, keyword,(data) => {
+            internLayout.contentLayout();
+            internLayout.rowTemplate(data.internLists);
+            internLayout.totalCount(data);
+            internLayout.listTotalCount(data);
+            internLayout.renderPagination(data.criteria);
 
             bindPaginationEvent(companyId, status, keyword);
         });
     });
 };
 
-experienceNoticeService.getList(companyId, page, status, keyword,(data) => {
-    experienceLayout.contentLayout();
-    experienceLayout.rowTemplate(data.experienceLists);
-    experienceLayout.totalCount(data);
-    experienceLayout.listTotalCount(data);
-    experienceLayout.renderPagination(data.criteria);
+internNoticeService.getList(companyId, page, status, keyword,(data) => {
+    internLayout.contentLayout();
+    internLayout.rowTemplate(data.internLists);
+    internLayout.totalCount(data);
+    internLayout.listTotalCount(data);
+    internLayout.renderPagination(data.criteria);
     bindPaginationEvent(companyId, status, keyword);
 });
 
@@ -154,19 +153,7 @@ experienceNoticeService.getList(companyId, page, status, keyword,(data) => {
 // ######################### 검색 ############################
 // 요소 가져오기
 const searchInput = document.querySelector(".search-input");     // 검색어
-// const jobButtons = document.querySelectorAll(".job-3 .job-6");   // 직군 선택
 const statusButtons = document.querySelectorAll(".category-sub"); // 전체/모집중/종료
-
-// 현재 선택 상태 저장
-// let selectedJob = "";     // 직군
-
-// 직군 선택 이벤트
-// jobButtons.forEach(btn => {
-//     btn.addEventListener("click", () => {
-//         selectedJob = btn.textContent.trim();
-//         document.querySelector(".search-span").textContent = selectedJob; // 버튼에 표시 업데이트
-//     });
-// });
 
 // 상태 버튼 이벤트 (전체/모집중/모집종료)
 statusButtons.forEach(btn => {
@@ -192,12 +179,12 @@ statusButtons.forEach(btn => {
 function doSearch(page = 1) {
     keyword = searchInput.value.trim();
 
-    experienceNoticeService.getList(companyId, page, status, keyword, (data) => {
-        experienceLayout.contentLayout();
-        experienceLayout.rowTemplate(data.experienceLists);
-        experienceLayout.totalCount(data);
-        experienceLayout.listTotalCount(data);
-        experienceLayout.renderPagination(data.criteria);
+    internNoticeService.getList(companyId, page, status, keyword, (data) => {
+        internLayout.contentLayout();
+        internLayout.rowTemplate(data.internLists);
+        internLayout.totalCount(data);
+        internLayout.listTotalCount(data);
+        internLayout.renderPagination(data.criteria);
         bindPaginationEvent(companyId, page, status, keyword);
     });
 }

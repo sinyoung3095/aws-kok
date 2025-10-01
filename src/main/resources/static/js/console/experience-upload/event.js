@@ -159,11 +159,11 @@ if(btnUpdate){
                 jobCategoryId: document.querySelector("#job-category").dataset.id,
                 experienceStartDate: document.querySelector("#experience-start-date").value,
                 experienceEndDate: document.querySelector("#experience-end-date").value,
-                experienceNoticeIntroduceJob: document.querySelector("#introduce_job").value,
-                experienceMainTasks: document.querySelector("#main_tasks").value,
-                experienceNoticeEtc: document.querySelector("#notice_etc").value,
-                experienceNoticeStartDate: document.querySelector("#experience-start-date").value,
-                experienceNoticeEndDate: document.querySelector("#experience-end-date").value,
+                experienceNoticeIntroduceJob: document.querySelector("#introduce-job").value,
+                experienceMainTasks: document.querySelector("#main-tasks").value,
+                experienceNoticeEtc: document.querySelector("#notice-etc").value,
+                experienceNoticeStartDate: document.querySelector("#experience-notice-start-date").value,
+                experienceNoticeEndDate: document.querySelector("#experience-notice-end-date").value,
             }
 
             try {
@@ -196,9 +196,9 @@ if(btnYegister) {
                 jobCategoryId: document.querySelector("#job-category").dataset.id,
                 experienceStartDate: document.querySelector("#experience-start-date").value,
                 experienceEndDate: document.querySelector("#experience-end-date").value,
-                experienceNoticeIntroduceJob: document.querySelector("#introduce_job").value,
-                experienceMainTasks: document.querySelector("#main_tasks").value,
-                experienceNoticeEtc: document.querySelector("#notice_etc").value,
+                experienceNoticeIntroduceJob: document.querySelector("#introduce-job").value,
+                experienceMainTasks: document.querySelector("#main-tasks").value,
+                experienceNoticeEtc: document.querySelector("#notice-etc").value,
                 experienceNoticeStartDate: document.querySelector("#experience-start-date").value,
                 experienceNoticeEndDate: document.querySelector("#experience-end-date").value,
             }
