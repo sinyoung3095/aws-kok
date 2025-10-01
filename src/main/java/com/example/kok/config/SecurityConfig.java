@@ -46,16 +46,16 @@ public class SecurityConfig {
 //                ) 강사님 코드
                 .authorizeHttpRequests(auth -> auth
                         .anyRequest().permitAll()   // 임시 모든 요청 허용
-                )
-                .exceptionHandling(exceptions ->
-                        exceptions.authenticationEntryPoint(jwtAuthenticationHandler)
-                                .accessDeniedHandler(jwtAuthorizationHandler)
-                )
-                .oauth2Login(oauth -> oauth
-                        .userInfoEndpoint(userInfo->userInfo.userService(oAuth2UserService))
-                        .successHandler(oAuth2SuccessHandler)
-                        .failureHandler(oAuth2FailureHandler))
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                );
+//                .exceptionHandling(exceptions ->
+//                        exceptions.authenticationEntryPoint(jwtAuthenticationHandler)
+//                                .accessDeniedHandler(jwtAuthorizationHandler)
+//                )
+//                .oauth2Login(oauth -> oauth
+//                        .userInfoEndpoint(userInfo->userInfo.userService(oAuth2UserService))
+//                        .successHandler(oAuth2SuccessHandler)
+//                        .failureHandler(oAuth2FailureHandler))
+//                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
