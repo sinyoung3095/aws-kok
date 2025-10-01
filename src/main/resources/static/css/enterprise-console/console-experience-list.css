@@ -318,6 +318,7 @@ p.card-body-sub{
     color: #737373;
     font-size: 12px;
     line-height: 1.33333;
+    margin-bottom: 0;
 }
 
 button.card-btn,

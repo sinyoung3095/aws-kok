@@ -1,7 +1,10 @@
 package com.example.kok.dto;
 
 import com.example.kok.enumeration.Status;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -10,15 +13,13 @@ import java.time.LocalDate;
 @Getter @Setter
 @ToString
 @EqualsAndHashCode(of="id")
-public class ConsoleExperienceListDTO {
+public class ConsoleInternNoticeDTO {
     private long id;
-    private String experienceNoticeTitle;
-    private String experienceNoticeSubtitle;
-    private LocalDate experienceStartDate;
-    private LocalDate experienceEndDate;
-    private LocalDate experienceNoticeStartDate;
-    private LocalDate experienceNoticeEndDate;
-    private Status experienceNoticeStatus;
+    private String internNoticeTitle;
+    private String internNoticeSubtitle;
+    private LocalDate internNoticeStartDate;
+    private LocalDate internNoticeEndDate;
+    private Status internNoticeStatus;
     private long companyId;
     private String createdDateTime;
     private String updatedDateTime;
