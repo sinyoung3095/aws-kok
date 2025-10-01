@@ -283,6 +283,29 @@ document.body.addEventListener("click", async (e) => {
             reportModal.style.display = "none";
         }
     }
+
+    // 답글 보기 / 접기 버튼 토글
+    if (target.closest(".show-replies-content")) {
+        const commentBlock = target.closest(".post-8");
+        if (!commentBlock) return;
+
+        const nonShow = commentBlock.querySelector(".non-show-replies-container");
+        const show = commentBlock.querySelector(".show-replies-container");
+        const repliesBox = commentBlock.querySelector(".comment-contain");
+
+        if (nonShow && show && repliesBox) {
+            if (nonShow.style.display !== "none") {
+                nonShow.style.display = "none";
+                show.style.display = "flex";
+                repliesBox.style.display = "block";
+            } else {
+                nonShow.style.display = "flex";
+                show.style.display = "none";
+                repliesBox.style.display = "none";
+            }
+        }
+    }
+
 });
 
 

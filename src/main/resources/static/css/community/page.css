@@ -1552,6 +1552,16 @@ div {
     outline: none;
 }
 
+.non-show-replies-content {
+    display: flex;
+    gap: 5px;
+}
+
+.show-replies-content {
+    display: flex;
+    gap: 5px;
+}
+
 #post-write-popup {
     display: none
 }
