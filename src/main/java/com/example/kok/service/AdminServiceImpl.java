@@ -4,11 +4,14 @@ import com.example.kok.domain.AdminNoticeVO;
 import com.example.kok.dto.*;
 import com.example.kok.repository.AdminExperienceDAO;
 import com.example.kok.repository.AdminNoticeDAO;
+import com.example.kok.repository.UserDAO;
+import com.example.kok.util.AdminExperienceCriteria;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.DateUtils;
 import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,22 +28,62 @@ public class AdminServiceImpl implements AdminService {
     private final AdminNoticeDAO adminNoticeDAO;
     private final AdminExperienceDAO adminExperienceDAO;
 
-//    체험 목록
+//    체험
     @Override
-    public AdminExperienceCriteriaDTO getExperienceNotice(int page, Search search) {
-        AdminExperienceCriteriaDTO adminExperienceCriteriaDTO = new AdminExperienceCriteriaDTO();
-        Criteria criteria = new Criteria(page, adminExperienceDAO.adminExperienceCountAll());
-        List<AdminExperienceDTO> experiences = adminExperienceDAO.adminExperienceAll(criteria, search);
+    @Transactional(rollbackFor = Exception.class)
+    public AdminExperienceDetailDTO getExperience(int page, Search search, Long id) {
+        AdminExperienceDetailDTO adminExperienceDetailDTO = new AdminExperienceDetailDTO();
+        Criteria listCriteria = new Criteria(page, adminExperienceDAO.adminExperienceSearchCountAll(search));
+        List<AdminExperienceDTO> experiences = adminExperienceDAO.adminExperienceAll(listCriteria, search);
 
-        criteria.setHasMore(experiences.size() > criteria.getRowCount());
+        listCriteria.setHasMore(experiences.size() > listCriteria.getRowCount());
+        listCriteria.setHasPreviousPage(page > 1);
+        listCriteria.setHasNextPage(page < listCriteria.getRealEnd());
 
+        log.info("이전 페이지 버튼: {}", listCriteria.isHasPreviousPage());
+        log.info("다음 페이지 버튼: {}", listCriteria.isHasNextPage());
 //        11개 가져왔으면, 마지막 1개 삭제
-        if(criteria.isHasMore()){
+        if(listCriteria.isHasMore()){
             experiences.remove(experiences.size()-1);
         }
+        adminExperienceDetailDTO.setListCriteria(listCriteria);
 
-        adminExperienceCriteriaDTO.setExperienceList(experiences);
-        return adminExperienceCriteriaDTO;
+        Optional<AdminExperienceDTO> adminExperienceDTO = adminExperienceDAO.selectAdminExperience(id);
+        AdminExperienceCriteria requestCriteria = new AdminExperienceCriteria(page, adminExperienceDAO.countRequestUser(id));
+        List<UserRequestExperienceDTO> requestExperienceList = adminExperienceDAO.requestUser(requestCriteria, id);
+        AdminExperienceCriteria experienceCriteria = new AdminExperienceCriteria(page, adminExperienceDAO.countUserEvaluation(id));
+        List<UserEvaluationDTO> userEvaluationList = adminExperienceDAO.userEvaluation(experienceCriteria, id);
+
+        requestCriteria.setHasMore(requestExperienceList.size() > requestCriteria.getRowCount());
+        requestCriteria.setHasPreviousPage(page > 1);
+        requestCriteria.setHasNextPage(page < requestExperienceList.size());
+
+        log.info("이전 페이지 버튼: {}", requestCriteria.isHasPreviousPage());
+        log.info("다음 페이지 버튼: {}", requestCriteria.isHasNextPage());
+//        6개 가져왔으면, 마지막 1개 삭제
+        if(requestCriteria.isHasMore()){
+            requestExperienceList.remove(requestExperienceList.size()-1);
+        }
+        adminExperienceDetailDTO.setAdminExperienceCriteria(requestCriteria);
+
+        experienceCriteria.setHasMore(userEvaluationList.size() > experienceCriteria.getRowCount());
+        experienceCriteria.setHasPreviousPage(page > 1);
+        experienceCriteria.setHasNextPage(page < userEvaluationList.size());
+
+        log.info("이전 페이지 버튼: {}", experienceCriteria.isHasPreviousPage());
+        log.info("다음 페이지 버튼: {}", experienceCriteria.isHasNextPage());
+//        6개 가져왔으면, 마지막 1개 삭제
+        if(experienceCriteria.isHasMore()){
+            userEvaluationList.remove(userEvaluationList.size()-1);
+        }
+        adminExperienceDetailDTO.setAdminExperienceCriteria(experienceCriteria);
+
+        adminExperienceDetailDTO.setExperienceList(experiences);
+        adminExperienceDetailDTO.setExperience(adminExperienceDTO);
+        adminExperienceDetailDTO.setUserRequestExperience(requestExperienceList);
+        adminExperienceDetailDTO.setUserEvaluation(userEvaluationList);
+
+        return adminExperienceDetailDTO;
     }
 
 //    공지 등록

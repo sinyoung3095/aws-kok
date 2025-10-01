@@ -1,16 +1,15 @@
 package com.example.kok.service;
 
 import com.example.kok.domain.AdminNoticeVO;
-import com.example.kok.dto.AdminExperienceCriteriaDTO;
-import com.example.kok.dto.AdminNoticeCriteriaDTO;
-import com.example.kok.dto.AdminNoticeDTO;
+import com.example.kok.dto.*;
 import com.example.kok.util.Search;
 
 import java.util.Optional;
 
 public interface AdminService {
-//    체험 목록
-    public AdminExperienceCriteriaDTO getExperienceNotice(int page, Search search);
+
+//    체험
+    public AdminExperienceDetailDTO getExperience(int page, Search search, Long id);
 
 //    공지 등록
     public void write (AdminNoticeDTO adminNoticeDTO);

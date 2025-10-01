@@ -14,3 +14,8 @@ create table  tbl_evaluation (
     constraint fk_evaluation_company foreign key(company_id)
         references tbl_company(user_id)
 );
+
+select * from tbl_evaluation;
+insert into tbl_evaluation (evaluation_content, evaluation_avg_score, request_experience_id, member_id, company_id)
+values ('한 줄 평가5', '4.0', '26', '7', '2');
+

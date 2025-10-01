@@ -21,8 +21,6 @@ public class AdminNoticeTests {
     private AdminNoticeDAO adminNoticeDAO;
     @Autowired
     private AdminService adminService;
-    @Autowired
-    private AdminNoticeDTO adminNoticeDTO;
 
     //    Mapper
     @Test
