@@ -9,6 +9,9 @@ const userMenuContent = document.querySelector(".user-menu-content");
 const pageNums = document.querySelectorAll(".page-num");
 const pageItemNums = document.querySelectorAll(".page-item-num");
 
+// 목록
+service.getExperience(layout.showList);
+
 // 사이드바 펼침/접힘
 sideMenuButtons.forEach((menu) => {
     menu.addEventListener("click", function () {
