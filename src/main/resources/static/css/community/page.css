@@ -295,7 +295,6 @@ div {
 .post-23{
     justify-content: center;
     align-items: center;
-    padding-inline: 4px;
     display: inline-flex;
 }
 .post-24{
@@ -877,6 +876,23 @@ div {
     cursor: pointer;
 }
 .report-6{
+    color: rgba(18,19,20,1);
+    letter-spacing: -0.28px;
+    font-family: "PretendardVariable","PretendardVariable Fallback";
+    font-size: 13px;
+    line-height: 13px;
+    margin: 0;
+}
+.delete-post-btn {
+    color: rgba(18,19,20,1);
+    letter-spacing: -0.28px;
+    font-family: "PretendardVariable","PretendardVariable Fallback";
+    font-size: 13px;
+    line-height: 13px;
+    margin: 0;
+}
+
+.update-post-btn {
     color: rgba(18,19,20,1);
     letter-spacing: -0.28px;
     font-family: "PretendardVariable","PretendardVariable Fallback";
