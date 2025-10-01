@@ -148,7 +148,7 @@
                                 </div>
                             </a>
                             <!-- 상단 고객지원 - 자주 묻는 질문 이동 -->
-                            <a href="/admin/support/1" class="kok-link mr-3">
+                            <a href="/admin/support" class="kok-link mr-3">
                                 <div class="header-menu-btn-notice">
                                     <i class="mdi mdi-bullhorn-variant-outline"></i>
                                 </div>
@@ -206,7 +206,7 @@
                                     <div class="col-auto">
                                         <div class="filter-wrapper filter-search ml-1">
                                             <div class="input-group">
-                                                <input class="form-control flex-grow-1" type="text" placeholder="기업명/모집상태/직군" value="">
+                                                <input type="text" name="keyword" class="form-control flex-grow-1" placeholder="검색어를 입력하세요">
                                                 <div class="input-group-append">
                                                     <button class="btn btn-search">
                                                         <span class="comp-icon icon-magnify" id="icons/ico-search.svg">
@@ -235,52 +235,38 @@
                                         </tr>
                                     </thead>
                                     <tbody class="">
-                                        <tr>
-                                            <td class="td-name">
-                                                <p>코리아IT</p>
-                                            </td>
-                                            <td class="td-main-title">
-                                                <p>SW 개발 백엔드 체험</p>
-                                            </td>
-                                            <td class="td-sub-title">
-                                                <p>AWS 클라우드를 활용한 풀스택 & 자동화 실무 개발</p>
-                                            </td>
-                                            <td class="td-status">
-                                                <p>모집중</p>
-                                            </td>
-                                            <td class="td-date">
-                                                <p>2025/09/19</p>
-                                            </td>  
-                                            <td class="td-job">
-                                                <p>SW 개발</p>
-                                            </td>
-                                            <td class="td-action text-center">
-                                                <div class="action-btn">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <p>코리아IT</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-main-title">-->
+<!--                                                <p>SW 개발 백엔드 체험</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-sub-title">-->
+<!--                                                <p>AWS 클라우드를 활용한 풀스택 & 자동화 실무 개발</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-status">-->
+<!--                                                <p>모집중</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-date">-->
+<!--                                                <p>2025/09/19</p>-->
+<!--                                            </td>  -->
+<!--                                            <td class="td-job">-->
+<!--                                                <p>SW 개발</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-action text-center">-->
+<!--                                                <div class="action-btn">-->
+<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
+<!--                                                </div>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
                                     </tbody>
                                 </table>
                             </div>
                             <!-- 페이지 번호 -->
                             <nav class="kok-pagination-wrapper mt-5 mb-4">
                                 <ul class="pagination kok-pagination">
-                                    <li class="page-item page-num active">
-                                        <a href="" class="page-item-link page-item-num">1</a>
-                                    </li>
-                                    <li class="page-item page-num">
-                                        <a href="" class="page-item-link page-item-num">2</a>
-                                    </li>
-                                    <li class="page-item page-num">
-                                        <a href="" class="page-item-link page-item-num">3</a>
-                                    </li>
-                                    <li class="page-item page-num">
-                                        <a href="" class="page-item-link page-item-num">4</a>
-                                    </li>
-                                    <li class="page-item page-num">
-                                        <a href="" class="page-item-link page-item-num">5</a>
-                                    </li>
+                                    <!-- 페이지 번호 배치 -->
                                 </ul>
                                 <div class="pagination-desc">
                                     <!-- 회원이 1페이지(10명 미만)일 때 -->
@@ -447,5 +433,7 @@
         </div>
     </div>
 </body>
+<script src="/js/admin/experience/module/service.js"></script>
+<script src="/js/admin/experience/module/layout.js"></script>
 <script src="/js/admin/experience/event.js"></script>
 </html>

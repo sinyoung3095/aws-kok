@@ -1270,6 +1270,10 @@ button.btn .comp-icon {
     font-weight: 700;
 }
 
+.page-item-link {
+    cursor: pointer;
+}
+
 /* 일반회원이 1페이지(10명 미만)일 때 */
 .kok-pagination-wrapper .pagination-desc {
     position: absolute;
