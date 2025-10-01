@@ -11,14 +11,14 @@ import java.time.LocalDate;
 @ToString
 @EqualsAndHashCode(of="id")
 public class ConsoleExperienceListDTO {
-    private Long id;
+    private long id;
     private String experienceNoticeTitle;
     private String experienceNoticeSubtitle;
     private LocalDate ExperienceStartDate;
     private LocalDate ExperienceEndDate;
     private Status experienceNoticeStatus;
     private Status experienceRequestStatus;
-    private Long companyId;
+    private long companyId;
     private String createdDateTime;
     private String updatedDateTime;
 
