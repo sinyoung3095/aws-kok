@@ -50,5 +50,6 @@
         insert into tbl_user(user_name, user_phone, sns_email, user_role)
         values (#{userName},#{userPhone},#{snsEmail},#{userRole})
     </insert>
+<!--    -->
 
 </mapper>

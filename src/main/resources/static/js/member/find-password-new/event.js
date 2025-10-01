@@ -42,3 +42,7 @@ function submitButtonAction() {
 }
 inputPassword.addEventListener("input", submitButtonAction);
 inputPasswordCheck.addEventListener("input", submitButtonAction);
+
+const email = document.getElementById("email");
+console.log(`${model.userEmail}`);
+email.setAttribute("value",`${model.userEmail}`);

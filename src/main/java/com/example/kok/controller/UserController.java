@@ -9,6 +9,8 @@ import com.example.kok.mybatis.handler.ProviderHandler;
 import com.example.kok.repository.UserDAO;
 import com.example.kok.service.S3Service;
 import com.example.kok.service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -111,15 +113,31 @@ public class UserController {
         return "member/find-password";
     }
 
+    @GetMapping("find-password-ok")
+    public RedirectView goToFindPasswordOkPage(@CookieValue(name="code", required = false) String cookieCode,
+                                         String code,
+                                         HttpServletResponse response){
+        if(cookieCode == null || cookieCode.isEmpty()){
+            return new RedirectView("/member/find-password");
+        }
+
+        if(cookieCode.equals(code)){
+            Cookie cookie = new Cookie("code", null);
+            cookie.setMaxAge(0);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            return new RedirectView("/member/find-password-new");
+        }
+
+        return new RedirectView("/member/find-password-ok");
+    }
+
     @GetMapping("find-password-new")
-    public String goToFindPasswordNewPage() {
+    public String goToFindPasswordNewPage(@CookieValue(name="email", required = false) String email,Model model) {
+        model.addAttribute("userEmail", email);
         return "member/find-password-new";
     }
 
-    @GetMapping("find-password-ok")
-    public String goToFindPasswordOkPage() {
-        return "member/find-password-ok";
-    }
 
     @GetMapping("find-email")
     public String goToFindEmailPage() {
