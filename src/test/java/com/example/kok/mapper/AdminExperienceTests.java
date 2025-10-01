@@ -30,10 +30,11 @@ public class AdminExperienceTests {
     @Test
     public void testAdminExperienceAll() {
         Search search = new Search();
-        search.setKeyword(null);
-        Criteria criteria = new Criteria(3, adminExperienceMapper.selectAdminExperienceSearchCountAll(search));
+        search.setKeyword("그린");
+        Criteria criteria = new Criteria(1, adminExperienceMapper.selectAdminExperienceSearchCountAll(search));
         adminExperienceMapper.selectAdminExperienceAll(criteria, search).stream().map(AdminExperienceDTO::toString).forEach(log::info);
         log.info("{}", criteria);
+        log.info("{}", search);
     }
 
     @Test
@@ -104,16 +105,4 @@ public class AdminExperienceTests {
 
 
 //    Service
-    @Test
-    public void testGetExperienceNotice() {
-        Search search = new Search();
-        search.setKeyword(null);
-        log.info("페이지 1: {}", adminService.getExperienceList(1, search));
-    }
-
-//    @Test
-//    public void testGetExperience() {
-//        Long id = 55L;
-//        log.info("55번 게시글: {}", adminService.getExperience(id));
-//    }
 }

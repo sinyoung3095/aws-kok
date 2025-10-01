@@ -7,10 +7,8 @@ import com.example.kok.util.Search;
 import java.util.Optional;
 
 public interface AdminService {
-//    체험 목록
-//    public AdminExperienceDetailDTO getExperienceList(int page, Search search);
 
-//    체험 상세
+//    체험
     public AdminExperienceDetailDTO getExperience(int page, Search search, Long id);
 
 //    공지 등록

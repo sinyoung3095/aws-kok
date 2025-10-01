@@ -84,11 +84,46 @@ document.addEventListener("click", (e) => {
     }
 });
 
-// 페이지 번호
-pageItemNums.forEach((pageItemNum) => {
-    pageItemNum.addEventListener("click", (e) => {
-        e.preventDefault();
-        pageNums.forEach((pageNum) => pageNum.classList.remove("active"));
-        pageItemNum.parentElement.classList.add("active");
+// 목록
+const content = document.querySelector("input[name=keyword]");
+const pagination = document.querySelector(".pagination.kok-pagination");
+pagination.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const keyword = content.value;
+    await service.getExperience(layout.showList, e.target.dataset.page, keyword);
+
+    // 페이지 번호
+    const clickNum = e.target.closest("a[data-page]");
+    const pageNumber = parseInt(clickNum.dataset.page);
+
+    const pageNumsList = pagination.querySelectorAll("li.page-num");
+    pageNumsList.forEach((pageNum) => {
+        pageNum.classList.remove("active");
     });
+
+    const currentList = Array.from(pageNumsList).find((pageNum) => {
+        const activeList = pageNum.querySelector("a.page-item-num");
+        return activeList && parseInt(activeList.dataset.page) === pageNumber;
+    });
+
+    if(currentList){
+        currentList.classList.add("active");
+    }
 });
+
+// 검색창
+const search = document.querySelector(".btn.btn-search");
+search.addEventListener("click", (e) => {
+    const page = 1;
+    const keyword = content.value;
+    service.getExperience(layout.showList, page, keyword);
+});
+
+// 페이지 번호
+// pageItemNums.forEach((pageItemNum) => {
+//     pageItemNum.addEventListener("click", (e) => {
+//         e.preventDefault();
+//         pageNums.forEach((pageNum) => pageNum.classList.remove("active"));
+//         pageItemNum.parentElement.classList.add("active");
+//     });
+// });

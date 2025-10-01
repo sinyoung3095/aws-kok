@@ -35,6 +35,41 @@ const layout = (() => {
         });
         experienceListContainer.innerHTML = text;
 
+        const pagination = document.querySelector(".pagination.kok-pagination");
+        let criteria = adminExperienceDetailDTO.listCriteria;
+        let textNumber = ``;
+
+        console.log(criteria);
+
+        if(criteria.hasPreviousPage){
+            textNumber = `
+                <li class="page-item page-num">
+                    <a class="page-item-link page-item-num" data-page="${criteria.page - 1}">이전</a>
+                </li>
+            `;
+        }
+
+        for(let i = criteria.startPage; i <= criteria.endPage; i++){
+            textNumber += `
+                <li class="page-item page-num">
+                    <a class="page-item-num" href="/admin/support/${i}" data-page="${i}">${i}</a>
+                </li>
+           `;
+        }
+
+        if(criteria.hasNextPage){
+            textNumber += `
+                <li class="page-item page-num">
+                    <a class="page-item-link page-item-num" data-page="${criteria.page + 1}">다음</a>
+                </li>
+            `;
+        }
+        pagination.innerHTML = textNumber;
+
+        const firstNumber = pagination.querySelector("li");
+        if (firstNumber) {
+            firstNumber.classList.add("active");
+        }
     }
 
     return {showList: showList}

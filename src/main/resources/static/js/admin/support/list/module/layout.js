@@ -22,7 +22,7 @@ const layout = (() => {
         if(criteria.hasPreviousPage){
             textNumber = `
                 <li class="page-item page-num">
-                    <a class="page-item-link" data-page="${criteria.page - 1}">이전</a>
+                    <a class="page-item-link page-item-num" data-page="${criteria.page - 1}">이전</a>
                 </li>
             `;
         }
@@ -30,7 +30,7 @@ const layout = (() => {
         for(let i = criteria.startPage; i <= criteria.endPage; i++){
             textNumber += `
                 <li class="page-item page-num">
-                    <a href="/admin/support/${i}" data-page="${i}">${i}</a>
+                    <a class="page-item-num" href="/admin/support/${i}" data-page="${i}" class="page-item-num">${i}</a>
                 </li>
            `;
         }
@@ -38,7 +38,7 @@ const layout = (() => {
         if(criteria.hasNextPage){
             textNumber += `
                 <li class="page-item page-num">
-                    <a class="page-item-link" data-page="${criteria.page + 1}">다음</a>
+                    <a class="page-item-link page-item-num" data-page="${criteria.page + 1}">다음</a>
                 </li>
             `;
         }

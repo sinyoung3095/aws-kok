@@ -16,7 +16,7 @@ import java.util.Optional;
 @ToString
 public class AdminExperienceDetailDTO {
     private List<AdminExperienceDTO> experienceList;
-    private Criteria criteria;
+    private Criteria listCriteria;
 
     private Optional<AdminExperienceDTO> experience;
     private List<UserRequestExperienceDTO> userRequestExperience;

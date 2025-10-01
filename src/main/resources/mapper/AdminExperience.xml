@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kok.mapper.AdminExperienceMapper">
     <sql id="search">
-        <if test="search.keyword != null and search.keyword == ''">
+        <if test="search.keyword != null and search.keyword != ''">
             and (
             c.company_name like concat('%', #{search.keyword}, '%') or
             en.experience_notice_title like concat('%', #{search.keyword}, '%') or
@@ -32,8 +32,8 @@
                 on en.id = ejc.experience_notice_id
             left join tbl_job_category jc
                 on ejc.job_category = jc.id
-        <include refid="search"></include>
         where experience_notice_status = 'active'
+        <include refid="search"/>
         order by en.id desc
         limit #{criteria.count} offset #{criteria.offset}
     </select>
@@ -47,8 +47,8 @@
                 on en.id = ejc.experience_notice_id
             left join tbl_job_category jc
                 on ejc.job_category = jc.id
-        <include refid="search"></include>
         where experience_notice_status = 'active'
+        <include refid="search"/>
     </select>
 
     <select id="selectAdminExperienceById">

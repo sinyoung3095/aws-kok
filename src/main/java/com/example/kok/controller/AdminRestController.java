@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AdminRestController {
     private final AdminService adminService;
+    private final AdminExperienceDetailDTO adminExperienceDetailDTO;
 
-//    공지 목록
+    //    공지 목록
     @GetMapping("support/{page}")
     public AdminNoticeCriteriaDTO list(@PathVariable("page") int page){
         log.info("page = {}", page);

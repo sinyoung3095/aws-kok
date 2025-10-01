@@ -1,6 +1,6 @@
 const service = (() => {
-    const getExperience = async (callback, page = 1) => {
-        const response = await fetch(`/api/experience/${page}`);
+    const getExperience = async (callback, page = 1, keyword = '') => {
+        const response = await fetch(`/api/experience/${page}?keyword=${keyword}`);
         const adminExperienceDetailDTO = await response.json();
         if(callback){
             callback(adminExperienceDetailDTO);
