@@ -18,4 +18,14 @@ public class SaveExperienceNoticeDAO {
     public void deleteExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO) {
         saveExperienceNoticeMapper.deleteSaveExp(saveExperienceNoticeDTO);
     }
+
+//    공고 저장 여부 판별
+    public boolean idSavedExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO) {
+        int bool=saveExperienceNoticeMapper.selectCountSavedExpByExpId(saveExperienceNoticeDTO);
+        if(bool>0){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

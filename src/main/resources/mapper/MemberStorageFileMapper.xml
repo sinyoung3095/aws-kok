@@ -6,4 +6,14 @@
         insert into tbl_member_storage_file(file_id, member_id)
         values(#{fileId}, #{memberId})
     </insert>
+<!--    멤버 id로 파일 조회-->
+    <select id="selectStorageFilesByMemberId">
+        select f.id, f.file_origin_name, f.file_name, f.file_path, f.file_size, f.file_content_type
+        from tbl_file f
+        join tbl_member_storage_file s
+        on s.file_id=f.id
+        join tbl_member m
+        on m.user_id=s.member_id
+        where s.member_id=#{memberId}
+    </select>
 </mapper>

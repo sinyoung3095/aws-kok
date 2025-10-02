@@ -12,4 +12,11 @@
         where experience_notice_id=#{experienceNoticeId}
         and member_id=#{memberId}
     </delete>
+<!--    공고 저장 여부 반환(1, 0)-->
+    <select id="selectCountSavedExpByExpId">
+        select count(*)
+        from tbl_save_experience_notice
+        where experience_notice_id=#{experienceNoticeId}
+        and member_id=#{memberId}
+    </select>
 </mapper>

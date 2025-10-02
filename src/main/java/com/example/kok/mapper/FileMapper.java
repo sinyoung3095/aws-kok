@@ -11,4 +11,6 @@ public interface FileMapper {
     public void insertFile(FileDTO fileDTO);
 //    기업 아이디로 프사 조회
     public Optional<FileDTO> selectFileByCompanyId(Long userId);
+//    fileName으로 id 조회
+    public Long selectFileByName(String fileName);
 }

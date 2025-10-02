@@ -12,14 +12,16 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 @EqualsAndHashCode(of ="id")
-public class PaymentDTO {
+public class ConsolePaymentDTO {
     private long id;
-    private long paymentPrice;
-    private RequestStatus paymentStatus;
-    private LocalDateTime paymentPaidDatetime;
-    private long advertisementId;
-    private long requestExperienceId;
-    private long userId;
+    private long paymentPrice; // 결제 금액
+    private RequestStatus paymentStatus; // 결제 상태
+    private LocalDateTime paymentPaidDatetime; // 결제일
+
+    private long userId; // 결제한 회사
+
+    private String advertisementMainText; // 광고 제목
+
     private String createdDateTime;
     private String updatedDateTime;
 }
