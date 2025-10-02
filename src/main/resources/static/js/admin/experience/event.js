@@ -70,6 +70,31 @@ closeFooterButton.addEventListener("click", () => {
     }, 100);
 });
 
+// 모달 상세
+const experienceListContainer = document.querySelector(".table.member-table tbody");
+experienceListContainer.addEventListener("click",async (e)=>{
+
+    if(e.target.closest(".action-btn")){
+        console.log("모달 들어옴");
+        modal.style.display = "block";
+        setTimeout(() => {
+            modal.classList.add("show");
+            modal.style.background = "rgba(0,0,0,0.5)";
+            document.body.classList.add("modal-open");
+        }, 100);
+
+        const actionButton = e.target.closest(".action-btn");
+        const page = 1;
+        const id = Number(actionButton.dataset.id);
+        console.log(id);
+        await service.getExperienceDetail(layout.showInfo, page, id);
+        await service.getExperienceDetail(layout.showRequest, page, id);
+        await service.getExperienceDetail(layout.showEvaluation, page, id);
+    }
+})
+
+
+
 // 관리자 이메일 토글
 userMenuWrapper.addEventListener("click", () => {
     userMenuContent.classList.toggle("show");
@@ -113,10 +138,11 @@ pagination.addEventListener("click", async (e) => {
 
 // 검색창
 const search = document.querySelector(".btn.btn-search");
-search.addEventListener("click", (e) => {
+search.addEventListener("click", async (e) => {
     const page = 1;
     const keyword = content.value;
-    service.getExperience(layout.showList, page, keyword);
+    console.log(keyword);
+    await service.getExperience(layout.showList, page, keyword);
 });
 
 // 페이지 번호

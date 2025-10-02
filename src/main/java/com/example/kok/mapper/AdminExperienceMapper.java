@@ -4,6 +4,7 @@ import com.example.kok.dto.AdminExperienceDTO;
 import com.example.kok.dto.UserEvaluationDTO;
 import com.example.kok.dto.UserRequestExperienceDTO;
 import com.example.kok.util.AdminExperienceCriteria;
+import com.example.kok.util.AdminExperienceListCriteria;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.Search;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,13 +16,13 @@ import java.util.Optional;
 @Mapper
 public interface AdminExperienceMapper {
 //    전체(목록)
-    public List<AdminExperienceDTO> selectAdminExperienceAll(@Param("criteria") Criteria criteria, @Param("search") Search search);
+    public List<AdminExperienceDTO> selectAdminExperienceAll(@Param("criteria") AdminExperienceListCriteria criteria, @Param("keyword") String keyword);
 
 //    검색 개수
-    public int selectAdminExperienceSearchCountAll(@Param("search") Search search);
+    public int selectAdminExperienceSearchCountAll(@Param("keyword") String keyword);
 
 //    체험공고 - 상세
-    public Optional<AdminExperienceDTO> selectAdminExperienceById(Long id);
+    public AdminExperienceDTO selectAdminExperienceById(Long id);
 
 //    체험공고 - 신청자 내역
     public List<UserRequestExperienceDTO> selectRequestUser(@Param("criteria") AdminExperienceCriteria criteria, @Param("id") Long id);

@@ -1555,6 +1555,10 @@ table.info-table th {
     word-break: break-all;
 }
 
+#info-evaluation table {
+    margin-bottom: 20px;
+}
+
 .modal-footer {
     align-items: center;
     border-bottom-left-radius: calc(.3rem - 1px);
