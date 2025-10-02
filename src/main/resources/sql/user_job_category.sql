@@ -8,3 +8,6 @@ CREATE TABLE tbl_user_job_category (
 );
 
 select * from tbl_user_job_category;
+
+insert into tbl_user_job_category (user_id, job_category)
+values (12, 3);
