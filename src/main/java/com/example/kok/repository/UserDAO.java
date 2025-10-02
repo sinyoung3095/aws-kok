@@ -43,4 +43,8 @@ public class UserDAO {
     public void saveSnsUser(UserDTO userDTO) {
         userMapper.insertSnsMember(userDTO);
     }
+//    비밀번호 변경
+    public void setPassword(UserDTO userDTO) {
+        userMapper.updatePassword(userDTO);
+    }
 }

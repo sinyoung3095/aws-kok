@@ -28,4 +28,6 @@ public Optional<UserDTO> selectByAdminEmail(String userEmail);
     public Optional<UserDTO> selectBySnsEmail(String snsEmail);
 //    sns 이메일로 회원 가입
     public void insertSnsMember(UserDTO userDTO);
+//    비밀번호 변경
+    public void updatePassword(UserDTO userDTO);
 }

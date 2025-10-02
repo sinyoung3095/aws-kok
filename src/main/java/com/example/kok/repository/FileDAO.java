@@ -21,8 +21,10 @@ public class FileDAO {
     public Optional<FileDTO> findFileByCompanyId(Long userId) {
         return fileMapper.selectFileByCompanyId(userId);
     }
+
 //    파일 uuid 합친 이름으로 id 조회
     public Long findFileIdByName(String fileName) {
         return fileMapper.selectFileByName(fileName);
     }
+
 }
