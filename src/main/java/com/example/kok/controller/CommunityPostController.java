@@ -35,49 +35,38 @@ public class CommunityPostController {
     }
 
 //    게시글 작성
-//    @PostMapping
-//    public ResponseEntity<?> write(@RequestParam("postContent") String postContent,
-//                                   @RequestParam(value="files", required=false) List<MultipartFile> files,
-//                                   @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-//        PostDTO postDTO = new PostDTO();
-//        postDTO.setPostContent(postContent);
-//        postDTO.setMemberId(customUserDetails.getId());
-//
-//        communityPostService.write(postDTO, files != null ? files : List.of());
-//        return ResponseEntity.status(HttpStatus.CREATED).body(postDTO.getId());
-//    }
-
-//    임시 작성
     @PostMapping
     public ResponseEntity<?> write(@RequestParam("postContent") String postContent,
-                                   @RequestParam(value="files", required=false) List<MultipartFile> files) {
+                                   @RequestParam(value="files", required=false) List<MultipartFile> files,
+                                   @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         PostDTO postDTO = new PostDTO();
         postDTO.setPostContent(postContent);
-        postDTO.setMemberId(3L); // 임시회원 아이디 설정
+        postDTO.setMemberId(customUserDetails.getId());
+
         communityPostService.write(postDTO, files != null ? files : List.of());
         return ResponseEntity.status(HttpStatus.CREATED).body(postDTO.getId());
     }
 
 //    게시글 수정
-//    @PutMapping("/{id}")
-//    public ResponseEntity<?> update(@PathVariable("id") Long id,
-//                                    @RequestParam("postContent") String postContent,
-//                                    @RequestParam(value="deleteFiles", required=false) Long[] deleteFiles,
-//                                    @RequestParam(value="files", required=false) List<MultipartFile> files,
-//                                    @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-//        PostDTO postDTO = new PostDTO();
-//        postDTO.setId(id);
-//        postDTO.setPostContent(postContent);
-//        postDTO.setMemberId(customUserDetails.getId());
-//
-//        PostDTO updatedPost = communityPostService.update(postDTO, deleteFiles, files != null ? files : List.of());
-//        return ResponseEntity.ok(updatedPost);
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") Long id,
+                                    @RequestParam("postContent") String postContent,
+                                    @RequestParam(value="deleteFiles", required=false) Long[] deleteFiles,
+                                    @RequestParam(value="files", required=false) List<MultipartFile> files,
+                                    @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        PostDTO postDTO = new PostDTO();
+        postDTO.setId(id);
+        postDTO.setPostContent(postContent);
+        postDTO.setMemberId(customUserDetails.getId());
+
+        PostDTO updatedPost = communityPostService.update(postDTO, deleteFiles, files != null ? files : List.of());
+        return ResponseEntity.ok(updatedPost);
+    }
 
 //    게시글 삭제
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<?> remove(@PathVariable("id") Long id) {
-//        communityPostService.delete(id);
-//        return ResponseEntity.noContent().build();
-//    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> remove(@PathVariable("id") Long id) {
+        communityPostService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
