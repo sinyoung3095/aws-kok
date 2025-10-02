@@ -54,145 +54,37 @@
                                                 <thead class="list-list-thead">
                                                     <tr class="list-tr">
                                                         <th class="list-head-main">해당 결제건 공고 제목</th>
-                                                        <th class="list-head-sub">금액</th>
-                                                        <th class="list-head-sub">결제일</th>
-                                                        <th class="list-head-sub">구분</th>
+                                                        <th class="list-head-sub tac">금액</th>
+                                                        <th class="list-head-sub tac">결제일</th>
+                                                        <th class="list-head-sub tac">구분</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="list-list-tbody">
-                                                    <tr class="body-tr">
+                                                    <!-- 결제내역이 있을 때 -->
+                                                    <tr class="body-tr" th:each="payment : ${payment.payments}">
+                                                        <!-- 공고제목 -->
                                                         <td class="body-td">
-                                                            <div>
-                                                                <div class="td-title">공고 제목</div>
-                                                            </div>
+                                                            <p class="td-title" th:text="${payment.advertisementMainText}"></p>
                                                         </td>
-                                                        <td class="body-td">
-                                                            <span class="span-number">250,000</span>
-                                                            원
+                                                        <!-- 금액 -->
+                                                        <td class="body-td tac">
+                                                            <p><span class="span-number" th:text="${payment.paymentPrice}"></span>원</p>
                                                         </td>
-                                                        <td class="body-td">2025-09-15</td>
-                                                        <td class="body-td">
-                                                            <span class="exp-status">결제</span>
+                                                        <!-- 결제일 -->
+                                                        <td class="body-td tac">
+                                                            <p th:text="${payment.paymentPaidDatetime != null} ? ${payment.paymentPaidDatetime} : '-'"></p>
                                                         </td>
-                                                    </tr>
-                                                    <tr class="body-tr">
-                                                        <td class="body-td">
-                                                            <div>
-                                                                <div class="td-title">공고 제목</div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="body-td">
-                                                            <span class="span-number">250,000</span>
-                                                            원
-                                                        </td>
-                                                        <td class="body-td">2025-09-15</td>
-                                                        <td class="body-td">
-                                                            <span class="exp-status">결제</span>
+                                                        <!-- 상태 -->
+                                                        <td class="body-td tac" th:switch="${payment.paymentStatus.name()}">
+                                                            <span th:case="'AWAIT'" class="exp-status status-await">대기</span>
+                                                            <span th:case="'ACCEPT'" class="exp-status status-accept">결제</span>
+                                                            <span th:case="'REJECT'" class="exp-status status-reject">취소</span>
                                                         </td>
                                                     </tr>
-                                                    <tr class="body-tr">
-                                                        <td class="body-td">
-                                                            <div>
-                                                                <div class="td-title">공고 제목</div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="body-td">
-                                                            <span class="span-number">250,000</span>
-                                                            원
-                                                        </td>
-                                                        <td class="body-td">2025-09-15</td>
-                                                        <td class="body-td">
-                                                            <span class="exp-status">결제</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="body-tr">
-                                                        <td class="body-td">
-                                                            <div>
-                                                                <div class="td-title">공고 제목</div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="body-td">
-                                                            <span class="span-number">250,000</span>
-                                                            원
-                                                        </td>
-                                                        <td class="body-td">2025-09-15</td>
-                                                        <td class="body-td">
-                                                            <span class="exp-status">결제</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="body-tr">
-                                                        <td class="body-td">
-                                                            <div>
-                                                                <div class="td-title">공고 제목</div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="body-td">
-                                                            <span class="span-number">250,000</span>
-                                                            원
-                                                        </td>
-                                                        <td class="body-td">2025-09-15</td>
-                                                        <td class="body-td">
-                                                            <span class="exp-status">결제</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="body-tr">
-                                                        <td class="body-td">
-                                                            <div>
-                                                                <div class="td-title">공고 제목</div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="body-td">
-                                                            <span class="span-number">250,000</span>
-                                                            원
-                                                        </td>
-                                                        <td class="body-td">2025-09-15</td>
-                                                        <td class="body-td">
-                                                            <span class="exp-status">결제</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="body-tr">
-                                                        <td class="body-td">
-                                                            <div>
-                                                                <div class="td-title">공고 제목</div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="body-td">
-                                                            <span class="span-number">250,000</span>
-                                                            원
-                                                        </td>
-                                                        <td class="body-td">2025-09-15</td>
-                                                        <td class="body-td">
-                                                            <span class="exp-status">결제</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="body-tr">
-                                                        <td class="body-td">
-                                                            <div>
-                                                                <div class="td-title">공고 제목</div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="body-td">
-                                                            <span class="span-number">250,000</span>
-                                                            원
-                                                        </td>
-                                                        <td class="body-td">2025-09-15</td>
-                                                        <td class="body-td">
-                                                            <span class="exp-status">결제</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="body-tr">
-                                                        <td class="body-td">
-                                                            <div>
-                                                                <div class="td-title">공고 제목</div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="body-td">
-                                                            <span class="span-number">250,000</span>
-                                                            원
-                                                        </td>
-                                                        <td class="body-td">2025-09-15</td>
-                                                        <td class="body-td">
-                                                            <span class="exp-status">결제</span>
+                                                    <!-- 결제내역이 없을 때 -->
+                                                    <tr th:if="${payment == null or #lists.isEmpty(payment.payments)}">
+                                                        <td class="body-td tac no-data" colspan="4">
+                                                            결제 내역이 없습니다.
                                                         </td>
                                                     </tr>
                                                 </tbody>
