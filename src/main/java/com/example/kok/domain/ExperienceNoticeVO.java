@@ -19,6 +19,7 @@ public class ExperienceNoticeVO extends Period{
     private String experienceNoticeSubtitle;
     private String experienceNoticeIntroduceJob;
     private String experienceNoticeEtc;
+    private String experienceMainTasks;
     private LocalDate ExperienceStartDate;
     private LocalDate ExperienceEndDate;
     private Status experienceNoticeStatus;

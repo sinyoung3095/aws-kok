@@ -13,4 +13,9 @@ public class MemberAlarmSettingDAO {
         memberAlarmSettingMapper.insertByMemberId(memberId);
     };
 
+//    멤버id로 알람id 조회
+    public long findByMemberId(Long memberId){
+        return memberAlarmSettingMapper.selectByMemberId(memberId);
+    }
+
 }

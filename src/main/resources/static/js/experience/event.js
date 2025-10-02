@@ -321,6 +321,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const response = await fetch(`/api/experiences/detail?companyId=${companyId}&experienceId=${experienceId}`);
         const data = await response.json();
         const detailData = data;
+        // console.log(detailData);
 
         const fileUrlPre = await fetch(`/api/experiences/profile?companyId=${companyId}`);
         const fileUrl = await fileUrlPre.text();
@@ -329,6 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const formatted = `${endDate.getFullYear()}년 ${endDate.getMonth() + 1}월 ${endDate.getDate()}일`;
 
         const isSavedPre= await fetch(`/api/experiences/is-saved?experienceId=${experienceId}`);
+        console.log(isSavedPre);
         const isSaved=await isSavedPre.json();
         const isSavedDetail=isSaved;
         // console.log(isSavedDetail);
@@ -535,9 +537,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (saveBtn.textContent==="저장하기") {
                 if (textBox) textBox.textContent = "공고를 저장했어요.";
-                await fetch(`/api/experiences/save?experienceId=${expId}`, {
+                const response = await fetch(`/api/experiences/save?experienceId=${expId}`, {
                     method: "POST"
                 });
+                if(!response.ok){
+                    window.location.href = "/member/login";
+                }
                 saveBtn.textContent = "저장취소";
             } else {
                 if (textBox) textBox.textContent = "공고 저장을 취소했어요.";
@@ -559,6 +564,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if(e.target.classList.contains("popup-trigger")){
+            await quickApplyPopupFn();
             const trigger=e.target;
             const dropdowns = document.querySelectorAll(".option-menu");
 
@@ -595,11 +601,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-
-
-    // 이력서 선택 팝업
-    document.querySelector(".file-btn").addEventListener("click", async (e) => {
-        // console.log("이력서 버튼 클릭됨")
+    async function selectFilePop() {
         const popup = document.getElementById("resume-check-popup");
 
         // 드롭다운도 전부 닫기
@@ -636,37 +638,37 @@ document.addEventListener("DOMContentLoaded", () => {
         const bodyHtml = document.querySelector(".popup-body.scroll");
         // 이력서 있는지 여부 판별
         const storageFilesPre = await fetch(`/api/member/storage/load`);
-        const storageFilesJson=await storageFilesPre.json();
-        const storageFiles=storageFilesJson;
-        let checkedFileId=``;
+        const storageFilesJson = await storageFilesPre.json();
+        const storageFiles = storageFilesJson;
+        let checkedFileId = ``;
 
-        if (storageFiles.length>0) {
+        if (storageFiles.length > 0) {
             bodyHtml.innerHTML = `<ul class="form-list file-list form-row" id="storage-files-ul">
                 </ul>`;
-            const storageUl=document.getElementById("storage-files-ul");
-            let liText=``;
-            storageFiles.forEach((file, i)=>{
-                const originName=file.fileOriginName;
-                const extensionName=originName.split(".").pop();
-                const number=i+1;
-                const fileId=file.id;
+            const storageUl = document.getElementById("storage-files-ul");
+            let liText = ``;
+            storageFiles.forEach((file, i) => {
+                const originName = file.fileOriginName;
+                const extensionName = originName.split(".").pop();
+                const number = i + 1;
+                const fileId = file.id;
                 // console.log(fileId);
-                let extension="";
-                if(extensionName==="xlsx"||extensionName==="xlsm"||extensionName==="xls"||extensionName==="xlsb"||extensionName==="xltx"||extensionName==="xltm"){
-                    extension="excel";
-                } else if(extensionName==="pdf"){
-                    extension="pdf";
-                } else if(extensionName==="ppt"||extensionName==="pptx"||extensionName==="pptm"||extensionName==="potx"){
-                    extension="ppt";
-                } else if(extensionName==="docx"||extensionName==="doc"){
-                    extension="docx";
-                } else{
-                    extension="default";
+                let extension = "";
+                if (extensionName === "xlsx" || extensionName === "xlsm" || extensionName === "xls" || extensionName === "xlsb" || extensionName === "xltx" || extensionName === "xltm") {
+                    extension = "excel";
+                } else if (extensionName === "pdf") {
+                    extension = "pdf";
+                } else if (extensionName === "ppt" || extensionName === "pptx" || extensionName === "pptm" || extensionName === "potx") {
+                    extension = "ppt";
+                } else if (extensionName === "docx" || extensionName === "doc") {
+                    extension = "docx";
+                } else {
+                    extension = "default";
                 }
                 // console.log(originName);
                 // console.log(extensionName);
-                if(extension){
-                    liText+=`<li class="form-item">
+                if (extension) {
+                    liText += `<li class="form-item">
                         <div class="file-container">
                             <div class="file-icon">
                                 <img src="/images/experience/icon_file_${extension}.svg" alt="">
@@ -684,7 +686,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                     </li>`;
                 }
-                storageUl.innerHTML=liText;
+                storageUl.innerHTML = liText;
                 // const inputFile=document.getElementById(`check${number}`);
             })
         } else {
@@ -702,7 +704,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 이력서 등록하기
         const putFileBtn = document.querySelector(".btn-primary.popup-trigger");
-        if(putFileBtn){
+        if (putFileBtn) {
             putFileBtn.addEventListener("click", (e) => {
                 saveStorageFilePop.classList.add("active");
             })
@@ -724,6 +726,7 @@ document.addEventListener("DOMContentLoaded", () => {
             );
             doneBtn.disabled = !anyChecked;
         }
+
         for (var i = 0; i < allRadiobox.length; i++) {
             allRadiobox[i].addEventListener("change", updateDoneBtn);
         }
@@ -742,7 +745,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // 파일명/id
             const itemBox = checkedBox.closest(".form-item");
             const fileName = itemBox.querySelector(".file-label");
-            const checkedFileId=fileName.dataset.fileid;
+            const checkedFileId = fileName.dataset.fileid;
             // console.log(checkedFileId);
 
             const fileNametext = fileName.innerText;
@@ -797,6 +800,12 @@ document.addEventListener("DOMContentLoaded", () => {
             resumeCheckPopup.classList.remove("active");
             quickApplyPopup.classList.add("active");
         });
+    }
+
+    // 이력서 선택 팝업
+    document.querySelector(".file-btn").addEventListener("click", async (e) => {
+        // console.log("이력서 버튼 클릭됨")
+        selectFilePop();
     });
 
 
@@ -809,8 +818,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         fileInput.addEventListener("change", () => {
             if (fileInput.files.length > 0) {
+                console.log("화면에 파일 이름 띄우기");
                 formFileLabel.textContent = fileInput.files[0].name;
-            }if(fileInput.files.length>1){
+            }else if(fileInput.files.length>1){
                 formFileLabel.textContent=fileInput.files[0].name+" 외 "+(fileInput.files.length-1)+"개";
             } else {
                 formFileLabel.textContent = "파일";
@@ -833,6 +843,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 method: "POST",
                 body: formData
             });
+            saveStorageFilePop.classList.remove("active");
+            selectFilePop();
         })
     }
     fileInputFn();
@@ -1075,6 +1087,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const toastText = toast.querySelector(".toast-text");
 
         const userDetailsPre = await fetch('/api/experiences/user');
+        if(!userDetailsPre.ok){
+            window.location.href = "/member/login";
+        }
         const userDetail = await userDetailsPre.json();
         const user = userDetail;
 
@@ -1232,7 +1247,6 @@ document.addEventListener("DOMContentLoaded", () => {
             popup.classList.remove("active");
         });
     }
-    quickApplyPopupFn();
 
     // 이력서선택 팝업
     function resumeCheckPopupFn() {

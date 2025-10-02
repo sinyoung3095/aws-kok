@@ -23,6 +23,8 @@ CREATE TABLE tbl_request_experience (
 
 select * from tbl_request_experience;
 
+select * from tbl_request_experience_file;
+
 alter table tbl_request_experience add request_experience_member_name varchar(255) not null;
 
 alter table tbl_request_experience add request_experience_member_email varchar(255) not null;
