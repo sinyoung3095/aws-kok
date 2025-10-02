@@ -30,4 +30,6 @@ public Optional<UserDTO> selectByAdminEmail(String userEmail);
     public void insertSnsMember(UserDTO userDTO);
 //    비밀번호 변경
     public void updatePassword(UserDTO userDTO);
+//    전화번호로 이메일 조회
+    public UserDTO selectEmailByPhone(String phone);
 }

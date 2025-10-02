@@ -63,5 +63,10 @@
         set user_password = #{userPassword}
         where user_email = #{userEmail}
     </update>
+<!--  phoneNumber로 이메일 조회  -->
+    <select id="selectEmailByPhone">
+        select * from tbl_user
+        where user_phone = #{userPhone}
+    </select>
 
 </mapper>
