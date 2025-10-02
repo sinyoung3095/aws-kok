@@ -280,17 +280,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
     keywordInputValidate();
 
-    // 채용 상세
     const container = document.querySelector(".list-container");
     const contentDetail = document.querySelector(".content-detail");
     const contentSide = document.querySelector(".content-side");
+    const triggers = document.querySelectorAll(".popup-trigger");
+    const popups = document.querySelectorAll(".popup-container");
+    const dropdowns = document.querySelectorAll(".option-menu");
+    const saveStorageFilePop=document.getElementById("resume-upload-popup");
 
-
-    const showDetailByShare = async () => {
+    // 채용상세
+    const showDetailByShare = async (e) => {
+        let companyId = null;
+        let experienceId = null;
         contentDetail.classList.remove('active');
+        if(sharedCompanyId && sharedExperienceId) {
+            companyId = sharedCompanyId;
+            experienceId = sharedExperienceId;
+        }else {
+            const btn = e.target.closest(".list-item-btn");
+            if (!btn) return;
 
-        const companyId = sharedCompanyId;
-        const experienceId = sharedExperienceId;
+            contentDetail.classList.remove('active');
+
+            const companyClass = Array.from(btn.classList)
+                .find(c => c.startsWith("companyId-"));
+            if (!companyClass) return;
+
+            companyId = companyClass.split("-")[1];
+
+            const experienceClass = Array.from(btn.classList)
+                .find(c => c.startsWith("experienceId-"));
+            if (!experienceClass) return;
+
+            experienceId = experienceClass.split("-")[1];
+        }
+
+
 
         // fetch로 상세 데이터 가져오기
         const response = await fetch(`/api/experiences/detail?companyId=${companyId}&experienceId=${experienceId}`);
@@ -303,12 +328,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const endDate = new Date(detailData.notice.experienceEndDate);
         const formatted = `${endDate.getFullYear()}년 ${endDate.getMonth() + 1}월 ${endDate.getDate()}일`;
 
+        const isSavedPre= await fetch(`/api/experiences/is-saved?experienceId=${experienceId}`);
+        const isSaved=await isSavedPre.json();
+        const isSavedDetail=isSaved;
+        // console.log(isSavedDetail);
 
-        // console.log(formatted);
-
-        // console.log(detailData.notice);
-        // console.log(detailData.company);
-
+        let saveBtnText='';
+        if(isSavedDetail){
+            saveBtnText="저장취소";
+        } else{
+            saveBtnText="저장하기"
+        }
         contentDetail.innerHTML = `<div class="content-detail-inner active" id="experienceDetail-${experienceId}">
                             <div class="content-detail-header">
                                 <button class="detail-arrow-btn">
@@ -342,7 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <div class="detail-actions">
                                         <!-- popup-trigger 클래스가 있으면 열림 -->
                                         <button class="detail-action-btn detail-apply-btn popup-trigger" data-target="#quick-apply-popup">간편 지원하기</button>
-                                        <button class="detail-action-btn detail-save-btn">저장하기</button>
+                                        <button class="detail-action-btn detail-save-btn" data-experienceid=${experienceId}>${saveBtnText}</button>
                                         <button class="detail-action-btn detail-share-btn" data-companyid=${companyId} data-experienceid=${experienceId}>공유하기</button>
                                     </div>
 
@@ -389,115 +419,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!container || !contentDetail) return;
 
-    container.addEventListener("click", async (e) => {
-        contentDetail.innerHTML = ``;
-        const btn = e.target.closest(".list-item-btn");
-        if (!btn) return;
-
-        contentDetail.classList.remove('active');
-
-        const companyClass = Array.from(btn.classList)
-            .find(c => c.startsWith("companyId-"));
-        if (!companyClass) return;
-
-        const companyId = companyClass.split("-")[1];
-
-        const experienceClass = Array.from(btn.classList)
-            .find(c => c.startsWith("experienceId-"));
-        if (!experienceClass) return;
-
-        const experienceId = experienceClass.split("-")[1];
-
-        // fetch로 상세 데이터 가져오기
-        const response = await fetch(`/api/experiences/detail?companyId=${companyId}&experienceId=${experienceId}`);
-        const data = await response.json();
-        const detailData = data;
-
-        const fileUrlPre = await fetch(`/api/experiences/profile?companyId=${companyId}`);
-        const fileUrl = await fileUrlPre.text();
-
-        const endDate = new Date(detailData.notice.experienceEndDate);
-        const formatted = `${endDate.getFullYear()}년 ${endDate.getMonth() + 1}월 ${endDate.getDate()}일`;
-
-
-        // console.log(formatted);
-
-        // console.log(detailData.notice);
-        // console.log(detailData.company);
-
-        contentDetail.innerHTML = `<div class="content-detail-inner active" id="experienceDetail-${experienceId}">
-                            <div class="content-detail-header">
-                                <button class="detail-arrow-btn">
-                                    <svg fill="currentColor" height="20" role="img" width="20">
-                                        <path clip-rule="evenodd" d="M11.566 5.435a.8.8 0 0 0-1.132 0l-6 6a.8.8 0 0 0 0 1.13l6 6a.8.8 0 1 0 1.132-1.13L6.93 12.8H19a.8.8 0 1 0 0-1.6H6.931l4.635-4.634a.8.8 0 0 0 0-1.131" fill-rule="evenodd"></path>
-                                    </svg>
-                                    <p>목록</p>
-                                </button>
-                            </div>
-                            <div class="content-detail-body">
-                                <button class="list-item-header">
-                                    <div class="list-item-thumb">
-                                        <img src="${fileUrl}" alt="">
-                                    </div>
-                                    <div class="list-item-content">
-                                        <p class="list-item-title">${detailData.company.companyName}</p>
-                                        <ul class="profile-stats">
-                                            <li class="profile-stat-item">팔로워 <i class="num">${detailData.company.followerCount}</i></li>
-                                            <li class="profile-stat-item">체험공고 <i class="num">${detailData.company.experienceCount}</i></li>
-                                            <li class="profile-stat-item">인턴공고 <i class="num">${detailData.company.internCount}</i></li>
-                                        </ul>
-                                    </div>
-                                </button>
-                                
-                                <div class="detail-content">
-                                    <div class="detail-header">
-                                        <strong class="detail-title">${detailData.notice.experienceNoticeTitle}</strong>
-                                        <p class="detail-subtitle">${detailData.notice.experienceNoticeSubtitle}</p>
-                                    </div>
-
-                                    <div class="detail-actions">
-                                        <!-- popup-trigger 클래스가 있으면 열림 -->
-                                        <button class="detail-action-btn detail-apply-btn popup-trigger" data-target="#quick-apply-popup">간편 지원하기</button>
-                                        <button class="detail-action-btn detail-save-btn">저장하기</button>
-                                        <button class="detail-action-btn detail-share-btn" data-companyid=${companyId} data-experienceid=${experienceId}>공유하기</button>
-                                    </div>
-
-                                    <ul class="detail-meta">
-                                        <li class="detail-meta-item">
-                                            <p class="meta-label">직군</p>
-                                            <p class="meta-value">${detailData.notice.jobName}</p>
-                                        </li>
-                                        <li class="detail-meta-item">
-                                            <p class="meta-label">회사 규모</p>
-                                            <p class="meta-value">${detailData.company.scaleName}</p>
-                                        </li>
-                                    </ul>
-
-                                    <div class="deadline-info">
-                                        <p class="deadline-remain">지원 마감까지 ${detailData.notice.remainingDays}일 남음</p>
-                                        <p class="deadline-description">${formatted}까지 지원할 수 있습니다.</p>
-                                    </div>
-
-                                    <div class="detail-description">
-                                        <div class="detail-item">
-                                            <p class="detail-item-title">직무소개</p>
-                                            <p class="detail-item-content">${detailData.notice.experienceNoticeIntroduceJob}</p>
-                                        </div>
-                                        <div class="detail-item">
-                                            <p class="detail-item-title">참고사항</p>
-                                            <p class="detail-item-content">${detailData.notice.experienceNoticeEtc}</p>
-                                        </div>
-                                        <div class="detail-item">
-                                            <p class="detail-item-title">주요 업무</p>
-                                            <p class="detail-item-content">${detailData.notice.experienceMainTasks}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`;
-        contentDetail.classList.add("active");
-        if (contentSide) contentSide.style.display = "none";
-    });
+    container.addEventListener("click", showDetailByShare);
 
     // transition 끝나면 inner 활성화
     const inner = contentDetail.querySelector(".content-detail-inner");
@@ -530,51 +452,52 @@ document.addEventListener("DOMContentLoaded", () => {
     keywordInputValidate();
 
     // 채용 - 공고 저장/저장 취소, 공유하기  버튼 클릭 시 토스트 메시지 노출
-    function toastPopupFn() {
-        const saveToast = document.querySelector("#toast-white");
-        const saveBtn = document.querySelector(".detail-save-btn");
+    // function toastPopupFn() {
+    //     const saveToast = document.querySelector("#toast-white");
+    //     const saveBtn = document.querySelector(".detail-save-btn");
+    //
+    //     let saved = false; // 저장 상태
+    //     let showingToast = false; // 연타방지
+    //
+    //     // 공고 저장/저장 취소
+    //     if (saveBtn) {
+    //         saveBtn.addEventListener("click", async () => {
+    //             if (showingToast) return; // 토스트 떠 있으면 무시
+    //
+    //             const textBox = saveToast.querySelector("p");
+    //             const idWrapDiv = document.querySelector(".content-detail-inner");
+    //             const expId = idWrapDiv.id.split("-")[1];
+    //
+    //             // console.log(expId);
+    //
+    //             if (!saved) {
+    //                 saved = true;
+    //                 if (textBox) textBox.textContent = "공고를 저장했어요.";
+    //                 await fetch(`/api/experiences/save?experienceId=${expId}`);
+    //                 saveBtn.textContent = "저장취소";
+    //             } else {
+    //                 saved = false;
+    //                 if (textBox) textBox.textContent = "공고 저장을 취소했어요.";
+    //                 await fetch(`/api/experiences/unsave?experienceId=${expId}`);
+    //                 saveBtn.textContent = "저장함";
+    //             }
+    //
+    //             console.log("토스트 띄우기");
+    //             // 토스트 띄우기
+    //             saveToast.classList.add("show");
+    //             showingToast = true;
+    //
+    //             setTimeout(() => {
+    //                 saveToast.classList.remove("show");
+    //                 showingToast = false;
+    //             }, 2000);
+    //         });
+    //     }
+    // }
 
-        let saved = false; // 저장 상태
-        let showingToast = false; // 연타방지
-
-        // 공고 저장/저장 취소
-        if (saveBtn) {
-            saveBtn.addEventListener("click", async () => {
-                if (showingToast) return; // 토스트 떠 있으면 무시
-
-                const textBox = saveToast.querySelector("p");
-                const idWrapDiv = document.querySelector(".content-detail-inner");
-                const expId = idWrapDiv.id.split("-")[1];
-
-                // console.log(expId);
-
-                if (!saved) {
-                    saved = true;
-                    if (textBox) textBox.textContent = "공고를 저장했어요.";
-                    await fetch(`/api/experiences/save?experienceId=${expId}`);
-                    saveBtn.textContent = "저장취소";
-                } else {
-                    saved = false;
-                    if (textBox) textBox.textContent = "공고 저장을 취소했어요.";
-                    await fetch(`/api/experiences/unsave?experienceId=${expId}`);
-                    saveBtn.textContent = "저장함";
-                }
-
-                console.log("토스트 띄우기");
-                // 토스트 띄우기
-                saveToast.classList.add("show");
-                showingToast = true;
-
-                setTimeout(() => {
-                    saveToast.classList.remove("show");
-                    showingToast = false;
-                }, 2000);
-            });
-        }
-    }
-
-    contentDetail.addEventListener("click", (e) => {
-        if(e.target.classList.contains("detail-share-btn")) {
+    // 간편지원, 저장, 공유 클릭될 때
+    contentDetail.addEventListener("click", async (e) => {
+        if (e.target.classList.contains("detail-share-btn")) {
             const saveToast = document.querySelector("#toast-white");
             const shareBtn = e.target;
             const textBox = saveToast.querySelector("p");
@@ -593,7 +516,183 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 saveToast.classList.remove("show");
                 showingToast = false;
-            }, 2000);;
+            }, 2000);
+            ;
+        }
+
+        if (e.target.classList.contains("detail-save-btn")) {
+            const saveToast = document.querySelector("#toast-white");
+            const saveBtn = e.target;
+            const textBox = saveToast.querySelector("p");
+            // console.log(saveBtn.dataset.experienceid);
+
+            const expId = Number(saveBtn.dataset.experienceid);
+
+            // console.log(expId);
+
+            let showingToast = false; // 연타방지
+
+            if (saveBtn.textContent==="저장하기") {
+                if (textBox) textBox.textContent = "공고를 저장했어요.";
+                await fetch(`/api/experiences/save?experienceId=${expId}`, {
+                    method: "POST"
+                });
+                saveBtn.textContent = "저장취소";
+            } else {
+                if (textBox) textBox.textContent = "공고 저장을 취소했어요.";
+                await fetch(`/api/experiences/unsave?experienceId=${expId}`, {
+                    method: "POST"
+                });
+                saveBtn.textContent = "저장하기";
+            }
+
+            // console.log("토스트 띄우기");
+            // 토스트 띄우기
+            saveToast.classList.add("show");
+            showingToast = true;
+
+            setTimeout(() => {
+                saveToast.classList.remove("show");
+                showingToast = false;
+            }, 2000);
+        }
+
+        if(e.target.classList.contains("popup-trigger")){
+            const trigger=e.target;
+            const dropdowns = document.querySelectorAll(".option-menu");
+
+            // console.log("간편지원하기 클릭됨");
+            const target = trigger.getAttribute("data-target");
+            const popup = document.querySelector(target);
+
+            // 드롭다운 전부 닫기
+            dropdowns.forEach((menu) => menu.classList.remove("active"));
+
+            // 다른 팝업 닫기 (data-sticky가 붙어있는 팝업 제외)
+            popups.forEach((pop) => {
+                if (!pop.hasAttribute("data-sticky")) {
+                    pop.classList.remove("active");
+                }
+            });
+
+            // 현재(부모) 팝업 닫기 - 스티키면 유지
+            const parentPopup = trigger.closest(".popup-container");
+            if (parentPopup && !parentPopup.hasAttribute("data-sticky")) {
+                parentPopup.classList.remove("active");
+            }
+
+            // 해당 팝업 열기
+            if (popup) {
+                popup.classList.add("active");
+            }
+        }
+    });
+
+    // 이력서 선택 팝업
+    document.querySelector(".file-btn").addEventListener("click", async (e) => {
+        // console.log("이력서 버튼 클릭됨")
+        const popup = document.getElementById("resume-check-popup");
+
+        // 드롭다운도 전부 닫기
+        dropdowns.forEach((menu) => menu.classList.remove("active"));
+
+        // 다른 팝업 닫기 (data-sticky가 붙어있는 팝업 제외)
+        popups.forEach((pop) => {
+            if (!pop.hasAttribute("data-sticky")) {
+                pop.classList.remove("active");
+            }
+        });
+
+        popup.innerHTML = `<div class="popup-inner">
+            <div class="popup-header">
+                <button class="popup-prev">
+                    <svg fill="currentColor" height="20" role="img" width="20">
+                        <path clip-rule="evenodd" d="M11.566 5.435a.8.8 0 0 0-1.132 0l-6 6a.8.8 0 0 0 0 1.13l6 6a.8.8 0 1 0 1.132-1.13L6.93 12.8H19a.8.8 0 1 0 0-1.6H6.931l4.635-4.634a.8.8 0 0 0 0-1.131" fill-rule="evenodd"></path>
+                    </svg>
+                </button>
+                <div class="popup-title-container">
+                    <strong class="popup-title">이력서</strong>
+                    <span class="popup-description">파일 또는 URL 선택</span>
+                </div>
+            </div>
+
+            <div class="popup-body scroll">
+            </div>
+
+            <div class="popup-action line">
+                <button id="file-add-btn" class="pop-btn btn-default popup-trigger" data-target="#resume-upload-popup">추가 등록</button>
+                <button id="file-select-btn" class="pop-btn btn-primary" disabled>선택 완료</button>
+            </div>
+        </div>`;
+        const bodyHtml = document.querySelector(".popup-body.scroll");
+        // 이력서 있는지 여부 판별
+        const storageFilesPre = await fetch(`/api/member/storage/load`);
+        const storageFilesJson=await storageFilesPre.json();
+        const storageFiles=storageFilesJson;
+
+        if (storageFiles.length>0) {
+            bodyHtml.innerHTML = `<ul class="form-list file-list form-row" id="storage-files-ul">
+                </ul>`;
+            const storageUl=document.getElementById("storage-files-ul");
+            let liText=``;
+            storageFiles.forEach((file, i)=>{
+                const originName=file.fileOriginName;
+                const extensionName=originName.split(".").pop();
+                const number=i+1;
+                let extension="";
+                if(extensionName==="xlsx"||extensionName==="xlsm"||extensionName==="xls"||extensionName==="xlsb"||extensionName==="xltx"||extensionName==="xltm"){
+                    extension="excel";
+                } else if(extensionName==="pdf"){
+                    extension="pdf";
+                } else if(extensionName==="ppt"||extensionName==="pptx"||extensionName==="pptm"||extensionName==="potx"){
+                    extension="ppt";
+                } else if(extensionName==="docx"||extensionName==="doc"){
+                    extension="docx";
+                } else{
+                    extension="default";
+                }
+                // console.log(originName);
+                // console.log(extensionName);
+                if(extension){
+                    liText+=`<li class="form-item">
+                        <div class="file-container">
+                            <div class="file-icon">
+                                <img src="/images/experience/icon_file_${extension}.svg" alt="">
+                            </div>
+                            <div class="file-info">
+                                <p class="file-label">${originName}</p>
+                            </div>
+                        </div>
+                        <div class="btn-check-container">
+                            <div class="radio-box">
+                                <label for="check${number}" class="icon-radio">
+                                    <input type="radio" name="radio" id="check${number}">
+                                </label>
+                            </div>
+                        </div>
+                    </li>`;
+                }
+                storageUl.innerHTML=liText;
+            })
+        } else {
+            bodyHtml.innerHTML = `<!-- 데이터 없을때 -->
+                <div class="no-data">
+                    <p class="title">아직 등록된 라이브러리가 없습니다.</p>
+                    <p class="description">이력서 파일을 미리 등록하면 빠르게 공고에 지원할 수 있습니다.</p>
+
+                    <button type="button" class="btn-primary popup-trigger" data-target="#resume-upload-popup">등록하기</button>
+                </div>`;
+        }
+
+        // 해당 팝업 열기
+        popup.classList.add("active");
+
+        // 이력서 등록하기
+        const putFileBtn = document.querySelector(".btn-primary.popup-trigger");
+        if(putFileBtn){
+            putFileBtn.addEventListener("click", (e) => {
+                saveStorageFilePop.classList.add("active");
+            })
         }
     });
 
@@ -608,18 +707,35 @@ document.addEventListener("DOMContentLoaded", () => {
         fileInput.addEventListener("change", () => {
             if (fileInput.files.length > 0) {
                 formFileLabel.textContent = fileInput.files[0].name;
+            }if(fileInput.files.length>1){
+                formFileLabel.textContent=fileInput.files[0].name+" 외 "+(fileInput.files.length-1)+"개";
             } else {
                 formFileLabel.textContent = "파일";
             }
         });
+    //     등록하기 눌렀을 때
+        const saveBtn=document.getElementById("pop-apply");
+
+        saveBtn.addEventListener("click", async (e) => {
+            // console.log("버튼 클릭됨");
+            if (formFileLabel.textContent === "파일") {
+                alert("파일이 선택되지 않았습니다.")
+                return;
+            }
+            const formData=new FormData();
+            for (let i = 0; i < fileInput.files.length; i++) {
+                formData.append("files", fileInput.files[i]);
+            }
+            await fetch(`/api/member/storage/save`,{
+                method: "POST",
+                body: formData
+            });
+        })
     }
     fileInputFn();
 
     // 팝업
     function popupFn() {
-        const triggers = document.querySelectorAll(".popup-trigger");
-        const popups = document.querySelectorAll(".popup-container");
-        const dropdowns = document.querySelectorAll(".option-menu");
 
         if (!triggers) return;
 
@@ -637,7 +753,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // 팝업 열기
         triggers.forEach((trigger) => {
             trigger.addEventListener("click", () => {
-                console.log("간편지원하기 클릭됨");
                 const target = trigger.getAttribute("data-target");
                 const popup = document.querySelector(target);
 
@@ -754,60 +869,60 @@ document.addEventListener("DOMContentLoaded", () => {
     dropdownFn();
 
     // 보관함 유효성 검사 - 파일 추가
-    function checkPopupLibrary() {
-        const applyBtn = document.querySelector("#resume-upload-popup #pop-apply");
-        const form = document.querySelector("#resume-upload-popup form");
-        const libraryToast = document.querySelector("#toast-library");
-        const typeInput = document.querySelector(
-            "#resume-upload-popup #type-input"
-        );
-        const fileInput = document.querySelector(
-            "#resume-upload-popup #file-input"
-        );
-        const fileLabel = document.querySelector(
-            "#resume-upload-popup .form-file-label"
-        );
-
-        if (!applyBtn || !form) return;
-
-        // 유효성 검사
-        const validate = () => {
-            if (typeInput.value.trim() === "") {
-                libraryToast.classList.add("show");
-                setTimeout(() => {
-                    libraryToast.classList.remove("show");
-                    showingToast = false;
-                }, 2000);
-
-                typeInput.focus();
-                return false;
-            }
-            if (!fileInput.files || fileInput.files.length === 0) {
-                libraryToast.classList.add("show");
-                setTimeout(() => {
-                    libraryToast.classList.remove("show");
-                    showingToast = false;
-                }, 2000);
-
-                return false;
-            }
-            return true;
-        };
-
-        // 버튼 클릭일 때만 검사
-        applyBtn.addEventListener("click", () => {
-            if (!validate()) return;
-            document
-                .getElementById("resume-upload-popup")
-                .classList.remove("active");
-
-            // 초기화
-            if (typeInput) typeInput.value = "";
-            if (fileInput) fileInput.value = "";
-            if (fileLabel) fileLabel.textContent = "파일";
-        });
-    }
-    checkPopupLibrary();
+    // function checkPopupLibrary() {
+    //     const applyBtn = document.querySelector("#resume-upload-popup #pop-apply");
+    //     const form = document.querySelector("#resume-upload-popup form");
+    //     const libraryToast = document.querySelector("#toast-library");
+    //     const typeInput = document.querySelector(
+    //         "#resume-upload-popup #type-input"
+    //     );
+    //     const fileInput = document.querySelector(
+    //         "#resume-upload-popup #file-input"
+    //     );
+    //     const fileLabel = document.querySelector(
+    //         "#resume-upload-popup .form-file-label"
+    //     );
+    //
+    //     if (!applyBtn || !form) return;
+    //
+    //     // 유효성 검사
+    //     const validate = () => {
+    //         if (typeInput.value.trim() === "") {
+    //             libraryToast.classList.add("show");
+    //             setTimeout(() => {
+    //                 libraryToast.classList.remove("show");
+    //                 showingToast = false;
+    //             }, 2000);
+    //
+    //             typeInput.focus();
+    //             return false;
+    //         }
+    //         if (!fileInput.files || fileInput.files.length === 0) {
+    //             libraryToast.classList.add("show");
+    //             setTimeout(() => {
+    //                 libraryToast.classList.remove("show");
+    //                 showingToast = false;
+    //             }, 2000);
+    //
+    //             return false;
+    //         }
+    //         return true;
+    //     };
+    //
+    //     // 버튼 클릭일 때만 검사
+    //     applyBtn.addEventListener("click", () => {
+    //         if (!validate()) return;
+    //         document
+    //             .getElementById("resume-upload-popup")
+    //             .classList.remove("active");
+    //
+    //         // 초기화
+    //         if (typeInput) typeInput.value = "";
+    //         if (fileInput) fileInput.value = "";
+    //         if (fileLabel) fileLabel.textContent = "파일";
+    //     });
+    // }
+    // checkPopupLibrary();
 
     // 보관함 유효성 검사 - url 추가
     function checkPopupLibraryUrl() {
@@ -930,7 +1045,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 간편지원하기 팝업
-    function quickApplyPopupFn() {
+    async function quickApplyPopupFn() {
         const popup = document.getElementById("quick-apply-popup");
         if (!popup) return;
 
@@ -938,17 +1053,30 @@ document.addEventListener("DOMContentLoaded", () => {
         const toast = document.getElementById("toast-red");
         const toastText = toast.querySelector(".toast-text");
 
+        const userDetailsPre = await fetch('/api/experiences/user');
+        const userDetail = await userDetailsPre.json();
+        const user = userDetail;
+
+        console.log(user);
+
         const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
         const isPhone = (v) => {
             const d = v.replace(/[^\d]/g, "");
             return d.length >= 9 && d.length <= 11; // 국내 9~11자리 간단 체크
         };
 
+        const name = popup.querySelector("#name-input");
+        const email = popup.querySelector("#email-input");
+        const phone = popup.querySelector("#phone-input");
+        const resume = popup.querySelector("#resume-value");
+
+        name.value=user.userName;
+
+        email.value=user.userEmail||user.snsEmail;
+
+        phone.value=user.userPhone;
+
         submitBtn.addEventListener("click", () => {
-            const name = popup.querySelector("#name-input");
-            const email = popup.querySelector("#email-input");
-            const phone = popup.querySelector("#phone-input");
-            const resume = popup.querySelector("#resume-value");
 
             // 이름을 입력안했을때
             if (!name.value.trim()) {

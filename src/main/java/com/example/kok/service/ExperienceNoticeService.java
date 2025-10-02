@@ -27,4 +27,7 @@ public interface ExperienceNoticeService {
 
 //    최신 체험 공고 4개 조회
     public List<ExperienceNoticeDTO> findLatestFour();
+
+//    공고 저장 여부 판별
+    public boolean isSavedExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO);
 }

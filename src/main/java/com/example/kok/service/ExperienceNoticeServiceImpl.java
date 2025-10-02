@@ -137,4 +137,10 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
         });
         return experiences;
     }
+
+    @Override
+    public boolean isSavedExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO) {
+        boolean result=saveExperienceNoticeDAO.idSavedExp(saveExperienceNoticeDTO);
+        return result;
+    }
 }

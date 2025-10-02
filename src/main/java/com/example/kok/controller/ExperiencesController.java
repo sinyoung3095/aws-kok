@@ -6,6 +6,7 @@ import com.example.kok.repository.CompanyProfileFileDAO;
 import com.example.kok.service.CompanyService;
 import com.example.kok.service.ExperienceNoticeService;
 import com.example.kok.service.RequestExperienceService;
+import com.example.kok.service.UserService;
 import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ public class ExperiencesController {
     private final CompanyProfileFileDAO companyProfileFileDAO;
     private final CompanyService companyService;
     private final RequestExperienceService requestExperienceService;
+    private final UserService userService;
 
 //    목록
     @GetMapping("{page}")
@@ -90,6 +92,28 @@ public class ExperiencesController {
         deleteExp.setExperienceNoticeId(experienceId);
         deleteExp.setMemberId(customUserDetails.getId());
         experienceNoticeService.deleteExp(deleteExp);
+    }
+
+    //    저장 여부 판별
+    @GetMapping("/is-saved")
+    public boolean isSaved(@RequestParam Long experienceId,
+                           @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+
+        System.out.println(customUserDetails);
+        SaveExperienceNoticeDTO exp=new SaveExperienceNoticeDTO();
+        exp.setExperienceNoticeId(experienceId);
+        exp.setMemberId(customUserDetails.getId());
+        boolean result= experienceNoticeService.isSavedExp(exp);
+        return result;
+    }
+
+//    간편지원 input에 넣을 유저 정보 불러오기
+    @GetMapping("/user")
+    public UserDTO loadUserDetails(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        UserDTO user=new UserDTO();
+        user=userService.findById(customUserDetails.getId());
+        System.out.println(user);
+        return user;
     }
 
 }
