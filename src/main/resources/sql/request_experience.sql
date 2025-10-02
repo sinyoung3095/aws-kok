@@ -6,15 +6,31 @@ CREATE TABLE tbl_request_experience (
     member_alarm_setting_id bigint not null,
     created_datetime timestamp default now(),
     updated_datetime timestamp default now(),
+    request_experience_member_name varchar(255) not null,
+    request_experience_member_email varchar(255) not null,
+    request_experience_member_phone varchar(255) not null,
+    request_experience_member_url varchar(255),
+    file_id bigint not null,
     constraint fk_request_experience_experience_notice foreign key(experience_notice_id)
         references tbl_experience_notice(id),
     constraint fk_request_experience_member foreign key(member_id)
         references tbl_member(user_id),
     constraint fk_request_experience_member_alarm_setting foreign key(member_alarm_setting_id)
-        references tbl_member_alarm_setting(id)
+        references tbl_member_alarm_setting(id),
+    constraint fk_request_experience_file foreign key(file_id)
+        references tbl_file(id)
 );
 
 select * from tbl_request_experience;
 
-insert into tbl_request_experience (experience_notice_id, member_id, member_alarm_setting_id)
-values (56, 7, 4);
+alter table tbl_request_experience add request_experience_member_name varchar(255) not null;
+
+alter table tbl_request_experience add request_experience_member_email varchar(255) not null;
+
+alter table tbl_request_experience add request_experience_member_phone varchar(255) not null;
+
+alter table tbl_request_experience add request_experience_member_url varchar(255);
+
+alter table tbl_request_experience add file_id bigint not null;
+
+alter table tbl_request_experience add constraint fk_request_experience_file foreign key(file_id) references tbl_file(id);

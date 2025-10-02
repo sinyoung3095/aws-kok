@@ -317,7 +317,7 @@
                 <button class="popup-close popup-remove">닫기</button>
             </div>
 
-            <form action="">
+            <form action="/api/experiences/apply" method="post">
                 <div class="popup-body">
                     <ul class="form-list form-row">
                         <li class="form-item">
@@ -348,7 +348,7 @@
                         <li class="form-item line">
                             <p class="form-label">URL</p>
                             <div class="form-field">
-                                <input id="" placeholder="https://www.example.com">
+                                <input id="url-input" placeholder="https://www.example.com">
                             </div>
                         </li>
                     </ul>
@@ -362,128 +362,6 @@
 
     <!-- popup - 이력서 -->
     <div id="resume-check-popup" class="popup-container pop-side">
-        <div class="popup-inner">
-            <div class="popup-header">
-                <button class="popup-prev">
-                    <svg fill="currentColor" height="20" role="img" width="20">
-                        <path clip-rule="evenodd" d="M11.566 5.435a.8.8 0 0 0-1.132 0l-6 6a.8.8 0 0 0 0 1.13l6 6a.8.8 0 1 0 1.132-1.13L6.93 12.8H19a.8.8 0 1 0 0-1.6H6.931l4.635-4.634a.8.8 0 0 0 0-1.131" fill-rule="evenodd"></path>
-                    </svg>
-                </button>
-                <div class="popup-title-container">
-                    <strong class="popup-title">이력서</strong>
-                    <span class="popup-description">파일 또는 URL 선택</span>
-                </div>
-            </div>
-
-            <div class="popup-body scroll">
-                <ul class="form-list file-list form-row">
-                    <li class="form-item">
-                        <div class="file-container">
-                            <div class="file-icon">
-                                <img src="/images/experience/icon_file_excel.svg" alt="">
-                            </div>
-                            <div class="file-info">
-                                <p class="file-label">포트폴리오</p>
-                                <span class="file-name">파일이름.xlsx</span>
-                            </div>
-                        </div>
-                        <div class="btn-check-container">
-                            <div class="radio-box">
-                                <label for="check1" class="icon-radio">
-                                    <input type="radio" name="radio" id="check1">
-                                </label>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="form-item">
-                        <div class="file-container">
-                            <div class="file-icon">
-                                <!-- 기본이미지 -->
-                                <img src="/images/experience/icon_file_default.svg" alt="">
-                            </div>
-                            <div class="file-info">
-                                <p class="file-label">포트폴리오</p>
-                                <span class="file-name">파일이름</span>
-                            </div>
-                        </div>
-                        <div class="btn-check-container">
-                            <div class="radio-box">
-                                <label for="check2" class="icon-radio">
-                                    <input type="radio" name="radio" id="check2">
-                                </label>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="form-item">
-                        <div class="file-container">
-                            <div class="file-icon">
-                                <img src="/images/experience/icon_file_pdf.svg" alt="">
-                            </div>
-                            <div class="file-info">
-                                <p class="file-label">포트폴리오</p>
-                                <span class="file-name">파일이름.pdf</span>
-                            </div>
-                        </div>
-                        <div class="btn-check-container">
-                            <div class="radio-box">
-                                <label for="check3" class="icon-radio">
-                                    <input type="radio" name="radio" id="check3">
-                                </label>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="form-item">
-                        <div class="file-container">
-                            <div class="file-icon">
-                                <img src="/images/experience/icon_file_ppt.svg" alt="">
-                            </div>
-                            <div class="file-info">
-                                <p class="file-label">포트폴리오</p>
-                                <span class="file-name">파일이름.ppt</span>
-                            </div>
-                        </div>
-                        <div class="btn-check-container">
-                            <div class="radio-box">
-                                <label for="check4" class="icon-radio">
-                                    <input type="radio" name="radio" id="check4">
-                                </label>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="form-item">
-                        <div class="file-container">
-                            <div class="file-icon">
-                                <img src="/images/experience/icon_file_docx.svg" alt="">
-                            </div>
-                            <div class="file-info">
-                                <p class="file-label">포트폴리오</p>
-                                <span class="file-name">파일이름.docx</span>
-                            </div>
-                        </div>
-                        <div class="btn-check-container">
-                            <div class="radio-box">
-                                <label for="check5" class="icon-radio">
-                                    <input type="radio" name="radio" id="check5">
-                                </label>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                
-                <!-- 데이터 없을때 -->
-                <div class="no-data">
-                    <p class="title">아직 등록된 라이브러리가 없습니다.</p>
-                    <p class="description">파일 또는 URL을 미리 등록하면 빠르게 공고에 지원할 수 있습니다.</p>
-
-                    <button type="button" class="btn-primary popup-trigger" data-target="#resume-upload-popup">등록하기</button>
-                </div>
-            </div>
-
-            <div class="popup-action line">
-                <button id="file-add-btn" class="pop-btn btn-default popup-trigger" data-target="#resume-upload-popup">추가 등록</button>
-                <button id="file-select-btn" class="pop-btn btn-primary" disabled>선택 완료</button>
-            </div>
-        </div>
     </div>
 
     <!-- popup - 이력서등록 -->
@@ -494,48 +372,48 @@
                 <strong class="popup-title">보관함 등록</strong>
                 <button class="popup-close popup-library-close">닫기</button>
             </div>
-            <form action="/api/experiences/request" method="post">
+            <form>
                 <div class="popup-body">
                     <div class="form-list form-grid">
-                        <div class="form-item flex-1-1">
-                            <label class="form-label" for="type-input">유형<span class="must">*</span></label>
-                            <div class="form-field form-field-dropdown">
-                                <input type="text" id="type-input" class="dropdown-trigger" data-target="#dropdown2" placeholder="선택 또는 입력">
+<!--                        <div class="form-item flex-1-1">-->
+<!--                            <label class="form-label" for="type-input">유형<span class="must">*</span></label>-->
+<!--                            <div class="form-field form-field-dropdown">-->
+<!--                                <input type="text" id="type-input" class="dropdown-trigger" data-target="#dropdown2" placeholder="선택 또는 입력">-->
 
-                                <div id="dropdown2" class="option-menu">
-                                    <ul class="option-list">
-                                        <li class="option-item option-input">
-                                            <button type="button" class="option-btn">
-                                                <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24">
-                                                    <path clip-rule="evenodd" d="M12 4.2a.8.8 0 0 1 .8.8v6.2H19a.8.8 0 0 1 0 1.6h-6.2V19a.8.8 0 0 1-1.6 0v-6.2H5a.8.8 0 0 1 0-1.6h6.2V5a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
-                                                </svg>
-                                                <p>직접 입력</p>
-                                            </button>
-                                        </li>
-                                        <li class="option-item">
-                                            <button type="button" class="option-btn">
-                                                <p>이력서</p>
-                                            </button>
-                                        </li>
-                                        <li class="option-item">
-                                            <button type="button" class="option-btn">
-                                                <p>포트폴리오</p>
-                                            </button>
-                                        </li>
-                                        <li class="option-item">
-                                            <button type="button" class="option-btn">
-                                                <p>자기소개서</p>
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+<!--                                <div id="dropdown2" class="option-menu">-->
+<!--                                    <ul class="option-list">-->
+<!--                                        <li class="option-item option-input">-->
+<!--                                            <button type="button" class="option-btn">-->
+<!--                                                <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24">-->
+<!--                                                    <path clip-rule="evenodd" d="M12 4.2a.8.8 0 0 1 .8.8v6.2H19a.8.8 0 0 1 0 1.6h-6.2V19a.8.8 0 0 1-1.6 0v-6.2H5a.8.8 0 0 1 0-1.6h6.2V5a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>-->
+<!--                                                </svg>-->
+<!--                                                <p>직접 입력</p>-->
+<!--                                            </button>-->
+<!--                                        </li>-->
+<!--                                        <li class="option-item">-->
+<!--                                            <button type="button" class="option-btn">-->
+<!--                                                <p>이력서</p>-->
+<!--                                            </button>-->
+<!--                                        </li>-->
+<!--                                        <li class="option-item">-->
+<!--                                            <button type="button" class="option-btn">-->
+<!--                                                <p>포트폴리오</p>-->
+<!--                                            </button>-->
+<!--                                        </li>-->
+<!--                                        <li class="option-item">-->
+<!--                                            <button type="button" class="option-btn">-->
+<!--                                                <p>자기소개서</p>-->
+<!--                                            </button>-->
+<!--                                        </li>-->
+<!--                                    </ul>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
                         <div class="form-item flex-3">
                             <label class="form-label" for="file-input">파일<span class="must">*</span></label>
                             <div class="form-field">
                                 <!-- 실제 파일 input은 숨김 -->
-                                <input type="file" id="file-input" hidden>
+                                <input type="file" id="file-input" name="files" hidden multiple>
                                 <!-- 파일명이 표시될 커스텀 영역 -->
                                 <label for="file-input" class="form-file-label">파일</label>
                             </div>
