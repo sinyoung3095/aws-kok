@@ -4,7 +4,6 @@ create table tbl_request_intern (
     member_id bigint not null,
     intern_notice_id bigint not null,
     member_alarm_setting_id bigint not null,
-    evaluation_id bigint not null,
     created_datetime timestamp default now(),
     updated_datetime timestamp default now(),
     constraint fk_request_intern_member foreign key(member_id)
@@ -12,7 +11,12 @@ create table tbl_request_intern (
     constraint fk_request_intern_intern_notice foreign key(intern_notice_id)
         references tbl_intern_notice(id),
     constraint fk_request_intern_member_alarm_setting foreign key(member_alarm_setting_id)
-        references tbl_member_alarm_setting(id),
-    constraint fk_request_intern_evaluation foreign key(evaluation_id)
-        references tbl_evaluation(id)
+        references tbl_member_alarm_setting(id)
 );
+
+select * from tbl_request_intern;
+
+insert into tbl_request_intern (member_id, intern_notice_id, member_alarm_setting_id)
+values (1, 1, 1);
+
+alter table tbl_request_intern drop evaluation_id;

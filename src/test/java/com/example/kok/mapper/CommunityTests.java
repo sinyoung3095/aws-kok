@@ -24,4 +24,16 @@ public class CommunityTests {
         postDTO.setPostContent("test");
         log.info("{}", postDTO);
     }
+
+//    회원별 게시물 조회
+
+    @Test
+    public void testSelectPostById() {
+        log.info("{}", communityPostMapper.selectPostById(1L));
+    }
+
+    @Test
+    public void testSelectPostByIds() {
+        log.info("{}", communityPostDAO.findPostById(1L));
+    }
 }

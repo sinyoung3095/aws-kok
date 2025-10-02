@@ -14,4 +14,4 @@ create table tbl_member_alarm_setting (
 select * from tbl_member_alarm_setting;
 
 insert into tbl_member_alarm_setting (member_id)
-values (9);
+values (1);
