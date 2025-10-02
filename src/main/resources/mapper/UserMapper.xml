@@ -50,6 +50,11 @@
         insert into tbl_user(user_name, user_phone, sns_email, user_role)
         values (#{userName},#{userPhone},#{snsEmail},#{userRole})
     </insert>
-<!--    -->
+    <!--  비밀번호 변경  -->
+    <update id="updatePassword">
+        update tbl_user
+        set user_password = #{userPassword}
+        where user_email = #{userEmail}
+    </update>
 
 </mapper>
