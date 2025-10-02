@@ -38,4 +38,5 @@ public class MemberController {
         List<FileDTO> files=memberService.findFilesByMemberId(memberId);
         return files;
     }
+
 }

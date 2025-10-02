@@ -19,6 +19,7 @@ public class ExperienceNoticeDTO{
     private String experienceNoticeSubtitle;
     private String experienceNoticeIntroduceJob;
     private String experienceNoticeEtc;
+    private String experienceMainTasks;
     private LocalDate experienceStartDate;
     private LocalDate experienceEndDate;
     private Status experienceNoticeStatus;

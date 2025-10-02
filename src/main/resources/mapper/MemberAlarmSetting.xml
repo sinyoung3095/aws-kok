@@ -5,4 +5,10 @@
         insert into tbl_member_alarm_setting(member_id)
         values (#{memberId})
     </insert>
+<!--    멤버 id로 알람 테이블 id 조회-->
+    <select id="selectByMemberId">
+        select id
+        from tbl_member_alarm_setting
+        where member_id=#{memberId}
+    </select>
 </mapper>
