@@ -40,7 +40,7 @@ public class MailService {
         body.append("<html><body>");
         body.append("<p>"+name+"님 링크를 클릭해 인증해 주세요."+"</p>");
         body.append("<a href=\"http://localhost:10000/mail/find-password-ok?code=" + code + "\">인증 하러 가기</a>");
-//        body.append("<img src=\"cid:\">");
+        body.append("<img src=\"/images/member/kok_logo.png\">");
 
         body.append("</body></html>");
 
