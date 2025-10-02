@@ -41,7 +41,7 @@
                     <div class="etc-1">
                         <div class="etc-2">
                             <div class="etc-3">
-                                <img alt="image" draggable="false" loading="lazy" width="60" height="60" decoding="async" data-nimg="1" srcset="" src="/images/mypage/default.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+                                <img alt="image" width="60" height="60" src="/images/mypage/default.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
                             </div>
                             <div class="etc-4">
                                 <div class="etc-5">
@@ -376,6 +376,9 @@
     </main>
 </div>
 </body>
+<script th:inline="javascript">
+    const member = [[${member}]];
+</script>
 <script src="/js/community/post/module/layout.js"></script>
 <script src="/js/community/post/module/service.js"></script>
 <script src="/js/community/comment/module/layout.js"></script>
