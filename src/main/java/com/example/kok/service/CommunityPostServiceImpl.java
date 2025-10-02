@@ -5,6 +5,7 @@ import com.example.kok.dto.FileDTO;
 import com.example.kok.dto.PostDTO;
 import com.example.kok.dto.PostFileDTO;
 import com.example.kok.dto.PostsCriteriaDTO;
+import com.example.kok.repository.CommunityLikeDAO;
 import com.example.kok.repository.CommunityPostDAO;
 import com.example.kok.repository.CommunityPostFileDAO;
 import com.example.kok.util.Criteria;
@@ -30,6 +31,7 @@ import java.util.List;
 public class CommunityPostServiceImpl implements CommunityPostService {
     private final CommunityPostDAO communityPostDAO;
     private final CommunityPostFileDAO communityPostFileDAO;
+    private final CommunityLikeDAO communityLikeDAO;
     private final S3Service s3Service;
     private final CommunityCommentService communityCommentService;
 
@@ -44,7 +46,7 @@ public class CommunityPostServiceImpl implements CommunityPostService {
     }
 
     @Override
-    public PostsCriteriaDTO getList(int page) {
+    public PostsCriteriaDTO getList(int page, Long memberId) {
         Criteria criteria = new Criteria(page, communityPostDAO.findCountAll());
         List<PostDTO> posts = communityPostDAO.findAll(criteria);
 
@@ -56,6 +58,13 @@ public class CommunityPostServiceImpl implements CommunityPostService {
                 postFile.setPostFilePath(s3Service.getPreSignedUrl(postFile.getPostFilePath(), Duration.ofMinutes(5)));
             });
             post.setPostFiles(postFiles);
+
+            post.setLikesCount(communityLikeDAO.getPostLikeCount(post.getId()));
+            if (memberId != null) {
+                post.setLiked(communityLikeDAO.isexistLike(post.getId(), memberId));
+            } else {
+                post.setLiked(false);
+            }
         });
 
         criteria.setHasMore(criteria.getPage() < criteria.getRealEnd());
@@ -72,7 +81,7 @@ public class CommunityPostServiceImpl implements CommunityPostService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     @Cacheable(value = "posts", key="'post_' + #id")
-    public PostDTO getPost(Long id) {
+    public PostDTO getPost(Long id, Long memberId) {
         PostDTO postDTO = communityPostDAO.findById(id).orElseThrow(PostNotFoundException::new);
         postDTO.setRelativeDate(DateUtils.toRelativeTime(postDTO.getCreatedDateTime().split("\\.")[0]));
         postDTO.setCreatedDateTime(postDTO.getCreatedDateTime().split(" ")[0]);
@@ -82,6 +91,13 @@ public class CommunityPostServiceImpl implements CommunityPostService {
             f.setPostFilePath(s3Service.getPreSignedUrl(f.getPostFilePath(), Duration.ofMinutes(5)));
         });
         postDTO.setPostFiles(files);
+
+        postDTO.setLikesCount(communityLikeDAO.getPostLikeCount(postDTO.getId()));
+        if (memberId != null) {
+            postDTO.setLiked(communityLikeDAO.isexistLike(postDTO.getId(), memberId));
+        } else {
+            postDTO.setLiked(false);
+        }
 
         return postDTO;
     }
