@@ -1,6 +1,5 @@
 CREATE TABLE tbl_payment_user (
     id bigint generated always as identity primary key,
-    paid_datetime timestamp default now(),
     payment_id bigint not null,
     user_id bigint not null,
     request_experience_id bigint,
@@ -15,3 +14,8 @@ CREATE TABLE tbl_payment_user (
         references tbl_advertisement(id)
 );
 
+select * from tbl_payment_user;
+
+-- 실제 결제된 시간 컬럼 삭제 -> payment로 이동(join해서 사용해야함)
+ALTER TABLE tbl_payment_user
+    drop COLUMN paid_datetime;
