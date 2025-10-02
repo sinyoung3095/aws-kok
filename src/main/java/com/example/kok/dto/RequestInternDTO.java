@@ -12,6 +12,14 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @EqualsAndHashCode(of ="id")
 public class RequestInternDTO {
-    private long fileId;
-    private long requestInternId;
+    private long id;
+    private RequestStatus requestInternStatus;
+    private long memberId;
+    private long internNoticeId;
+    private long memberAlarmSettingId;
+    private long evaluationId;
+    private String companyName;
+    private String internNoticeTitle;
+    private String createdDateTime;
+    private String updatedDateTime;
 }

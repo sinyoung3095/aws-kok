@@ -6,4 +6,39 @@
         values(#{userId},#{memberProvider})
     </insert>
 
+    <sql id="search">
+        <if test="keyword != null and keyword != ''">
+            and (
+            user_name like concat('%', #{keyword}, '%') or
+            user_email like concat('%', #{keyword}, '%') or
+            job_name like concat('%', #{keyword}, '%')
+            )
+        </if>
+    </sql>
+
+<!-- 일반 회원 전체 조회 -->
+    <select id="selectMembers">
+        select id, user_name, user_phone, user_email, user_role, sns_email, user_status, member_profile_url, avg_score, job_name
+        from view_user_with_evaluation_and_job
+        where user_status = 'active' and user_role = 'member'
+        <include refid="search"/>
+        order by id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+<!--  목록 개수  -->
+    <select id="selectCount">
+        select count(*)
+        from view_user_with_evaluation_and_job
+        where user_status = 'active' and user_role = 'member'
+        <include refid="search"/>
+    </select>
+
+<!-- 회원 아이디로 조회 -->
+<select id="selectMember">
+    select id, user_name, user_phone, user_email, user_role, sns_email, user_status, member_profile_url, avg_score, job_name
+    from view_user_with_evaluation_and_job
+    where user_status = 'active' and user_role = 'member' and id = #{id}
+</select>
+
 </mapper>
