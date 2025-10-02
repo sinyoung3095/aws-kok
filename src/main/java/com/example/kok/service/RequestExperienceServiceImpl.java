@@ -16,14 +16,13 @@ public class RequestExperienceServiceImpl implements RequestExperienceService {
     private final RequestExperienceFileDAO requestExperienceFileDAO;
 
     @Override
-    public void applyForExperience(RequestExperienceDTO requestExperienceDTO, List<Long> fileIds) {
+    public void applyForExperience(RequestExperienceDTO requestExperienceDTO) {
         requestExperienceDAO.applyForExperience(requestExperienceDTO);
         Long reqId=requestExperienceDTO.getId();
-        List<RequestExperienceFileDTO> dtoList = fileIds.stream()
-            .map(fileId -> new RequestExperienceFileDTO(fileId, reqId))
-            .toList();
-        dtoList.forEach(requestExperienceFileDTO -> {
-            requestExperienceFileDAO.saveRequestFile(requestExperienceFileDTO);
-        });
+        Long fileId=requestExperienceDTO.getFileId();
+        RequestExperienceFileDTO file=new RequestExperienceFileDTO();
+        file.setFileId(fileId);
+        file.setRequestExperienceId(reqId);
+        requestExperienceFileDAO.saveRequestFile(file);
     }
 }

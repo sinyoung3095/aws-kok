@@ -61,18 +61,18 @@ public class ExperiencesController {
         return result;
     }
 
-//    간편지원 넣기
-    @PostMapping("/request")
-    public void requestExperience(Long experienceId,
-            @AuthenticationPrincipal CustomUserDetails customUserDetails,
-            @RequestParam List<Long> fileIds) {
-
-        RequestExperienceDTO reqDTO = new RequestExperienceDTO();
-        reqDTO.setExperienceNoticeId(experienceId);
-        reqDTO.setMemberId(customUserDetails.getId());
-//        reqDTO.setMemberAlarmSettingId();
-        requestExperienceService.applyForExperience(reqDTO, fileIds);
-    }
+////    간편지원 넣기
+//    @PostMapping("/request")
+//    public void requestExperience(Long experienceId,
+//            @AuthenticationPrincipal CustomUserDetails customUserDetails,
+//            @RequestParam List<Long> fileIds) {
+//
+//        RequestExperienceDTO reqDTO = new RequestExperienceDTO();
+//        reqDTO.setExperienceNoticeId(experienceId);
+//        reqDTO.setMemberId(customUserDetails.getId());
+////        reqDTO.setMemberAlarmSettingId();
+//        requestExperienceService.applyForExperience(reqDTO, fileIds);
+//    }
 
 //    공고 저장하기
     @PostMapping("/save")
@@ -116,4 +116,24 @@ public class ExperiencesController {
         return user;
     }
 
+//    간편지원 완료
+    @PostMapping("/request")
+    public void requestExperience(@RequestBody RequestExperienceDTO requestExperienceDTO,
+                                  @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+//        System.out.println(requestExperienceDTO);
+//        System.out.println(customUserDetails.getId());
+        RequestExperienceDTO request=new RequestExperienceDTO();
+        request.setRequestExperienceMemberName(requestExperienceDTO.getRequestExperienceMemberName());
+        request.setRequestExperienceMemberEmail(requestExperienceDTO.getRequestExperienceMemberEmail());
+        request.setRequestExperienceMemberPhone(requestExperienceDTO.getRequestExperienceMemberPhone());
+        if(requestExperienceDTO.getRequestExperienceMemberUrl()!=null){
+            request.setRequestExperienceMemberUrl(requestExperienceDTO.getRequestExperienceMemberUrl());
+        }
+        request.setFileId(requestExperienceDTO.getFileId());
+        request.setMemberId(customUserDetails.getId());
+        request.setExperienceNoticeId(requestExperienceDTO.getExperienceNoticeId());
+        request.setMemberAlarmSettingId(customUserDetails.getId());
+        System.out.println(request);
+        requestExperienceService.applyForExperience(request);
+    }
 }

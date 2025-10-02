@@ -371,7 +371,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                                     <div class="detail-actions">
                                         <!-- popup-trigger 클래스가 있으면 열림 -->
-                                        <button class="detail-action-btn detail-apply-btn popup-trigger" data-target="#quick-apply-popup">간편 지원하기</button>
+                                        <button class="detail-action-btn detail-apply-btn popup-trigger" data-experienceid=${experienceId} data-target="#quick-apply-popup">간편 지원하기</button>
                                         <button class="detail-action-btn detail-save-btn" data-experienceid=${experienceId}>${saveBtnText}</button>
                                         <button class="detail-action-btn detail-share-btn" data-companyid=${companyId} data-experienceid=${experienceId}>공유하기</button>
                                     </div>
@@ -495,6 +495,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //     }
     // }
 
+    let nowExperienceId=``;
     // 간편지원, 저장, 공유 클릭될 때
     contentDetail.addEventListener("click", async (e) => {
         if (e.target.classList.contains("detail-share-btn")) {
@@ -564,6 +565,12 @@ document.addEventListener("DOMContentLoaded", () => {
             // console.log("간편지원하기 클릭됨");
             const target = trigger.getAttribute("data-target");
             const popup = document.querySelector(target);
+            const applyBtn=e.target;
+            const expId = Number(applyBtn.dataset.experienceid);
+
+            nowExperienceId=expId;
+
+            // console.log(nowExperienceId);
 
             // 드롭다운 전부 닫기
             dropdowns.forEach((menu) => menu.classList.remove("active"));
@@ -587,6 +594,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
+
+
 
     // 이력서 선택 팝업
     document.querySelector(".file-btn").addEventListener("click", async (e) => {
@@ -629,6 +638,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const storageFilesPre = await fetch(`/api/member/storage/load`);
         const storageFilesJson=await storageFilesPre.json();
         const storageFiles=storageFilesJson;
+        let checkedFileId=``;
 
         if (storageFiles.length>0) {
             bodyHtml.innerHTML = `<ul class="form-list file-list form-row" id="storage-files-ul">
@@ -639,6 +649,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const originName=file.fileOriginName;
                 const extensionName=originName.split(".").pop();
                 const number=i+1;
+                const fileId=file.id;
+                // console.log(fileId);
                 let extension="";
                 if(extensionName==="xlsx"||extensionName==="xlsm"||extensionName==="xls"||extensionName==="xlsb"||extensionName==="xltx"||extensionName==="xltm"){
                     extension="excel";
@@ -660,7 +672,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <img src="/images/experience/icon_file_${extension}.svg" alt="">
                             </div>
                             <div class="file-info">
-                                <p class="file-label">${originName}</p>
+                                <p class="file-label" data-fileid="${fileId}">${originName}</p>
                             </div>
                         </div>
                         <div class="btn-check-container">
@@ -673,6 +685,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     </li>`;
                 }
                 storageUl.innerHTML=liText;
+                // const inputFile=document.getElementById(`check${number}`);
             })
         } else {
             bodyHtml.innerHTML = `<!-- 데이터 없을때 -->
@@ -694,6 +707,96 @@ document.addEventListener("DOMContentLoaded", () => {
                 saveStorageFilePop.classList.add("active");
             })
         }
+        const resumeCheckPopupBox = document.getElementById("resume-check-popup");
+        const quickApplyPopupBox = document.getElementById("quick-apply-popup");
+        if (!resumeCheckPopupBox || !quickApplyPopupBox) return;
+
+        const doneBtn = resumeCheckPopupBox.querySelector("#file-select-btn");
+        const allRadiobox = resumeCheckPopupBox.querySelectorAll(
+            'input[type="radio"]'
+        );
+        if (!doneBtn) return;
+
+        // 체크 - 버튼 활성/비활성
+        function updateDoneBtn() {
+            const anyChecked = resumeCheckPopupBox.querySelector(
+                'input[type="radio"]:checked'
+            );
+            doneBtn.disabled = !anyChecked;
+        }
+        for (var i = 0; i < allRadiobox.length; i++) {
+            allRadiobox[i].addEventListener("change", updateDoneBtn);
+        }
+        updateDoneBtn();
+
+        // 선택 완료 클릭하면 quickApplyPopup에 값 넣기
+        doneBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const checkedBox = resumeCheckPopupBox.querySelector(
+                'input[type="radio"]:checked'
+            );
+            if (!checkedBox || checkedBox.length === 0) return;
+
+            // 파일명/id
+            const itemBox = checkedBox.closest(".form-item");
+            const fileName = itemBox.querySelector(".file-label");
+            const checkedFileId=fileName.dataset.fileid;
+            // console.log(checkedFileId);
+
+            const fileNametext = fileName.innerText;
+
+            console.log(fileNametext);
+
+            // 숨김 input(#resume-value)에 값 저장
+            const formPopup1 = quickApplyPopupBox.querySelector("form");
+            let resumeInput = quickApplyPopupBox.querySelector("#resume-value");
+            if (!resumeInput) {
+                resumeInput = document.createElement("input");
+                resumeInput.type = "hidden";
+                resumeInput.id = "resume-value";
+                resumeInput.name = "resume";
+                if (formPopup1) formPopup1.appendChild(resumeInput);
+            }
+            resumeInput.value = checkedFileId;
+
+            // 표시용 버튼 텍스트 변경
+            const fileButton = quickApplyPopupBox.querySelector(".file-btn");
+            fileButton.innerText = fileNametext;
+
+            // 팝업 전환
+            resumeCheckPopupBox.classList.remove("active");
+            quickApplyPopupBox.classList.add("active");
+
+            // 다음 열 때 초기화
+            checkedBox.checked = false;
+
+            updateDoneBtn();
+        });
+
+        // 이력서 팝업 이전 버튼 클릭시
+        const prevBtn = document.querySelector("#resume-check-popup .popup-prev");
+        const quickApplyPopup = document.getElementById("quick-apply-popup");
+        const resumeCheckPopup = document.getElementById("resume-check-popup");
+        if (!prevBtn || !quickApplyPopup || !resumeCheckPopup) return;
+
+        // 혹시 모를 제출 방지
+        prevBtn.type = "button";
+
+        prevBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // 열려있던 드롭다운 있으면 닫기(선택)
+            document
+                .querySelectorAll(".option-menu.active")
+                .forEach((m) => m.classList.remove("active"));
+
+            // 팝업 전환
+            resumeCheckPopup.classList.remove("active");
+            quickApplyPopup.classList.add("active");
+        });
     });
 
 
@@ -868,62 +971,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     dropdownFn();
 
-    // 보관함 유효성 검사 - 파일 추가
-    // function checkPopupLibrary() {
-    //     const applyBtn = document.querySelector("#resume-upload-popup #pop-apply");
-    //     const form = document.querySelector("#resume-upload-popup form");
-    //     const libraryToast = document.querySelector("#toast-library");
-    //     const typeInput = document.querySelector(
-    //         "#resume-upload-popup #type-input"
-    //     );
-    //     const fileInput = document.querySelector(
-    //         "#resume-upload-popup #file-input"
-    //     );
-    //     const fileLabel = document.querySelector(
-    //         "#resume-upload-popup .form-file-label"
-    //     );
-    //
-    //     if (!applyBtn || !form) return;
-    //
-    //     // 유효성 검사
-    //     const validate = () => {
-    //         if (typeInput.value.trim() === "") {
-    //             libraryToast.classList.add("show");
-    //             setTimeout(() => {
-    //                 libraryToast.classList.remove("show");
-    //                 showingToast = false;
-    //             }, 2000);
-    //
-    //             typeInput.focus();
-    //             return false;
-    //         }
-    //         if (!fileInput.files || fileInput.files.length === 0) {
-    //             libraryToast.classList.add("show");
-    //             setTimeout(() => {
-    //                 libraryToast.classList.remove("show");
-    //                 showingToast = false;
-    //             }, 2000);
-    //
-    //             return false;
-    //         }
-    //         return true;
-    //     };
-    //
-    //     // 버튼 클릭일 때만 검사
-    //     applyBtn.addEventListener("click", () => {
-    //         if (!validate()) return;
-    //         document
-    //             .getElementById("resume-upload-popup")
-    //             .classList.remove("active");
-    //
-    //         // 초기화
-    //         if (typeInput) typeInput.value = "";
-    //         if (fileInput) fileInput.value = "";
-    //         if (fileLabel) fileLabel.textContent = "파일";
-    //     });
-    // }
-    // checkPopupLibrary();
-
     // 보관함 유효성 검사 - url 추가
     function checkPopupLibraryUrl() {
         const applyBtn = document.querySelector("#url-upload-popup #pop-apply");
@@ -946,17 +993,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 typeInput.focus();
                 return false;
             }
-            if (urlInput.value.trim() === "") {
-                toastSubText.textContent = "URL을 입력해주세요.";
-
-                libraryToast.classList.add("show");
-                setTimeout(() => {
-                    libraryToast.classList.remove("show");
-                }, 2000);
-
-                urlInput.focus();
-                return false;
-            }
+            // if (urlInput.value.trim() === "") {
+            //     toastSubText.textContent = "URL을 입력해주세요.";
+            //
+            //     libraryToast.classList.add("show");
+            //     setTimeout(() => {
+            //         libraryToast.classList.remove("show");
+            //     }, 2000);
+            //
+            //     urlInput.focus();
+            //     return false;
+            // }
             return true;
         };
 
@@ -1011,32 +1058,6 @@ document.addEventListener("DOMContentLoaded", () => {
     popupLibraryClose("resume-upload-popup", ["#type-input", "#file-input"]);
     popupLibraryClose("url-upload-popup", ["#type-input", "#url-input"]);
 
-    // 이력서 팝업 이전 버튼 클릭시
-    function setupPopupPrev() {
-        const prevBtn = document.querySelector("#resume-check-popup .popup-prev");
-        const quickApplyPopup = document.getElementById("quick-apply-popup");
-        const resumeCheckPopup = document.getElementById("resume-check-popup");
-        if (!prevBtn || !quickApplyPopup || !resumeCheckPopup) return;
-
-        // 혹시 모를 제출 방지
-        prevBtn.type = "button";
-
-        prevBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-
-            // 열려있던 드롭다운 있으면 닫기(선택)
-            document
-                .querySelectorAll(".option-menu.active")
-                .forEach((m) => m.classList.remove("active"));
-
-            // 팝업 전환
-            resumeCheckPopup.classList.remove("active");
-            quickApplyPopup.classList.add("active");
-        });
-    }
-    setupPopupPrev();
-
     // 전화번호 포맷팅
     function formatPhoneNumber(input) {
         input.value = input.value
@@ -1069,6 +1090,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const email = popup.querySelector("#email-input");
         const phone = popup.querySelector("#phone-input");
         const resume = popup.querySelector("#resume-value");
+        const url=popup.querySelector("#url-input");
 
         name.value=user.userName;
 
@@ -1076,7 +1098,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         phone.value=user.userPhone;
 
-        submitBtn.addEventListener("click", () => {
+        submitBtn.addEventListener("click", async () => {
 
             // 이름을 입력안했을때
             if (!name.value.trim()) {
@@ -1182,6 +1204,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            const requestExperienceDTO = {};
+            requestExperienceDTO.requestExperienceMemberName = name.value;
+            requestExperienceDTO.requestExperienceMemberEmail = email.value;
+            requestExperienceDTO.requestExperienceMemberPhone = phone.value;
+            requestExperienceDTO.fileId=Number(resume.value);
+            requestExperienceDTO.experienceNoticeId=nowExperienceId;
+
+            console.log(nowExperienceId);
+            console.log(requestExperienceDTO);
+            if(url.value){
+                requestExperienceDTO.requestExperienceMemberUrl = url.value;
+            }
+
+            await fetch(`/api/experiences/request`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(requestExperienceDTO)
+            })
+            // const memberName=name.value;
+            // const memberEmail=email.value;
+            // const memberPhone=phone.value;
+            // const fileId=Number(resume.value);
+
             popup.classList.remove("active");
         });
     }
@@ -1189,78 +1236,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 이력서선택 팝업
     function resumeCheckPopupFn() {
-        var resumeCheckPopupBox = document.getElementById("resume-check-popup");
-        var quickApplyPopupBox = document.getElementById("quick-apply-popup");
-        if (!resumeCheckPopupBox || !quickApplyPopupBox) return;
-
-        var doneBtn = resumeCheckPopupBox.querySelector("#file-select-btn");
-        var allRadiobox = resumeCheckPopupBox.querySelectorAll(
-            'input[type="radio"]'
-        );
-        if (!doneBtn) return;
-
-        // 체크 - 버튼 활성/비활성
-        function updateDoneBtn() {
-            var anyChecked = resumeCheckPopupBox.querySelector(
-                'input[type="radio"]:checked'
-            );
-            doneBtn.disabled = !anyChecked;
-        }
-        for (var i = 0; i < allRadiobox.length; i++) {
-            allRadiobox[i].addEventListener("change", updateDoneBtn);
-        }
-        updateDoneBtn();
-
-        // 선택 완료 클릭하면 quickApplyPopup에 값 넣기
-        doneBtn.addEventListener("click", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            var checkedBoxes = resumeCheckPopupBox.querySelectorAll(
-                'input[type="radio"]:checked'
-            );
-            if (!checkedBoxes || checkedBoxes.length === 0) return;
-
-            // 파일명/URL
-            var nameList = [];
-            for (var j = 0; j < checkedBoxes.length; j++) {
-                var cb = checkedBoxes[j];
-                var itemBox = cb.closest(".form-item");
-                var fileName = itemBox.querySelector(".file-name");
-
-                var text = fileName.textContent ? fileName.textContent.trim() : "";
-                if (text) nameList.push(text);
-            }
-            var joinedValue = nameList.join(", ");
-
-            // 숨김 input(#resume-value)에 값 저장
-            var formPopup1 = quickApplyPopupBox.querySelector("form");
-            var resumeInput = quickApplyPopupBox.querySelector("#resume-value");
-            if (!resumeInput) {
-                resumeInput = document.createElement("input");
-                resumeInput.type = "hidden";
-                resumeInput.id = "resume-value";
-                resumeInput.name = "resume";
-                if (formPopup1) formPopup1.appendChild(resumeInput);
-            }
-            resumeInput.value = joinedValue;
-
-            // 표시용 버튼 텍스트 변경
-            var fileButton = quickApplyPopupBox.querySelector(".file-btn");
-            if (fileButton) {
-                fileButton.textContent = nameList[0];
-            }
-
-            // 팝업 전환
-            resumeCheckPopupBox.classList.remove("active");
-            quickApplyPopupBox.classList.add("active");
-
-            // 다음 열 때 초기화
-            for (var k = 0; k < checkedBoxes.length; k++) {
-                checkedBoxes[k].checked = false;
-            }
-            updateDoneBtn();
-        });
     }
     resumeCheckPopupFn();
 

@@ -17,5 +17,10 @@ public class RequestExperienceVO extends Period{
     private long memberId;
     private long memberAlarmSettingId;
     private long experienceNoticeId;
+    private String requestExperienceMemberName;
+    private String requestExperienceMemberEmail;
+    private String requestExperienceMemberPhone;
+    private String requestExperienceMemberUrl;
+    private long fileId;
 
 }
