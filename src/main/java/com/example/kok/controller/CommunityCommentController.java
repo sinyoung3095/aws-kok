@@ -1,5 +1,7 @@
 package com.example.kok.controller;
 
+import com.example.kok.auth.CustomUserDetails;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import com.example.kok.dto.CommentDTO;
 import com.example.kok.service.CommunityCommentService;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +20,9 @@ public class CommunityCommentController {
 
 //    댓글 작성
     @PostMapping
-    public ResponseEntity<?> write(@RequestBody CommentDTO commentDTO) {
-        // 임시 memberId 설정
-        commentDTO.setMemberId(3L);
+    public ResponseEntity<?> write(@RequestBody CommentDTO commentDTO,
+                                   @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        commentDTO.setMemberId(customUserDetails.getId());
         communityCommentService.write(commentDTO);
         return ResponseEntity.ok(commentDTO);
     }

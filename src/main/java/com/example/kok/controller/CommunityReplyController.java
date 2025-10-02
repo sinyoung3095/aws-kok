@@ -20,9 +20,9 @@ public class CommunityReplyController {
 
 //    대댓글 작성
     @PostMapping
-    public ResponseEntity<?> write(@RequestBody ReplyDTO replyDTO) {
-        // 임시 memberId 설정
-        replyDTO.setMemberId(3L);
+    public ResponseEntity<?> write(@RequestBody ReplyDTO replyDTO,
+                                   @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        replyDTO.setMemberId(customUserDetails.getId());
         communityReplyService.write(replyDTO);
         return ResponseEntity.ok(replyDTO);
     }
