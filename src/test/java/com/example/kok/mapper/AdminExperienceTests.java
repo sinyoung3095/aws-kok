@@ -6,6 +6,7 @@ import com.example.kok.dto.UserRequestExperienceDTO;
 import com.example.kok.repository.AdminExperienceDAO;
 import com.example.kok.service.AdminService;
 import com.example.kok.util.AdminExperienceCriteria;
+import com.example.kok.util.AdminExperienceListCriteria;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.Search;
 import lombok.extern.slf4j.Slf4j;
@@ -29,19 +30,17 @@ public class AdminExperienceTests {
 //    Mapper
     @Test
     public void testAdminExperienceAll() {
-        Search search = new Search();
-        search.setKeyword("그린");
-        Criteria criteria = new Criteria(1, adminExperienceMapper.selectAdminExperienceSearchCountAll(search));
-        adminExperienceMapper.selectAdminExperienceAll(criteria, search).stream().map(AdminExperienceDTO::toString).forEach(log::info);
+        String keyword = "그린";
+        AdminExperienceListCriteria criteria = new AdminExperienceListCriteria(1, adminExperienceMapper.selectAdminExperienceSearchCountAll(keyword));
+        adminExperienceMapper.selectAdminExperienceAll(criteria, keyword).stream().map(AdminExperienceDTO::toString).forEach(log::info);
         log.info("{}", criteria);
-        log.info("{}", search);
+        log.info("{}", keyword);
     }
 
     @Test
     public void testSelectAdminExperienceCountAll() {
-        Search search = new Search();
-        search.setKeyword(null);
-        log.info("전체 개수: {}", adminExperienceMapper.selectAdminExperienceSearchCountAll(search));
+        String keyword = "";
+        log.info("전체 개수: {}", adminExperienceMapper.selectAdminExperienceSearchCountAll(keyword));
     }
 
     @Test
@@ -83,18 +82,16 @@ public class AdminExperienceTests {
 //    DAO
     @Test
     public void testAdminExperienceAllDAO() {
-        Search search = new Search();
-        search.setKeyword(null);
-        Criteria criteria = new Criteria(3, adminExperienceDAO.adminExperienceSearchCountAll(search));
-        adminExperienceDAO.adminExperienceAll(criteria, search).stream().map(AdminExperienceDTO::toString).forEach(log::info);
+        String keyword = "";
+        AdminExperienceListCriteria criteria = new AdminExperienceListCriteria(3, adminExperienceDAO.adminExperienceSearchCountAll(keyword));
+        adminExperienceDAO.adminExperienceAll(criteria, keyword).stream().map(AdminExperienceDTO::toString).forEach(log::info);
         log.info("{}", criteria);
     }
 
     @Test
     public void testAdminExperienceSearchCountAll() {
-        Search search = new Search();
-        search.setKeyword(null);
-        log.info("전체 개수{}", adminExperienceDAO.adminExperienceSearchCountAll(search));
+        String keyword = "";
+        log.info("전체 개수{}", adminExperienceDAO.adminExperienceSearchCountAll(keyword));
     }
 
     @Test
@@ -103,6 +100,22 @@ public class AdminExperienceTests {
         log.info("55번 게시글: {}", adminExperienceDAO.selectAdminExperience(id));
     }
 
+    @Test
+    public void testRequestUser() {
+        int page = 2;
+        Long id = 56L;
+        AdminExperienceCriteria criteria = new AdminExperienceCriteria(page, adminExperienceDAO.countRequestUser(id));
+        log.info("adminExperienceCriteria: {}", criteria);
+        log.info("requestUserCount: {}", adminExperienceDAO.countRequestUser(id));
+        adminExperienceDAO.requestUser(criteria, id).stream().map(UserRequestExperienceDTO::toString).forEach(log::info);
+    }
+
 
 //    Service
+    @Test
+    public void testGetExperienceDetail() {
+        int page = 3;
+        Long id = 55L;
+        log.info(adminService.getExperienceDetail(page, id).toString());
+    }
 }

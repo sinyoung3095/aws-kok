@@ -247,6 +247,7 @@ button:not(:disabled) {
 
 .d-table {
     display: table !important;
+    margin-bottom: 15px;
 }
 
 .d-table-cell {
@@ -1553,6 +1554,10 @@ table.info-table th {
 .modal.member-modal .tab-inner.tab-detail table.info-table td {
     white-space: pre-line;
     word-break: break-all;
+}
+
+#info-evaluation table {
+    margin-bottom: 20px;
 }
 
 .modal-footer {

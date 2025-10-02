@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @Getter @Setter
 @ToString
-public class AdminExperienceCriteria {
+public class AdminExperienceListCriteria {
     private int page;
     private int pageCount;
     private int startPage;
@@ -20,9 +20,9 @@ public class AdminExperienceCriteria {
     private int count;
     private int total;
 
-    public AdminExperienceCriteria(int page, int total) {
-        rowCount = 5;
-        pageCount = 5;
+    public AdminExperienceListCriteria(int page, int total) {
+        rowCount = 10;
+        pageCount = 10;
         count = rowCount + 1;
         this.page = Math.max(1, page);
         endPage = (int)(Math.ceil(page / (double)pageCount) * pageCount);
