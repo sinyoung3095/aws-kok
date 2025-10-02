@@ -1,6 +1,7 @@
 package com.example.kok.dto;
 
 import com.example.kok.enumeration.Provider;
+import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.enumeration.Status;
 import com.example.kok.enumeration.UserRole;
 import lombok.*;

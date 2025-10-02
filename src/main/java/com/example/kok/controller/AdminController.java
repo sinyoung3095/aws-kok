@@ -93,7 +93,7 @@ public class AdminController {
     }
 
 //    고객지원 - 공지사항 목록
-    @GetMapping("support/{page}")
+    @GetMapping("support")
     public String goToSupportPage() {
         return "admin/support";
     }
@@ -136,6 +136,6 @@ public class AdminController {
     @GetMapping("support/delete/{id}")
     public RedirectView delete (@PathVariable Long id) {
         adminService.delete(id);
-        return new RedirectView("/admin/support/1");
+        return new RedirectView("/admin/support");
     }
 }

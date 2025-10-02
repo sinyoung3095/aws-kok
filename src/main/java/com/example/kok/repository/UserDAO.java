@@ -15,6 +15,10 @@ public class UserDAO {
     public Optional<UserDTO> findByEmail(String userEmail) {
         return userMapper.selectByEmail(userEmail);
     }
+//
+    public UserDTO findById(Long id){
+        return userMapper.selectById(id);
+    }
 //    일반 회원 가입
     public void saveUser(UserDTO userDTO) {
         userMapper.insertMember(userDTO);

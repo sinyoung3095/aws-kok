@@ -22,4 +22,6 @@ public interface UserService {
                .build();
 
     }
+
+    UserDTO findById(Long id);
 }

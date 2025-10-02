@@ -150,30 +150,30 @@ const experienceLayout = (() => {
                         </div>
                     </div>
                 </div>
-                <div class="cards">
-                    <div class="card-top">
-                        <div class="card-top-text">
-                        활성화된 공고의 지원자
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="request-total">
-                            <div class="card-body-title"><span class="count">${data.activeRequestCount}</span>명</div>
-                            <p class="card-body-sub">활성화 상태인 체험 공고의 지원자</p>
-                        </div>
+            </div>
+            <div class="cards">
+                <div class="card-top">
+                    <div class="card-top-text">
+                    활성화된 공고의 지원자
                     </div>
                 </div>
-                <div class="cards">
-                    <div class="card-top">
-                        <div class="card-top-text">
-                        누적 지원자
-                        </div>
+                <div class="card-body">
+                    <div class="request-total">
+                        <div class="card-body-title"><span class="count">${data.activeRequestCount}</span>명</div>
+                        <p class="card-body-sub">활성화 상태인 체험 공고의 지원자</p>
                     </div>
-                    <div class="card-body">
-                        <div>
-                            <div class="card-body-title"><span class="count">${data.totalRequestCount}</span>명</div>
-                            <p class="card-body-sub">전체 공고 누적 지원자 수</p>
-                        </div>
+                </div>
+            </div>
+            <div class="cards">
+                <div class="card-top">
+                    <div class="card-top-text">
+                    누적 지원자
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-body-title"><span class="count">${data.totalRequestCount}</span>명</div>
+                        <p class="card-body-sub">전체 공고 누적 지원자 수</p>
                     </div>
                 </div>
             </div>

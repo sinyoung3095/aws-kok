@@ -140,7 +140,9 @@ const postLayout = (() => {
                                 <div class="report-3">
                                     <div class="report-4">
                                         <div class="report-5">
-                                            <p class="report-6">게시물 신고</p>
+                                            <p class="delete-post-btn">게시글 삭제</p>
+                                            <br>
+                                            <p class="update-post-btn">게시글 수정</p>
                                         </div>
                                     </div>
                                 </div>

@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface UserMapper {
 //    이메일로 전체 조회
     public Optional<UserDTO> selectByEmail(String userEmail);
+//    id로 조회
+    public UserDTO selectById(Long id);
 //    이메일로 일반 회원 조회
     public Optional<UserDTO> selectByMemberEmail(String userEmail);
 //    이메일로 기업 회원 조회

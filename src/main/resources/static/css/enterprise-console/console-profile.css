@@ -287,13 +287,18 @@ div.profile-content{
     color: #0a0a0a;
 }
 
-div.contents{
+div.profile-content .contents:not(:first-child) {
+    margin-top: 20px;
+}
+
+div.back-file-btncontents{
     margin-block-start: 0px;
     margin-block-end: 16px;
     color: #0a0a0a;
 }
 
-label.profile-label{
+label.profile-label,
+p.profile-label{
     user-select: none;
     font-weight: 500;
     line-height: 1;

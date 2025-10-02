@@ -39,6 +39,20 @@ public class S3Service {
         return fileName;
     }
 
+    public String uploadStorageFile(MultipartFile file, String path) throws IOException {
+        String fileName = getFileName(file, path);
+        PutObjectRequest request=PutObjectRequest.builder()
+                .bucket(bucketName)
+                .key(fileName)
+                .contentType(file.getContentType())
+                .contentLength(file.getSize())
+                .build();
+
+        s3Client.putObject(request, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
+
+        return fileName;
+    }
+
     public String getPreSignedUrl(String key, Duration validDuration) {
         GetObjectRequest request = GetObjectRequest.builder()
                 .bucket(bucketName)

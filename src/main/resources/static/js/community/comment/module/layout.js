@@ -55,17 +55,9 @@ const commentLayout = (() => {
                     <div class="detail-post-20">
                         <div class="post-21">
                             <div class="post-22">
-                                <button class="post-23">
-                                    <div class="post-24">
-                                        <svg class="heart" viewBox="0 0 24 24" fill="${comment.liked ? "red" : "none"}" stroke="red" height="20" role="img" width="20">
-                                            <path d="M17.668 16.4c2.028-1.76 4.328-3.755 4.328-6.902a6.07 6.07 0 0 0-5.831-6.274 5.25 5.25 0 0 0-2.296.447l-.267.128a5.3 5.3 0 0 0-1.606 1.274 5.26 5.26 0 0 0-4.161-1.85 6.07 6.07 0 0 0-4.211 1.934l-.2.225a6.07 6.07 0 0 0-1.42 4.116l.005.29c.132 2.968 2.278 4.833 4.353 6.637v.001l.742.65.893.797a39 39 0 0 0 3.057 2.623l.109.065c.22.12.462.193.712.21l.125.005c.293 0 .58-.075.837-.215l.108-.065a39 39 0 0 0 3.151-2.707l.802-.716z"></path>
-                                        </svg>
-                                    </div>
-                                    <div style="margin-left: 5px;">
-                                        <p class="post-25">${comment.likesCount}</p>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <p class="post-25 comment">답글</p>
+                                <button class="post-23">                                  
+                                    <div>
+                                        <p class="post-25 comment">답글 달기</p>
                                     </div>
                                 </button>
                             </div>
@@ -158,19 +150,6 @@ const commentLayout = (() => {
                                 <div class="post-18">
                                     <div class="post-19" style="font-size: 14px; white-space: normal;">
                                         <span>${reply.replyContent}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="reply-28">
-                                <div class="reply-29">
-                                    <div class="reply-30">
-                                        <button class="reply-31">
-                                            <div class="reply-32">
-                                                <svg class="heart" viewBox="0 0 24 24" fill="red" stroke="red" height="20" role="img" width="20">
-                                                    <path d="M17.668 16.4c2.028-1.76 4.328-3.755 4.328-6.902a6.07 6.07 0 0 0-5.831-6.274 5.25 5.25 0 0 0-2.296.447l-.267.128a5.3 5.3 0 0 0-1.606 1.274 5.26 5.26 0 0 0-4.161-1.85 6.07 6.07 0 0 0-4.211 1.934l-.2.225a6.07 6.07 0 0 0-1.42 4.116l.005.29c.132 2.968 2.278 4.833 4.353 6.637v.001l.742.65.893.797a39 39 0 0 0 3.057 2.623l.109.065c.22.12.462.193.712.21l.125.005c.293 0 .58-.075.837-.215l.108-.065a39 39 0 0 0 3.151-2.707l.802-.716z"></path>
-                                                </svg>
-                                            </div>
-                                        </button>
                                     </div>
                                 </div>
                             </div>

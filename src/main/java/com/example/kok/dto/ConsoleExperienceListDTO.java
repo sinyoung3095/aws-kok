@@ -14,10 +14,11 @@ public class ConsoleExperienceListDTO {
     private long id;
     private String experienceNoticeTitle;
     private String experienceNoticeSubtitle;
-    private LocalDate ExperienceStartDate;
-    private LocalDate ExperienceEndDate;
+    private LocalDate experienceStartDate;
+    private LocalDate experienceEndDate;
+    private LocalDate experienceNoticeStartDate;
+    private LocalDate experienceNoticeEndDate;
     private Status experienceNoticeStatus;
-    private Status experienceRequestStatus;
     private long companyId;
     private String createdDateTime;
     private String updatedDateTime;

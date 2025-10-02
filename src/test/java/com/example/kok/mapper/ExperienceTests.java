@@ -20,7 +20,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Slf4j
 public class ExperienceTests {
     @Autowired
-<<<<<<< HEAD
     private ExperienceNoticeMapper experienceNoticeMapper;
     @Autowired
     private CompanyMapper companyMapper;
@@ -34,21 +33,7 @@ public class ExperienceTests {
     private CompanyDAO companyDAO;
     @Autowired
     private SaveExperienceNoticeDAO saveExperienceNoticeDAO;
-=======
-    private ConsoleExperienceListMapper consoleExperienceListMapper;
->>>>>>> ex/apply
 
-    @Test
-    void testSelectById() {
-        ConsoleExperienceNoticeRequestDTO dto = consoleExperienceListMapper.selectById(1L);
-
-        System.out.println("id: " + dto.getId());
-        System.out.println("제목: " + dto.getExperienceNoticeTitle());
-        System.out.println("직군 ID: " + dto.getJobCategoryId());
-        System.out.println("직군 이름: " + dto.getJobCategoryName());
-    }
-
-<<<<<<< HEAD
     @Test
     public void testSelectCompany(){
         System.out.println(companyMapper.selectCompanyById(8L));
@@ -80,6 +65,4 @@ public class ExperienceTests {
 //
 //        System.out.println(deleteExp);
     }
-=======
->>>>>>> ex/apply
 }

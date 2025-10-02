@@ -1,16 +1,7 @@
-// const searchBtn = document.querySelector(".search-btn");
 const jobMenu = document.querySelector(".job");
 const jobItems = document.querySelectorAll(".job-3");
 const checkIcon = document.querySelector(".setting-31");
 const searchSpan = document.querySelector(".search-span");
-// const cateBtns = document.querySelectorAll(".category-sub");
-
-// 버튼 클릭 → 메뉴 표시/숨김 토글
-// searchBtn.addEventListener("click", (e) => {
-//     e.stopPropagation(); // 외부 클릭 이벤트 막기
-//     jobMenu.style.display =
-//         jobMenu.style.display === "block" ? "none" : "block";
-// });
 
 // job-3 선택
 jobItems.forEach((item) => {
@@ -33,53 +24,6 @@ jobItems.forEach((item) => {
         jobMenu.style.display = "none";
     });
 });
-
-
-
-// 여러 개의 tr.body-tr에 대해 각각 적용
-// document.querySelectorAll("tr.body-tr").forEach((tr) => {
-//     const activeExp = tr.querySelector("button.appli-active-btn");
-//     const activeCircle = activeExp ? activeExp.querySelector(".circle") : null;
-//     const expStatus = tr.querySelector("span.exp-status");
-//
-//     if (!activeExp || !activeCircle || !expStatus) return;
-//
-//     activeExp.style.transition = "background-color 0.5s";
-//     activeCircle.style.transition = "transform 0.5s";
-//     expStatus.style.transition = "background-color 0.5s, color 0.5s";
-//
-//     activeExp.addEventListener("click", () => {
-//         if (expStatus.classList.contains("gray")) {
-//             activeExp.classList.remove("gray");
-//             expStatus.classList.remove("gray");
-//             expStatus.innerText = "모집 중";
-//         } else {
-//             activeExp.classList.add("gray");
-//             expStatus.classList.add("gray");
-//             expStatus.innerText = "모집 완료";
-//         }
-//     });
-//
-//     cateBtns.forEach((btn) => {
-//         btn.addEventListener("click", (e) => {
-//             if (e.target.classList.contains("all")) {
-//                 tr.classList.remove("disnone");
-//             } else if (e.target.classList.contains("ing")) {
-//                 if (expStatus.classList.contains("gray")) {
-//                     tr.classList.add("disnone");
-//                 } else {
-//                     tr.classList.remove("disnone");
-//                 }
-//             } else if (e.target.classList.contains("end")) {
-//                 if (expStatus.classList.contains("gray")) {
-//                     tr.classList.remove("disnone");
-//                 } else {
-//                     tr.classList.add("disnone");
-//                 }
-//             }
-//         });
-//     });
-// });
 
 const experienceTable = document.querySelector("#experience-list-table");
 if (experienceTable) {
@@ -248,7 +192,6 @@ statusButtons.forEach(btn => {
 function doSearch(page = 1) {
     keyword = searchInput.value.trim();
 
-    // getList 호출 (필요하다면 service.js 에서 job 파라미터도 추가)
     experienceNoticeService.getList(companyId, page, status, keyword, (data) => {
         experienceLayout.contentLayout();
         experienceLayout.rowTemplate(data.experienceLists);

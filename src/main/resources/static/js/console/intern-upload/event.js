@@ -2,6 +2,7 @@ const searchBtn = document.querySelector(".search-btn");
 const searchSpan = document.querySelector(".search-span");
 const dropdownMenu = document.querySelector(".dropdown-menu");
 const jobButtons = document.querySelectorAll(".dropdown-btn");
+const companyId = 1; //나중에 수정해야함
 
 // 검색 버튼 클릭 시 드롭다운 열기/닫기
 searchBtn.addEventListener("click", (e) => {
@@ -21,9 +22,12 @@ jobButtons.forEach((btn) => {
         btn.classList.add("active");
 
         // 선택된 텍스트를 상단 버튼에 반영
-        searchSpan.innerText = btn.querySelector(".job-6").innerText;
-        searchSpan.style.color = "#000";
+        const jobCategoryName = btn.querySelector(".job-6").innerText;
+        const jobCategoryId = btn.dataset.id;
 
+        searchSpan.innerText = jobCategoryName;
+        searchSpan.style.color = "#000";
+        searchSpan.dataset.id = jobCategoryId;
         // 드롭다운 닫기
         dropdownMenu.classList.remove("active");
     });
@@ -55,27 +59,36 @@ validateLengthInputs.forEach((input) => {
 });
 
 // 필수값 유효성 검사
-const openBtn = document.querySelector("#btn-register-experience"); // 하단 버튼
-const popup = document.querySelector(".popup-container");           // 팝업
-const btnNo = document.querySelector(".btn-no");                    // 팝업 취소
-const btnYes = document.querySelector(".btn-yes");                  // 팝업 확인
+const openBtn = document.querySelector(".popup-trigger"); // 팝업열기 하단 버튼
+const popup = document.querySelector(".popup-container"); // 팝업
+const btnNo = document.querySelector(".btn-no"); // 팝업 취소
+const btnYegister = document.querySelector("#btn-register-intern"); // 팝업 등록 확인
+const btnUpdate = document.querySelector("#btn-update-intern"); // 팝업 수정 확인
+const dateInputs = document.querySelectorAll(".date-input"); // 달력 인풋
+const textareas = document.querySelectorAll(".contents .textarea"); // 텍스트박스
+const dropdownBtns = document.querySelectorAll(".contents .dropdown-btn"); //드롭다운 버튼
+const searchBtns = document.querySelectorAll(".contents .search-btn");
+const contentInput =document.querySelectorAll(".contents .content-input"); // 기본 인풋
+
 
 // 팝업 열기
-openBtn.addEventListener("click", () => {
-    popup.style.display = "flex";
-});
-
+if(openBtn) {
+    openBtn.addEventListener("click", () => {
+        popup.style.display = "flex";
+    });
+}
 // 팝업 취소
 btnNo.addEventListener("click", () => {
     popup.style.display = "none";
 });
 
-// 팝업 확인 (유효성 검사 실행)
-btnYes.addEventListener("click", () => {
+// 유효성 검사
+
+function formValidate(){
     let isValid = true;
 
     // 입력 필드 검사
-    document.querySelectorAll(".contents .content-input").forEach(input => {
+    contentInput.forEach(input => {
         const hasMust = input.closest(".contents")?.querySelector(".must");
 
         if (hasMust) {
@@ -89,7 +102,7 @@ btnYes.addEventListener("click", () => {
     });
 
     // 드롭다운 검사
-    document.querySelectorAll(".contents .search-btn").forEach(btn => {
+    searchBtns.forEach(btn => {
         const hasMust = btn.closest(".contents")?.querySelector(".must");
         const span = btn.querySelector(".search-span");
 
@@ -104,7 +117,7 @@ btnYes.addEventListener("click", () => {
     });
 
     // textarea 검사
-    document.querySelectorAll(".contents .textarea").forEach(textarea => {
+    textareas.forEach(textarea => {
         const hasMust = textarea.closest(".contents")?.querySelector(".must");
         if (hasMust) {
             if (textarea.value.trim() === "") {
@@ -117,7 +130,7 @@ btnYes.addEventListener("click", () => {
     });
 
     // date-input 검사 (yyyy-mm-dd 형식)
-    document.querySelectorAll(".date-input").forEach(input => {
+    dateInputs.forEach(input => {
         const hasMust = input.closest(".contents")?.querySelector(".must");
         const datePattern = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -131,18 +144,79 @@ btnYes.addEventListener("click", () => {
         }
     });
 
-    if (isValid) {
-        console.log("유효성 통과 → 등록 진행!");
-    } else {
-        console.log("유효성 실패 → 빨간 border 표시");
-    }
+    return isValid;
+}
 
-    // 팝업은 결과와 상관없이 닫기
-    popup.style.display = "none";
-});
+// 팝업 수정 확인
+if(btnUpdate){
+    btnUpdate.addEventListener("click", async () => {
+        const isValid = formValidate();
+
+        if (isValid) {
+            const data = {
+                internNoticeTitle: document.querySelector("#content-title").value,
+                internNoticeSubtitle: document.querySelector("#content-subtitle").value,
+                jobCategoryId: document.querySelector("#job-category").dataset.id,
+                internNoticeIntroduceJob: document.querySelector("#introduce-job").value,
+                internMainTasks: document.querySelector("#main-tasks").value,
+                internNoticeEtc: document.querySelector("#notice-etc").value,
+                internNoticeStartDate: document.querySelector("#intern-notice-start-date").value,
+                internNoticeEndDate: document.querySelector("#intern-notice-end-date").value,
+            }
+
+            try {
+                const result = await internRegisterService.update(id, data);
+                console.log("수정 성공이당", result);
+                alert("공고가 수정되었습니다.");
+            } catch (err) {
+                console.error(err);
+                alert("수정 중 오류가 발생했습니다.");
+            }
+        } else {
+            console.log("유효성 실패!!!!!");
+        }
+
+        popup.style.display = "none";
+
+    });
+}
+
+// 팝업 등록 확인
+if(btnYegister) {
+    btnYegister.addEventListener("click", async () => {
+        const isValid = formValidate();
+
+        if (isValid) {
+            const data = {
+                companyId: companyId,
+                internNoticeTitle: document.querySelector("#content-title").value,
+                internNoticeSubtitle: document.querySelector("#content-subtitle").value,
+                jobCategoryId: document.querySelector("#job-category").dataset.id,
+                internNoticeIntroduceJob: document.querySelector("#introduce-job").value,
+                internMainTasks: document.querySelector("#main-tasks").value,
+                internNoticeEtc: document.querySelector("#notice-etc").value,
+                internNoticeStartDate: document.querySelector("#intern-notice-start-date").value,
+                internNoticeEndDate: document.querySelector("#intern-notice-end-date").value,
+            }
+
+            try {
+                const result = await internRegisterService.register(data);
+                console.log("등록 성공이당", result);
+                alert("공고가 등록되었습니다.");
+            } catch (err) {
+                console.error(err);
+                alert("등록 중 오류가 발생했습니다.");
+            }
+        } else {
+            console.log("유효성 실패!!!!!");
+        }
+
+        popup.style.display = "none";
+    });
+}
 
 // 입력 중 border 해제 (실시간)
-document.querySelectorAll(".contents .content-input").forEach(input => {
+contentInput.forEach(input => {
     input.addEventListener("input", () => {
         if (input.value.trim() !== "" && input.value.length <= 30) {
             input.style.border = "";
@@ -151,7 +225,7 @@ document.querySelectorAll(".contents .content-input").forEach(input => {
 });
 
 // 드롭다운 선택 시 border 해제
-document.querySelectorAll(".contents .dropdown-btn").forEach(btn => {
+dropdownBtns.forEach(btn => {
     btn.addEventListener("click", (e) => {
         const selectedText = e.currentTarget.querySelector(".job-6")?.textContent || "";
         const container = e.currentTarget.closest(".dropdown-container");
@@ -173,10 +247,11 @@ document.querySelectorAll(".contents .textarea").forEach(textarea => {
 });
 
 // 달력 input
-document.querySelectorAll(".date-input").forEach(input => {
-    input.addEventListener("input", (e) => {
-        let value = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 허용
-        if (value.length > 8) value = value.substring(0, 8);
+dateInputs.forEach(input => {
+    document.querySelectorAll(".date-input").forEach(input => {
+        input.addEventListener("input", (e) => {
+            let value = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 허용
+            if (value.length > 8) value = value.substring(0, 8);
 
         if (value.length >= 5) {
             value = value.substring(0,4) + "-" + value.substring(4,6) +
@@ -188,3 +263,17 @@ document.querySelectorAll(".date-input").forEach(input => {
         e.target.value = value;
     });
 });
+
+// 입력 중 border 해제 (textarea)
+    textareas.forEach(textarea => {
+        textarea.addEventListener("input", () => {
+            if (textarea.value.trim() !== "") {
+                textarea.style.border = "";
+            }
+        });
+    });
+});
+
+// document.addEventListener("DOMContentLoaded", async () => {
+//     const data = await internRegisterService.detail(id);
+// });

@@ -32,8 +32,8 @@
                         <div class="upload-wrap-inner2">
                             <div th:if="${page} == 'create'" class="home-top">
                                 <div>
-                                    <h1 class="top-h1">공고 등록하기</h1>
-                                    <p class="top-p">새로운 채용 공고를 등록하세요</p>
+                                    <h1 class="top-h1">체험 공고 등록하기</h1>
+                                    <p class="top-p">새로운 체험 공고를 등록하세요</p>
                                 </div>
                             </div>
                             <div th:unless="${page} == 'create'" class="home-top">
@@ -227,21 +227,21 @@
                                     </div>
                                     <div class="cards">
                                         <div class="card-title">
-                                            <div class="main-title">공고 상세</div>
+                                            <div class="main-title">체험 공고 상세</div>
                                             <div class="sub-title">상세한 체험 내용을 작성하세요</div>
                                         </div>
                                         <div class="card-content">
                                             <div class="contents">
                                                 <label class="content-label">직무소개<span class="must">*</span></label>
-                                                <textarea name="" id="introduce_job" class="textarea" th:text="${notice.experienceNoticeIntroduceJob}"></textarea>
+                                                <textarea name="" id="introduce-job" class="textarea" th:text="${notice.experienceNoticeIntroduceJob}"></textarea>
                                             </div>
                                             <div class="contents">
                                                 <label class="content-label">주요 업무<span class="must">*</span></label>
-                                                <textarea name="" id="main_tasks" class="textarea" th:text="${notice.experienceMainTasks}"></textarea>
+                                                <textarea name="" id="main-tasks" class="textarea" th:text="${notice.experienceMainTasks}"></textarea>
                                             </div>
                                             <div class="contents">
                                                 <label class="content-label">참고사항<span class="must">*</span></label>
-                                                <textarea name="" id="notice_etc" class="textarea" th:text="${notice.experienceNoticeEtc}"></textarea>
+                                                <textarea name="" id="notice-etc" class="textarea" th:text="${notice.experienceNoticeEtc}"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -292,15 +292,12 @@
             </div>
             <div th:unless="${page} == 'create'" class="pop-title-wrap">
                 <h2 class="pop-title">공고를 수정하시겠습니까?</h2>
-                <p class="pop-desc">공고 정보가 업데이트됩니다.
-
-                </p>
+                <p class="pop-desc">공고 정보가 업데이트됩니다.</p>
             </div>
             <div class="pop-buttons">
                 <button class="btn-no">취소</button>
                 <button th:if="${page} == 'create'" id="btn-register-experience" class="btn-yes">등록하기</button>
                 <button th:unless="${page} == 'create'" id="btn-update-experience" class="btn-yes">수정하기</button>
-                <div id="pageInfo" data-page="${page}" style="display:none;"></div>
             </div>
         </div>
     </div>
@@ -310,7 +307,6 @@
     const page = [[${page}]];
 </script>
 <script src="/js/console/experience-upload/module/service.js"></script>
-<script src="/js/console/experience-upload/module/layout.js"></script>
 <script src="/js/console/experience-upload/event.js"></script>
 <script src="/js/console/sidebar/event.js"></script>
 </html>
