@@ -24,7 +24,6 @@ public class CommunityCommentController {
         communityCommentService.write(commentDTO);
         return ResponseEntity.ok(commentDTO);
     }
-
 //    댓글 목록
     @GetMapping("/{postId}")
     public ResponseEntity<?> list(@PathVariable Long postId) {

@@ -31,7 +31,6 @@ document.body.addEventListener("click", async (e) => {
             await commentService.writeComment({
                 postId: postId,
                 commentContent: content,
-                memberId: 3
             });
 
             textarea.value = "";
@@ -64,7 +63,6 @@ document.body.addEventListener("click", async (e) => {
             await commentService.writeReply({
                 commentId: commentId,
                 replyContent: content,
-                memberId: 3,
                 postId: postId
             });
 
