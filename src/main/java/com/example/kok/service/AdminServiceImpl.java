@@ -54,11 +54,12 @@ public class AdminServiceImpl implements AdminService {
     public AdminExperienceDetailDTO getExperienceDetail(int page, Long id) {
         AdminExperienceDetailDTO adminExperienceDetailDTO = new AdminExperienceDetailDTO();
 
+//        체험공고 상세정보
         AdminExperienceDTO adminExperienceDTO = adminExperienceDAO.selectAdminExperience(id);
+
+//        신청자 내역
         AdminExperienceCriteria requestCriteria = new AdminExperienceCriteria(page, adminExperienceDAO.countRequestUser(id));
         List<UserRequestExperienceDTO> requestExperienceList = adminExperienceDAO.requestUser(requestCriteria, id);
-        AdminExperienceCriteria experienceCriteria = new AdminExperienceCriteria(page, adminExperienceDAO.countUserEvaluation(id));
-        List<UserEvaluationDTO> userEvaluationList = adminExperienceDAO.userEvaluation(experienceCriteria, id);
 
         requestCriteria.setHasMore(requestExperienceList.size() > requestCriteria.getRowCount());
         requestCriteria.setHasPreviousPage(page > 1);
@@ -72,6 +73,10 @@ public class AdminServiceImpl implements AdminService {
         }
         adminExperienceDetailDTO.setAdminExperienceCriteria(requestCriteria);
 
+//        체험 회원 평가
+        AdminExperienceCriteria experienceCriteria = new AdminExperienceCriteria(page, adminExperienceDAO.countUserEvaluation(id));
+        List<UserEvaluationDTO> userEvaluationList = adminExperienceDAO.userEvaluation(experienceCriteria, id);
+
         experienceCriteria.setHasMore(userEvaluationList.size() > experienceCriteria.getRowCount());
         experienceCriteria.setHasPreviousPage(page > 1);
         experienceCriteria.setHasNextPage(page < userEvaluationList.size());
@@ -84,11 +89,9 @@ public class AdminServiceImpl implements AdminService {
         }
         adminExperienceDetailDTO.setAdminExperienceCriteria(experienceCriteria);
 
-
         adminExperienceDetailDTO.setExperience(adminExperienceDTO);
         adminExperienceDetailDTO.setUserRequestExperience(requestExperienceList);
         adminExperienceDetailDTO.setUserEvaluation(userEvaluationList);
-
         return adminExperienceDetailDTO;
     }
 

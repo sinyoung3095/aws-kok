@@ -247,6 +247,7 @@ button:not(:disabled) {
 
 .d-table {
     display: table !important;
+    margin-bottom: 15px;
 }
 
 .d-table-cell {

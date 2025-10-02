@@ -100,11 +100,21 @@ public class AdminExperienceTests {
         log.info("55번 게시글: {}", adminExperienceDAO.selectAdminExperience(id));
     }
 
+    @Test
+    public void testRequestUser() {
+        int page = 2;
+        Long id = 56L;
+        AdminExperienceCriteria criteria = new AdminExperienceCriteria(page, adminExperienceDAO.countRequestUser(id));
+        log.info("adminExperienceCriteria: {}", criteria);
+        log.info("requestUserCount: {}", adminExperienceDAO.countRequestUser(id));
+        adminExperienceDAO.requestUser(criteria, id).stream().map(UserRequestExperienceDTO::toString).forEach(log::info);
+    }
+
 
 //    Service
     @Test
     public void testGetExperienceDetail() {
-        int page = 1;
+        int page = 3;
         Long id = 55L;
         log.info(adminService.getExperienceDetail(page, id).toString());
     }

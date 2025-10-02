@@ -18,6 +18,7 @@ public class AdminExperienceCriteria {
     private boolean hasPreviousPage;
     private boolean hasMore;
     private int count;
+    private int total;
 
     public AdminExperienceCriteria(int page, int total) {
         rowCount = 5;
@@ -32,5 +33,6 @@ public class AdminExperienceCriteria {
         offset = (page - 1) * rowCount;
         hasNextPage = endPage < realEnd;
         hasPreviousPage = startPage > 1;
+        this.total = total;
     }
 }

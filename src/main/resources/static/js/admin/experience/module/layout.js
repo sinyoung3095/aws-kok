@@ -85,12 +85,14 @@ const layout = (() => {
 
     const showInfo = (adminExperienceDetailDTO) => {
         const detailInfo = document.querySelector("#info-table tbody");
+        const modalTitle = document.querySelector(".modal-title");
         const experienceInfo = adminExperienceDetailDTO.experience;
+        let titleText = ``;
         let text = ``;
 
-        console.log(adminExperienceDetailDTO);
-        console.log(adminExperienceDetailDTO.experience);
-        console.log(experienceInfo);
+        titleText = `${experienceInfo.experienceNoticeTitle}
+                <span class="badge-label text-danger font-weight-bold ml-2">${experienceInfo.companyName}</span>`;
+        modalTitle.innerHTML = titleText;
 
         text = `
             <tr>
@@ -139,10 +141,52 @@ const layout = (() => {
                     <td>${request.userEmail}</td>
                     <td>${request.userPhone}</td>
                     <td style="text-align: center;">`;
-            text += request.requestExperienceStatus === 'await' ? '서류 접수' : '합격';
+            if(request.requestExperienceStatus === 'await') {
+                text += `서류 접수`;
+            } else if(request.requestExperienceStatus === 'accept') {
+                text += `합격`;
+            } else {
+                text += `불합격`;
+            }
             text += `</td></tr>`;
         });
         detailRequest.innerHTML = text;
+
+        const pagination = document.querySelector(".pagination.kok-pagination.detail-request");
+        let criteria = adminExperienceDetailDTO.adminExperienceCriteria;
+        let textNumber = ``;
+
+        if(criteria.hasPreviousPage){
+            textNumber = `
+                <li class="page-item page-num">
+                    <a class="page-item-link page-item-num" data-page="${criteria.page - 1}">이전</a>
+                </li>
+            `;
+        }
+        for(let i = criteria.startPage; i <= criteria.endPage; i++){
+            textNumber += `
+                <li class="page-item page-num number">
+                    <a class="page-item-num" data-page="${i}" class="page-item-num">${i}</a>
+                </li>
+           `;
+        }
+
+        console.log(criteria.endPage);
+        console.log(criteria.total);
+
+        if(criteria.hasNextPage){
+            textNumber += `
+                <li class="page-item page-num">
+                    <a class="page-item-link page-item-num" data-page="${criteria.page + 1}">다음</a>
+                </li>
+            `;
+        }
+        pagination.innerHTML = textNumber;
+
+        const firstNumber = pagination.querySelector("li.number");
+        if (firstNumber) {
+            firstNumber.classList.add("active");
+        }
     }
 
     const showEvaluation = (adminExperienceDetailDTO) => {
