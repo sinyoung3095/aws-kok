@@ -1,20 +1,41 @@
 package com.example.kok.controller;
 
+import com.example.kok.dto.ConsolePaymentCriteriaDTO;
+import com.example.kok.service.ConsolePaymentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Collections;
 
 @Slf4j
 @Controller
-@RequestMapping("/enterprise-console")
+@RequestMapping("/enterprise-console/payment")
 @RequiredArgsConstructor
 public class ConsolePaymentController {
+    private final ConsolePaymentService consolepaymentService;
 
 //    기업 콘솔 결제내역
-    @GetMapping("/payment")
-    public String goToList() {
+    @GetMapping
+    public String goToList(
+//            @PathVariable("companyId") Long companyId,
+//            @PathVariable("page") int page,
+            @RequestParam(defaultValue = "1") int page,
+                           Model model) {
+        Long companyId = 1L;
+        ConsolePaymentCriteriaDTO payment = consolepaymentService.getList(companyId, page);
+        model.addAttribute("payment", payment);
+
+        if (payment == null) {
+            payment = new ConsolePaymentCriteriaDTO();
+            payment.setPayments(Collections.emptyList());
+        }
+
         return "enterprise-console/console-payment";
     }
 

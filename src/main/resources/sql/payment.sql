@@ -1,7 +1,8 @@
 CREATE TABLE tbl_payment (
     id bigint generated always as identity primary key,
     payment_price bigint not null,
-    --     payment_status enum('success', 'refund', 'fail') not null default 'success',
+    payment_status request_status not null default 'await',
+    payment_paid_datetime timestamp,
     advertisement_id bigint,
     request_experience_id bigint,
     user_id bigint not null,
@@ -14,3 +15,13 @@ CREATE TABLE tbl_payment (
     constraint fk_payment_user foreign key(user_id)
         references tbl_user(id)
 );
+
+-- 결제 상태 컬럼 추가
+ALTER TABLE tbl_payment
+    ADD COLUMN payment_status request_status not null default 'await';
+
+-- 실제 결제된 시간 컬럼 추가
+ALTER TABLE tbl_payment
+    ADD COLUMN payment_paid_datetime timestamp;
+
+select * from tbl_payment;

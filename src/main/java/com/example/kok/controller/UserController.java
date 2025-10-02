@@ -9,8 +9,11 @@ import com.example.kok.mybatis.handler.ProviderHandler;
 import com.example.kok.repository.UserDAO;
 import com.example.kok.service.S3Service;
 import com.example.kok.service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +32,7 @@ public class UserController {
     private final UserService userService;
     private final UserDAO userDAO;
     private final JwtTokenProvider  jwtTokenProvider;
+    private final PasswordEncoder  passwordEncoder;
 
     @GetMapping("join-member")
     public String goToJoinPage() {
@@ -111,15 +115,33 @@ public class UserController {
         return "member/find-password";
     }
 
-    @GetMapping("find-password-new")
-    public String goToFindPasswordNewPage() {
-        return "member/find-password-new";
-    }
-
     @GetMapping("find-password-ok")
-    public String goToFindPasswordOkPage() {
+    public String goToFindPasswordOkPage(@CookieValue(name="email", required = false) String email ,Model model) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserEmail(email);
+        model.addAttribute("userDTO", userDTO);
         return "member/find-password-ok";
     }
+
+    @GetMapping("find-password-new")
+    public String goToFindPasswordNewPage(@CookieValue(name="email", required = false) String email,Model model) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserEmail(email);
+        model.addAttribute("userDTO", userDTO);
+        return "member/find-password-new";
+    }
+    @PostMapping("find-password-new")
+    public RedirectView setPassword(UserDTO userDTO ,HttpServletResponse response){
+        userDTO.setUserPassword(passwordEncoder.encode(userDTO.getUserPassword()));
+        userDAO.setPassword(userDTO);
+        Cookie cookie = new Cookie("email", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        return new RedirectView("/member/login");
+    }
+
+
 
     @GetMapping("find-email")
     public String goToFindEmailPage() {

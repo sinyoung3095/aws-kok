@@ -38,7 +38,11 @@ function submitButtonAction() {
         submitButton.classList.remove("inactive");
     } else {
         submitButton.classList.add("inactive");
+        submitButton.removeAttribute("disabled")
     }
 }
 inputPassword.addEventListener("input", submitButtonAction);
 inputPasswordCheck.addEventListener("input", submitButtonAction);
+const email = document.getElementById("email");
+console.log(`${userDTO.userEmail}`);
+email.setAttribute("value",`${userDTO.userEmail}`);
