@@ -34,4 +34,7 @@ public interface CommunityPostMapper {
 
 //    좋아요 수 감수
     public void decreaseLikesCount(Long id);
+
+//    회원 아이디로 게시물 조회
+    public List<PostDTO> selectPostById(Long id);
 }

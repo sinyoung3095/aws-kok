@@ -3,8 +3,13 @@ package com.example.kok.mapper;
 import com.example.kok.dto.RequestExperienceDTO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface RequestExperienceMapper {
 //    지원서 넣기
     public void insertRequest(RequestExperienceDTO requestExperienceDTO);
+
+//    멤버별 지원서 조회
+    public List<RequestExperienceDTO> selectRequestById(Long id);
 }

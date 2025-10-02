@@ -1,5 +1,5 @@
 CREATE TABLE tbl_save_intern_notice (
-    member_id bigint primary key,
+    member_id bigint,
     intern_notice_id bigint not null,
     created_datetime timestamp default now(),
     updated_datetime timestamp default now(),

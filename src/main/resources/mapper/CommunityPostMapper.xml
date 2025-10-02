@@ -79,4 +79,11 @@
         where id = #{id}
         and likes_count > 0
     </update>
+
+<!--  멤버 별 게시물 조회  -->
+    <select id="selectPostById">
+        select id, post_content, post_status, created_datetime
+        from tbl_post
+        where member_id = #{id}
+    </select>
 </mapper>
