@@ -23,14 +23,18 @@ public class CommunityPostController {
 
 //    게시글 목록 조회
     @GetMapping("/{page}")
-    public PostsCriteriaDTO getPosts(@PathVariable("page") int page) {
-        return communityPostService.getList(page);
+    public PostsCriteriaDTO getPosts(@PathVariable("page") int page,
+                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        Long memberId = customUserDetails != null ? customUserDetails.getId() : null;
+        return communityPostService.getList(page, memberId);
     }
 
 //    게시글 조회
     @GetMapping("/post/{id}")
-    public ResponseEntity<PostDTO> getOne(@PathVariable("id") Long id) {
-        PostDTO postDTO = communityPostService.getPost(id);
+    public ResponseEntity<PostDTO> getOne(@PathVariable("id") Long id,
+                                          @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        Long memberId = (customUserDetails != null) ? customUserDetails.getId() : null;
+        PostDTO postDTO = communityPostService.getPost(id, memberId);
         return ResponseEntity.ok(postDTO);
     }
 

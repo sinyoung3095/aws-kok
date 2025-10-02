@@ -10,6 +10,12 @@ create table tbl_member (
 );
 
 select * from tbl_member;
+select * from tbl_report;
+select * from tbl_post_like;
+delete from tbl_post_like;
+select likes_count from tbl_post
+where likes_count > 0;
+delete from tbl_report;
 
 insert into tbl_member (user_id, member_provider, member_profile_url, member_info)
 values
