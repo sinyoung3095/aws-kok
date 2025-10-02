@@ -9,4 +9,6 @@ public interface SaveExperienceNoticeMapper {
     public void insertSaveExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO);
 //    공고 저장 취소
     public void deleteSaveExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO);
+//    공고 저장 여부 판별
+    public int selectCountSavedExpByExpId(SaveExperienceNoticeDTO saveExperienceNoticeDTO);
 }
