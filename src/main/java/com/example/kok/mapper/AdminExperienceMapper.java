@@ -3,10 +3,7 @@ package com.example.kok.mapper;
 import com.example.kok.dto.AdminExperienceDTO;
 import com.example.kok.dto.UserEvaluationDTO;
 import com.example.kok.dto.UserRequestExperienceDTO;
-import com.example.kok.util.AdminExperienceCriteria;
-import com.example.kok.util.AdminExperienceListCriteria;
-import com.example.kok.util.Criteria;
-import com.example.kok.util.Search;
+import com.example.kok.util.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,7 +22,7 @@ public interface AdminExperienceMapper {
     public AdminExperienceDTO selectAdminExperienceById(Long id);
 
 //    체험공고 - 신청자 내역
-    public List<UserRequestExperienceDTO> selectRequestUser(@Param("criteria") AdminExperienceCriteria criteria, @Param("id") Long id);
+    public List<UserRequestExperienceDTO> selectRequestUser(@Param("criteria") AdminExperienceRequestCriteria criteria, @Param("id") Long id);
 //    체험공고 - 신청자 내역 개수
     public int countRequestUser(Long id);
 

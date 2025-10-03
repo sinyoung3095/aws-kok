@@ -42,6 +42,14 @@ values
     ('뷔', '010-4444-5555', 'vvv@example.com', '1234', 'member'),
     ('변우석', '010-5555-6666', 'suck@example.com', '1234', 'member');
 
+insert into tbl_user (user_name, user_phone, user_email, user_password, user_role)
+values
+    ('가가가', '010-1111-2223', 'oooaa@example.com', '1234', 'member'),
+    ('나나나', '010-2222-3334', 'gumbb@example.com', '1234', 'member'),
+    ('다다다', '010-3333-4445', 'jangc@example.com', '1234', 'member'),
+    ('라라라', '010-4444-5556', 'vvvdd@example.com', '1234', 'member'),
+    ('마마마', '010-5555-6667', 'sucke@example.com', '1234', 'member');
+
 select * from tbl_user;
 
 delete  FROM tbl_user

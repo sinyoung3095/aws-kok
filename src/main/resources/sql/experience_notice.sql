@@ -40,7 +40,7 @@ alter table tbl_experience_notice
 alter table tbl_experience_notice
     add column experience_request_status request_status default 'await' not null;
 
-select * from tbl_experience_notice;
+select * from tbl_experience_notice order by id;
 
 alter table tbl_experience_notice
     add column experience_main_tasks varchar(255);

@@ -58,20 +58,21 @@ public class AdminServiceImpl implements AdminService {
         AdminExperienceDTO adminExperienceDTO = adminExperienceDAO.selectAdminExperience(id);
 
 //        신청자 내역
-        AdminExperienceCriteria requestCriteria = new AdminExperienceCriteria(page, adminExperienceDAO.countRequestUser(id));
+        AdminExperienceRequestCriteria requestCriteria = new AdminExperienceRequestCriteria(page, adminExperienceDAO.countRequestUser(id));
         List<UserRequestExperienceDTO> requestExperienceList = adminExperienceDAO.requestUser(requestCriteria, id);
 
         requestCriteria.setHasMore(requestExperienceList.size() > requestCriteria.getRowCount());
         requestCriteria.setHasPreviousPage(page > 1);
-        requestCriteria.setHasNextPage(page < requestExperienceList.size());
+        requestCriteria.setHasNextPage(5 < requestExperienceList.size());
 
         log.info("이전 페이지 버튼: {}", requestCriteria.isHasPreviousPage());
         log.info("다음 페이지 버튼: {}", requestCriteria.isHasNextPage());
+        log.info("신청자 내역 총 개수: {}", adminExperienceDAO.countRequestUser(id));
 //        6개 가져왔으면, 마지막 1개 삭제
         if(requestCriteria.isHasMore()){
             requestExperienceList.remove(requestExperienceList.size()-1);
         }
-        adminExperienceDetailDTO.setAdminExperienceCriteria(requestCriteria);
+        adminExperienceDetailDTO.setAdminExperienceRequestCriteria(requestCriteria);
 
 //        체험 회원 평가
         AdminExperienceCriteria experienceCriteria = new AdminExperienceCriteria(page, adminExperienceDAO.countUserEvaluation(id));
@@ -79,10 +80,11 @@ public class AdminServiceImpl implements AdminService {
 
         experienceCriteria.setHasMore(userEvaluationList.size() > experienceCriteria.getRowCount());
         experienceCriteria.setHasPreviousPage(page > 1);
-        experienceCriteria.setHasNextPage(page < userEvaluationList.size());
+        experienceCriteria.setHasNextPage(5 < userEvaluationList.size());
 
         log.info("이전 페이지 버튼: {}", experienceCriteria.isHasPreviousPage());
         log.info("다음 페이지 버튼: {}", experienceCriteria.isHasNextPage());
+        log.info("평가자 총 개수: {}", adminExperienceDAO.countUserEvaluation(id));
 //        6개 가져왔으면, 마지막 1개 삭제
         if(experienceCriteria.isHasMore()){
             userEvaluationList.remove(userEvaluationList.size()-1);

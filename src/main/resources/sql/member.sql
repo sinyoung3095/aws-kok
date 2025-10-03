@@ -19,3 +19,11 @@ values
     (9, 'naver', null, '사진 취미'),
     (10, 'kok', null, '간단 프로필 없음');
 
+insert into tbl_member (user_id, member_provider, member_profile_url, member_info)
+values
+    (18, 'kok', null, '자기소개: 차은우 팬클럽 회장'),
+    (19, 'kakao', null, '뮤지컬 좋아함'),
+    (20, 'google', null, '여행 덕후'),
+    (21, 'naver', null, '사진 취미'),
+    (22, 'kok', null, '간단 프로필 없음');
+

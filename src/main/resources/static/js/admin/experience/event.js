@@ -75,7 +75,6 @@ const experienceListContainer = document.querySelector(".table.member-table tbod
 experienceListContainer.addEventListener("click",async (e)=>{
 
     if(e.target.closest(".action-btn")){
-        console.log("모달 들어옴");
         modal.style.display = "block";
         setTimeout(() => {
             modal.classList.add("show");
@@ -87,16 +86,27 @@ experienceListContainer.addEventListener("click",async (e)=>{
         const page = 1;
         const id = Number(actionButton.dataset.id);
         console.log(id);
+
         // 체험공고 상세정보
         await service.getExperienceDetail(layout.showInfo, page, id);
+
         // 신청자 내역
         await service.getExperienceDetail(layout.showRequest, page, id);
+
         const detailPagination = document.querySelector(".pagination.kok-pagination.detail-request");
-        detailPagination.addEventListener("click", async(e) => {
+        const firstNumber = detailPagination.querySelector("li.number");
+        if (firstNumber) {
+            firstNumber.classList.add("active");
+        }
+        detailPagination.onclick = async (e) => {
             e.preventDefault()
+
             // 페이지 번호
             const clickNum = e.target.closest("a[data-page]");
             const pageNumber = Number(clickNum.dataset.page);
+
+            await service.getExperienceDetail(layout.showRequest, pageNumber, id);
+
             const pageNumsList = detailPagination.querySelectorAll("li.page-num");
             pageNumsList.forEach((pageNum) => {
                 pageNum.classList.remove("active");
@@ -105,13 +115,42 @@ experienceListContainer.addEventListener("click",async (e)=>{
                 const activeList = pageNum.querySelector("a.page-item-num");
                 return activeList && Number(activeList.dataset.page) === pageNumber;
             });
+
             if(currentList){
                 currentList.classList.add("active");
             }
-            await service.getExperienceDetail(layout.showRequest, pageNumber, id);
-        });
+        }
 
+        // 평가자 목록
         await service.getExperienceDetail(layout.showEvaluation, page, id);
+
+        const evaluationPagination = document.querySelector(".pagination.kok-pagination.detail-evaluation");
+        const firstEvaluationNumber = evaluationPagination.querySelector("li.number");
+        if (firstEvaluationNumber) {
+            firstEvaluationNumber.classList.add("active");
+        }
+        evaluationPagination.onclick = async (e) => {
+            e.preventDefault()
+
+            // 페이지 번호
+            const clickNum = e.target.closest("a[data-page]");
+            const pageNumber = Number(clickNum.dataset.page);
+
+            await service.getExperienceDetail(layout.showEvaluation, pageNumber, id);
+
+            const pageNumsList = evaluationPagination.querySelectorAll("li.page-num");
+            pageNumsList.forEach((pageNum) => {
+                pageNum.classList.remove("active");
+            });
+            const currentList = Array.from(pageNumsList).find((pageNum) => {
+                const activeList = pageNum.querySelector("a.page-item-num");
+                return activeList && Number(activeList.dataset.page) === pageNumber;
+            });
+
+            if(currentList){
+                currentList.classList.add("active");
+            }
+        }
     }
 });
 
