@@ -2,6 +2,7 @@ package com.example.kok.dto;
 
 import com.example.kok.util.AdminExperienceCriteria;
 import com.example.kok.util.AdminExperienceListCriteria;
+import com.example.kok.util.AdminExperienceRequestCriteria;
 import com.example.kok.util.Criteria;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,5 +21,6 @@ public class AdminExperienceDetailDTO {
     private List<UserRequestExperienceDTO> userRequestExperience;
     private List<UserEvaluationDTO> userEvaluation;
 
+    private AdminExperienceRequestCriteria adminExperienceRequestCriteria;
     private AdminExperienceCriteria adminExperienceCriteria;
 }

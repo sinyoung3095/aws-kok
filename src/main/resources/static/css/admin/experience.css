@@ -1555,9 +1555,28 @@ table.info-table th {
     white-space: pre-line;
     word-break: break-all;
 }
+a.page-item-num {
+    cursor: pointer;
+}
+
+#info-request tr {
+    text-align: center;
+}
+
+#info-request td {
+    text-align: center;
+}
 
 #info-evaluation table {
     margin-bottom: 20px;
+}
+
+#info-evaluation th{
+    width: 100%;
+}
+
+#info-evaluation td{
+    width: 100%;
 }
 
 .modal-footer {

@@ -5,10 +5,7 @@ import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.dto.UserEvaluationDTO;
 import com.example.kok.dto.UserRequestExperienceDTO;
 import com.example.kok.mapper.AdminExperienceMapper;
-import com.example.kok.util.AdminExperienceCriteria;
-import com.example.kok.util.AdminExperienceListCriteria;
-import com.example.kok.util.Criteria;
-import com.example.kok.util.Search;
+import com.example.kok.util.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -36,7 +33,7 @@ public class AdminExperienceDAO {
     }
 
 //    체험공고 - 신청자 내역
-    public List<UserRequestExperienceDTO> requestUser(AdminExperienceCriteria criteria, Long id) {
+    public List<UserRequestExperienceDTO> requestUser(AdminExperienceRequestCriteria criteria, Long id) {
         return adminExperienceMapper.selectRequestUser(criteria, id);
     }
 //    체험공고 - 신청자 내역 개수
