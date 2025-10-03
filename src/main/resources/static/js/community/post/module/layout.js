@@ -35,8 +35,19 @@ const postLayout = (() => {
                                 <div class="report-2">
                                     <div class="report-3">
                                         <div class="report-4">
-                                            <div class="report-5">
-                                                <p class="report-6">게시물 신고</p>
+                                            <div class="report-5">`;
+            if (post.owner) {
+                text += `
+                    <p class="delete-post-btn">게시글 삭제</p>
+                    <br>
+                    <p class="update-post-btn">게시글 수정</p>`;
+            }
+            else {
+                text += `
+                    <p class="report-6">게시물 신고</p>`;
+                        }
+
+                        text += `
                                             </div>
                                         </div>
                                     </div>
@@ -134,20 +145,41 @@ const postLayout = (() => {
                     <button class="post-28" style="width: 70px; color: #e0e0e0; font-size: 15px; font-weight: 500;">
                         <svg class="btn" aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="20" role="img" width="20" >
                             <path clip-rule="evenodd" d="M12 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5m0-4c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5m0 11c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5" fill-rule="evenodd"></path>
-                        </svg>
-                        <div class="report-1">
-                            <div class="report-2">
-                                <div class="report-3">
-                                    <div class="report-4">
-                                        <div class="report-5">
-                                            <p class="delete-post-btn">게시글 삭제</p>
-                                            <br>
-                                            <p class="update-post-btn">게시글 수정</p>
+                        </svg>`;
+
+                    if (post.owner) {
+                        detail += `
+                            <div class="report-1">
+                                <div class="report-2">
+                                    <div class="report-3">
+                                        <div class="report-4">
+                                            <div class="report-5">
+                                                <p class="delete-post-btn">게시글 삭제</p>
+                                                <br>
+                                                <p class="update-post-btn">게시글 수정</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div>`;
+                    }
+
+                    else {
+                        detail += `
+                            <div class="report-1">
+                                <div class="report-2">
+                                    <div class="report-3">
+                                        <div class="report-4">
+                                            <div class="report-5">
+                                                <p class="report-6">게시물 신고</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                    }
+        detail += `
+
                     </button>
                 </div>
             </div>
