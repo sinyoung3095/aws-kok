@@ -5,10 +5,7 @@ import com.example.kok.dto.UserEvaluationDTO;
 import com.example.kok.dto.UserRequestExperienceDTO;
 import com.example.kok.repository.AdminExperienceDAO;
 import com.example.kok.service.AdminService;
-import com.example.kok.util.AdminExperienceCriteria;
-import com.example.kok.util.AdminExperienceListCriteria;
-import com.example.kok.util.Criteria;
-import com.example.kok.util.Search;
+import com.example.kok.util.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +49,7 @@ public class AdminExperienceTests {
     @Test
     public void testSelectRequestUser() {
         Long id = 54L;
-        AdminExperienceCriteria adminExperienceCriteria = new AdminExperienceCriteria(1, adminExperienceMapper.countRequestUser(id));
+        AdminExperienceRequestCriteria adminExperienceCriteria = new AdminExperienceRequestCriteria(1, adminExperienceMapper.countRequestUser(id));
         adminExperienceMapper.selectRequestUser(adminExperienceCriteria, id).stream().map(UserRequestExperienceDTO::toString).forEach(log::info);
         log.info("adminExperienceCriteria: {}", adminExperienceCriteria);
         log.info("신청자 수: {}", adminExperienceMapper.countRequestUser(id));
@@ -104,7 +101,7 @@ public class AdminExperienceTests {
     public void testRequestUser() {
         int page = 2;
         Long id = 56L;
-        AdminExperienceCriteria criteria = new AdminExperienceCriteria(page, adminExperienceDAO.countRequestUser(id));
+        AdminExperienceRequestCriteria criteria = new AdminExperienceRequestCriteria(page, adminExperienceDAO.countRequestUser(id));
         log.info("adminExperienceCriteria: {}", criteria);
         log.info("requestUserCount: {}", adminExperienceDAO.countRequestUser(id));
         adminExperienceDAO.requestUser(criteria, id).stream().map(UserRequestExperienceDTO::toString).forEach(log::info);
