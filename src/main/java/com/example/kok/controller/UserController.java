@@ -149,7 +149,31 @@ public class UserController {
     }
 
     @GetMapping("find-email-ok")
-    public String goToFindEmailOkPage() {
+    public String goToFindEmailOkPage(@CookieValue(name = "email",required = false) String email,Model model, HttpServletResponse response) {
+        UserDTO userDTO = userDAO.findByEmail(email).get();
+
+        String input = userDTO.getUserEmail();
+        char targetChar = '@';
+
+        int targetIndex = input.indexOf(targetChar);
+        String result = "";
+        if (targetIndex >= 3) {
+            // 앞의 전체, 앞에서 3글자 제외한 부분
+            String before = input.substring(0, targetIndex - 3);
+            String masked = "***";
+            String after = input.substring(targetIndex);
+
+            result = before + masked + after;
+        }
+        userDTO.setUserEmail(result);
+        userDTO.setCreatedDateTime("가입일 "+userDTO.getCreatedDateTime().split(" ")[0]);
+        log.info("userDTO:"+userDTO);
+        model.addAttribute("userDTO", userDTO);
+
+        Cookie cookie = new Cookie("email", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
         return "member/find-email-ok";
     }
 

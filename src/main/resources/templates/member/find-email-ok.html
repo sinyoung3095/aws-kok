@@ -27,8 +27,8 @@
                             <ul class="account-info-list">
                                 <li class="account-info-item">
                                     <div class="account-info">
-                                        <div class="account-email">exam***@gmail.com</div>
-                                        <div class="account-join-date">가입일 2025.09.15.</div>
+                                        <div class="account-email" th:text="${userDTO.userEmail}">exam***@gmail.com</div>
+                                        <div class="account-join-date" th:text="${userDTO.createdDateTime}">가입일 2025.09.15.</div>
                                     </div>
                                 </li>
                             </ul>

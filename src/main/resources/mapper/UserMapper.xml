@@ -65,8 +65,9 @@
     </update>
 <!--  phoneNumber로 이메일 조회  -->
     <select id="selectEmailByPhone">
-        select * from tbl_user
-        where user_phone = #{userPhone}
+        select u.user_email,u.created_datetime from tbl_user u join tbl_member m
+        on u.id = m.user_id
+        where u.user_phone = #{userPhone} and m.member_provider = 'kok' and u.user_status = 'active'
     </select>
 
 </mapper>
