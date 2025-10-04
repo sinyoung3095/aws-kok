@@ -28,4 +28,5 @@ public class PostDTO {
     private String memberProfileUrl;
     private boolean liked;
     private List<CommentDTO> comments;
+    private boolean owner;
 }
