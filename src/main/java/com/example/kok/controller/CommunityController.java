@@ -1,5 +1,6 @@
 package com.example.kok.controller;
 
+import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.service.CommunityPostService;
 import com.example.kok.service.ExperienceNoticeService;
@@ -18,22 +19,23 @@ import java.util.List;
 @RequestMapping("/community")
 @RequiredArgsConstructor
 public class CommunityController {
+
     private final CommunityPostService communityPostService;
     private final ExperienceNoticeService experienceNoticeService;
 
-//    커뮤니티
     @GetMapping("/page")
     public String goToCommunityPage(Model model,
-                                    @AuthenticationPrincipal com.example.kok.auth.CustomUserDetails customUserDetails) {
+                                    @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
-        Long memberId = (customUserDetails != null) ? customUserDetails.getId() : null;
+        Long memberId = customUserDetails.getId();
         model.addAttribute("posts", communityPostService.getList(1, memberId).getPosts());
 
-//        최신 공고 4개 조회
         List<ExperienceNoticeDTO> latestFour = experienceNoticeService.findLatestFour();
         model.addAttribute("latestFour", latestFour);
 
+        model.addAttribute("member", customUserDetails);
+        log.info("로그인: {}", customUserDetails);
+
         return "community/page";
     }
-
 }

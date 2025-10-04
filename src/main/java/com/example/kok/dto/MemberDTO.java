@@ -17,4 +17,5 @@ public class MemberDTO {
     private String memberInfo;
     private String createdDateTime;
     private String updatedDateTime;
+    private String jobName;
 }

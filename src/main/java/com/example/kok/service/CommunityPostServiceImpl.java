@@ -61,8 +61,10 @@ public class CommunityPostServiceImpl implements CommunityPostService {
 
             post.setLikesCount(communityLikeDAO.getPostLikeCount(post.getId()));
             if (memberId != null) {
+                post.setOwner(memberId.equals(post.getMemberId()));
                 post.setLiked(communityLikeDAO.isexistLike(post.getId(), memberId));
             } else {
+                post.setOwner(false);
                 post.setLiked(false);
             }
         });
@@ -95,8 +97,10 @@ public class CommunityPostServiceImpl implements CommunityPostService {
         postDTO.setLikesCount(communityLikeDAO.getPostLikeCount(postDTO.getId()));
         if (memberId != null) {
             postDTO.setLiked(communityLikeDAO.isexistLike(postDTO.getId(), memberId));
+            postDTO.setOwner(memberId.equals(postDTO.getMemberId()));
         } else {
             postDTO.setLiked(false);
+            postDTO.setOwner(false);
         }
 
         return postDTO;
@@ -161,18 +165,22 @@ public class CommunityPostServiceImpl implements CommunityPostService {
         }
 
         multipartFiles.forEach((multipartFile) -> {
-            if(multipartFile.getOriginalFilename().equals("")){
-                return;
-            }
+            if(multipartFile.isEmpty()) return;
 
-            PostFileDTO postFileDTO = new PostFileDTO();
             try {
                 String s3Key = s3Service.uploadFile(multipartFile, getPath());
+                FileDTO fileDTO = new FileDTO();
+                fileDTO.setFileOriginName(multipartFile.getOriginalFilename());
+                fileDTO.setFileName(s3Key.substring(s3Key.lastIndexOf("/") + 1));
+                fileDTO.setFileSize(String.valueOf(multipartFile.getSize()));
+                fileDTO.setFilePath(s3Key);
+                fileDTO.setFileContentType(multipartFile.getContentType());
 
+                communityPostFileDAO.saveFile(fileDTO);
+
+                PostFileDTO postFileDTO = new PostFileDTO();
+                postFileDTO.setFileId(fileDTO.getId());
                 postFileDTO.setPostId(postDTO.getId());
-                postFileDTO.setPostFileName(multipartFile.getOriginalFilename());
-                postFileDTO.setPostFilePath(s3Key);
-                postFileDTO.setPostFileSize(String.valueOf(multipartFile.getSize()));
 
                 communityPostFileDAO.save(postFileDTO);
 
