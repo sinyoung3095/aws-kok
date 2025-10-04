@@ -1,6 +1,8 @@
 package com.example.kok.dto;
 
 import com.example.kok.util.AdminExperienceCriteria;
+import com.example.kok.util.AdminExperienceListCriteria;
+import com.example.kok.util.AdminExperienceRequestCriteria;
 import com.example.kok.util.Criteria;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,11 +17,10 @@ import java.util.Optional;
 @Setter
 @ToString
 public class AdminExperienceDetailDTO {
-    private List<AdminExperienceDTO> experienceList;
-    private Criteria listCriteria;
-
-    private Optional<AdminExperienceDTO> experience;
+    private AdminExperienceDTO experience;
     private List<UserRequestExperienceDTO> userRequestExperience;
     private List<UserEvaluationDTO> userEvaluation;
+
+    private AdminExperienceRequestCriteria adminExperienceRequestCriteria;
     private AdminExperienceCriteria adminExperienceCriteria;
 }

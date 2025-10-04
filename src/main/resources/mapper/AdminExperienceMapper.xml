@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kok.mapper.AdminExperienceMapper">
     <sql id="search">
-        <if test="search.keyword != null and search.keyword != ''">
+        <if test="keyword != null and keyword != ''">
             and (
-            c.company_name like concat('%', #{search.keyword}, '%') or
-            en.experience_notice_title like concat('%', #{search.keyword}, '%') or
-            en.experience_notice_subtitle like concat('%', #{search.keyword}, '%') or
-            jc.job_name like concat('%', #{search.keyword}, '%')
+            c.company_name like concat('%', #{keyword}, '%') or
+            en.experience_notice_title like concat('%', #{keyword}, '%') or
+            en.experience_notice_subtitle like concat('%', #{keyword}, '%') or
+            jc.job_name like concat('%', #{keyword}, '%')
             )
         </if>
     </sql>
@@ -129,7 +129,7 @@
                   on en.id = re.experience_notice_id
              join tbl_user u
                   on e.member_id = u.id
-        where en.id = #{id} and u.user_role = 'member' and u.user_status = 'active'
+        where en.id = #{id} and u.user_role = 'member' and u.user_status = 'active' and re.request_experience_status = 'accept'
         order by e.id desc
         limit #{criteria.count} offset #{criteria.offset}
     </select>
@@ -143,6 +143,6 @@
                   on en.id = re.experience_notice_id
              join tbl_user u
                   on e.member_id = u.id
-        where en.id = #{id}
+        where en.id = #{id} and re.request_experience_status = 'accept'
     </select>
 </mapper>

@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @Getter @Setter
 @ToString
-public class AdminExperienceCriteria {
+public class AdminExperienceRequestCriteria {
     private int page;
     private int pageCount;
     private int startPage;
@@ -20,7 +20,7 @@ public class AdminExperienceCriteria {
     private int count;
     private int total;
 
-    public AdminExperienceCriteria(int page, int total) {
+    public AdminExperienceRequestCriteria(int page, int total) {
         rowCount = 5;
         pageCount = 5;
         count = rowCount + 1;

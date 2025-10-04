@@ -8,8 +8,11 @@ import java.util.Optional;
 
 public interface AdminService {
 
-//    체험
-    public AdminExperienceDetailDTO getExperience(int page, Search search, Long id);
+//    체험 목록
+    public AdminExperienceListDTO getExperience(int page, String keyword);
+
+//    체험 상세
+    public AdminExperienceDetailDTO getExperienceDetail(int page, Long id);
 
 //    공지 등록
     public void write (AdminNoticeDTO adminNoticeDTO);
