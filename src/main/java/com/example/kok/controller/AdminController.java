@@ -2,6 +2,7 @@ package com.example.kok.controller;
 
 import com.example.kok.common.exception.PostNotFoundException;
 import com.example.kok.dto.AdminNoticeDTO;
+import com.example.kok.service.AdminReportService;
 import com.example.kok.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,8 +20,9 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequiredArgsConstructor
 public class AdminController {
     private final AdminService adminService;
+    private final AdminReportService adminReportService;
 
-//    관리자 등록
+    //    관리자 등록
     @GetMapping("join")
     public String goToJoinPage() {
         return "admin/join";
@@ -90,6 +92,13 @@ public class AdminController {
     @GetMapping("notify/post")
     public String goToNotifyPostPage() {
         return "admin/notify-post";
+    }
+
+//    신고 게시글 삭제
+    @GetMapping("notify/post/delete/{id}")
+    public RedirectView notifyPostDelete(@PathVariable Long id) {
+        adminReportService.deleteReportPost(id);
+        return new RedirectView("/admin/notify/post");
     }
 
 //    고객지원 - 공지사항 목록

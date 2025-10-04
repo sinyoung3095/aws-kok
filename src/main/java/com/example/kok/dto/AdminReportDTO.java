@@ -22,4 +22,5 @@ public class AdminReportDTO {
     private String postContent;
     private Status postStatus;
     private String createdDateTime;
+    private String relativeDate;
 }

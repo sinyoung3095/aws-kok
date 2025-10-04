@@ -1,0 +1,66 @@
+package com.example.kok.service;
+
+import com.example.kok.dto.AdminReportCriteriaDTO;
+import com.example.kok.dto.AdminReportDTO;
+import com.example.kok.repository.AdminReportDAO;
+import com.example.kok.util.Criteria;
+import com.example.kok.util.DateUtils;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+@Primary
+public class AdminReportServiceImpl implements AdminReportService {
+    private final AdminReportDAO adminReportDAO;
+
+//    신고 게시글 목록
+    @Override
+    public AdminReportCriteriaDTO getReportList(int page) {
+        AdminReportCriteriaDTO adminReportCriteriaDTO = new AdminReportCriteriaDTO();
+        Criteria criteria = new Criteria(page, adminReportDAO.reportCount());
+        List<AdminReportDTO> reports = adminReportDAO.reportList(criteria);
+        reports.forEach((report) -> {
+            String relativeDate = DateUtils.getCreatedDate(report.getCreatedDateTime());
+            report.setRelativeDate(relativeDate);
+        });
+
+        criteria.setHasMore(reports.size() > criteria.getRowCount());
+        criteria.setHasPreviousPage(page > 1);
+        criteria.setHasNextPage(page < criteria.getRealEnd());
+
+        log.info("이전 페이지 버튼: {}", criteria.isHasPreviousPage());
+        log.info("다음 페이지 버튼: {}", criteria.isHasNextPage());
+//        11개 가져왔으면, 마지막 1개 삭제
+        if(criteria.isHasMore()){
+            reports.remove(reports.size()-1);
+        }
+
+        adminReportCriteriaDTO.setAdminReportDTO(reports);
+        adminReportCriteriaDTO.setCriteria(criteria);
+        return adminReportCriteriaDTO;
+    }
+
+//    신고 게시글 상세
+    @Override
+    public AdminReportDTO getReportDetail(Long id) {
+        AdminReportDTO adminReportDTO = new AdminReportDTO();
+        adminReportDTO = adminReportDAO.reportDetail(id);
+
+        String relativeDate = DateUtils.getCreatedDate(adminReportDTO.getCreatedDateTime());
+        adminReportDTO.setRelativeDate(relativeDate);
+
+        return adminReportDTO;
+    }
+
+//    신고 게시글 삭제
+    @Override
+    public void deleteReportPost(Long id) {
+        adminReportDAO.deleteReport(id);
+    }
+}

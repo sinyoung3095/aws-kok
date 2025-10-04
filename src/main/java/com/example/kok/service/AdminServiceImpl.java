@@ -51,6 +51,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
 //    체험 상세
+    @Override
+    @Transactional(rollbackFor = Exception.class)
     public AdminExperienceDetailDTO getExperienceDetail(int page, Long id) {
         AdminExperienceDetailDTO adminExperienceDetailDTO = new AdminExperienceDetailDTO();
 
