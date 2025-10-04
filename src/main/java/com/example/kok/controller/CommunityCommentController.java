@@ -28,8 +28,30 @@ public class CommunityCommentController {
     }
 //    댓글 목록
     @GetMapping("/{postId}")
-    public ResponseEntity<?> list(@PathVariable Long postId) {
-        List<CommentDTO> comments = communityCommentService.getComments(postId);
+    public ResponseEntity<?> list(@PathVariable Long postId,
+                                  @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        Long memberId = customUserDetails.getId();
+        List<CommentDTO> comments = communityCommentService.getComments(postId, memberId);
         return ResponseEntity.ok(comments);
     }
+
+//    댓글 수정
+    @PutMapping("/{commentId}")
+    public ResponseEntity<?> updateComment(@PathVariable("commentId") Long commentId,
+                                           @RequestBody CommentDTO commentDTO,
+                                           @AuthenticationPrincipal CustomUserDetails user) {
+        commentDTO.setId(commentId);
+        commentDTO.setMemberId(user.getId());
+        communityCommentService.update(commentDTO);
+        return ResponseEntity.ok().build();
+    }
+
+//    댓글 삭제
+    @DeleteMapping("/{commentId}")
+    public ResponseEntity<?> deleteComment(@PathVariable("commentId") Long commentId) {
+        communityCommentService.delete(commentId);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }

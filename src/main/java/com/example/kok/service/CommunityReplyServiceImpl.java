@@ -2,6 +2,7 @@ package com.example.kok.service;
 
 import com.example.kok.dto.ReplyDTO;
 import com.example.kok.repository.CommunityReplyDAO;
+import com.example.kok.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +33,15 @@ public class CommunityReplyServiceImpl implements CommunityReplyService {
 
 //    댓글 내 대댓글 목록
     @Override
-    public List<ReplyDTO> getReplies(Long commentId) {
-        return communityReplyDAO.findAll(commentId);
+    public List<ReplyDTO> getReplies(Long commentId, Long memberId) {
+        List<ReplyDTO> replies = communityReplyDAO.findAll(commentId);
+
+        replies.forEach(reply -> {
+            reply.setRelativeDate(DateUtils.toRelativeTime(reply.getCreatedDateTime()));
+            reply.setOwner(memberId != null && memberId.equals(reply.getMemberId()));
+        });
+
+        return replies;
     }
 
 //    대댓글 갯수
