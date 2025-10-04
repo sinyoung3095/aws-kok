@@ -1,6 +1,8 @@
 package com.example.kok.mapper;
 
 import com.example.kok.dto.AdminReportDTO;
+import com.example.kok.repository.AdminReportDAO;
+import com.example.kok.service.AdminReportService;
 import com.example.kok.util.Criteria;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -12,6 +14,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class AdminReportTests {
     @Autowired
     private AdminReportMapper adminReportMapper;
+    @Autowired
+    private AdminReportDAO adminReportDAO;
+    @Autowired
+    private AdminReportService adminReportService;
 
 //    Mapper
     @Test
@@ -42,10 +48,50 @@ public class AdminReportTests {
 
 
 //    DAO
+    @Test
+    public void testReportList(){
+        Criteria criteria = new Criteria(1, adminReportDAO.reportCount());
+        adminReportDAO.reportList(criteria).stream().map(AdminReportDTO::toString).forEach(log::info);
+        log.info("{}", criteria);
+    }
 
+    @Test
+    public void testReportCount(){
+        log.info("전체 개수: {}", adminReportDAO.reportCount());
+    }
 
+    @Test
+    public void testReportDetail(){
+        Long id = 31L;
+        log.info("31번 게시글: {}", adminReportDAO.reportDetail(id));
+    }
+
+    @Test
+    public void testDeleteReport(){
+        Long id = 36L;
+        log.info("삭제 전 전체 개수: {}", adminReportDAO.reportCount());
+        adminReportDAO.deleteReport(id);
+        log.info("삭제 후 전체 개수: {}", adminReportDAO.reportCount());
+    }
 
 
 //    Service
+    @Test
+    public void testGetReportList(){
+        log.info("Service 목록: {}", adminReportService.getReportList(1));
+    }
 
+    @Test
+    public void testGetReportDetail(){
+        Long id = 31L;
+        log.info("31번 게시글: {}", adminReportService.getReportDetail(id));
+    }
+
+    @Test
+    public void testDeleteReportPostService(){
+        Long id = 36L;
+        log.info("삭제 전 전체 개수: {}", adminReportDAO.reportCount());
+        adminReportService.deleteReportPost(36L);
+        log.info("삭제 후 전체 개수: {}", adminReportDAO.reportCount());
+    }
 }

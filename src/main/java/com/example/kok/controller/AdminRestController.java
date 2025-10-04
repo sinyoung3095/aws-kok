@@ -1,9 +1,7 @@
 package com.example.kok.controller;
 
-import com.example.kok.dto.AdminExperienceDTO;
-import com.example.kok.dto.AdminExperienceDetailDTO;
-import com.example.kok.dto.AdminExperienceListDTO;
-import com.example.kok.dto.AdminNoticeCriteriaDTO;
+import com.example.kok.dto.*;
+import com.example.kok.service.AdminReportService;
 import com.example.kok.service.AdminService;
 import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AdminRestController {
     private final AdminService adminService;
+    private final AdminReportService adminReportService;
 
     //    공지 목록
     @GetMapping("support/{page}")
@@ -39,6 +38,20 @@ public class AdminRestController {
         log.info("page = {}", page);
         log.info("id = {}", id);
         return adminService.getExperienceDetail(page, id);
+    }
+
+//    신고 게시글 목록
+    @GetMapping("notify/post/{page}")
+    public AdminReportCriteriaDTO getNotifyList(@PathVariable("page") int page){
+        log.info("page = {}", page);
+        return adminReportService.getReportList(page);
+    }
+
+//    신고 게시글 상세
+    @GetMapping("notify/post/detail/{id}")
+    public AdminReportDTO getNotifyDetail(@PathVariable("id")Long id){
+        log.info("id = {}", id);
+        return adminReportService.getReportDetail(id);
     }
 
 }
