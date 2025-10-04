@@ -38,6 +38,6 @@
     <select id="countCommentsByPostId">
         select count(*)
         from tbl_comment
-        where post_id = #{postId}
+        where post_id = #{postId} and comment_status = 'active'
     </select>
 </mapper>

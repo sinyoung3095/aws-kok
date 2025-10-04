@@ -10,8 +10,7 @@ const postService = (() => {
     // 게시글 조회
     const getOne = async (id) => {
         const response = await fetch(`/api/community/post/${id}`);
-        if (!response.ok) throw new Error("게시글을 불러올 수 없습니다.");
-        return await response.json();
+        return response.json();
     };
 
     // 글쓰기
@@ -27,8 +26,7 @@ const postService = (() => {
             body: formData
         });
 
-        if (!response.ok) throw new Error(await response.text());
-        return await response.json();
+        return response.json();
     };
 
     // 수정
