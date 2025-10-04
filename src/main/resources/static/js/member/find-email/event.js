@@ -16,12 +16,7 @@ const toastFailSend = document.getElementById("toast-fail-send");
 const toastFailMember = document.getElementById("toast-fail-member");
 inputCertiContainer.style.display = "none";
 
-// 전화번호 포맷팅
-function formatPhoneNumber(input) {
-    input.value = input.value
-        .replace(/[^0-9]/g, '')
-        .replace(/(^02|^01[0-9]|[0-9]{3})([0-9]+)?([0-9]{4})$/, '$1 $2 $3');
-}
+
 // 인증번호 포맷팅
 function formatCertiNumber(input) {
     // 숫자만 남기기
@@ -81,46 +76,59 @@ function showMemberErrorToast() {
 
 // 인증번호 받기 버튼 활성화/비활성화
 inputName.addEventListener("keyup", (e) => {
-    if (inputName.value.length !== 0 && inputNumber.value.length === 13) {
+    if (inputName.value.length !== 0 && inputNumber.value.length === 11) {
         submitButton.classList.remove('inactive');
-    } else if (inputName.value.length === 0 || inputNumber.value.length < 13) {
+    } else if (inputName.value.length === 0 || inputNumber.value.length < 11) {
         submitButton.classList.add('inactive');
     }
 });
 inputNumber.addEventListener("keyup", (e) => {
-    if (inputName.value.length !== 0 && inputNumber.value.length === 13) {
+    if (inputName.value.length !== 0 && inputNumber.value.length === 11) {
         submitButton.classList.remove('inactive');
-    } else if (inputName.value.length === 0 || inputNumber.value.length < 13) {
+    } else if (inputName.value.length === 0 || inputNumber.value.length < 11) {
         submitButton.classList.add('inactive');
     }
 });
+
 
 
 // 인증번호 받기 전
 submitButton.addEventListener("click", () => {
     if (inputName.value.length === 0) {
         showNameErrorToast();  // 이름 공란
-    } else if (inputNumber.value.trim().length < 13) {
+    } else if (inputNumber.value.trim().length < 11) {
         showNumberErrorToast();  // 전화번호 공란
     }
     // 회원 정보 불일치 조건 추가 예정(showMemberErrorToast)
 });
 
+let checkCode = "";
 
 // 인증번호 받은 후
-submitButton.addEventListener("click", (e) => {
+submitButton.addEventListener("click", async (e) => {
     // let text = `<span class="btn-submit-text">확인</span>`;
 
     if (submitButton.classList.contains('inactive')) {
-        return;
+        showSendErrorToast()
     }
     // 이름, 전화번호 확인 조건 추가 예정
     else if (inputCertiContainer.style.display === "none") {
-        showSendToast();
+
         inputCertiContainer.style.display = "block";
         // submitButton.innerHTML = text;
-        submitButton.classList.add('none');
-        checkButton.classList.remove('none');
+        const Phone = inputNumber.value;
+        console.log(Phone);
+        const name = inputName.value;
+        console.log(name);
+        const result = await service.send({"userPhone" :Phone,"userName": name});
+
+        if(result.success){
+            showSendToast();
+            checkCode = result.code.toString();
+            console.log(checkCode);
+            submitButton.classList.add('none');
+            checkButton.classList.remove('none');
+        }
     }
 
     // 인증번호 발송 실패 조건 추가 예정(showSendErrorToast)
@@ -142,3 +150,20 @@ inputCerti.addEventListener("keyup", (e) => {
         checkButton.classList.add('inactive')
     }
 });
+
+checkButton.addEventListener("click",async (e)=>{
+    if(!checkButton.classList.contains('inactive')){
+        if(checkCode===inputCerti.value){
+        const Phone = inputNumber.value;
+        const result = await service.getEmailByPhoneNumber({userPhone:Phone});
+            if(result.success){location.href="/member/find-email-ok"}
+            else{
+                showMemberErrorToast();
+            }
+
+        }else{
+            showWrongCertiErrorToast();
+        }
+
+    }
+})

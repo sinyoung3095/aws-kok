@@ -47,4 +47,8 @@ public class UserDAO {
     public void setPassword(UserDTO userDTO) {
         userMapper.updatePassword(userDTO);
     }
+//    전화번호로 이메일번호 조회
+    public UserDTO findEmailByPhone(String phone) {
+        return userMapper.selectEmailByPhone(phone);
+    }
 }
