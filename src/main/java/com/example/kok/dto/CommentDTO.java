@@ -28,4 +28,5 @@ public class CommentDTO{
     private boolean liked;
     private int totalReplyCount;
     private List<ReplyDTO> replies;
+    private boolean owner;
 }

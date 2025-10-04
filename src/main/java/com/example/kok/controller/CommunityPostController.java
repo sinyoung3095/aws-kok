@@ -25,7 +25,7 @@ public class CommunityPostController {
     @GetMapping("/{page}")
     public PostsCriteriaDTO getPosts(@PathVariable("page") int page,
                                      @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        Long memberId = customUserDetails != null ? customUserDetails.getId() : null;
+        Long memberId = customUserDetails.getId();
         return communityPostService.getList(page, memberId);
     }
 
@@ -33,7 +33,7 @@ public class CommunityPostController {
     @GetMapping("/post/{id}")
     public ResponseEntity<PostDTO> getOne(@PathVariable("id") Long id,
                                           @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        Long memberId = (customUserDetails != null) ? customUserDetails.getId() : null;
+        Long memberId = customUserDetails.getId();
         PostDTO postDTO = communityPostService.getPost(id, memberId);
         return ResponseEntity.ok(postDTO);
     }
@@ -47,7 +47,7 @@ public class CommunityPostController {
         postDTO.setPostContent(postContent);
         postDTO.setMemberId(customUserDetails.getId());
 
-        communityPostService.write(postDTO, files != null ? files : List.of());
+        communityPostService.write(postDTO, files);
         return ResponseEntity.status(HttpStatus.CREATED).body(postDTO.getId());
     }
 
@@ -63,7 +63,7 @@ public class CommunityPostController {
         postDTO.setPostContent(postContent);
         postDTO.setMemberId(customUserDetails.getId());
 
-        PostDTO updatedPost = communityPostService.update(postDTO, deleteFiles, files != null ? files : List.of());
+        PostDTO updatedPost = communityPostService.update(postDTO, deleteFiles, files);
         return ResponseEntity.ok(updatedPost);
     }
 

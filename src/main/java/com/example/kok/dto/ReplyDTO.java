@@ -25,4 +25,5 @@ public class ReplyDTO {
     private String jobName;
     private String memberProfileUrl;
     private boolean liked;
+    private boolean owner;
 }

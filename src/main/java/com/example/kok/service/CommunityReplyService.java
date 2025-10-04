@@ -16,7 +16,7 @@ public interface CommunityReplyService {
     public void delete(Long id);
 
 //    댓글 내 대댓글 목록
-    public List<ReplyDTO> getReplies(Long commentId);
+    public List<ReplyDTO> getReplies(Long commentId, Long memberId);;
 
 //    대댓글 갯수
     public int getRepliesCount(Long commentId);

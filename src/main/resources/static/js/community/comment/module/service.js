@@ -3,8 +3,7 @@ const commentService = (() => {
     // 댓글 목록
     const getComments = async (postId) => {
         const response = await fetch(`/api/comments/${postId}`);
-        if (!response.ok) throw new Error("댓글을 불러올 수 없습니다.");
-        return await response.json();
+        return response.json();
     };
 
     // 댓글 작성
@@ -14,41 +13,31 @@ const commentService = (() => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(commentDTO),
         });
-        if (!response.ok) throw new Error("댓글 작성 실패");
-        return await response.json();
+        return response.json();
     };
 
-    // 댓글 좋아요
-    const commentLike = async (commentId) => {
-        const response = await fetch(`/api/comment-likes/${commentId}`, {
-            method: "POST"
+    // 댓글 수정
+    const updateComment = async (commentId, content) => {
+        const response = await fetch(`/api/comments/${commentId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ commentContent: content }),
         });
-
-        if(response.ok) {
-            console.log("좋아요 성공");
-            return true;
-        } else{
-            const errorMessage = await response.text();
-            console.log(errorMessage)
-            alert("이미 좋아요를 누른 댓글 입니다.");
-            return false;
-        }
+        return response.ok;
     };
 
-    // 댓글 좋아요 취소
-    const commentUnlike = async (commentId) => {
-        const response = await fetch(`/api/comment-likes/${commentId}`, {
-            method: "DELETE"
+    // 댓글 삭제
+    const deleteComment = async (commentId) => {
+        const response = await fetch(`/api/comments/${commentId}`, {
+            method: "DELETE",
         });
-
         return response.ok;
     };
 
     // 대댓글 목록
     const getReplies = async (commentId) => {
         const response = await fetch(`/api/replies/${commentId}`);
-        if (!response.ok) throw new Error("대댓글을 불러올 수 없습니다.");
-        return await response.json();
+        return response.json();
     };
 
     // 대댓글 작성
@@ -58,11 +47,28 @@ const commentService = (() => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(replyDTO),
         });
-        if (!response.ok) throw new Error("대댓글 작성 실패");
-        return await response.json();
+        return response.json();
     };
 
-    return { getComments : getComments, writeComment : writeComment, commentLike : commentLike,
-        commentUnlike : commentUnlike, getReplies : getReplies, writeReply : writeReply};
+    // 대댓글 수정
+    const updateReply = async (replyId, content) => {
+        const response = await fetch(`/api/replies/${replyId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ replyContent: content }),
+        });
+        return response.ok;
+    };
+
+    // 대댓글 삭제
+    const deleteReply = async (replyId) => {
+        const response = await fetch(`/api/replies/${replyId}`, {
+            method: "DELETE",
+        });
+        return response.ok;
+    };
+
+    return { getComments : getComments, writeComment : writeComment, updateComment : updateComment, deleteComment : deleteComment,
+        getReplies : getReplies, writeReply : writeReply, updateReply : updateReply, deleteReply : deleteReply};
 
 })();
