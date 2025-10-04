@@ -5,9 +5,7 @@ import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.dto.UserEvaluationDTO;
 import com.example.kok.dto.UserRequestExperienceDTO;
 import com.example.kok.mapper.AdminExperienceMapper;
-import com.example.kok.util.AdminExperienceCriteria;
-import com.example.kok.util.Criteria;
-import com.example.kok.util.Search;
+import com.example.kok.util.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -20,22 +18,22 @@ public class AdminExperienceDAO {
     private final AdminExperienceMapper adminExperienceMapper;
 
 //    전체(목록)
-    public List<AdminExperienceDTO> adminExperienceAll(Criteria criteria, Search search) {
-        return adminExperienceMapper.selectAdminExperienceAll(criteria, search);
+    public List<AdminExperienceDTO> adminExperienceAll(AdminExperienceListCriteria criteria, String keyword) {
+        return adminExperienceMapper.selectAdminExperienceAll(criteria, keyword);
     }
 
 //    검색 개수
-    public int adminExperienceSearchCountAll(Search search) {
-        return adminExperienceMapper.selectAdminExperienceSearchCountAll(search);
+    public int adminExperienceSearchCountAll(String keyword) {
+        return adminExperienceMapper.selectAdminExperienceSearchCountAll(keyword);
     }
 
 //    체험공고 - 상세
-    public Optional<AdminExperienceDTO> selectAdminExperience(Long id) {
+    public AdminExperienceDTO selectAdminExperience(Long id) {
         return adminExperienceMapper.selectAdminExperienceById(id);
     }
 
 //    체험공고 - 신청자 내역
-    public List<UserRequestExperienceDTO> requestUser(AdminExperienceCriteria criteria, Long id) {
+    public List<UserRequestExperienceDTO> requestUser(AdminExperienceRequestCriteria criteria, Long id) {
         return adminExperienceMapper.selectRequestUser(criteria, id);
     }
 //    체험공고 - 신청자 내역 개수

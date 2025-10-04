@@ -70,6 +70,91 @@ closeFooterButton.addEventListener("click", () => {
     }, 100);
 });
 
+// 모달 상세
+const experienceListContainer = document.querySelector(".table.member-table tbody");
+experienceListContainer.addEventListener("click",async (e)=>{
+
+    if(e.target.closest(".action-btn")){
+        modal.style.display = "block";
+        setTimeout(() => {
+            modal.classList.add("show");
+            modal.style.background = "rgba(0,0,0,0.5)";
+            document.body.classList.add("modal-open");
+        }, 100);
+
+        const actionButton = e.target.closest(".action-btn");
+        const page = 1;
+        const id = Number(actionButton.dataset.id);
+        console.log(id);
+
+        // 체험공고 상세정보
+        await service.getExperienceDetail(layout.showInfo, page, id);
+
+        // 신청자 내역
+        await service.getExperienceDetail(layout.showRequest, page, id);
+
+        const detailPagination = document.querySelector(".pagination.kok-pagination.detail-request");
+        const firstNumber = detailPagination.querySelector("li.number");
+        if (firstNumber) {
+            firstNumber.classList.add("active");
+        }
+        detailPagination.onclick = async (e) => {
+            e.preventDefault()
+
+            // 페이지 번호
+            const clickNum = e.target.closest("a[data-page]");
+            const pageNumber = Number(clickNum.dataset.page);
+
+            await service.getExperienceDetail(layout.showRequest, pageNumber, id);
+
+            const pageNumsList = detailPagination.querySelectorAll("li.page-num");
+            pageNumsList.forEach((pageNum) => {
+                pageNum.classList.remove("active");
+            });
+            const currentList = Array.from(pageNumsList).find((pageNum) => {
+                const activeList = pageNum.querySelector("a.page-item-num");
+                return activeList && Number(activeList.dataset.page) === pageNumber;
+            });
+
+            if(currentList){
+                currentList.classList.add("active");
+            }
+        }
+
+        // 평가자 목록
+        await service.getExperienceDetail(layout.showEvaluation, page, id);
+
+        const evaluationPagination = document.querySelector(".pagination.kok-pagination.detail-evaluation");
+        const firstEvaluationNumber = evaluationPagination.querySelector("li.number");
+        if (firstEvaluationNumber) {
+            firstEvaluationNumber.classList.add("active");
+        }
+        evaluationPagination.onclick = async (e) => {
+            e.preventDefault()
+
+            // 페이지 번호
+            const clickNum = e.target.closest("a[data-page]");
+            const pageNumber = Number(clickNum.dataset.page);
+
+            await service.getExperienceDetail(layout.showEvaluation, pageNumber, id);
+
+            const pageNumsList = evaluationPagination.querySelectorAll("li.page-num");
+            pageNumsList.forEach((pageNum) => {
+                pageNum.classList.remove("active");
+            });
+            const currentList = Array.from(pageNumsList).find((pageNum) => {
+                const activeList = pageNum.querySelector("a.page-item-num");
+                return activeList && Number(activeList.dataset.page) === pageNumber;
+            });
+
+            if(currentList){
+                currentList.classList.add("active");
+            }
+        }
+    }
+});
+
+
 // 관리자 이메일 토글
 userMenuWrapper.addEventListener("click", () => {
     userMenuContent.classList.toggle("show");
@@ -113,10 +198,11 @@ pagination.addEventListener("click", async (e) => {
 
 // 검색창
 const search = document.querySelector(".btn.btn-search");
-search.addEventListener("click", (e) => {
+search.addEventListener("click", async (e) => {
     const page = 1;
     const keyword = content.value;
-    service.getExperience(layout.showList, page, keyword);
+    console.log(keyword);
+    await service.getExperience(layout.showList, page, keyword);
 });
 
 // 페이지 번호
