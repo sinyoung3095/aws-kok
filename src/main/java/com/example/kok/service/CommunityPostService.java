@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface CommunityPostService {
     //    게시글 전체 조회
-    public PostsCriteriaDTO getList(int page);
+    public PostsCriteriaDTO getList(int page, Long memberId);
     //    조회
-    public PostDTO getPost(Long id);
+    public PostDTO getPost(Long id, Long memberId);
     public void setPreSignedUrl(PostDTO postDTO);
     //    추가
     public void write(PostDTO postDTO, List<MultipartFile> multipartFiles);

@@ -862,15 +862,15 @@ div {
     opacity: 1;
     transform: none;
     flex-direction: column;
-    z-index: 10000;
+    z-index: 100;
     box-shadow: 0px 4px 20px 0px rgba(24,37,61,0.0600);
     border-radius: 5px;
     border: 1px solid rgba(86,105,143,0.1200);
     background: #ffffff;
     display: none;
     cursor: default;
-    margin-top: 60px;
-    margin-left: -110px;
+    margin-top: 90px;
+    margin-left: -90px;
 }
 .report-2{
     overflow: auto;
@@ -894,7 +894,6 @@ div {
     flex-direction: column;
     padding-inline: 4px;
     display: flex;
-    cursor: pointer;
 }
 .report-6{
     color: rgba(18,19,20,1);
@@ -903,6 +902,7 @@ div {
     font-size: 13px;
     line-height: 13px;
     margin: 0;
+    cursor: pointer;
 }
 .delete-post-btn {
     color: rgba(18,19,20,1);
@@ -911,6 +911,7 @@ div {
     font-size: 13px;
     line-height: 13px;
     margin: 0;
+    cursor: pointer;
 }
 
 .update-post-btn {
@@ -920,6 +921,7 @@ div {
     font-size: 13px;
     line-height: 13px;
     margin: 0;
+    cursor: pointer;
 }
 .report-7{
     z-index: 1100;
@@ -1607,8 +1609,6 @@ div {
     display: flex
 }
 
-
-
 #post-write-popup {
     position: fixed;
     top: 0;
@@ -1620,6 +1620,36 @@ div {
     justify-content: center;
     align-items: center;
     z-index: 9999;
+}
+
+#post-update-popup {
+    display: none
+}
+
+#post-update-popup.active {
+    display: flex
+}
+
+#post-update-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.pop-btn-update {
+    height: 36px;
+    letter-spacing: -.28px;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0 12px;
+    border-radius: 999px;
 }
 
 .preview-remove {

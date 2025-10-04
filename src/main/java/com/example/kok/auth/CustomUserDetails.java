@@ -1,5 +1,6 @@
 package com.example.kok.auth;
 
+import com.example.kok.dto.MemberDTO;
 import com.example.kok.dto.UserDTO;
 import com.example.kok.enumeration.Status;
 import com.example.kok.enumeration.UserRole;
@@ -24,6 +25,8 @@ public class CustomUserDetails implements UserDetails {
     private String snsEmail;
     private UserRole userRole;
     private Status userStatus;
+    private String jobName;
+    private String memberProfile;
 
     public CustomUserDetails(UserDTO userDTO){
         log.info("CustomUserDetails:{}",userDTO.toString());
@@ -35,6 +38,11 @@ public class CustomUserDetails implements UserDetails {
         this.snsEmail=userDTO.getSnsEmail();
         this.userRole=userDTO.getUserRole();
         this.userStatus=userDTO.getUserStatus();
+    }
+
+    public CustomUserDetails(MemberDTO memberDTO){
+        this.jobName = memberDTO.getJobName();
+        this.memberProfile = memberDTO.getMemberProfileUrl();
     }
 
     @Override

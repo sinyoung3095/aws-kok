@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.RequestInternMapper">
+<!--  일반 인턴 회원 지원 조회  -->
+    <select id="selectRequestInternById">
+        select c.company_name, ino.intern_notice_title, ri.request_intern_status
+        from tbl_request_intern ri
+                join tbl_intern_notice ino
+                    on ri.intern_notice_id = ino.id
+                join tbl_company c
+                    on ino.company_id = c.user_id
+        where member_id = #{id}
+    </select>
+</mapper>

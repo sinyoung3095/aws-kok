@@ -1,6 +1,7 @@
 package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
+import com.example.kok.common.exception.MemberNotFoundException;
 import com.example.kok.dto.*;
 import com.example.kok.repository.CompanyProfileFileDAO;
 import com.example.kok.service.CompanyService;
@@ -61,27 +62,31 @@ public class ExperiencesController {
         return result;
     }
 
-//    간편지원 넣기
-    @PostMapping("/request")
-    public void requestExperience(Long experienceId,
-            @AuthenticationPrincipal CustomUserDetails customUserDetails,
-            @RequestParam List<Long> fileIds) {
-
-        RequestExperienceDTO reqDTO = new RequestExperienceDTO();
-        reqDTO.setExperienceNoticeId(experienceId);
-        reqDTO.setMemberId(customUserDetails.getId());
-//        reqDTO.setMemberAlarmSettingId();
-        requestExperienceService.applyForExperience(reqDTO, fileIds);
-    }
+////    간편지원 넣기
+//    @PostMapping("/request")
+//    public void requestExperience(Long experienceId,
+//            @AuthenticationPrincipal CustomUserDetails customUserDetails,
+//            @RequestParam List<Long> fileIds) {
+//
+//        RequestExperienceDTO reqDTO = new RequestExperienceDTO();
+//        reqDTO.setExperienceNoticeId(experienceId);
+//        reqDTO.setMemberId(customUserDetails.getId());
+////        reqDTO.setMemberAlarmSettingId();
+//        requestExperienceService.applyForExperience(reqDTO, fileIds);
+//    }
 
 //    공고 저장하기
     @PostMapping("/save")
-    public void saveExperience(@RequestParam Long experienceId,
+    public ResponseEntity<?> saveExperience(@RequestParam Long experienceId,
             @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        SaveExperienceNoticeDTO saveExp=new SaveExperienceNoticeDTO();
-        saveExp.setExperienceNoticeId(experienceId);
-        saveExp.setMemberId(customUserDetails.getId());
-        experienceNoticeService.saveExp(saveExp);
+        if(customUserDetails!=null){
+            SaveExperienceNoticeDTO saveExp=new SaveExperienceNoticeDTO();
+            saveExp.setExperienceNoticeId(experienceId);
+            saveExp.setMemberId(customUserDetails.getId());
+            experienceNoticeService.saveExp(saveExp);
+            return ResponseEntity.ok("저장 성공");
+        }
+        return ResponseEntity.notFound().build();
     }
 
 //    공고 저장 취소하기
@@ -99,21 +104,47 @@ public class ExperiencesController {
     public boolean isSaved(@RequestParam Long experienceId,
                            @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
-        System.out.println(customUserDetails);
-        SaveExperienceNoticeDTO exp=new SaveExperienceNoticeDTO();
-        exp.setExperienceNoticeId(experienceId);
-        exp.setMemberId(customUserDetails.getId());
-        boolean result= experienceNoticeService.isSavedExp(exp);
-        return result;
+        if(customUserDetails!=null){
+            System.out.println(customUserDetails);
+            SaveExperienceNoticeDTO exp=new SaveExperienceNoticeDTO();
+            exp.setExperienceNoticeId(experienceId);
+            exp.setMemberId(customUserDetails.getId());
+            boolean result= experienceNoticeService.isSavedExp(exp);
+            return result;
+        }
+        return false;
+
     }
 
 //    간편지원 input에 넣을 유저 정보 불러오기
     @GetMapping("/user")
-    public UserDTO loadUserDetails(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        UserDTO user=new UserDTO();
-        user=userService.findById(customUserDetails.getId());
-        System.out.println(user);
-        return user;
+    public ResponseEntity<UserDTO> loadUserDetails(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        if(customUserDetails!=null){
+            UserDTO user=new UserDTO();
+            user=userService.findById(customUserDetails.getId());
+            System.out.println(user);
+            return ResponseEntity.ok(user);
+        }
+        return ResponseEntity.notFound().build();
     }
 
+//    간편지원 완료
+    @PostMapping("/request")
+    public void requestExperience(@RequestBody RequestExperienceDTO requestExperienceDTO,
+                                  @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+//        System.out.println(requestExperienceDTO);
+//        System.out.println(customUserDetails.getId());
+        RequestExperienceDTO request=new RequestExperienceDTO();
+        request.setRequestExperienceMemberName(requestExperienceDTO.getRequestExperienceMemberName());
+        request.setRequestExperienceMemberEmail(requestExperienceDTO.getRequestExperienceMemberEmail());
+        request.setRequestExperienceMemberPhone(requestExperienceDTO.getRequestExperienceMemberPhone());
+        if(requestExperienceDTO.getRequestExperienceMemberUrl()!=null){
+            request.setRequestExperienceMemberUrl(requestExperienceDTO.getRequestExperienceMemberUrl());
+        }
+        request.setFileId(requestExperienceDTO.getFileId());
+        request.setMemberId(customUserDetails.getId());
+        request.setExperienceNoticeId(requestExperienceDTO.getExperienceNoticeId());
+        System.out.println(request);
+        requestExperienceService.applyForExperience(request);
+    }
 }

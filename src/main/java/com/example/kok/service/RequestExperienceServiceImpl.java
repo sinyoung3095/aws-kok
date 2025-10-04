@@ -2,6 +2,7 @@ package com.example.kok.service;
 
 import com.example.kok.dto.RequestExperienceDTO;
 import com.example.kok.dto.RequestExperienceFileDTO;
+import com.example.kok.repository.MemberAlarmSettingDAO;
 import com.example.kok.repository.RequestExperienceDAO;
 import com.example.kok.repository.RequestExperienceFileDAO;
 import lombok.RequiredArgsConstructor;
@@ -14,16 +15,19 @@ import java.util.List;
 public class RequestExperienceServiceImpl implements RequestExperienceService {
     private final RequestExperienceDAO requestExperienceDAO;
     private final RequestExperienceFileDAO requestExperienceFileDAO;
+    private final MemberAlarmSettingDAO memberAlarmSettingDAO;
 
     @Override
-    public void applyForExperience(RequestExperienceDTO requestExperienceDTO, List<Long> fileIds) {
+    public void applyForExperience(RequestExperienceDTO requestExperienceDTO) {
+        Long memberAlarmSettingId=memberAlarmSettingDAO.findByMemberId(requestExperienceDTO.getMemberId());
+        requestExperienceDTO.setMemberAlarmSettingId(memberAlarmSettingId);
         requestExperienceDAO.applyForExperience(requestExperienceDTO);
+        System.out.println(requestExperienceDTO.getId());
         Long reqId=requestExperienceDTO.getId();
-        List<RequestExperienceFileDTO> dtoList = fileIds.stream()
-            .map(fileId -> new RequestExperienceFileDTO(fileId, reqId))
-            .toList();
-        dtoList.forEach(requestExperienceFileDTO -> {
-            requestExperienceFileDAO.saveRequestFile(requestExperienceFileDTO);
-        });
+        Long fileId=requestExperienceDTO.getFileId();
+        RequestExperienceFileDTO file=new RequestExperienceFileDTO();
+        file.setFileId(fileId);
+        file.setRequestExperienceId(reqId);
+        requestExperienceFileDAO.saveRequestFile(file);
     }
 }

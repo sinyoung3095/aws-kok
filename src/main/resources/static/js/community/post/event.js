@@ -59,11 +59,7 @@ document.body.addEventListener("click", async (e) => {
         const files = writeFiles.files;
 
         if (content.length < 10 && files.length === 0) {
-            const toast = document.getElementById("toast-white");
-            if (toast) {
-                toast.style.display = "flex";
-                setTimeout(() => toast.style.display = "none", 2000);
-            }
+            alert("10자 이상 작성하거나 파일을 추가해주세요.");
             return;
         }
 
@@ -200,10 +196,45 @@ document.body.addEventListener("click", async (e) => {
         }
     });
 
-    // 게시글 신고
-    if (target.closest(".report-1")) {
+    // 게시글 삭제 버튼
+    if (target.closest(".delete-post-btn")) {
         const postCard = target.closest(".post-8");
-        const postId = postCard.dataset.postId;
+        const postId = postCard ? postCard.dataset.postId : document.getElementById("post-detail-modal").dataset.postId;
+
+        if (confirm("정말로 게시글을 삭제하시겠습니까?")) {
+            const success = await postService.remove(postId);
+            if (success) {
+                alert("삭제되었습니다.");
+                location.reload();
+            }
+        }
+        return;
+    }
+
+    // 게시글 수정 버튼
+    if (target.closest(".update-post-btn")) {
+        const postCard = target.closest(".post-8");
+        const postId = postCard ? postCard.dataset.postId : document.getElementById("post-detail-modal").dataset.postId;
+
+        const post = await postService.getOne(postId);
+
+        const updatePopup = document.getElementById("post-update-popup");
+        const textarea = updatePopup.querySelector("#update-postContent");
+        const previewContainer = updatePopup.querySelector(".update-preview-inner");
+
+        textarea.value = post.postContent;
+        previewContainer.innerHTML = "";
+
+        updatePopup.dataset.postId = postId;
+        updatePopup.classList.add("active");
+    }
+
+
+    // 게시글 신고
+    if (target.closest(".report-6")) {
+        const postCard = target.closest(".post-8");
+        const postId = postCard ? postCard.dataset.postId : document.getElementById("post-detail-modal").dataset.postId;
+
         const reportModal = document.querySelector(".report-7");
 
         if (postId && reportModal) {

@@ -1,11 +1,9 @@
 package com.example.kok.service;
 
 import com.example.kok.domain.MemberVO;
-import com.example.kok.dto.FileDTO;
-import com.example.kok.dto.MemberStorageFileDTO;
-import com.example.kok.repository.FileDAO;
-import com.example.kok.repository.MemberDAO;
-import com.example.kok.repository.MemberStorageFileDAO;
+import com.example.kok.dto.*;
+import com.example.kok.repository.*;
+import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +12,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +21,9 @@ public class MemberServiceImpl implements MemberService {
     private final MemberStorageFileDAO memberStorageFileDAO;
     private final S3Service s3Service;
     private final FileDAO fileDAO;
+    private final RequestExperienceDAO requestExperienceDAO;
+    private final RequestInternDAO requestInternDAO;
+    private final CommunityPostDAO  communityPostDAO;
 
     @Override
     public void joinMember(MemberVO memberVO) {
@@ -58,6 +60,31 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public List<FileDTO> findFilesByMemberId(Long memberId) {
         return memberStorageFileDAO.findFilesByMemberId(memberId);
+    }
+
+//    회원 전체조회
+    @Override
+    public List<UserMemberDTO> findUserMembers(int page, String keyword) {
+        Criteria criteria = new Criteria(page, 10);
+        return memberDAO.selectMembers(criteria, keyword);
+    }
+
+//    회원 아이디로 조회
+    @Override
+    public Optional<UserMemberDTO> findMembersByMemberId(Long memberId) {
+        return memberDAO.selectMember(memberId)
+                .map(userMemberDTO -> {
+                    List<RequestExperienceDTO> requestExperiences =
+                            requestExperienceDAO.selectAllRequestById(memberId);
+                    List<RequestInternDTO> requestInterns =
+                            requestInternDAO.selectAllInternById(memberId);
+                    List<PostDTO> posts =
+                            communityPostDAO.findPostById(memberId);
+                    userMemberDTO.setRequestExperiences(requestExperiences);
+                    userMemberDTO.setRequestInterns(requestInterns);
+                    userMemberDTO.setPosts(posts);
+                    return userMemberDTO;
+                });
     }
 
     public String getPath() {

@@ -69,3 +69,6 @@ values ('SW 개발'),
        ('숙박/레저'),
        ('서비스'),
        ('종교인');
+
+insert into tbl_post (post_content, member_id)
+values ('test1', 1);

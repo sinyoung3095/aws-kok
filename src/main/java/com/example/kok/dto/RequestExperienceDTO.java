@@ -15,6 +15,14 @@ public class RequestExperienceDTO {
     private long memberId;
     private long memberAlarmSettingId;
     private long experienceNoticeId;
+    private String companyName;
+    private Double evaluationAvgScore;
+    private String experienceNoticeTitle;
     private String createdDateTime;
     private String updatedDateTime;
+    private String requestExperienceMemberName;
+    private String requestExperienceMemberEmail;
+    private String requestExperienceMemberPhone;
+    private String requestExperienceMemberUrl;
+    private long fileId;
 }

@@ -1,9 +1,11 @@
 package com.example.kok.controller;
 
+import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.service.CommunityReportService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +19,9 @@ public class CommunityReportController {
     private final CommunityReportService communityReportService;
 
     @PostMapping("/{postId}")
-    public ResponseEntity<String> reportPost(@PathVariable Long postId) {
-        Long memberId = 1L; // 임시
+    public ResponseEntity<String> reportPost(@PathVariable Long postId,
+                                             @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        Long memberId = customUserDetails.getId();
 
         boolean existReported = communityReportService.reportPost(postId, memberId);
 

@@ -53,4 +53,9 @@ public class CommunityPostDAO {
     public void decreaseLikesCount(Long id) {
         communityPostMapper.decreaseLikesCount(id);
     }
+
+    //    회원 아이디로 게시물 조회
+    public List<PostDTO> findPostById(Long id) {
+        return communityPostMapper.selectPostById(id);
+    };
 }

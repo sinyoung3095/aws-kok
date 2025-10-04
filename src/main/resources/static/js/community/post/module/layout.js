@@ -22,7 +22,7 @@ const postLayout = (() => {
                             </div>
                         </div>
                         <div class="post-14">
-                            <p class="post-15">${post.jobName}</p>
+                            <p class="post-15">${post.jobName || `-`}</p>
                             <p class="post-15">${post.relativeDate}</p>
                         </div>
                     </div>
@@ -35,8 +35,19 @@ const postLayout = (() => {
                                 <div class="report-2">
                                     <div class="report-3">
                                         <div class="report-4">
-                                            <div class="report-5">
-                                                <p class="report-6">게시물 신고</p>
+                                            <div class="report-5">`;
+            if (post.owner) {
+                text += `
+                    <p class="delete-post-btn">게시글 삭제</p>
+                    <br>
+                    <p class="update-post-btn">게시글 수정</p>`;
+            }
+            else {
+                text += `
+                    <p class="report-6">게시물 신고</p>`;
+                        }
+
+                        text += `
                                             </div>
                                         </div>
                                     </div>
@@ -80,7 +91,7 @@ const postLayout = (() => {
                         <div class="post-22">
                             <button class="post-23 like-btn" data-post-id="${post.id}" data-liked="${post.liked}">
                                 <div class="post-24">
-                                    <svg class="heart" viewBox="0 0 24 24" fill="${post.liked ? 'red' : 'white'}" stroke="red" height="20" role="img" width="20">
+                                    <svg class="heart" viewBox="0 0 24 24" style="fill: ${post.liked ? 'red' : 'white'}; stroke: red;" height="20" role="img" width="20">
                                         <path d="M17.668 16.4c2.028-1.76 4.328-3.755 4.328-6.902a6.07 6.07 0 0 0-5.831-6.274 5.25 5.25 0 0 0-2.296.447l-.267.128a5.3 5.3 0 0 0-1.606 1.274 5.26 5.26 0 0 0-4.161-1.85 6.07 6.07 0 0 0-4.211 1.934l-.2.225a6.07 6.07 0 0 0-1.42 4.116l.005.29c.132 2.968 2.278 4.833 4.353 6.637v.001l.742.65.893.797a39 39 0 0 0 3.057 2.623l.109.065c.22.12.462.193.712.21l.125.005c.293 0 .58-.075.837-.215l.108-.065a39 39 0 0 0 3.151-2.707l.802-.716z"></path>
                                     </svg>
                                 </div>
@@ -126,7 +137,7 @@ const postLayout = (() => {
                         </div>
                     </div>
                     <div class="post-14">
-                        <p class="post-15">${post.jobName}</p>
+                        <p class="post-15">${post.jobName || `-`}</p>
                         <p class="post-15">${post.relativeDate}</p>
                     </div>
                 </div>
@@ -134,20 +145,41 @@ const postLayout = (() => {
                     <button class="post-28" style="width: 70px; color: #e0e0e0; font-size: 15px; font-weight: 500;">
                         <svg class="btn" aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="20" role="img" width="20" >
                             <path clip-rule="evenodd" d="M12 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5m0-4c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5m0 11c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5" fill-rule="evenodd"></path>
-                        </svg>
-                        <div class="report-1">
-                            <div class="report-2">
-                                <div class="report-3">
-                                    <div class="report-4">
-                                        <div class="report-5">
-                                            <p class="delete-post-btn">게시글 삭제</p>
-                                            <br>
-                                            <p class="update-post-btn">게시글 수정</p>
+                        </svg>`;
+
+                    if (post.owner) {
+                        detail += `
+                            <div class="report-1">
+                                <div class="report-2">
+                                    <div class="report-3">
+                                        <div class="report-4">
+                                            <div class="report-5">
+                                                <p class="delete-post-btn">게시글 삭제</p>
+                                                <br>
+                                                <p class="update-post-btn">게시글 수정</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div>`;
+                    }
+
+                    else {
+                        detail += `
+                            <div class="report-1">
+                                <div class="report-2">
+                                    <div class="report-3">
+                                        <div class="report-4">
+                                            <div class="report-5">
+                                                <p class="report-6">게시물 신고</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                    }
+        detail += `
+
                     </button>
                 </div>
             </div>
@@ -186,7 +218,7 @@ const postLayout = (() => {
                     <div class="post-22">
                         <button class="post-23 like-btn" data-post-id="${post.id}" data-liked="${post.liked}">
                             <div class="post-24">
-                                <svg class="heart" viewBox="0 0 24 24" fill="${post.liked ? 'red' : 'white'}" stroke="red" height="20" role="img" width="20">
+                                <svg class="heart" viewBox="0 0 24 24" style="fill:${post.liked ? 'red' : 'white'}; stroke: red;" height="20" role="img" width="20">
                                     <path d="M17.668 16.4c2.028-1.76 4.328-3.755 4.328-6.902a6.07 6.07 0 0 0-5.831-6.274 5.25 5.25 0 0 0-2.296.447l-.267.128a5.3 5.3 0 0 0-1.606 1.274 5.26 5.26 0 0 0-4.161-1.85 6.07 6.07 0 0 0-4.211 1.934l-.2.225a6.07 6.07 0 0 0-1.42 4.116l.005.29c.132 2.968 2.278 4.833 4.353 6.637v.001l.742.65.893.797a39 39 0 0 0 3.057 2.623l.109.065c.22.12.462.193.712.21l.125.005c.293 0 .58-.075.837-.215l.108-.065a39 39 0 0 0 3.151-2.707l.802-.716z"></path>
                                 </svg>
                             </div>
