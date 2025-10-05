@@ -39,7 +39,7 @@ const postService = (() => {
         }
 
         const response = await fetch(`/api/community/${postId}`, {
-            method: "PUT",
+            method: "POST",
             body: formData
         });
 
