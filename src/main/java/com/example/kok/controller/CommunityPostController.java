@@ -12,6 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -23,10 +24,11 @@ public class CommunityPostController {
 
 //    게시글 목록 조회
     @GetMapping("/{page}")
-    public PostsCriteriaDTO getPosts(@PathVariable("page") int page,
-                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    public ResponseEntity<PostsCriteriaDTO> getPosts(@PathVariable("page") int page,
+                                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         Long memberId = customUserDetails.getId();
-        return communityPostService.getList(page, memberId);
+        PostsCriteriaDTO list = communityPostService.getList(page, memberId);
+        return ResponseEntity.ok(list);
     }
 
 //    게시글 조회
@@ -52,12 +54,14 @@ public class CommunityPostController {
     }
 
 //    게시글 수정
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Long id,
                                     @RequestParam("postContent") String postContent,
                                     @RequestParam(value="deleteFiles", required=false) Long[] deleteFiles,
                                     @RequestParam(value="files", required=false) List<MultipartFile> files,
                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+
+        System.out.println("🧪 Controller.deleteFiles = " + (deleteFiles == null ? "null" : Arrays.toString(deleteFiles)));
         PostDTO postDTO = new PostDTO();
         postDTO.setId(id);
         postDTO.setPostContent(postContent);
