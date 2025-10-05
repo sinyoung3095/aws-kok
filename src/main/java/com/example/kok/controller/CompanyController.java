@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
 @Controller
-@RequestMapping("/company/**")
+@RequestMapping("/company")
 @RequiredArgsConstructor
 public class CompanyController {
 
 //    기업 목록
-    @GetMapping("list")
+    @GetMapping("/list")
     public String goToCompanyList() {
         return "company/list";
     }
 
 //    기업 상세
-    @GetMapping("detail")
+    @GetMapping("/detail")
     public String goToCompanyDetail() {
         return "company/detail";
     }
