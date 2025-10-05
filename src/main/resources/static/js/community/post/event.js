@@ -211,25 +211,6 @@ document.body.addEventListener("click", async (e) => {
         return;
     }
 
-    // 게시글 수정 버튼
-    if (target.closest(".update-post-btn")) {
-        const postCard = target.closest(".post-8");
-        const postId = postCard ? postCard.dataset.postId : document.getElementById("post-detail-modal").dataset.postId;
-
-        const post = await postService.getOne(postId);
-
-        const updatePopup = document.getElementById("post-update-popup");
-        const textarea = updatePopup.querySelector("#update-postContent");
-        const previewContainer = updatePopup.querySelector(".update-preview-inner");
-
-        textarea.value = post.postContent;
-        previewContainer.innerHTML = "";
-
-        updatePopup.dataset.postId = postId;
-        updatePopup.classList.add("active");
-    }
-
-
     // 게시글 신고
     if (target.closest(".report-6")) {
         const postCard = target.closest(".post-8");
@@ -348,3 +329,91 @@ document.body.addEventListener("click", async (e) => {
     // 이벤트 바인딩
     input.addEventListener('change', () => addFiles(input.files));
 })();
+
+// 수정 모달 썸네일
+(() => {
+    const input = document.getElementById('btn-update-photo');
+    const previewContainer = document.querySelector('.update-preview-inner');
+
+    const MAX_FILES = 8;
+    const MAX_SIZE = 20 * 1024 * 1024;
+    let fileBuffer = [];
+
+    const toKey = (f) => `${f.name}|${f.size}|${f.lastModified}`;
+
+    const syncInput = () => {
+        const dt = new DataTransfer();
+        fileBuffer.forEach(f => dt.items.add(f));
+        input.files = dt.files;
+    };
+
+    const render = () => {
+        previewContainer.innerHTML = '';
+        fileBuffer.forEach((file, idx) => {
+            const item = document.createElement('div');
+            item.className = 'preview-item';
+
+            if (file.type && file.type.startsWith('image/')) {
+                const img = document.createElement('img');
+                img.className = 'preview-thumb';
+                const reader = new FileReader();
+                reader.onload = (e) => { img.src = e.target.result; };
+                reader.readAsDataURL(file);
+                item.appendChild(img);
+            } else {
+                const box = document.createElement('div');
+                box.className = 'preview-generic';
+                box.textContent = file.name;
+                item.appendChild(box);
+            }
+
+            // 삭제 버튼
+            const rm = document.createElement('button');
+            rm.type = 'button';
+            rm.className = 'preview-remove';
+            rm.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                              <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>`;
+            rm.addEventListener('click', () => {
+                fileBuffer.splice(idx, 1);
+                syncInput();
+                render();
+            });
+
+            item.appendChild(rm);
+            previewContainer.appendChild(item);
+        });
+    };
+
+    const addFiles = (files) => {
+        const existingKeys = new Set(fileBuffer.map(toKey));
+        const arFile = Array.from(files);
+
+        for (const f of arFile) {
+            if (fileBuffer.length >= MAX_FILES) {
+                alert(`최대 ${MAX_FILES}개까지 업로드할 수 있습니다.`);
+                break;
+            }
+            if (f.size > MAX_SIZE) {
+                alert(`"${f.name}" 파일이 용량 제한(20MB)을 초과했습니다.`);
+                continue;
+            }
+            if (existingKeys.has(toKey(f))) {
+                continue;
+            }
+            fileBuffer.push(f);
+            existingKeys.add(toKey(f));
+        }
+        syncInput();
+        render();
+    };
+
+    input.addEventListener('change', () => addFiles(input.files));
+
+    window.resetUpdateFileBuffer = () => {
+        fileBuffer = [];
+        syncInput();
+        render();
+    };
+})();
+
