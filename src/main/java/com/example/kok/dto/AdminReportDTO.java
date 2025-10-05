@@ -7,6 +7,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Getter
 @Setter
@@ -23,4 +25,5 @@ public class AdminReportDTO {
     private Status postStatus;
     private String createdDateTime;
     private String relativeDate;
+    private List<PostFileDTO> postFiles;
 }

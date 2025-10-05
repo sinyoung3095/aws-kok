@@ -97,6 +97,7 @@ public class AdminController {
 //    신고 게시글 삭제
     @GetMapping("notify/post/delete/{id}")
     public RedirectView notifyPostDelete(@PathVariable Long id) {
+        log.info("################ 삭제Controller들어옴 ################");
         adminReportService.deleteReportPost(id);
         return new RedirectView("/admin/notify/post");
     }
