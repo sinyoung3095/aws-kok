@@ -41,13 +41,13 @@ document.addEventListener("click", (e) => {
 });
 
 // 페이지 번호
-pageItemNums.forEach((pageItemNum) => {
-    pageItemNum.addEventListener("click", (e) => {
-        e.preventDefault();
-        pageNums.forEach((pageNum) => pageNum.classList.remove("active"));
-        pageItemNum.parentElement.classList.add("active");
-    });
-});
+// pageItemNums.forEach((pageItemNum) => {
+//     pageItemNum.addEventListener("click", (e) => {
+//         e.preventDefault();
+//         pageNums.forEach((pageNum) => pageNum.classList.remove("active"));
+//         pageItemNum.parentElement.classList.add("active");
+//     });
+// });
 
 // 신고 게시글 상세 모달
 const rows = document.querySelectorAll(".post-detail");

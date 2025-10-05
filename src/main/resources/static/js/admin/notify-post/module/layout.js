@@ -77,12 +77,10 @@ const layout = (() => {
                     </div>
                 </div>
                 <div>
-                    <a th:href="@{/admin/notify/post/delete/{id}(id=${adminReportDTO.id})}">
-                        <button class="post-modal-top-button">
-                            <div class="post-modal-top-icon">
-                                <p class="post-modal-delete">삭제하기</p>
-                            </div>
-                        </button>
+                    <a href="/admin/notify/post/delete/${adminReportDTO.id}" class="post-modal-top-button">
+                        <div class="post-modal-top-icon">
+                            <p class="post-modal-delete">삭제하기</p>
+                        </div>
                     </a>
                 </div>
             </div>
