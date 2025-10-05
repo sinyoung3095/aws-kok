@@ -202,5 +202,5 @@ const commentLayout = (() => {
         commentContainer.innerHTML += text;
     };
 
-    return { showCommentsList };
+    return { showCommentsList : showCommentsList };
 })();

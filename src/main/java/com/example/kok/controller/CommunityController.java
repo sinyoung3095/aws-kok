@@ -34,7 +34,7 @@ public class CommunityController {
         model.addAttribute("latestFour", latestFour);
 
         model.addAttribute("member", customUserDetails);
-        log.info("로그인: {}", customUserDetails);
+//        log.info("로그인: {}", customUserDetails);
 
         return "community/page";
     }
