@@ -52,11 +52,11 @@ public class CommunityPostController {
     }
 
 //    게시글 수정
-    @PostMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Long id,
                                     @RequestParam("postContent") String postContent,
-                                    @RequestParam(value = "deleteFiles", required = false) Long[] deleteFiles,
-                                    @RequestParam(value = "files", required = false) List<MultipartFile> files,
+                                    @RequestParam(value="deleteFiles", required=false) Long[] deleteFiles,
+                                    @RequestParam(value="files", required=false) List<MultipartFile> files,
                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         PostDTO postDTO = new PostDTO();
         postDTO.setId(id);

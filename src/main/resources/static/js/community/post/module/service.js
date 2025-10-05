@@ -33,14 +33,13 @@ const postService = (() => {
     const update = async (postId, postContent, deleteFiles = [], files = []) => {
         const formData = new FormData();
         formData.append("postContent", postContent);
-
         deleteFiles.forEach(id => formData.append("deleteFiles", id));
         for (let i = 0; i < files.length; i++) {
             formData.append("files", files[i]);
         }
 
-        const response = await fetch(`/api/community/update/${postId}`, {
-            method: "POST",
+        const response = await fetch(`/api/community/${postId}`, {
+            method: "PUT",
             body: formData
         });
 
