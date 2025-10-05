@@ -15,7 +15,7 @@ public interface CommunityCommentService {
     public void delete(Long id);
 
 //    게시글 내 댓글 목록
-    public List<CommentDTO> getComments(Long postId);
+    public List<CommentDTO> getComments(Long postId, Long memberId);
 
 //    게시글 내 댓글 갯수
     public int commentsCountByPostId(Long postId);

@@ -26,6 +26,7 @@ const commentLayout = (() => {
                         </div>
                     </div>
                     <!-- 댓글 삭제 -->
+                    ${comment.owner ? `
                     <div class="delete">
                         <button class="post-28" style="width:70px; color:#e0e0e0; font-size:15px; font-weight:500;">
                             <svg class="delbtn" fill="currentColor" height="20" width="20">
@@ -43,14 +44,16 @@ const commentLayout = (() => {
                                     <div class="report-3">
                                         <div class="report-4">
                                             <div class="report-5">
-                                                <p class="report-6">댓글 삭제</p>
+                                                <p class="delete-comment-btn">댓글 삭제</p>
+                                                <br>
+                                                <p class="update-comment-btn">댓글 수정</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </button>
-                    </div>
+                    </div>`:``}
                 </div>
 
                 <!-- 댓글 본문 -->
@@ -105,7 +108,6 @@ const commentLayout = (() => {
                 </div>
             `;
 
-            // ✅ 답글이 있을 때만 답글 목록 렌더링
             if (comment.replies && comment.replies.length > 0) {
                 text += `
                 <div class="comment-contain">
@@ -126,7 +128,7 @@ const commentLayout = (() => {
 
                 comment.replies.forEach(reply => {
                     text += `
-                        <div class="post-13 reply-item" style="padding:8px; border-bottom:none; gap:5px;">
+                        <div class="post-13 reply-item" style="padding:8px; border-bottom:none; gap:5px;" data-reply-id="${reply.id}">
                             <div class="post-9">
                                 <div>
                                     <img alt="image" width="25" height="25"
@@ -144,6 +146,7 @@ const commentLayout = (() => {
                                         <p class="post-15" style="font-size:14px;">${reply.relativeDate}</p>
                                     </div>
                                 </div>
+                                ${reply.owner ? `
                                 <div class="delete">
                                     <button class="delete-2" style="color:#e0e0e0; font-size:15px; font-weight:500;">
                                         <svg class="delbtn-0" fill="currentColor" height="20" width="20">
@@ -161,14 +164,16 @@ const commentLayout = (() => {
                                                 <div class="report-3">
                                                     <div class="report-4">
                                                         <div class="report-5">
-                                                            <p class="report-6">답글 삭제</p>
+                                                            <p class="delete-reply-btn" data-reply-id="${reply.id}">답글 삭제</p>
+                                                            <br>
+                                                            <p class="update-reply-btn" data-reply-id="${reply.id}">답글 수정</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </button>
-                                </div>
+                                </div>`:``}
                             </div>
                             <div class="detail-post-16" style="gap:8px;">
                                 <div class="post-17">
@@ -184,14 +189,13 @@ const commentLayout = (() => {
                 });
 
                 text += `
-                    </div> <!-- reply-list -->
-                </div> <!-- comment-contain -->
+                    </div> 
+                </div> 
                 `;
             }
 
-            // ✅ 댓글 닫기
             text += `
-            </div> <!-- post-8 -->
+            </div> 
             `;
         });
 

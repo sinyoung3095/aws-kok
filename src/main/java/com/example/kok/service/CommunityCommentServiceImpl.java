@@ -39,15 +39,17 @@ public class CommunityCommentServiceImpl implements CommunityCommentService {
 
 //    게시글 내 댓글 목록
     @Override
-    public List<CommentDTO> getComments(Long postId) {
+    public List<CommentDTO> getComments(Long postId, Long memberId) {
         List<CommentDTO> comments = communityCommentDAO.findAll(postId);
 
         comments.forEach(comment -> {
             comment.setRelativeDate(DateUtils.toRelativeTime(comment.getCreatedDateTime()));
+            comment.setOwner(memberId.equals(comment.getMemberId()));
 
             List<ReplyDTO> replies = communityReplyDAO.findAll(comment.getId());
             replies.forEach(reply -> {
                 reply.setRelativeDate(DateUtils.toRelativeTime(reply.getCreatedDateTime()));
+                reply.setOwner(memberId.equals(reply.getMemberId()));
             });
 
             comment.setReplies(replies);

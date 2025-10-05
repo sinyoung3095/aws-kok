@@ -29,8 +29,32 @@ public class CommunityReplyController {
 
 //    대댓글 목록
     @GetMapping("/{commentId}")
-    public ResponseEntity<?> list(@PathVariable Long commentId) {
-        List<ReplyDTO> replies = communityReplyService.getReplies(commentId);
+    public ResponseEntity<?> list(@PathVariable Long commentId, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        Long memberId = customUserDetails.getId();
+        List<ReplyDTO> replies = communityReplyService.getReplies(commentId, memberId);
         return ResponseEntity.ok(replies);
     }
+
+//    대댓글 수정
+    @PutMapping("/{replyId}")
+    public ResponseEntity<?> updateReply(@PathVariable("replyId") Long replyId,
+                                         @RequestBody ReplyDTO replyDTO,
+                                         @AuthenticationPrincipal CustomUserDetails user) {
+
+        log.info("user = {}", user);
+        log.info("replyId = {}", replyId);
+        log.info("replyDTO = {}", replyDTO);
+        replyDTO.setId(replyId);
+        replyDTO.setMemberId(user.getId());
+        communityReplyService.update(replyDTO);
+        return ResponseEntity.ok().build();
+    }
+
+//    대댓글 삭제
+    @DeleteMapping("/{replyId}")
+    public ResponseEntity<?> deleteReply(@PathVariable("replyId") Long replyId) {
+        communityReplyService.delete(replyId);
+        return ResponseEntity.noContent().build();
+    }
+
 }
