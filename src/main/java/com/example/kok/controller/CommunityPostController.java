@@ -12,7 +12,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -61,7 +60,6 @@ public class CommunityPostController {
                                     @RequestParam(value="files", required=false) List<MultipartFile> files,
                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
-        System.out.println("🧪 Controller.deleteFiles = " + (deleteFiles == null ? "null" : Arrays.toString(deleteFiles)));
         PostDTO postDTO = new PostDTO();
         postDTO.setId(id);
         postDTO.setPostContent(postContent);
