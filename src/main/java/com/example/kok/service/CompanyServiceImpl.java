@@ -9,12 +9,14 @@ import com.example.kok.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
     private final CompanyDAO companyDAO;
+    private final S3Service s3Service;
 
 
     @Override
@@ -42,12 +44,29 @@ public class CompanyServiceImpl implements CompanyService {
 //    기업 목록
     @Override
     public CompaniesCriteriaDTO getCompanyList(int page) {
-        int total = companyDAO.findTotalCount();
-        Criteria criteria = new Criteria(page, total);
-
+        Criteria criteria = new Criteria(page, companyDAO.findTotalCount());
         List<CompanyDTO> companies = companyDAO.findCompanies(criteria);
 
-        return new CompaniesCriteriaDTO(companies, criteria);
+        companies.forEach(company -> {
+            company.setCompanyProfileFile(
+                s3Service.getPreSignedUrl(company.getCompanyProfileFile(), Duration.ofMinutes(10))
+            );
+
+            company.setCompanyBackgroundFile(
+                s3Service.getPreSignedUrl(company.getCompanyBackgroundFile(), Duration.ofMinutes(10))
+            );
+        });
+
+        criteria.setHasMore(criteria.getPage() < criteria.getRealEnd());
+        if (criteria.isHasMore() && !companies.isEmpty()) {
+            companies.remove(companies.size() - 1);
+        }
+
+        CompaniesCriteriaDTO companiesCriteriaDTO = new CompaniesCriteriaDTO();
+        companiesCriteriaDTO.setCompanies(companies);
+        companiesCriteriaDTO.setCriteria(criteria);
+
+        return companiesCriteriaDTO;
     }
 
 }

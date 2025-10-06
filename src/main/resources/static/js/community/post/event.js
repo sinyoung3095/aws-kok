@@ -163,9 +163,9 @@ document.body.addEventListener("click", async (e) => {
             }
             try {
                 const postId = await postService.write(content, files);
-                console.log("글쓰기 성공:", postId);
+                // console.log("글쓰기 성공:", postId);
+                popup.classList.remove("active");
             } catch (err) {
-                console.error("업로드 실패:", err.message);
                 alert("업로드를 실패했습니다.");
             }
         } else {
@@ -175,7 +175,7 @@ document.body.addEventListener("click", async (e) => {
             }
             try {
                 const postId = popup.dataset.postId;
-                console.log("게시글 id", postId, "삭제파일 id:", deleteFileIds);
+                // console.log("게시글 id", postId, "삭제파일 id:", deleteFileIds);
                 await postService.update(postId, content, deleteFileIds, files);
                 alert("게시글이 수정되었습니다.");
                 deleteFileIds = [];
@@ -188,7 +188,6 @@ document.body.addEventListener("click", async (e) => {
                 return;
 
             } catch (err) {
-                console.error("수정 실패:", err.message);
                 alert("수정 중 오류가 발생했습니다.");
             }
         }
@@ -242,7 +241,6 @@ document.body.addEventListener("click", async (e) => {
 
             popup.classList.add("active");
         } catch (err) {
-            console.error("수정 모드 불러오기 실패:", err);
             alert("게시글을 불러올 수 없습니다.");
         }
         return;
@@ -267,7 +265,6 @@ document.body.addEventListener("click", async (e) => {
             await showComments(postId);
 
         } catch (err) {
-            console.error("게시글 불러오기 실패:", err);
             alert("게시글을 불러올 수 없습니다.");
         }
         return;
@@ -411,7 +408,6 @@ document.body.addEventListener("click", async (e) => {
             alert("신고가 접수되었습니다.");
             reportModal.style.display = "none";
         } catch (err) {
-            console.error("신고 실패:", err);
             alert(err.message);
             reportModal.style.display = "none";
         }
