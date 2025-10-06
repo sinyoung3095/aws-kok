@@ -5,6 +5,9 @@ const userMenuContent = document.querySelector(".user-menu-content");
 const pageNums = document.querySelectorAll(".page-num");
 const pageItemNums = document.querySelectorAll(".page-item-num");
 
+// 목록
+service.getReportList(layout.showList);
+
 // 사이드바 펼침/접힘
 sideMenuButtons.forEach((menu) => {
     menu.addEventListener("click", function () {
@@ -38,13 +41,13 @@ document.addEventListener("click", (e) => {
 });
 
 // 페이지 번호
-pageItemNums.forEach((pageItemNum) => {
-    pageItemNum.addEventListener("click", (e) => {
-        e.preventDefault();
-        pageNums.forEach((pageNum) => pageNum.classList.remove("active"));
-        pageItemNum.parentElement.classList.add("active");
-    });
-});
+// pageItemNums.forEach((pageItemNum) => {
+//     pageItemNum.addEventListener("click", (e) => {
+//         e.preventDefault();
+//         pageNums.forEach((pageNum) => pageNum.classList.remove("active"));
+//         pageItemNum.parentElement.classList.add("active");
+//     });
+// });
 
 // 신고 게시글 상세 모달
 const rows = document.querySelectorAll(".post-detail");
@@ -63,4 +66,42 @@ modal.addEventListener("click", () => {
 
 modalContent.addEventListener("click", (e) => {
     e.stopPropagation();
+});
+
+
+// 모달 상세
+const reportListContainer = document.querySelector(".table.table-notice tbody");
+reportListContainer.addEventListener("click",async (e)=>{
+
+    modal.style.display = "flex";
+    const clickNum = e.target.closest("tr[data-id]");
+    const id = Number(clickNum.dataset.id);
+
+    // 신고 게시글 상세정보
+    await service.getReportDetail(layout.showDetail, id);
+});
+
+// 목록 페이지 번호
+const pagination = document.querySelector(".pagination.kok-pagination");
+pagination.addEventListener("click", async (e) => {
+    e.preventDefault();
+    await service.getReportList(layout.showList, e.target.dataset.page);
+
+    // 페이지 번호
+    const clickNum = e.target.closest("a[data-page]");
+    const pageNumber = parseInt(clickNum.dataset.page);
+
+    const pageNumsList = pagination.querySelectorAll("li.page-num");
+    pageNumsList.forEach((pageNum) => {
+        pageNum.classList.remove("active");
+    });
+
+    const currentList = Array.from(pageNumsList).find((pageNum) => {
+        const activeList = pageNum.querySelector("a.page-item-num");
+        return activeList && parseInt(activeList.dataset.page) === pageNumber;
+    });
+
+    if(currentList){
+        currentList.classList.add("active");
+    }
 });

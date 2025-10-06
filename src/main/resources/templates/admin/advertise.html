@@ -259,18 +259,8 @@
                                                                 <div class="row">
                                                                     <div class="col">
                                                                         <div class="kok-check d-flex align-items-center undefined" style="cursor: pointer;">
-                                                                            <div class="kok-check-box " tabindex="0" style="width: 20px; height: 20px;">
-                                                                                <i class="mdi mdi-check" style="display: none;"></i>
-                                                                            </div>
-                                                                            <div class="kok-check-content flex-grow-1">승인</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="list-item">
-                                                                <div class="row">
-                                                                    <div class="col">
-                                                                        <div class="kok-check d-flex align-items-center undefined" style="cursor: pointer;">
+                                                                            <input id="cat-await" class="kok-radio-input" type="radio" name="category" value="await" th:checked="${search.category == 'await'}">
+                                                                            <label for="cat-await"></label>
                                                                             <div class="kok-check-box " tabindex="0" style="width: 20px; height: 20px;">
                                                                                 <i class="mdi mdi-check" style="display: none;"></i>
                                                                             </div>
@@ -283,6 +273,22 @@
                                                                 <div class="row">
                                                                     <div class="col">
                                                                         <div class="kok-check d-flex align-items-center undefined" style="cursor: pointer;">
+                                                                            <input id="cat-accept" class="kok-radio-input" type="radio" name="category" value="accept" th:checked="${search.category == 'accept'}">
+                                                                            <label for="cat-accept"></label>
+                                                                            <div class="kok-check-box " tabindex="0" style="width: 20px; height: 20px;">
+                                                                                <i class="mdi mdi-check" style="display: none;"></i>
+                                                                            </div>
+                                                                            <div class="kok-check-content flex-grow-1">승인</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="list-item">
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <div class="kok-check d-flex align-items-center undefined" style="cursor: pointer;">
+                                                                            <input id="cat-reject" class="kok-radio-input" type="radio" name="category" value="reject" th:checked="${search.category == 'reject'}">
+                                                                            <label for="cat-reject"></label>
                                                                             <div class="kok-check-box " tabindex="0" style="width: 20px; height: 20px;">
                                                                                 <i class="mdi mdi-check" style="display: none;"></i>
                                                                             </div>
@@ -304,7 +310,7 @@
                                     <div class="col-auto">
                                         <div class="filter-wrapper filter-search ml-1">
                                             <div class="input-group">
-                                                <input class="form-control flex-grow-1" type="text" placeholder="기업명/광고상태" value="">
+                                                <input class="form-control flex-grow-1" type="text" placeholder="기업명/메인텍스트" value="">
                                                 <div class="input-group-append">
                                                     <button class="btn btn-search">
                                                         <span class="comp-icon icon-magnify" id="icons/ico-search.svg">
@@ -494,5 +500,7 @@
         </div>
     </div>
 </body>
+<script src="/js/admin/advertise/module/service.js"></script>
+<script src="/js/admin/advertise/module/layout.js"></script>
 <script src="/js/admin/advertise/event.js"></script>
 </html>
