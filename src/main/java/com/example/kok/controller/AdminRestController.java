@@ -1,6 +1,7 @@
 package com.example.kok.controller;
 
 import com.example.kok.dto.*;
+import com.example.kok.service.AdminAdvertisementService;
 import com.example.kok.service.AdminReportService;
 import com.example.kok.service.AdminService;
 import com.example.kok.util.Search;
@@ -15,8 +16,9 @@ import org.springframework.web.bind.annotation.*;
 public class AdminRestController {
     private final AdminService adminService;
     private final AdminReportService adminReportService;
+    private final AdminAdvertisementService adminAdvertisementService;
 
-    //    공지 목록
+//    공지 목록
     @GetMapping("support/{page}")
     public AdminNoticeCriteriaDTO list(@PathVariable("page") int page){
         log.info("page = {}", page);
@@ -54,4 +56,17 @@ public class AdminRestController {
         return adminReportService.getReportDetail(id);
     }
 
+//    광고 목록
+    @GetMapping("advertise/{page}")
+    public AdminAdvertisementCriteriaDTO getAdvertisementList(@PathVariable("page") int page,
+                                                              @RequestParam(required = false) Search search){
+        return adminAdvertisementService.advertisementList(page, search);
+    }
+
+//    광고 상세
+    @GetMapping("advertise/detail/{id}")
+    public AdminAdvertisementDTO getAdvertisementDetail(@PathVariable("id")Long id){
+        log.info("id = {}", id);
+        return adminAdvertisementService.advertisementDetail(id);
+    }
 }

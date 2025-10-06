@@ -93,9 +93,13 @@ const layout = (() => {
                     </div>
                     <div class="post-modal-file-wrap">
                         <div class="post-modal-file">
-<!--                            <img alt="" width="0" height="0" sizes="100vw" srcset="" src="/images/mypage/IMG_4127_2025_09_11T05_25_47_988Z.webp" style="color: transparent; border-radius: 8px; height: auto; width: 100%;">-->
-<!--                            <img alt="" width="0" height="0" sizes="100vw" srcset="" src="/images/mypage/1.webp" style="color: transparent; border-radius: 8px; height: auto; width: 100%;">-->
-<!--                            <img alt="" width="0" height="0" sizes="100vw" srcset="" src="/images/mypage/2.webp" style="color: transparent; border-radius: 8px; height: auto; width: 100%;">-->
+<!--                            <img alt="" width="0" height="0" sizes="100vw" srcset="" src="/images/mypage/IMG_4127_2025_09_11T05_25_47_988Z.webp" style="color: transparent; border-radius: 8px; height: auto; width: 100%;">-->`;
+                                if(adminReportDTO.postFiles.postFilePath === undefined) {
+                                    text += ``;
+                                } else {
+                                    text += `<img width="0" height="0" sizes="100vw" src="${adminReportDTO.postFiles.postFilePath}">`;
+                                }
+        text += `
                         </div>
                     </div>
                 </div>

@@ -21,3 +21,10 @@ ALTER TABLE tbl_advertisement RENAME COLUMN end_advertise_datetime TO advertise_
 
 -- 승인 컬럼 추가
 alter table tbl_advertisement add advertisement_request_status request_status not null default 'await';
+
+insert into tbl_advertisement (advertisement_main_text, advertisement_sub_text, advertise_start_datetime, advertise_end_datetime, company_id)
+values ('광고 제목05', '광고 부제목05', '2025-10-06', '2025-10-10', '5');
+
+select * from tbl_advertisement order by id;
+select * from tbl_user;
+select * from tbl_company;

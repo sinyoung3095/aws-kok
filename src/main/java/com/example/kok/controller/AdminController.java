@@ -4,6 +4,7 @@ import com.example.kok.common.exception.PostNotFoundException;
 import com.example.kok.dto.AdminNoticeDTO;
 import com.example.kok.service.AdminReportService;
 import com.example.kok.service.AdminService;
+import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -66,7 +67,8 @@ public class AdminController {
 
 //    배너 - 광고 신청
     @GetMapping("advertise")
-    public String goToAdvertisePage() {
+    public String goToAdvertisePage(Model model) {
+        model.addAttribute("search", new Search());
         return "admin/advertise";
     }
 
@@ -97,7 +99,6 @@ public class AdminController {
 //    신고 게시글 삭제
     @GetMapping("notify/post/delete/{id}")
     public RedirectView notifyPostDelete(@PathVariable Long id) {
-        log.info("################ 삭제Controller들어옴 ################");
         adminReportService.deleteReportPost(id);
         return new RedirectView("/admin/notify/post");
     }

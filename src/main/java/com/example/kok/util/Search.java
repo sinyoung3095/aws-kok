@@ -8,4 +8,5 @@ import lombok.ToString;
 @ToString
 public class Search {
     private String keyword;
+    private String category;
 }

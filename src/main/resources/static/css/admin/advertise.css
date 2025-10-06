@@ -422,6 +422,15 @@ button:not(:disabled) {
     content: "\F012C";
 }
 
+.kok-radio-input {
+    position: absolute !important;
+    opacity: 0;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0,0,0,0);
+    border: 0;
+}
+
 .mdi-timer-sand:before {
     content: "\F051F";
 }

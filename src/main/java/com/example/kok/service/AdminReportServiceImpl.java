@@ -75,15 +75,12 @@ public class AdminReportServiceImpl implements AdminReportService {
 
 //    신고 게시글 삭제
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    @CacheEvict(value="posts", key = "'post_' + #id")
     public void deleteReportPost(Long id) {
-        log.info("################ 삭제Service들어옴 ################");
+        adminReportDAO.deleteReport(id);
+
         List<PostFileDTO> postFiles = communityPostFileDAO.findAllByPostId(id);
         postFiles.forEach((postFile) -> {
             s3Service.deleteFile(postFile.getPostFilePath());
         });
-
-        adminReportDAO.deleteReport(id);
     }
 }
