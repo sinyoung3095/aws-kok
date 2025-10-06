@@ -2,17 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kok.mapper.AdminAdvertisementMapper">
     <sql id="searchCategory">
-        <if test="search.category != null and search.category != ''">
-             and a.advertisement_request_status::text = #{search.category}
+        <if test="category != null and category != ''">
+             and a.advertisement_request_status::text = #{category}
         </if>
     </sql>
 
     <sql id="searchKeyword">
-        <if test="search.keyword != null and search.keyword != ''">
+        <if test="keyword != null and keyword != ''">
             and
             (
-            c.company_name like concat('%', #{search.keyword}, '%') or
-            a.advertisement_main_text like concat('%', #{search.keyword}, '%')
+            c.company_name like concat('%', #{keyword}, '%') or
+            a.advertisement_main_text like concat('%', #{keyword}, '%')
             )
         </if>
     </sql>
@@ -49,13 +49,12 @@
     </select>
 
 <!--  광고 상태 각 개수  -->
-    <select id="countAdvertisementStatus" resultType="AdvertisementStatusCountsDTO">
+    <select id="countAdvertisementStatus" resultType="AdminAdvertisementCountDTO">
         select
-        count(*) filter (where a.advertisement_request_status = 'accept') as acceptCount,
-        count(*) filter (where a.advertisement_request_status = 'await')  as awaitCount,
-        count(*) filter (where a.advertisement_request_status = 'reject') as rejectCount,
-        from tbl_advertisement a
-        <include refid="searchKeyword"/>
+            sum(case when advertisement_request_status = 'accept' then 1 else 0 end) as acceptCount,
+            sum(case when advertisement_request_status = 'await' then 1 else 0 end) as awaitCount,
+            sum(case when advertisement_request_status = 'reject' then 1 else 0 end) as rejectCount
+        FROM tbl_advertisement
     </select>
 
 <!--  광고 상세  -->

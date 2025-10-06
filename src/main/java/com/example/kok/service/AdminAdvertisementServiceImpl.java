@@ -1,10 +1,7 @@
 package com.example.kok.service;
 
 import com.example.kok.common.exception.PostNotFoundException;
-import com.example.kok.dto.AdminAdvertisementCriteriaDTO;
-import com.example.kok.dto.AdminAdvertisementDTO;
-import com.example.kok.dto.AdvertisementBackgroundFileDTO;
-import com.example.kok.dto.PostFileDTO;
+import com.example.kok.dto.*;
 import com.example.kok.repository.AdminAdvertisementDAO;
 import com.example.kok.repository.AdvertisementBackgroundFileDAO;
 import com.example.kok.repository.CommunityPostFileDAO;
@@ -33,10 +30,11 @@ public class AdminAdvertisementServiceImpl implements AdminAdvertisementService 
 
 //    광고 목록
     @Override
-    public AdminAdvertisementCriteriaDTO advertisementList(int page, Search search) {
+    public AdminAdvertisementCriteriaDTO advertisementList(int page, String keyword, String category) {
         AdminAdvertisementCriteriaDTO advertisementCriteriaDTO = new AdminAdvertisementCriteriaDTO();
-        AdminAdvertisementCriteria criteria = new AdminAdvertisementCriteria(page, adminAdvertisementDAO.countAll(search));
-        List<AdminAdvertisementDTO> advertisements = adminAdvertisementDAO.getAdvertisementList(criteria, search);
+        AdminAdvertisementCountDTO countDTO = adminAdvertisementDAO.countStatus();
+        AdminAdvertisementCriteria criteria = new AdminAdvertisementCriteria(page, adminAdvertisementDAO.countAll(keyword, category));
+        List<AdminAdvertisementDTO> advertisements = adminAdvertisementDAO.getAdvertisementList(criteria, keyword, category);
 
         criteria.setHasMore(advertisements.size() > criteria.getRowCount());
         criteria.setHasPreviousPage(page > 1);
@@ -49,6 +47,7 @@ public class AdminAdvertisementServiceImpl implements AdminAdvertisementService 
             advertisements.remove(advertisements.size()-1);
         }
 
+        advertisementCriteriaDTO.setCountDTO(countDTO);
         advertisementCriteriaDTO.setAdvertisements(advertisements);
         advertisementCriteriaDTO.setCriteria(criteria);
         return advertisementCriteriaDTO;

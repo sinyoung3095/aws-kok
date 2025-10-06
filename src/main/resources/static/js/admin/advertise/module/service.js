@@ -1,6 +1,6 @@
 const service = (() => {
-    const getAdvertisementList = async (callback, page = 1, keyword = '') => {
-        const response = await fetch(`/api/advertise/${page}?keyword=${keyword}`);
+    const getAdvertisementList = async (callback, page = 1, keyword = '', category = '') => {
+        const response = await fetch(`/api/advertise/${page}?keyword=${keyword}&category=${category}`);
         const AdminAdvertisementCriteriaDTO = await response.json();
         if(callback){
             callback(AdminAdvertisementCriteriaDTO);
@@ -19,7 +19,7 @@ const service = (() => {
     }
 
     const getAdvertisementDetail = async (callback, id = 1) => {
-        const response = await fetch(`/api/advertise/detail//${id}`);
+        const response = await fetch(`/api/advertise/detail/${id}`);
         const adminAdvertisementDTO = await response.json();
         if(callback){
             callback(adminAdvertisementDTO);

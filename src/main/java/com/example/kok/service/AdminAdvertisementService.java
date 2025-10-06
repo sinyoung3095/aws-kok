@@ -7,7 +7,7 @@ import com.example.kok.util.Search;
 
 public interface AdminAdvertisementService {
 //    광고 목록
-    public AdminAdvertisementCriteriaDTO advertisementList(int page, Search search);
+    public AdminAdvertisementCriteriaDTO advertisementList(int page, String keyword, String category);
 
 //    광고 상세
     public AdminAdvertisementDTO advertisementDetail(Long id);

@@ -24,22 +24,24 @@ public class AdminAdvertisementTests {
 //    Mapper
     @Test
     public void testSelectAllAdvertisementList(){
-        Search search = new Search();
-        search.setKeyword("");
-        search.setCategory("");
-        AdminAdvertisementCriteria criteria = new AdminAdvertisementCriteria(1, adminAdvertisementMapper.countAllAdvertisement(search));
+        String keyword = "";
+        String category = "";
+        AdminAdvertisementCriteria criteria = new AdminAdvertisementCriteria(1, adminAdvertisementMapper.countAllAdvertisement(keyword, category));
         log.info("##################");
-        adminAdvertisementMapper.selectAllAdvertisementList(criteria, search).stream().map(AdminAdvertisementDTO::toString).forEach(log::info);
+        adminAdvertisementMapper.selectAllAdvertisementList(criteria, keyword, category).stream().map(AdminAdvertisementDTO::toString).forEach(log::info);
         log.info("{}", criteria);
-        log.info("{}", search);
     }
 
     @Test
     public void testCountAllAdvertisement(){
-        Search search = new Search();
-        search.setKeyword("");
-        search.setCategory("accept");
-        log.info("전체 개수: {}", adminAdvertisementMapper.countAllAdvertisement(search));
+        String keyword = "";
+        String category = "accept";
+        log.info("전체 개수: {}", adminAdvertisementMapper.countAllAdvertisement(keyword, category));
+    }
+
+    @Test
+    public void testCountAdvertisementStatus(){
+        log.info("상태 개수: {}", adminAdvertisementMapper.countAdvertisementStatus());
     }
 
     @Test
