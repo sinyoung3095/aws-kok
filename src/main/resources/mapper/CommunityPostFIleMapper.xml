@@ -23,11 +23,12 @@
     </select>
 
 <!-- 게시글 파일 경로 조회 -->
-    <select id="selectPostFilePathByPostFileId">
-        select f.file_path
+    <select id="selectPostFilePathByPostFileId" resultType="com.example.kok.dto.PostFileDTO">
+        select f.id as file_id,
+               f.file_path as post_file_path
         from tbl_file f
         join tbl_post_file pf on f.id = pf.file_id
-        and f.id = #{id}
+        and f.id = #{fileId}
     </select>
 
 <!-- 파일 조회 -->
@@ -35,12 +36,16 @@
         select f.id, f.file_name, f.file_path, f.file_size, f.created_datetime, f.updated_datetime, pf.post_id
         from tbl_file f
         join tbl_post_file pf on f.id = pf.file_id
-        where id = #{id}
+        where f.id = #{id}
     </select>
-
 <!-- 파일 삭제 -->
     <delete id="deletePostFile">
         delete from tbl_post_file
         where file_id = #{fileId}
+    </delete>
+
+    <delete id="deleteFile">
+        delete from tbl_file
+        where id = #{fileId}
     </delete>
 </mapper>

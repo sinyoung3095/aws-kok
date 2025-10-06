@@ -19,10 +19,11 @@ public interface CommunityPostFileMapper {
 
 //    조회
     public List<PostFileDTO> selectPostFilesByPostId(@Param("postId") Long postId);
-    public Optional<PostFileDTO> selectPostFilePathByPostFileId(Long postFileId);
+    public Optional<PostFileDTO> selectPostFilePathByPostFileId(@Param("fileId") Long fileId);
     public Optional<PostFileDTO> selectPostFileById(Long id);
 
 //    삭제
-    public void deletePostFile(Long id);
+    public void deletePostFile(@Param("fileId") Long fileId);
+    public void deleteFile(@Param("fileId") Long fileId);
 
 }

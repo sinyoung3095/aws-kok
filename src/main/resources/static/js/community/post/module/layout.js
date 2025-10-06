@@ -22,7 +22,7 @@ const postLayout = (() => {
                             </div>
                         </div>
                         <div class="post-14">
-                            <p class="post-15">${post.jobName || `-`}</p>
+                            <p class="post-15">${post.jobName || '-'}</p>
                             <p class="post-15">${post.relativeDate}</p>
                         </div>
                     </div>
@@ -44,7 +44,7 @@ const postLayout = (() => {
             }
             else {
                 text += `
-                    <p class="report-6">게시물 신고</p>`;
+                    <p class="report-6">게시글 신고</p>`;
                         }
 
                         text += `
@@ -137,7 +137,7 @@ const postLayout = (() => {
                         </div>
                     </div>
                     <div class="post-14">
-                        <p class="post-15">${post.jobName || `-`}</p>
+                        <p class="post-15">${post.jobName || '-'}</p>
                         <p class="post-15">${post.relativeDate}</p>
                     </div>
                 </div>
@@ -171,7 +171,7 @@ const postLayout = (() => {
                                     <div class="report-3">
                                         <div class="report-4">
                                             <div class="report-5">
-                                                <p class="report-6">게시물 신고</p>
+                                                <p class="report-6">게시글 신고</p>
                                             </div>
                                         </div>
                                     </div>

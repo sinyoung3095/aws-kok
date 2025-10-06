@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler({PostNotFoundException.class})
     public RedirectView handlePostNotFoundException(PostNotFoundException e){
-        return new RedirectView("/post/list/1");
+        return new RedirectView("/member/login");
     }
     @ExceptionHandler({MemberNotFoundException.class})
     public RedirectView handleMemberNotFoundException(MemberNotFoundException e){

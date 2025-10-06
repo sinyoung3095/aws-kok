@@ -13,8 +13,8 @@
         from tbl_user u
         join tbl_member m on u.id = m.user_id
         join tbl_post p on m.user_id = p.member_id
-        join tbl_user_job_category ujc on u.id = ujc.user_id
-        join tbl_job_category jc on ujc.job_category = jc.id
+        left join tbl_user_job_category ujc on u.id = ujc.user_id
+        left join tbl_job_category jc on ujc.job_category = jc.id
         where p.post_status = 'active'
         order by created_datetime desc
         limit #{rowCount} offset #{offset}
@@ -40,8 +40,8 @@
         from tbl_user u
                  join tbl_member m on u.id = m.user_id
                  join tbl_post p on m.user_id = p.member_id
-                 join tbl_user_job_category ujc on u.id = ujc.user_id
-                 join tbl_job_category jc on ujc.job_category = jc.id
+                 left join tbl_user_job_category ujc on u.id = ujc.user_id
+                 left join tbl_job_category jc on ujc.job_category = jc.id
         where p.post_status = 'active' and p.id = #{id}
     </select>
 

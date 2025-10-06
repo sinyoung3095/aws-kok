@@ -36,7 +36,10 @@ public class CommunityPostFileDAO {
     }
 
 //    삭제
-    public void deleteById(Long id){
-        communityPostFileMapper.deletePostFile(id);
+    public void deleteById(Long fileId){
+        System.out.println("🧪 DAO.deleteById 호출됨, fileId = " + fileId);
+        communityPostFileMapper.deletePostFile(fileId);
+        communityPostFileMapper.deleteFile(fileId);
     }
+
 }
