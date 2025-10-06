@@ -1,8 +1,9 @@
 const layout = (() => {
     const showList = (adminAdvertisementCriteriaDTO) => {
-        const amountSection = document.querySelector(".amount-box");
+        const amountSection = document.querySelector(".amount-section");
         let amountText = ``;
 
+        const countStatus = adminAdvertisementCriteriaDTO.countDTO
         amountText = `
             <div class="amount-box form-info-box">
                 <div class="revenue-box">
@@ -14,7 +15,7 @@ const layout = (() => {
                             <span class="badge-label">승인</span>
                         </div>
                         <div class="col text-right amount-col">
-                            <span class="span-amount">${}</span>
+                            <span class="span-amount">${countStatus.acceptCount}</span>
                             <span class="amount-unit">건</span>
                         </div>
                     </div>
@@ -30,7 +31,7 @@ const layout = (() => {
                             <span class="badge-label">대기</span>
                         </div>
                         <div class="col text-right amount-col">
-                            <span class="span-amount">1</span>
+                            <span class="span-amount">${countStatus.awaitCount}</span>
                             <span class="amount-unit">건</span>
                         </div>
                     </div>
@@ -46,13 +47,14 @@ const layout = (() => {
                             <span class="badge-label">거절</span>
                         </div>
                         <div class="col text-right amount-col">
-                            <span class="span-amount">1</span>
+                            <span class="span-amount">${countStatus.rejectCount}</span>
                             <span class="amount-unit">건</span>
                         </div>
                     </div>
                 </div>
             </div>
         `;
+        amountSection.innerHTML = amountText;
 
         const advertisementList = document.getElementById("advertisement-list");
         let text = ``;
@@ -87,7 +89,7 @@ const layout = (() => {
             text += `</p>
                     </td>
                     <td class="td-action text-center">
-                        <div class="action-btn">
+                        <div class="action-btn" data-id="${advertisement.id}">
                             <i class="mdi mdi-chevron-right"></i>
                         </div>
                     </td>
@@ -123,5 +125,109 @@ const layout = (() => {
             `;
         }
         pagination.innerHTML = textNumber;
+
+        // 페이지 번호 색상 이벤트
+        const firstNumber = pagination.querySelector("li");
+        if (firstNumber) {
+            firstNumber.classList.add("active");
+        }
     }
-});
+
+    const showDetail = (adminAdvertisementDTO) => {
+        const modalDialog = document.querySelector(".modal-dialog");
+        let text = ``;
+
+        text += `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">${adminAdvertisementDTO.companyName}</div>
+                    <button class="close">
+                        <i class="mdi mdi-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="divider">
+                        <div class="tab-view">
+                            <div class="tab-view-header"></div>
+                            <div class="tab-view-body">
+                                <div style="display: block;">
+                                    <div class="tab-inner tab-detail">
+                                        <div class="info-layout detail-info">
+                                            <div class="info-title justify-content-between">
+                                                <div class="flex-left d-flex">
+                                                    <div class="title">광고 상세정보</div>
+                                                </div>
+                                                <div class="flex-right"></div>
+                                            </div>
+                                            <table class="info-table w-100">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>기업명</th>
+                                                        <td>${adminAdvertisementDTO.companyName}</td>
+                                                        <th>기업ID (이메일)</th>
+                                                        <td>${adminAdvertisementDTO.userEmail}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>대표번호</th>
+                                                        <td>${adminAdvertisementDTO.userPhone}</td>
+                                                        <th>기업URL</th>
+                                                        <td>${adminAdvertisementDTO.companyUrl}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>광고 시작일</th>
+                                                        <td>${adminAdvertisementDTO.advertiseStartDatetime}</td>
+                                                        <th>광고 종료일</th>
+                                                        <td>${adminAdvertisementDTO.advertiseEndDatetime}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>메인 텍스트</th>
+                                                        <td colspan="3">${adminAdvertisementDTO.advertisementMainText}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>서브 텍스트</th>
+                                                        <td colspan="3">${adminAdvertisementDTO.advertisementSubText}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="info-layout detail-info">
+                                            <div class="info-title justify-content-between">
+                                                <div class="flex-left d-flex">
+                                                    <div class="title">이미지</div>
+                                                </div>
+                                                <div class="flex-right"></div>
+                                            </div>
+                                            <!--  배경 이미지  -->`;
+                                            // if(adminAdvertisementDTO.advertisementBackgroundFiles.filePath === undefined) {
+                                            //     text += ``;
+                                            // } else {
+                                            //     text += `<img src="${adminAdvertisementDTO.advertisementBackgroundFiles.filePath}" height="100%" width="100%" alt="">`;
+                                            // }
+        text += `
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">`;
+        if(adminAdvertisementDTO.advertisementRequestStatus === 'await'){
+            text += `
+                <a href="/admin/advertise/accept/${adminAdvertisementDTO.id}">
+                        <button class="btn-apply btn">승인</button>
+                    </a>
+                <a href="/admin/advertise/reject/${adminAdvertisementDTO.id}">
+                    <button class="btn-reject btn">거절</button>
+                </a>
+            `;
+        }
+        text += `
+                </div>
+            </div>
+        `;
+        modalDialog.innerHTML = text;
+    }
+
+    return {showList: showList, showDetail: showDetail};
+})();

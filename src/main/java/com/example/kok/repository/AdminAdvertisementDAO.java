@@ -1,5 +1,6 @@
 package com.example.kok.repository;
 
+import com.example.kok.dto.AdminAdvertisementCountDTO;
 import com.example.kok.dto.AdminAdvertisementDTO;
 import com.example.kok.mapper.AdminAdvertisementMapper;
 import com.example.kok.util.AdminAdvertisementCriteria;
@@ -19,13 +20,18 @@ public class AdminAdvertisementDAO {
 
 //    광고 목록
     public List<AdminAdvertisementDTO> getAdvertisementList(
-            @Param("criteria") AdminAdvertisementCriteria criteria, @Param("search") Search search) {
-        return adminAdvertisementMapper.selectAllAdvertisementList(criteria, search);
+            @Param("criteria") AdminAdvertisementCriteria criteria, @Param("keyword") String keyword, @Param("category") String category) {
+        return adminAdvertisementMapper.selectAllAdvertisementList(criteria, keyword, category);
     }
 
 //    광고 개수
-    public int countAll(@Param("search") Search search) {
-        return adminAdvertisementMapper.countAllAdvertisement(search);
+    public int countAll(@Param("keyword") String keyword, @Param("category") String category) {
+        return adminAdvertisementMapper.countAllAdvertisement(keyword, category);
+    }
+
+//    광고 상태 개수
+    public AdminAdvertisementCountDTO countStatus() {
+        return adminAdvertisementMapper.countAdvertisementStatus();
     }
 
 //    광고 상세
