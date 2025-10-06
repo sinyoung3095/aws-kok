@@ -3,8 +3,11 @@ package com.example.kok.repository;
 import com.example.kok.domain.CompanyVO;
 import com.example.kok.dto.CompanyDTO;
 import com.example.kok.mapper.CompanyMapper;
+import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -39,4 +42,14 @@ public class CompanyDAO {
     public void saveCompany(CompanyDTO  companyDTO){
         companyMapper.insertCompany(companyDTO);
     };
+
+//    기업 목록
+    public List<CompanyDTO> findCompanies(Criteria criteria) {
+        return companyMapper.selectCompanyAll(criteria);
+    }
+
+//    기업 수
+    public int findTotalCount() {
+        return companyMapper.selectCompanyCount();
+    }
 }
