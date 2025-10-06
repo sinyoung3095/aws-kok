@@ -2,6 +2,7 @@ package com.example.kok.repository;
 
 import com.example.kok.dto.AdminAdvertisementDTO;
 import com.example.kok.mapper.AdminAdvertisementMapper;
+import com.example.kok.util.AdminAdvertisementCriteria;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class AdminAdvertisementDAO {
 
 //    광고 목록
     public List<AdminAdvertisementDTO> getAdvertisementList(
-            @Param("criteria") Criteria criteria, @Param("search") Search search) {
+            @Param("criteria") AdminAdvertisementCriteria criteria, @Param("search") Search search) {
         return adminAdvertisementMapper.selectAllAdvertisementList(criteria, search);
     }
 

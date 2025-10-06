@@ -1,6 +1,8 @@
 package com.example.kok.mapper;
 
+import com.example.kok.dto.AdminAdvertisementCountDTO;
 import com.example.kok.dto.AdminAdvertisementDTO;
+import com.example.kok.util.AdminAdvertisementCriteria;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.Search;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,10 +15,13 @@ import java.util.Optional;
 public interface AdminAdvertisementMapper {
 //    광고 목록
     public List<AdminAdvertisementDTO> selectAllAdvertisementList(
-            @Param("criteria") Criteria criteria, @Param("search") Search search);
+            @Param("criteria") AdminAdvertisementCriteria criteria, @Param("search") Search search);
 
 //    광고 개수
     public int countAllAdvertisement(@Param("search") Search search);
+
+//    광고 상태 개수
+    public AdminAdvertisementCountDTO countAdvertisementStatus(@Param("search") Search search);
 
 //    광고 상세
     public Optional<AdminAdvertisementDTO> selectAdvertisementById(Long id);

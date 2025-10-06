@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kok.mapper.AdminAdvertisementMapper">
-    <sql id="search">
-        <if test="search.keyword != null">
+    <sql id="searchCategory">
+        <if test="search.category != null and search.category != ''">
+             and a.advertisement_request_status::text = #{search.category}
+        </if>
+    </sql>
+
+    <sql id="searchKeyword">
+        <if test="search.keyword != null and search.keyword != ''">
             and
-            <choose>
-                <when test="search.category == 'accept'.toString()">
-                    a.advertisement_request_status like concat('%', #{search.keyword}, '%')
-                </when>
-                <when test="search.category == 'await'.toString()">
-                    a.advertisement_request_status like concat('%', #{search.keyword}, '%')
-                </when>
-                <when test="search.category == 'reject'.toString()">
-                    a.advertisement_request_status like concat('%', #{search.keyword}, '%')
-                </when>
-                <otherwise>
-                    (
-                    c.company_name like concat('%', #{search.keyword}, '%') or
-                    a.advertisement_main_text like concat('%', #{search.keyword}, '%')
-                    )
-                </otherwise>
-            </choose>
+            (
+            c.company_name like concat('%', #{search.keyword}, '%') or
+            a.advertisement_main_text like concat('%', #{search.keyword}, '%')
+            )
         </if>
     </sql>
 
@@ -39,7 +32,8 @@
         from tbl_advertisement a
             join tbl_company c
                 on a.company_id = c.user_id
-        <include refid="search"/>
+        <include refid="searchCategory"/>
+        <include refid="searchKeyword"/>
         order by a.id desc
         limit #{criteria.count} offset #{criteria.offset}
     </select>
@@ -50,7 +44,18 @@
         from tbl_advertisement a
              join tbl_company c
                   on a.company_id = c.user_id
-        <include refid="search"/>
+        <include refid="searchCategory"/>
+        <include refid="searchKeyword"/>
+    </select>
+
+<!--  광고 상태 각 개수  -->
+    <select id="countAdvertisementStatus" resultType="AdvertisementStatusCountsDTO">
+        select
+        count(*) filter (where a.advertisement_request_status = 'accept') as acceptCount,
+        count(*) filter (where a.advertisement_request_status = 'await')  as awaitCount,
+        count(*) filter (where a.advertisement_request_status = 'reject') as rejectCount,
+        from tbl_advertisement a
+        <include refid="searchKeyword"/>
     </select>
 
 <!--  광고 상세  -->

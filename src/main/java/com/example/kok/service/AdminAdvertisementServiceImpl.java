@@ -8,6 +8,7 @@ import com.example.kok.dto.PostFileDTO;
 import com.example.kok.repository.AdminAdvertisementDAO;
 import com.example.kok.repository.AdvertisementBackgroundFileDAO;
 import com.example.kok.repository.CommunityPostFileDAO;
+import com.example.kok.util.AdminAdvertisementCriteria;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.DateUtils;
 import com.example.kok.util.Search;
@@ -34,7 +35,7 @@ public class AdminAdvertisementServiceImpl implements AdminAdvertisementService 
     @Override
     public AdminAdvertisementCriteriaDTO advertisementList(int page, Search search) {
         AdminAdvertisementCriteriaDTO advertisementCriteriaDTO = new AdminAdvertisementCriteriaDTO();
-        Criteria criteria = new Criteria(page, adminAdvertisementDAO.countAll(search));
+        AdminAdvertisementCriteria criteria = new AdminAdvertisementCriteria(page, adminAdvertisementDAO.countAll(search));
         List<AdminAdvertisementDTO> advertisements = adminAdvertisementDAO.getAdvertisementList(criteria, search);
 
         criteria.setHasMore(advertisements.size() > criteria.getRowCount());

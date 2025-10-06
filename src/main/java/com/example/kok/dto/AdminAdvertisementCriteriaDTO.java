@@ -1,5 +1,6 @@
 package com.example.kok.dto;
 
+import com.example.kok.util.AdminAdvertisementCriteria;
 import com.example.kok.util.Criteria;
 import lombok.*;
 import org.springframework.stereotype.Component;
@@ -13,5 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class AdminAdvertisementCriteriaDTO {
     private List<AdminAdvertisementDTO> advertisements;
-    private Criteria criteria;
+    private AdminAdvertisementCriteria criteria;
+
+    private AdminAdvertisementCountDTO countDTO;
 }

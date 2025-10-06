@@ -338,7 +338,7 @@
                                             <th class="td-action">상세</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="">
+                                    <tbody id="advertisement-list" class="">
                                         <tr>
                                             <td class="td-name">
                                                 <p>코리아IT</p>
@@ -354,7 +354,7 @@
                                             </td>
                                             <td class="td-end">
                                                 <p>2025/09/27</p>
-                                            </td>  
+                                            </td>
                                             <td class="td-status">
                                                 <p>승인</p>
                                             </td>
@@ -379,7 +379,7 @@
                                             </td>
                                             <td class="td-end">
                                                 <p>2025/09/27</p>
-                                            </td>  
+                                            </td>
                                             <td class="td-status">
                                                 <p>대기</p>
                                             </td>
@@ -404,7 +404,7 @@
                                             </td>
                                             <td class="td-end">
                                                 <p>2025/09/27</p>
-                                            </td>  
+                                            </td>
                                             <td class="td-status">
                                                 <p>거절</p>
                                             </td>
@@ -416,10 +416,19 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <!-- 페이지 번호 -->
+                                <nav class="kok-pagination-wrapper mt-5 mb-4">
+                                    <ul class="pagination kok-pagination">
+                                        <!-- 페이지 번호 배치 -->
+                                    </ul>
+                                    <div class="pagination-desc">
+                                    </div>
+                                </nav>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--  모달  -->
                 <div class="modal fade member-modal" style="display: none;">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">

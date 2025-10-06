@@ -3,6 +3,7 @@ package com.example.kok.mapper;
 import com.example.kok.dto.AdminAdvertisementDTO;
 import com.example.kok.repository.AdminAdvertisementDAO;
 import com.example.kok.service.AdminAdvertisementService;
+import com.example.kok.util.AdminAdvertisementCriteria;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.Search;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,7 @@ public class AdminAdvertisementTests {
         Search search = new Search();
         search.setKeyword("");
         search.setCategory("");
-        Criteria criteria = new Criteria(1, adminAdvertisementMapper.countAllAdvertisement(search));
+        AdminAdvertisementCriteria criteria = new AdminAdvertisementCriteria(1, adminAdvertisementMapper.countAllAdvertisement(search));
         log.info("##################");
         adminAdvertisementMapper.selectAllAdvertisementList(criteria, search).stream().map(AdminAdvertisementDTO::toString).forEach(log::info);
         log.info("{}", criteria);
@@ -37,7 +38,7 @@ public class AdminAdvertisementTests {
     public void testCountAllAdvertisement(){
         Search search = new Search();
         search.setKeyword("");
-        search.setCategory("");
+        search.setCategory("accept");
         log.info("전체 개수: {}", adminAdvertisementMapper.countAllAdvertisement(search));
     }
 
