@@ -2,12 +2,13 @@
 let page = 1;
 let checkScroll = true;
 let companiesCriteria;
+let SearchCompanies  = {};
 
 const showList = async (page = 1) => {
     const loading = document.getElementById("loading");
     if (loading) loading.style.display = "block";
 
-    companiesCriteria = await companyService.getList(page, companyLayout.showList);
+    companiesCriteria = await companyService.getList(page, companyLayout.showList, SearchCompanies);
 
     if (loading) setTimeout(() => (loading.style.display = "none"), 500);
     return companiesCriteria;
@@ -25,6 +26,52 @@ window.addEventListener("scroll", async () => {
         }, 800);
     }
 });
+
+// 검색 조건에 맞춰 기업 목록을 다시 불러오는 함수
+async function fetchCompanies(page = 1) {
+    const keywordInput = document.querySelector("#keyword-input");
+    const keyword = keywordInput.value.trim();
+
+    // 산업 분야 (두 번째 search-item)
+    const industryBtns = document.querySelectorAll(
+        ".search-item:nth-child(2) .dropdown-btn.active"
+    );
+    const industries = Array.from(industryBtns).map(btn => btn.textContent.trim());
+
+    // 기업 규모 (세 번째 search-item)
+    const scaleBtns = document.querySelectorAll(
+        ".search-item:nth-child(3) .dropdown-btn.active"
+    );
+    const scales = Array.from(scaleBtns).map(btn => btn.querySelector("p").textContent.trim());
+
+    // 백엔드에 보낼 검색 파라미터 객체
+    SearchCompanies = {
+        keyword: keyword || "",
+        job: industries.length > 0 ? industries.join(",") : "",
+        scale: scales.length > 0 ? scales.join(",") : ""
+    };
+
+    // console.log("검색 내용", SearchCompanies);
+
+    // 검색 시 페이지와 기존 목록 초기화
+    page = 1;
+    const listContainer = document.querySelector(".list-container");
+    listContainer.innerHTML = "";
+
+    // API 호출
+    companiesCriteria = await companyService.getList(
+        page,
+        (data) => {
+            companyLayout.showList(data, true)
+            // console.log("layout 불러올 데이터", data);
+        },
+        SearchCompanies
+    );
+
+    checkScroll = true;
+
+    // console.log("검색 결과", companiesCriteria);
+}
 
 // 서치 드롭다운 옵션 버튼 클릭 시 active 클래스 토글 및 전체 선택 상태 업데이트
 function searchDropdownFn() {
@@ -216,7 +263,7 @@ function keywordInputValidate() {
     if (searchButton) {
         searchButton.addEventListener("click", (e) => {
             if (checkKeywordLength(e)) {
-                fetchExperiences();
+                fetchCompanies();
             }
         });
     }
@@ -226,7 +273,7 @@ function keywordInputValidate() {
         if (e.key === "Enter") {
             e.preventDefault();
             if (checkKeywordLength(e)) {
-                fetchExperiences();
+                fetchCompanies();
             }
         }
     });

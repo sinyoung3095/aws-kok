@@ -2,8 +2,11 @@ package com.example.kok.mapper;
 
 import com.example.kok.domain.CompanyVO;
 import com.example.kok.dto.CompanyDTO;
+import com.example.kok.util.CompanySearch;
 import com.example.kok.util.Criteria;
+import com.example.kok.util.Search;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,8 +26,8 @@ public interface CompanyMapper {
     public void insertCompany(CompanyDTO  companyDTO);
 
 //    기업 목록
-    public List<CompanyDTO> selectCompanyAll(Criteria criteria);
+    public List<CompanyDTO> selectCompanyAll(@Param("criteria") Criteria criteria, @Param("search") CompanySearch search);
 
 //    기업 수
-    public int selectCompanyCount();
+    public int selectCompanyCount(@Param("search") CompanySearch search);
 }

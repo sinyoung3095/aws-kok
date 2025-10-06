@@ -1,6 +1,7 @@
 package com.example.kok.controller;
 
 import com.example.kok.service.CompanyService;
+import com.example.kok.util.CompanySearch;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -17,12 +18,13 @@ public class CompanyController {
 
 //    기업 목록
     @GetMapping("/list")
-    public String goToCompanyList(Model model) {
-        model.addAttribute("companies", companyService.getCompanyList(1).getCompanies());
+    public String goToCompanyList(Model model, CompanySearch search) {
+        model.addAttribute("companies", companyService.getCompanyList(1, search).getCompanies());
         return "company/list";
     }
 
-//    기업 상세
+
+    //    기업 상세
     @GetMapping("/detail")
     public String goToCompanyDetail() {
         return "company/detail";

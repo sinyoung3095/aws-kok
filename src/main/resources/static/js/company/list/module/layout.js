@@ -1,7 +1,19 @@
 const companyLayout = (() => {
-    const showList = (companiesCriteria) => {
+    const showList = (companiesCriteria, search = false) => {
         const listContainer = document.querySelector('.list-container');
         let text = ``;
+
+        if (!companiesCriteria.companies || companiesCriteria.companies.length === 0) {
+            if (search) {
+                listContainer.innerHTML = `
+                    <div class="no-data">
+                        <p class="title">조건에 맞는 기업이 없습니다.</p>
+                        <p class="description">조건을 변경하여 다시 검색해 보세요.</p>
+                    </div>
+                `;
+            }
+            return;
+        }
 
         companiesCriteria.companies.forEach((company) => {
             text += `
@@ -15,7 +27,7 @@ const companyLayout = (() => {
                             <img src="${company.companyProfileFile || `/images/mypage/logo_1757380047672.webp`}">
                         </div>
                         <div class="list-item-content">
-                            <p class="list-item-category">${company.scaleName || '직군'}</p>
+                            <p class="list-item-category">${company.companySectorName || '산업분야'}</p>
                             <p class="list-item-name">${company.companyName}</p>
                             <p class="list-item-description">${company.companyInfo || '기업소개'}</p>
                         </div>
@@ -24,7 +36,11 @@ const companyLayout = (() => {
             </div>`;
         });
 
-        listContainer.innerHTML += text;
+        if (search) {
+            listContainer.innerHTML = text;
+        } else {
+            listContainer.innerHTML += text;
+        }
     };
 
     return { showList : showList };
