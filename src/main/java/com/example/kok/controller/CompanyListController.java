@@ -4,6 +4,7 @@ import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.CompaniesCriteriaDTO;
 import com.example.kok.dto.PostsCriteriaDTO;
 import com.example.kok.service.CompanyService;
+import com.example.kok.util.CompanySearch;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class CompanyListController {
 
 //    기업 목록
     @GetMapping("/{page}")
-    public CompaniesCriteriaDTO getCompanyList(@PathVariable("page") int page) {
-        return companyService.getCompanyList(page);
+    public CompaniesCriteriaDTO getCompanyList(@PathVariable("page") int page, CompanySearch search) {
+        return companyService.getCompanyList(page, search);
     }
 }

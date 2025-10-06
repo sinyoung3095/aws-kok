@@ -2,6 +2,7 @@ package com.example.kok.service;
 
 import com.example.kok.dto.CompaniesCriteriaDTO;
 import com.example.kok.dto.CompanyDTO;
+import com.example.kok.util.CompanySearch;
 
 public interface CompanyService {
 
@@ -9,5 +10,5 @@ public interface CompanyService {
     public CompanyDTO findCompanyById(Long companyId);
 
 //    기업 목록
-    public CompaniesCriteriaDTO getCompanyList(int page);
+    public CompaniesCriteriaDTO getCompanyList(int page, CompanySearch search);
 }

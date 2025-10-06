@@ -4,6 +4,7 @@ import com.example.kok.dto.CompaniesCriteriaDTO;
 import com.example.kok.dto.CompanyDTO;
 import com.example.kok.dto.ReplyDTO;
 import com.example.kok.repository.CompanyDAO;
+import com.example.kok.util.CompanySearch;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.DateUtils;
 import lombok.RequiredArgsConstructor;
@@ -43,9 +44,12 @@ public class CompanyServiceImpl implements CompanyService {
 
 //    기업 목록
     @Override
-    public CompaniesCriteriaDTO getCompanyList(int page) {
-        Criteria criteria = new Criteria(page, companyDAO.findTotalCount());
-        List<CompanyDTO> companies = companyDAO.findCompanies(criteria);
+    public CompaniesCriteriaDTO getCompanyList(int page, CompanySearch search) {
+//        System.out.println("검색 한 내용 " + search);
+
+        Criteria criteria = new Criteria(page, companyDAO.findTotalCount(search));
+        List<CompanyDTO> companies = companyDAO.findCompanies(criteria, search);
+//        System.out.println("기업들" + companies);
 
         companies.forEach(company -> {
             company.setCompanyProfileFile(
