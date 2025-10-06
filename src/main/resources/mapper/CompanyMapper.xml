@@ -51,23 +51,45 @@
         values (#{userId},#{companyName})
     </insert>
 
-    <!-- 기업 목록 -->
+
+<!-- 기업 검색 -->
+    <sql id="search">
+        <if test="search.keyword != null and search.keyword != ''">
+            and c.company_name like concat('%', #{search.keyword}, '%')
+        </if>
+        <if test="search.job != null and search.job != ''">
+            and cs.company_sector_name = #{search.job}
+        </if>
+        <if test="search.scale != null and search.scale != ''">
+            and csc.company_scale_name = #{search.scale}
+        </if>
+    </sql>
+
+<!-- 기업 목록 -->
     <select id="selectCompanyAll">
-        select c.user_id, c.company_name, c.company_info, f.file_path, csc.company_scale_name, cs.company_sector_name
+        select c.user_id, c.company_name, c.company_info, background_file.file_path as companyBackgroundFile, profile_file.file_path as companyProfileFile, csc.company_scale_name, cs.company_sector_name
         from tbl_company c
                  join tbl_user u on c.user_id = u.id
-                 left join tbl_company_background_file cbf on c.user_id = cbf.company_id
-                 left join tbl_file f on cbf.file_id = f.id
+                 join tbl_company_profile_file cpf on c.user_id = cpf.company_id
+                 join tbl_file profile_file on cpf.file_id = profile_file.id
+                 join tbl_company_background_file cbf on c.user_id = cbf.company_id
+                 join tbl_file background_file on cbf.file_id = background_file.id
                  left join tbl_company_sector_category csec on c.user_id = csec.company_id
                  left join tbl_company_sector cs on csec.company_sector_id = cs.id
                  left join tbl_company_scale_category_bridge cscb on c.user_id = cscb.company_id
                  left join tbl_company_scale_category csc on cscb.company_scale_category_id = csc.id
+        <include refid="search"/>
         limit #{rowCount} offset #{offset}
     </select>
 
-    <!-- 기업 수 -->
+<!-- 기업 수 -->
     <select id="selectCompanyCount" resultType="int">
         select count(*)
-        from tbl_company
+        from tbl_company c
+        left join tbl_company_sector_category csec on c.user_id = csec.company_id
+        left join tbl_company_sector cs on csec.company_sector_id = cs.id
+        left join tbl_company_scale_category_bridge cscb on c.user_id = cscb.company_id
+        left join tbl_company_scale_category csc on cscb.company_scale_category_id = csc.id
+        <include refid="search"/>
     </select>
 </mapper>

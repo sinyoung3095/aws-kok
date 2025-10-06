@@ -6,3 +6,13 @@ CREATE TABLE tbl_company_profile_file (
     constraint fk_company_profile_file_company foreign key(company_id)
         references tbl_company(user_id)
 );
+
+select * from tbl_company_profile_file;
+select * from tbl_company_background_file;
+select * from tbl_file;
+insert into tbl_company_profile_file (file_id, company_id)
+values (62, 9);
+insert into tbl_company_background_file (file_id, company_id)
+values (56, 9);
+
+select * from tbl_company;

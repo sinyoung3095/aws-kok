@@ -56,7 +56,7 @@ public class CommunityPostServiceImpl implements CommunityPostService {
             post.setCommentsCount(communityCommentService.commentsCountByPostId(post.getId()));
             List<PostFileDTO> postFiles = communityPostFileDAO.findAllByPostId(post.getId());
             postFiles.forEach(postFile -> {
-                postFile.setPostFilePath(s3Service.getPreSignedUrl(postFile.getPostFilePath(), Duration.ofMinutes(5)));
+                postFile.setPostFilePath(s3Service.getPreSignedUrl(postFile.getPostFilePath(), Duration.ofMinutes(10)));
             });
             post.setPostFiles(postFiles);
 
