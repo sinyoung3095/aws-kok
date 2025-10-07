@@ -2,6 +2,7 @@ package com.example.kok.controller;
 
 import com.example.kok.dto.*;
 import com.example.kok.service.AdminAdvertisementService;
+import com.example.kok.service.AdminBannerService;
 import com.example.kok.service.AdminReportService;
 import com.example.kok.service.AdminService;
 import com.example.kok.util.Search;
@@ -17,6 +18,7 @@ public class AdminRestController {
     private final AdminService adminService;
     private final AdminReportService adminReportService;
     private final AdminAdvertisementService adminAdvertisementService;
+    private final AdminBannerService adminBannerService;
 
 //    공지 목록
     @GetMapping("support/{page}")
@@ -69,5 +71,14 @@ public class AdminRestController {
     public AdminAdvertisementDTO getAdvertisementDetail(@PathVariable("id")Long id){
         log.info("id = {}", id);
         return adminAdvertisementService.advertisementDetail(id);
+    }
+
+//    현수막
+    @GetMapping("banner/{page}")
+    public BannerFileCriteriaDTO getBanner(@PathVariable("page") int page, Long id){
+        log.info("page = {}", page);
+//        BannerFileDTO bannerFileDTO = adminBannerService.selectAllFiles(id);
+//        adminBannerService.setPreSignedUrl(bannerFileDTO);
+        return adminBannerService.bannerList(page);
     }
 }
