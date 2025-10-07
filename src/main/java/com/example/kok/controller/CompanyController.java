@@ -32,11 +32,4 @@ public class CompanyController {
         model.addAttribute("company", company);
         return "company/detail";
     }
-
-
-//    기업 상세 임시
-    @GetMapping("/detail")
-    public String goToCompanyDetail() {
-        return "company/detail";
-    }
 }
