@@ -4,8 +4,6 @@ import com.example.kok.dto.AdminAdvertisementDTO;
 import com.example.kok.repository.AdminAdvertisementDAO;
 import com.example.kok.service.AdminAdvertisementService;
 import com.example.kok.util.AdminAdvertisementCriteria;
-import com.example.kok.util.Criteria;
-import com.example.kok.util.Search;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
