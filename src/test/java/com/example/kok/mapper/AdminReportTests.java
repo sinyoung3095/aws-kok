@@ -83,8 +83,8 @@ public class AdminReportTests {
 
     @Test
     public void testGetReportDetail(){
-        Long id = 31L;
-        log.info("31번 게시글: {}", adminReportService.getReportDetail(id));
+        Long id = 38L;
+        log.info("38번 게시글: {}", adminReportService.getReportDetail(id).getPostFiles());
     }
 
     @Test
