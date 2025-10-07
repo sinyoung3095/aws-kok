@@ -296,6 +296,14 @@ div.search-area{
     gap: 16px;
 }
 
+div.search-area.ad div.search-div{
+    max-width: inherit;
+}
+
+div.search-area.ad button.search-status-btn {
+    margin-inline-end: 0;
+}
+
 div.search-div{
     flex: 1;
     max-width: 384px;

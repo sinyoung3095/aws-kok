@@ -15,8 +15,10 @@ const showList = async (page = 1) => {
 };
 showList(page);
 
-window.addEventListener("scroll", async () => {
-    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 100) {
+const scrollContainer = document.querySelector(".list-container.pd-0");
+
+scrollContainer.addEventListener("scroll", async () => {
+    if (scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 100) {
         if (checkScroll) {
             companiesCriteria = await showList(++page);
             checkScroll = false;
@@ -32,11 +34,13 @@ async function fetchCompanies(page = 1) {
     const keywordInput = document.querySelector("#keyword-input");
     const keyword = keywordInput.value.trim();
 
+    // 산업 분야 (두 번째 search-item)
     const industryBtns = document.querySelectorAll(
         ".search-item:nth-child(2) .dropdown-btn.active"
     );
     const industries = Array.from(industryBtns).map(btn => btn.textContent.trim());
 
+    // 기업 규모 (세 번째 search-item)
     const scaleBtns = document.querySelectorAll(
         ".search-item:nth-child(3) .dropdown-btn.active"
     );

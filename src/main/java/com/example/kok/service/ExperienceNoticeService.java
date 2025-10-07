@@ -1,9 +1,6 @@
 package com.example.kok.service;
 
-import com.example.kok.dto.CompanyProfileFileDTO;
-import com.example.kok.dto.ExperienceNoticeCriteriaDTO;
-import com.example.kok.dto.ExperienceNoticeDTO;
-import com.example.kok.dto.SaveExperienceNoticeDTO;
+import com.example.kok.dto.*;
 import com.example.kok.util.Search;
 
 import java.util.List;
@@ -30,4 +27,7 @@ public interface ExperienceNoticeService {
 
 //    공고 저장 여부 판별
     public boolean isSavedExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO);
+
+//    기업별 체험 공고
+    public CompanyExperienceNoticeCriteriaDTO getNoticesByCompanyId(int page, Long companyId, Search search);
 }
