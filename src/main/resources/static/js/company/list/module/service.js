@@ -4,6 +4,7 @@ const companyService = (() => {
 
         const contexts = [];
         // push : 조건이 있는 검색 파라미터만 골라서 배열에 모으는 역할
+        // encodeURIComponent : 검색 파라미터를 URL에 안전하게 넣기 위해 사용하는 함수
         if (searchCompanies.keyword && searchCompanies.keyword.trim() !== "") {
             contexts.push(`keyword=${encodeURIComponent(searchCompanies.keyword)}`);
         }

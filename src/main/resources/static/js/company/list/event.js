@@ -32,13 +32,11 @@ async function fetchCompanies(page = 1) {
     const keywordInput = document.querySelector("#keyword-input");
     const keyword = keywordInput.value.trim();
 
-    // 산업 분야 (두 번째 search-item)
     const industryBtns = document.querySelectorAll(
         ".search-item:nth-child(2) .dropdown-btn.active"
     );
     const industries = Array.from(industryBtns).map(btn => btn.textContent.trim());
 
-    // 기업 규모 (세 번째 search-item)
     const scaleBtns = document.querySelectorAll(
         ".search-item:nth-child(3) .dropdown-btn.active"
     );
