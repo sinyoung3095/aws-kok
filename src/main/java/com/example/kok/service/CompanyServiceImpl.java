@@ -27,13 +27,25 @@ public class CompanyServiceImpl implements CompanyService {
             return null;
         }
 
-        Integer followerCount = companyDAO.findFollowCount(companyId);
+        if (company.getCompanyProfileFile() != null) {
+            company.setCompanyProfileFile(
+                    s3Service.getPreSignedUrl(company.getCompanyProfileFile(), Duration.ofMinutes(10))
+            );
+        }
+
+        if (company.getCompanyBackgroundFile() != null) {
+            company.setCompanyBackgroundFile(
+                    s3Service.getPreSignedUrl(company.getCompanyBackgroundFile(), Duration.ofMinutes(10))
+            );
+        }
+
+        int followerCount = companyDAO.findFollowCount(companyId);
         company.setFollowerCount(followerCount);
 
-        Integer experienceCount = companyDAO.findExperienceById(companyId);
+        int experienceCount = companyDAO.findExperienceById(companyId);
         company.setExperienceCount(experienceCount);
 
-        Integer internCount = companyDAO.findInternById(companyId);
+        int internCount = companyDAO.findInternById(companyId);
         company.setInternCount(internCount);
 
         String scaleName = companyDAO.findScaleById(companyId);
@@ -51,20 +63,24 @@ public class CompanyServiceImpl implements CompanyService {
         List<CompanyDTO> companies = companyDAO.findCompanies(criteria, search);
 //        System.out.println("기업들" + companies);
 
-        companies.forEach(company -> {
-            company.setCompanyProfileFile(
-                s3Service.getPreSignedUrl(company.getCompanyProfileFile(), Duration.ofMinutes(10))
-            );
-
-            company.setCompanyBackgroundFile(
-                s3Service.getPreSignedUrl(company.getCompanyBackgroundFile(), Duration.ofMinutes(10))
-            );
-        });
-
         criteria.setHasMore(criteria.getPage() < criteria.getRealEnd());
         if (criteria.isHasMore() && !companies.isEmpty()) {
             companies.remove(companies.size() - 1);
         }
+
+        companies.forEach(company -> {
+            if (company.getCompanyProfileFile() != null) {
+                company.setCompanyProfileFile(
+                        s3Service.getPreSignedUrl(company.getCompanyProfileFile(), Duration.ofMinutes(10))
+                );
+            }
+
+            if (company.getCompanyBackgroundFile() != null) {
+                company.setCompanyBackgroundFile(
+                        s3Service.getPreSignedUrl(company.getCompanyBackgroundFile(), Duration.ofMinutes(10))
+                );
+            }
+        });
 
         CompaniesCriteriaDTO companiesCriteriaDTO = new CompaniesCriteriaDTO();
         companiesCriteriaDTO.setCompanies(companies);
