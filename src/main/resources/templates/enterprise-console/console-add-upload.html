@@ -70,24 +70,24 @@
                                             <div class="main-title">내용 기재</div>
                                             <div class="sub-title">텍스트와 배경 사진을 설정하세요.</div>
                                         </div>
-                                        <div class="card-content">
+                                        <div class="card-content contents">
                                             <div class="yoso">
-                                                <label for="" class="card-label">메인 텍스트(필수)</label>
-                                                <input type="text" class="add-text-input" id="add-main-text" placeholder="예) 신년 채용 공고">
+                                                <label for="" class="card-label">메인 텍스트<span class="must">(필수)</span></label>
+                                                <input type="text" id="ad-main-text" class="ad-text-input" placeholder="예) 신년 채용 공고">
                                                 <div class="sub-text">최대 30자까지 입력 가능합니다.</div>
                                             </div>
                                             <div class="yoso">
-                                                <label for="" class="card-label">서브 텍스트(필수)</label>
-                                                <input type="text" class="add-text-input" id="add-sub-text" placeholder="배너 광고에 대한 간단한 설명을 입력해주세요.">
+                                                <label for="" class="card-label">서브 텍스트<span class="must">(필수)</span></label>
+                                                <input type="text" id="ad-sub-text" class="ad-text-input" placeholder="배너에 대한 간단한 설명을 입력해주세요.">
                                                 <div class="sub-text">최대 50자까지 입력 가능합니다.</div>
                                             </div>
                                             <div class="yoso">
                                                 <label for="" class="card-label">배경 미디어(선택)</label>
                                                 <label for="" class="media-label">
-                                                    <span class="media-span">
+                                                    <p class="media-span">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="media-svg"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
-                                                        배경 미디어 선택
-                                                    </span>
+                                                        <span>배경 미디어 선택</span>
+                                                    </p>
                                                 </label>
                                                 <div class="sub-text">2:1 비율의 이미지를 업로드해주세요.</div>
                                                 <div class="sub-text">업로드하지 않으면 기본 이미지로 업로드됩니다.</div>
@@ -95,21 +95,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="cards">
+                                    <div class="cards contents">
                                         <div class="card-title">
                                             <div class="main-title">광고 기간</div>
-                                            <div class="sub-title">2025-09-15 형태로 입력해주세요.</div>
+                                            <div class="sub-text">광고 시작일은 신청일 2일 후부터로만 입력 가능합니다.</div>
                                         </div>
                                         <div class="card-content">
                                             <div class="date-wrap">
                                                 <div class="date-main">
-                                                    <div>
-                                                        <div class="sub-text"></div>
-                                                        <div class="input-wrap">
-                                                            <input type="text" class="date-input" placeholder="시작일" id="start-date">
-                                                            <input type="text" class="date-input" placeholder="종료일" id="end-date">
-                                                            <button class="calcu">✓</button>
-                                                        </div>
+                                                    <div class="input-wrap">
+                                                        <input type="text" class="date-input" placeholder="시작일" id="start-date" disabled>
+                                                        <input type="text" class="date-input" placeholder="종료일" id="end-date">
+                                                        <button class="confirm-btn">✓</button>
                                                     </div>
                                                 </div>
                                                 <div class="date-sub">
@@ -130,7 +127,7 @@
                                             <div class="start-main">
                                                 <div class="start-price">￦200,000</div>
                                                 <div class="start-explain">
-                                                    <div class="explains">일일 총 비용: ￦200,000</div>
+                                                    <div class="explains">일일 비용: ￦200,000</div>
                                                     <div class="explains" id="add-date-text">광고 기간: 1일</div>
                                                 </div>
                                             </div>
@@ -146,6 +143,7 @@
          </main>
     </div>
 </body>
+<script src="https://js.bootpay.co.kr/bootpay-5.0.2.min.js"></script>
 <script src="/js/console/add-upload/event.js"></script>
 <script src="/js/console/sidebar/event.js"></script>
 </html>
