@@ -7,4 +7,8 @@ CREATE TABLE tbl_advertisement_background_file (
         references tbl_advertisement(id)
 );
 
+<<<<<<< HEAD
 select * from tbl_advertisement_background_file;
+=======
+select * from tbl_advertisement_background_file;
+>>>>>>> console/ad
