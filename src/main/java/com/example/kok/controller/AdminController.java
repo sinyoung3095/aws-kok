@@ -2,6 +2,7 @@ package com.example.kok.controller;
 
 import com.example.kok.common.exception.PostNotFoundException;
 import com.example.kok.dto.AdminNoticeDTO;
+import com.example.kok.service.AdminAdvertisementService;
 import com.example.kok.service.AdminReportService;
 import com.example.kok.service.AdminService;
 import com.example.kok.util.Search;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.view.RedirectView;
 public class AdminController {
     private final AdminService adminService;
     private final AdminReportService adminReportService;
+    private final AdminAdvertisementService adminAdvertisementService;
 
     //    관리자 등록
     @GetMapping("join")
@@ -71,6 +73,17 @@ public class AdminController {
         model.addAttribute("search", new Search());
         return "admin/advertise";
     }
+    @GetMapping("advertise/accept/{id}")
+    public RedirectView advertisementAccept(@PathVariable Long id) {
+        adminAdvertisementService.accept(id);
+        return new RedirectView("/admin/advertise");
+    }
+    @GetMapping("advertise/reject/{id}")
+    public RedirectView advertisementReject(@PathVariable Long id) {
+        adminAdvertisementService.reject(id);
+        return new RedirectView("/admin/advertise");
+    }
+
 
 //    배너 - 현수막
     @GetMapping("banner")

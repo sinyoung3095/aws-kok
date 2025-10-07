@@ -188,54 +188,54 @@
                 <div class="page-body">
                     <!-- 상단 건 수 -->
                     <div class="amount-section">
-                        <div class="amount-box form-info-box">
-                            <div class="revenue-box">
-                                <div class="row">
-                                    <div class="col-auto title-col">
-                                        <span class="badge-label text-primary icon-label">
-                                            <i class="mdi mdi-check"></i>
-                                        </span>
-                                        <span class="badge-label">승인</span>
-                                    </div>
-                                    <div class="col text-right amount-col">
-                                        <span class="span-amount">1</span>
-                                        <span class="amount-unit">건</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="amount-box form-info-box">
-                            <div class="revenue-box">
-                                <div class="row">
-                                    <div class="col-auto title-col">
-                                        <span class="badge-label text-wait icon-label">
-                                            <i class="mdi mdi-timer-sand"></i>
-                                        </span>
-                                        <span class="badge-label">대기</span>
-                                    </div>
-                                    <div class="col text-right amount-col">
-                                        <span class="span-amount">1</span>
-                                        <span class="amount-unit">건</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="amount-box amount-value-box">
-                            <div class="cancel-box">
-                                <div class="row">
-                                    <div class="col-auto title-col">
-                                        <span class="badge-label text-danger icon-label">
-                                            <i class="mdi mdi-close"></i>
-                                        </span>
-                                        <span class="badge-label">거절</span>
-                                    </div>
-                                    <div class="col text-right amount-col">
-                                        <span class="span-amount">1</span>
-                                        <span class="amount-unit">건</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<!--                        <div class="amount-box form-info-box">-->
+<!--                            <div class="revenue-box">-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-auto title-col">-->
+<!--                                        <span class="badge-label text-primary icon-label">-->
+<!--                                            <i class="mdi mdi-check"></i>-->
+<!--                                        </span>-->
+<!--                                        <span class="badge-label">승인</span>-->
+<!--                                    </div>-->
+<!--                                    <div class="col text-right amount-col">-->
+<!--                                        <span class="span-amount">1</span>-->
+<!--                                        <span class="amount-unit">건</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="amount-box form-info-box">-->
+<!--                            <div class="revenue-box">-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-auto title-col">-->
+<!--                                        <span class="badge-label text-wait icon-label">-->
+<!--                                            <i class="mdi mdi-timer-sand"></i>-->
+<!--                                        </span>-->
+<!--                                        <span class="badge-label">대기</span>-->
+<!--                                    </div>-->
+<!--                                    <div class="col text-right amount-col">-->
+<!--                                        <span class="span-amount">1</span>-->
+<!--                                        <span class="amount-unit">건</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="amount-box amount-value-box">-->
+<!--                            <div class="cancel-box">-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-auto title-col">-->
+<!--                                        <span class="badge-label text-danger icon-label">-->
+<!--                                            <i class="mdi mdi-close"></i>-->
+<!--                                        </span>-->
+<!--                                        <span class="badge-label">거절</span>-->
+<!--                                    </div>-->
+<!--                                    <div class="col text-right amount-col">-->
+<!--                                        <span class="span-amount">1</span>-->
+<!--                                        <span class="amount-unit">건</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
                     <div class="page-content">
                         <div class="table-layout white-panel">
@@ -298,7 +298,7 @@
                                                                 </div>
                                                             </li>
                                                             <li class="list-item mt-2">
-                                                                <button class="btn btn-outline-primary btn-sm">확인</button>
+                                                                <button type="button" class="btn btn-outline-primary btn-sm">확인</button>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -310,7 +310,7 @@
                                     <div class="col-auto">
                                         <div class="filter-wrapper filter-search ml-1">
                                             <div class="input-group">
-                                                <input class="form-control flex-grow-1" type="text" placeholder="기업명/메인텍스트" value="">
+                                                <input name="keyword" class="form-control flex-grow-1" type="text" placeholder="기업명/메인텍스트" value="">
                                                 <div class="input-group-append">
                                                     <button class="btn btn-search">
                                                         <span class="comp-icon icon-magnify" id="icons/ico-search.svg">
@@ -338,7 +338,7 @@
                                             <th class="td-action">상세</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="">
+                                    <tbody id="advertisement-list" class="">
                                         <tr>
                                             <td class="td-name">
                                                 <p>코리아IT</p>
@@ -354,7 +354,7 @@
                                             </td>
                                             <td class="td-end">
                                                 <p>2025/09/27</p>
-                                            </td>  
+                                            </td>
                                             <td class="td-status">
                                                 <p>승인</p>
                                             </td>
@@ -379,7 +379,7 @@
                                             </td>
                                             <td class="td-end">
                                                 <p>2025/09/27</p>
-                                            </td>  
+                                            </td>
                                             <td class="td-status">
                                                 <p>대기</p>
                                             </td>
@@ -404,7 +404,7 @@
                                             </td>
                                             <td class="td-end">
                                                 <p>2025/09/27</p>
-                                            </td>  
+                                            </td>
                                             <td class="td-status">
                                                 <p>거절</p>
                                             </td>
@@ -416,10 +416,19 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <!-- 페이지 번호 -->
+                                <nav class="kok-pagination-wrapper mt-5 mb-4">
+                                    <ul class="pagination kok-pagination">
+                                        <!-- 페이지 번호 배치 -->
+                                    </ul>
+                                    <div class="pagination-desc">
+                                    </div>
+                                </nav>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--  모달  -->
                 <div class="modal fade member-modal" style="display: none;">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">

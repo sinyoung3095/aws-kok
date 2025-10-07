@@ -59,8 +59,9 @@ public class AdminRestController {
 //    광고 목록
     @GetMapping("advertise/{page}")
     public AdminAdvertisementCriteriaDTO getAdvertisementList(@PathVariable("page") int page,
-                                                              @RequestParam(required = false) Search search){
-        return adminAdvertisementService.advertisementList(page, search);
+                                                              @RequestParam(required = false) String keyword,
+                                                              @RequestParam(required = false) String category){
+        return adminAdvertisementService.advertisementList(page, keyword, category);
     }
 
 //    광고 상세
