@@ -248,20 +248,18 @@ document.querySelectorAll(".contents .textarea").forEach(textarea => {
 
 // 달력 input
 dateInputs.forEach(input => {
-    document.querySelectorAll(".date-input").forEach(input => {
-        input.addEventListener("input", (e) => {
-            let value = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 허용
-            if (value.length > 8) value = value.substring(0, 8);
+    input.addEventListener("input", (e) => {
+        let value = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 허용
+        if (value.length > 8) value = value.substring(0, 8);
 
-        if (value.length >= 5) {
-            value = value.substring(0,4) + "-" + value.substring(4,6) +
-                (value.length > 6 ? "-" + value.substring(6) : "");
-        } else if (value.length >= 4) {
-            value = value.substring(0,4) + "-" + value.substring(4);
-        }
+    if (value.length >= 5) {
+        value = value.substring(0,4) + "-" + value.substring(4,6) +
+            (value.length > 6 ? "-" + value.substring(6) : "");
+    } else if (value.length >= 4) {
+        value = value.substring(0,4) + "-" + value.substring(4);
+    }
 
-        e.target.value = value;
-    });
+    e.target.value = value;
 });
 
 // 입력 중 border 해제 (textarea)

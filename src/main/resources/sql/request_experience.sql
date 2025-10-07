@@ -9,7 +9,10 @@ CREATE TABLE tbl_request_experience (
     request_experience_member_name varchar(255) not null,
     request_experience_member_email varchar(255) not null,
     request_experience_member_phone varchar(255) not null,
+<<<<<<< HEAD
     request_experience_member_url varchar(255),
+=======
+>>>>>>> console/ad
     file_id bigint not null,
     constraint fk_request_experience_experience_notice foreign key(experience_notice_id)
         references tbl_experience_notice(id),
@@ -23,6 +26,7 @@ CREATE TABLE tbl_request_experience (
 
 select * from tbl_request_experience;
 
+<<<<<<< HEAD
 select * from tbl_request_experience_file;
 
 alter table tbl_request_experience add request_experience_member_name varchar(255) not null;
@@ -36,6 +40,17 @@ alter table tbl_request_experience add request_experience_member_url varchar(255
 alter table tbl_request_experience add file_id bigint not null;
 
 alter table tbl_request_experience add constraint fk_request_experience_file foreign key(file_id) references tbl_file(id);
+=======
+-- alter table tbl_request_experience add request_experience_member_name varchar(255) not null;
+--
+-- alter table tbl_request_experience add request_experience_member_email varchar(255) not null;
+--
+-- alter table tbl_request_experience add request_experience_member_phone varchar(255) not null;
+--
+-- alter table tbl_request_experience add file_id bigint not null;
+
+-- alter table tbl_request_experience add constraint fk_request_experience_file foreign key(file_id) references tbl_file(id);
+>>>>>>> console/ad
 
 insert into tbl_request_experience (experience_notice_id, member_id, member_alarm_setting_id)
 values (1, 1, 1);
