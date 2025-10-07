@@ -2,7 +2,9 @@ package com.example.kok.controller;
 
 import com.example.kok.common.exception.PostNotFoundException;
 import com.example.kok.dto.AdminNoticeDTO;
+import com.example.kok.dto.BannerFileDTO;
 import com.example.kok.service.AdminAdvertisementService;
+import com.example.kok.service.AdminBannerService;
 import com.example.kok.service.AdminReportService;
 import com.example.kok.service.AdminService;
 import com.example.kok.util.Search;
@@ -10,11 +12,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -24,6 +26,7 @@ public class AdminController {
     private final AdminService adminService;
     private final AdminReportService adminReportService;
     private final AdminAdvertisementService adminAdvertisementService;
+    private final AdminBannerService adminBannerService;
 
     //    관리자 등록
     @GetMapping("join")
@@ -84,11 +87,21 @@ public class AdminController {
         return new RedirectView("/admin/advertise");
     }
 
-
 //    배너 - 현수막
     @GetMapping("banner")
     public String goToBannerPage() {
         return "admin/banner";
+    }
+    @PostMapping("banner/save")
+    public RedirectView saveBanner(@RequestParam(value = "files", required = false) List<MultipartFile> multipartFiles) {
+        BannerFileDTO bannerFileDTO = new BannerFileDTO();
+        adminBannerService.save(bannerFileDTO, multipartFiles);
+        return new RedirectView("/admin/banner");
+    }
+    @PostMapping("banner/delete/{id}")
+    public RedirectView deleteBanner(@PathVariable Long id) {
+        adminBannerService.delete(id);
+        return new RedirectView("/admin/banner");
     }
 
 //    결제 - 광고
