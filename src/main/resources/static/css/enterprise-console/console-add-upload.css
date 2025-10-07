@@ -170,7 +170,7 @@ div.add-upload-inner2{
     padding: 24px;
     margin-inline: auto;
     max-width: 96rem;
-    width: 100%;
+    width: 80%;
 }
 
 div.add-upload-top{
@@ -353,14 +353,13 @@ label.card-label{
     font-weight: 500;
     line-height: 1;
     font-size: 14px;
-    gap: 8px;
     align-items: center;
     display: flex;
     margin-block-start: 0px;
     margin-block-end: 8px;
 }
 
-input.add-text-input{
+input.ad-text-input{
     font-size: 14px;
     line-height: 1.42857;
     outline-style: none;
@@ -402,7 +401,7 @@ label.media-label{
     margin-block-end: 8px;
 }
 
-span.media-span{
+p.media-span{
     padding-inline: 12px;
     outline-style: none;
     transition-property: color, box-shadow;
@@ -418,7 +417,6 @@ span.media-span{
     border-style: solid;
     border-width: 1px;
     border-radius: 8px;
-    gap: 8px;
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -426,6 +424,14 @@ span.media-span{
     width: 100%;
     height: 36px;
     display: inline-flex;
+    position: relative;
+}
+
+span.media-span svg{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
 }
 
 svg.media-svg{
@@ -474,7 +480,7 @@ input.date-input{
     display: inline-flex;
 }
 
-button.calcu{
+button.confirm-btn{
     padding-inline:12px;
     outline-style: none;
     transition-property: color, box-shadow;
@@ -495,7 +501,7 @@ button.calcu{
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
-    width: 10%;
+    width: calc(20% - 8px);
     height: 36px;
     margin: auto;
     display: inline-flex;
@@ -572,4 +578,14 @@ button.start-add{
 
 button.start-add:hover{
     background-color: #40b9ff;
+}
+
+input:disabled {
+    color: #848484;
+}
+
+.error-msg {
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
 }
