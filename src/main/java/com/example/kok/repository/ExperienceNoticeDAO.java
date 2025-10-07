@@ -3,6 +3,7 @@ package com.example.kok.repository;
 import com.example.kok.dto.ExperienceNoticeCriteriaDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.mapper.ExperienceNoticeMapper;
+import com.example.kok.util.CompanyNoticeCriteria;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
@@ -38,5 +39,15 @@ public class ExperienceNoticeDAO {
 //    최신 체험 공고 4개 조회
     public List<ExperienceNoticeDTO> findLatestFour() {
         return experienceNoticeMapper.selectLatestFour();
+    }
+
+//    기업별 체험 공고 목록
+    public List<ExperienceNoticeDTO> findAllByCompanyId(Long companyId, CompanyNoticeCriteria criteria, Search search) {
+        return experienceNoticeMapper.selectAllNoticeByCompanyId(companyId, criteria, search);
+    }
+
+//    기업별 체험 공고 갯수
+    public int findCountByCompanyId(Long companyId, Search search) {
+        return experienceNoticeMapper.selectAllNoticeCountByCompanyId(companyId, search);
     }
 }

@@ -2,6 +2,7 @@ package com.example.kok.mapper;
 
 import com.example.kok.dto.ExperienceNoticeCriteriaDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
+import com.example.kok.util.CompanyNoticeCriteria;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.Search;
 import org.apache.ibatis.annotations.Mapper;
@@ -25,4 +26,10 @@ public interface ExperienceNoticeMapper {
 
 //    최신 체험 공고 4개 조회
     public List<ExperienceNoticeDTO> selectLatestFour();
+
+//    기업별 체험 공고 목록
+    public List<ExperienceNoticeDTO> selectAllNoticeByCompanyId(@Param("companyId") Long companyId, @Param("criteria") CompanyNoticeCriteria criteria, @Param("search") Search search);
+
+//    기업별 체험 공고 갯수
+    public int selectAllNoticeCountByCompanyId(@Param("companyId") Long companyId, @Param("search") Search search);
 }
