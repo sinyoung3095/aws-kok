@@ -14,9 +14,7 @@ public interface AdminBannerMapper {
 
 //    파일 목록 조회
     public List<BannerFileDTO> selectBannerFiles(Criteria criteria);
-
     public List<BannerFileDTO> selectBannerFilesById(Long id);
-    public Optional<BannerFileDTO> selectBannerFilePathById(Long id);
 
 //    파일 전체 개수
     public int countBannerFiles();

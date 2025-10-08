@@ -36,21 +36,14 @@
         where id = #{id}
     </select>
 
-<!--  파일 경로 조회  -->
-    <select id="selectBannerFilePathById">
-        select banner_file_path
-        from tbl_banner_file
-        where id = #{id}
-    </select>
-
 <!--  파일 전체 개수  -->
     <select id="countBannerFiles">
         select count(*) from tbl_banner_file
     </select>
 
 <!--  파일 삭제  -->
-    <select id="deleteBannerFile">
+    <delete id="deleteBannerFile">
         delete from tbl_banner_file
         where id = #{id}
-    </select>
+    </delete>
 </mapper>
