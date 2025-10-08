@@ -67,7 +67,7 @@
                                                             (최대 30자)
                                                         </span>
                                                     </label>
-                                                    <input type="text" id="content-title" class="content-input validate-length" maxlength="30" placeholder="예: 프론트엔드 개발자" th:value="${notice.internNoticeTitle}">
+                                                    <input th:value="${notice.internNoticeTitle}" type="text" id="content-title" class="content-input validate-length" maxlength="30" placeholder="예: 프론트엔드 개발자">
                                                 </div>
                                                 <div class="contents">
                                                     <label class="content-label">

@@ -30,7 +30,7 @@ const internRegisterService = (() => {
         return await response.json();
     };
 
-    // 체험 공고 수정
+    // 인턴 공고 수정
     const update = async (id, data) => {
         const response = await fetch(`/api/enterprise-console/intern/edit/${id}`, {
             method: "PUT",

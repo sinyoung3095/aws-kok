@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     Math.floor((end - start) / (1000 * 60 * 60 * 24)) + 1;
 
                 const resultDate = document.querySelector("div.main-date-text");
-                const resultPrice = document.querySelector("div.start-price");
+                const resultPrice = document.querySelector("div.start-price .price");
                 const date2 = document.getElementById("add-date-text");
                 if (
                     Math.floor((start - nowDate) / (1000 * 60 * 60 * 24)) <= 0
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     } else {
                         resultDate.innerText = diffDays + "일";
                         const price = diffDays * 200000;
-                        resultPrice.innerText = "￦" + price.toLocaleString();
+                        resultPrice.innerText = price.toLocaleString();
                         date2.innerText = "광고 기간: " + diffDays + "일";
                         okcheck = true;
                     }
@@ -138,8 +138,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    const btnAddDateText = document.querySelector("button.start-add");
-    btnAddDateText.addEventListener("click", async () => {
+    // 광고 등록하기 버튼
+    const btnRegisterAd = document.querySelector("#btn-register-ad");
+    if(btnRegisterAd){
+        btnRegisterAd.addEventListener("click", async () => {
         const isMainValid = validateInput(inputMain, "메인 텍스트를 입력해주세요.");
         const isSubValid = validateInput(inputSub, "서브 텍스트를 입력해주세요.");
         const isDateValid = validateDate(okcheck);
@@ -155,18 +157,69 @@ document.addEventListener("DOMContentLoaded", function () {
             price: 3000,
             duration: 2
         }
-        // await pay(payInfo);
+        // await pay(payInfo); // 결제 프로세스
 
         // 데이터 보내기
         const data = {
-            adMainText: document.querySelector("#ad-main-text").value,
-            adSubText: document.querySelector("#ad-sub-text").value,
-            adStartDatetime: document.querySelector("#start-date").value,
-            adEndDatetime: document.querySelector("#end-date").value
+            advertisementMainText: document.querySelector("#ad-main-text").value,
+            advertisementSubText: document.querySelector("#ad-sub-text").value,
+            advertiseStartDatetime: document.querySelector("#start-date").value,
+            advertiseEndDatetime: document.querySelector("#end-date").value,
+            companyId: 1,
+            paymentPrice: document.querySelector(".start-price .price").value
         }
 
-        console.log(data)
+        try {
+            const result = await adService.register(data);
+            console.log("광고 등록 성공이당", result);
+            alert("광고가 등록되었습니다.");
+        } catch (err) {
+            console.error(err);
+            alert("광고 등록 중 오류가 발생했습니다.");
+        }
     });
+    }
+
+    // 광고 수정하기 버튼
+    const btnUpdateAd = document.querySelector("#btn-update-ad");
+    if(btnUpdateAd){
+        btnUpdateAd.addEventListener("click", async () => {
+        const isMainValid = validateInput(inputMain, "메인 텍스트를 입력해주세요.");
+        const isSubValid = validateInput(inputSub, "서브 텍스트를 입력해주세요.");
+        const isDateValid = validateDate(okcheck);
+
+        // 하나라도 false면 return
+        if (!isMainValid || !isSubValid || !isDateValid) return;
+
+        // 모든 유효성 통과 시 실행
+        console.log("수정 등록 처리 실행!");
+
+        // 결제 완료
+        const payInfo = {
+            price: 3000,
+            duration: 2
+        }
+        // await pay(payInfo); // 결제 프로세스
+
+        // 데이터 보내기
+        const data = {
+            advertisementMainText: document.querySelector("#ad-main-text").value,
+            advertisementSubText: document.querySelector("#ad-sub-text").value,
+            advertiseStartDatetime: document.querySelector("#start-date").value,
+            advertiseEndDatetime: document.querySelector("#end-date").value,
+            paymentPrice: document.querySelector(".start-price .price").value
+        }
+
+        try {
+            const result = await adService.update(id, data);
+            console.log("광고 수정 성공이당", result);
+            alert("광고가 수정등록되었습니다.");
+        } catch (err) {
+            console.error(err);
+            alert("광고 수정등록 중 오류가 발생했습니다.");
+        }
+    });
+    }
 
     function validateInput(inputElement, message) {
         const parent = inputElement.closest(".yoso");
@@ -211,8 +264,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // const btnAddDateText = document.querySelector("button.start-add");
-    // btnAddDateText.addEventListener("click", async () => {
+    // const btnRegisterAd = document.querySelector("button.start-add");
+    // btnRegisterAd.addEventListener("click", async () => {
     //     if (!inputMain.value.trim()) {
     //         inputMain.style.border = "2px solid red";
     //         return;
@@ -272,6 +325,12 @@ dateInputs.forEach(input => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+    const startInput = document.querySelector(".start-date");
+    const endInput = document.querySelector(".end-date");
+
+    if (!startInput || !endInput) return;
+    if (startInput.value && endInput.value) return;
+
     const today = new Date();
     const twoDaysLater = new Date(today);
     twoDaysLater.setDate(today.getDate() + 2);
@@ -283,8 +342,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return `${y}-${m}-${day}`;
     };
 
-    document.getElementById("start-date").value = formatted(twoDaysLater);
-    document.getElementById("end-date").value = formatted(twoDaysLater);
+    startInput.value = formatted(twoDaysLater);
+    endInput.value = formatted(twoDaysLater);
 });
 
 

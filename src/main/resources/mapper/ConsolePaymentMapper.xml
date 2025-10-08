@@ -24,6 +24,6 @@
                       on pu.payment_id = p.id
                  join tbl_advertisement a
                       on pu.advertisement_id = a.id
-        where pu.payment_id = #{companyId}
+        where pu.user_id = #{companyId}
     </select>
 </mapper>

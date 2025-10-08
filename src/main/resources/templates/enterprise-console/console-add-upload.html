@@ -73,12 +73,12 @@
                                         <div class="card-content contents">
                                             <div class="yoso">
                                                 <label for="" class="card-label">메인 텍스트<span class="must">(필수)</span></label>
-                                                <input type="text" id="ad-main-text" class="ad-text-input" placeholder="예) 신년 채용 공고">
+                                                <input type="text" id="ad-main-text" class="ad-text-input" placeholder="예) 신년 채용 공고" th:value="${notice.advertisementMainText}">
                                                 <div class="sub-text">최대 30자까지 입력 가능합니다.</div>
                                             </div>
                                             <div class="yoso">
                                                 <label for="" class="card-label">서브 텍스트<span class="must">(필수)</span></label>
-                                                <input type="text" id="ad-sub-text" class="ad-text-input" placeholder="배너에 대한 간단한 설명을 입력해주세요.">
+                                                <input type="text" id="ad-sub-text" class="ad-text-input" placeholder="배너에 대한 간단한 설명을 입력해주세요." th:value="${notice.advertisementSubText}">
                                                 <div class="sub-text">최대 50자까지 입력 가능합니다.</div>
                                             </div>
                                             <div class="yoso">
@@ -103,9 +103,9 @@
                                         <div class="card-content">
                                             <div class="date-wrap">
                                                 <div class="date-main">
-                                                    <div class="input-wrap">
-                                                        <input type="text" class="date-input" placeholder="시작일" id="start-date" disabled>
-                                                        <input type="text" class="date-input" placeholder="종료일" id="end-date">
+                                                    <div class="input-wrap create-input-wrap">
+                                                        <input th:value="${notice.advertiseStartDatetime}" type="text" id="start-date" class="date-input" placeholder="시작일" th:attr="disabled=${page} == 'create' ? true : false">
+                                                        <input th:value="${notice.advertiseEndDatetime}" type="text" id="end-date" class="date-input" placeholder="종료일">
                                                         <button class="confirm-btn">✓</button>
                                                     </div>
                                                 </div>
@@ -125,13 +125,14 @@
                                         </div>
                                         <div class="card-content">
                                             <div class="start-main">
-                                                <div class="start-price">￦200,000</div>
+                                                <div class="start-price">￦<span class="price">200,000</span></div>
                                                 <div class="start-explain">
                                                     <div class="explains">일일 비용: ￦200,000</div>
                                                     <div class="explains" id="add-date-text">광고 기간: 1일</div>
                                                 </div>
                                             </div>
-                                            <button class="start-add">배너 광고 시작하기</button>
+                                            <button th:if="${page} == 'create'" id="btn-register-ad" class="start-add">배너 광고 시작하기</button>
+                                            <button th:unless="${page} == 'create'" id="btn-update-ad" class="start-add">배너 광고 시작하기</button>
                                         </div>
                                     </div>
                                 </div>
@@ -143,7 +144,13 @@
          </main>
     </div>
 </body>
+<script th:inline="javascript">
+    const id = [[${id}]];
+    const page = [[${page}]];
+</script>
 <script src="https://js.bootpay.co.kr/bootpay-5.0.2.min.js"></script>
+<script src="/js/console/add-upload/module/service.js"></script>
+<script src="/js/console/add-upload/module/layout.js"></script>
 <script src="/js/console/add-upload/event.js"></script>
 <script src="/js/console/sidebar/event.js"></script>
 </html>
