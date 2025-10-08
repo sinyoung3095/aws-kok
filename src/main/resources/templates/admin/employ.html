@@ -206,7 +206,7 @@
                                     <div class="col-auto">
                                         <div class="filter-wrapper filter-search ml-1">
                                             <div class="input-group">
-                                                <input class="form-control flex-grow-1" type="text" placeholder="기업명/모집상태/직군" value="">
+                                                <input name="keyword" class="form-control flex-grow-1" type="text" placeholder="검색어를 입력하세요" value="">
                                                 <div class="input-group-append">
                                                     <button class="btn btn-search">
                                                         <span class="comp-icon icon-magnify" id="icons/ico-search.svg">
@@ -317,7 +317,7 @@
                                         <div class="tab-view-body">
                                             <div style="display: block;">
                                                 <div class="tab-inner tab-detail">
-                                                    <div class="info-layout detail-info">
+                                                    <div class="info-layout detail-info" id="info-table">
                                                         <div class="info-title justify-content-between">
                                                             <div class="flex-left d-flex">
                                                                 <div class="title">인턴공고 상세정보</div>
@@ -356,7 +356,7 @@
                                                         </table>
                                                     </div>
                                                     <!-- 신청자 내역 -->
-                                                    <div class="info-layout detail-info">
+                                                    <div class="info-layout detail-info" id="info-request">
                                                         <div class="info-title justify-content-between">
                                                             <div class="flex-left d-flex">
                                                                 <div class="title">신청자 내역</div>
@@ -394,7 +394,14 @@
                                                                     </tr> 
                                                                 </tbody>
                                                             </table>
-                                                        </div>                             
+                                                        </div>
+                                                        <nav class="kok-pagination-wrapper undefined">
+                                                            <!-- 페이징 번호 -->
+                                                            <ul class="pagination kok-pagination detail-request">
+                                                                <!-- 번호 배치 -->
+                                                            </ul>
+                                                            <div class="pagination-desc"></div>
+                                                        </nav>
                                                     </div>
                                                 </div>
                                             </div>

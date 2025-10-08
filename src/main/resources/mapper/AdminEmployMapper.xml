@@ -18,10 +18,12 @@
                tin.intern_notice_title,
                tin.intern_notice_subtitle,
                tin.intern_notice_introduce_job,
-               tin.intern_notice_major_work,
-               tin.intern_notice_notes,
+               tin.intern_main_tasks,
                tin.intern_notice_status,
                tin.company_id,
+               tin.intern_notice_start_date,
+               tin.intern_notice_end_date,
+               tin.intern_notice_etc,
                tin.created_datetime,
                tin.updated_datetime,
                c.company_name,
@@ -29,11 +31,10 @@
         from tbl_intern_notice tin
             join tbl_company c
                 on tin.company_id = c.user_id
-            left join tbl_intern_job_category ijc
+            join tbl_intern_job_category ijc
                 on tin.id = ijc.intern_notice_id
-            left join tbl_job_category jc
+            join tbl_job_category jc
                 on ijc.job_category = jc.id
-        where tin.intern_notice_status = 'active'
         <include refid="search"/>
         order by tin.id desc
         limit #{criteria.count} offset #{criteria.offset}
@@ -45,11 +46,10 @@
         from tbl_intern_notice tin
             join tbl_company c
                 on tin.company_id = c.user_id
-            left join tbl_intern_job_category ijc
+            join tbl_intern_job_category ijc
                 on tin.id = ijc.intern_notice_id
-            left join tbl_job_category jc
+            join tbl_job_category jc
                 on ijc.job_category = jc.id
-        where tin.intern_notice_status = 'active'
         <include refid="search"/>
     </select>
 
@@ -64,6 +64,7 @@
                tin.company_id,
                tin.intern_notice_start_date,
                tin.intern_notice_end_date,
+               tin.intern_notice_etc,
                tin.created_datetime,
                tin.updated_datetime,
                c.user_id,
@@ -71,7 +72,7 @@
         from tbl_intern_notice tin
             join tbl_company c
                 on tin.company_id = c.user_id
-        where tin.id = #{id} and intern_notice_status = 'active'
+        where tin.id = #{id}
     </select>
 
 <!--  인턴 공고 상세정보(2)  -->
