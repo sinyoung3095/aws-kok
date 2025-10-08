@@ -44,7 +44,6 @@
                  join tbl_user u
                       on r.member_id = u.id
         where p.post_status = 'active' and r.id = #{id}
-        order by r.id desc
     </select>
 
     <update id="deleteReportPost">

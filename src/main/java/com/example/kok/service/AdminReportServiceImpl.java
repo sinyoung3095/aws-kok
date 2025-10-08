@@ -9,8 +9,6 @@ import com.example.kok.util.Criteria;
 import com.example.kok.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,14 +55,13 @@ public class AdminReportServiceImpl implements AdminReportService {
 //    신고 게시글 상세
     @Override
     @Transactional(rollbackFor = Exception.class)
-    @Cacheable(value = "posts", key="'post_' + #id")
     public AdminReportDTO getReportDetail(Long id) {
         AdminReportDTO adminReportDTO = adminReportDAO.reportDetail(id);
 
         String relativeDate = DateUtils.getCreatedDate(adminReportDTO.getCreatedDateTime());
         adminReportDTO.setRelativeDate(relativeDate);
 
-        List<PostFileDTO> files = communityPostFileDAO.findAllByPostId(adminReportDTO.getId());
+        List<PostFileDTO> files = communityPostFileDAO.findAllByPostId(adminReportDTO.getPostId());
         files.forEach(file -> {
             file.setPostFilePath(s3Service.getPreSignedUrl(file.getPostFilePath(), Duration.ofMinutes(5)));
         });

@@ -943,6 +943,32 @@ body #kok {
     width: 100%;
 }
 
+.pg-list.list-unstyled img {
+    margin: 10px;
+    width: 200px;
+}
+
+.preview-remove {
+    top: 6px;
+    right: 6px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: rgba(17, 24, 39, .6);
+    color: #FFFFFF;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background .15s ease;
+}
+.preview-remove:hover { background: rgba(17, 24, 39, .8); }
+
+.preview-remove svg {
+    pointer-events: none;
+}
+
 .page .page-header {
     padding-bottom: 20px;
 }
@@ -1011,6 +1037,9 @@ body #kok {
     border-radius: 4px;
     text-decoration: none;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-style: none;
+    width: 50px;
+    height: 40px;
 }
 
 .register-link:hover {
@@ -1108,6 +1137,10 @@ body #kok {
     white-space: nowrap;
 }
 
+.no-data td {
+    padding: 72px 0 20px 0;
+}
+
 .page-content .table-layout {
     background-color: #fff;
     border-radius: 8px;
@@ -1159,6 +1192,10 @@ body #kok {
 .kok-pagination-wrapper ul.kok-pagination>li.page-item.active>a {
     color: #507cf3;
     font-weight: 700;
+}
+
+.page-item-num {
+    cursor: pointer;
 }
 
 /* 일반회원이 1페이지(10명 미만)일 때 */

@@ -92,9 +92,9 @@ pageItemNums.forEach((pageItemNum) => {
 });
 
 // 체크박스 클릭 이벤트 (라디오 버튼처럼 하나만 선택)
-if (confirmBtn) {
-    confirmBtn.style.display = "none";
-}
+// if (confirmBtn) {
+//     confirmBtn.style.display = "none";
+// }
 
 filterBtn.addEventListener("click", function () {
     popBack.classList.toggle("show");
@@ -128,11 +128,11 @@ checkItems.forEach((item) => {
         if (!isActive) {
             checkIcon.style.display = "inline-block";
             currentLi.classList.add("active");
-            confirmBtn.style.display = "block";
+            // confirmBtn.style.display = "block";
         } else {
             checkIcon.style.display = "none";
             currentLi.classList.remove("active");
-            confirmBtn.style.display = "none";
+            // confirmBtn.style.display = "none";
         }
     });
 });
@@ -141,6 +141,10 @@ if (confirmBtn) {
     confirmBtn.addEventListener("click", function () {
         popBack.classList.remove("show");
         popContext.classList.remove("show");
+
+        if (pagination) {
+            delete pagination.dataset.category;
+        }
     });
 }
 
@@ -166,42 +170,56 @@ advertiseListContainer.addEventListener("click",async (e)=>{
 });
 
 
+// 카테고리 선택
+const listItem = document.querySelectorAll(".list-item");
+const content = document.querySelector("input[name=keyword]");
+const pagination = document.querySelector(".pagination.kok-pagination");
+
+confirmBtn.addEventListener("click", (e) => {
+    listItem.forEach(async (listItem) => {
+        const page = 1;
+        const keyword = content.value;
+        const categoryTag = listItem.querySelector(".active input[name=category]");
+
+        if(categoryTag){
+            const category = categoryTag.value;
+            pagination.dataset.category = category;
+
+            console.log(keyword);
+            console.log(category);
+
+            return await service.getAdvertisementList(layout.showList, page, keyword, category);
+        }
+        // else if(!categoryTag) {
+        //     if (pagination) {
+        //         delete pagination.dataset.category;
+        //     }
+        //     const keyword = content.value ? content.value : '';
+        //     await service.getAdvertisementList(layout.showList, keyword);
+        // }
+    });
+});
 
 // 검색창
 const search = document.querySelector(".btn.btn-search");
 search.addEventListener("click", async (e) => {
     const page = 1;
     const keyword = content.value;
+    let category = pagination.dataset.category
+
     console.log(keyword);
-    await service.getAdvertisementList(layout.showList, page, keyword);
-});
+    console.log(category);
 
-// 카테고리 선택
-const categoryTag = document.querySelector("input[name=category]");
-const listItem = document.querySelectorAll(".list-item");
-confirmBtn.addEventListener("click", (e) => {
-    listItem.forEach(async (listItem) => {
-        const listBoolean = listItem.classList.contains("active")
-        if(listBoolean){
-            const page = 1;
-            category = categoryTag.value;
-            const keyword = content.value ? content.value : '';
-
-            console.log(keyword);
-            console.log(category);
-
-            await service.getAdvertisementList(layout.showList, page, keyword, category);
-        }
-    })
+    await service.getAdvertisementList(layout.showList, page, keyword, category);
 });
 
 // 목록 페이지 번호
-const content = document.querySelector("input[name=keyword]");
-const pagination = document.querySelector(".pagination.kok-pagination");
 pagination.addEventListener("click", async (e) => {
     e.preventDefault();
+
     const keyword = content.value;
-    category = categoryTag.value;
+    let category = pagination.dataset.category
+
     await service.getAdvertisementList(layout.showList, e.target.dataset.page, keyword, category);
 
     // 페이지 번호
