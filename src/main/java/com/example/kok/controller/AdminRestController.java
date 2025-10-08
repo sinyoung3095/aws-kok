@@ -75,7 +75,7 @@ public class AdminRestController {
 
 //    현수막
     @GetMapping("banner/{page}")
-    public BannerFileCriteriaDTO getBanner(@PathVariable("page") int page, Long id){
+    public BannerFileCriteriaDTO getBanner(@PathVariable("page") int page, @RequestParam(required = false) Long id){
         log.info("page = {}", page);
 //        BannerFileDTO bannerFileDTO = adminBannerService.selectAllFiles(id);
 //        adminBannerService.setPreSignedUrl(bannerFileDTO);

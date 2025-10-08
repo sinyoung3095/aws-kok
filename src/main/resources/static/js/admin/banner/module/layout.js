@@ -17,14 +17,14 @@ const layout = (()=> {
             bannerFileCriteriaDTO.bannerFileList.forEach((file) => {
                 text += `
                     <tr class="banner-row">
-                        <td>${file.bannerFilePath}</td>
                         <td>${file.bannerFileOriginName}</td>
                         <td>
                             <img src="${file.bannerFilePath}" alt="현수막 이미지" style="width:120px; height:60px; object-fit:cover; border-radius:6px;">
                         </td>
+                        <td>${file.bannerFileContentType}</td>
                         <td>${file.relativeDate}</td>
                         <td>
-                             <form action="/api/banner/delete/${file.id}" method="post">
+                             <form action="/admin/banner/delete/${file.id}" method="post">
                                 <button type="submit" class="banner-delete-btn">삭제</button>
                              </form>
                         </td>

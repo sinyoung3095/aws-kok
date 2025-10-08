@@ -26,9 +26,6 @@ public class AdminBannerDAO {
     public List<BannerFileDTO> selectAllFileById(Long id){
         return adminBannerMapper.selectBannerFilesById(id);
     }
-    public Optional<BannerFileDTO> selectBannerFileById(Long id){
-        return adminBannerMapper.selectBannerFilePathById(id);
-    }
 
 //    파일 전체 개수
     public int countAll (){

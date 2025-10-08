@@ -9,6 +9,7 @@ import com.example.kok.util.Criteria;
 import com.example.kok.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.Banner;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,10 +29,13 @@ import java.util.List;
 public class AdminBannerServiceImpl implements AdminBannerService {
     private final AdminBannerDAO adminBannerDAO;
     private final S3Service s3Service;
+    private final BannerFileDTO bannerFileDTO;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void save(BannerFileDTO bannerFileDTO, List<MultipartFile> multipartFiles) {
+    public void save(List<MultipartFile> multipartFiles) {
+        log.info("save 메서드 실행됨");
+
         multipartFiles.forEach((multipartFile) -> {
             if(multipartFile.getOriginalFilename().equals("")){
                 return;
@@ -39,11 +43,14 @@ public class AdminBannerServiceImpl implements AdminBannerService {
 
             try {
                 String s3Key = s3Service.uploadFile(multipartFile, getPath());
+                BannerFileDTO bannerFileDTO = new BannerFileDTO();
 
                 bannerFileDTO.setBannerFileOriginName(multipartFile.getOriginalFilename());
                 bannerFileDTO.setBannerFileName(s3Key.substring(s3Key.lastIndexOf("/") + 1));
+                bannerFileDTO.setBannerFilePath(s3Key);
                 bannerFileDTO.setBannerFileSize(String.valueOf(multipartFile.getSize()));
                 bannerFileDTO.setBannerFileContentType(multipartFile.getContentType());
+                bannerFileDTO.setBannerFileContentType(bannerFileDTO.getBannerFileContentType().split("/")[1]);
 
                 adminBannerDAO.insertFile(bannerFileDTO);
             } catch (IOException e) {
@@ -61,6 +68,7 @@ public class AdminBannerServiceImpl implements AdminBannerService {
         bannerFiles.forEach((file) -> {
             String relativeDate = DateUtils.getCreatedDate(file.getCreatedDateTime());
             file.setRelativeDate(relativeDate);
+            file.setBannerFilePath(s3Service.getPreSignedUrl(file.getBannerFilePath(), Duration.ofMinutes(5)));
         });
 
         criteria.setHasMore(bannerFiles.size() > criteria.getRowCount());
@@ -79,21 +87,17 @@ public class AdminBannerServiceImpl implements AdminBannerService {
         return bannerFileCriteriaDTO;
     }
 
-    @Override
-    public BannerFileDTO selectAllFiles(Long id){
-        return adminBannerDAO.selectBannerFileById(id).orElseThrow(PostNotFoundException::new);
-    }
+//    @Override
+//    public BannerFileDTO selectAllFiles(Long id){
+//        return adminBannerDAO.selectBannerFileById(id).orElseThrow(PostNotFoundException::new);
+//    }
 
-    @Override
-    public void setPreSignedUrl(BannerFileDTO bannerFileDTO) {
-        BannerFileCriteriaDTO bannerFileCriteriaDTO = new BannerFileCriteriaDTO();
-        List<BannerFileDTO> bannerFiles = adminBannerDAO.selectAllFileById(bannerFileDTO.getId());
-        bannerFiles.forEach((bannerFile) -> {
-            bannerFile.setBannerFilePath(s3Service.getPreSignedUrl(bannerFile.getBannerFilePath(), Duration.ofMinutes(5)));
-        });
-
-        bannerFileCriteriaDTO.setBannerFileList(bannerFiles);
-    }
+//    @Override
+//    public void setPreSignedUrl(BannerFileDTO bannerFileDTO) {
+//        log.info("setPreSignedUrl 실행됨");
+//        bannerFileDTO = adminBannerDAO.selectBannerFileById(bannerFileDTO.getId()).orElseThrow(PostNotFoundException::new);
+//        bannerFileDTO.setBannerFilePath(s3Service.getPreSignedUrl(bannerFileDTO.getBannerFilePath(), Duration.ofMinutes(5)));
+//    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -102,6 +106,7 @@ public class AdminBannerServiceImpl implements AdminBannerService {
         bannerFiles.forEach((bannerFile) -> {
             s3Service.deleteFile(bannerFile.getBannerFilePath());
         });
+        adminBannerDAO.deleteFile(id);
     }
 
     public String getPath() {
