@@ -1,30 +1,38 @@
-// const advertisementService = (() => {
-//     const updateInternStatus = async (noticeId, statusValue) => {
-//         const data = { id: noticeId, internNoticeStatus: statusValue };
-//
-//         const response = await fetch(`/api/enterprise-console/intern/${noticeId}/status`, {
-//             method:"PUT",
-//             headers: {
-//                 "Content-Type": "application/json"
-//             },
-//             body: JSON.stringify(data)
-//         });
-//
-//         console.log("보내는 데이터",data)
-//
-//         if(response.ok) {
-//             console.log("상태변경 성공")
-//         }else if(response.status === 404){
-//             console.log("상태변경 실패")
-//         }else {
-//             const error = await response.text()
-//             console.log(error);
-//         }
-//
-//         return data;
-//     }
-//
-//     return {updateInternStatus:updateInternStatus}
-// })();
-//
-//
+const adService = (() => {
+    const register = async (data) => {
+        const response = await fetch(`/api/enterprise-console/ad/create`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+            console.error("광고 등록 성공: " + response.status);
+            return;
+        } else {
+            console.error("광고 등록 실패: " + response.status);
+            return;
+        }
+        return await response.json();
+    };
+
+    // 체험 공고 수정
+    const update = async (id, data) => {
+        console.log("확인이 안되나?",id)
+        const response = await fetch(`/api/enterprise-console/ad/edit/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+            throw new Error("광고 수정 실패: " + response.status);
+        }
+        return await response.json();
+    };
+
+
+    return {register:register, update:update}
+})();
+
+

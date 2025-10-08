@@ -579,20 +579,35 @@ span.list-table-span{
     display: inline-flex;
 }
 
-span.list-table-span.ing-td{
-    background-color: #171717;
-    color: #fafafa;
+span.list-table-span.accept{
+    background-color: #0aa5ff;
+    color: #fff;
 }
 
-span.list-table-span.pend-td{
+span.list-table-span.await{
     color: #171717; 
     background-color: #f5f5f5;
 }
 
-span.list-table-span.comp-td{
+span.list-table-span.reject{
+    background-color: #171717;
+    color: #fafafa;
+}
+
+span.list-table-span.complete{
     color: #0a0a0a;
     background-color: white;
     border-color: #e5e5e5;
+}
+
+tr.body-tr.no-data td {
+    text-align: center;
+    padding: 40px;
+}
+
+li.page-li > a.active {
+    color: #171717;
+    font-weight: 700;
 }
 
 .job {
