@@ -53,4 +53,9 @@ public class CompanyDAO {
     public int findTotalCount(CompanySearch search) {
         return companyMapper.selectCompanyCount(search);
     }
+
+//    인기 기업 목록
+    public List<CompanyDTO> findCompaniesByFollowerCount() {
+        return companyMapper.selectCompaniesByFollowerCount();
+    }
 }

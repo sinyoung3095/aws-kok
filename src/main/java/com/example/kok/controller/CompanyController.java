@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Slf4j
 @Controller
 @RequestMapping("/company")
@@ -30,6 +32,10 @@ public class CompanyController {
     public String detailPage(@PathVariable Long companyId, Model model) {
         CompanyDTO company = companyService.findCompanyById(companyId);
         model.addAttribute("company", company);
+
+        List<CompanyDTO> popularCompanies = companyService.getCompaniesByFollowerCount();
+        model.addAttribute("popularCompanies", popularCompanies);
+
         return "company/detail";
     }
 }

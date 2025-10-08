@@ -57,7 +57,7 @@
                                     <p th:text="${company.companyInfo != null ? company.companyInfo : '-'}"></p>
                                 </div>
                                 <div class="profile-btn-wrap">
-                                    <button class="btn-primary btn-follow" type="button">
+                                    <button class="btn-primary btn-follow" type="button" th:data-company-id="${company.userId}">
                                         <span>팔로우</span>
                                     </button>
                                 </div>
@@ -245,53 +245,13 @@
                         <div class="content-box">
                             <p class="content-title">인기 있는 기업</p>
                             <ul class="content-list">
-                                <li class="content-item">
-                                    <a href="" class="content-link">
+                                <li class="content-item" th:each="company : ${popularCompanies}">
+                                    <a th:href="@{/company/detail/{id}(id=${company.userId})}" class="content-link">
                                         <div class="content-img-thumb">
-                                            <img src="/images/experience/img_default.png" alt="">
+                                            <img th:src="${company.companyProfileFile != null ? company.companyProfileFile : '/images/experience/img_default.png'}" alt="">
                                         </div>
                                         <div class="content-text">
-                                            <p class="title">트릿지</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="content-item">
-                                    <a href="" class="content-link">
-                                        <div class="content-img-thumb">
-                                            <img src="/images/experience/img_default.png" alt="">
-                                        </div>
-                                        <div class="content-text">
-                                            <p class="title">트릿지</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="content-item">
-                                    <a href="" class="content-link">
-                                        <div class="content-img-thumb">
-                                            <img src="/images/experience/img_default.png" alt="">
-                                        </div>
-                                        <div class="content-text">
-                                            <p class="title">트릿지</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="content-item">
-                                    <a href="" class="content-link">
-                                        <div class="content-img-thumb">
-                                            <img src="/images/experience/img_default.png" alt="">
-                                        </div>
-                                        <div class="content-text">
-                                            <p class="title">트릿지</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="content-item">
-                                    <a href="" class="content-link">
-                                        <div class="content-img-thumb">
-                                            <img src="/images/experience/img_default.png" alt="">
-                                        </div>
-                                        <div class="content-text">
-                                            <p class="title">트릿지</p>
+                                            <p class="title" th:text="${company.companyName}"></p>
                                         </div>
                                     </a>
                                 </li>

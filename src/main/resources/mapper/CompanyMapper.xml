@@ -109,4 +109,22 @@
         where u.user_status = 'active'
         <include refid="search"/>
     </select>
+
+<!-- 인기 기업 팔로워 순 5개 -->
+    <select id="selectCompaniesByFollowerCount" resultType="CompanyDTO">
+        select c.user_id as userId, c.company_name as companyName, profile_file.file_path as companyProfileFile,
+               background_file.file_path as companyBackgroundFile, count(f.id) as followerCount
+        from tbl_company c
+        join tbl_user u on c.user_id = u.id
+        left join tbl_follow f on c.user_id = f.company_id
+        and f.follow_status = 'active'
+        left join tbl_company_profile_file cpf on c.user_id = cpf.company_id
+        left join tbl_file profile_file on cpf.file_id = profile_file.id
+        left join tbl_company_background_file cbf on c.user_id = cbf.company_id
+        left join tbl_file background_file on cbf.file_id = background_file.id
+        where u.user_status = 'active'
+        group by c.user_id, c.company_name, profile_file.file_path, background_file.file_path
+        order by followerCount desc
+        limit 5
+    </select>
 </mapper>
