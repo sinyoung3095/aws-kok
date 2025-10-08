@@ -1,6 +1,5 @@
 package com.example.kok.dto;
 
-import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.enumeration.Status;
 import lombok.*;
 import org.springframework.stereotype.Component;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Component;
 @ToString
 @NoArgsConstructor
 @EqualsAndHashCode(of ="id")
-public class InternNoticeDTO {
+public class AdminInternNoticeDetailDTO {
     private Long id;
     private Long companyId;
     private String internNoticeTitle;
@@ -26,4 +25,6 @@ public class InternNoticeDTO {
     private String internEndDate;
     private String createdDateTime;
     private String updatedDateTime;
+
+    private String companyName;
 }
