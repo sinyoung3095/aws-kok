@@ -261,20 +261,6 @@ function sortBtnFn() {
 }
 sortBtnFn();
 
-// 페이지네이션
-function pagenation() {
-    const pageItems = document.querySelectorAll(".page-list .page-item");
-
-    pageItems.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            pageItems.forEach((item) => item.classList.remove("active"));
-
-            btn.classList.add("active");
-        });
-    });
-}
-pagenation();
-
 // 광고 배너
 function bannerActiveFn() {
     const banners = document.querySelectorAll(".banner-list .ad-banner");
@@ -307,3 +293,68 @@ function bannerActiveFn() {
     timer = setInterval(showRandomBanner, 5000);
 }
 bannerActiveFn();
+
+const companyId = document.querySelector(".btn-follow")?.dataset.companyId;
+if (companyId) {
+    let currentPage = 1;
+    let search = { keyword: "", category: "" };
+
+    const keywordInput = document.getElementById("keyword-input");
+    const sortBtns = document.querySelectorAll(".sort-options .sort-btn");
+    const paginationContainer = document.querySelector(".page-list");
+
+    // 초기 호출
+    showExperienceNoticeList();
+
+    // 검색
+    if (keywordInput) {
+        keywordInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                search.keyword = keywordInput.value.trim();
+                currentPage = 1;
+                showExperienceNoticeList();
+            }
+        });
+    }
+
+    // 전체/체험/인턴 필터 클릭
+    sortBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            sortBtns.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            const text = btn.textContent.trim();
+            if (text === "전체") search.category = "";
+            else if (text === "체험") search.category = "experience";
+            else if (text === "인턴") search.category = "intern";
+
+            currentPage = 1;
+            showExperienceNoticeList();
+        });
+    });
+
+    // 페이지 클릭
+    const pagination = document.querySelector(".pagenation");
+
+    if (pagination) {
+        pagination.addEventListener("click", (e) => {
+            const target = e.target.closest(".page-item");
+            if (!target || target.disabled) return;
+
+            const targetPage = Number(target.dataset.page);
+            if (!isNaN(targetPage)) {
+                currentPage = targetPage;
+                showExperienceNoticeList();
+            }
+        });
+    }
+
+    async function showExperienceNoticeList() {
+        await companyNoticeService.getExperienceNotices(
+            companyId,
+            currentPage,
+            search,
+            (data) => companyNoticeLayout.showExperienceNotices(data)
+        );
+    }
+}

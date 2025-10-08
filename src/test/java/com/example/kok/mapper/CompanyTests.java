@@ -27,8 +27,9 @@ public class CompanyTests {
         Criteria criteria = new Criteria(1, 10);
         CompanySearch search = new CompanySearch();
         search.setKeyword("그린");
-        List<CompanyDTO> result = companyMapper.selectCompanyAll(criteria, search);
 
-        log.info("검색 결과: {}", result);
+//        List<CompanyDTO> result = companyMapper.selectCompanyAll(criteria, search);
+//
+//        log.info("검색 결과: {}", result);
     }
 }

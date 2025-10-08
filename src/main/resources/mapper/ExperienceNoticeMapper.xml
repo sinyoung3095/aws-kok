@@ -15,15 +15,15 @@
 
     <sql id="companyNoticeSearch">
         <if test="search.keyword != null and search.keyword != ''">
-            AND (
-            LOWER(e.experience_notice_title) LIKE CONCAT('%', LOWER(#{search.keyword}), '%')
-            OR LOWER(e.experience_notice_subtitle) LIKE CONCAT('%', LOWER(#{search.keyword}), '%')
-            OR LOWER(e.experience_notice_etc) LIKE CONCAT('%', LOWER(#{search.keyword}), '%')
-            OR LOWER(j.job_name) LIKE CONCAT('%', LOWER(#{search.keyword}), '%')
+            and (
+            lower(e.experience_notice_title) like concat('%', lower(#{search.keyword}), '%')
+            or lower(e.experience_notice_subtitle) like concat('%', lower(#{search.keyword}), '%')
+            or lower(e.experience_notice_etc) like concat('%', lower(#{search.keyword}), '%')
+            or lower(j.job_name) like concat('%', lower(#{search.keyword}), '%')
             )
         </if>
         <if test="search.category != null and search.category != '' and search.category != '전체'">
-            AND e.experience_notice_category = #{search.category}
+            and e.experience_notice_category = #{search.category}
         </if>
     </sql>
 <!--    조회-->
@@ -124,7 +124,7 @@
         and e.company_id = #{companyId}
         <include refid="companyNoticeSearch"></include>
         order by e.created_datetime desc
-        limit #{criteria.amount} offset #{criteria.startRow}
+        limit #{criteria.rowCount} offset #{criteria.offset}
     </select>
 
     <select id="selectExperienceNoticeCountByCompanyId" resultType="int">
@@ -133,7 +133,7 @@
         join tbl_company c on c.user_id = e.company_id
         left join tbl_experience_job_category ej on ej.experience_notice_id = e.id
         left join tbl_job_category j on j.id = ej.job_category
-        where e.experience_end_date &gt;= now()
+        where e.experience_notice_end_date >= now()
         and e.experience_notice_status = 'active'
         and e.company_id = #{companyId}
         <include refid="companyNoticeSearch"></include>

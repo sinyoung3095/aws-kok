@@ -56,11 +56,11 @@ public class CompanyServiceImpl implements CompanyService {
 
 //    기업 목록
     @Override
-    public CompaniesCriteriaDTO getCompanyList(int page, CompanySearch search) {
+    public CompaniesCriteriaDTO getCompanyList(int page, CompanySearch search, Long userId) {
 //        System.out.println("검색 한 내용 " + search);
 
         Criteria criteria = new Criteria(page, companyDAO.findTotalCount(search));
-        List<CompanyDTO> companies = companyDAO.findCompanies(criteria, search);
+        List<CompanyDTO> companies = companyDAO.findCompanies(criteria, search, userId);
 //        System.out.println("기업들" + companies);
 
         criteria.setHasMore(criteria.getPage() < criteria.getRealEnd());

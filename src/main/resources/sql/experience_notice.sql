@@ -41,7 +41,7 @@ alter table tbl_experience_notice
 -- 선택사항2 -
 update tbl_experience_notice
 set experience_notice_status = 'active'
-where experience_notice_status is null;
+where experience_notice_status = 'inactive';
 
 select * from tbl_experience_notice;
 
@@ -51,4 +51,8 @@ alter table tbl_experience_notice
 insert into tbl_experience_notice (experience_notice_title, experience_notice_subtitle, experience_notice_introduce_job, experience_notice_etc, experience_start_date, experience_end_date, company_id, experience_main_tasks, experience_notice_start_date, experience_notice_end_date)
 values ('공고 제목3', '공고 부제목3', '직무 소개1', '참고사항1', '2025-09-25', '2025-09-26', 6, '주요업무1', '2025-09-25', '2025-09-26');
 
-select * from tbl_experience_notice order by id;
+select * from tbl_experience_notice where company_id = 7;
+
+delete from tbl_experience_notice where company_id = 7;
+insert into tbl_experience_notice (experience_notice_title, experience_notice_subtitle, experience_notice_introduce_job, experience_notice_etc, experience_start_date, experience_end_date, company_id, experience_main_tasks, experience_notice_start_date, experience_notice_end_date)
+values ('체험 제목26', '체험 부제목26', '직무 소개1', '참고사항1', '2025-09-25', '2025-09-26', 7, '주요업무1', '2025-09-25', '2025-11-26');

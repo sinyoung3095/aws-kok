@@ -45,8 +45,8 @@ public class CompanyDAO {
     };
 
 //    기업 목록
-    public List<CompanyDTO> findCompanies(Criteria criteria, CompanySearch search) {
-        return companyMapper.selectCompanyAll(criteria, search);
+    public List<CompanyDTO> findCompanies(Criteria criteria, CompanySearch search, Long userId) {
+        return companyMapper.selectCompanyAll(criteria, search, userId);
     }
 
 //    기업 수

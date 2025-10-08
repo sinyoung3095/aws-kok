@@ -27,13 +27,14 @@ public class CompanyListController {
 
 //    기업 목록
     @GetMapping("/{page}")
-    public CompaniesCriteriaDTO getCompanyList(@PathVariable("page") int page, CompanySearch search) {
-        return companyService.getCompanyList(page, search);
+    public CompaniesCriteriaDTO getCompanyList(@PathVariable("page") int page, CompanySearch search, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        Long userId = customUserDetails.getId();
+        return companyService.getCompanyList(page, search, userId);
     }
 
     @GetMapping("/{companyId}/experiences/{page}")
-    public CompanyExperienceNoticeCriteriaDTO getCompanyExperiences(@PathVariable("companyId") Long companyId, @PathVariable("page") int page, Search search) {
-        log.info("기업별 체험 공고 목록 - companyId: {}, page: {}, search: {}", companyId, page, search);
+    public CompanyExperienceNoticeCriteriaDTO getCompanyExperienceNotices(@PathVariable("companyId") Long companyId, @PathVariable("page") int page, Search search) {
+//        log.info("기업별 체험 공고 목록 - companyId: {}, page: {}, search: {}", companyId, page, search);
         return experienceNoticeService.getExperienceNoticesByCompanyId(page, companyId, search);
     }
 }

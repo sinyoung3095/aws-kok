@@ -26,7 +26,7 @@ public interface CompanyMapper {
     public void insertCompany(CompanyDTO  companyDTO);
 
 //    기업 목록
-    public List<CompanyDTO> selectCompanyAll(@Param("criteria") Criteria criteria, @Param("search") CompanySearch search);
+    public List<CompanyDTO> selectCompanyAll(@Param("criteria") Criteria criteria, @Param("search") CompanySearch search, @Param("userId") Long userId);
 
 //    기업 수
     public int selectCompanyCount(@Param("search") CompanySearch search);

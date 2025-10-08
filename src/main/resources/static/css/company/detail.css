@@ -491,6 +491,7 @@
     opacity: 0;
     transition: .5s ease;
     z-index: 9999;
+    pointer-events: none;
 }
 
 .toast-warning-content {
@@ -516,6 +517,7 @@
 .toast-warning.show {
     transform: translate(-50%, 0);
     opacity: 1;
+    pointer-events: auto;
 }
 
 .toast-subText {
