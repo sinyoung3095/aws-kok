@@ -151,8 +151,7 @@ internNoticeService.getList(companyId, page, status, keyword,(data) => {
 
 
 // ######################### 검색 ############################
-// 요소 가져오기
-const searchInput = document.querySelector(".search-input");     // 검색어
+const searchInput = document.querySelector(".search-input"); // 검색어
 const statusButtons = document.querySelectorAll(".category-sub"); // 전체/모집중/종료
 
 // 상태 버튼 이벤트 (전체/모집중/모집종료)
