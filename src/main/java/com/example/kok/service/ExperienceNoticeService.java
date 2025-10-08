@@ -29,5 +29,5 @@ public interface ExperienceNoticeService {
     public boolean isSavedExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO);
 
 //    기업별 체험 공고
-    public CompanyExperienceNoticeCriteriaDTO getNoticesByCompanyId(int page, Long companyId, Search search);
+    public CompanyExperienceNoticeCriteriaDTO getExperienceNoticesByCompanyId(int page, Long companyId, Search search);
 }
