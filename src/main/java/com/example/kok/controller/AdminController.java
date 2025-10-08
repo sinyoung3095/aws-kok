@@ -93,9 +93,9 @@ public class AdminController {
         return "admin/banner";
     }
     @PostMapping("banner/save")
-    public RedirectView saveBanner(@RequestParam(value = "files", required = false) List<MultipartFile> multipartFiles) {
-        BannerFileDTO bannerFileDTO = new BannerFileDTO();
-        adminBannerService.save(bannerFileDTO, multipartFiles);
+    public RedirectView saveBanner(@RequestParam(value = "file", required = false) List<MultipartFile> multipartFiles) {
+        log.info("저장 컨트롤러 들어옴");
+        adminBannerService.save(multipartFiles);
         return new RedirectView("/admin/banner");
     }
     @PostMapping("banner/delete/{id}")

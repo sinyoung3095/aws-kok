@@ -192,7 +192,7 @@
                                 <div class="title">
                                     현수막 등록
                                 </div>
-                                <form id="banner-form" action="" method="">
+                                <form th:action="@{/admin/banner/save}" id="banner-form" method="post" enctype="multipart/form-data">
                                     <!-- 아래 Li수만큼 Img -->
                                     <div class="dropdown" style="width: 97px; height: 30px;">
                                         <label>
@@ -211,9 +211,10 @@
                                             <!--  첨부 사진 미리보기  -->
                                             </li>
                                         </ul>
-                                        <a th:href="@{/admin/banner/save}">
+<!--                                        <a th:href="@{/admin/banner/save}">-->
+<!--                                            <a href="/admin/banner/save">-->
                                             <button type="submit" class="register-link">등록</button>
-                                        </a>
+<!--                                            </a>-->
                                     </div>
                                 </form>
                             </div>                   
@@ -227,9 +228,9 @@
                                 </colgroup>
                                 <thead>
                                     <tr>
-                                        <th>이미지 위치</th>
                                         <th>이미지 원본 이름</th>
                                         <th>이미지</th>
+                                        <th>이미지 형식</th>
                                         <th>업로드 날짜</th>
                                         <th>삭제</th>
                                     </tr>
