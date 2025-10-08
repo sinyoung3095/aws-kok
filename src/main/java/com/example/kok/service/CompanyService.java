@@ -12,7 +12,7 @@ public interface CompanyService {
     public CompanyDTO findCompanyById(Long companyId);
 
 //    기업 목록
-    public CompaniesCriteriaDTO getCompanyList(int page, CompanySearch search);
+    public CompaniesCriteriaDTO getCompanyList(int page, CompanySearch search, Long userId);
 
 //    인기 기업 목록
     public List<CompanyDTO> getCompaniesByFollowerCount();

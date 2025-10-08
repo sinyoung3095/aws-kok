@@ -27,6 +27,10 @@ public class CommunityController {
     public String goToCommunityPage(Model model,
                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
+        if (customUserDetails == null) {
+            return "redirect:/member/login";
+        }
+
         Long memberId = customUserDetails.getId();
         model.addAttribute("posts", communityPostService.getList(1, memberId).getPosts());
 

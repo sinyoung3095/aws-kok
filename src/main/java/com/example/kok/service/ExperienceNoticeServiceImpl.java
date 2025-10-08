@@ -153,9 +153,6 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
         List<ExperienceNoticeDTO> notices = experienceNoticeDAO.findAllByCompanyId(companyId, criteria, search);
 
         criteria.setHasMore(criteria.getPage() < criteria.getRealEnd());
-        if (criteria.isHasMore() && !notices.isEmpty()) {
-            notices.remove(notices.size() - 1);
-        }
 
         CompanyExperienceNoticeCriteriaDTO companyExperienceNoticeCriteriaDTO = new CompanyExperienceNoticeCriteriaDTO();
         companyExperienceNoticeCriteriaDTO.setCriteria(criteria);

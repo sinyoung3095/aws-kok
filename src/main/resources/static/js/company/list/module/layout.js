@@ -18,7 +18,7 @@ const companyLayout = (() => {
         companiesCriteria.companies.forEach((company) => {
             text += `
             <div class="list-item" data-company-id="${company.userId}">
-                <button class="list-item-btn" onclick="window.location.href='/company/detail/${company.userId}'">
+                <button class="list-item-btn" onclick="window.location.href='/company/${company.userId}'">
                     <div class="list-item-background">
                         <img src="${company.companyBackgroundFile || '/images/mypage/banner.jpg'}">
                     </div>

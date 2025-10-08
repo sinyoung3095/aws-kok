@@ -623,7 +623,6 @@ div {
     display: flex;
 }
 .etc-9{
-    cursor: pointer;
     justify-content: center;
     align-items: center;
     gap: 6px;
