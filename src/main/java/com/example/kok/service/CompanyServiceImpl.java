@@ -89,4 +89,25 @@ public class CompanyServiceImpl implements CompanyService {
         return companiesCriteriaDTO;
     }
 
+//    인기 기업 목록
+    @Override
+    public List<CompanyDTO> getCompaniesByFollowerCount() {
+        List<CompanyDTO> companies = companyDAO.findCompaniesByFollowerCount();
+
+        companies.forEach(company -> {
+            if (company.getCompanyProfileFile() != null) {
+                company.setCompanyProfileFile(
+                        s3Service.getPreSignedUrl(company.getCompanyProfileFile(), Duration.ofMinutes(10))
+                );
+            }
+
+            if (company.getCompanyBackgroundFile() != null) {
+                company.setCompanyBackgroundFile(
+                        s3Service.getPreSignedUrl(company.getCompanyBackgroundFile(), Duration.ofMinutes(10))
+                );
+            }
+        });
+
+        return companies;
+    }
 }

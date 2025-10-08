@@ -30,4 +30,7 @@ public interface CompanyMapper {
 
 //    기업 수
     public int selectCompanyCount(@Param("search") CompanySearch search);
+
+//    인기 기업 목록
+    public List<CompanyDTO> selectCompaniesByFollowerCount();
 }
