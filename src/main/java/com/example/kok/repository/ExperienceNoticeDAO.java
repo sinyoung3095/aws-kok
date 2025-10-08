@@ -43,11 +43,11 @@ public class ExperienceNoticeDAO {
 
 //    기업별 체험 공고 목록
     public List<ExperienceNoticeDTO> findAllByCompanyId(Long companyId, CompanyNoticeCriteria criteria, Search search) {
-        return experienceNoticeMapper.selectAllNoticeByCompanyId(companyId, criteria, search);
+        return experienceNoticeMapper.selectExperienceNoticeByCompanyId(companyId, criteria, search);
     }
 
 //    기업별 체험 공고 갯수
     public int findCountByCompanyId(Long companyId, Search search) {
-        return experienceNoticeMapper.selectAllNoticeCountByCompanyId(companyId, search);
+        return experienceNoticeMapper.selectExperienceNoticeCountByCompanyId(companyId, search);
     }
 }

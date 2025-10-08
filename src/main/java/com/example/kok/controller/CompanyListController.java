@@ -34,6 +34,6 @@ public class CompanyListController {
     @GetMapping("/{companyId}/experiences/{page}")
     public CompanyExperienceNoticeCriteriaDTO getCompanyExperiences(@PathVariable("companyId") Long companyId, @PathVariable("page") int page, Search search) {
         log.info("기업별 체험 공고 목록 - companyId: {}, page: {}, search: {}", companyId, page, search);
-        return experienceNoticeService.getNoticesByCompanyId(page, companyId, search);
+        return experienceNoticeService.getExperienceNoticesByCompanyId(page, companyId, search);
     }
 }

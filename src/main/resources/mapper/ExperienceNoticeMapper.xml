@@ -15,15 +15,15 @@
 
     <sql id="companyNoticeSearch">
         <if test="search.keyword != null and search.keyword != ''">
-            and (
-            lower(e.experience_notice_title) like concat('%', lower(#{search.keyword}), '%')
-            or lower(e.experience_notice_subtitle) like concat('%', lower(#{search.keyword}), '%')
-            or lower(e.experience_notice_etc) like concat('%', lower(#{search.keyword}), '%')
-            or lower(j.job_name) like concat('%', lower(#{search.keyword}), '%')
+            AND (
+            LOWER(e.experience_notice_title) LIKE CONCAT('%', LOWER(#{search.keyword}), '%')
+            OR LOWER(e.experience_notice_subtitle) LIKE CONCAT('%', LOWER(#{search.keyword}), '%')
+            OR LOWER(e.experience_notice_etc) LIKE CONCAT('%', LOWER(#{search.keyword}), '%')
+            OR LOWER(j.job_name) LIKE CONCAT('%', LOWER(#{search.keyword}), '%')
             )
         </if>
-        <if test="search.category != null and search.category != ''">
-            and e.experience_notice_category = #{search.category}
+        <if test="search.category != null and search.category != '' and search.category != '전체'">
+            AND e.experience_notice_category = #{search.category}
         </if>
     </sql>
 <!--    조회-->
@@ -109,8 +109,8 @@
         limit 4
     </select>
 
-<!-- 기업별 체험/인턴 공고 목록 -->
-    <select id="selectAllNoticeByCompanyId" resultType="ExperienceNoticeDTO">
+<!-- 기업별 체험 공고 목록 -->
+    <select id="selectExperienceNoticeByCompanyId" resultType="ExperienceNoticeDTO">
         select e.id, e.experience_notice_title, e.experience_notice_subtitle, e.experience_notice_etc,
                e.experience_main_tasks, s.id as scale_id, s.company_scale_name, j.job_name
         from tbl_experience_notice e
@@ -127,7 +127,7 @@
         limit #{criteria.amount} offset #{criteria.startRow}
     </select>
 
-    <select id="selectAllNoticeCountByCompanyId" resultType="int">
+    <select id="selectExperienceNoticeCountByCompanyId" resultType="int">
         select count(*)
         from tbl_experience_notice e
         join tbl_company c on c.user_id = e.company_id

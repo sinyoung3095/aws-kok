@@ -147,7 +147,7 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
 
 //    기업별 체험 공고
     @Override
-    public CompanyExperienceNoticeCriteriaDTO getNoticesByCompanyId(int page, Long companyId, Search search) {
+    public CompanyExperienceNoticeCriteriaDTO getExperienceNoticesByCompanyId(int page, Long companyId, Search search) {
         int total = experienceNoticeDAO.findCountByCompanyId(companyId, search);
         CompanyNoticeCriteria criteria = new CompanyNoticeCriteria(page, total);
         List<ExperienceNoticeDTO> notices = experienceNoticeDAO.findAllByCompanyId(companyId, criteria, search);

@@ -28,8 +28,8 @@ public interface ExperienceNoticeMapper {
     public List<ExperienceNoticeDTO> selectLatestFour();
 
 //    기업별 체험 공고 목록
-    public List<ExperienceNoticeDTO> selectAllNoticeByCompanyId(@Param("companyId") Long companyId, @Param("criteria") CompanyNoticeCriteria criteria, @Param("search") Search search);
+    public List<ExperienceNoticeDTO> selectExperienceNoticeByCompanyId(@Param("companyId") Long companyId, @Param("criteria") CompanyNoticeCriteria criteria, @Param("search") Search search);
 
 //    기업별 체험 공고 갯수
-    public int selectAllNoticeCountByCompanyId(@Param("companyId") Long companyId, @Param("search") Search search);
+    public int selectExperienceNoticeCountByCompanyId(@Param("companyId") Long companyId, @Param("search") Search search);
 }
