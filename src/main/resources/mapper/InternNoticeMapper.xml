@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.InternNoticeMapper">
+    <sql id="companyInternNoticeSearch">
+        <if test="search.keyword != null and search.keyword != ''">
+            and (
+            lower(i.intern_notice_title) like concat('%', lower(#{search.keyword}), '%')
+            or lower(i.intern_notice_subtitle) like concat('%', lower(#{search.keyword}), '%')
+            or lower(i.intern_notice_introduce_job) like concat('%', lower(#{search.keyword}), '%')
+            or lower(i.intern_main_tasks) like concat('%', lower(#{search.keyword}), '%')
+            or lower(i.intern_notice_etc) like concat('%', lower(#{search.keyword}), '%')
+            or lower(j.job_name) like concat('%', lower(#{search.keyword}), '%')
+            )
+        </if>
+    </sql>
+
+<!-- 기업별 인턴 공고 목록 -->
+    <select id="selectInternNoticeByCompanyId" resultType="InternNoticeDTO">
+        select i.id, i.intern_notice_title, i.intern_notice_subtitle, i.intern_notice_introduce_job,
+               i.intern_main_tasks, i.intern_notice_etc, s.id as scale_id, s.company_scale_name, j.job_name
+        from tbl_intern_notice i
+        join tbl_company c on c.user_id = i.company_id
+        left join tbl_company_scale_category_bridge b on i.company_id = b.company_id
+        left join tbl_company_scale_category s on b.company_scale_category_id = s.id
+        left join tbl_experience_job_category ej on ej.experience_notice_id = e.id
+        left join tbl_job_category j on j.id = ej.job_category
+        where i.intern_notice_end_date >= now()
+        and i.intern_notice_status = 'active'
+        and i.company_id = #{companyId}
+        <include refid="companyInternNoticeSearch"/>
+        order by i.created_datetime desc
+        limit #{criteria.rowCount} offset #{criteria.offset}
+    </select>
+
+    <select id="selectInternNoticeCountByCompanyId" resultType="int">
+        select count(*)
+        from tbl_intern_notice i
+        join tbl_company c on c.user_id = i.company_id
+        where i.intern_notice_end_date >= now()
+        and i.intern_notice_status = 'active'
+        and i.company_id = #{companyId}
+        <include refid="companyInternNoticeSearch"/>
+    </select>
+</mapper>
