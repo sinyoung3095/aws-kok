@@ -26,4 +26,7 @@ public class CompanyDTO{
     private String companyBackgroundFile;
     private String companyProfileFile;
     private String companySectorName;
+
+    private int experienceCountByEndDate;
+    private int internCountByEndDate;
 }

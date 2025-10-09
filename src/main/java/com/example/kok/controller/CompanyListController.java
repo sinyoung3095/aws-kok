@@ -1,10 +1,7 @@
 package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
-import com.example.kok.dto.CompaniesCriteriaDTO;
-import com.example.kok.dto.CompanyExperienceNoticeCriteriaDTO;
-import com.example.kok.dto.CompanyInternNoticeCriteriaDTO;
-import com.example.kok.dto.PostsCriteriaDTO;
+import com.example.kok.dto.*;
 import com.example.kok.service.CompanyService;
 import com.example.kok.service.ExperienceNoticeService;
 import com.example.kok.service.InternNoticeService;
@@ -34,8 +31,6 @@ public class CompanyListController {
         Long userId = customUserDetails.getId();
         return companyService.getCompanyList(page, search, userId);
     }
-
-//    기업 전체 공고 목록
 
 //    기업 체험 공고 목록
     @GetMapping("/{companyId}/experiences/{page}")

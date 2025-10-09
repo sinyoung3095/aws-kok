@@ -9,7 +9,7 @@ const companyNoticeLayout = (() => {
         if (!experienceNotice.experiences || experienceNotice.experiences.length === 0) {
             html = `
                 <div class="no-data">
-                    <p class="title">공고가 없습니다.</p>
+                    <p class="title">체험 공고가 없습니다.</p>
                     <p class="description">팔로우하면 새 공고 알림을 받을 수 있어요.</p>
                 </div>
             `;
@@ -17,7 +17,7 @@ const companyNoticeLayout = (() => {
             experienceNotice.experiences.forEach((experience) => {
                 html += `
                     <div class="card-item">
-                        <a href="/experience/detail/${experience.id}" class="card-link">
+                        <a href="" class="card-link">
                             <div class="card-content">
                                 <p class="card-title">${experience.experienceNoticeTitle}</p>
                                 <p class="card-desc">${experience.experienceNoticeSubtitle}</p>
@@ -30,6 +30,34 @@ const companyNoticeLayout = (() => {
 
         listContainer.innerHTML = html;
         showPagination(experienceNotice.criteria);
+    };
+
+    const showInternNotices = (internNotice) => {
+        let html = "";
+        if (!internNotice.interns || internNotice.interns.length === 0) {
+            html = `
+                <div class="no-data">
+                    <p class="title">인턴 공고가 없습니다.</p>
+                    <p class="description">팔로우하면 새 공고 알림을 받을 수 있어요.</p>
+                </div>
+            `;
+        } else {
+            internNotice.interns.forEach((intern) => {
+                html += `
+                    <div class="card-item">
+                        <a href="" class="card-link">
+                            <div class="card-content">
+                                <p class="card-title">${intern.internNoticeTitle}</p>
+                                <p class="card-desc">${intern.internNoticeSubTitle}</p>
+                            </div>
+                        </a>
+                    </div>
+                `;
+            });
+        }
+
+        listContainer.innerHTML = html;
+        showPagination(internNotice.criteria);
     };
 
     const showPagination = (criteria) => {
@@ -57,5 +85,5 @@ const companyNoticeLayout = (() => {
         }
     };
 
-    return { showExperienceNotices : showExperienceNotices };
+    return { showExperienceNotices : showExperienceNotices, showInternNotices : showInternNotices, showPagination : showPagination };
 })();
