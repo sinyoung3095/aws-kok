@@ -21,9 +21,9 @@
             )
         </if>
         group by
-        a.id, a.advertisement_main_text, a.advertisement_sub_text,
-        a.advertisement_request_status, a.advertise_start_datetime, a.advertise_end_datetime,
-        a.created_datetime
+            a.id, a.advertisement_main_text, a.advertisement_sub_text,
+            a.advertisement_request_status, a.advertise_start_datetime, a.advertise_end_datetime,
+            a.created_datetime
         order by a.created_datetime desc
         limit #{criteria.count} offset #{criteria.offset}
     </select>
@@ -31,8 +31,8 @@
     <select id="selectCountByCompany">
         select count(distinct a.id)
         from tbl_advertisement a
-        left join tbl_payment p
-        on a.id = p.advertisement_id
+            left join tbl_payment p
+                on a.id = p.advertisement_id
         where a.company_id = #{companyId}
         <if test="status != null">
             <choose>
@@ -102,6 +102,5 @@
                  left join tbl_payment p on a.id = p.advertisement_id
         where a.id = #{id}
     </select>
-
 </mapper>
 

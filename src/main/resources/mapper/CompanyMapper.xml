@@ -127,4 +127,25 @@
         order by followerCount desc
         limit 5
     </select>
+
+<!-- 등록기간 지나지 않은 체험 공고 -->
+    <select id="selectExperienceByEndDate" resultType="int">
+        select count(*)
+        from tbl_experience_notice e
+                 join tbl_company c
+                      on e.company_id=c.user_id
+        where e.experience_notice_status='active'
+          and e.experience_notice_end_date >= now()
+          and e.company_id=#{companyId}
+    </select>
+<!-- 등록기간 지나지 않은 인턴 공고 수 조회-->
+    <select id="selectInternByEndDate" resultType="int">
+        select count(*)
+        from tbl_intern_notice i
+                 join tbl_company c
+                      on i.company_id=c.user_id
+        where i.intern_notice_status='active'
+          and i.intern_notice_end_date >= now()
+          and i.company_id=#{companyId}
+    </select>
 </mapper>

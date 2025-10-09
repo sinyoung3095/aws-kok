@@ -1,11 +1,9 @@
 package com.example.kok.dto;
 
 import com.example.kok.enumeration.RequestStatus;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,6 +12,7 @@ import java.util.List;
 @Component
 @Getter @Setter
 @ToString
+@NoArgsConstructor
 @EqualsAndHashCode(of="id")
 public class ConsoleAdNoticeDTO {
     private long id; // 결제 id
@@ -28,5 +27,6 @@ public class ConsoleAdNoticeDTO {
     private String updatedDateTime;
     private int paymentPrice; // 금액
 
-    private List<PostFileDTO> postFiles;
+    private List<MultipartFile> uploadFiles;
+    private List<FileDTO> files;
 }

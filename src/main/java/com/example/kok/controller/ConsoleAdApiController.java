@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -28,20 +31,20 @@ public class ConsoleAdApiController {
     }
 
 //    등록
-    @PostMapping("/create")
-    public ResponseEntity<?> createNotice(@RequestBody ConsoleAdNoticeDTO adNoticeDTO) {
-        adService.registerAdvertisement(adNoticeDTO);
-        return ResponseEntity.ok(adNoticeDTO);
-    }
+//    @PostMapping("/create")
+//    public ResponseEntity<?> createNotice(@RequestBody ConsoleAdNoticeDTO adNoticeDTO, @RequestParam("files") List<MultipartFile> multipartFiles) {
+//        adService.registerAdvertisement(adNoticeDTO, multipartFiles);
+//        return ResponseEntity.ok(adNoticeDTO);
+//    }
 
 //    수정
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<?> updateNotice(@PathVariable Long id,
-                                          @RequestBody ConsoleAdNoticeDTO adNoticeDTO) {
-        adNoticeDTO.setId(id);
-        adService.modifyNotice(adNoticeDTO);
-
-        log.info("수정 요청 DTO = {}", adNoticeDTO);
-        return ResponseEntity.ok(adNoticeDTO);
-    }
+//    @PutMapping("/edit/{id}")
+//    public ResponseEntity<?> updateNotice(@PathVariable Long id,
+//                                          @RequestBody ConsoleAdNoticeDTO adNoticeDTO) {
+//        adNoticeDTO.setId(id);
+//        adService.modifyNotice(adNoticeDTO);
+//
+//        log.info("수정 요청 DTO = {}", adNoticeDTO);
+//        return ResponseEntity.ok(adNoticeDTO);
+//    }
 }

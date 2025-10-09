@@ -11,18 +11,18 @@ select * from tbl_intern_job_category;
 
 -- 1번 회사 (그린테크) 공고 12개 매핑
 insert into tbl_intern_job_category (intern_notice_id, job_category) values
-                                                                         (1, 1),   -- SW 개발
-                                                                         (2, 2),   -- 데이터/AI
-                                                                         (3, 3),   -- 기획/전략
-                                                                         (4, 12),  -- HW 개발
-                                                                         (5, 13),  -- 연구/R&D
-                                                                         (6, 4),   -- 디자인/UX
-                                                                         (7, 5),   -- 마케팅/PR
-                                                                         (8, 18),  -- 제조/생산
-                                                                         (9, 20),  -- 식품/조리
-                                                                         (10, 21), -- 숙박/레저
-                                                                         (11, 6),  -- 경영/운영
-                                                                         (12, 7);  -- HR/인사
+                                                                         (13, 1),   -- SW 개발
+                                                                         (14, 2),   -- 데이터/AI
+                                                                         (16, 3),   -- 기획/전략
+                                                                         (17, 12),  -- HW 개발
+                                                                         (19, 13),  -- 연구/R&D
+                                                                         (20, 4),   -- 디자인/UX
+                                                                         (21, 5),   -- 마케팅/PR
+                                                                         (22, 18),  -- 제조/생산
+                                                                         (24, 20),  -- 식품/조리
+                                                                         (26, 21), -- 숙박/레저
+                                                                         (27, 6),  -- 경영/운영
+                                                                         (29, 7);  -- HR/인사
 
 -- 2번 회사 (스타푸드)
 insert into tbl_intern_job_category (intern_notice_id, job_category) values

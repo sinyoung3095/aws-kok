@@ -1,8 +1,6 @@
-// 목록
 const experienceNoticeService = (() => {
     // 목록
     const getList = async (companyId, page, status, keyword, callback) => {
-        console.log("보내는 keyword:", keyword);
         const response = await fetch(`/api/enterprise-console/experience/list/${companyId}/${page}?status=${status ?? ""}&keyword=${keyword ?? ""}`);
         const data = await response.json();
 
@@ -16,7 +14,7 @@ const experienceNoticeService = (() => {
             console.log("공고 존재")
             console.log(data)
         } else if (response.status === 404) {
-            console.log("게시글 없음")
+            console.log("공고 없음")
         } else {
             const error = await response.text()
             console.log(error);

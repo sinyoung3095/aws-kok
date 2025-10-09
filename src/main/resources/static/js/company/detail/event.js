@@ -294,7 +294,7 @@ function bannerActiveFn() {
 }
 bannerActiveFn();
 
-const companyId = document.querySelector(".btn-follow")?.dataset.companyId;
+const companyId = document.querySelector(".btn-follow").dataset.companyId;
 if (companyId) {
     let currentPage = 1;
     let search = { keyword: "", category: "" };
@@ -303,7 +303,6 @@ if (companyId) {
     const sortBtns = document.querySelectorAll(".sort-options .sort-btn");
     const paginationContainer = document.querySelector(".page-list");
 
-    // 초기 호출
     showExperienceNoticeList();
 
     // 검색
@@ -312,30 +311,37 @@ if (companyId) {
             if (e.key === "Enter") {
                 search.keyword = keywordInput.value.trim();
                 currentPage = 1;
-                showExperienceNoticeList();
+
+                if (search.category === "intern") {
+                    showInternNoticeList();
+                } else {
+                    showExperienceNoticeList();
+                }
             }
         });
     }
 
-    // 전체/체험/인턴 필터 클릭
+    // 체험/인턴 카테고리
     sortBtns.forEach((btn) => {
         btn.addEventListener("click", () => {
             sortBtns.forEach((b) => b.classList.remove("active"));
             btn.classList.add("active");
 
             const text = btn.textContent.trim();
-            if (text === "전체") search.category = "";
-            else if (text === "체험") search.category = "experience";
-            else if (text === "인턴") search.category = "intern";
-
-            currentPage = 1;
-            showExperienceNoticeList();
+            if (text === "체험") {
+                search.category = "experience";
+                currentPage = 1;
+                showExperienceNoticeList();
+            } else if (text === "인턴") {
+                search.category = "intern";
+                currentPage = 1;
+                showInternNoticeList();
+            }
         });
     });
 
-    // 페이지 클릭
+    // 페이징 처리
     const pagination = document.querySelector(".pagenation");
-
     if (pagination) {
         pagination.addEventListener("click", (e) => {
             const target = e.target.closest(".page-item");
@@ -344,17 +350,33 @@ if (companyId) {
             const targetPage = Number(target.dataset.page);
             if (!isNaN(targetPage)) {
                 currentPage = targetPage;
-                showExperienceNoticeList();
+
+                if (search.category === "intern") {
+                    showInternNoticeList();
+                } else {
+                    showExperienceNoticeList();
+                }
             }
         });
     }
 
+    // 체험 공고
     async function showExperienceNoticeList() {
         await companyNoticeService.getExperienceNotices(
             companyId,
             currentPage,
             search,
             (data) => companyNoticeLayout.showExperienceNotices(data)
+        );
+    }
+
+    // 인턴 공고
+    async function showInternNoticeList() {
+        await companyNoticeService.getInternNotices(
+            companyId,
+            currentPage,
+            search,
+            (data) => companyNoticeLayout.showInternNotices(data)
         );
     }
 }

@@ -18,8 +18,10 @@ public interface CompanyMapper {
     public int selectFollowerCountByCompanyId(Long companyId);
     //    체험 공고 수 조회
     public int selectExperienceById(Long companyId);
+    public int selectExperienceByEndDate(Long companyId);
     //    인턴 공고 수 조회
     public int selectInternById(Long companyId);
+    public int selectInternByEndDate(Long companyId);
     //    회사 규모 조회
     public String selectScaleById(Long companyId);
     //    기업회원 회원 가입

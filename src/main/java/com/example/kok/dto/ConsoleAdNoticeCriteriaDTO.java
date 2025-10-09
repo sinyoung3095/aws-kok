@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 @Getter @Setter
 @ToString
-@EqualsAndHashCode(of="id")
+@EqualsAndHashCode
 public class ConsoleAdNoticeCriteriaDTO {
     private List<ConsoleAdNoticeDTO> adLists;
 
