@@ -1,8 +1,10 @@
 package com.example.kok.service;
 
 import com.example.kok.dto.CompaniesCriteriaDTO;
+import com.example.kok.dto.CompanyAllNoticeCriteriaDTO;
 import com.example.kok.dto.CompanyDTO;
 import com.example.kok.util.CompanySearch;
+import com.example.kok.util.Search;
 
 import java.util.List;
 

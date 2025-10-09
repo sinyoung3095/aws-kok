@@ -30,9 +30,17 @@ public class CompanyDAO {
         return companyMapper.selectExperienceById(companyId);
     }
 
+    public int findExperienceByEndDate(Long companyId){
+        return companyMapper.selectExperienceByEndDate(companyId);
+    }
+
 //    인턴 공고 수 조회
     public int findInternById(Long companyId){
         return companyMapper.selectInternById(companyId);
+    }
+
+    public int findInternByEndDate(Long companyId){
+        return companyMapper.selectInternByEndDate(companyId);
     }
 
 //    회사 규모 조회

@@ -1,12 +1,10 @@
 package com.example.kok.service;
 
-import com.example.kok.dto.CompaniesCriteriaDTO;
-import com.example.kok.dto.CompanyDTO;
-import com.example.kok.dto.ReplyDTO;
+import com.example.kok.dto.*;
 import com.example.kok.repository.CompanyDAO;
-import com.example.kok.util.CompanySearch;
-import com.example.kok.util.Criteria;
-import com.example.kok.util.DateUtils;
+import com.example.kok.repository.ExperienceNoticeDAO;
+import com.example.kok.repository.InternNoticeDAO;
+import com.example.kok.util.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
     private final CompanyDAO companyDAO;
+    private final ExperienceNoticeDAO experienceNoticeDAO;
+    private final InternNoticeDAO internNoticeDAO;
     private final S3Service s3Service;
 
 
@@ -47,6 +47,12 @@ public class CompanyServiceImpl implements CompanyService {
 
         int internCount = companyDAO.findInternById(companyId);
         company.setInternCount(internCount);
+
+        int experienceCountByEndDate = companyDAO.findExperienceByEndDate(companyId);
+        company.setExperienceCountByEndDate(experienceCountByEndDate);
+
+        int internCountEndDate = companyDAO.findInternByEndDate(companyId);
+        company.setInternCountByEndDate(internCountEndDate);
 
         String scaleName = companyDAO.findScaleById(companyId);
         company.setScaleName(scaleName);

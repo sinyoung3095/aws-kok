@@ -46,11 +46,11 @@
                                     </div>
                                     <div class="stat-item">
                                         <p class="stat-label">체험공고</p>
-                                        <p class="stat-value" th:text="${company.experienceCount}"></p>
+                                        <p class="stat-value" th:text="${company.experienceCountByEndDate}"></p>
                                     </div>
                                     <div class="stat-item">
                                         <p class="stat-label">인턴공고</p>
-                                        <p class="stat-value" th:text="${company.internCount}"></p>
+                                        <p class="stat-value" th:text="${company.internCountByEndDate}"></p>
                                     </div>
                                 </div>
                                 <div class="company-intro">
@@ -84,10 +84,7 @@
                                 <div class="categoty-tag-box">
                                     <div class="sort-options">
                                         <div class="sort-options-item">
-                                            <button class="sort-btn active">전체</button>
-                                        </div>
-                                        <div class="sort-options-item">
-                                            <button class="sort-btn">체험</button>
+                                            <button class="sort-btn active">체험</button>
                                         </div>
                                         <div class="sort-options-item">
                                             <button class="sort-btn">인턴</button>

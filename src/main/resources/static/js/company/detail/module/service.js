@@ -32,24 +32,25 @@ const followService = (() => {
 const companyNoticeService = (() => {
 
     const getExperienceNotices = async (companyId, page = 1, search = {}, callback) => {
-        let searchContext = "";
-        const contexts = [];
+        let experienceSearchContext = "";
+        const experienceContexts = [];
 
+        // push : 조건이 있는 검색 파라미터만 골라서 배열에 모으는 역할
+        // encodeURIComponent : 검색 파라미터를 URL에 안전하게 넣기 위해 사용하는 함수
         if (search.keyword && search.keyword.trim() !== "") {
-            contexts.push(`keyword=${encodeURIComponent(search.keyword)}`);
+            experienceContexts.push(`keyword=${encodeURIComponent(search.keyword)}`);
         }
 
         if (search.category && search.category.trim() !== "") {
-            contexts.push(`category=${encodeURIComponent(search.category)}`);
+            experienceContexts.push(`category=${encodeURIComponent(search.category)}`);
         }
 
-        if (contexts.length > 0) {
-            searchContext = "?" + contexts.join("&");
+        if (experienceContexts.length > 0) {
+            experienceSearchContext = "?" + experienceContexts.join("&");
         }
 
-        const experienceNotice = `/api/company/${companyId}/experiences/${page}${searchContext}`;
-
-        console.log("체험 카테고리:", experienceNotice);
+        const experienceNotice = `/api/company/${companyId}/experiences/${page}${experienceSearchContext}`;
+        // console.log("체험 카테고리:", experienceNotice);
         const response = await fetch(experienceNotice);
 
         const result = await response.json();
@@ -57,5 +58,33 @@ const companyNoticeService = (() => {
         return result;
     };
 
-    return { getExperienceNotices : getExperienceNotices };
+
+    const getInternNotices = async (companyId, page = 1, search = {}, callback) => {
+        let internSearchContext = "";
+        const internContexts = [];
+
+        // push : 조건이 있는 검색 파라미터만 골라서 배열에 모으는 역할
+        // encodeURIComponent : 검색 파라미터를 URL에 안전하게 넣기 위해 사용하는 함수
+        if (search.keyword && search.keyword.trim() !== "") {
+            internContexts.push(`keyword=${encodeURIComponent(search.keyword)}`);
+        }
+
+        if (search.category && search.category.trim() !== "") {
+            internContexts.push(`category=${encodeURIComponent(search.category)}`);
+        }
+
+        if (internContexts.length > 0) {
+            internSearchContext = "?" + internContexts.join("&");
+        }
+
+        const internNotice = `/api/company/${companyId}/interns/${page}${internSearchContext}`;
+
+        // console.log("인턴 카테고리:", internNotice);
+        const response = await fetch(internNotice);
+        const result = await response.json();
+        if (callback) callback(result);
+        return result;
+    };
+
+    return { getExperienceNotices : getExperienceNotices, getInternNotices : getInternNotices };
 })();
