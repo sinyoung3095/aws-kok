@@ -490,7 +490,8 @@ div.pop-head{
     padding-inline: 8px;
 }
 
-div.hambuger-list{
+div.hambuger-list,
+a.hambuger-list{
     user-select: none;
     outline-style: none;
     font-size: 14px;
@@ -528,7 +529,8 @@ div.bar-hambuger{
     margin-inline: -4px;
 }
 
-div.red-ham-list{
+div.red-ham-list,
+a.red-ham-list{
     user-select: none;
     outline-style: none;
     color: #e7000b;
