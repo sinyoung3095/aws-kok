@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.AdminPaymentAdvertiseMapper">
+    <sql id="search">
+        <if test="keyword != null and keyword != ''">
+            and (
+                c.company_name like concat('%', #{keyword}, '%') or
+                p.payment_price like concat('%', #{keyword}, '%') or
+                p.payment_paid_datetime like concat('%', #{keyword}, '%')
+            )
+        </if>
+    </sql>
+
+<!--  광고 결제 목록  -->
+    <select id="selectPaymentAdvertiseAllList">
+        select a.id,
+               a.advertisement_status,
+               a.advertise_start_datetime,
+               a.advertise_end_datetime,
+               u.user_email,
+               c.company_name,
+               p.payment_price,
+               p.payment_paid_datetime
+        from tbl_advertisement a
+            join tbl_user u
+                on u.id = a.company_id
+            join tbl_company c
+                on c.user_id = a.company_id
+            join tbl_payment p
+                on a.id = p.advertisement_id
+            join tbl_payment_user pu
+                on a.id = pu.advertisement_id
+        where u.user_role = 'company'
+        <include refid="search"/>
+        order by p.id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+<!--  광고 결제 총 개수  -->
+    <select id="countAllPaymentAdvertise">
+        select count(*)
+        from tbl_payment p
+            join tbl_payment_user pu
+                on p.id = pu.payment_id
+        <include refid="search"/>
+    </select>
+
+<!--  승인된 결제 개수  -->
+    <select id="countAcceptPaymentAdvertise">
+        select
+            sum(case when payment_status = 'accept' then 1 else 0 end)
+        from tbl_payment
+    </select>
+</mapper>
