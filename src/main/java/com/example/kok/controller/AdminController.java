@@ -106,7 +106,8 @@ public class AdminController {
 
 //    결제 - 광고
     @GetMapping("payment/advertise")
-    public String goToPaymentAdvertisePage() {
+    public String goToPaymentAdvertisePage(Model model) {
+        model.addAttribute("search", new Search());
         return "admin/payment-advertise";
     }
 
