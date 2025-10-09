@@ -16,6 +16,7 @@ public class AdminRestController {
     private final AdminAdvertisementService adminAdvertisementService;
     private final AdminBannerService adminBannerService;
     private final AdminEmployService adminEmployService;
+    private final AdminPaymentAdvertiseService adminPaymentAdvertiseService;
 
 //    공지 목록
     @GetMapping("support/{page}")
@@ -72,7 +73,7 @@ public class AdminRestController {
         return adminReportService.getReportDetail(id);
     }
 
-//    광고 목록
+//    배너 - 광고 목록
     @GetMapping("advertise/{page}")
     public AdminAdvertisementCriteriaDTO getAdvertisementList(@PathVariable("page") int page,
                                                               @RequestParam(required = false) String keyword,
@@ -80,19 +81,26 @@ public class AdminRestController {
         return adminAdvertisementService.advertisementList(page, keyword, category);
     }
 
-//    광고 상세
+//    배너 - 광고 상세
     @GetMapping("advertise/detail/{id}")
     public AdminAdvertisementDTO getAdvertisementDetail(@PathVariable("id")Long id){
         log.info("id = {}", id);
         return adminAdvertisementService.advertisementDetail(id);
     }
 
-//    현수막
+//    배너 - 현수막
     @GetMapping("banner/{page}")
     public BannerFileCriteriaDTO getBanner(@PathVariable("page") int page, @RequestParam(required = false) Long id){
         log.info("page = {}", page);
-//        BannerFileDTO bannerFileDTO = adminBannerService.selectAllFiles(id);
-//        adminBannerService.setPreSignedUrl(bannerFileDTO);
         return adminBannerService.bannerList(page);
+    }
+
+//    결제 - 광고
+    @GetMapping("payment/advertise/{page}")
+    public AdminPaymentAdvertiseCriteriaDTO getPaymentAdvertise(@PathVariable("page") int page,
+                                                                @RequestParam(required = false) String keyword,
+                                                                @RequestParam(required = false) String category){
+        log.info("page = {}", page);
+        return adminPaymentAdvertiseService.paymentAdvertiseList(page, keyword, category);
     }
 }

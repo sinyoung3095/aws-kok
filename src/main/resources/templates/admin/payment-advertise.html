@@ -198,9 +198,9 @@
                                         </span>
                                         <span class="badge-label">결제승인</span>
                                     </div>
-                                    <div class="col text-right amount-col">
-                                        <span class="span-amount">1,500,000</span>
-                                        <span class="amount-unit">원</span>
+                                    <div class="col text-right amount-col" id="acceptTotal">
+<!--                                        <span class="span-amount">1,500,000</span>-->
+<!--                                        <span class="amount-unit">원</span>-->
                                     </div>
                                 </div>
                             </div>
@@ -214,9 +214,9 @@
                                         </span>
                                         <span class="badge-label">결제건수</span>
                                     </div>
-                                    <div class="col text-right amount-col">
-                                        <span class="span-amount">3</span>
-                                        <span class="amount-unit">건</span>
+                                    <div class="col text-right amount-col" id="acceptCount">
+<!--                                        <span class="span-amount">3</span>-->
+<!--                                        <span class="amount-unit">건</span>-->
                                     </div>
                                 </div>
                             </div>
@@ -243,22 +243,8 @@
                                                                 <div class="row">
                                                                     <div class="col">
                                                                         <div class="kok-check d-flex align-items-center undefined" style="cursor: pointer;">
-<!--                                                                            <input id="cat-accept" class="kok-radio-input" type="radio" name="category" value="accept" th:checked="${search.category == 'accept'}">-->
-<!--                                                                            <label for="cat-accept"></label>-->
-                                                                            <div class="kok-check-box " tabindex="0" style="width: 20px; height: 20px;">
-                                                                                <i class="mdi mdi-check" style="display: none;"></i>
-                                                                            </div>
-                                                                            <div class="kok-check-content flex-grow-1">진행중</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="list-item">
-                                                                <div class="row">
-                                                                    <div class="col">
-                                                                        <div class="kok-check d-flex align-items-center undefined" style="cursor: pointer;">
-<!--                                                                            <input id="cat-await" class="kok-radio-input" type="radio" name="category" value="await" th:checked="${search.category == 'await'}">-->
-<!--                                                                            <label for="cat-await"></label>-->
+                                                                            <input id="cat-await" class="kok-radio-input" type="radio" name="category" value="await">
+                                                                            <label for="cat-await"></label>
                                                                             <div class="kok-check-box " tabindex="0" style="width: 20px; height: 20px;">
                                                                                 <i class="mdi mdi-check" style="display: none;"></i>
                                                                             </div>
@@ -271,8 +257,22 @@
                                                                 <div class="row">
                                                                     <div class="col">
                                                                         <div class="kok-check d-flex align-items-center undefined" style="cursor: pointer;">
-<!--                                                                            <input id="cat-reject" class="kok-radio-input" type="radio" name="category" value="reject" th:checked="${search.category == 'reject'}">-->
-<!--                                                                            <label for="cat-reject"></label>-->
+                                                                            <input id="cat-accept" class="kok-radio-input" type="radio" name="category" value="accept">
+                                                                            <label for="cat-accept"></label>
+                                                                            <div class="kok-check-box " tabindex="0" style="width: 20px; height: 20px;">
+                                                                                <i class="mdi mdi-check" style="display: none;"></i>
+                                                                            </div>
+                                                                            <div class="kok-check-content flex-grow-1">진행중</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="list-item">
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <div class="kok-check d-flex align-items-center undefined" style="cursor: pointer;">
+                                                                            <input id="cat-reject" class="kok-radio-input" type="radio" name="category" value="reject">
+                                                                            <label for="cat-reject"></label>
                                                                             <div class="kok-check-box " tabindex="0" style="width: 20px; height: 20px;">
                                                                                 <i class="mdi mdi-check" style="display: none;"></i>
                                                                             </div>
@@ -294,7 +294,7 @@
                                     <div class="col-auto">
                                         <div class="filter-wrapper filter-search ml-1">
                                             <div class="input-group">
-                                                <input class="form-control flex-grow-1" type="text" placeholder="기업명/기업ID/광고상태" value="">
+                                                <input name="keyword" class="form-control flex-grow-1" type="text" placeholder="검색어를 입력해주세요" value="">
                                                 <div class="input-group-append">
                                                     <button class="btn btn-search">
                                                         <span class="comp-icon icon-magnify" id="icons/ico-search.svg">
@@ -323,96 +323,96 @@
                                         </tr>
                                     </thead>
                                     <tbody class="">
-                                        <tr>
-                                            <td class="td-name">
-                                                <p>코리아IT</p>
-                                            </td>
-                                            <td class="td-id">
-                                                <p>test01@gmail.com</p>
-                                            </td>
-                                            <td class="td-start">
-                                                <p>2025/09/17</p>
-                                            </td>
-                                            <td class="td-end">
-                                                <p>2025/09/27</p>
-                                            </td>  
-                                            <td class="td-status">
-                                                <p>진행중</p>
-                                            </td>  
-                                            <td class="td-pay">
-                                                <p>500,000</p>
-                                            </td>
-                                            <td class="td-date">
-                                                <p>2025/09/18</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="td-name">
-                                                <p>코리아IT</p>
-                                            </td>
-                                            <td class="td-id">
-                                                <p>test01@gmail.com</p>
-                                            </td>
-                                            <td class="td-start">
-                                                <p>2025/09/07</p>
-                                            </td>
-                                            <td class="td-end">
-                                                <p>2025/09/16</p>
-                                            </td>  
-                                            <td class="td-status">
-                                                <p>완료</p>
-                                            </td>  
-                                            <td class="td-pay">
-                                                <p>500,000</p>
-                                            </td>
-                                            <td class="td-date">
-                                                <p>2025/09/18</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="td-name">
-                                                <p>코리아IT</p>
-                                            </td>
-                                            <td class="td-id">
-                                                <p>test01@gmail.com</p>
-                                            </td>
-                                            <td class="td-start">
-                                                <p>2025/09/27</p>
-                                            </td>
-                                            <td class="td-end">
-                                                <p>2025/10/06</p>
-                                            </td>  
-                                            <td class="td-status">
-                                                <p>대기중</p>
-                                            </td>  
-                                            <td class="td-pay">
-                                                <p>500,000</p>
-                                            </td>
-                                            <td class="td-date">
-                                                <p>2025/09/18</p>
-                                            </td>
-                                        </tr>                                      
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <p>코리아IT</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-id">-->
+<!--                                                <p>test01@gmail.com</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-start">-->
+<!--                                                <p>2025/09/17</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-end">-->
+<!--                                                <p>2025/09/27</p>-->
+<!--                                            </td>  -->
+<!--                                            <td class="td-status">-->
+<!--                                                <p>진행중</p>-->
+<!--                                            </td>  -->
+<!--                                            <td class="td-pay">-->
+<!--                                                <p>500,000</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-date">-->
+<!--                                                <p>2025/09/18</p>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <p>코리아IT</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-id">-->
+<!--                                                <p>test01@gmail.com</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-start">-->
+<!--                                                <p>2025/09/07</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-end">-->
+<!--                                                <p>2025/09/16</p>-->
+<!--                                            </td>  -->
+<!--                                            <td class="td-status">-->
+<!--                                                <p>완료</p>-->
+<!--                                            </td>  -->
+<!--                                            <td class="td-pay">-->
+<!--                                                <p>500,000</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-date">-->
+<!--                                                <p>2025/09/18</p>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <p>코리아IT</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-id">-->
+<!--                                                <p>test01@gmail.com</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-start">-->
+<!--                                                <p>2025/09/27</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-end">-->
+<!--                                                <p>2025/10/06</p>-->
+<!--                                            </td>  -->
+<!--                                            <td class="td-status">-->
+<!--                                                <p>대기중</p>-->
+<!--                                            </td>  -->
+<!--                                            <td class="td-pay">-->
+<!--                                                <p>500,000</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-date">-->
+<!--                                                <p>2025/09/18</p>-->
+<!--                                            </td>-->
+<!--                                        </tr>                                      -->
                                     </tbody>
                                 </table>
                             </div>
                             <!-- 페이지 번호 -->
                             <nav class="kok-pagination-wrapper mt-5 mb-4">
                                 <ul class="pagination kok-pagination">
-                                    <li class="page-item page-num active">
-                                        <a href="" class="page-item-link page-item-num">1</a>
-                                    </li>
-                                    <li class="page-item page-num">
-                                        <a href="" class="page-item-link page-item-num">2</a>
-                                    </li>
-                                    <li class="page-item page-num">
-                                        <a href="" class="page-item-link page-item-num">3</a>
-                                    </li>
-                                    <li class="page-item page-num">
-                                        <a href="" class="page-item-link page-item-num">4</a>
-                                    </li>
-                                    <li class="page-item page-num">
-                                        <a href="" class="page-item-link page-item-num">5</a>
-                                    </li>
+<!--                                    <li class="page-item page-num active">-->
+<!--                                        <a href="" class="page-item-link page-item-num">1</a>-->
+<!--                                    </li>-->
+<!--                                    <li class="page-item page-num">-->
+<!--                                        <a href="" class="page-item-link page-item-num">2</a>-->
+<!--                                    </li>-->
+<!--                                    <li class="page-item page-num">-->
+<!--                                        <a href="" class="page-item-link page-item-num">3</a>-->
+<!--                                    </li>-->
+<!--                                    <li class="page-item page-num">-->
+<!--                                        <a href="" class="page-item-link page-item-num">4</a>-->
+<!--                                    </li>-->
+<!--                                    <li class="page-item page-num">-->
+<!--                                        <a href="" class="page-item-link page-item-num">5</a>-->
+<!--                                    </li>-->
                                 </ul>
                                 <div class="pagination-desc">
                                     <!-- 회원이 1페이지(10명 미만)일 때 -->
@@ -433,5 +433,7 @@
         </div>
     </div>
 </body>
-<script src="/js/admin/payment/event.js"></script>
+<script src="/js/admin/payment-advertise/module/service.js"></script>
+<script src="/js/admin/payment-advertise/module/layout.js"></script>
+<script src="/js/admin/payment-advertise/event.js"></script>
 </html>
