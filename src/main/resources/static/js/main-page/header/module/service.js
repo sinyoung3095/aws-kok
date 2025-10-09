@@ -9,6 +9,14 @@ const service = (()=>{
             throw new Error(errorText || "Fetch error");
         }
     };
+    const getRequestExperience = async (callback)=>{
+        const response = await fetch('/api/main/requestExperience');
+        const requestDTO = await response.json();
 
-    return {logout:logout}
+        if(callback){
+            return callback(requestDTO);
+        }
+    }
+
+    return {logout:logout,getRequestExperience:getRequestExperience}
 })();

@@ -98,11 +98,13 @@ const experienceContent = document.querySelector(
 const employContent = document.querySelector(".history-modal-main-employ");
 
 if (historyBtn && historyModal) {
-    historyBtn.addEventListener("click", () => {
+    historyBtn.addEventListener("click", async () => {
         if (profileModal) profileModal.style.display = "none";
         if (settingHeaderModal) settingHeaderModal.style.display = "none";
 
         historyModal.style.display = "flex";
+        const id = document.getElementById("id");
+        await  service.getRequestExperience(layout.showExperienceList);
     });
 }
 
