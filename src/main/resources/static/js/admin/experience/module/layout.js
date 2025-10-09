@@ -52,7 +52,7 @@ const layout = (() => {
         for(let i = criteria.startPage; i <= criteria.endPage; i++){
             textNumber += `
                 <li class="page-item page-num">
-                    <a class="page-item-num" href="/admin/support/${i}" data-page="${i}">${i}</a>
+                    <a class="page-item-num" data-page="${i}">${i}</a>
                 </li>
            `;
         }

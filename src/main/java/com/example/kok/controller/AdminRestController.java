@@ -1,11 +1,7 @@
 package com.example.kok.controller;
 
 import com.example.kok.dto.*;
-import com.example.kok.service.AdminAdvertisementService;
-import com.example.kok.service.AdminBannerService;
-import com.example.kok.service.AdminReportService;
-import com.example.kok.service.AdminService;
-import com.example.kok.util.Search;
+import com.example.kok.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +15,7 @@ public class AdminRestController {
     private final AdminReportService adminReportService;
     private final AdminAdvertisementService adminAdvertisementService;
     private final AdminBannerService adminBannerService;
+    private final AdminEmployService adminEmployService;
 
 //    공지 목록
     @GetMapping("support/{page}")
@@ -42,6 +39,23 @@ public class AdminRestController {
         log.info("page = {}", page);
         log.info("id = {}", id);
         return adminService.getExperienceDetail(page, id);
+    }
+
+//    인턴 목록
+    @GetMapping("employ/{page}")
+    public AdminInternNoticeListCriteriaDTO getInternNoticeList(@PathVariable("page") int page,
+                                                                @RequestParam(required = false) String keyword){
+        log.info("page = {}", page);
+        return adminEmployService.getList(page, keyword);
+    }
+
+//    인턴 상세
+    @GetMapping("employ/detail/{id}/{page}")
+    public AdminInternNoticeDetailCriteriaDTO getInternNoticeDetail(@PathVariable("id")Long id,
+                                                                    @PathVariable("page")int page){
+        log.info("page = {}", page);
+        log.info("id = {}", id);
+        return adminEmployService.getDetail(page, id);
     }
 
 //    신고 게시글 목록

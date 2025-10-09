@@ -9,6 +9,9 @@ const userMenuContent = document.querySelector(".user-menu-content");
 const pageNums = document.querySelectorAll(".page-num");
 const pageItemNums = document.querySelectorAll(".page-item-num");
 
+// 목록
+service.getEmployList(layout.showList);
+
 // 사이드바 펼침/접힘
 sideMenuButtons.forEach((menu) => {
     menu.addEventListener("click", function () {
@@ -82,10 +85,101 @@ document.addEventListener("click", (e) => {
 });
 
 // 페이지 번호
-pageItemNums.forEach((pageItemNum) => {
-    pageItemNum.addEventListener("click", (e) => {
-        e.preventDefault();
-        pageNums.forEach((pageNum) => pageNum.classList.remove("active"));
-        pageItemNum.parentElement.classList.add("active");
+// pageItemNums.forEach((pageItemNum) => {
+//     pageItemNum.addEventListener("click", (e) => {
+//         e.preventDefault();
+//         pageNums.forEach((pageNum) => pageNum.classList.remove("active"));
+//         pageItemNum.parentElement.classList.add("active");
+//     });
+// });
+
+
+// 모달 상세
+const experienceListContainer = document.querySelector(".table.member-table tbody");
+experienceListContainer.addEventListener("click",async (e)=>{
+
+    if(e.target.closest(".action-btn")){
+        modal.style.display = "block";
+        setTimeout(() => {
+            modal.classList.add("show");
+            modal.style.background = "rgba(0,0,0,0.5)";
+            document.body.classList.add("modal-open");
+        }, 100);
+
+        const actionButton = e.target.closest(".action-btn");
+        const page = 1;
+        const id = Number(actionButton.dataset.id);
+        console.log(id);
+
+        // 체험공고 상세정보
+        await service.getEmployDetail(layout.showInfo, page, id);
+
+        // 신청자 내역
+        await service.getEmployDetail(layout.showRequest, page, id);
+
+        const detailPagination = document.querySelector(".pagination.kok-pagination.detail-request");
+        const firstNumber = detailPagination.querySelector("li.number");
+        if (firstNumber) {
+            firstNumber.classList.add("active");
+        }
+        detailPagination.onclick = async (e) => {
+            e.preventDefault()
+
+            // 페이지 번호
+            const clickNum = e.target.closest("a[data-page]");
+            const pageNumber = Number(clickNum.dataset.page);
+
+            await service.getEmployDetail(layout.showRequest, pageNumber, id);
+
+            const pageNumsList = detailPagination.querySelectorAll("li.page-num");
+            pageNumsList.forEach((pageNum) => {
+                pageNum.classList.remove("active");
+            });
+            const currentList = Array.from(pageNumsList).find((pageNum) => {
+                const activeList = pageNum.querySelector("a.page-item-num");
+                return activeList && Number(activeList.dataset.page) === pageNumber;
+            });
+
+            if(currentList){
+                currentList.classList.add("active");
+            }
+        }
+    }
+});
+
+
+// 목록
+const content = document.querySelector("input[name=keyword]");
+const pagination = document.querySelector(".pagination.kok-pagination");
+pagination.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const keyword = content.value;
+    await service.getEmployList(layout.showList, e.target.dataset.page, keyword);
+
+    // 페이지 번호
+    const clickNum = e.target.closest("a[data-page]");
+    const pageNumber = parseInt(clickNum.dataset.page);
+
+    const pageNumsList = pagination.querySelectorAll("li.page-num");
+    pageNumsList.forEach((pageNum) => {
+        pageNum.classList.remove("active");
     });
+
+    const currentList = Array.from(pageNumsList).find((pageNum) => {
+        const activeList = pageNum.querySelector("a.page-item-num");
+        return activeList && parseInt(activeList.dataset.page) === pageNumber;
+    });
+
+    if(currentList){
+        currentList.classList.add("active");
+    }
+});
+
+// 검색창
+const search = document.querySelector(".btn.btn-search");
+search.addEventListener("click", async (e) => {
+    const page = 1;
+    const keyword = content.value;
+    console.log(keyword);
+    await service.getEmployList(layout.showList, page, keyword);
 });
