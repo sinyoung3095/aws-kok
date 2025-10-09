@@ -31,15 +31,15 @@
                     <div class="home-wrap-inner">
                         <div class="home-wrap-inner-2">
                             <div class="back-back">
-                                <button class="back-btn">
+                                <a th:href="@{'/enterprise-console/experience/applicate-list/' + ${applicantDetail.experienceNoticeId}}"  class="back-btn">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="back-svg"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
                                     뒤로가기
-                                </button>
+                                </a>
                             </div>
                             <div class="home-top-wrap">
                                 <div class="home-top">
-                                    <h1 class="top-h1">test님의 지원서</h1>
-                                    <p class="top-p">지원한 공고 제목 들어갈 자리</p>
+                                    <h1 th:text="${applicantDetail.userName}" class="top-h1"></h1>
+                                    <p th:text="${applicantDetail.experienceNoticeTitle}" class="top-p">지원한 공고 제목 들어갈 자리</p>
                                 </div>
                                 <button class="new-exp">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="new-exp-svg"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
@@ -62,26 +62,26 @@
                                                 <div class="info-line">
                                                     <div>
                                                         <label for="" class="info-key">이름</label>
-                                                        <div class="info-value">test</div>
+                                                        <div th:text="${applicantDetail.userName}" class="info-value"></div>
                                                     </div>
                                                     <div>
                                                         <label for="" class="info-key">전화번호</label>
-                                                        <div class="info-value">01012345678</div>
+                                                        <div th:text="${applicantDetail.userPhone}" class="info-value"></div>
                                                     </div>
                                                 </div>
                                                 <div class="info-line">
                                                     <div>
                                                         <label for="" class="info-key">이메일</label>
-                                                        <div class="info-value">test@gmail.com</div>
+                                                        <div th:text="${applicantDetail.userEmail}" class="info-value"></div>
                                                     </div>
-                                                    <div>
-                                                        <label for="" class="info-key">직군</label>
-                                                        <div class="info-value">SW 개발</div>
-                                                    </div>
-                                                    <div>
-                                                        <label for="" class="info-key">url</label>
-                                                        <a href="" class="info-key">www.kok.com</a>
-                                                    </div>
+<!--                                                    <div>-->
+<!--                                                        <label for="" class="info-key">직군</label>-->
+<!--                                                        <div class="info-value">SW 개발</div>-->
+<!--                                                    </div>-->
+<!--                                                    <div>-->
+<!--                                                        <label for="" class="info-key">url</label>-->
+<!--                                                        <a href="" class="info-key">www.kok.com</a>-->
+<!--                                                    </div>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -147,7 +147,7 @@
                                                 <label for="" class="info-key">지원 일시</label>
                                                 <div class="datetime-applicate">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datetime-svg"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                                                    <p class="datetime">2025-09-15 오후 2:07:27</p>
+                                                    <p th:text="${applicantDetail.requestDatetime}" class="datetime"></p>
                                                 </div>
                                             </div>
                                             <div class="yoso">
@@ -186,7 +186,7 @@
                                             <div class="yoso">
                                                 <label for="" class="info-key">현재 상태</label>
                                                 <div class="status-mark">
-                                                    <span class="status-mark-span">서류 검토 중</span>
+                                                    <span th:text="${applicantDetail.requestExperienceStatus eq 'await' ? '서류 검토 중' : (applicantDetail.requestExperienceStatus eq 'accept' ? '합격' : '불합격')}" class="status-mark-span"></span>
                                                 </div>
                                             </div>
                                         </div>
