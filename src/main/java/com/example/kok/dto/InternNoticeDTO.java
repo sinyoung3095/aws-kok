@@ -17,9 +17,13 @@ public class InternNoticeDTO {
     private String internNoticeTitle;
     private String internNoticeSubTitle;
     private String internNoticeIntroduceJob;
-    private String internNoticeMajorWork;
-    private String internNoticeNotes;
+    private String internMainTasks;
     private Status internNoticeStatus;
+    private String internNoticeStartDate;
+    private String internNoticeEndDate;
+    private String internNoticeEtc;
+    private String internStartDate;
+    private String internEndDate;
     private String createdDateTime;
     private String updatedDateTime;
 }

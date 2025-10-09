@@ -188,54 +188,54 @@
                 <div class="page-body">
                     <!-- 상단 건 수 -->
                     <div class="amount-section">
-                        <div class="amount-box form-info-box">
-                            <div class="revenue-box">
-                                <div class="row">
-                                    <div class="col-auto title-col">
-                                        <span class="badge-label text-primary icon-label">
-                                            <i class="mdi mdi-check"></i>
-                                        </span>
-                                        <span class="badge-label">승인</span>
-                                    </div>
-                                    <div class="col text-right amount-col">
-                                        <span class="span-amount">1</span>
-                                        <span class="amount-unit">건</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="amount-box form-info-box">
-                            <div class="revenue-box">
-                                <div class="row">
-                                    <div class="col-auto title-col">
-                                        <span class="badge-label text-wait icon-label">
-                                            <i class="mdi mdi-timer-sand"></i>
-                                        </span>
-                                        <span class="badge-label">대기</span>
-                                    </div>
-                                    <div class="col text-right amount-col">
-                                        <span class="span-amount">1</span>
-                                        <span class="amount-unit">건</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="amount-box amount-value-box">
-                            <div class="cancel-box">
-                                <div class="row">
-                                    <div class="col-auto title-col">
-                                        <span class="badge-label text-danger icon-label">
-                                            <i class="mdi mdi-close"></i>
-                                        </span>
-                                        <span class="badge-label">거절</span>
-                                    </div>
-                                    <div class="col text-right amount-col">
-                                        <span class="span-amount">1</span>
-                                        <span class="amount-unit">건</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<!--                        <div class="amount-box form-info-box">-->
+<!--                            <div class="revenue-box">-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-auto title-col">-->
+<!--                                        <span class="badge-label text-primary icon-label">-->
+<!--                                            <i class="mdi mdi-check"></i>-->
+<!--                                        </span>-->
+<!--                                        <span class="badge-label">승인</span>-->
+<!--                                    </div>-->
+<!--                                    <div class="col text-right amount-col">-->
+<!--                                        <span class="span-amount">1</span>-->
+<!--                                        <span class="amount-unit">건</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="amount-box form-info-box">-->
+<!--                            <div class="revenue-box">-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-auto title-col">-->
+<!--                                        <span class="badge-label text-wait icon-label">-->
+<!--                                            <i class="mdi mdi-timer-sand"></i>-->
+<!--                                        </span>-->
+<!--                                        <span class="badge-label">대기</span>-->
+<!--                                    </div>-->
+<!--                                    <div class="col text-right amount-col">-->
+<!--                                        <span class="span-amount">1</span>-->
+<!--                                        <span class="amount-unit">건</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="amount-box amount-value-box">-->
+<!--                            <div class="cancel-box">-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-auto title-col">-->
+<!--                                        <span class="badge-label text-danger icon-label">-->
+<!--                                            <i class="mdi mdi-close"></i>-->
+<!--                                        </span>-->
+<!--                                        <span class="badge-label">거절</span>-->
+<!--                                    </div>-->
+<!--                                    <div class="col text-right amount-col">-->
+<!--                                        <span class="span-amount">1</span>-->
+<!--                                        <span class="amount-unit">건</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
                     <div class="page-content">
                         <div class="table-layout white-panel">
@@ -259,18 +259,8 @@
                                                                 <div class="row">
                                                                     <div class="col">
                                                                         <div class="kok-check d-flex align-items-center undefined" style="cursor: pointer;">
-                                                                            <div class="kok-check-box " tabindex="0" style="width: 20px; height: 20px;">
-                                                                                <i class="mdi mdi-check" style="display: none;"></i>
-                                                                            </div>
-                                                                            <div class="kok-check-content flex-grow-1">승인</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="list-item">
-                                                                <div class="row">
-                                                                    <div class="col">
-                                                                        <div class="kok-check d-flex align-items-center undefined" style="cursor: pointer;">
+                                                                            <input id="cat-await" class="kok-radio-input" type="radio" name="category" value="await" th:checked="${search.category == 'await'}">
+                                                                            <label for="cat-await"></label>
                                                                             <div class="kok-check-box " tabindex="0" style="width: 20px; height: 20px;">
                                                                                 <i class="mdi mdi-check" style="display: none;"></i>
                                                                             </div>
@@ -283,6 +273,22 @@
                                                                 <div class="row">
                                                                     <div class="col">
                                                                         <div class="kok-check d-flex align-items-center undefined" style="cursor: pointer;">
+                                                                            <input id="cat-accept" class="kok-radio-input" type="radio" name="category" value="accept" th:checked="${search.category == 'accept'}">
+                                                                            <label for="cat-accept"></label>
+                                                                            <div class="kok-check-box " tabindex="0" style="width: 20px; height: 20px;">
+                                                                                <i class="mdi mdi-check" style="display: none;"></i>
+                                                                            </div>
+                                                                            <div class="kok-check-content flex-grow-1">승인</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="list-item">
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <div class="kok-check d-flex align-items-center undefined" style="cursor: pointer;">
+                                                                            <input id="cat-reject" class="kok-radio-input" type="radio" name="category" value="reject" th:checked="${search.category == 'reject'}">
+                                                                            <label for="cat-reject"></label>
                                                                             <div class="kok-check-box " tabindex="0" style="width: 20px; height: 20px;">
                                                                                 <i class="mdi mdi-check" style="display: none;"></i>
                                                                             </div>
@@ -292,7 +298,7 @@
                                                                 </div>
                                                             </li>
                                                             <li class="list-item mt-2">
-                                                                <button class="btn btn-outline-primary btn-sm">확인</button>
+                                                                <button type="button" class="btn btn-outline-primary btn-sm">확인</button>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -304,7 +310,7 @@
                                     <div class="col-auto">
                                         <div class="filter-wrapper filter-search ml-1">
                                             <div class="input-group">
-                                                <input class="form-control flex-grow-1" type="text" placeholder="기업명/광고상태" value="">
+                                                <input name="keyword" class="form-control flex-grow-1" type="text" placeholder="기업명/메인텍스트" value="">
                                                 <div class="input-group-append">
                                                     <button class="btn btn-search">
                                                         <span class="comp-icon icon-magnify" id="icons/ico-search.svg">
@@ -332,88 +338,97 @@
                                             <th class="td-action">상세</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="">
-                                        <tr>
-                                            <td class="td-name">
-                                                <p>코리아IT</p>
-                                            </td>
-                                            <td class="td-main-title">
-                                                <p>신년 채용 특집 배너</p>
-                                            </td>
-                                            <td class="td-sub-title">
-                                                <p>우수한 인재를 찾고 계신가요? 지금 바로 체험 공고를 등록하고 최고의 후보자들을 만나보세요.</p>
-                                            </td>
-                                            <td class="td-start">
-                                                <p>2025/09/17</p>
-                                            </td>
-                                            <td class="td-end">
-                                                <p>2025/09/27</p>
-                                            </td>  
-                                            <td class="td-status">
-                                                <p>승인</p>
-                                            </td>
-                                            <td class="td-action text-center">
-                                                <div class="action-btn">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="td-name">
-                                                <p>코리아IT</p>
-                                            </td>
-                                            <td class="td-main-title">
-                                                <p>신년 채용 특집 배너</p>
-                                            </td>
-                                            <td class="td-sub-title">
-                                                <p>우수한 인재를 찾고 계신가요? 지금 바로 체험 공고를 등록하고 최고의 후보자들을 만나보세요.</p>
-                                            </td>
-                                            <td class="td-start">
-                                                <p>2025/09/17</p>
-                                            </td>
-                                            <td class="td-end">
-                                                <p>2025/09/27</p>
-                                            </td>  
-                                            <td class="td-status">
-                                                <p>대기</p>
-                                            </td>
-                                            <td class="td-action text-center">
-                                                <div class="action-btn">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="td-name">
-                                                <p>코리아IT</p>
-                                            </td>
-                                            <td class="td-main-title">
-                                                <p>신년 채용 특집 배너</p>
-                                            </td>
-                                            <td class="td-sub-title">
-                                                <p>우수한 인재를 찾고 계신가요? 지금 바로 체험 공고를 등록하고 최고의 후보자들을 만나보세요.</p>
-                                            </td>
-                                            <td class="td-start">
-                                                <p>2025/09/17</p>
-                                            </td>
-                                            <td class="td-end">
-                                                <p>2025/09/27</p>
-                                            </td>  
-                                            <td class="td-status">
-                                                <p>거절</p>
-                                            </td>
-                                            <td class="td-action text-center">
-                                                <div class="action-btn">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    <tbody id="advertisement-list" class="">
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <p>코리아IT</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-main-title">-->
+<!--                                                <p>신년 채용 특집 배너</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-sub-title">-->
+<!--                                                <p>우수한 인재를 찾고 계신가요? 지금 바로 체험 공고를 등록하고 최고의 후보자들을 만나보세요.</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-start">-->
+<!--                                                <p>2025/09/17</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-end">-->
+<!--                                                <p>2025/09/27</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-status">-->
+<!--                                                <p>승인</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-action text-center">-->
+<!--                                                <div class="action-btn">-->
+<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
+<!--                                                </div>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <p>코리아IT</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-main-title">-->
+<!--                                                <p>신년 채용 특집 배너</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-sub-title">-->
+<!--                                                <p>우수한 인재를 찾고 계신가요? 지금 바로 체험 공고를 등록하고 최고의 후보자들을 만나보세요.</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-start">-->
+<!--                                                <p>2025/09/17</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-end">-->
+<!--                                                <p>2025/09/27</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-status">-->
+<!--                                                <p>대기</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-action text-center">-->
+<!--                                                <div class="action-btn">-->
+<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
+<!--                                                </div>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <p>코리아IT</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-main-title">-->
+<!--                                                <p>신년 채용 특집 배너</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-sub-title">-->
+<!--                                                <p>우수한 인재를 찾고 계신가요? 지금 바로 체험 공고를 등록하고 최고의 후보자들을 만나보세요.</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-start">-->
+<!--                                                <p>2025/09/17</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-end">-->
+<!--                                                <p>2025/09/27</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-status">-->
+<!--                                                <p>거절</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-action text-center">-->
+<!--                                                <div class="action-btn">-->
+<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
+<!--                                                </div>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
                                     </tbody>
                                 </table>
+                                <!-- 페이지 번호 -->
+                                <nav class="kok-pagination-wrapper mt-5 mb-4">
+                                    <ul class="pagination kok-pagination">
+                                        <!-- 페이지 번호 배치 -->
+                                    </ul>
+                                    <div class="pagination-desc">
+                                    </div>
+                                </nav>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--  모달  -->
                 <div class="modal fade member-modal" style="display: none;">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -475,7 +490,7 @@
                                                             </div>
                                                             <div class="flex-right"></div>
                                                         </div>
-                                                        <img src="/images/mypage/banner.jpg" height="100%" width="100%" alt="">
+<!--                                                        <img src="/images/mypage/banner.jpg" height="100%" width="100%" alt="">-->
                                                     </div>
                                                 </div>
                                             </div>
@@ -494,5 +509,7 @@
         </div>
     </div>
 </body>
+<script src="/js/admin/advertise/module/service.js"></script>
+<script src="/js/admin/advertise/module/layout.js"></script>
 <script src="/js/admin/advertise/event.js"></script>
 </html>

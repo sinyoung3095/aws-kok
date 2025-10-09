@@ -8,3 +8,13 @@ CREATE TABLE tbl_follow (
     constraint fk_follow_company foreign key(company_id)
         references tbl_company(user_id)
 );
+
+select * from tbl_follow;
+select * from tbl_member;
+select * from tbl_company;
+select * from tbl_user;
+alter table tbl_follow
+    add constraint uq_follow_member_company unique (member_id, company_id);
+
+insert into tbl_follow (member_id, company_id)
+values (5, 18);

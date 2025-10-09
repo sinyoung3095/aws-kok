@@ -22,4 +22,11 @@ public class CompanyDTO{
     private int followerCount;
     private int experienceCount;
     private int internCount;
+
+    private String companyBackgroundFile;
+    private String companyProfileFile;
+    private String companySectorName;
+
+    private int experienceCountByEndDate;
+    private int internCountByEndDate;
 }

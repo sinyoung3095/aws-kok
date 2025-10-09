@@ -1,36 +1,119 @@
 package com.example.kok.service;
 
-import com.example.kok.dto.CompanyDTO;
+import com.example.kok.dto.*;
 import com.example.kok.repository.CompanyDAO;
+import com.example.kok.repository.ExperienceNoticeDAO;
+import com.example.kok.repository.InternNoticeDAO;
+import com.example.kok.util.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.Duration;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
     private final CompanyDAO companyDAO;
+    private final ExperienceNoticeDAO experienceNoticeDAO;
+    private final InternNoticeDAO internNoticeDAO;
+    private final S3Service s3Service;
 
 
     @Override
-public CompanyDTO findCompanyById(Long companyId) {
-    CompanyDTO company = companyDAO.findCompanyById(companyId);
-    if (company == null) {
-        return null;
+    public CompanyDTO findCompanyById(Long companyId) {
+        CompanyDTO company = companyDAO.findCompanyById(companyId);
+        if (company == null) {
+            return null;
+        }
+
+        if (company.getCompanyProfileFile() != null) {
+            company.setCompanyProfileFile(
+                    s3Service.getPreSignedUrl(company.getCompanyProfileFile(), Duration.ofMinutes(10))
+            );
+        }
+
+        if (company.getCompanyBackgroundFile() != null) {
+            company.setCompanyBackgroundFile(
+                    s3Service.getPreSignedUrl(company.getCompanyBackgroundFile(), Duration.ofMinutes(10))
+            );
+        }
+
+        int followerCount = companyDAO.findFollowCount(companyId);
+        company.setFollowerCount(followerCount);
+
+        int experienceCount = companyDAO.findExperienceById(companyId);
+        company.setExperienceCount(experienceCount);
+
+        int internCount = companyDAO.findInternById(companyId);
+        company.setInternCount(internCount);
+
+        int experienceCountByEndDate = companyDAO.findExperienceByEndDate(companyId);
+        company.setExperienceCountByEndDate(experienceCountByEndDate);
+
+        int internCountEndDate = companyDAO.findInternByEndDate(companyId);
+        company.setInternCountByEndDate(internCountEndDate);
+
+        String scaleName = companyDAO.findScaleById(companyId);
+        company.setScaleName(scaleName);
+
+        return company;
     }
 
-    Integer followerCount = companyDAO.findFollowCount(companyId);
-    company.setFollowerCount(followerCount);
+//    기업 목록
+    @Override
+    public CompaniesCriteriaDTO getCompanyList(int page, CompanySearch search, Long userId) {
+//        System.out.println("검색 한 내용 " + search);
 
-    Integer experienceCount = companyDAO.findExperienceById(companyId);
-    company.setExperienceCount(experienceCount);
+        Criteria criteria = new Criteria(page, companyDAO.findTotalCount(search));
+        List<CompanyDTO> companies = companyDAO.findCompanies(criteria, search, userId);
+//        System.out.println("기업들" + companies);
 
-    Integer internCount = companyDAO.findInternById(companyId);
-    company.setInternCount(internCount);
+        criteria.setHasMore(criteria.getPage() < criteria.getRealEnd());
+        if (criteria.isHasMore() && !companies.isEmpty()) {
+            companies.remove(companies.size() - 1);
+        }
 
-    String scaleName = companyDAO.findScaleById(companyId);
-    company.setScaleName(scaleName);
+        companies.forEach(company -> {
+            if (company.getCompanyProfileFile() != null) {
+                company.setCompanyProfileFile(
+                        s3Service.getPreSignedUrl(company.getCompanyProfileFile(), Duration.ofMinutes(10))
+                );
+            }
 
-    return company;
-}
+            if (company.getCompanyBackgroundFile() != null) {
+                company.setCompanyBackgroundFile(
+                        s3Service.getPreSignedUrl(company.getCompanyBackgroundFile(), Duration.ofMinutes(10))
+                );
+            }
+        });
 
+        CompaniesCriteriaDTO companiesCriteriaDTO = new CompaniesCriteriaDTO();
+        companiesCriteriaDTO.setCompanies(companies);
+        companiesCriteriaDTO.setCriteria(criteria);
+
+        return companiesCriteriaDTO;
+    }
+
+//    인기 기업 목록
+    @Override
+    public List<CompanyDTO> getCompaniesByFollowerCount() {
+        List<CompanyDTO> companies = companyDAO.findCompaniesByFollowerCount();
+
+        companies.forEach(company -> {
+            if (company.getCompanyProfileFile() != null) {
+                company.setCompanyProfileFile(
+                        s3Service.getPreSignedUrl(company.getCompanyProfileFile(), Duration.ofMinutes(10))
+                );
+            }
+
+            if (company.getCompanyBackgroundFile() != null) {
+                company.setCompanyBackgroundFile(
+                        s3Service.getPreSignedUrl(company.getCompanyBackgroundFile(), Duration.ofMinutes(10))
+                );
+            }
+        });
+
+        return companies;
+    }
 }

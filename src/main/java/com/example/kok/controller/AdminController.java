@@ -2,16 +2,21 @@ package com.example.kok.controller;
 
 import com.example.kok.common.exception.PostNotFoundException;
 import com.example.kok.dto.AdminNoticeDTO;
+import com.example.kok.dto.BannerFileDTO;
+import com.example.kok.service.AdminAdvertisementService;
+import com.example.kok.service.AdminBannerService;
+import com.example.kok.service.AdminReportService;
 import com.example.kok.service.AdminService;
+import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -19,8 +24,11 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequiredArgsConstructor
 public class AdminController {
     private final AdminService adminService;
+    private final AdminReportService adminReportService;
+    private final AdminAdvertisementService adminAdvertisementService;
+    private final AdminBannerService adminBannerService;
 
-//    관리자 등록
+    //    관리자 등록
     @GetMapping("join")
     public String goToJoinPage() {
         return "admin/join";
@@ -64,8 +72,19 @@ public class AdminController {
 
 //    배너 - 광고 신청
     @GetMapping("advertise")
-    public String goToAdvertisePage() {
+    public String goToAdvertisePage(Model model) {
+        model.addAttribute("search", new Search());
         return "admin/advertise";
+    }
+    @GetMapping("advertise/accept/{id}")
+    public RedirectView advertisementAccept(@PathVariable Long id) {
+        adminAdvertisementService.accept(id);
+        return new RedirectView("/admin/advertise");
+    }
+    @GetMapping("advertise/reject/{id}")
+    public RedirectView advertisementReject(@PathVariable Long id) {
+        adminAdvertisementService.reject(id);
+        return new RedirectView("/admin/advertise");
     }
 
 //    배너 - 현수막
@@ -73,10 +92,22 @@ public class AdminController {
     public String goToBannerPage() {
         return "admin/banner";
     }
+    @PostMapping("banner/save")
+    public RedirectView saveBanner(@RequestParam(value = "file", required = false) List<MultipartFile> multipartFiles) {
+        log.info("저장 컨트롤러 들어옴");
+        adminBannerService.save(multipartFiles);
+        return new RedirectView("/admin/banner");
+    }
+    @PostMapping("banner/delete/{id}")
+    public RedirectView deleteBanner(@PathVariable Long id) {
+        adminBannerService.delete(id);
+        return new RedirectView("/admin/banner");
+    }
 
 //    결제 - 광고
     @GetMapping("payment/advertise")
-    public String goToPaymentAdvertisePage() {
+    public String goToPaymentAdvertisePage(Model model) {
+        model.addAttribute("search", new Search());
         return "admin/payment-advertise";
     }
 
@@ -90,6 +121,13 @@ public class AdminController {
     @GetMapping("notify/post")
     public String goToNotifyPostPage() {
         return "admin/notify-post";
+    }
+
+//    신고 게시글 삭제
+    @GetMapping("notify/post/delete/{id}")
+    public RedirectView notifyPostDelete(@PathVariable Long id) {
+        adminReportService.deleteReportPost(id);
+        return new RedirectView("/admin/notify/post");
     }
 
 //    고객지원 - 공지사항 목록

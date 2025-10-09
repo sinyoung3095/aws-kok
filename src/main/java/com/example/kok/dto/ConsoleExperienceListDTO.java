@@ -16,8 +16,6 @@ public class ConsoleExperienceListDTO {
     private String experienceNoticeSubtitle;
     private LocalDate experienceStartDate;
     private LocalDate experienceEndDate;
-    private LocalDate experienceNoticeStartDate;
-    private LocalDate experienceNoticeEndDate;
     private Status experienceNoticeStatus;
     private long companyId;
     private String createdDateTime;

@@ -192,9 +192,9 @@
                                 <div class="title">
                                     현수막 등록
                                 </div>
-                                <form id="banner-form" action="" method="">
+                                <form th:action="@{/admin/banner/save}" id="banner-form" method="post" enctype="multipart/form-data">
                                     <!-- 아래 Li수만큼 Img -->
-                                    <div class="dropdown">
+                                    <div class="dropdown" style="width: 97px; height: 30px;">
                                         <label>
                                             <input type="file" id="banner-file" class="banner-file" name="file" style="display: none;" multiple="">
                                             <div class="add-btn">
@@ -206,8 +206,15 @@
                                     </div>
                                     <div class="kok-tip tip primary">
                                         <ul class="pg-list list-unstyled">
+                                            <li id="banner-img">
+                                                <span>첨부된 이미지가 없습니다.</span>
+                                            <!--  첨부 사진 미리보기  -->
+                                            </li>
                                         </ul>
-                                        <a href="" class="register-link">등록</a>
+<!--                                        <a th:href="@{/admin/banner/save}">-->
+<!--                                            <a href="/admin/banner/save">-->
+                                            <button type="submit" class="register-link">등록</button>
+<!--                                            </a>-->
                                     </div>
                                 </form>
                             </div>                   
@@ -221,33 +228,42 @@
                                 </colgroup>
                                 <thead>
                                     <tr>
-                                        <th>이미지 위치</th>
                                         <th>이미지 원본 이름</th>
                                         <th>이미지</th>
+                                        <th>이미지 형식</th>
                                         <th>업로드 날짜</th>
                                         <th>삭제</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- 데이터 없을때 -->
+                                    <!-- 데이터 없을 때 -->
                                     <!-- <tr class="no-data">
                                         <td colspan="6">
                                             등록된 배너가 없습니다.
                                         </td>
-                                    </tr> -->                           
-                                    <tr class="banner-row">                                      
-                                        <td>-</td>
-                                        <td>-</td>
-                                        <td>
-                                            <img src="/images/mypage/banner.jpg" alt="" style="width:120px; height:60px; object-fit:cover; border-radius:6px;">
-                                        </td>
-                                        <td>-</td>
-                                        <td>
-                                            <button class="banner-delete-btn">삭제</button>   
-                                        </td>
-                                    </tr>
+                                    </tr> -->
+                                    <!-- 데이터 있을 때 -->
+<!--                                    <tr class="banner-row">                                      -->
+<!--                                        <td>-</td>-->
+<!--                                        <td>-</td>-->
+<!--                                        <td>-->
+<!--                                            <img src="/images/mypage/banner.jpg" alt="" style="width:120px; height:60px; object-fit:cover; border-radius:6px;">-->
+<!--                                        </td>-->
+<!--                                        <td>-</td>-->
+<!--                                        <td>-->
+<!--                                            <button class="banner-delete-btn">삭제</button>   -->
+<!--                                        </td>-->
+<!--                                    </tr>-->
                                 </tbody>
-                            </table>                           
+                            </table>
+                            <!-- 페이지 번호 -->
+                            <nav class="kok-pagination-wrapper mt-5 mb-4">
+                                <ul class="pagination kok-pagination">
+                                    <!-- 페이지 번호 배치 -->
+                                </ul>
+                                <div class="pagination-desc">
+                                </div>
+                            </nav>
                         </div>
                     </div>
                 </div>
@@ -255,5 +271,7 @@
         </div>
     </div>
 </body>
+<script src="/js/admin/banner/module/service.js"></script>
+<script src="/js/admin/banner/module/layout.js"></script>
 <script src="/js/admin/banner/event.js"></script>
 </html>

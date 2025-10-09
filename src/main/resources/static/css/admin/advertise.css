@@ -422,6 +422,16 @@ button:not(:disabled) {
     content: "\F012C";
 }
 
+.kok-radio-input {
+    position: absolute !important;
+    opacity: 0;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
 .mdi-timer-sand:before {
     content: "\F051F";
 }
@@ -1498,6 +1508,10 @@ button.btn .comp-icon {
     font-weight: 700;
 }
 
+a.page-item-num {
+    cursor: pointer;
+}
+
 /* 일반회원이 1페이지(10명 미만)일 때 */
 .kok-pagination-wrapper .pagination-desc {
     position: absolute;
@@ -1807,6 +1821,7 @@ button.btn.btn-outline-filter {
 
 .modal>.modal-dialog>.modal-content>.modal-footer>* {
     margin: 0;
+    margin-right: 10px;
 }
 
 .modal.member-modal .modal-footer button.btn-apply {

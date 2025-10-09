@@ -227,13 +227,7 @@ div.cards{
 
 div.card-title{
     padding-inline: 24px;
-    gap: 6px;
     align-items: flex-start;
-    grid-template-rows: auto auto;
-    grid-auto-rows: min-content;
-    display: grid;
-    margin-block-start: 0px;
-    margin-block-end: 16px;
 }
 
 div.main-title{
@@ -952,28 +946,27 @@ tr.list-tr{
 }
 
 th.list-head-main{
+    text-align: center;
     color: #0a0a0a;
     white-space: nowrap;
     font-weight: 500;
     vertical-align: middle;
-    text-align: left;
     padding-inline: 8px;
-    width: 300px;
     height: 40px;
 }
 
 th.list-head-sub{
+    text-align: center;
     color: #0a0a0a;
     white-space: nowrap;
     font-weight: 500;
     vertical-align: middle;
-    text-align: left;
     padding-inline: 8px;
-    width: 150px;
     height: 40px;
 }
 
 tr.body-tr{
+    text-align: center;
     height: 55px;;
     position: relative;
     border-style: solid;
@@ -1126,7 +1119,7 @@ a.page-a{
     text-align: center;
 }
 
-li.page-li.page-on>a{
+li.page-li > a.active{
     color: #171717;
     font-weight: 700;
 }

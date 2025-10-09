@@ -8,6 +8,10 @@ CREATE TABLE tbl_report (
         references tbl_member(user_id)
 );
 
+insert into tbl_report (post_id, member_id)
+values ('2', 7);
+select * from tbl_report order by id;
+select * from tbl_post order by id;
 
 select * from tbl_report;
 delete from tbl_report;

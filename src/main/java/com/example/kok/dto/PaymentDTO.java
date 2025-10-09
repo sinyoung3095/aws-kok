@@ -16,7 +16,7 @@ public class PaymentDTO {
     private long id;
     private long paymentPrice;
     private RequestStatus paymentStatus;
-    private LocalDateTime paymentPaidDatetime;
+    private String paymentPaidDatetime;
     private long advertisementId;
     private long requestExperienceId;
     private long userId;

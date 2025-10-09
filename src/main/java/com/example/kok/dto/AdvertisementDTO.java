@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 @EqualsAndHashCode(of="id")
 @NoArgsConstructor
 public class AdvertisementDTO {
-    private Long id;
+    private long id;
     private String advertisementMainText;
     private String advertisementSubText;
     private RequestStatus advertisementStatus;
-    private String startAdvertise;
-    private String endAdvertise;
-    private Long companyId;
+    private String advertiseStartDatetime;
+    private String advertiseEndDatetime;
+    private long companyId;
     private String createdDateTime;
     private String updatedDateTime;
 }

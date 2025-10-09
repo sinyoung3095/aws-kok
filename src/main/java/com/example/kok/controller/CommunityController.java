@@ -27,6 +27,10 @@ public class CommunityController {
     public String goToCommunityPage(Model model,
                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
+        if (customUserDetails == null) {
+            return "redirect:/member/login";
+        }
+
         Long memberId = customUserDetails.getId();
         model.addAttribute("posts", communityPostService.getList(1, memberId).getPosts());
 
@@ -34,7 +38,7 @@ public class CommunityController {
         model.addAttribute("latestFour", latestFour);
 
         model.addAttribute("member", customUserDetails);
-        log.info("로그인: {}", customUserDetails);
+//        log.info("로그인: {}", customUserDetails);
 
         return "community/page";
     }

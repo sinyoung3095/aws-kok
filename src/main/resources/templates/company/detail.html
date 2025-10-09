@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/font/font.css">
     <link rel="stylesheet" href="/css/experience/list.css">
-        <link rel="stylesheet" href="/css/main-page/header.css">
+    <link rel="stylesheet" href="/css/main-page/header.css">
     <link rel="stylesheet" href="/css/main-page/login-header.css">
-    <title>기업홈 | 콕</title>
+    <title th:text="${company.companyName} + ' | 콕'">기업홈 | 콕</title>
 </head>
 <body>
     <div id="main-content" class="main-content">
@@ -18,7 +18,8 @@
                 <div class="banner-section">
                     <div class="banner-container">
                         <div class="banner-wrapper">
-                            <img alt="" src="/images/mypage/banner.jpg">
+                            <img th:src="${company.companyBackgroundFile != null ?
+                            company.companyBackgroundFile : '/images/mypage/banner.jpg'}" alt="">
                         </div>
                     </div>
                 </div>
@@ -28,34 +29,35 @@
                             <div class="profile-content">
                                 <div class="profile-header">
                                     <div class="profile-avatar">
-                                        <img alt="" src="/images/mypage/default.webp">
+                                        <img th:src="${company.companyProfileFile != null ?
+                                        company.companyProfileFile : '/images/mypage/logo_1757380047672.webp'}" alt="">
                                     </div>
                                     <div class="profile-info">
                                         <div class="profile-name">
-                                            <p class="member-name">로켓펀치</p>
+                                            <p class="member-name" th:text="${company.companyName}"></p>
                                         </div>
-                                        <p class="profile-category">포털/인터넷/콘텐츠</p>
+                                        <p class="profile-category" th:text="${company.companySectorName != null ? company.scaleName : '-'}"></p>
                                     </div>
                                 </div>
                                 <div class="stats-list">
                                     <div class="stat-item">
                                         <p class="stat-label">팔로워</p>
-                                        <p class="stat-value">0</p>
+                                        <p class="stat-value" th:text="${company.followerCount}"></p>
                                     </div>
                                     <div class="stat-item">
                                         <p class="stat-label">체험공고</p>
-                                        <p class="stat-value">0</p>
+                                        <p class="stat-value" th:text="${company.experienceCountByEndDate}"></p>
                                     </div>
                                     <div class="stat-item">
                                         <p class="stat-label">인턴공고</p>
-                                        <p class="stat-value">0</p>
+                                        <p class="stat-value" th:text="${company.internCountByEndDate}"></p>
                                     </div>
                                 </div>
                                 <div class="company-intro">
-                                    <p>한국 최대 비즈니스 소셜 네트워크</p>
+                                    <p th:text="${company.companyInfo != null ? company.companyInfo : '-'}"></p>
                                 </div>
                                 <div class="profile-btn-wrap">
-                                    <button class="btn-primary btn-follow" type="button">
+                                    <button class="btn-primary btn-follow" type="button" th:data-company-id="${company.userId}">
                                         <span>팔로우</span>
                                     </button>
                                 </div>
@@ -68,24 +70,21 @@
                                 <ul class="company-info-list">
                                     <li class="company-info-item">
                                         <p class="label">산업 분야</p>
-                                        <p class="value">-</p>
+                                        <p class="value" th:text="${company.companySectorName != null ? company.companySectorName : '-'}"></p>
                                     </li>
                                     <li class="company-info-item">
                                         <p class="label">기업 규모</p>
-                                        <p class="value">-</p>
+                                        <p class="value" th:text="${company.scaleName != null ? company.scaleName : '-'}"></p>
                                     </li>
                                 </ul>
                             </div>
                             <div class="content-box">
-                                <p class="content-title">체험/인턴 공고 &#40;<span>20</span>&#41;</p>
+                                <p class="content-title">체험/인턴 공고</p>
 
                                 <div class="categoty-tag-box">
                                     <div class="sort-options">
                                         <div class="sort-options-item">
-                                            <button class="sort-btn active">전체</button>
-                                        </div>
-                                        <div class="sort-options-item">
-                                            <button class="sort-btn">체험</button>
+                                            <button class="sort-btn active">체험</button>
                                         </div>
                                         <div class="sort-options-item">
                                             <button class="sort-btn">인턴</button>
@@ -113,151 +112,13 @@
                                                     </svg>
                                                 </button>
                                             </div>
-                                            <div class="dropdown-container">
-                                                <button class="dropdown-open-btn circle">
-                                                    <p>직군</p>
-                                                    <svg viewBox="0 0 24 24" aria-label="icon" fill="#12131466" height="20" role="img" width="20">
-                                                        <path clip-rule="evenodd" d="M6.434 9.435a.8.8 0 0 1 1.132 0L12 13.869l4.434-4.434a.8.8 0 1 1 1.132 1.13l-5 5a.8.8 0 0 1-1.132 0l-5-5a.8.8 0 0 1 0-1.13" fill-rule="evenodd"></path>
-                                                    </svg>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <p class="dropdown-name">직군</p>
-                                                    <div class="dropdown-content">
-                                                        <ul class="dropdown-list">
-                                                            <li class="dropdown-item">
-                                                                <button class="dropdown-btn">
-                                                                    <p>SW 개발</p>
-                                                                </button>
-                                                            </li>
-                                                            <li class="dropdown-item">
-                                                                <button class="dropdown-btn">
-                                                                    <p>데이터/AI</p>
-                                                                </button>
-                                                            </li>
-                                                            <li class="dropdown-item">
-                                                                <button class="dropdown-btn">
-                                                                    <p>기획/전략</p>
-                                                                </button>
-                                                            </li>
-                                                            <li class="dropdown-item">
-                                                                <button class="dropdown-btn">
-                                                                    <p>디자인/UX</p>
-                                                                </button>
-                                                            </li>
-                                                            <li class="dropdown-item">
-                                                                <button class="dropdown-btn">
-                                                                    <p>마케팅/PR</p>
-                                                                </button>
-                                                            </li>
-                                                            <li class="dropdown-item">
-                                                                <button class="dropdown-btn">
-                                                                    <p>경영/운영</p>
-                                                                </button>
-                                                            </li>
-                                                            <li class="dropdown-item">
-                                                                <button class="dropdown-btn">
-                                                                    <p>HR/인사</p>
-                                                                </button>
-                                                            </li>
-                                                            <li class="dropdown-item">
-                                                                <button class="dropdown-btn">
-                                                                    <p>회계/재무</p>
-                                                                </button>
-                                                            </li>
-                                                            <li class="dropdown-item">
-                                                                <button class="dropdown-btn">
-                                                                    <p>법률/법무</p>
-                                                                </button>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="dropdown-actions">
-                                                            <button class="select-all-btn">전체 선택</button>
-                                                            <button class="apply-btn">적용</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- 게시물이 없을 때 -->
-                                <div class="no-data">                        
-                                    <p class="title">기업이 작성한 게시물이 없습니다.</p>
-                                    <p class="description">미리 팔로우하면 새로운 게시물 작성 시 소식을 받아볼 수 있습니다.</p>
-                                    <button type="button" class="btn-primary btn-follow">팔로우</button>
-                                </div>
-
-                                <!-- 검색 결과가 없을때 -->
-                                <div class="no-data">                        
-                                    <p class="title">검색 조건에 맞는 공고가 없습니다.</p>
-                                    <p class="description">검색 조건을 변경해보세요.</p>
-                                    <button type="button" class="btn-default btn-reset">초기화</button>
-                                </div>
-
+                                <!-- 전체/체험/인턴 공고 목록 -->
                                 <div class="card-list">
-                                    <div class="card-item">
-                                        <a href="" class="card-link">
-                                            <div class="card-thumb">
-                                                <!-- 로고 이미지 들어가는곳 -->
-                                                <img src="/images/experience/img_default.png" alt="">
-                                            </div>
-                                            <div class="card-content">
-                                                <p class="card-title">[로켓펀치] 콘텐츠 마케터 (전환형 인턴)</p>
-                                                <p class="card-desc">로켓펀치에서 콘텐츠 마케터로 시작하고 싶으신 분들 찾습니다.</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="card-item">
-                                        <a href="" class="card-link">
-                                            <div class="card-thumb">
-                                                <!-- 로고 이미지 들어가는곳 -->
-                                                <img src="/images/experience/img_default.png" alt="">
-                                            </div>
-                                            <div class="card-content">
-                                                <p class="card-title">[로켓펀치] 콘텐츠 마케터 (전환형 인턴)</p>
-                                                <p class="card-desc">로켓펀치에서 콘텐츠 마케터로 시작하고 싶으신 분들 찾습니다.</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="card-item">
-                                        <a href="" class="card-link">
-                                            <div class="card-thumb">
-                                                <!-- 로고 이미지 들어가는곳 -->
-                                                <img src="/images/experience/img_default.png" alt="">
-                                            </div>
-                                            <div class="card-content">
-                                                <p class="card-title">[로켓펀치] 콘텐츠 마케터 (전환형 인턴)</p>
-                                                <p class="card-desc">로켓펀치에서 콘텐츠 마케터로 시작하고 싶으신 분들 찾습니다.</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="card-item">
-                                        <a href="" class="card-link">
-                                            <div class="card-thumb">
-                                                <!-- 로고 이미지 들어가는곳 -->
-                                                <img src="/images/experience/img_default.png" alt="">
-                                            </div>
-                                            <div class="card-content">
-                                                <p class="card-title">[로켓펀치] 콘텐츠 마케터 (전환형 인턴)</p>
-                                                <p class="card-desc">로켓펀치에서 콘텐츠 마케터로 시작하고 싶으신 분들 찾습니다.</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="card-item">
-                                        <a href="" class="card-link">
-                                            <div class="card-thumb">
-                                                <!-- 로고 이미지 들어가는곳 -->
-                                                <img src="/images/experience/img_default.png" alt="">
-                                            </div>
-                                            <div class="card-content">
-                                                <p class="card-title">[로켓펀치] 콘텐츠 마케터 (전환형 인턴)</p>
-                                                <p class="card-desc">로켓펀치에서 콘텐츠 마케터로 시작하고 싶으신 분들 찾습니다.</p>
-                                            </div>
-                                        </a>
-                                    </div>
+                                    <!-- 전체/체험/인턴 공고 목록 -->
                                 </div>
-
                                 <div class="pagenation">
                                     <button class="page-item prev">
                                         <svg viewBox="0 0 24 24" aria-label="icon" fill="#12131466" height="20" role="img" width="20">
@@ -265,11 +126,7 @@
                                         </svg>
                                     </button>
                                     <div class="page-list">
-                                        <button class="page-item active">1</button>
-                                        <button class="page-item">2</button>
-                                        <button class="page-item">3</button>
-                                        <button class="page-item">4</button>
-                                        <button class="page-item">5</button>
+                                        <!-- 페이징 처리 -->
                                     </div>
                                     <button class="page-item next">
                                         <svg viewBox="0 0 24 24" aria-label="icon" fill="#12131466" height="20" role="img" width="20">
@@ -293,7 +150,12 @@
                                     <div class="content-text">
                                         <p class="title">홈페이지</p>
                                         <p class="desc">
-                                            <a href="https://www.rocketpunch.com" target="_blank">https://www.rocketpunch.com</a>
+                                            <a th:if="${company.companyUrl != null}"
+                                               th:href="${company.companyUrl}"
+                                               target="_blank"
+                                               th:text="${company.companyUrl}"></a>
+
+                                            <span th:unless="${company.companyUrl != null}">등록된 홈페이지가 없습니다.</span>
                                         </p>
                                     </div>
                                 </li>
@@ -302,53 +164,13 @@
                         <div class="content-box">
                             <p class="content-title">인기 있는 기업</p>
                             <ul class="content-list">
-                                <li class="content-item">
-                                    <a href="" class="content-link">
+                                <li class="content-item" th:each="company : ${popularCompanies}">
+                                    <a th:href="@{/company/detail/{id}(id=${company.userId})}" class="content-link">
                                         <div class="content-img-thumb">
-                                            <img src="/images/experience/img_default.png" alt="">
+                                            <img th:src="${company.companyProfileFile != null ? company.companyProfileFile : '/images/experience/img_default.png'}" alt="">
                                         </div>
                                         <div class="content-text">
-                                            <p class="title">트릿지</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="content-item">
-                                    <a href="" class="content-link">
-                                        <div class="content-img-thumb">
-                                            <img src="/images/experience/img_default.png" alt="">
-                                        </div>
-                                        <div class="content-text">
-                                            <p class="title">트릿지</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="content-item">
-                                    <a href="" class="content-link">
-                                        <div class="content-img-thumb">
-                                            <img src="/images/experience/img_default.png" alt="">
-                                        </div>
-                                        <div class="content-text">
-                                            <p class="title">트릿지</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="content-item">
-                                    <a href="" class="content-link">
-                                        <div class="content-img-thumb">
-                                            <img src="/images/experience/img_default.png" alt="">
-                                        </div>
-                                        <div class="content-text">
-                                            <p class="title">트릿지</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="content-item">
-                                    <a href="" class="content-link">
-                                        <div class="content-img-thumb">
-                                            <img src="/images/experience/img_default.png" alt="">
-                                        </div>
-                                        <div class="content-text">
-                                            <p class="title">트릿지</p>
+                                            <p class="title" th:text="${company.companyName}"></p>
                                         </div>
                                     </a>
                                 </li>
@@ -419,7 +241,8 @@
             <p class="toast-subText">관련 소식을 받아볼 수 있습니다.</p>
         </div>
     </div>
-
-    <script src="/js/experience/event.js"></script>
 </body>
+<script src="/js/company/detail/module/layout.js"></script>
+<script src="/js/company/detail/module/service.js"></script>
+<script src="/js/company/detail/event.js"></script>
 </html>

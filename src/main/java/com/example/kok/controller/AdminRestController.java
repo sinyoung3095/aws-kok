@@ -1,11 +1,7 @@
 package com.example.kok.controller;
 
-import com.example.kok.dto.AdminExperienceDTO;
-import com.example.kok.dto.AdminExperienceDetailDTO;
-import com.example.kok.dto.AdminExperienceListDTO;
-import com.example.kok.dto.AdminNoticeCriteriaDTO;
-import com.example.kok.service.AdminService;
-import com.example.kok.util.Search;
+import com.example.kok.dto.*;
+import com.example.kok.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +12,13 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AdminRestController {
     private final AdminService adminService;
+    private final AdminReportService adminReportService;
+    private final AdminAdvertisementService adminAdvertisementService;
+    private final AdminBannerService adminBannerService;
+    private final AdminEmployService adminEmployService;
+    private final AdminPaymentAdvertiseService adminPaymentAdvertiseService;
 
-    //    공지 목록
+//    공지 목록
     @GetMapping("support/{page}")
     public AdminNoticeCriteriaDTO list(@PathVariable("page") int page){
         log.info("page = {}", page);
@@ -41,4 +42,65 @@ public class AdminRestController {
         return adminService.getExperienceDetail(page, id);
     }
 
+//    인턴 목록
+    @GetMapping("employ/{page}")
+    public AdminInternNoticeListCriteriaDTO getInternNoticeList(@PathVariable("page") int page,
+                                                                @RequestParam(required = false) String keyword){
+        log.info("page = {}", page);
+        return adminEmployService.getList(page, keyword);
+    }
+
+//    인턴 상세
+    @GetMapping("employ/detail/{id}/{page}")
+    public AdminInternNoticeDetailCriteriaDTO getInternNoticeDetail(@PathVariable("id")Long id,
+                                                                    @PathVariable("page")int page){
+        log.info("page = {}", page);
+        log.info("id = {}", id);
+        return adminEmployService.getDetail(page, id);
+    }
+
+//    신고 게시글 목록
+    @GetMapping("notify/post/{page}")
+    public AdminReportCriteriaDTO getNotifyList(@PathVariable("page") int page){
+        log.info("page = {}", page);
+        return adminReportService.getReportList(page);
+    }
+
+//    신고 게시글 상세
+    @GetMapping("notify/post/detail/{id}")
+    public AdminReportDTO getNotifyDetail(@PathVariable("id")Long id){
+        log.info("id = {}", id);
+        return adminReportService.getReportDetail(id);
+    }
+
+//    배너 - 광고 목록
+    @GetMapping("advertise/{page}")
+    public AdminAdvertisementCriteriaDTO getAdvertisementList(@PathVariable("page") int page,
+                                                              @RequestParam(required = false) String keyword,
+                                                              @RequestParam(required = false) String category){
+        return adminAdvertisementService.advertisementList(page, keyword, category);
+    }
+
+//    배너 - 광고 상세
+    @GetMapping("advertise/detail/{id}")
+    public AdminAdvertisementDTO getAdvertisementDetail(@PathVariable("id")Long id){
+        log.info("id = {}", id);
+        return adminAdvertisementService.advertisementDetail(id);
+    }
+
+//    배너 - 현수막
+    @GetMapping("banner/{page}")
+    public BannerFileCriteriaDTO getBanner(@PathVariable("page") int page, @RequestParam(required = false) Long id){
+        log.info("page = {}", page);
+        return adminBannerService.bannerList(page);
+    }
+
+//    결제 - 광고
+    @GetMapping("payment/advertise/{page}")
+    public AdminPaymentAdvertiseCriteriaDTO getPaymentAdvertise(@PathVariable("page") int page,
+                                                                @RequestParam(required = false) String keyword,
+                                                                @RequestParam(required = false) String category){
+        log.info("page = {}", page);
+        return adminPaymentAdvertiseService.paymentAdvertiseList(page, keyword, category);
+    }
 }

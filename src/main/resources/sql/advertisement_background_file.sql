@@ -1,4 +1,3 @@
-
 CREATE TABLE tbl_advertisement_background_file (
     file_id bigint primary key,
     advertisement_id bigint not null,
@@ -7,3 +6,5 @@ CREATE TABLE tbl_advertisement_background_file (
     constraint fk_advertisement_background_file_advertisement foreign key(advertisement_id)
         references tbl_advertisement(id)
 );
+
+select * from tbl_advertisement_background_file;

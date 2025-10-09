@@ -27,8 +27,8 @@
         from tbl_comment c
         join tbl_member m on c.member_id = m.user_id
         join tbl_user u on m.user_id = u.id
-        join tbl_user_job_category ujc on u.id = ujc.user_id
-        join tbl_job_category jc on ujc.job_category = jc.id
+        left join tbl_user_job_category ujc on u.id = ujc.user_id
+        left join tbl_job_category jc on ujc.job_category = jc.id
         where c.comment_status = 'active'
         and c.post_id = #{postId}
         order by c.created_datetime desc

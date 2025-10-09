@@ -3,8 +3,12 @@ package com.example.kok.repository;
 import com.example.kok.domain.CompanyVO;
 import com.example.kok.dto.CompanyDTO;
 import com.example.kok.mapper.CompanyMapper;
+import com.example.kok.util.CompanySearch;
+import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -26,9 +30,17 @@ public class CompanyDAO {
         return companyMapper.selectExperienceById(companyId);
     }
 
+    public int findExperienceByEndDate(Long companyId){
+        return companyMapper.selectExperienceByEndDate(companyId);
+    }
+
 //    인턴 공고 수 조회
     public int findInternById(Long companyId){
         return companyMapper.selectInternById(companyId);
+    }
+
+    public int findInternByEndDate(Long companyId){
+        return companyMapper.selectInternByEndDate(companyId);
     }
 
 //    회사 규모 조회
@@ -39,4 +51,19 @@ public class CompanyDAO {
     public void saveCompany(CompanyDTO  companyDTO){
         companyMapper.insertCompany(companyDTO);
     };
+
+//    기업 목록
+    public List<CompanyDTO> findCompanies(Criteria criteria, CompanySearch search, Long userId) {
+        return companyMapper.selectCompanyAll(criteria, search, userId);
+    }
+
+//    기업 수
+    public int findTotalCount(CompanySearch search) {
+        return companyMapper.selectCompanyCount(search);
+    }
+
+//    인기 기업 목록
+    public List<CompanyDTO> findCompaniesByFollowerCount() {
+        return companyMapper.selectCompaniesByFollowerCount();
+    }
 }

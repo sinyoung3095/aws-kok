@@ -27,8 +27,8 @@
         from tbl_reply r
         join tbl_member m on r.member_id = m.user_id
         join tbl_user u on m.user_id = u.id
-        join tbl_user_job_category ujc on u.id = ujc.user_id
-        join tbl_job_category jc on ujc.job_category = jc.id
+        left join tbl_user_job_category ujc on u.id = ujc.user_id
+        left join tbl_job_category jc on ujc.job_category = jc.id
         where r.reply_status = 'active'
         and r.comment_id = #{commentId}
         order by r.created_datetime asc

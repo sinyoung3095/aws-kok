@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>커뮤니티 | 콕</title>
     <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/community/page.css">
     <link rel="stylesheet" href="/font/font.css">
+    <link rel="stylesheet" href="/css/community/page.css">
     <link rel="stylesheet" href="/css/main-page/login-header.css">
     <link rel="stylesheet" href="/css/experience/list.css">
     <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
@@ -41,22 +41,20 @@
                     <div class="etc-1" th:if="${member != null}">
                         <div class="etc-2">
                             <div class="etc-3">
-                                <img alt="image" width="60" height="60" src="/images/mypage/default.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+                                <img alt="image" width="60" height="60" src="/images/mypage/default.webp" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
                             </div>
                             <div class="etc-4">
                                 <div class="etc-5">
                                     <p class="etc-6">이름</p>
                                 </div>
-                                <p class="etc-7">SW개발자</p>
+                                <p class="etc-7">직군</p>
                             </div>
                         </div>
                         <div class="etc-8">
-                            <a href="">
-                                <div class="etc-9">
-                                    <p class="etc-10">게시물</p>
-                                    <p class="etc-11">0</p>
-                                </div>
-                            </a>
+                            <div class="etc-9">
+                                <p class="etc-10">게시물</p>
+                                <p class="etc-11">0</p>
+                            </div>
                             <div class="etc-9">
                                 <p class="etc-10">팔로잉</p>
                                 <p class="etc-11">0</p>
@@ -224,7 +222,7 @@
                 </div>
 
                 <!-- 글쓰기 창 -->
-                <div id="post-write-popup" class="popup-container">
+                <div id="post-write-popup" class="popup-container" data-mode="write">
                     <div class="popup-inner">
                         <div class="popup-header profile">
                             <div class="profile-header">
@@ -235,12 +233,12 @@
                                     <div class="profile-name">
                                         <p class="member-name">이름</p>
                                     </div>
-                                    <p class="profile-category">SW개발</p>
+                                    <p class="profile-category">직군</p>
                                 </div>
 
                                 <div class="popup-close-box">
                                     <button type="button" class="popup-write-close">
-                                        <svg viewBox="0 0 24 24" aria-label="icon" fill="currentColor" height="20" role="img" width="20">
+                                        <svg viewBox="0 0 24 24" aria-label="icon" fill="currentColor" height="20" width="20">
                                             <path clip-rule="evenodd"
                                                   d="M6.434 6.435a.8.8 0 0 1 1.132 0L12 10.869l4.434-4.434a.8.8 0 1 1 1.132 1.13L13.13 12l4.435 4.435a.8.8 0 1 1-1.132 1.13L12 13.133l-4.434 4.434a.8.8 0 0 1-1.132-1.131L10.87 12 6.434 7.566a.8.8 0 0 1 0-1.131"
                                                   fill-rule="evenodd"></path>
@@ -251,9 +249,9 @@
                         </div>
                         <form id="post-write-form" enctype="multipart/form-data" onsubmit="return false;">
                             <div class="popup-body">
+                                <!-- 글 내용 -->
                                 <div class="popup-input">
-                                    <textarea class="popup-textarea" name="postContent" id="postContent"
-                                              placeholder="오늘의 생각, 일에 대한 통찰, 커리어 궁금증을 남겨보세요"></textarea>
+                                    <textarea class="popup-textarea" name="postContent" id="postContent" placeholder="오늘의 생각, 일에 대한 통찰, 커리어 궁금증을 남겨보세요"></textarea>
                                 </div>
                                 <div class="popup-preview">
                                     <div class="popup-preview-inner">
@@ -265,8 +263,7 @@
                                 <div class="popup-action-left">
                                     <label for="btn-add-photo" class="popup-btn-photo">
                                         <div class="phot-icon">
-                                            <svg viewBox="0 0 24 24" aria-label="icon" fill="currentColor" height="20" role="img"
-                                                 width="20">
+                                            <svg viewBox="0 0 24 24" aria-label="icon" fill="currentColor" height="20" width="20">
                                                 <path
                                                         d="M19 2.2H5C3.45 2.2 2.2 3.45 2.2 5v14c0 1.55 1.25 2.8 2.8 2.8h14c1.55 0 2.8-1.25 2.8-2.8V5c0-1.55-1.25-2.8-2.8-2.8m-14 18c-.66 0-1.2-.54-1.2-1.2v-5.17c1.83.11 3.56.59 5.11 1.37a14.8 14.8 0 0 0-2.92 5h-1zM20.2 19c0 .66-.54 1.2-1.2 1.2H7.7c.69-1.76 1.74-3.33 3.07-4.63l.46-.43c2.33-2.08 5.41-3.34 8.78-3.34h.2V19zm0-8.8H20c-3.81 0-7.29 1.44-9.91 3.81a14.9 14.9 0 0 0-6.29-1.79V5c0-.66.54-1.2 1.2-1.2h14c.66 0 1.2.54 1.2 1.2zM9.96 8.636c-.31-.22-.67-.29-.91-.29s-.6.07-.91.29c-.35.25-.59.66-.59 1.21s.24.96.59 1.21c.31.22.67.29.91.29s.6-.07.91-.29c.35-.25.59-.66.59-1.21s-.24-.96-.59-1.21"></path>
                                             </svg>
@@ -274,98 +271,20 @@
                                         <p class="popup-tool-label">사진</p>
                                     </label>
                                     <input type="file" name="files" id="btn-add-photo" multiple hidden>
-                                    <div class="popup-preview-inner"></div>
-                                    <!-- multiple로 썸네일 js를 이용해 뿌려주기 -->
                                 </div>
+
                                 <div class="popup-action-right">
-                                    <button type="button" class="pop-btn btn-primary pop-btn-write"
-                                            data-target="#post-write-popup">글쓰기
+                                    <button type="button" class="pop-btn btn-primary pop-btn-write" data-target="#post-write-popup">
+                                        글쓰기
                                     </button>
                                 </div>
                             </div>
+
+                            <div id="deleteFilesWrap"></div>
                         </form>
                     </div>
                 </div>
 
-                <!-- 글쓰기 수정 창 -->
-                <div id="post-update-popup" class="popup-container">
-                    <div class="popup-inner">
-                        <div class="popup-header profile">
-                            <div class="profile-header">
-                                <div class="profile-avatar">
-                                    <img alt="image" src="/images/mypage/default.webp">
-                                </div>
-                                <div class="profile-info">
-                                    <div class="profile-name">
-                                        <p class="member-name">이름</p>
-                                    </div>
-                                    <p class="profile-category">SW개발</p>
-                                </div>
-
-                                <div class="popup-close-box">
-                                    <button type="button" class="popup-write-close">
-                                        <svg viewBox="0 0 24 24" aria-label="icon" fill="currentColor" height="20" role="img" width="20">
-                                            <path clip-rule="evenodd"
-                                                  d="M6.434 6.435a.8.8 0 0 1 1.132 0L12 10.869l4.434-4.434a.8.8 0 1 1 1.132 1.13L13.13 12l4.435 4.435a.8.8 0 1 1-1.132 1.13L12 13.133l-4.434 4.434a.8.8 0 0 1-1.132-1.131L10.87 12 6.434 7.566a.8.8 0 0 1 0-1.131"
-                                                  fill-rule="evenodd"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <form id="post-update-form" enctype="multipart/form-data" onsubmit="return false;">
-                            <div class="popup-body">
-                                <div class="popup-input">
-                                    <textarea class="popup-textarea" name="postContent" id="update-postContent"
-                                              placeholder="오늘의 생각, 일에 대한 통찰, 커리어 궁금증을 남겨보세요"></textarea>
-                                </div>
-                                <div class="popup-preview">
-                                    <div class="popup-preview-inner update-preview-inner">
-                                        <!-- 이미지 미리보기 들어오는 영역 -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="popup-action">
-                                <div class="popup-action-left">
-                                    <label for="btn-update-photo" class="popup-btn-photo">
-                                        <div class="phot-icon">
-                                            <svg viewBox="0 0 24 24" aria-label="icon" fill="currentColor" height="20" role="img"
-                                                 width="20">
-                                                <path
-                                                        d="M19 2.2H5C3.45 2.2 2.2 3.45 2.2 5v14c0 1.55 1.25 2.8 2.8 2.8h14c1.55 0 2.8-1.25 2.8-2.8V5c0-1.55-1.25-2.8-2.8-2.8m-14 18c-.66 0-1.2-.54-1.2-1.2v-5.17c1.83.11 3.56.59 5.11 1.37a14.8 14.8 0 0 0-2.92 5h-1zM20.2 19c0 .66-.54 1.2-1.2 1.2H7.7c.69-1.76 1.74-3.33 3.07-4.63l.46-.43c2.33-2.08 5.41-3.34 8.78-3.34h.2V19zm0-8.8H20c-3.81 0-7.29 1.44-9.91 3.81a14.9 14.9 0 0 0-6.29-1.79V5c0-.66.54-1.2 1.2-1.2h14c.66 0 1.2.54 1.2 1.2zM9.96 8.636c-.31-.22-.67-.29-.91-.29s-.6.07-.91.29c-.35.25-.59.66-.59 1.21s.24.96.59 1.21c.31.22.67.29.91.29s.6-.07.91-.29c.35-.25.59-.66.59-1.21s-.24-.96-.59-1.21"></path>
-                                            </svg>
-                                        </div>
-                                        <p class="popup-tool-label">사진</p>
-                                    </label>
-                                    <input type="file" name="files" id="btn-update-photo" multiple hidden>
-                                    <div class="popup-preview-inner"></div>
-                                    <!-- multiple로 썸네일 js를 이용해 뿌려주기 -->
-                                </div>
-                                <div class="popup-action-right">
-                                    <button type="button" class="pop-btn btn-primary pop-btn-update"
-                                            data-target="#post-update-popup">수정하기
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- popup - 닫기 메세지 -->
-                <div id="message-popup2" class="popup-container pop-center pop-default">
-                    <div class="popup-inner">
-                        <div class="popup-body">
-                            <div class="popup-title-box">
-                                <strong class="popup-title">게시하지 않고 나가시겠어요?</strong>
-                                <p class="popup-sub-title">지금 나가면 작성했던 내용이 저장되지 않습니다.</p>
-                            </div>
-                        </div>
-                        <div class="popup-action popup-btn-row">
-                            <button class="pop-btn btn-primary popup-all-close">나가기</button>
-                            <button class="pop-btn btn-default popup-continue popup-remove">계속 작성하기</button>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="hide-1">
                     <button type="button" class="btn-write btn-primary popup-trigger" data-target="#post-write-popup" style="width: 70px;height: 40px;">글쓰기</button>

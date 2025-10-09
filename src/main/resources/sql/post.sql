@@ -33,6 +33,9 @@ delete from tbl_post where post_status = 'active';
 delete from tbl_post_file where post_id = 59;
 delete from tbl_file where file_content_type = 'image/png';
 
+insert into tbl_post (post_content, member_id)
+values ('게시글 내용이 들어가는 부분입니다. 게시글 내용이 들어가는 부분입니다. 게시글 내용이 들어가는 부분입니다.', 8);
+
 select * from tbl_post;
 select * from tbl_post_like;
 select * from tbl_member;

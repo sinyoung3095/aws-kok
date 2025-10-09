@@ -81,7 +81,7 @@ const experienceLayout = (() => {
                             <div class="hambuger-pop-wrap">
                                 <div class="hambuger-pop">
                                     <div class="pop-head">작업</div>
-                                    <a href="/enterprise-console/experience/applicate-list" id="detail-btn" class="hambuger-list">
+                                    <a href="/enterprise-console/experience/applicate-list/${list.id}" id="detail-btn" class="hambuger-list">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hambuger-svg"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                         상세보기
                                     </a>
@@ -90,10 +90,10 @@ const experienceLayout = (() => {
                                         수정하기
                                     </a>
                                     <div class="bar-hambuger"></div>
-                                    <div class="red-ham-list">
+                                    <a href="#;" class="red-ham-list">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hambuger-svg"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
                                         삭제하기
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </button>

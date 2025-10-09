@@ -5,6 +5,7 @@ import com.example.kok.repository.CompanyProfileFileDAO;
 import com.example.kok.repository.ExperienceNoticeDAO;
 import com.example.kok.repository.FileDAO;
 import com.example.kok.repository.SaveExperienceNoticeDAO;
+import com.example.kok.util.CompanyNoticeCriteria;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
@@ -142,5 +143,20 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
     public boolean isSavedExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO) {
         boolean result=saveExperienceNoticeDAO.idSavedExp(saveExperienceNoticeDTO);
         return result;
+    }
+
+//    기업별 체험 공고
+    @Override
+    public CompanyExperienceNoticeCriteriaDTO getExperienceNoticesByCompanyId(int page, Long companyId, Search search) {
+        int total = experienceNoticeDAO.findCountByCompanyId(companyId, search);
+        CompanyNoticeCriteria criteria = new CompanyNoticeCriteria(page, total);
+        List<ExperienceNoticeDTO> notices = experienceNoticeDAO.findAllByCompanyId(companyId, criteria, search);
+
+        criteria.setHasMore(criteria.getPage() < criteria.getRealEnd());
+
+        CompanyExperienceNoticeCriteriaDTO companyExperienceNoticeCriteriaDTO = new CompanyExperienceNoticeCriteriaDTO();
+        companyExperienceNoticeCriteriaDTO.setCriteria(criteria);
+        companyExperienceNoticeCriteriaDTO.setExperiences(notices);
+        return companyExperienceNoticeCriteriaDTO;
     }
 }

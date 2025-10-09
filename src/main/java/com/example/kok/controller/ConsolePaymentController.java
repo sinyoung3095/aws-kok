@@ -27,14 +27,16 @@ public class ConsolePaymentController {
 //            @PathVariable("page") int page,
             @RequestParam(defaultValue = "1") int page,
                            Model model) {
+
         Long companyId = 1L;
         ConsolePaymentCriteriaDTO payment = consolepaymentService.getList(companyId, page);
-        model.addAttribute("payment", payment);
 
         if (payment == null) {
             payment = new ConsolePaymentCriteriaDTO();
             payment.setPayments(Collections.emptyList());
         }
+
+        model.addAttribute("payment", payment);
 
         return "enterprise-console/console-payment";
     }
