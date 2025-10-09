@@ -1,10 +1,12 @@
 package com.example.kok.controller;
 
+import com.example.kok.dto.ConsoleExperienceApplicantCriteriaDTO;
 import com.example.kok.dto.ConsoleExperienceListCriteriaDTO;
 import com.example.kok.dto.ConsoleExperienceListDTO;
 import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
-import com.example.kok.dto.ExperienceNoticeDTO;
+import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.enumeration.Status;
+import com.example.kok.service.ConsoleExperienceDetailService;
 import com.example.kok.service.ConsoleExperienceListService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,8 +17,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/enterprise-console/experience")
-public class ConsoleExperienceListApiController {
+public class ConsoleExperienceApiController {
     private final ConsoleExperienceListService experienceService;
+    private final ConsoleExperienceDetailService experienceDetailService;
 
 //    공고 목록
     @GetMapping("/list/{companyId}/{page}")
@@ -56,12 +59,19 @@ public class ConsoleExperienceListApiController {
         noticeRequestDTO.setId(id);
         experienceService.modifyNotice(noticeRequestDTO);
 
-        log.info("수정 요청 DTO = {}", noticeRequestDTO);
         return ResponseEntity.ok(noticeRequestDTO);
     }
 
-//    @GetMapping("/edit/{id}")
-//    public ResponseEntity<ConsoleExperienceNoticeRequestDTO> getNoticeForEdit(@PathVariable Long id) {
-//        return ResponseEntity.ok(experienceService.getNotice(id));
-//    }
+//    공고 상세 - 지원자
+    @GetMapping("/applicate-list/{experienceNoticeId}/{page}")
+    public ResponseEntity<?> applicateList(@PathVariable("experienceNoticeId") Long experienceNoticeId, @PathVariable("page") int page, @RequestParam(value = "status", required = false) RequestStatus status) {
+
+        ConsoleExperienceApplicantCriteriaDTO experienceCriteriaDTO = experienceDetailService.getApplicateList(experienceNoticeId, page, status);
+        if(experienceCriteriaDTO == null || experienceCriteriaDTO.getApplicantLists().size() == 0){
+            return ResponseEntity.ok(experienceCriteriaDTO);
+        }
+
+        return ResponseEntity.ok(experienceCriteriaDTO);
+    }
+
 }
