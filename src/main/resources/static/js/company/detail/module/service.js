@@ -49,6 +49,7 @@ const companyNoticeService = (() => {
 
         const experienceNotice = `/api/company/${companyId}/experiences/${page}${searchContext}`;
 
+        console.log("체험 카테고리:", experienceNotice);
         const response = await fetch(experienceNotice);
 
         const result = await response.json();
