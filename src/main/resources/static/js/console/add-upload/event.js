@@ -77,25 +77,74 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const mediaLabel = document.querySelector("label.media-label");
     const backgroundInput = document.getElementById("add-background");
+    const previewImg = document.getElementById("add-back");
 
+    // 라벨 클릭 시 input 클릭
     mediaLabel.addEventListener("click", function () {
         backgroundInput.click();
     });
 
+    // 파일 선택 시 미리보기 이미지 변경
     backgroundInput.addEventListener("change", function () {
         const file = backgroundInput.files[0];
+
         if (file) {
-            const img = document.getElementById("add-back");
             const reader = new FileReader();
             reader.onload = function (e) {
-                img.src = e.target.result;
+                // 기존 이미지 교체
+                previewImg.src = e.target.result;
+                // 선택한 새 파일을 시각적으로 표시 (optional)
+                previewImg.style.opacity = "1";
             };
             reader.readAsDataURL(file);
+        } else {
+            // 파일이 없을 경우 (선택 취소 시) 기본 이미지로 되돌리기
+            previewImg.src = "/images/experience/ad_bg_img.jpg";
         }
     });
 
     const startDateInput = document.getElementById("start-date");
     const endDateInput = document.getElementById("end-date");
+
+    if (page === "create") {
+        const startInput = document.querySelector("#start-date");
+        const endInput = document.querySelector("#end-date");
+
+        if (!startInput || !endInput) return;
+        if (startInput.value && endInput.value) return;
+
+        const today = new Date();
+        const twoDaysLater = new Date(today);
+        twoDaysLater.setDate(today.getDate() + 2);
+
+        const formatted = (d) => {
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, "0");
+            const day = String(d.getDate()).padStart(2, "0");
+            return `${y}-${m}-${day}`;
+        };
+
+        startInput.value = formatted(twoDaysLater);
+        endInput.value = formatted(twoDaysLater);
+    }
+
+    // 달력 input
+    const dateInputs = document.querySelectorAll(".date-input");
+    dateInputs.forEach(input => {
+        input.addEventListener("input", (e) => {
+            let value = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 허용
+            if (value.length > 8) value = value.substring(0, 8);
+
+            if (value.length >= 5) {
+                value = value.substring(0,4) + "-" + value.substring(4,6) +
+                    (value.length > 6 ? "-" + value.substring(6) : "");
+            } else if (value.length >= 4) {
+                value = value.substring(0,4) + "-" + value.substring(4);
+            }
+
+            e.target.value = value;
+        });
+    });
 
     function calculatePeriod() {
         const startDate = startDateInput.value;
@@ -138,6 +187,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // 달력 날짜 확인 버튼
+    const checkBtn = document.querySelector(".confirm-btn");
+    checkBtn.addEventListener("click", (e)=>{
+        e.preventDefault();
+        calculatePeriod()
+    });
+
     // 광고 등록하기 버튼
     const btnRegisterAd = document.querySelector("#btn-register-ad");
     if(btnRegisterAd){
@@ -153,199 +209,45 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("등록 처리 실행!");
 
         // 결제 완료
-        const payInfo = {
-            price: 3000,
-            duration: 2
-        }
-        // await pay(payInfo); // 결제 프로세스
-
-        // 데이터 보내기
-        const data = {
-            advertisementMainText: document.querySelector("#ad-main-text").value,
-            advertisementSubText: document.querySelector("#ad-sub-text").value,
-            advertiseStartDatetime: document.querySelector("#start-date").value,
-            advertiseEndDatetime: document.querySelector("#end-date").value,
-            companyId: 1,
-            paymentPrice: document.querySelector(".start-price .price").value
-        }
-
         try {
-            const result = await adService.register(data);
-            console.log("광고 등록 성공이당", result);
-            alert("광고가 등록되었습니다.");
-        } catch (err) {
-            console.error(err);
-            alert("광고 등록 중 오류가 발생했습니다.");
-        }
-    });
-    }
-
-    // 광고 수정하기 버튼
-    const btnUpdateAd = document.querySelector("#btn-update-ad");
-    if(btnUpdateAd){
-        btnUpdateAd.addEventListener("click", async () => {
-        const isMainValid = validateInput(inputMain, "메인 텍스트를 입력해주세요.");
-        const isSubValid = validateInput(inputSub, "서브 텍스트를 입력해주세요.");
-        const isDateValid = validateDate(okcheck);
-
-        // 하나라도 false면 return
-        if (!isMainValid || !isSubValid || !isDateValid) return;
-
-        // 모든 유효성 통과 시 실행
-        console.log("수정 등록 처리 실행!");
-
-        // 결제 완료
-        const payInfo = {
-            price: 3000,
-            duration: 2
-        }
-        // await pay(payInfo); // 결제 프로세스
-
-        // 데이터 보내기
-        const data = {
-            advertisementMainText: document.querySelector("#ad-main-text").value,
-            advertisementSubText: document.querySelector("#ad-sub-text").value,
-            advertiseStartDatetime: document.querySelector("#start-date").value,
-            advertiseEndDatetime: document.querySelector("#end-date").value,
-            paymentPrice: document.querySelector(".start-price .price").value
-        }
-
-        try {
-            const result = await adService.update(id, data);
-            console.log("광고 수정 성공이당", result);
-            alert("광고가 수정등록되었습니다.");
-        } catch (err) {
-            console.error(err);
-            alert("광고 수정등록 중 오류가 발생했습니다.");
-        }
-    });
-    }
-
-    function validateInput(inputElement, message) {
-        const parent = inputElement.closest(".yoso");
-        let errorMsg = parent.querySelector(".error-msg");
-        const value = inputElement.value.trim();
-
-        if (!value) {
-            inputElement.style.border = "2px solid red";
-
-            if (!errorMsg) {
-                errorMsg = document.createElement("p");
-                errorMsg.classList.add("error-msg");
-                errorMsg.innerText = message;
-                parent.appendChild(errorMsg);
+            const payInfo = {
+                price: 100,
+                duration: 2
             }
-            return false;
-        } else {
-            inputElement.style.border = "";
-            if (errorMsg) errorMsg.remove();
-            return true;
+            await pay(payInfo); // 결제 프로세스
+
+            // 결제 완료 후 form 자동 제출
+            const form = document.getElementById("adForm");
+            console.log("결제 완료! 광고 등록을 시작합니다.");
+
+            // 폼 전송
+            form.submit();
+        } catch (error) {
+            console.error("결제 또는 등록 중 오류", error);
+            alert("결제 또는 광고 등록 중 오류가 발생했습니다.");
         }
+
+        // const data = {
+        //     advertisementMainText: document.querySelector("#ad-main-text").value,
+        //     advertisementSubText: document.querySelector("#ad-sub-text").value,
+        //     advertiseStartDatetime: document.querySelector("#start-date").value,
+        //     advertiseEndDatetime: document.querySelector("#end-date").value,
+        //     companyId: 1,
+        //     paymentPrice: document.querySelector(".start-price .price").value
+        // }
+        //
+        // try {
+        //     const result = await adService.register(data);
+        //     console.log("광고 등록 성공이당", result);
+        //     alert("광고가 등록되었습니다.");
+        // } catch (err) {
+        //     console.error(err);
+        //     alert("광고 등록 중 오류가 발생했습니다.");
+        // }
+    });
     }
 
-    function validateDate(okcheck) {
-        // okcheck가 false면 날짜 미지정
-        if (!okcheck) {
-            const dateWrap = document.querySelector(".date-wrap");
-            let errorMsg = dateWrap.querySelector(".error-msg");
-
-            if (!errorMsg) {
-                errorMsg = document.createElement("p");
-                errorMsg.classList.add("error-msg");
-                errorMsg.innerText = "날짜를 필수로 지정해 주세요.";
-                dateWrap.appendChild(errorMsg);
-            }
-            return false;
-        } else {
-            const dateWrap = document.querySelector(".date-wrap");
-            const errorMsg = dateWrap.querySelector(".error-msg");
-            if (errorMsg) errorMsg.remove();
-            return true;
-        }
-    }
-
-    // const btnRegisterAd = document.querySelector("button.start-add");
-    // btnRegisterAd.addEventListener("click", async () => {
-    //     if (!inputMain.value.trim()) {
-    //         inputMain.style.border = "2px solid red";
-    //         return;
-    //     }
-    //
-    //     if (!inputSub.value.trim()) {
-    //         alert("필수 텍스트를 입력해 주세요");
-    //         inputMain.style.border = "2px solid red";
-    //         return;
-    //     }
-    //
-    //     if (!okcheck) {
-    //         alert("날짜를 필수로 지정해 주세요");
-    //         return;
-    //     }
-    //
-    //     // 결제 완료
-    //     const payInfo = {
-    //         price: 3000,
-    //         duration: 2
-    //     }
-    //     // await pay(payInfo);
-    //
-    //     // 데이터 보내기
-    //     const data = {
-    //         adMainText: document.querySelector("#ad-main-text").value,
-    //         adSubText: document.querySelector("#ad-sub-text").value,
-    //         adStartDatetime: document.querySelector("#start-date").value,
-    //         adEndDatetime: document.querySelector("#end-date").value
-    //     }
-    //
-    //     console.log(data)
-    // });
-
-    const checkBtn = document.querySelector("button.confirm-btn");
-    checkBtn.addEventListener("click", ()=>{
-        calculatePeriod()
-    });
 });
-
-// 달력 input
-const dateInputs = document.querySelectorAll(".date-input");
-dateInputs.forEach(input => {
-    input.addEventListener("input", (e) => {
-        let value = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 허용
-        if (value.length > 8) value = value.substring(0, 8);
-
-        if (value.length >= 5) {
-            value = value.substring(0,4) + "-" + value.substring(4,6) +
-                (value.length > 6 ? "-" + value.substring(6) : "");
-        } else if (value.length >= 4) {
-            value = value.substring(0,4) + "-" + value.substring(4);
-        }
-
-        e.target.value = value;
-    });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    const startInput = document.querySelector(".start-date");
-    const endInput = document.querySelector(".end-date");
-
-    if (!startInput || !endInput) return;
-    if (startInput.value && endInput.value) return;
-
-    const today = new Date();
-    const twoDaysLater = new Date(today);
-    twoDaysLater.setDate(today.getDate() + 2);
-
-    const formatted = (d) => {
-        const y = d.getFullYear();
-        const m = String(d.getMonth() + 1).padStart(2, "0");
-        const day = String(d.getDate()).padStart(2, "0");
-        return `${y}-${m}-${day}`;
-    };
-
-    startInput.value = formatted(twoDaysLater);
-    endInput.value = formatted(twoDaysLater);
-});
-
 
 
 
