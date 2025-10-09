@@ -14,11 +14,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class AdminPaymentAdvertiseDTO {
     private Long id;
-    private long paymentPrice;
+    private Long paymentPrice;
     private RequestStatus paymentStatus;
-    private LocalDateTime paymentPaidDatetime;
-    private long advertisementId;
-    private long requestExperienceId;
+    private String paymentPaidDatetime;
+    private String relativeDate;
+    private Long advertisementId;
+    private Long requestExperienceId;
 
+    private String companyName;
+    private String userEmail;
+    private String advertiseStartDatetime;
+    private String advertiseEndDatetime;
     private RequestStatus advertisementStatus;
 }
