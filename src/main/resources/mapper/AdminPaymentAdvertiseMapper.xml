@@ -61,15 +61,32 @@
 
 <!--  승인된 결제 총액  -->
     <select id="totalAcceptPaymentAdvertise" resultType="com.example.kok.dto.AdminPaymentAdvertiseCountDTO">
-        select sum(payment_price) as acceptTotal
-        from tbl_payment
-        where payment_status = 'accept'
+        select sum(p.payment_price) as acceptTotal
+        from tbl_advertisement a
+             join tbl_user u
+                  on u.id = a.company_id
+             join tbl_company c
+                  on c.user_id = a.company_id
+             join tbl_payment p
+                  on a.id = p.advertisement_id
+             join tbl_payment_user pu
+                  on pu.payment_id = p.id and pu.advertisement_id = a.id
+        where u.user_role = 'company' and a.advertisement_request_status = 'accept' and payment_status = 'accept'
     </select>
 
 <!--  승인된 결제 개수  -->
     <select id="countAcceptPaymentAdvertise" resultType="com.example.kok.dto.AdminPaymentAdvertiseCountDTO">
         select
-            sum(case when payment_status = 'accept' then 1 else 0 end) as acceptCount
-        from tbl_payment
+            sum(case when p.payment_status = 'accept' then 1 else 0 end) as acceptCount
+        from tbl_advertisement a
+                 join tbl_user u
+                      on u.id = a.company_id
+                 join tbl_company c
+                      on c.user_id = a.company_id
+                 join tbl_payment p
+                      on a.id = p.advertisement_id
+                 join tbl_payment_user pu
+                      on pu.payment_id = p.id and pu.advertisement_id = a.id
+        where u.user_role = 'company' and a.advertisement_request_status = 'accept'
     </select>
 </mapper>
