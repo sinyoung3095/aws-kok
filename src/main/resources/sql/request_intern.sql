@@ -16,7 +16,21 @@ create table tbl_request_intern (
 
 select * from tbl_request_intern;
 
-insert into tbl_request_intern (member_id, intern_notice_id, member_alarm_setting_id)
+select * from tbl_request_intern_file;
+
+alter table tbl_request_intern add request_intern_member_name varchar(255) not null;
+
+alter table tbl_request_intern add request_intern_member_email varchar(255) not null;
+
+alter table tbl_request_intern add request_intern_member_phone varchar(255) not null;
+
+alter table tbl_request_intern add request_intern_member_url varchar(255);
+
+alter table tbl_request_intern add file_id bigint not null;
+
+alter table tbl_request_intern add constraint fk_request_intern_file foreign key(file_id) references tbl_file(id);
+
+insert into tbl_request_intern (intern_notice_id, member_id, member_alarm_setting_id)
 values (1, 1, 1);
 
 alter table tbl_request_intern drop evaluation_id;
