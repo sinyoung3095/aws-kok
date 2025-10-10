@@ -4,6 +4,10 @@ const second = document.getElementsByClassName("second");
 const third = document.getElementsByClassName("third");
 const fourth = document.getElementsByClassName("fourth");
 const list = document.getElementsByClassName("post-1");
+const savedList=document.getElementById("saved-list-wrap");
+const postsList=document.getElementById("my-posts-wrap");
+const requestList=document.getElementById("request-list-wrap");
+const paymentList=document.getElementById("payment-list-wrap");
 const close = document.getElementById("close");
 const setting = document.getElementsByClassName("setting")[0];
 const set = document.getElementsByClassName("set")[0];
@@ -80,10 +84,10 @@ first.forEach((item) => {
         fourth.forEach((fir) => {
             fir.classList.remove("active");
         });
-        list[0].classList.add("active");
-        list[1].classList.remove("active");
-        list[2].classList.remove("active");
-        list[3].classList.remove("active");
+        postsList.classList.add("active");
+        savedList.classList.remove("active");
+        requestList.classList.remove("active");
+        paymentList.classList.remove("active");
     });
 });
 // 게시물 삭제 버튼
@@ -109,10 +113,10 @@ second.forEach((item) => {
         fourth.forEach((fir) => {
             fir.classList.remove("active");
         });
-        list[1].classList.add("active");
-        list[0].classList.remove("active");
-        list[2].classList.remove("active");
-        list[3].classList.remove("active");
+        savedList.classList.add("active");
+        postsList.classList.remove("active");
+        requestList.classList.remove("active");
+        paymentList.classList.remove("active");
     });
 });
 let count = 0;

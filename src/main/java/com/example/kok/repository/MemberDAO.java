@@ -1,6 +1,8 @@
 package com.example.kok.repository;
 
 import com.example.kok.domain.MemberVO;
+import com.example.kok.dto.RequestExperienceDTO;
+import com.example.kok.dto.RequestInternDTO;
 import com.example.kok.dto.UserMemberDTO;
 import com.example.kok.mapper.MemberMapper;
 import com.example.kok.util.Criteria;
@@ -31,5 +33,15 @@ public class MemberDAO {
     //    아이디로 회원 조회
     public Optional<UserMemberDTO> selectMember(Long memberId) {
         return memberMapper.selectMember(memberId);
+    }
+
+//    아이디로 지원한 체험 공고 조회
+    public List<RequestExperienceDTO> findExperienceByMemberId(Long memberId) {
+        return memberMapper.selectExperienceByMemberId(memberId);
+    }
+
+    //    아이디로 지원한 인턴 공고 조회
+    public List<RequestInternDTO> findInternByMemberId(Long memberId) {
+        return memberMapper.selectInternByMemberId(memberId);
     }
 }
