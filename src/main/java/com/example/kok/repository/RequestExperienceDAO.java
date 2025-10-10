@@ -21,4 +21,8 @@ public class RequestExperienceDAO {
     public List<RequestExperienceDTO> selectAllRequestById(Long id){
         return requestExperienceMapper.selectRequestById(id);
     }
+    //    지원 내역 목록 조회
+    public List<RequestExperienceDTO> selectAllRequestByUserId(Long id){
+        return requestExperienceMapper.selectRequestByUserId(id);
+    }
 }

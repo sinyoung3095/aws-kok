@@ -21,4 +21,8 @@ public class RequestInternDAO {
     public List<RequestInternDTO> selectAllInternById(Long id){
         return requestInternMapper.selectRequestById(id);
     }
+//    인턴 지원 내역 조회
+    public List<RequestInternDTO> selectAllInternByUserId(Long Id){
+        return  requestInternMapper.selectRequestInternByUserId(Id);
+    }
 }
