@@ -21,7 +21,11 @@
                 <!-- 프로필 드롭다운 -->
                 <div class="profile-modal">
                     <div class="profile-modal-header">
+<<<<<<< HEAD
                         <div class="member-name" th:text="${userDTO.username}+' 님'"></div>
+=======
+                        <div class="member-name" th:text="${userDTO.username}+' 님'" ></div>
+>>>>>>> main-page
                     </div>
                     <div class="profile-modal-body">
                         <div class="list-wrap">
@@ -110,62 +114,13 @@
                 </div>
                 <!-- 체험 지원내역 -->
                 <div id="experienceWarp" class="history-modal-main history-modal-main-experience">
-                    <!-- 합격 or 접수중 -->
 
                 </div>
 
                 <!-- 인턴 지원내역 -->
-                <div class="history-modal-main history-modal-main-employ" style="display:none;">
-                    <!-- 합격 or 접수중 -->
-                    <div class="history-modal-main-section">
-                        <div class="history-modal-main-company-wrap">
-                            <!-- 기업 프로필 이미지 -->
-                            <img alt="image" width="32" height="32" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
-                            <div class="history-modal-main-section-info">
-                                <span class="history-modal-main-company-name">기업명</span>
-                                <span class="history-modal-main-announce-title">인턴공고 제목</span>
-                                <p class="history-modal-main-apply-date">지원일: 2025년 09월 12일</p>
-                            </div>
-                            <div class="history-modal-main-apply-status-wrap">
-                                <div class="history-modal-main-apply-status">
-                                    <span class="history-modal-main-apply-status-text">서류 접수</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="history-modal-main-section">
-                        <div class="history-modal-main-company-wrap">
-                            <!-- 기업 프로필 이미지 -->
-                            <img alt="image" width="32" height="32" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
-                            <div class="history-modal-main-section-info">
-                                <span class="history-modal-main-company-name">기업명</span>
-                                <span class="history-modal-main-announce-title">인턴공고 제목</span>
-                                <p class="history-modal-main-apply-date">지원일: 2025년 09월 12일</p>
-                            </div>
-                            <div class="history-modal-main-apply-status-wrap">
-                                <div class="history-modal-main-apply-status">
-                                    <span class="history-modal-main-apply-status-text">합격</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 불합격 시 상세보기 막기 -->
-                    <div class="history-modal-main-section fail">
-                        <div class="history-modal-main-company-wrap-fail">
-                            <!-- 기업 프로필 이미지 -->
-                            <img alt="image" width="32" height="32" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
-                            <div class="history-modal-main-section-info">
-                                <span class="history-modal-main-company-name">기업명</span>
-                                <span class="history-modal-main-announce-title">인턴공고 제목</span>
-                                <p class="history-modal-main-apply-date">지원일: 2025년 09월 12일</p>
-                            </div>
-                            <div class="history-modal-main-apply-status-wrap">
-                                <div class="history-modal-main-apply-status">
-                                    <span class="history-modal-main-apply-status-text">불합격</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div id="InternWarp" class="history-modal-main history-modal-main-employ" style="display:none;">
+
+
                 </div>
             </div>
         </div>

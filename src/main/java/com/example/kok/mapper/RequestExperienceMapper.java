@@ -12,4 +12,6 @@ public interface RequestExperienceMapper {
 
 //    멤버별 지원서 조회
     public List<RequestExperienceDTO> selectRequestById(Long id);
+//    지원 내역 목록 조회
+public List<RequestExperienceDTO> selectRequestByUserId(Long id);
 }

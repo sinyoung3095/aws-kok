@@ -11,6 +11,7 @@
                     on ino.company_id = c.user_id
         where member_id = #{id}
     </select>
+<<<<<<< HEAD
     <!--    지원서 넣기-->
     <insert id="insertRequest" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_request_intern(intern_notice_id, member_id, member_alarm_setting_id, request_intern_member_name, request_intern_member_email, request_intern_member_phone, request_intern_member_url, file_id)
@@ -32,5 +33,16 @@
                  join tbl_evaluation e
                       on r.id = e.request_experience_id
         where r.member_id = #{id};
+=======
+<!--  인턴 지원 내역 조회  -->
+    <select id="selectRequestInternByUserId">
+        select c.company_name, ino.intern_notice_title, ri.request_intern_status ,ri.created_datetime
+        from tbl_request_intern ri
+                 join tbl_intern_notice ino
+                      on ri.intern_notice_id = ino.id
+                 join tbl_company c
+                      on ino.company_id = c.user_id
+        where ri.member_id = #{id}
+>>>>>>> main-page
     </select>
 </mapper>
