@@ -2,11 +2,15 @@ package com.example.kok.service;
 
 import com.example.kok.dto.RequestInternDTO;
 import com.example.kok.dto.RequestInternFileDTO;
+import com.example.kok.dto.UserMemberDTO;
 import com.example.kok.repository.MemberAlarmSettingDAO;
+import com.example.kok.repository.MemberDAO;
 import com.example.kok.repository.RequestInternDAO;
 import com.example.kok.repository.RequestInternFileDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -14,6 +18,7 @@ public class RequestInternServiceImpl implements RequestInternService {
     private final RequestInternDAO requestInternDAO;
     private final RequestInternFileDAO requestInternFileDAO;
     private final MemberAlarmSettingDAO memberAlarmSettingDAO;
+    private final MemberDAO memberDAO;
 
     @Override
     public void applyForIntern(RequestInternDTO requestInternDTO) {
@@ -21,6 +26,7 @@ public class RequestInternServiceImpl implements RequestInternService {
         requestInternDTO.setMemberAlarmSettingId(memberAlarmSettingId);
         requestInternDAO.applyForIntern(requestInternDTO);
         System.out.println(requestInternDTO.getId());
+        Optional<UserMemberDTO> member=memberDAO.selectMember(requestInternDTO.getMemberId());
         Long reqId=requestInternDTO.getId();
         Long fileId=requestInternDTO.getFileId();
         RequestInternFileDTO file=new RequestInternFileDTO();
