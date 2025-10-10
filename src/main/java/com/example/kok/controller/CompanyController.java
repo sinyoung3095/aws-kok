@@ -28,22 +28,23 @@ public class CompanyController {
     @GetMapping("/list")
     public String goToCompanyList(Model model, CompanySearch search, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
-        if (customUserDetails == null) {
-            return "redirect:/member/login";
+        Long userId = null;
+
+        if (customUserDetails != null) {
+            userId = customUserDetails.getId();
+            model.addAttribute("userDTO", customUserDetails);
         }
 
-        Long userId = customUserDetails.getId();
         model.addAttribute("companies", companyService.getCompanyList(1, search, userId).getCompanies());
-        model.addAttribute("user", customUserDetails);
         return "company/list";
     }
 
 //    기업 상세
     @GetMapping("/{companyId}")
-    public String detailPage(@PathVariable Long companyId, Model model) {
+    public String detailPage(@PathVariable Long companyId, Model model,  @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         CompanyDTO company = companyService.findCompanyById(companyId);
         model.addAttribute("company", company);
-
+        model.addAttribute("userDTO", customUserDetails);
         List<CompanyDTO> popularCompanies = companyService.getCompaniesByFollowerCount();
         model.addAttribute("popularCompanies", popularCompanies);
 

@@ -254,7 +254,7 @@
                     </div>
 
                     <!-- 글쓰기 창 -->
-                    <div id="post-write-popup" class="popup-container" data-mode="write">
+                    <div id="post-write-popup" class="popup-container" data-mode="write" th:if="${member != null}">
                         <div class="popup-inner">
                             <div class="popup-header profile">
                                 <div class="profile-header">
@@ -349,13 +349,6 @@
 <script src="/js/community/post/module/service.js"></script>
 <script src="/js/community/comment/module/layout.js"></script>
 <script src="/js/community/comment/module/service.js"></script>
-<script src="/js/main-page/side-bar/module/layout.js"></script>
-<script src="/js/main-page/side-bar/module/service.js"></script>
-<script src="/js/main-page/header/module/layout.js"></script>
-<script src="/js/main-page/header/module/service.js"></script>
 <script src="/js/community/post/event.js"></script>
 <script src="/js/community/comment/event.js"></script>
-<script src="/js/main-page/side-bar/event.js"></script>
-<script src="/js/main-page/header/event.js"></script>
-<script src="/js/main-page/mobile-footer/event.js"></script>
 </html>
