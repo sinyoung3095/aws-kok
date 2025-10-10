@@ -41,7 +41,9 @@ select * from tbl_post_like;
 select * from tbl_member;
 select * from tbl_post_file;
 select * from tbl_file;
-
+update tbl_post
+    set post_status = 'active'
+where post_status = 'inactive';
 ALTER TABLE tbl_post
     ADD COLUMN likes_count int DEFAULT 0;
 
