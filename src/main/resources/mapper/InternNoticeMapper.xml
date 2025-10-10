@@ -3,8 +3,6 @@
 <mapper namespace="com.example.kok.mapper.InternNoticeMapper">
     <sql id="companyInternNoticeSearch">
         <if test="search.keyword != null and search.keyword != ''">
-    <sql id="search">
-        <if test="search.keyword != null">
             and (
             lower(i.intern_notice_title) like concat('%', lower(#{search.keyword}), '%')
             or lower(i.intern_notice_subtitle) like concat('%', lower(#{search.keyword}), '%')
@@ -12,6 +10,12 @@
             or lower(i.intern_main_tasks) like concat('%', lower(#{search.keyword}), '%')
             or lower(i.intern_notice_etc) like concat('%', lower(#{search.keyword}), '%')
             or lower(j.job_name) like concat('%', lower(#{search.keyword}), '%')
+            )
+        </if>
+    </sql>
+    <sql id="search">
+        <if test="search.keyword != null">
+            and (
                 lower(i.intern_notice_title) like concat('%', lower(#{search.keyword}), '%') or
                 lower(i.intern_notice_subtitle) like concat('%', lower(#{search.keyword}), '%') or
                 lower(i.intern_notice_etc) like concat('%', lower(#{search.keyword}), '%') or
@@ -21,11 +25,26 @@
         </if>
     </sql>
 
-<!-- 기업별 인턴 공고 목록 -->
+    <!-- 기업별 인턴 공고 목록 -->
     <select id="selectInternNoticeByCompanyId" resultType="InternNoticeDTO">
         select i.id, i.intern_notice_title, i.intern_notice_subtitle as internNoticeSubTitle, i.intern_notice_introduce_job,
                i.intern_main_tasks, i.intern_notice_etc, csc.id as scale_id, csc.company_scale_name, j.job_name
-<!--    조회-->
+        from tbl_intern_notice i
+        join tbl_company c on c.user_id = i.company_id
+        left join tbl_company_scale_category_bridge cscb on i.company_id = cscb.company_id
+        left join tbl_company_scale_category csc on cscb.company_scale_category_id = csc.id
+        left join tbl_intern_job_category ijc on ijc.intern_notice_id = i.id
+        left join tbl_job_category j on j.id = ijc.job_category
+        where i.intern_notice_end_date >= now()
+        and i.intern_notice_status = 'active'
+        and i.company_id = #{companyId}
+        <include refid="companyInternNoticeSearch"/>
+        order by i.created_datetime desc
+        limit #{criteria.rowCount} offset #{criteria.offset}
+    </select>
+
+
+    <!--    조회-->
     <select id="selectAllInternNotice">
         select i.id,
         i.intern_notice_title,
@@ -92,6 +111,7 @@
         and i.intern_notice_status = 'active'
         and i.company_id = #{companyId}
         <include refid="companyInternNoticeSearch"/>
+    </select>
 <!--    전체 개수 조회-->
     <select id="selectCountAll">
         select count(*) from tbl_intern_notice
@@ -101,11 +121,13 @@
 <!--  기업별 인턴 모집  -->
     <select id="selectListById">
         select intern_notice_title, intern_notice_subtitle, intern_notice_status
+        from tbl_intern_notice
+        where company_id = #{userId}
+    </select>
 <!--    체험 공고 단일 조회-->
     <select id="selectById">
         select id, intern_notice_title, intern_notice_subtitle, intern_notice_introduce_job, intern_notice_etc, intern_main_tasks, intern_start_date, intern_end_date, intern_notice_status, created_datetime, updated_datetime, company_id
         from tbl_intern_notice
-        where company_id = #{userId}
         where id=#{id}
         and intern_notice_status='active'
     </select>

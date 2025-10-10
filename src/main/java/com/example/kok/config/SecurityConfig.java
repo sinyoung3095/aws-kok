@@ -37,7 +37,9 @@ public class SecurityConfig {
 //                .authorizeHttpRequests(auth -> auth
 //                        .requestMatchers(
 //                                "/api/auth/**",
-//                                "/member/join",
+//                                "/member/join-member",
+//                                "/member/join-social",
+//                                "/member/join-company",
 //                                "/member/login",
 //                                "/admin/login",
 //                                "/css/**",
