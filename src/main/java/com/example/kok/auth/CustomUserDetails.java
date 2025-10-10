@@ -27,6 +27,7 @@ public class CustomUserDetails implements UserDetails {
     private Status userStatus;
     private String jobName;
     private String memberProfile;
+    private int postsCount;
 
     public CustomUserDetails(UserDTO userDTO){
         log.info("CustomUserDetails:{}",userDTO.toString());
@@ -43,6 +44,7 @@ public class CustomUserDetails implements UserDetails {
     public CustomUserDetails(MemberDTO memberDTO){
         this.jobName = memberDTO.getJobName();
         this.memberProfile = memberDTO.getMemberProfileUrl();
+        this.postsCount = memberDTO.getPostsCount();
     }
 
     @Override

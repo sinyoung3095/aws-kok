@@ -3,13 +3,7 @@
 <mapper namespace="com.example.kok.mapper.CommunityPostMapper">
 <!-- 게시글 전체 목록 -->
     <select id="selectCommunityPosts">
-        select distinct u.id as member_id, u.user_name, m.member_profile_url, p.id as id, p.post_content, p.post_status, p.created_datetime, p.updated_datetime, ujc.job_category, jc.job_name, p.likes_count,
-            exists (
-                       select 1
-                       from tbl_post_like pl
-                       where pl.post_id = p.id
-                         and pl.member_id = 5
-                   ) as liked
+        select u.id as member_id, u.user_name, m.member_profile_url, p.id as id, p.post_content, p.post_status, p.created_datetime, p.updated_datetime, ujc.job_category, jc.job_name, p.likes_count
         from tbl_user u
         join tbl_member m on u.id = m.user_id
         join tbl_post p on m.user_id = p.member_id
@@ -30,13 +24,7 @@
 
 <!-- 게시글 조회 -->
     <select id="selectCommunityPost">
-        select distinct u.id as member_id, u.user_name, m.member_profile_url, p.id as id, p.post_content, p.post_status, p.created_datetime, p.updated_datetime, ujc.job_category, jc.job_name, p.likes_count,
-                        exists (
-                            select 1
-                            from tbl_post_like pl
-                            where pl.post_id = p.id
-                              and pl.member_id = 5
-                        ) as liked
+        select u.id as member_id, u.user_name, m.member_profile_url, p.id as id, p.post_content, p.post_status, p.created_datetime, p.updated_datetime, ujc.job_category, jc.job_name, p.likes_count
         from tbl_user u
                  join tbl_member m on u.id = m.user_id
                  join tbl_post p on m.user_id = p.member_id
@@ -85,5 +73,13 @@
         select id, post_content, post_status, created_datetime
         from tbl_post
         where member_id = #{id}
+    </select>
+
+<!--  회원 별 게시글 갯수  -->
+    <select id="selectPostsCountByMemberId">
+        select count(*)
+        from tbl_post
+        where member_id = #{memberId}
+        and post_status = 'active'
     </select>
 </mapper>
