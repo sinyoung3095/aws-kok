@@ -22,4 +22,9 @@ public class RequestInternDTO {
     private String internNoticeTitle;
     private String createdDateTime;
     private String updatedDateTime;
+    private String requestInternMemberName;
+    private String requestInternMemberEmail;
+    private String requestInternMemberPhone;
+    private String requestInternMemberUrl;
+    private long fileId;
 }
