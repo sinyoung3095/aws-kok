@@ -3,6 +3,7 @@ package com.example.kok.controller;
 import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.CompanyDTO;
 import com.example.kok.service.CompanyService;
+import com.example.kok.service.UserService;
 import com.example.kok.util.CompanySearch;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CompanyController {
     private final CompanyService companyService;
+    private final UserService userService;
 
 //    기업 목록
     @GetMapping("/list")
