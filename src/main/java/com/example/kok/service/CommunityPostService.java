@@ -13,6 +13,7 @@ public interface CommunityPostService {
     //    조회
     public PostDTO getPost(Long id, Long memberId);
     public void setPreSignedUrl(PostDTO postDTO);
+    public int getPostsCountByMemberId(Long memberId);
     //    추가
     public void write(PostDTO postDTO, List<MultipartFile> multipartFiles);
     //    삭제

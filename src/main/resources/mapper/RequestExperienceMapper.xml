@@ -13,7 +13,8 @@
                c.company_name,
                e.evaluation_avg_score,
                n.experience_notice_title,
-               r.request_experience_status
+               r.request_experience_status,
+               r.created_datetime
         from tbl_company c
                  join tbl_experience_notice n
                       on c.user_id = n.company_id
@@ -21,7 +22,9 @@
                       on n.id = r.experience_notice_id
                  join tbl_evaluation e
                       on r.id = e.request_experience_id
-        where r.member_id = #{id};
+        where r.member_id = #{id}
+        order by r.created_datetime desc
+        limit 3
     </select>
     <!--  지원 내역 목록 조회  -->
     <select id="selectRequestByUserId">

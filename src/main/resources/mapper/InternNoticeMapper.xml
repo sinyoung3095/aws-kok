@@ -49,6 +49,8 @@
         select intern_notice_title, intern_notice_subtitle, intern_notice_status
         from tbl_intern_notice
         where company_id = #{userId}
+        order by created_datetime desc
+        limit 3
     </select>
 
     <sql id="search">
