@@ -127,7 +127,6 @@ const layout = (() => {
                 `
             })
         } else {
-            console.log("------------------")
             experiencesText += `
                     <tr>
                         <td>-</td>
@@ -260,7 +259,7 @@ const layout = (() => {
                                                     <div class="info-layout detail-info">
                                                         <div class="info-title justify-content-between">
                                                             <div class="flex-left d-flex">
-                                                                <a href="" class="info-detail">
+                                                                <a href="/admin/experience" class="info-detail">
                                                                     <div class="title">체험공고 내역
                                                                         <i class="mdi mdi-menu-left ml-2"></i>
                                                                     </div>
@@ -287,7 +286,7 @@ const layout = (() => {
                                                     <div class="info-layout detail-info">
                                                         <div class="info-title justify-content-between">
                                                             <div class="flex-left d-flex">
-                                                                <a href="" class="info-detail">
+                                                                <a href="/admin/employ" class="info-detail">
                                                                     <div class="title">인턴공고 내역
                                                                         <i class="mdi mdi-menu-left ml-2"></i>
                                                                     </div>
