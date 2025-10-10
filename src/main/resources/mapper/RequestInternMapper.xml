@@ -23,7 +23,8 @@
                c.company_name,
                e.evaluation_avg_score,
                n.intern_notice_title,
-               r.request_intern_status
+               r.request_intern_status,
+               r.created_datetime
         from tbl_company c
                  join tbl_intern_notice n
                       on c.user_id = n.company_id
@@ -31,6 +32,8 @@
                       on n.id = r.intern_notice_id
                  join tbl_evaluation e
                       on r.id = e.request_experience_id
-        where r.member_id = #{id};
+        where r.member_id = #{id}
+        order by created_datetime desc
+        limit 3
     </select>
 </mapper>
