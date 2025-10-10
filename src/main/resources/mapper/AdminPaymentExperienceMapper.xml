@@ -3,7 +3,7 @@
 <mapper namespace="com.example.kok.mapper.AdminPaymentExperienceMapper">
     <sql id="searchCategory">
         <if test="category != null and category != ''">
-            and a.advertisement_status::text = #{category}
+            and re.request_experience_status::text = #{category}
         </if>
     </sql>
 

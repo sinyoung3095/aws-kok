@@ -17,6 +17,7 @@ public class AdminRestController {
     private final AdminBannerService adminBannerService;
     private final AdminEmployService adminEmployService;
     private final AdminPaymentAdvertiseService adminPaymentAdvertiseService;
+    private final AdminPaymentExperienceService adminPaymentExperienceService;
 
 //    공지 목록
     @GetMapping("support/{page}")
@@ -102,5 +103,14 @@ public class AdminRestController {
                                                                 @RequestParam(required = false) String category){
         log.info("page = {}", page);
         return adminPaymentAdvertiseService.paymentAdvertiseList(page, keyword, category);
+    }
+
+//    결제 - 체험
+    @GetMapping("payment/experience/{page}")
+    public AdminPaymentExperienceCriteriaDTO getPaymentExperience(@PathVariable("page") int page,
+                                                                  @RequestParam(required = false) String keyword,
+                                                                  @RequestParam(required = false) String category){
+        log.info("page = {}", page);
+        return adminPaymentExperienceService.getPaymentExperienceList(page, keyword, category);
     }
 }
