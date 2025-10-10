@@ -4,6 +4,7 @@ import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.service.CommunityPostService;
 import com.example.kok.service.ExperienceNoticeService;
+import com.example.kok.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,6 +23,7 @@ public class CommunityController {
 
     private final CommunityPostService communityPostService;
     private final ExperienceNoticeService experienceNoticeService;
+    private final MemberService memberService;
 
     @GetMapping("/page")
     public String goToCommunityPage(Model model,
@@ -37,7 +39,13 @@ public class CommunityController {
         List<ExperienceNoticeDTO> latestFour = experienceNoticeService.findLatestFour();
         model.addAttribute("latestFour", latestFour);
 
-        model.addAttribute("member", customUserDetails);
+        model.addAttribute("userDTO", customUserDetails);
+
+        memberService.findMembersByMemberId(memberId)
+                .ifPresent(userMemberDTO -> {
+                    model.addAttribute("member", userMemberDTO);
+//                    log.info("커뮤니티 페이지 회원 정보: {}", userMemberDTO);
+                });
 //        log.info("로그인: {}", customUserDetails);
 
         return "community/page";

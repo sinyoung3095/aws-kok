@@ -29,6 +29,7 @@ public class MemberServiceImpl implements MemberService {
     private final CommunityPostDAO  communityPostDAO;
     private final UserMemberDTO userMemberDTO;
     private final MemberDTO memberDTO;
+    private final FollowDAO followDAO;
 
     @Override
     public void joinMember(MemberVO memberVO) {
@@ -108,7 +109,10 @@ public class MemberServiceImpl implements MemberService {
                             communityPostDAO.findPostById(memberId);
 
                     int postsCount = communityPostDAO.findPostsCountByMemberId(memberId);
-                    memberDTO.setPostsCount(postsCount);
+                    userMemberDTO.setPostsCount(postsCount);
+
+                    int followingCount = followDAO.selectFollowingCountByMemberId(memberId);
+                    userMemberDTO.setFollowingCount(followingCount);
 
                     userMemberDTO.setRequestExperiences(requestExperiences);
                     userMemberDTO.setRequestInterns(requestInterns);

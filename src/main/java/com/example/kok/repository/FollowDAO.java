@@ -35,4 +35,9 @@ public class FollowDAO {
     public int countFollowersByCompanyId(Long companyId) {
         return followMapper.countFollowersByCompanyId(companyId);
     }
+
+//    회원 팔로잉 수
+    public int selectFollowingCountByMemberId(Long memberId) {
+        return followMapper.selectFollowingCountByMemberId(memberId);
+    }
 }
