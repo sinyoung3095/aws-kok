@@ -24,4 +24,7 @@ public interface FollowMapper{
 //    기업 팔로워 수
     public int countFollowersByCompanyId(@Param("companyId") Long companyId);
 
+//    회원 팔로잉 수
+    public int selectFollowingCountByMemberId (Long memberId);
+
 }

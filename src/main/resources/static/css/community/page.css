@@ -11,7 +11,7 @@
 
 }
 body, html {
-    overflow-y: auto; /* 세로 스크롤 자동 */
+    overflow-y: hidden;
 }
 button {
     color: inherit;
@@ -88,6 +88,7 @@ div {
     gap: 16px;
     flex: 1 0 0;
     display: flex;
+    overflow-y: auto;
 }
 
 .main-1{
@@ -1269,7 +1270,7 @@ div {
 }
 
 .reply{
-    z-index: 999;
+    z-index: 1001;
     opacity: 1;
     justify-content: center;
     top: 0;

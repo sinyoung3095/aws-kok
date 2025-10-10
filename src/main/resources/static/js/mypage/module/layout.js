@@ -1,4 +1,21 @@
-<tr>
+const myPageLayout = (() => {
+    const showExperienceRequest = async (request) => {   // 👈 async 붙임
+        const container = document.querySelector('.exp-request-container');
+        if (!container) return;
+
+        if (!Array.isArray(request) || request.length === 0) {
+            container.innerHTML = '<p class="no-results">검색 결과가 없습니다.</p>';
+            return;
+        }
+
+        let html = '';
+
+        for (const req of request) {
+            const fileUrl = await fetch(`/api/mypage/request-list`)
+                                  .then(res => res.text());
+
+            html += `
+                <tr>
                                                     <td class="payment-3">
                                                         <p>코리아IT</p>
                                                     </td>
@@ -16,6 +33,17 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+            `;
+        }
+
+        container.innerHTML = html;
+
+        applyFilters();
+    };
+
+    return { showList };
+})();
+
                                                 <tr>
                                                     <td class="payment-3">
                                                         <p>코리아IT</p>

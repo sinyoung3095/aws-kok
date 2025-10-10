@@ -19,3 +19,5 @@ alter table tbl_follow
 
 insert into tbl_follow (member_id, company_id)
 values (5, 18);
+
+select * from tbl_follow where member_id = 12;

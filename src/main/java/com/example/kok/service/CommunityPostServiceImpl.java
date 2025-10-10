@@ -112,6 +112,10 @@ public class CommunityPostServiceImpl implements CommunityPostService {
     public void write(PostDTO postDTO, List<MultipartFile> multipartFiles) {
         communityPostDAO.save(postDTO);
 
+        if (multipartFiles == null || multipartFiles.isEmpty()) {
+            return;
+        }
+
         multipartFiles.forEach((multipartFile) -> {
             if(multipartFile.isEmpty()) return;
 

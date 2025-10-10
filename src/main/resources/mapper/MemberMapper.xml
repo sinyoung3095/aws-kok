@@ -66,4 +66,10 @@
         where u.id=#{memberId}
     </select>
 
+<!--    평점 평균 조회-->
+    <select id="selectAvgByMemberId">
+        select avg
+        from view_member_with_evaluation
+        where member_id=#{memberId}
+    </select>
 </mapper>
