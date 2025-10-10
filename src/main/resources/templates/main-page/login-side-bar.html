@@ -197,7 +197,7 @@
                                 <path clip-rule="evenodd" d="M11 4.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4M3.2 11a7.8 7.8 0 1 1 13.852 4.921l3.514 3.514a.8.8 0 1 1-1.132 1.13l-3.513-3.513A7.8 7.8 0 0 1 3.2 11" fill-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input maxlength="50" placeholder="기업, 체험공고, 고용공고, 관심직무" class="search-modal-input" value="">
+                        <input maxlength="50" placeholder="체험공고, 고용공고" class="search-modal-input" value="">
                         <button class="close-search-modal">
                             <div class="close-search-modal-icon">
                                 <svg color="foregrounds.neutral.primary" fill="currentColor" height="20" role="img" width="20" viewBox="0 0 24 24">
@@ -348,49 +348,8 @@
                                         </div>
                                     </div>
                                     <!-- 6개 기업 팔로워 순 -->
-                                    <div class="search-modal-company-list-wrap">
-                                        <div class="search-modal-company-list">
-                                            <img alt="image" width="36" height="36" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 5.4px; cursor: default; max-height: 36px; max-width: 36px; min-height: 36px; min-width: 36px; object-fit: contain;">
-                                            <div class="search-modal-company-section">
-                                                <span class="search-modal-company-name">삼성</span>
-                                                <p class="search-modal-company-experience">팔로워 3.1천</p>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-company-list">
-                                            <img alt="image" width="36" height="36" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 5.4px; cursor: default; max-height: 36px; max-width: 36px; min-height: 36px; min-width: 36px; object-fit: contain;">
-                                            <div class="search-modal-company-section">
-                                                <span class="search-modal-company-name">삼성</span>
-                                                <p class="search-modal-company-experience">팔로워 2.8천</p>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-company-list">
-                                            <img alt="image" width="36" height="36" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 5.4px; cursor: default; max-height: 36px; max-width: 36px; min-height: 36px; min-width: 36px; object-fit: contain;">
-                                            <div class="search-modal-company-section">
-                                                <span class="search-modal-company-name">삼성</span>
-                                                <p class="search-modal-company-experience">팔로워 2.1천</p>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-company-list">
-                                            <img alt="image" width="36" height="36" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 5.4px; cursor: default; max-height: 36px; max-width: 36px; min-height: 36px; min-width: 36px; object-fit: contain;">
-                                            <div class="search-modal-company-section">
-                                                <span class="search-modal-company-name">삼성</span>
-                                                <p class="search-modal-company-experience">팔로워 2천</p>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-company-list">
-                                            <img alt="image" width="36" height="36" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 5.4px; cursor: default; max-height: 36px; max-width: 36px; min-height: 36px; min-width: 36px; object-fit: contain;">
-                                            <div class="search-modal-company-section">
-                                                <span class="search-modal-company-name">삼성</span>
-                                                <p class="search-modal-company-experience">팔로워 1.5천</p>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-company-list">
-                                            <img alt="image" width="36" height="36" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 5.4px; cursor: default; max-height: 36px; max-width: 36px; min-height: 36px; min-width: 36px; object-fit: contain;">
-                                            <div class="search-modal-company-section">
-                                                <span class="search-modal-company-name">삼성</span>
-                                                <p class="search-modal-company-experience">팔로워 921</p>
-                                            </div>
-                                        </div>
+                                    <div id="company-list-wrap" class="search-modal-company-list-wrap">
+
                                     </div>
                                 </div>
                             </div>
@@ -476,7 +435,7 @@
                                                     <p class="setting-modal-text-info">프로필 수정을 찾고 계신가요?</p>
                                                     <p class="setting-modal-text-move">내 프로필에서 관리할 수 있습니다.</p>
                                                 </div>
-                                                <a href="">
+                                                <a onclick="window.location.href='/mypage/page'">
                                                     <button class="setting-modal-move-button">
                                                         <span class="setting-modal-move-button-text">이동</span>
                                                     </button>

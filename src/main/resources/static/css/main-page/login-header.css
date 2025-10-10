@@ -415,7 +415,7 @@
 
 .history-modal-main-apply-date {
     overflow: hidden;
-    display: -webkit-box;
+    display: contents;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     white-space: pre-line;

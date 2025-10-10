@@ -1,10 +1,17 @@
 package com.example.kok.mapper;
 
+
+import com.example.kok.dto.CompanyDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
-public interface FollowMapper {
+public interface FollowMapper{
+    public List<CompanyDTO> selectPopularCompany();
+
+
 //    팔로우
     public void insertFollow(@Param("memberId") Long memberId, @Param("companyId") Long companyId);
 
@@ -16,4 +23,5 @@ public interface FollowMapper {
 
 //    기업 팔로워 수
     public int countFollowersByCompanyId(@Param("companyId") Long companyId);
+
 }
