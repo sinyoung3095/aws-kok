@@ -10,8 +10,8 @@ CREATE TABLE tbl_company_scale_category_bridge (
 select * from tbl_company_scale_category_bridge;
 
 insert into tbl_company_scale_category_bridge(company_id, company_scale_category_id)
-values(7, 4),
-      (8, 5),
-      (9, 3),
-      (10, 4),
-      (11, 1);
+values(6, 1),
+      (7, 2),
+      (8, 3),
+      (9, 4),
+      (10, 5);

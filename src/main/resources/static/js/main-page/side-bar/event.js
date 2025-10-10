@@ -4,8 +4,9 @@ const searchModal = document.querySelector(".search-modal-wrap");
 const searchModalContent = document.querySelector(".search-modal");
 const searchCloseBtn = document.querySelector(".close-search-modal");
 
-openSearchBtn.addEventListener("click", () => {
+openSearchBtn.addEventListener("click", async () => {
     searchModal.classList.add("active");
+    await service.getPopularCompany(layout.showPopularCompany);
 });
 
 searchCloseBtn.addEventListener("click", () => {

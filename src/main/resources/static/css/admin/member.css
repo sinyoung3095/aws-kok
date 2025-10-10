@@ -1278,6 +1278,7 @@ button.btn .comp-icon {
 
 .kok-pagination-wrapper ul.kok-pagination>li.page-item {
     padding: 2.5px;
+    cursor: pointer;
 }
 
 .kok-pagination-wrapper ul.kok-pagination>li.page-item a {
@@ -1291,7 +1292,12 @@ button.btn .comp-icon {
     text-align: center;
 }
 
-.kok-pagination-wrapper ul.kok-pagination>li.page-item.active>a {
+.kok-pagination-wrapper ul.kok-pagination>li.page-item:hover>a {
+    color: #507cf3;
+    font-weight: 700;
+}
+
+.kok-pagination-wrapper ul.kok-pagination>li.page-number.active>a {
     color: #507cf3;
     font-weight: 700;
 }

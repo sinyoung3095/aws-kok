@@ -10,6 +10,11 @@ const socialLoginContainer = document.querySelector('.social-login-container');
 const joinMember = document.querySelector('.join-member');
 const joinCompany = document.querySelector('.join-company');
 const checkRole = document.getElementById("role");
+const closeOutline = document.getElementById("close-outline");4
+
+closeOutline.addEventListener("click",(e)=>{
+    window.location.href="/experience/list";
+})
 
 if(window.location.search.includes("error")){
     alert("입력하신 아이디가 없습니다.")

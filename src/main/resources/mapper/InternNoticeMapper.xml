@@ -43,4 +43,11 @@
         and i.company_id = #{companyId}
         <include refid="companyInternNoticeSearch"/>
     </select>
+
+<!--  기업별 인턴 모집  -->
+    <select id="selectListById">
+        select intern_notice_title, intern_notice_subtitle, intern_notice_status
+        from tbl_intern_notice
+        where company_id = #{userId}
+    </select>
 </mapper>

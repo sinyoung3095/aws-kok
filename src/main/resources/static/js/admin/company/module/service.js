@@ -1,9 +1,9 @@
-const memberService = (() => {
-    const memberList = async (page, callback, keyword = "") => {
+const companyService = (() => {
+    const companyList = async (page, callback, keyword = "") => {
 
         const url = keyword
-            ? `/api/member/list/${page}?keyword=${encodeURIComponent(keyword)}`
-            : `/api/member/list/${page}`;
+            ? `/api/company/list/${page}?keyword=${encodeURIComponent(keyword)}`
+            : `/api/company/list/${page}`;
 
         const response = await fetch(url, {
             method:'GET'
@@ -20,8 +20,8 @@ const memberService = (() => {
         return result;
     }
 
-    const memberDetail = async (id, callback) => {
-        const response = await fetch(`/api/member/detail/${id}`, {
+    const companyDetail = async (id, callback) => {
+        const response = await fetch(`/api/company/detail/${id}`, {
             method:'GET'
         })
 
@@ -34,5 +34,5 @@ const memberService = (() => {
 
         return result;
     }
-    return {memberList:memberList, memberDetail:memberDetail}
+    return {companyList:companyList, companyDetail:companyDetail}
 })();
