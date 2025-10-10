@@ -1,14 +1,18 @@
 package com.example.kok.repository;
 
 import com.example.kok.domain.CompanyVO;
+import com.example.kok.dto.AdminCompanyDTO;
 import com.example.kok.dto.CompanyDTO;
+import com.example.kok.dto.UserMemberDTO;
 import com.example.kok.mapper.CompanyMapper;
 import com.example.kok.util.CompanySearch;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -66,4 +70,19 @@ public class CompanyDAO {
     public List<CompanyDTO> findCompaniesByFollowerCount() {
         return companyMapper.selectCompaniesByFollowerCount();
     }
+
+    //    기업 목록 조회
+    public List<AdminCompanyDTO> selectCompanyList(Criteria criteria, String keyword) {
+        return companyMapper.selectCompanyList(criteria, keyword);
+    };
+
+    //    목록 개수 조회
+    public int selectCompanyCount(String keyword) {
+        return companyMapper.selectCompanyCount(keyword);
+    };
+
+    //    아이디로 회원 조회
+    public Optional<AdminCompanyDTO> selectCompany(Long userId) {
+        return companyMapper.selectCompany(userId);
+    };
 }

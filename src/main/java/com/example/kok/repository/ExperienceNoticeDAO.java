@@ -50,4 +50,9 @@ public class ExperienceNoticeDAO {
     public int findCountByCompanyId(Long companyId, Search search) {
         return experienceNoticeMapper.selectExperienceNoticeCountByCompanyId(companyId, search);
     }
+
+    //    기업별 체험 공고 조회
+    public List<ExperienceNoticeDTO> selectListById(Long userId) {
+        return experienceNoticeMapper.selectListById(userId);
+    };
 }

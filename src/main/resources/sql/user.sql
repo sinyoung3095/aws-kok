@@ -52,3 +52,42 @@ where id =2;
 
 
 
+INSERT INTO tbl_user (user_name, user_phone, user_email, user_password, user_role)
+VALUES
+    ('정해인', '010-6666-7777', 'hane@example.com', '1234', 'member'),
+    ('이도현', '010-7777-8888', 'dohyun@example.com', '1234', 'member'),
+    ('송강', '010-8888-9999', 'song@example.com', '1234', 'member'),
+    ('남주혁', '010-9999-0000', 'nam@example.com', '1234', 'member'),
+    ('유연석', '010-1010-2020', 'yeon@example.com', '1234', 'member'),
+    ('김수현', '010-2020-3030', 'soo@example.com', '1234', 'member'),
+    ('이민호', '010-3030-4040', 'minho@example.com', '1234', 'member'),
+    ('박서준', '010-4040-5050', 'seo@example.com', '1234', 'member'),
+    ('공유', '010-5050-6060', 'gong@example.com', '1234', 'member'),
+    ('현빈', '010-6060-7070', 'bin@example.com', '1234', 'member'),
+    ('이종석', '010-7070-8080', 'jong@example.com', '1234', 'member'),
+    ('조인성', '010-8080-9090', 'insung@example.com', '1234', 'member'),
+    ('강동원', '010-9090-1010', 'dongwon@example.com', '1234', 'member'),
+    ('하정우', '010-1011-2022', 'jungwoo@example.com', '1234', 'member'),
+    ('류준열', '010-2022-3033', 'junyeol@example.com', '1234', 'member'),
+    ('유아인', '010-3033-4044', 'yain@example.com', '1234', 'member');
+
+
+INSERT INTO tbl_user (user_name, user_phone, user_email, user_password, user_role)
+VALUES
+    ('정사장', '010-6666-1111', 'jung@example.com', '1234', 'company'),
+    ('윤사장', '010-7777-2222', 'yoon@example.com', '1234', 'company'),
+    ('안사장', '010-8888-3333', 'ahn@example.com', '1234', 'company'),
+    ('서사장', '010-9999-4444', 'seo2@example.com', '1234', 'company'),
+    ('조사장', '010-1010-5555', 'jo@example.com', '1234', 'company'),
+    ('남사장', '010-2020-6666', 'nam2@example.com', '1234', 'company'),
+    ('노사장', '010-3030-7777', 'noh@example.com', '1234', 'company'),
+    ('문사장', '010-4040-8888', 'moon@example.com', '1234', 'company'),
+    ('심사장', '010-5050-9999', 'shim@example.com', '1234', 'company'),
+    ('배사장', '010-6060-1110', 'bae@example.com', '1234', 'company'),
+    ('한사장', '010-7070-2220', 'han@example.com', '1234', 'company'),
+    ('장사장', '010-8080-3330', 'jang2@example.com', '1234', 'company'),
+    ('임사장', '010-9090-4440', 'lim@example.com', '1234', 'company'),
+    ('권사장', '010-1112-5550', 'kwon@example.com', '1234', 'company'),
+    ('하사장', '010-2223-6660', 'ha@example.com', '1234', 'company'),
+    ('신사장', '010-3334-7770', 'shin@example.com', '1234', 'company');
+

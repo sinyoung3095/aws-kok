@@ -1,6 +1,7 @@
 package com.example.kok.service;
 
 import com.example.kok.domain.MemberVO;
+import com.example.kok.dto.AdminMemberCriteriaDTO;
 import com.example.kok.dto.FileDTO;
 import com.example.kok.dto.MemberDTO;
 import com.example.kok.dto.UserMemberDTO;
@@ -20,7 +21,7 @@ public interface MemberService {
     public List<FileDTO> findFilesByMemberId(Long memberId);
 
 //    모든 회원 조회
-    public List<UserMemberDTO> findUserMembers(int page, String keyword);
+    public AdminMemberCriteriaDTO findUserMembers(int page, String keyword);
 
 //    회원별 모든 이력 조회
     public Optional<UserMemberDTO> findMembersByMemberId(Long memberId);

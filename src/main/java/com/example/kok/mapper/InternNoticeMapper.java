@@ -5,6 +5,9 @@ import com.example.kok.util.CompanyNoticeCriteria;
 import com.example.kok.util.Search;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import com.example.kok.dto.ExperienceNoticeDTO;
+import com.example.kok.dto.InternNoticeDTO;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -15,4 +18,6 @@ public interface InternNoticeMapper {
 
 //    기업별 인턴 공고 개수
     public int selectInternNoticeCountByCompanyId(@Param("companyId") Long companyId, @Param("search") Search search);
+
+    public List<InternNoticeDTO> selectListById(Long userId);
 }
