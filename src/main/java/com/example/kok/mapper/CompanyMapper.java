@@ -1,8 +1,15 @@
 package com.example.kok.mapper;
 
 import com.example.kok.domain.CompanyVO;
+import com.example.kok.dto.AdminCompanyDTO;
 import com.example.kok.dto.CompanyDTO;
+import com.example.kok.dto.UserMemberDTO;
+import com.example.kok.util.Criteria;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface CompanyMapper {
@@ -18,4 +25,12 @@ public interface CompanyMapper {
     public String selectScaleById(Long companyId);
     //    기업회원 회원 가입
     public void insertCompany(CompanyDTO  companyDTO);
+//    기업 목록 조회
+    public List<AdminCompanyDTO> selectCompanyList(@Param("criteria") Criteria criteria, @Param("keyword") String keyword);
+
+    //    목록 개수 조회
+    public int selectCompanyCount(String keyword);
+
+    //    아이디로 회원 조회
+    public Optional<AdminCompanyDTO> selectCompany(Long userId);
 }

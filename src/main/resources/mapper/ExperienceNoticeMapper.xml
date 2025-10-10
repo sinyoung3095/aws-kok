@@ -92,4 +92,12 @@
         order by created_datetime desc
         limit 4
     </select>
+
+<!-- 기업별 체험 조회   -->
+
+    <select id="selectListById">
+        select experience_notice_title, experience_notice_subtitle, experience_notice_status
+        from tbl_experience_notice
+        where company_id = #{userId}
+    </select>
 </mapper>

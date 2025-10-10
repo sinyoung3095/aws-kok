@@ -13,8 +13,19 @@ select * from tbl_member;
 
 insert into tbl_member (user_id, member_provider, member_profile_url, member_info)
 values
-    (1, 'kok', null, '자기소개: 차은우 팬클럽 회장'),
-    (2, 'kakao', null, '뮤지컬 좋아함'),
-    (3, 'google', null, '여행 덕후'),
-    (4, 'naver', null, '사진 취미'),
-    (5, 'kok', null, '간단 프로필 없음');
+    (11, 'kok', null, '자기소개: 차은우 팬클럽 회장'),
+    (12, 'kakao', null, '뮤지컬 좋아함'),
+    (13, 'google', null, '여행 덕후'),
+    (14, 'naver', null, '사진 취미'),
+    (15, 'kok', null, '간단 프로필 없음'),
+    (16, 'kok', null, '자기소개: 차은우 팬클럽 회장'),
+    (17, 'kakao', null, '뮤지컬 좋아함'),
+    (18, 'google', null, '여행 덕후'),
+    (19, 'naver', null, '사진 취미'),
+    (20, 'kok', null, '간단 프로필 없음'),
+    (21, 'kok', null, '자기소개: 차은우 팬클럽 회장'),
+    (22, 'kakao', null, '뮤지컬 좋아함'),
+    (23, 'google', null, '여행 덕후'),
+    (24, 'naver', null, '사진 취미'),
+    (25, 'kok', null, '간단 프로필 없음'),
+    (26, 'kok', null, '간단 프로필 없음');

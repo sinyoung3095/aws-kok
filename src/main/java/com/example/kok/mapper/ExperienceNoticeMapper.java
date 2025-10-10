@@ -25,4 +25,7 @@ public interface ExperienceNoticeMapper {
 
 //    최신 체험 공고 4개 조회
     public List<ExperienceNoticeDTO> selectLatestFour();
+
+//    기업별 체험 공고 조회
+    public List<ExperienceNoticeDTO> selectListById(Long userId);
 }

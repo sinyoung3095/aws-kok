@@ -195,10 +195,10 @@
                                     <ul class="tab-name-list list-unstyled list-inline">
                                         <!-- 클릭 한 부분은 active -->
                                         <li class="tab-name">
-                                            <a href="">일반회원</a>
+                                            <a href="/admin/member">일반회원</a>
                                         </li>
                                         <li class="tab-name active">
-                                            <a href="">기업회원</a>
+                                            <a href="/admin/company">기업회원</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -261,35 +261,35 @@
                                         </tr>
                                     </thead>
                                     <!-- 회원 리스트 -->
-                                    <tbody class="">
-                                        <tr>
-                                            <td class="td-name">
-                                                <div class="member-name">대표자명
-                                                    <span class="badge-label badge text-danger ml-2">기업회원</span>
-                                                </div>
-                                                <div class="member-id">test01@gmail.com</div>
-                                            </td>
-                                            <td class="td-amount pr-4 font-weight-bold">
-                                                <p>코리아IT</p>
-                                            </td>
-                                            <td class="td-email">
-                                                <p>test01@gmail.com</p>
-                                            </td>
-                                            <td class="td-phone">
-                                                <p>010-1234-5678</p>
-                                            </td>
-                                            <td class="td-profile">
-                                                <p>1234abcd</p>
-                                            </td>
-                                            <td class="td-job">
-                                                <p>IT/웹/통신</p>
-                                            </td>
-                                            <td class="td-action text-center">
-                                                <div class="action-btn">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    <tbody class="company-list">
+<!--                                        <tr>-->
+<!--                                            <td class="td-name">-->
+<!--                                                <div class="member-name">대표자명-->
+<!--                                                    <span class="badge-label badge text-danger ml-2">기업회원</span>-->
+<!--                                                </div>-->
+<!--                                                <div class="member-id">test01@gmail.com</div>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-amount pr-4 font-weight-bold">-->
+<!--                                                <p>코리아IT</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-email">-->
+<!--                                                <p>test01@gmail.com</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-phone">-->
+<!--                                                <p>010-1234-5678</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-profile">-->
+<!--                                                <p>1234abcd</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-job">-->
+<!--                                                <p>IT/웹/통신</p>-->
+<!--                                            </td>-->
+<!--                                            <td class="td-action text-center">-->
+<!--                                                <div class="action-btn">-->
+<!--                                                    <i class="mdi mdi-chevron-right"></i>-->
+<!--                                                </div>-->
+<!--                                            </td>-->
+<!--                                        </tr>-->
                                     </tbody>
                                 </table>
                             </div>
@@ -298,18 +298,6 @@
                                 <ul class="pagination kok-pagination">
                                     <li class="page-item page-num active">
                                         <a href="" class="page-item-link page-item-num">1</a>
-                                    </li>
-                                    <li class="page-item page-num">
-                                        <a href="" class="page-item-link page-item-num">2</a>
-                                    </li>
-                                    <li class="page-item page-num">
-                                        <a href="" class="page-item-link page-item-num">3</a>
-                                    </li>
-                                    <li class="page-item page-num">
-                                        <a href="" class="page-item-link page-item-num">4</a>
-                                    </li>
-                                    <li class="page-item page-num">
-                                        <a href="" class="page-item-link page-item-num">5</a>
                                     </li>
                                 </ul>
                                 <div class="pagination-desc">
@@ -329,185 +317,187 @@
                 </div>
                 <!-- 기업회원 상세 모달 창 -->
                 <div class="modal fade member-modal" style="display: none;">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div class="modal-title">
-                                    코리아IT
-                                    <span class="badge-label text-danger font-weight-bold ml-2">기업회원</span>
-                                </div>
-                                <button class="close">
-                                    <i class="mdi mdi-close"></i>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="divider">
-                                    <div class="tab-view">
-                                        <div class="tab-view-header"></div>
-                                        <div class="tab-view-body">
-                                            <div style="display: block;">
-                                                <div class="tab-inner tab-detail">
-                                                    <div class="info-layout detail-info">
-                                                        <div class="info-title justify-content-between">
-                                                            <div class="flex-left d-flex">
-                                                                <div class="title">회원 상세정보</div>
-                                                            </div>
-                                                            <div class="flex-right"></div>
-                                                        </div>
-                                                        <div class="d-table w-100">
-                                                            <!-- 테이블 왼쪽 -->
-                                                            <div class="d-table-cell">
-                                                                <table class="info-table">
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <th>회원ID (이메일)</th>
-                                                                            <td>test01@gmail.com</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>대표 번호</th>
-                                                                            <td>010-1234-5678</td>
-                                                                        </tr> 
-                                                                        <tr>
-                                                                            <th>프로필 URL</th>
-                                                                            <td>1234abcd</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>팔로워</th>
-                                                                            <td>3.1천명</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>체험공고 횟수</th>
-                                                                            <td>3</td>
-                                                                        </tr> 
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <!-- 테이블 오른쪽 -->                                                        
-                                                            <div class="d-table-cell">
-                                                                <table class="info-table">
-                                                                    <tbody>                                                                        
-                                                                        <tr>
-                                                                            <th>기업</th>
-                                                                            <td>코리아IT</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>사업자번호</th>
-                                                                            <td>815-88-00171</td>
-                                                                        </tr>                                                                    
-                                                                        <tr>
-                                                                            <th>산업분야</th>
-                                                                            <td>IT/웹/통신</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>기업규모</th>
-                                                                            <td>중간규모(100-400명)</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>인턴공고 횟수</th>
-                                                                            <td>3</td>
-                                                                        </tr> 
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- 체험공고 내역 -->
-                                                    <div class="info-layout detail-info">
-                                                        <div class="info-title justify-content-between">
-                                                            <div class="flex-left d-flex">
-                                                                <a href="" class="info-detail">
-                                                                    <div class="title">체험공고 내역
-                                                                        <i class="mdi mdi-menu-left ml-2"></i>
-                                                                    </div>
-                                                                </a>
-                                                            </div>
-                                                            <div class="flex-right"></div>
-                                                        </div>
-                                                        <div class="d-table w-100">
-                                                            <table class="info-table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th class="middle">체험공고 제목</th>
-                                                                        <th class="long">체험공고 부제목</th>
-                                                                        <th class="short">모집상태</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>SW 개발 백엔드 체험</td>
-                                                                        <td>AWS 클라우드를 활용한 풀스택 & 자동화 실무 개발</td>
-                                                                        <td>모집중</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>AI 개발과정</td>
-                                                                        <td>클라우드 AI기반 마이크로서비스 풀스택(리액트/자바) 개발</td>
-                                                                        <td>모집완료</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>프레임워크 기반 SW 개발자</td>
-                                                                        <td>풀스택 프레임워크(자바,스프링)기반 데이터 융합SW개발자 과정</td>
-                                                                        <td>모집완료</td>
-                                                                    </tr>                                                                                                                                   
-                                                                </tbody>
-                                                            </table>
-                                                        </div>                             
-                                                    </div>
-                                                    <!-- 인턴공고 내역 -->
-                                                    <div class="info-layout detail-info">
-                                                        <div class="info-title justify-content-between">
-                                                            <div class="flex-left d-flex">
-                                                                <a href="" class="info-detail">
-                                                                    <div class="title">인턴공고 내역
-                                                                        <i class="mdi mdi-menu-left ml-2"></i>
-                                                                    </div>
-                                                                </a>
-                                                            </div>
-                                                            <div class="flex-right"></div>
-                                                        </div>
-                                                        <div class="d-table w-100">
-                                                            <table class="info-table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th class="middle">인턴공고 제목</th>
-                                                                        <th class="long">인턴공고 부제목</th>
-                                                                        <th class="short">모집상태</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>SDK 개발자 (Kotlin Multiplatform)</td>
-                                                                        <td>크로스 플랫폼 광고 SDK 개발로 전문성을 쌓아갈 개발자 모집</td>
-                                                                        <td>모집중</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>인턴 백엔드 개발자</td>
-                                                                        <td>CTV 광고 플랫폼에서 전문성을 키워나갈 인턴 개발자 모집</td>
-                                                                        <td>모집완료</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Windows Developer</td>
-                                                                        <td>소프트웨어 엔지니어, 개발자</td>
-                                                                        <td>모집완료</td>
-                                                                    </tr>                                                                                                                                 
-                                                                </tbody>
-                                                            </table>
-                                                        </div>                             
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn-close btn btn-outline-filter">닫기</button>
-                            </div>
-                        </div>
-                    </div>
+<!--                    <div class="modal-dialog modal-lg">-->
+<!--                        <div class="modal-content">-->
+<!--                            <div class="modal-header">-->
+<!--                                <div class="modal-title">-->
+<!--                                    코리아IT-->
+<!--                                    <span class="badge-label text-danger font-weight-bold ml-2">기업회원</span>-->
+<!--                                </div>-->
+<!--                                <button class="close">-->
+<!--                                    <i class="mdi mdi-close"></i>-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                            <div class="modal-body">-->
+<!--                                <div class="divider">-->
+<!--                                    <div class="tab-view">-->
+<!--                                        <div class="tab-view-header"></div>-->
+<!--                                        <div class="tab-view-body">-->
+<!--                                            <div style="display: block;">-->
+<!--                                                <div class="tab-inner tab-detail">-->
+<!--                                                    <div class="info-layout detail-info">-->
+<!--                                                        <div class="info-title justify-content-between">-->
+<!--                                                            <div class="flex-left d-flex">-->
+<!--                                                                <div class="title">회원 상세정보</div>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="flex-right"></div>-->
+<!--                                                        </div>-->
+<!--                                                        <div class="d-table w-100">-->
+<!--                                                            &lt;!&ndash; 테이블 왼쪽 &ndash;&gt;-->
+<!--                                                            <div class="d-table-cell">-->
+<!--                                                                <table class="info-table">-->
+<!--                                                                    <tbody>-->
+<!--                                                                        <tr>-->
+<!--                                                                            <th>회원ID (이메일)</th>-->
+<!--                                                                            <td>test01@gmail.com</td>-->
+<!--                                                                        </tr>-->
+<!--                                                                        <tr>-->
+<!--                                                                            <th>대표 번호</th>-->
+<!--                                                                            <td>010-1234-5678</td>-->
+<!--                                                                        </tr> -->
+<!--                                                                        <tr>-->
+<!--                                                                            <th>프로필 URL</th>-->
+<!--                                                                            <td>1234abcd</td>-->
+<!--                                                                        </tr>-->
+<!--                                                                        <tr>-->
+<!--                                                                            <th>팔로워</th>-->
+<!--                                                                            <td>3.1천명</td>-->
+<!--                                                                        </tr>-->
+<!--                                                                        <tr>-->
+<!--                                                                            <th>체험공고 횟수</th>-->
+<!--                                                                            <td>3</td>-->
+<!--                                                                        </tr> -->
+<!--                                                                    </tbody>-->
+<!--                                                                </table>-->
+<!--                                                            </div>-->
+<!--                                                            &lt;!&ndash; 테이블 오른쪽 &ndash;&gt;                                                        -->
+<!--                                                            <div class="d-table-cell">-->
+<!--                                                                <table class="info-table">-->
+<!--                                                                    <tbody>                                                                        -->
+<!--                                                                        <tr>-->
+<!--                                                                            <th>기업</th>-->
+<!--                                                                            <td>코리아IT</td>-->
+<!--                                                                        </tr>-->
+<!--                                                                        <tr>-->
+<!--                                                                            <th>사업자번호</th>-->
+<!--                                                                            <td>815-88-00171</td>-->
+<!--                                                                        </tr>                                                                    -->
+<!--                                                                        <tr>-->
+<!--                                                                            <th>산업분야</th>-->
+<!--                                                                            <td>IT/웹/통신</td>-->
+<!--                                                                        </tr>-->
+<!--                                                                        <tr>-->
+<!--                                                                            <th>기업규모</th>-->
+<!--                                                                            <td>중간규모(100-400명)</td>-->
+<!--                                                                        </tr>-->
+<!--                                                                        <tr>-->
+<!--                                                                            <th>인턴공고 횟수</th>-->
+<!--                                                                            <td>3</td>-->
+<!--                                                                        </tr> -->
+<!--                                                                    </tbody>-->
+<!--                                                                </table>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    &lt;!&ndash; 체험공고 내역 &ndash;&gt;-->
+<!--                                                    <div class="info-layout detail-info">-->
+<!--                                                        <div class="info-title justify-content-between">-->
+<!--                                                            <div class="flex-left d-flex">-->
+<!--                                                                <a href="" class="info-detail">-->
+<!--                                                                    <div class="title">체험공고 내역-->
+<!--                                                                        <i class="mdi mdi-menu-left ml-2"></i>-->
+<!--                                                                    </div>-->
+<!--                                                                </a>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="flex-right"></div>-->
+<!--                                                        </div>-->
+<!--                                                        <div class="d-table w-100">-->
+<!--                                                            <table class="info-table">-->
+<!--                                                                <thead>-->
+<!--                                                                    <tr>-->
+<!--                                                                        <th class="middle">체험공고 제목</th>-->
+<!--                                                                        <th class="long">체험공고 부제목</th>-->
+<!--                                                                        <th class="short">모집상태</th>-->
+<!--                                                                    </tr>-->
+<!--                                                                </thead>-->
+<!--                                                                <tbody>-->
+<!--                                                                    <tr>-->
+<!--                                                                        <td>SW 개발 백엔드 체험</td>-->
+<!--                                                                        <td>AWS 클라우드를 활용한 풀스택 & 자동화 실무 개발</td>-->
+<!--                                                                        <td>모집중</td>-->
+<!--                                                                    </tr>-->
+<!--                                                                    <tr>-->
+<!--                                                                        <td>AI 개발과정</td>-->
+<!--                                                                        <td>클라우드 AI기반 마이크로서비스 풀스택(리액트/자바) 개발</td>-->
+<!--                                                                        <td>모집완료</td>-->
+<!--                                                                    </tr>-->
+<!--                                                                    <tr>-->
+<!--                                                                        <td>프레임워크 기반 SW 개발자</td>-->
+<!--                                                                        <td>풀스택 프레임워크(자바,스프링)기반 데이터 융합SW개발자 과정</td>-->
+<!--                                                                        <td>모집완료</td>-->
+<!--                                                                    </tr>                                                                                                                                   -->
+<!--                                                                </tbody>-->
+<!--                                                            </table>-->
+<!--                                                        </div>                             -->
+<!--                                                    </div>-->
+<!--                                                    &lt;!&ndash; 인턴공고 내역 &ndash;&gt;-->
+<!--                                                    <div class="info-layout detail-info">-->
+<!--                                                        <div class="info-title justify-content-between">-->
+<!--                                                            <div class="flex-left d-flex">-->
+<!--                                                                <a href="" class="info-detail">-->
+<!--                                                                    <div class="title">인턴공고 내역-->
+<!--                                                                        <i class="mdi mdi-menu-left ml-2"></i>-->
+<!--                                                                    </div>-->
+<!--                                                                </a>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="flex-right"></div>-->
+<!--                                                        </div>-->
+<!--                                                        <div class="d-table w-100">-->
+<!--                                                            <table class="info-table">-->
+<!--                                                                <thead>-->
+<!--                                                                    <tr>-->
+<!--                                                                        <th class="middle">인턴공고 제목</th>-->
+<!--                                                                        <th class="long">인턴공고 부제목</th>-->
+<!--                                                                        <th class="short">모집상태</th>-->
+<!--                                                                    </tr>-->
+<!--                                                                </thead>-->
+<!--                                                                <tbody>-->
+<!--                                                                    <tr>-->
+<!--                                                                        <td>SDK 개발자 (Kotlin Multiplatform)</td>-->
+<!--                                                                        <td>크로스 플랫폼 광고 SDK 개발로 전문성을 쌓아갈 개발자 모집</td>-->
+<!--                                                                        <td>모집중</td>-->
+<!--                                                                    </tr>-->
+<!--                                                                    <tr>-->
+<!--                                                                        <td>인턴 백엔드 개발자</td>-->
+<!--                                                                        <td>CTV 광고 플랫폼에서 전문성을 키워나갈 인턴 개발자 모집</td>-->
+<!--                                                                        <td>모집완료</td>-->
+<!--                                                                    </tr>-->
+<!--                                                                    <tr>-->
+<!--                                                                        <td>Windows Developer</td>-->
+<!--                                                                        <td>소프트웨어 엔지니어, 개발자</td>-->
+<!--                                                                        <td>모집완료</td>-->
+<!--                                                                    </tr>                                                                                                                                 -->
+<!--                                                                </tbody>-->
+<!--                                                            </table>-->
+<!--                                                        </div>                             -->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="modal-footer">-->
+<!--                                <button class="btn-close btn btn-outline-filter">닫기</button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>
     </div>
 </body>
+<script src="/js/admin/company/module/service.js"></script>
+<script src="/js/admin/company/module/layout.js"></script>
 <script src="/js/admin/company/event.js"></script>
 </html>

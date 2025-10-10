@@ -39,4 +39,9 @@ public class ExperienceNoticeDAO {
     public List<ExperienceNoticeDTO> findLatestFour() {
         return experienceNoticeMapper.selectLatestFour();
     }
+
+    //    기업별 체험 공고 조회
+    public List<ExperienceNoticeDTO> selectListById(Long userId) {
+        return experienceNoticeMapper.selectListById(userId);
+    };
 }
