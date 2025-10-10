@@ -39,3 +39,6 @@ alter table tbl_request_experience add constraint fk_request_experience_file for
 
 insert into tbl_request_experience (experience_notice_id, member_id, member_alarm_setting_id)
 values (1, 1, 1);
+
+insert into tbl_request_experience (experience_notice_id, member_id, member_alarm_setting_id,request_experience_member_name,request_experience_member_email,request_experience_member_phone,file_id)
+values (4, 2, 2,'김신영','ksy3095@naver.com','01051133095',2);
