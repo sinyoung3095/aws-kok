@@ -2,163 +2,147 @@ document.addEventListener("DOMContentLoaded", function () {
     const editBtn = document.getElementById("edit-btn");
     const cancelBtn = document.getElementById("cancle-btn");
     const buttonWrap = document.querySelector(".button-wrap");
-    // const explainHide1 = document.getElementById("explain-hide1");
-    // const explainHide2 = document.getElementById("explain-hide2");
     const nameInputs = document.querySelectorAll(".name");
     const imgUpBtns = document.querySelectorAll(".img-up-btn-wrap");
     const categoryBtns = document.querySelectorAll(".category-button");
-    const checkIcon = document.querySelector(".setting-31");
     let saveBtn = null;
 
+    // 편집 모드로 전환
     editBtn.addEventListener("click", function () {
-        // 취소 버튼 보이기
-        cancelBtn.style.display = "block";
-        // 편집 버튼 숨기기
-        editBtn.style.display = "none";
-        // p태그 보이기
-        // explainHide1.style.display = "block";
-        // explainHide2.style.display = "block";
-        // not-allowed 삭제
-        nameInputs.forEach((nameInput) => {
-            nameInput.classList.remove("not-allowed");
-            nameInput.disabled = false;
+        toggleEditMode(true);
+    });
+
+    // 취소 버튼 클릭 시 → 원래대로
+    cancelBtn.addEventListener("click", function () {
+        toggleEditMode(false);
+    });
+
+    // 저장 버튼 클릭 핸들러 (한 번만 정의)
+    function createSaveButton() {
+        saveBtn = document.createElement("button");
+        saveBtn.type = "submit";
+        saveBtn.className = "save-button";
+        saveBtn.id = "save-btn";
+        saveBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                 class="edit-icon">
+                <path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"></path>
+                <path d="M7 3v4a1 1 0 0 0 1 1h7"></path>
+            </svg> 저장
+        `;
+        buttonWrap.appendChild(saveBtn);
+        console.log("✅ 저장버튼의 부모 form:", saveBtn.closest("form"));
+
+        saveBtn.addEventListener("click", function () {
+            // toggleEditMode(false);
+            console.log("✅ 저장 버튼 클릭됨");
+            document.getElementById("profile-form").submit();
+
+            setTimeout(() => toggleEditMode(false), 500);
         });
-        // 이미지 업로드 버튼 보이기
-        imgUpBtns.forEach((imgupbtn) => {
-            imgupbtn.style.display = "";
+    }
+
+    // 편집 모드 on/off 공통 함수
+    function toggleEditMode(isEditing) {
+        cancelBtn.style.display = isEditing ? "block" : "none";
+        editBtn.style.display = isEditing ? "none" : "flex";
+
+        nameInputs.forEach((input) => {
+            input.classList.toggle("not-allowed", !isEditing);
+            input.readOnly = !isEditing;
         });
-        // 카테고리
-        categoryBtns.forEach((cateBtn) => {
-            cateBtn.classList.remove("not-allowed");
+
+        imgUpBtns.forEach((btn) => {
+            btn.style.display = isEditing ? "" : "none";
         });
 
-        // 저장 버튼 만들기
-        if (!saveBtn) {
-            saveBtn = document.createElement("button");
-            saveBtn.className = "save-button";
-            saveBtn.id = "save-btn";
-            saveBtn.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="edit-icon"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"></path><path d="M7 3v4a1 1 0 0 0 1 1h7"></path></svg>
-                저장
-            `;
-            buttonWrap.appendChild(saveBtn);
+        categoryBtns.forEach((btn) => {
+            btn.classList.toggle("not-allowed", !isEditing);
+        });
 
-            saveBtn.addEventListener("click", function () {
-                // 취소 버튼 숨기기
-                cancelBtn.style.display = "none";
-                // 저장 버튼 지우기
-                if (saveBtn) {
-                    buttonWrap.removeChild(saveBtn);
-                    saveBtn = null;
-                }
-                // p태그 숨기기
-                // explainHide1.style.display = "none";
-                // explainHide2.style.display = "none";
-                // 편집 버튼 보이기
-                editBtn.style.display = "";
-                // not-allowed 추가
-                nameInputs.forEach((nameInput) => {
-                    nameInput.classList.add("not-allowed");
-                    nameInput.disabled = true;
-                });
-                // 이미지 업로드 버튼 숨기기
-                imgUpBtns.forEach((imgupbtn) => {
-                    imgupbtn.style.display = "none";
-                });
-                // 카테고리
-                categoryBtns.forEach((cateBtn) => {
-                    cateBtn.classList.add("not-allowed");
-                });
-            });
-
-            categoryBtns.forEach((cateBtn) => {
-                const jobItems = cateBtn.querySelectorAll(".job-3");
-                cateBtn.addEventListener("click", function (e) {
-                    const jobElem = cateBtn.querySelector(".job");
-                    if (jobElem) {
-                        jobElem.style.display = "block";
-                    }
-                    e.stopPropagation();
-                });
-
-                jobItems.forEach((item) => {
-                    item.addEventListener("click", (e) => {
-                        e.stopPropagation();
-
-                        // 체크마크 이동
-                        // if (checkIcon.parentNode)
-                        //     checkIcon.parentNode.removeChild(checkIcon);
-                        // item.appendChild(checkIcon);
-
-                        // 선택 강조
-                        jobItems.forEach((j) => j.classList.remove("selected"));
-                        item.classList.add("selected");
-
-                        console.log(item);
-
-                        // span 업데이트
-                        const text = item.querySelector(".job-6").innerText;
-                        const selectedSpan =
-                            cateBtn.querySelector("span.selected");
-
-                        console.log(cateBtn);
-                        console.log(selectedSpan);
-
-                        // console.log(selectedSpan);
-                        if (selectedSpan) {
-                            selectedSpan.innerText = text;
-                        }
-                    });
-                });
-            });
-
-            // jobElem 영역 밖 클릭 시 jobElem 숨김
-            document.addEventListener("click", function (e) {
-                categoryBtns.forEach((cateBtn) => {
-                    const jobElem = cateBtn.querySelector(".job");
-                    if (jobElem && jobElem.style.display === "block") {
-                        if (
-                            !jobElem.contains(e.target) &&
-                            !cateBtn.contains(e.target)
-                        ) {
-                            jobElem.style.display = "";
-                        }
-                    }
-                });
-            });
+        if (isEditing && !saveBtn) {
+            createSaveButton();
+        } else if (!isEditing && saveBtn) {
+            buttonWrap.removeChild(saveBtn);
+            saveBtn = null;
         }
+    }
+
+    // 카테고리 버튼(산업분야, 기업규모) 처리
+    categoryBtns.forEach((cateBtn) => {
+        const jobElem = cateBtn.querySelector(".job");
+        const jobItems = cateBtn.querySelectorAll(".job-3");
+        const selectedSpan = cateBtn.querySelector("span.selected");
+
+        // 버튼 클릭 시 목록 토글
+        cateBtn.addEventListener("click", function (e) {
+            if (cateBtn.classList.contains("not-allowed")) return;
+            e.stopPropagation();
+            jobElem.style.display = jobElem.style.display === "block" ? "" : "block";
+        });
+
+        // 옵션 클릭 시 선택값 변경
+        jobItems.forEach((item) => {
+            item.addEventListener("click", function (e) {
+                e.stopPropagation();
+                const text = item.querySelector(".job-6").innerText;
+                selectedSpan.innerText = text;
+
+                const hiddenInput = cateBtn.parentElement.querySelector("input[type='hidden']");
+                if (hiddenInput) {
+                    hiddenInput.value = text;
+                }
+
+                jobElem.style.display = "";
+            });
+        });
     });
-});
 
-// 공통 함수: 버튼, 인풋, 이미지 연결
-function bindImageUpload(btnSelector, inputSelector, imgSelector) {
-    const btn = document.querySelector(btnSelector);
-    const input = document.querySelector(inputSelector);
-    const img = document.querySelector(imgSelector);
-
-    if (!btn || !input || !img) return;
-
-    // 버튼 클릭 시 → 파일 선택창 열기
-    btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        input.click();
+    // 외부 클릭 시 목록 닫기
+    document.addEventListener("click", function (e) {
+        document.querySelectorAll(".job").forEach((jobElem) => {
+            if (!jobElem.contains(e.target) && !e.target.closest(".category-button")) {
+                jobElem.style.display = "";
+            }
+        });
     });
 
-    // 파일 선택 시 → 미리보기 교체
-    input.addEventListener("change", (e) => {
-        const file = e.target.files[0];
-        if (file) {
+    // 이미지 업로드 공통 함수
+    const handleImageUpload = (fileInputSelector, imgSelector) => {
+        const fileInput = document.querySelector(fileInputSelector);
+        const img = document.querySelector(imgSelector);
+
+        fileInput.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
             const reader = new FileReader();
             reader.onload = (event) => {
                 img.src = event.target.result;
             };
             reader.readAsDataURL(file);
-        }
-    });
-}
+        });
+    };
 
-// 배너 이미지 바인딩
-bindImageUpload("#back-file-btn", ".back-input", ".back-img");
+    // 버튼 클릭 시 input 클릭
+    const setFileButtonTrigger = (buttonSelector, fileInputSelector) => {
+        const btn = document.querySelector(buttonSelector);
+        const fileInput = document.querySelector(fileInputSelector);
 
-// 프로필 이미지 바인딩
-bindImageUpload("#prof-file-btn", ".pro-input", ".profile-img");
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            fileInput.click();
+        });
+    };
+
+    // 프로필 이미지
+    handleImageUpload(".pro-input", ".profile-img");
+    setFileButtonTrigger("#prof-file-btn", ".pro-input");
+
+    // 배경 이미지
+    handleImageUpload(".back-input", ".back-img");
+    setFileButtonTrigger("#back-file-btn", ".back-input");
+});

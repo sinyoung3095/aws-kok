@@ -16,39 +16,6 @@ create table tbl_user (
     created_datetime timestamp default now(),
     updated_datetime timestamp default now()
 );
+
 alter table tbl_user add sns_email varchar(255);
 alter table tbl_user alter column user_email DROP not null;
--- select * from tbl_user;
---
--- insert into tbl_user(user_name, user_phone, user_email, user_password, user_role) values ('테스트', '01011111111', 'test1@gmail.com', '1234', 'company');
-
-select * from tbl_user;
-
-insert into tbl_user (user_name, user_phone, user_email, user_password, user_role)
-values
-    ('관리자', '010-0101-0202', 'admin@example.com', '1234', 'admin');
-
-insert into tbl_user (user_name, user_phone, user_email, user_password, user_role)
-values
-    ('홍사장', '010-1111-1111', 'hong@example.com', '1234', 'company'),
-    ('김사장', '010-2222-2222', 'kim@example.com', '1234', 'company'),
-    ('이사장', '010-3333-3333', 'lee@example.com', '1234', 'company'),
-    ('박사장', '010-4444-4444', 'park@example.com', '1234', 'company'),
-    ('최사장', '010-5555-5555', 'choi@example.com', '1234', 'company');
-
-insert into tbl_user (user_name, user_phone, user_email, user_password, user_role)
-values
-    ('차은우', '010-1111-2222', 'ooo@example.com', '1234', 'member'),
-    ('박보검', '010-2222-3333', 'gum@example.com', '1234', 'member'),
-    ('서강준', '010-3333-4444', 'jang@example.com', '1234', 'member'),
-    ('뷔', '010-4444-5555', 'vvv@example.com', '1234', 'member'),
-    ('변우석', '010-5555-6666', 'suck@example.com', '1234', 'member');
-
-select * from tbl_user;
-
-delete  FROM tbl_user
-where id =2;
-
-
-
-
