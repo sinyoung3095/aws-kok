@@ -82,4 +82,16 @@ public class MemberMapperTests {
         memberService.findMembersByMemberId(1L);
         log.info("memberDTOs: {}", memberService.findMembersByMemberId(1L));
     }
+
+    @Test
+    public void selectRequestTest(){
+        System.out.println(memberMapper.selectExperienceByMemberId(16L));
+        System.out.println(memberMapper.selectInternByMemberId(16L));
+    }
+
+    @Test
+    public void requestTest(){
+        System.out.println(memberService.findRequestExperienceByMemberId(16L));
+        System.out.println(memberService.findRequestInternByMemberId(16L));
+    }
 }
