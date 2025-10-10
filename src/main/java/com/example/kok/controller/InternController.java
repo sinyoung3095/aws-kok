@@ -27,7 +27,7 @@ public class InternController {
                               @ModelAttribute("search") Search search) {
         InternNoticeCriteriaDTO dto =internNoticeService.selectAllInternNotice(page, search);
         model.addAttribute("internNoticeCriteria", dto);
-        model.addAttribute("user", customUserDetails);
+        model.addAttribute("userDTO", customUserDetails);
         model.addAttribute("search", search);
         model.addAttribute("sharedCompanyId", sharedCompanyId);
         model.addAttribute("sharedInternId", sharedInternId);
