@@ -6,6 +6,7 @@ import com.example.kok.dto.RequestExperienceDTO;
 import com.example.kok.repository.FollowDAO;
 import com.example.kok.repository.RequestExperienceDAO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/main/**")
 @RequiredArgsConstructor
+@Slf4j
 public class MainpageRestController {
     private final FollowDAO  followDAO;
     private final RequestExperienceDAO requestExperienceDAO;
@@ -27,6 +29,7 @@ public class MainpageRestController {
 
     @GetMapping("requestExperience")
     public List<RequestExperienceDTO> findRequestExperience(@AuthenticationPrincipal CustomUserDetails customUserDetails){
+        log.info(customUserDetails.toString());
         return requestExperienceDAO.selectAllRequestById(customUserDetails.getId());
     }
 }

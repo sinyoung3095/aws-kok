@@ -56,3 +56,6 @@ select * from tbl_experience_notice where company_id = 7;
 delete from tbl_experience_notice where company_id = 7;
 insert into tbl_experience_notice (experience_notice_title, experience_notice_subtitle, experience_notice_introduce_job, experience_notice_etc, experience_start_date, experience_end_date, company_id, experience_main_tasks, experience_notice_start_date, experience_notice_end_date)
 values ('체험 제목26', '체험 부제목26', '직무 소개1', '참고사항1', '2025-09-25', '2025-09-26', 7, '주요업무1', '2025-09-25', '2025-11-26');
+
+insert into tbl_experience_notice (experience_notice_title, experience_notice_subtitle, experience_notice_introduce_job, experience_notice_etc, experience_start_date, experience_end_date, company_id, experience_main_tasks, experience_notice_start_date, experience_notice_end_date)
+values ('체험 제목26', '체험 부제목26', '직무 소개1', '참고사항1', '2025-09-25', '2025-09-26', 5, '주요업무1', '2025-09-25', '2025-11-26');
