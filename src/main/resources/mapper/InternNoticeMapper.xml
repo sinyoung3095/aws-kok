@@ -14,10 +14,10 @@
         </if>
     </sql>
 
-<!-- 기업별 인턴 공고 목록 -->
+    <!-- 기업별 인턴 공고 목록 -->
     <select id="selectInternNoticeByCompanyId" resultType="InternNoticeDTO">
         select i.id, i.intern_notice_title, i.intern_notice_subtitle as internNoticeSubTitle, i.intern_notice_introduce_job,
-               i.intern_main_tasks, i.intern_notice_etc, csc.id as scale_id, csc.company_scale_name, j.job_name
+        i.intern_main_tasks, i.intern_notice_etc, csc.id as scale_id, csc.company_scale_name, j.job_name
         from tbl_intern_notice i
         join tbl_company c on c.user_id = i.company_id
         left join tbl_company_scale_category_bridge cscb on i.company_id = cscb.company_id
@@ -44,7 +44,7 @@
         <include refid="companyInternNoticeSearch"/>
     </select>
 
-<!--  기업별 인턴 모집  -->
+    <!--  기업별 인턴 모집  -->
     <select id="selectListById">
         select intern_notice_title, intern_notice_subtitle, intern_notice_status
         from tbl_intern_notice
@@ -56,15 +56,15 @@
     <sql id="search">
         <if test="search.keyword != null">
             and (
-                lower(i.intern_notice_title) like concat('%', lower(#{search.keyword}), '%') or
-                lower(i.intern_notice_subtitle) like concat('%', lower(#{search.keyword}), '%') or
-                lower(i.intern_notice_etc) like concat('%', lower(#{search.keyword}), '%') or
-                lower(j.job_name) like concat('%', lower(#{search.keyword}), '%') or
-                lower(c.company_name) like concat('%', lower(#{search.keyword}), '%')
+            lower(i.intern_notice_title) like concat('%', lower(#{search.keyword}), '%') or
+            lower(i.intern_notice_subtitle) like concat('%', lower(#{search.keyword}), '%') or
+            lower(i.intern_notice_etc) like concat('%', lower(#{search.keyword}), '%') or
+            lower(j.job_name) like concat('%', lower(#{search.keyword}), '%') or
+            lower(c.company_name) like concat('%', lower(#{search.keyword}), '%')
             )
         </if>
     </sql>
-<!--    조회-->
+    <!--    조회-->
     <select id="selectAllInternNotice">
         select i.id,
         i.intern_notice_title,
@@ -74,7 +74,6 @@
         i.intern_start_date,
         i.intern_end_date,
         i.intern_notice_status,
-        i.intern_request_status,
         i.created_datetime,
         i.updated_datetime,
         i.company_id,
@@ -94,51 +93,51 @@
         and i.intern_notice_status='active'
         <include refid="search"></include>
         group by i.id,
-                 i.intern_notice_title,
-                 i.intern_notice_subtitle,
-                 i.intern_notice_etc,
-                 i.intern_main_tasks,
-                 i.intern_start_date,
-                 i.intern_end_date,
-                 i.intern_notice_status,
-                 i.created_datetime,
-                 i.updated_datetime,
-                 i.company_id,
-                 c.company_name,
-                 s.id,
-                 s.company_scale_name,
-                 j.job_name;
+        i.intern_notice_title,
+        i.intern_notice_subtitle,
+        i.intern_notice_etc,
+        i.intern_main_tasks,
+        i.intern_start_date,
+        i.intern_end_date,
+        i.intern_notice_status,
+        i.created_datetime,
+        i.updated_datetime,
+        i.company_id,
+        c.company_name,
+        s.id,
+        s.company_scale_name,
+        j.job_name;
     </select>
-<!--    전체 개수 조회-->
+    <!--    전체 개수 조회-->
     <select id="selectCountAll">
         select count(*) from tbl_intern_notice
         where intern_notice_status='active'
     </select>
-<!--    체험 공고 단일 조회-->
+    <!--    체험 공고 단일 조회-->
     <select id="selectById">
         select id, intern_notice_title, intern_notice_subtitle, intern_notice_introduce_job, intern_notice_etc, intern_main_tasks, intern_start_date, intern_end_date, intern_notice_status, created_datetime, updated_datetime, company_id
         from tbl_intern_notice
         where id=#{id}
-        and intern_notice_status='active'
+          and intern_notice_status='active'
     </select>
-<!--    직군 조회-->
+    <!--    직군 조회-->
     <select id="selectJobNameByIntId">
         select j.job_name
         from tbl_job_category j
-        join tbl_intern_job_category ij
-        on ij.job_category=j.id
-        join tbl_intern_notice i
-        on i.id=ij.intern_notice_id
+                 join tbl_intern_job_category ij
+                      on ij.job_category=j.id
+                 join tbl_intern_notice i
+                      on i.id=ij.intern_notice_id
         where ij.intern_notice_id=#{id}
     </select>
 
-<!-- 최신 체험 공고 4개 조회 -->
+    <!-- 최신 체험 공고 4개 조회 -->
     <select id="selectLatestFour">
         select c.user_id, c.company_name, cpf.file_id, f.file_path, i.intern_notice_title, i.intern_notice_subtitle, i.created_datetime, i.updated_datetime
         from tbl_company c
-        join tbl_intern_notice i on c.user_id = i.company_id
-        left join tbl_company_profile_file cpf on c.user_id = cpf.company_id
-        left join tbl_file f on cpf.file_id = f.id
+                 join tbl_intern_notice i on c.user_id = i.company_id
+                 left join tbl_company_profile_file cpf on c.user_id = cpf.company_id
+                 left join tbl_file f on cpf.file_id = f.id
         where intern_notice_status = 'active'
         order by created_datetime desc
         limit 4

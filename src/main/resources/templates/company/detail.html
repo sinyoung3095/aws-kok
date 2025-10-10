@@ -7,13 +7,28 @@
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/font/font.css">
     <link rel="stylesheet" href="/css/experience/list.css">
-    <link rel="stylesheet" href="/css/main-page/header.css">
     <link rel="stylesheet" href="/css/main-page/login-header.css">
+    <link rel="stylesheet" href="/css/main-page/header.css">
+    <link rel="stylesheet" href="/css/main-page/login-side-bar.css">
+    <link rel="stylesheet" href="/css/main-page/side-bar.css">
+    <link rel="stylesheet" href="/css/main-page/mobile-footer.css">
     <title th:text="${company.companyName} + ' | 콕'">기업홈 | 콕</title>
 </head>
 <body>
     <div id="main-content" class="main-content">
+        <th:block th:if="${userDTO == null}">
+            <div th:replace="~{main-page/side-bar}"></div>
+        </th:block>
+        <th:block th:if="${userDTO != null}">
+            <div th:replace="~{main-page/login-side-bar}"></div>
+        </th:block>
         <main class="main">
+            <th:block th:if="${userDTO == null}">
+                <div th:replace="~{main-page/header}"></div>
+            </th:block>
+            <th:block th:if="${userDTO != null}">
+                <div th:replace="~{main-page/login-header}"></div>
+            </th:block>
             <div class="content-layout scroll-y">
                 <div class="banner-section">
                     <div class="banner-container">
@@ -211,6 +226,7 @@
                 </div>
             </div>
         </main>
+        <div th:replace="~{main-page/mobile-footer}"></div>
     </div>
 
     <!-- toast - red -->

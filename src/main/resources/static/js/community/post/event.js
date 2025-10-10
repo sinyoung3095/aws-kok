@@ -13,8 +13,14 @@ const showList = async (page = 1) => {
 };
 showList(page);
 
-window.addEventListener("scroll", async () => {
-    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 100) {
+const mainContainer = document.querySelector(".main-0");
+
+mainContainer.addEventListener("scroll", async () => {
+    const scrollTop = mainContainer.scrollTop;
+    const clientHeight = mainContainer.clientHeight;
+    const scrollHeight = mainContainer.scrollHeight;
+
+    if (scrollTop + clientHeight >= scrollHeight - 100) {
         if (checkScroll) {
             postsCriteria = await showList(++page);
             checkScroll = false;
@@ -113,7 +119,9 @@ const addFiles = (files) => {
     render();
 };
 
-input.addEventListener('change', () => addFiles(input.files));
+if (input) {
+    input.addEventListener('change', () => addFiles(input.files));
+}
 
 // 글쓰기 / 수정 모달 관련
 const popup = document.getElementById("post-write-popup");
@@ -122,7 +130,9 @@ const closeBtn = document.querySelector(".popup-write-close");
 const writeTextarea = document.querySelector(".popup-textarea");
 const writeFiles = document.querySelector("#btn-add-photo");
 
-popup.dataset.mode = "write";
+if (popup) {
+    popup.dataset.mode = "write";
+}
 
 // 열기
 writeBtns.forEach((btn) => {
