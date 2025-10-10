@@ -1,8 +1,7 @@
 package com.example.kok.mapper;
 
 import com.example.kok.domain.MemberVO;
-import com.example.kok.dto.MemberDTO;
-import com.example.kok.dto.UserMemberDTO;
+import com.example.kok.dto.*;
 import com.example.kok.util.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -22,4 +21,10 @@ public interface MemberMapper {
 
 //    아이디로 회원 조회
     public Optional<UserMemberDTO> selectMember(Long memberId);
+
+//    아이디로 지원한 체험 공고 조회
+    public List<RequestExperienceDTO> selectExperienceByMemberId(Long memberId);
+
+//    아이디로 지원한 인턴 공고 조회
+    public List<RequestInternDTO> selectInternByMemberId(Long memberId);
 }
