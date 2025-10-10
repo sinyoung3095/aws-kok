@@ -21,6 +21,8 @@ import java.util.Optional;
 public class CompanyServiceImpl implements CompanyService {
     private final CompanyDAO companyDAO;
     private final S3Service s3Service;
+    private final InternNoticeDAO internNoticeDAO;
+    private final ExperienceNoticeDAO experienceNoticeDAO;
 
 
     @Override
