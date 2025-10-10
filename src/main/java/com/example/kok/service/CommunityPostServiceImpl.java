@@ -198,6 +198,10 @@ public class CommunityPostServiceImpl implements CommunityPostService {
         return postDTO;
     }
 
+    @Override
+    public int getPostsCountByMemberId(Long memberId) {
+        return communityPostDAO.findPostsCountByMemberId(memberId);
+    }
 
     public String getPath() {
         LocalDate today = LocalDate.now();

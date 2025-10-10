@@ -37,4 +37,7 @@ public interface CommunityPostMapper {
 
 //    회원 아이디로 게시물 조회
     public List<PostDTO> selectPostById(Long id);
+
+//    회원 별 게시글 갯수
+    public int selectPostsCountByMemberId(Long memberId);
 }
