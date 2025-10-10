@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainpageController {
 
     @GetMapping("main-ex")
-    public String  goToEx(){
+    public String  goToEx(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model){
+        model.addAttribute("userDTO", customUserDetails);
         return "main-page/main-ex";
     }
 
