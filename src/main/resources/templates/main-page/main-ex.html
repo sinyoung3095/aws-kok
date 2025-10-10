@@ -113,17 +113,27 @@
                     </div>
                     <div class="start-line">
                         <!-- 비로그인시 메뉴 삭제 -->
+                        <th:replace th:if="${userDTO==null}">
+
+                        </th:replace>
+                        <th:replace th:if="${userDTO!=null}">
                         <div class="sidebar-setting-wrap">
                             <div class="sidebar-setting">
                                 <p class="sidebar-setting-text">설정</p>
                             </div>
                         </div>
+                        </th:replace>
                         <!-- 비로그인시 메뉴 삭제 -->
+                        <th:replace th:if="${userDTO==null}">
+
+                        </th:replace>
+                        <th:replace th:if="${userDTO!=null}">
                         <div class="sidebar-support-wrap">
                             <div class="sidebar-support">
                                 <p class="sidebar-support-text">고객지원</p>
                             </div>
                         </div>
+                        </th:replace>
                         <!-- 서비스 소개 페이지 이동 -->
                         <div class="sidebar-service-wrap">
                             <a href="" class="sidebar-service">
@@ -163,20 +173,35 @@
                         </div>
                     </div>
                 </div>
+                <!-- 비로그인 시 버튼 -->
+                <th:replace th:if="${userDTO==null}">
+                <div class="sidebar-login">
+                    <div class="sidebar-login-inner">
+                        <div class="start-line">
+                            <div class="sidebar-line"></div>
+                        </div>
+                        <a onclick="window.location.href='/member/login'" class="sidebar-login-btn-wrap">
+                            <button class="sidebar-login-btn">
+                                <p class="sidebar-login-btn-text">로그인</p>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                </th:replace>
                 <!-- 로그인 한 회원 버튼 -->
+                <th:replace th:if="${userDTO!=null}">
                 <div class="sidebar-login-user">
                     <div class="sidebar-login-inner">
                         <div class="start-line">
                             <div class="sidebar-line"></div>
                         </div>
                         <div class="sidebar-login-user-btn-wrap">
-                            <a href="">
+
+                            <a onclick="window.location.href='/mypage/page'">
                                 <div class="sidebar-login-user-btn">
                                     <img alt="image" width="32" height="32" style="color:transparent;border-radius:999px;cursor:default;max-height:32px;max-width:32px;min-height:32px;min-width:32px;object-fit:contain" srcset="" src="/images/main-page/image.png">
                                     <div class="sidebar-login-user-wrap">
-                                        <span class="sidebar-login-user-name">회원이름</span>
-                                        <!-- 기업회원 경우에 기업명, 일반 회원은 공백 -->
-                                        <p class="sidebar-login-user-company">기업명</p>
+                                        <span class="sidebar-login-user-name" th:text="${userDTO.username+' 님'}"></span>
                                     </div>
                                     <div class="sidebar-login-user-icon-wrap">
                                         <div class="sidebar-login-user-icon">
@@ -190,31 +215,20 @@
                         </div>
                     </div>
                 </div>
-                <!-- 비로그인 시 버튼 -->
-                <div class="sidebar-login">
-                    <div class="sidebar-login-inner">
-                        <div class="start-line">
-                            <div class="sidebar-line"></div>
-                        </div>
-                        <a href="" class="sidebar-login-btn-wrap">
-                            <button class="sidebar-login-btn">
-                                <p class="sidebar-login-btn-text">로그인</p>
-                            </button>
-                        </a>
-                    </div>
-                </div>
+                </th:replace>
             </div>
         </div>
 
         <main class="main">
             <!-- pc 헤더 -->
             <div class="pc w100">
+                <th:replace th:if="${userDTO==null}">
                 <!-- pc 헤더 - 로그인전 -->
                 <div class="header-wrap">
                     <div class="header">
                         <div class="header-space"></div>
                         <div class="header-login">
-                            <a href="">
+                            <a onclick="window.location.href='/member/login'">
                                 <button type="button" class="login-button">
                                     <span class="login-text">로그인</span>
                                 </button>
@@ -222,8 +236,10 @@
                         </div>
                     </div>
                 </div>
+                </th:replace>
 
                 <!-- pc 헤더 - 로그인후 -->
+                <th:replace th:if="${userDTO!=null}">
                 <div class="header-wrap">
                     <div class="header">
                         <div class="header-space"></div>
@@ -235,7 +251,7 @@
                             <!-- 프로필 드롭다운 -->
                             <div class="profile-modal">
                                 <div class="profile-modal-header">
-                                    <div class="member-name">정희준님</div>
+                                    <div class="member-name" th:text="${userDTO.username+' 님'}"></div>
                                 </div>
                                 <div class="profile-modal-body">
                                     <div class="list-wrap">
@@ -292,7 +308,7 @@
                                                     </div>
                                                 </div>
                                             </button>
-                                            <div class="profile-modal-list-section">
+                                            <div id="logout" class="profile-modal-list-section">
                                                 <div class="profile-modal-list-content-wrap">
                                                     <div class="profile-modal-list-content">
                                                         <div class="profile-modal-icon-wrap">
@@ -315,11 +331,13 @@
                         </div>
                     </div>
                 </div>
+                </th:replace>
             </div>
             
             <!-- 모바일 헤더 -->
             <div class="mob">
                 <!-- 모바일 헤더 - 로그인전 -->
+                <th:replace th:if="${userDTO==null}">
                 <div class="top-wrap">
                     <div class="top">
                         <div class="top-left-section">
@@ -334,7 +352,7 @@
                             </button>
                         </div>
                         <div class="top-middle-section">
-                            <a href="" class="top-middle">
+                            <a onclick="window.location.href='/member/login'" class="top-middle">
                                 <div class="top-middle-button">
                                     <img alt="image" width="32" height="32" srcset="" src="/images/member/kok_logo.png">
                                 </div>
@@ -342,7 +360,7 @@
                         </div>
                         <!-- 비로그인 시 로그인 페이지 이동 -->
                         <div class="top-right-section">
-                            <a href="" class="top-right">
+                            <a onclick="window.location.href='/member/login'" class="top-right">
                                 <div class="top-right-button">
                                     <svg aria-label="icon" fill="#12131499" height="24" role="img" width="24">
                                         <path clip-rule="evenodd" d="M12 3.7a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6M7.1 7a4.9 4.9 0 1 1 9.8 0 4.9 4.9 0 0 1-9.8 0M9 15.7A3.3 3.3 0 0 0 5.7 19v2a.85.85 0 0 1-1.7 0v-2A4.9 4.9 0 0 1 9 14.1h6a4.9 4.9 0 0 1 4.9 4.9v2a.85.85 0 0 1-1.7 0v-2a3.3 3.3 0 0 0-3.3-3.3z" fill-rule="evenodd"></path>
@@ -352,8 +370,10 @@
                         </div>
                     </div>
                 </div>
+                </th:replace>
 
                 <!-- 모바일 헤더 - 로그인후 -->
+                <th:replace th:if="${userDTO!=null}">
                 <div class="top-wrap">
                     <div class="top">
                         <div class="top-left-section">
@@ -384,6 +404,7 @@
                         </div>
                     </div>
                 </div>
+                </th:replace>
             </div>
         </main>
 
@@ -1044,6 +1065,7 @@
     <!-- 사이드바 -->
     <div id="" class="mobile-sidebar" tabindex="-1" style="pointer-events: auto;">
         <!-- 로그인전 -->
+        <th:replace th:if="${userDTO==null}">
         <div class="sidebar-list">
             <div class="sidebar-list-logo-section">
                 <!-- 로고 -->
@@ -1063,7 +1085,7 @@
                     </svg>
                 </div>
                 <div class="sidebar-list-login">
-                    <a href="">
+                    <a onclick="window.location.href='/member/login'">
                         <span class="sidebar-list-login-main">로그인하기 →</span>
                     </a>
                     <span class="sidebar-list-login-sub">자주 사용하는 방법으로 
@@ -1105,7 +1127,9 @@
                 </div>
             </div>
         </div>
+        </th:replace>
         <!-- 로그인후 -->
+        <th:replace th:if="${userDTO!=null}">
         <div class="sidebar-list">
             <div class="sidebar-list-profile-section">
                 <!-- 회원 프로필 -->
@@ -1162,6 +1186,7 @@
                 </div>
             </div>
         </div>
+        </th:replace>
     </div>
 
     <!-- 지원 내역 모달창 -->
@@ -1348,7 +1373,7 @@
                                 </div>
                                 <div class="body-section-user-info-wrap">
                                     <div class="body-section-user-info-text-wrap">
-                                        <p class="body-section-user-info-text">정희준</p>
+                                        <p class="body-section-user-info-text">${userDTO.userName}</p>
                                     </div>
                                 </div>
                             </div>
@@ -1358,7 +1383,7 @@
                                 </div>
                                 <div class="body-section-user-info-wrap">
                                     <div class="body-section-user-info-text-wrap">
-                                        <p class="body-section-user-info-text">test@gmail.com</p>
+                                        <p class="body-section-user-info-text">${userDTO.userEmail}</p>
                                     </div>
                                 </div>
                             </div>
@@ -1368,7 +1393,7 @@
                                 </div>
                                 <div class="body-section-user-info-wrap">
                                     <div class="body-section-user-info-text-wrap">
-                                        <p class="body-section-user-info-text">010 1234 5678</p>
+                                        <p class="body-section-user-info-text">${userDTO.userPhone}</p>
                                     </div>
                                 </div>
                             </div>
@@ -1649,6 +1674,10 @@
         </div>
     </div>
 </body>
+<script src="/js/main-page/header/module/service.js"></script>
+<script src="/js/main-page/header/module/layout.js"></script>
+<script src="/js/main-page/side-bar/module/service.js"></script>
+<script src="/js/main-page/side-bar/module/layout.js"></script>
 <script src="/js/main-page/side-bar/event.js"></script>
 <script src="/js/main-page/header/event.js"></script>
 <script src="/js/main-page/mobile-header/event.js"></script>

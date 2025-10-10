@@ -20,9 +20,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
     private final CompanyDAO companyDAO;
-    private final ExperienceNoticeDAO experienceNoticeDAO;
-    private final InternNoticeDAO internNoticeDAO;
     private final S3Service s3Service;
+    private final InternNoticeDAO internNoticeDAO;
+    private final ExperienceNoticeDAO experienceNoticeDAO;
 
 
     @Override
@@ -110,7 +110,7 @@ public class CompanyServiceImpl implements CompanyService {
     public CompaniesCriteriaDTO getCompanyList(int page, CompanySearch search, Long userId) {
 //        System.out.println("검색 한 내용 " + search);
 
-        Criteria criteria = new Criteria(page, companyDAO.findTotalCount(search));
+        Criteria criteria = new Criteria(page, companyDAO.findTotalCountByUserId(search));
         List<CompanyDTO> companies = companyDAO.findCompanies(criteria, search, userId);
 //        System.out.println("기업들" + companies);
 
