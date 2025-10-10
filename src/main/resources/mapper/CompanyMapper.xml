@@ -98,7 +98,7 @@
     </select>
 
 <!-- 기업 수 -->
-    <select id="selectCompanyCount" resultType="int">
+    <select id="selectCompanyCountByUserId" resultType="int">
         select count(distinct c.user_id)
         from tbl_company c
         join tbl_user u on c.user_id = u.id
@@ -148,4 +148,41 @@
           and i.intern_notice_end_date >= now()
           and i.company_id=#{companyId}
     </select>
+
+<!-- 기업 목록 조회   -->
+
+    <sql id="searchCompany">
+        <if test="keyword != null and keyword != ''">
+            and (
+            company_scale_name like concat('%', #{keyword}, '%') or
+            user_email like concat('%', #{keyword}, '%') or
+            job_name like concat('%', #{keyword}, '%') or
+            company_name like concat('%', #{keyword}, '%')
+            )
+        </if>
+    </sql>
+    <select id="selectCompanyList">
+        select user_id ,user_name, company_name, user_email, user_phone, company_url, job_name, follow_count, company_scale_name
+        from vw_user_company_job_follow_scale
+        where user_status = 'active'
+        <include refid="searchCompany"/>
+        order by user_id desc
+        limit #{criteria.count} offset #{criteria.offset}
+    </select>
+
+    <!--  목록 개수  -->
+    <select id="selectCompanyCount">
+        select count(*)
+        from vw_user_company_job_follow_scale
+        where user_status = 'active'
+        <include refid="searchCompany"/>
+    </select>
+
+    <!-- 회원 아이디로 조회 -->
+    <select id="selectCompany">
+        select user_id, user_name, company_name, user_email, user_phone, company_url, job_name, user_status, follow_count, company_scale_name
+        from vw_user_company_job_follow_scale
+        where user_status = 'active' and user_id = #{userId}
+    </select>
+
 </mapper>

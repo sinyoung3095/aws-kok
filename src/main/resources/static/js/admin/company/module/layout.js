@@ -1,54 +1,55 @@
 const layout = (() => {
     const showList = (result) => {
-        const noticeListContainer = document.querySelector("tbody.table-notice");
+        const companyListContainer = document.querySelector("tbody.company-list");
         let text = ``;
 
         const countAmount = document.querySelector(".count-amount");
 
-        countAmount.innerText = result.userMemberDTOList.length;
+        countAmount.innerText = result.adminCompanyDTOList.length;
 
-        if (result.userMemberDTOList !== null) {
+        if (result.adminCompanyDTOList !== null && result.adminCompanyDTOList.length > 0) {
 
-            result.userMemberDTOList.forEach((userMemberDTO) => {
+            result.adminCompanyDTOList.forEach((company) => {
                 text += `
-
                     <tr>
                         <td class="td-name">
-                            <div class="member-name">${userMemberDTO.userName}
-                                <span class="badge-label badge text-danger ml-2">일반회원</span>
+                            <div class="member-name">${company.userName}
+                                <span class="badge-label badge text-danger ml-2">기업회원</span>
                             </div>
-                            <div class="member-id">${userMemberDTO.userEmail}</div>
+                            <div class="member-id">${company.userEmail}</div>
                         </td>
-                        <td class="td-amount pr-4 font-weight-bold">${userMemberDTO.userName}
-                            <span class="amount-unit"> 님</span>
+                        <td class="td-amount pr-4 font-weight-bold">
+                            <p>${company.companyName}</p>
                         </td>
                         <td class="td-email">
-                            <p>${userMemberDTO.userEmail}</p>
+                            <p>${company.userEmail}</p>
                         </td>
                         <td class="td-phone">
-                            <p>${userMemberDTO.userPhone}</p>
+                            <p>${company.userPhone}</p>
                         </td>
                         <td class="td-profile">
-                            <p>${userMemberDTO.memberProfileUrl ?? '-'}</p>
+                            <p>${company.companyUrl}</p>
                         </td>
                         <td class="td-job">
-                            <p>${userMemberDTO.jobName ?? '-'}</p>
+                            <p>${company.jobName ?? '-'}</p>
                         </td>
                         <td class="td-action text-center">
                             <div class="action-btn">
-                                <i class="mdi mdi-chevron-right" data-id="${userMemberDTO.id}"></i>
+                                <i class="mdi mdi-chevron-right" data-id="${company.userId}"></i>
                             </div>
                         </td>
-                    </tr> 
+                    </tr>
            `;
             });
-            noticeListContainer.innerHTML = text;
+            companyListContainer.innerHTML = text;
 
         } else {
-        text = `<tr> 결과가 없습니다.</tr>`;
+        text = `<tr class="no-data">
+                    <td colspan="6">결과가 없습니다.</td>
+                </tr>`;
 
 
-        noticeListContainer.innerHTML = text;
+            companyListContainer.innerHTML = text;
         }
 
         const pagination = document.querySelector(".pagination.kok-pagination");
@@ -98,24 +99,20 @@ const layout = (() => {
 
         let experiencesText = ``;
         let internsText = ``;
-        let postsText = ``;
         let experiencesCount = 0;
         let internsCount = 0;
         let text = ``;
 
-        if (result.requestExperiences) {
-            result.requestExperiences.forEach((experiences) => {
+        if (result.experienceNoticeDTO && result.experienceNoticeDTO.length > 0) {
+            result.experienceNoticeDTO.forEach((experiences) => {
                 let status = ``;
                 experiencesCount++;
 
-                if (experiences.requestExperienceStatus === "await") {
-                    status = "서류접수"
+                if (experiences.experienceNoticeStatus === "active") {
+                    status = "모집중"
                 }
-                else if (experiences.requestExperienceStatus === "accept") {
-                    status = "합격"
-                }
-                else if (experiences.requestExperienceStatus === "reject") {
-                    status = "불합격"
+                else if (experiences.experienceNoticeStatus === "inactive") {
+                    status = "모집완료"
                 }
 
 
@@ -123,28 +120,33 @@ const layout = (() => {
 
                 experiencesText += `
                     <tr>
-                        <td>${experiences.companyName}</td>
                         <td>${experiences.experienceNoticeTitle}</td>
-                        <td style="text-align: center;">${status}</td>
-                        <td style="text-align: center;">${experiences.evaluationAvgScore}</td>
+                        <td>${experiences.experienceNoticeSubtitle}</td>
+                        <td>${status}</td>
                     </tr>
                 `
             })
+        } else {
+            console.log("------------------")
+            experiencesText += `
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                `
         }
 
-        if (result.requestInterns) {
-            result.requestInterns.forEach((requestIntern) => {
+        if (result.internNoticeDTO && result.internNoticeDTO.length > 0) {
+            result.internNoticeDTO.forEach((requestIntern) => {
                 let status = ``;
                 internsCount++;
 
-                if (requestIntern.requestInternStatus === "await") {
-                    status = "서류접수"
+                if (requestIntern.internNoticeStatus === "active") {
+                    status = "모집중"
                 }
-                else if (requestIntern.requestInternStatus === "accept") {
-                    status = "합격"
-                }
-                else if (requestIntern.requestInternStatus === "reject") {
-                    status = "불합격"
+                else if (requestIntern.internNoticeStatus === "inactive") {
+                    status = "모집완료"
                 }
 
 
@@ -152,33 +154,20 @@ const layout = (() => {
 
                 internsText += `
                     <tr>
-                        <td>${requestIntern.companyName}</td>
                         <td>${requestIntern.internNoticeTitle}</td>
-                        <td style="text-align: center;">${status}</td>
-                    </tr>
-                `
-            })
-        }
-
-        if (result.posts) {
-            result.posts.forEach((post) => {
-                let status = ``;
-
-                if (post.postStatus === "active") {
-                    status = "게시중"
-                }
-                else if (post.postStatus === "inactive") {
-                    status = "삭제"
-                }
-
-                postsText += `
-                    <tr>
+                        <td>${requestIntern.internNoticeSubTitle}</td>
                         <td>${status}</td>
-                        <td>${post.postContent}</td>
-                        <td style="text-align: center;">${post.createdDateTime ? post.createdDateTime.split(" ")[0] : '-'}</td>
                     </tr>
                 `
             })
+        } else {
+            internsText += `
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                `
         }
 
 
@@ -189,10 +178,10 @@ const layout = (() => {
                         <div class="modal-content">
                             <div class="modal-header">
                                 <div class="modal-title">
-                                    ${result.userName}
-                                    <span class="badge-label text-danger font-weight-bold ml-2">일반회원</span>
+                                    ${result.companyName}
+                                    <span class="badge-label text-danger font-weight-bold ml-2">기업회원</span>
                                 </div>
-                                <button class="close close-button">
+                                <button class="close">
                                     <i class="mdi mdi-close"></i>
                                 </button>
                             </div>
@@ -220,15 +209,19 @@ const layout = (() => {
                                                                             <td>${result.userEmail}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>핸드폰 번호</th>
+                                                                            <th>대표 번호</th>
                                                                             <td>${result.userPhone}</td>
-                                                                        </tr>  
+                                                                        </tr> 
                                                                         <tr>
-                                                                            <th>직군</th>
-                                                                            <td>${result.jobName ?? '-'}</td>
+                                                                            <th>기업 링크</th>
+                                                                            <td>${result.companyUrl}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>체험신청 횟수</th>
+                                                                            <th>팔로워</th>
+                                                                            <td>${result.followCount}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>체험공고 횟수</th>
                                                                             <td>${experiencesCount}</td>
                                                                         </tr> 
                                                                     </tbody>
@@ -239,31 +232,39 @@ const layout = (() => {
                                                                 <table class="info-table">
                                                                     <tbody>                                                                        
                                                                         <tr>
-                                                                            <th>이름</th>
+                                                                            <th>기업</th>
+                                                                            <td>${result.companyName}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>대표자</th>
                                                                             <td>${result.userName}</td>
+                                                                        </tr>                                                                    
+                                                                        <tr>
+                                                                            <th>산업분야</th>
+                                                                            <td>${result.jobName ?? '-'}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>프로필 URL</th>
-                                                                            <td>${result.memberProfileUrl ?? '-'}</td>
-                                                                        </tr>   
-                                                                        <tr>
-                                                                            <th>평균 평점</th>
-                                                                            <td>${result.avgScore ?? '-'}</td>
+                                                                            <th>기업규모</th>
+                                                                            <td>${result.companyScaleName}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>인턴신청 횟수</th>
+                                                                            <th>인턴공고 횟수</th>
                                                                             <td>${internsCount}</td>
-                                                                        </tr>                                                                        
+                                                                        </tr> 
                                                                     </tbody>
                                                                 </table>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!-- 체험 신청 내역 -->
+                                                    <!-- 체험공고 내역 -->
                                                     <div class="info-layout detail-info">
                                                         <div class="info-title justify-content-between">
                                                             <div class="flex-left d-flex">
-                                                                <div class="title">체험신청 내역</div>
+                                                                <a href="" class="info-detail">
+                                                                    <div class="title">체험공고 내역
+                                                                        <i class="mdi mdi-menu-left ml-2"></i>
+                                                                    </div>
+                                                                </a>
                                                             </div>
                                                             <div class="flex-right"></div>
                                                         </div>
@@ -271,23 +272,26 @@ const layout = (() => {
                                                             <table class="info-table">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th class="middle">회사명</th>
-                                                                        <th class="long">체험공고 제목</th>
-                                                                        <th class="short" style="text-align: center;">지원상태</th>
-                                                                        <th class="short" style="text-align: center;">평가점수</th>
+                                                                        <th class="middle">체험공고 제목</th>
+                                                                        <th class="long">체험공고 부제목</th>
+                                                                        <th class="short">모집상태</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody>
-                                                                    ${experiencesText}                                                                                                                                 
+                                                                <tbody>    
+                                                                ${experiencesText}                                                                                                                            
                                                                 </tbody>
                                                             </table>
                                                         </div>                             
                                                     </div>
-                                                    <!-- 인턴 신청 내역 -->
+                                                    <!-- 인턴공고 내역 -->
                                                     <div class="info-layout detail-info">
                                                         <div class="info-title justify-content-between">
                                                             <div class="flex-left d-flex">
-                                                                <div class="title">인턴신청 내역</div>
+                                                                <a href="" class="info-detail">
+                                                                    <div class="title">인턴공고 내역
+                                                                        <i class="mdi mdi-menu-left ml-2"></i>
+                                                                    </div>
+                                                                </a>
                                                             </div>
                                                             <div class="flex-right"></div>
                                                         </div>
@@ -295,36 +299,13 @@ const layout = (() => {
                                                             <table class="info-table">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th class="middle">회사명</th>
-                                                                        <th class="long">인턴공고 제목</th>
-                                                                        <th class="middle" style="text-align: center;">지원상태</th>
+                                                                        <th class="middle">인턴공고 제목</th>
+                                                                        <th class="long">인턴공고 부제목</th>
+                                                                        <th class="short">모집상태</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody>
-                                                                    ${internsText}                                                                                                                                   
-                                                                </tbody>
-                                                            </table>
-                                                        </div>                             
-                                                    </div>
-                                                    <!-- 회원 작성 게시글 -->
-                                                    <div class="info-layout detail-info">
-                                                        <div class="info-title justify-content-between">
-                                                            <div class="flex-left d-flex">
-                                                                <div class="title">작성 게시글</div>
-                                                            </div>
-                                                            <div class="flex-right"></div>
-                                                        </div>
-                                                        <div class="d-table w-100">
-                                                            <table class="info-table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th class="long">게시글 제목</th>
-                                                                        <th>게시글 내용</th>
-                                                                        <th class="long" style="text-align: center;">게시글 작성 일자</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    ${postsText}                                                                                                                             
+                                                                <tbody>   
+                                                                ${internsText}                                                                                                                             
                                                                 </tbody>
                                                             </table>
                                                         </div>                             

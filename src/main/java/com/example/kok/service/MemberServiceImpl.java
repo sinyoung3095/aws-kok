@@ -5,6 +5,8 @@ import com.example.kok.dto.*;
 import com.example.kok.repository.*;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,6 +18,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MemberServiceImpl implements MemberService {
     private final MemberDAO memberDAO;
     private final MemberStorageFileDAO memberStorageFileDAO;
@@ -24,6 +27,7 @@ public class MemberServiceImpl implements MemberService {
     private final RequestExperienceDAO requestExperienceDAO;
     private final RequestInternDAO requestInternDAO;
     private final CommunityPostDAO  communityPostDAO;
+    private final UserMemberDTO userMemberDTO;
 
     @Override
     public void joinMember(MemberVO memberVO) {
@@ -64,13 +68,34 @@ public class MemberServiceImpl implements MemberService {
 
 //    회원 전체조회
     @Override
-    public List<UserMemberDTO> findUserMembers(int page, String keyword) {
-        Criteria criteria = new Criteria(page, 10);
-        return memberDAO.selectMembers(criteria, keyword);
+    public AdminMemberCriteriaDTO findUserMembers(int page, String keyword) {
+
+        AdminMemberCriteriaDTO  adminMemberCriteriaDTO = new AdminMemberCriteriaDTO();
+        Criteria criteria = new Criteria(page, memberDAO.countMembers(keyword));
+
+        List<UserMemberDTO> members = memberDAO.selectMembers(criteria, keyword);
+
+        criteria.setHasMore(members.size() > criteria.getRowCount());
+        criteria.setHasPreviousPage(page > 1);
+        criteria.setHasNextPage(page < criteria.getRealEnd());
+
+        criteria.setHasMore(members.size() == criteria.getRowCount() + 1);
+//        10개 가져왔으면, 마지막 1개 삭제
+        if(criteria.isHasMore()){
+            members.remove(members.size() - 1);
+        }
+
+        adminMemberCriteriaDTO.setUserMemberDTOList(members);
+        adminMemberCriteriaDTO.setCriteria(criteria);
+        adminMemberCriteriaDTO.setTotal(memberDAO.countMembers(keyword));
+
+
+        return adminMemberCriteriaDTO;
     }
 
 //    회원 아이디로 조회
     @Override
+    @Cacheable(value = "member", key="'member_' + #memberId")
     public Optional<UserMemberDTO> findMembersByMemberId(Long memberId) {
         return memberDAO.selectMember(memberId)
                 .map(userMemberDTO -> {

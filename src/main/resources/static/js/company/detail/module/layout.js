@@ -17,7 +17,7 @@ const companyNoticeLayout = (() => {
             experienceNotice.experiences.forEach((experience) => {
                 html += `
                     <div class="card-item">
-                        <a href="" class="card-link">
+                        <a href="/experience/list" class="card-link">
                             <div class="card-content">
                                 <p class="card-title">${experience.experienceNoticeTitle}</p>
                                 <p class="card-desc">${experience.experienceNoticeSubtitle}</p>
@@ -45,7 +45,7 @@ const companyNoticeLayout = (() => {
             internNotice.interns.forEach((intern) => {
                 html += `
                     <div class="card-item">
-                        <a href="" class="card-link">
+                        <a href="/intern/list" class="card-link">
                             <div class="card-content">
                                 <p class="card-title">${intern.internNoticeTitle}</p>
                                 <p class="card-desc">${intern.internNoticeSubTitle}</p>

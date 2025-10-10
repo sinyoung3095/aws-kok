@@ -165,7 +165,7 @@
                             <p class="content-title">인기 있는 기업</p>
                             <ul class="content-list">
                                 <li class="content-item" th:each="company : ${popularCompanies}">
-                                    <a th:href="@{/company/detail/{id}(id=${company.userId})}" class="content-link">
+                                    <a th:href="@{/company/{id}(id=${company.userId})}" class="content-link">
                                         <div class="content-img-thumb">
                                             <img th:src="${company.companyProfileFile != null ? company.companyProfileFile : '/images/experience/img_default.png'}" alt="">
                                         </div>
