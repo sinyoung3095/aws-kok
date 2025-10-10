@@ -7,7 +7,7 @@ const layout = (() => {
 
         countAmount.innerText = result.userMemberDTOList.length;
 
-        if (result.userMemberDTOList !== null) {
+        if (result.userMemberDTOList !== null && result.userMemberDTOList.length > 0) {
 
             result.userMemberDTOList.forEach((userMemberDTO) => {
                 text += `
@@ -45,7 +45,9 @@ const layout = (() => {
             noticeListContainer.innerHTML = text;
 
         } else {
-        text = `<tr> 결과가 없습니다.</tr>`;
+            text = `<tr class="no-data">
+                    <td colspan="6">결과가 없습니다.</td>
+                </tr>`;
 
 
         noticeListContainer.innerHTML = text;
@@ -103,7 +105,7 @@ const layout = (() => {
         let internsCount = 0;
         let text = ``;
 
-        if (result.requestExperiences) {
+        if (result.requestExperiences && result.requestExperiences.length > 0) {
             result.requestExperiences.forEach((experiences) => {
                 let status = ``;
                 experiencesCount++;
@@ -130,9 +132,17 @@ const layout = (() => {
                     </tr>
                 `
             })
+        } else {
+            experiencesText += `
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                `
         }
 
-        if (result.requestInterns) {
+        if (result.requestInterns && result.requestInterns.length > 0) {
             result.requestInterns.forEach((requestIntern) => {
                 let status = ``;
                 internsCount++;
@@ -158,9 +168,17 @@ const layout = (() => {
                     </tr>
                 `
             })
+        } else {
+            internsText += `
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                `
         }
 
-        if (result.posts) {
+        if (result.posts && result.posts.length > 0) {
             result.posts.forEach((post) => {
                 let status = ``;
 
@@ -179,7 +197,16 @@ const layout = (() => {
                     </tr>
                 `
             })
+        } else {
+            postsText += `
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                `
         }
+
 
 
 
