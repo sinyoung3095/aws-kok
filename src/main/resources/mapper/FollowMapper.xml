@@ -39,4 +39,11 @@
         where company_id = #{companyId}
         and follow_status = 'active'
     </select>
+
+    <select id="selectFollowingCountByMemberId" resultType="int">
+        select count(*)
+        from tbl_follow
+        where member_id = #{memberId}
+        and follow_status = 'active'
+    </select>
 </mapper>
