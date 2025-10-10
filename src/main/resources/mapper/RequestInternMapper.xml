@@ -11,4 +11,14 @@
                     on ino.company_id = c.user_id
         where member_id = #{id}
     </select>
+<!--  인턴 지원 내역 조회  -->
+    <select id="selectRequestInternByUserId">
+        select c.company_name, ino.intern_notice_title, ri.request_intern_status ,ri.created_datetime
+        from tbl_request_intern ri
+                 join tbl_intern_notice ino
+                      on ri.intern_notice_id = ino.id
+                 join tbl_company c
+                      on ino.company_id = c.user_id
+        where ri.member_id = #{id}
+    </select>
 </mapper>

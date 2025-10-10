@@ -22,7 +22,7 @@ values (1, 1, 1);
 alter table tbl_request_intern drop evaluation_id;
 
 insert into tbl_request_intern (member_id, intern_notice_id, member_alarm_setting_id)
-values (6, 1, 1);
+values (2, 2, 1);
 
 select * from tbl_member;
 select * from tbl_user;
