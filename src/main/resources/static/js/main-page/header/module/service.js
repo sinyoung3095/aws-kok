@@ -30,10 +30,6 @@ const service = (()=>{
             return requestDTO;
         }
 
-<<<<<<< HEAD
 
-    return {logout:logout,getRequestExperience:getRequestExperience}
-=======
     return {logout:logout,getRequestExperience:getRequestExperience,getRequestIntern:getRequestIntern}
->>>>>>> main-page
 })();

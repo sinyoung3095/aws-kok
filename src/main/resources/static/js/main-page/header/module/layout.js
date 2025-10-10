@@ -3,19 +3,6 @@ const layout = (() => {
         console.log(requestDTO)
         const experienceWarp = document.getElementById("experienceWarp");
         let text = '';
-<<<<<<< HEAD
-        requestDTO.forEach((requestDTO) => {
-            if (requestDTO.RequestStatus === 'await') {
-                text += `<div className="history-modal-main-section" data-id="${requestDTO.id}">
-                            <div className="history-modal-main-company-wrap">
-                                <!-- 기업 프로필 이미지 -->
-                                <img alt="image" width="32" height="32" srcSet="" src="/images/main-page/image.png"
-                                     style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;"/>
-                                <div className="history-modal-main-section-info">
-                                    <span className="history-modal-main-company-name" th:text="${requestDTO.companyName}"></span>
-                                    <span className="history-modal-main-announce-title" th:text="${requestDTO.experienceNoticeTitle}"></span>
-                                    <p className="history-modal-main-apply-date">지원일: </p><p className="history-modal-main-apply-date" th:text="${requestDTO.createdDateTime}"></p>
-=======
         requestDTO.forEach((request) => {
             if (request.requestExperienceStatus === 'await') {
                 text += `<div class="history-modal-main-section" data-id="${request.id}">
@@ -27,7 +14,6 @@ const layout = (() => {
                                     <span class="history-modal-main-company-name">${request.companyName}</span>
                                     <span class="history-modal-main-announce-title">${request.experienceNoticeTitle}</span>
                                     <p class="history-modal-main-apply-date">지원일: </p><p class="history-modal-main-apply-date">${request.createdDateTime.split(" ")[0]}</p>
->>>>>>> main-page
                                 </div>
                                 <div class="history-modal-main-apply-status-wrap">
                                     <div class="history-modal-main-apply-status">
@@ -36,18 +22,6 @@ const layout = (() => {
                                 </div>
                             </div>
                         </div>`
-<<<<<<< HEAD
-            } else if (request.RequestStatus === 'accept') {
-                text += `<div className="history-modal-main-section data-id="${requestDTO.id}"">
-                            <div className="history-modal-main-company-wrap">
-                                <!-- 기업 프로필 이미지 -->
-                                <img alt="image" width="32" height="32" srcSet="" src="/images/main-page/image.png"
-                                     style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;"/>
-                                <div className="history-modal-main-section-info">
-                                    <span className="history-modal-main-company-name">${requestDTO.companyName}</span>
-                                    <span className="history-modal-main-announce-title">${requestDTO.experienceNoticeTitle}</span>
-                                    <p className="history-modal-main-apply-date">지원일: </p><p className="history-modal-main-apply-date">${requestDTO.createdDateTime}</p>
-=======
             } else if (request.requestExperienceStatus === 'accept') {
                 text += `<div class="history-modal-main-section data-id="${request.id}"">
                             <div class="history-modal-main-company-wrap">
@@ -58,7 +32,6 @@ const layout = (() => {
                                     <span class="history-modal-main-company-name">${request.companyName}</span>
                                     <span class="history-modal-main-announce-title">${request.experienceNoticeTitle}</span>
                                     <p class="history-modal-main-apply-date">지원일: </p><p class="history-modal-main-apply-date">${request.createdDateTime.split(" ")[0]}</p>
->>>>>>> main-page
                                 </div>
                                 <div class="history-modal-main-apply-status-wrap">
                                     <div class="history-modal-main-apply-status">
@@ -73,17 +46,10 @@ const layout = (() => {
                                 <!-- 기업 프로필 이미지 -->
                                 <img alt="image" width="32" height="32" srcSet="" src="/images/main-page/image.png"
                                      style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;"/>
-<<<<<<< HEAD
-                                <div className="history-modal-main-section-info">
-                                    <span className="history-modal-main-company-name">${requestDTO.companyName}</span>
-                                    <span className="history-modal-main-announce-title">${requestDTO.experienceNoticeTitle}</span>
-                                    <p className="history-modal-main-apply-date">지원일: </p><p className="history-modal-main-apply-date">${requestDTO.createdDateTime}</p>
-=======
                                 <div class="history-modal-main-section-info">
                                     <span class="history-modal-main-company-name">${request.companyName}</span>
                                     <span class="history-modal-main-announce-title">${request.experienceNoticeTitle}</span>
                                     <p class="history-modal-main-apply-date">지원일: </p><p class="history-modal-main-apply-date">${request.createdDateTime.split(" ")[0]}</p>
->>>>>>> main-page
                                 </div>
                                 <div class="history-modal-main-apply-status-wrap">
                                     <div class="history-modal-main-apply-status">

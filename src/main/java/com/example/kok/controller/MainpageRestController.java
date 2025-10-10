@@ -32,6 +32,7 @@ public class MainpageRestController {
 
     @GetMapping("requestExperience")
     public List<RequestExperienceDTO> findRequestExperience(@AuthenticationPrincipal CustomUserDetails customUserDetails){
+        log.info(customUserDetails.toString());
         return requestExperienceDAO.selectAllRequestByUserId(customUserDetails.getId());
     }
     @GetMapping("requestIntern")
