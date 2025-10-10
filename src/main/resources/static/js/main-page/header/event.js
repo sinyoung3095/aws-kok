@@ -103,7 +103,6 @@ if (historyBtn && historyModal) {
         if (settingHeaderModal) settingHeaderModal.style.display = "none";
 
         historyModal.style.display = "flex";
-        const id = document.getElementById("id");
         await  service.getRequestExperience(layout.showExperienceList);
     });
 }
@@ -129,7 +128,7 @@ const experienceText = experienceTab.querySelector("p");
 const employmentTab = document.querySelector(".history-modal-top-section");
 const employmentText = employmentTab.querySelector("p");
 
-experienceTab.addEventListener("click", () => {
+experienceTab.addEventListener("click", async () => {
     experienceTab.classList.add("history-modal-top-section-active");
     experienceTab.classList.remove("history-modal-top-section");
     experienceText.classList.add("history-modal-top-section-text-active");
@@ -141,9 +140,10 @@ experienceTab.addEventListener("click", () => {
     employmentText.classList.add("history-modal-top-section-text");
     employContent.style.display = "none";
     experienceContent.style.display = "flex";
+    await  service.getRequestExperience(layout.showExperienceList);
 });
 
-employmentTab.addEventListener("click", () => {
+employmentTab.addEventListener("click", async() => {
     employmentTab.classList.add("history-modal-top-section-active");
     employmentTab.classList.remove("history-modal-top-section");
     employmentText.classList.add("history-modal-top-section-text-active");
@@ -155,6 +155,7 @@ employmentTab.addEventListener("click", () => {
     experienceText.classList.add("history-modal-top-section-text");
     employContent.style.display = "flex";
     experienceContent.style.display = "none";
+    await service.getRequestIntern(layout.showInternList);
 });
 
 // 지원내역 상세 모달

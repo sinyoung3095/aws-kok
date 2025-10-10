@@ -25,8 +25,6 @@ public class CustomUserDetails implements UserDetails {
     private String snsEmail;
     private UserRole userRole;
     private Status userStatus;
-    private String jobName;
-    private String memberProfile;
 
     public CustomUserDetails(UserDTO userDTO){
         log.info("CustomUserDetails:{}",userDTO.toString());
@@ -38,11 +36,6 @@ public class CustomUserDetails implements UserDetails {
         this.snsEmail=userDTO.getSnsEmail();
         this.userRole=userDTO.getUserRole();
         this.userStatus=userDTO.getUserStatus();
-    }
-
-    public CustomUserDetails(MemberDTO memberDTO){
-        this.jobName = memberDTO.getJobName();
-        this.memberProfile = memberDTO.getMemberProfileUrl();
     }
 
     @Override

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/font/font.css">
     <link rel="stylesheet" href="/css/main-page/login-header.css">
-    <link rel="stylesheet" href="/css/experience/list.css">
+<!--    <link rel="stylesheet" href="/css/experience/list.css">-->
     <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
 </head>
 <body>
@@ -275,7 +275,7 @@
                             </div>
                         </div>
                         <!-- 게시글 -->
-                        <div class="post-1 active">                    
+                        <div class="post-1 active" id="my-posts-wrap">
                             <div class="post-2">
                                 <!-- 게시물이 없을 때 -->
                                 <div class="post-3">                        
@@ -346,13 +346,13 @@
                                                     <div class="file-9">
                                                         <!-- 이미지들 -->
                                                         <div class="file-10">
-                                                            <img class="img" alt="첨부 이미지 1" draggable="false" loading="eager" width="0" height="0" decoding="async" data-nimg="1" class="bd_1px_solid bd-c_strokes.surface.standard bdr_8px" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="/images/mypage/IMG_4127_2025_09_11T05_25_47_988Z.webp" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
+                                                            <img class="img" alt="첨부 이미지 1" draggable="false" src="/images/mypage/post-image-1.png" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
                                                         </div>
                                                         <div class="file-10">
-                                                            <img class="img" alt="첨부 이미지 1" draggable="false" loading="eager" width="0" height="0" decoding="async" data-nimg="1" class="bd_1px_solid bd-c_strokes.surface.standard bdr_8px" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="/images/mypage/2.webp" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
+                                                            <img class="img" alt="첨부 이미지 1" draggable="false" src="/images/mypage/post-image-2.png" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
                                                         </div>
                                                         <div class="file-10">
-                                                            <img class="img" alt="첨부 이미지 1" draggable="false" loading="eager" width="0" height="0" decoding="async" data-nimg="1" class="bd_1px_solid bd-c_strokes.surface.standard bdr_8px" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="/images/mypage/3.webp" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
+                                                            <img class="img" alt="첨부 이미지 1" draggable="false" src="/images/mypage/post-image-3.png" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -499,7 +499,7 @@
                             </div>
                         </div>
                         <!-- 저장한 공고 -->
-                        <div class="post-1">
+                        <div class="post-1" id="saved-list-wrap">
                             <div class="post-2" style="align-items: start;">
                                 <div style="display: flex;">
                                     <div class="content-14 list" style="width: 65px; margin-left: 10px; margin-top: 10px; display: inline-block">
@@ -746,7 +746,7 @@
                             </div>
                         </div>
                         <!-- 지원내역 -->
-                        <div class="post-1">
+                        <div class="post-1" id="request-list-wrap">
                             <div class="post-2" style="align-items: start;">
                                 <div id="experience" style="display: contents;">
                                     <!-- 지원 내역이 없을 때 -->
@@ -788,53 +788,7 @@
                                                 </tr>
                                             </thead>
                                             <!-- 지원 내역들 -->
-                                            <tbody class="">
-                                                <tr>
-                                                    <td class="payment-3">
-                                                        <p>코리아IT</p>
-                                                    </td>
-                                                    <td class="payment-3">
-                                                        <p>SW 개발 백엔드 체험</p>
-                                                    </td>  
-                                                    <td class="payment-3">
-                                                        <p>서류 접수</p>
-                                                    </td>  
-                                                    <td class="payment-3">
-                                                        <div>
-                                                            <button class="post-23 retract-triger">
-                                                                <span class="ai_center d_flex jc_center us_none white-space_nowrap p_0px_3px textStyle_Body.BodyS_Bold">지원 취소</span>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="payment-3">
-                                                        <p>코리아IT</p>
-                                                    </td>
-                                                    <td class="payment-3">
-                                                        <p>SW 개발 백엔드 체험</p>
-                                                    </td>  
-                                                    <td class="payment-3">
-                                                        <p>합격</p>
-                                                    </td>  
-                                                    <td class="payment-3">
-                                                        <p>-</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="payment-3">
-                                                        <p>코리아IT</p>
-                                                    </td>
-                                                    <td class="payment-3">
-                                                        <p>SW 개발 백엔드 체험</p>
-                                                    </td>  
-                                                    <td class="payment-3">
-                                                        <p>불합격</p>
-                                                    </td>  
-                                                    <td class="payment-3">
-                                                        <p>환불</p>
-                                                    </td>
-                                                </tr>
+                                            <tbody class="exp-request-container">
                                             </tbody>
                                         </table>
                                     </div>
@@ -865,7 +819,7 @@
                             </div>
                         </div>
                         <!-- 결제내역 -->
-                        <div class="post-1">
+                        <div class="post-1" id="payment-list-wrap">
                             <div class="post-2" style="align-items: start;">
                                 <div id="experience" style="display: contents;">
                                     <!-- 결제 내역이 없을 때 -->
@@ -1275,13 +1229,13 @@
                                         <div class="file-9">
                                             <!-- 이미지들 -->
                                             <div class="file-10">
-                                                <img class="img" alt="첨부 이미지 1" draggable="false" loading="eager" width="0" height="0" decoding="async" data-nimg="1" class="bd_1px_solid bd-c_strokes.surface.standard bdr_8px" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="/images/mypage/IMG_4127_2025_09_11T05_25_47_988Z.webp" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
+                                                <img class="img" alt="첨부 이미지 1" src="/images/mypage/post-image-1.png" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
                                             </div>
                                             <div class="file-10">
-                                                <img class="img" alt="첨부 이미지 1" draggable="false" loading="eager" width="0" height="0" decoding="async" data-nimg="1" class="bd_1px_solid bd-c_strokes.surface.standard bdr_8px" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="/images/mypage/2.webp" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
+                                                <img class="img" alt="첨부 이미지 1" src="/images/mypage/post-image-2.png" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
                                             </div>
                                             <div class="file-10">
-                                                <img class="img" alt="첨부 이미지 1" draggable="false" loading="eager" width="0" height="0" decoding="async" data-nimg="1" class="bd_1px_solid bd-c_strokes.surface.standard bdr_8px" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="/images/mypage/3.webp" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
+                                                <img class="img" alt="첨부 이미지 1" src="/images/mypage/post-image-3.png" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
                                             </div>
                                         </div>
                                     </div>
@@ -2770,6 +2724,8 @@
 
     </div>
 </body>
-<script src="/js/experience/event.js"></script>
+<!--<script src="/js/experience/event.js"></script>-->
+<script src="/js/mypage/module/service.js"></script>
+<script src="/js/mypage/module/layout.js"></script>
 <script src="/js/mypage/event.js"></script>
 </html>

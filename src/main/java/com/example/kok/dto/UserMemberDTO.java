@@ -29,4 +29,6 @@ public class UserMemberDTO {
     private List<RequestExperienceDTO> requestExperiences;
     private List<PostDTO> posts;
     private List<RequestInternDTO> requestInterns;
+    private int postsCount;
+    private int followingCount;
 }

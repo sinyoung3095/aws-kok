@@ -26,4 +26,21 @@
         order by r.created_datetime desc
         limit 3
     </select>
+    <!--  지원 내역 목록 조회  -->
+    <select id="selectRequestByUserId">
+        select r.id,
+               c.company_name,
+               n.experience_notice_title,
+               r.request_experience_status,
+               r.request_experience_member_name,
+               r.request_experience_member_email,
+               r.request_experience_member_phone,
+               r.created_datetime
+        from tbl_company c
+                 join tbl_experience_notice n
+                      on c.user_id = n.company_id
+                 join tbl_request_experience r
+                      on n.id = r.experience_notice_id
+        where r.member_id = #{id};
+    </select>
 </mapper>

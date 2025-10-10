@@ -174,22 +174,22 @@
                         <div class="content-box" th:if="${user != null}">
                             <div class="profile-card">
                                 <div class="profile-avatar">
-                                    <img alt="image" draggable="false" loading="lazy" width="60" height="60" srcset="" src="/images/mypage/default.webp" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+                                    <img alt="image" width="60" height="60" srcset="" src="/images/mypage/default.webp" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
                                 </div>
                                 <div class="profile-info">
                                     <div class="profile-name">
-                                        <p class="member-name">이름</p>
+                                        <p class="member-name" th:text="${user.username}"></p>
                                     </div>
-                                    <p class="member-role">직군</p>
+                                    <p class="member-role">-</p>
                                 </div>
                                 <div class="stats-list">
                                     <div class="stat-item">
-                                        <p class="stat-value">0</p>
                                         <p class="stat-label">게시물</p>
+                                        <p class="stat-value">0</p>
                                     </div>
                                     <div class="stat-item">
-                                        <p class="stat-value">0</p>
                                         <p class="stat-label">팔로잉</p>
+                                        <p class="stat-value">0</p>
                                     </div>
                                 </div>
                             </div>
@@ -259,9 +259,6 @@
         </div>
     </div>
 </body>
-<script th:inline="javascript">
-    const user = [[${user}]];
-</script>
 <script src="/js/company/list/module/layout.js"></script>
 <script src="/js/company/list/module/service.js"></script>
 <script src="/js/company/list/event.js"></script>

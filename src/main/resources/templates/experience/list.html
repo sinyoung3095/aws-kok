@@ -8,15 +8,25 @@
     <link rel="stylesheet" href="/font/font.css">
     <link rel="stylesheet" href="/css/experience/list.css">
     <link rel="stylesheet" href="/css/main-page/side-bar.css">
+    <link rel="stylesheet" href="/css/main-page/login-side-bar.css">
+    <link rel="stylesheet" href="/css/main-page/header.css">
+    <link rel="stylesheet" href="/css/main-page/login-header.css">
     <title>체험공고 | 콕</title>
 </head>
 <body>
     <div id="main-content" class="main-content">
-        <div th:replace="~{main-page/side-bar.html::.pc}"></div>
-        <div th:replace="~{main-page/side-bar.html::.search-modal-wrap}"></div>
+        <th:block th:if="${userDTO==null}">
+            <div th:replace="~{main-page/side-bar}"></div>
+        </th:block>
+        <th:block th:if="${userDTO!=null}">
+            <div th:replace="~{main-page/login-side-bar}"></div>
+        </th:block>
         <main class="main">
-            <th:block th:if="${customUserDetails==null}">
-                <div th:replace="~{main-page/header.html::.header-wrap}"></div>
+            <th:block th:if="${userDTO==null}">
+                <div th:replace="~{main-page/header}"></div>
+            </th:block>
+            <th:block th:if="${userDTO!=null}">
+                <div th:replace="~{main-page/login-header}"></div>
             </th:block>
             <div class="content-layout">
                 <div class="search-container wide">
@@ -456,6 +466,10 @@
     const sharedCompanyId = [[${sharedCompanyId}]];
     const sharedExperienceId = [[${sharedExperienceId}]];
 </script>
+<script src="/js/main-page/side-bar/event.js"></script>
+<script src="/js/main-page/header/module/service.js"></script>
+<script src="/js/main-page/header/module/layout.js"></script>
+<script src="/js/main-page/header/event.js"></script>
 <script src="/js/experience/module/service.js"></script>
 <script src="/js/experience/module/layout.js"></script>
 <script src="/js/experience/event.js"></script>

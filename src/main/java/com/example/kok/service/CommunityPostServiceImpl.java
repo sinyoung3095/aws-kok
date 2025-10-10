@@ -112,6 +112,10 @@ public class CommunityPostServiceImpl implements CommunityPostService {
     public void write(PostDTO postDTO, List<MultipartFile> multipartFiles) {
         communityPostDAO.save(postDTO);
 
+        if (multipartFiles == null || multipartFiles.isEmpty()) {
+            return;
+        }
+
         multipartFiles.forEach((multipartFile) -> {
             if(multipartFile.isEmpty()) return;
 
@@ -198,6 +202,10 @@ public class CommunityPostServiceImpl implements CommunityPostService {
         return postDTO;
     }
 
+    @Override
+    public int getPostsCountByMemberId(Long memberId) {
+        return communityPostDAO.findPostsCountByMemberId(memberId);
+    }
 
     public String getPath() {
         LocalDate today = LocalDate.now();

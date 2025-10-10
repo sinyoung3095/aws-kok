@@ -28,6 +28,8 @@ public class MemberServiceImpl implements MemberService {
     private final RequestInternDAO requestInternDAO;
     private final CommunityPostDAO  communityPostDAO;
     private final UserMemberDTO userMemberDTO;
+    private final MemberDTO memberDTO;
+    private final FollowDAO followDAO;
 
     @Override
     public void joinMember(MemberVO memberVO) {
@@ -105,11 +107,30 @@ public class MemberServiceImpl implements MemberService {
                             requestInternDAO.selectAllInternById(memberId);
                     List<PostDTO> posts =
                             communityPostDAO.findPostById(memberId);
+
+                    int postsCount = communityPostDAO.findPostsCountByMemberId(memberId);
+                    userMemberDTO.setPostsCount(postsCount);
+
+                    int followingCount = followDAO.selectFollowingCountByMemberId(memberId);
+                    userMemberDTO.setFollowingCount(followingCount);
+
                     userMemberDTO.setRequestExperiences(requestExperiences);
                     userMemberDTO.setRequestInterns(requestInterns);
                     userMemberDTO.setPosts(posts);
                     return userMemberDTO;
                 });
+    }
+
+    @Override
+    public List<RequestExperienceDTO> findRequestExperienceByMemberId(Long memberId) {
+        List<RequestExperienceDTO> experiences=memberDAO.findExperienceByMemberId(memberId);
+        return experiences;
+    }
+
+    @Override
+    public List<RequestInternDTO> findRequestInternByMemberId(Long memberId) {
+        List<RequestInternDTO> requestInterns=memberDAO.findInternByMemberId(memberId);
+        return requestInterns;
     }
 
     public String getPath() {

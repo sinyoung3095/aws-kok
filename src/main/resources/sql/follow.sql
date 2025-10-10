@@ -6,7 +6,8 @@ CREATE TABLE tbl_follow (
     constraint fk_follow_member foreign key(member_id)
         references tbl_member(user_id),
     constraint fk_follow_company foreign key(company_id)
-        references tbl_company(user_id)
+        references tbl_company(user_id),
+    constraint uq_follow_member_company unique (member_id, company_id)
 );
 
 select * from tbl_follow;
@@ -18,3 +19,5 @@ alter table tbl_follow
 
 insert into tbl_follow (member_id, company_id)
 values (5, 18);
+
+select * from tbl_follow where member_id = 12;

@@ -32,4 +32,9 @@ public class FollowServiceImpl implements FollowService {
     public int countFollowers(Long companyId) {
         return followDAO.countFollowersByCompanyId(companyId);
     }
+
+    @Override
+    public int countFollowing(Long memberId) {
+        return followDAO.selectFollowingCountByMemberId(memberId);
+    }
 }
