@@ -58,8 +58,8 @@ public class CompanyDAO {
     }
 
 //    기업 수
-    public int findTotalCount(CompanySearch search) {
-        return companyMapper.selectCompanyCount(search);
+    public int findTotalCountByUserId(CompanySearch search) {
+        return companyMapper.selectCompanyCountByUserId(search);
     }
 
 //    인기 기업 목록

@@ -31,7 +31,7 @@ public interface CompanyMapper {
     public List<CompanyDTO> selectCompanyAll(@Param("criteria") Criteria criteria, @Param("search") CompanySearch search, @Param("userId") Long userId);
 
 //    기업 수
-    public int selectCompanyCount(@Param("search") CompanySearch search);
+    public int selectCompanyCountByUserId(@Param("search") CompanySearch search);
 
 //    인기 기업 목록
     public List<CompanyDTO> selectCompaniesByFollowerCount();

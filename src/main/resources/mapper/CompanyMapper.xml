@@ -98,7 +98,7 @@
     </select>
 
 <!-- 기업 수 -->
-    <select id="selectCompanyCount" resultType="int">
+    <select id="selectCompanyCountByUserId" resultType="int">
         select count(distinct c.user_id)
         from tbl_company c
         join tbl_user u on c.user_id = u.id
