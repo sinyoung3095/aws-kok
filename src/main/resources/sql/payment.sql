@@ -25,3 +25,37 @@ ALTER TABLE tbl_payment
     ADD COLUMN payment_paid_datetime timestamp;
 
 select * from tbl_payment;
+
+select * from tbl_user;
+select * from tbl_member;
+select * from tbl_company;
+select * from tbl_payment_user order by id desc;
+select * from tbl_payment order by id desc;
+select * from tbl_experience_notice order by id desc;
+select * from tbl_request_experience order by id desc;
+
+insert into tbl_payment (payment_price, payment_paid_datetime, request_experience_id, user_id)
+values ('5000', '2025-10-09 15:12:47.797648', '50', '9');
+
+insert into tbl_payment_user (payment_id, user_id, request_experience_id)
+values ('38', '8', '30'),
+       ('39', '9', '31'),
+       ('40', '10', '32'),
+       ('41', '17', '33'),
+       ('42', '18', '34'),
+       ('43', '6', '35'),
+       ('44', '7', '36'),
+       ('45', '8', '37'),
+       ('46', '9', '38'),
+       ('47', '10', '39'),
+       ('48', '17', '40'),
+       ('49', '18', '41'),
+       ('50', '19', '42'),
+       ('51', '20', '43'),
+       ('52', '21', '44'),
+       ('53', '22', '45'),
+       ('54', '6', '46'),
+       ('55', '6', '47'),
+       ('56', '7', '48'),
+       ('57', '8', '49'),
+       ('58', '9', '50');

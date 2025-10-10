@@ -9,7 +9,7 @@ create table tbl_member (
         references tbl_user(id)
 );
 
-select * from tbl_member;
+select * from tbl_user;
 select * from tbl_report;
 select * from tbl_post_like;
 delete from tbl_post_like;
