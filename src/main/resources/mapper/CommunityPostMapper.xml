@@ -85,5 +85,7 @@
         select id, post_content, post_status, created_datetime
         from tbl_post
         where member_id = #{id}
+        order by created_datetime desc
+            limit 3
     </select>
 </mapper>
