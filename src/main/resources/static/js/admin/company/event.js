@@ -27,45 +27,45 @@ sideMenuButtons.forEach((menu) => {
     });
 });
 
-// 상세 모달
-actionButtons.forEach((actionButton) => {
-    actionButton.addEventListener("click", () => {
-        modal.style.display = "block";
-        setTimeout(() => {
-            modal.classList.add("show");
-            modal.style.background = "rgba(0,0,0,0.5)";
-            document.body.classList.add("modal-open");
-        }, 100);
-    });
-});
-
-closeButtons.forEach((closeButton) => {
-    closeButton.addEventListener("click", () => {
-        modal.classList.remove("show");
-        document.body.classList.remove("modal-open");
-        setTimeout(() => {
-            modal.style.display = "none";
-        }, 100);
-    });
-});
-
-modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        modal.classList.remove("show");
-        document.body.classList.remove("modal-open");
-        setTimeout(() => {
-            modal.style.display = "none";
-        }, 100);
-    }
-});
-
-closeFooterButton.addEventListener("click", () => {
-    modal.classList.remove("show");
-    document.body.classList.remove("modal-open");
-    setTimeout(() => {
-        modal.style.display = "none";
-    }, 100);
-});
+// // 상세 모달
+// actionButtons.forEach((actionButton) => {
+//     actionButton.addEventListener("click", () => {
+//         modal.style.display = "block";
+//         setTimeout(() => {
+//             modal.classList.add("show");
+//             modal.style.background = "rgba(0,0,0,0.5)";
+//             document.body.classList.add("modal-open");
+//         }, 100);
+//     });
+// });
+//
+// closeButtons.forEach((closeButton) => {
+//     closeButton.addEventListener("click", () => {
+//         modal.classList.remove("show");
+//         document.body.classList.remove("modal-open");
+//         setTimeout(() => {
+//             modal.style.display = "none";
+//         }, 100);
+//     });
+// });
+//
+// modal.addEventListener("click", (e) => {
+//     if (e.target === modal) {
+//         modal.classList.remove("show");
+//         document.body.classList.remove("modal-open");
+//         setTimeout(() => {
+//             modal.style.display = "none";
+//         }, 100);
+//     }
+// });
+//
+// closeFooterButton.addEventListener("click", () => {
+//     modal.classList.remove("show");
+//     document.body.classList.remove("modal-open");
+//     setTimeout(() => {
+//         modal.style.display = "none";
+//     }, 100);
+// });
 
 // 관리자 이메일 토글
 userMenuWrapper.addEventListener("click", () => {
@@ -89,3 +89,92 @@ pageItemNums.forEach((pageItemNum) => {
         pageItemNum.parentElement.classList.add("active");
     });
 });
+
+// 이벤트 위임
+
+
+
+document.addEventListener("DOMContentLoaded", async() => {
+    const page = 1;
+    await companyService.companyList(page, layout.showList);
+
+    const modal = document.querySelector(".member-modal.modal");
+
+    document.addEventListener("click", async (e) => {
+        // 상세 모달 열기 (이벤트 위임)
+        const target = e.target.closest(".action-btn, .mdi-chevron-right");
+        if (!target) {return}
+
+        const id = target.dataset.id;
+        await companyService.companyDetail(id, layout.showDetail);
+
+        modal.style.display = "block";
+        setTimeout(() => {
+            modal.classList.add("show");
+            modal.style.background = "rgba(0,0,0,0.5)";
+            document.body.classList.add("modal-open");
+        }, 100);
+
+    });
+
+    document.addEventListener("click", async (e) => {
+        const pageButton = e.target.closest(".page-item-num");
+        if (!pageButton) return;
+
+        e.preventDefault();
+        const page = pageButton.dataset.page;
+
+        if (page) {
+            document.querySelectorAll(".page-number").forEach(li => {
+                li.classList.remove("active");
+            });
+
+            const parentLi = pageButton.closest(".page-number");
+            if (parentLi && !["이전", "다음"].includes(pageButton.textContent.trim())) {
+                parentLi.classList.add("active");
+            }
+
+            await companyService.companyList(page, layout.showList);
+        }
+    });
+
+    // 닫기 버튼 / 푸터 닫기 버튼 / 배경 클릭 → 모두 위임 처리
+    document.addEventListener("click", (e) => {
+        // 닫기 버튼(X)
+        if (e.target.closest(".close")) {
+            closeModal();
+            return;
+        }
+
+        // 푸터 닫기 버튼
+        if (e.target.closest(".btn-close.btn-outline-filter")) {
+            closeModal();
+            return;
+        }
+
+        // 모달 배경 클릭 시
+        if (e.target.classList.contains("member-modal") && e.target.classList.contains("modal")) {
+            closeModal();
+        }
+    });
+
+    function closeModal() {
+        modal.classList.remove("show");
+        document.body.classList.remove("modal-open");
+        setTimeout(() => {
+            modal.style.display = "none";
+        }, 100);
+    }
+});
+
+//  검색
+
+const searchBtn = document.querySelector(".btn-search");
+
+searchBtn.addEventListener("click", async (e) => {
+    const keyword = document.querySelector(".form-control").value.trim();
+    const page = 1;
+
+    await companyService.companyList(page, layout.showList, keyword);
+})
+

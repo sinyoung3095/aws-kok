@@ -14,13 +14,22 @@ import java.util.List;
 public class InternNoticeDAO {
     private final InternNoticeMapper internNoticeMapper;
 
-//    기업별 인턴 공고 목록
+    //    기업별 인턴 공고 목록
     public List<InternNoticeDTO> findAllByCompanyId(Long companyId, CompanyNoticeCriteria criteria, Search search) {
         return internNoticeMapper.selectInternNoticeByCompanyId(companyId, criteria, search);
     }
 
-//    기업별 인턴 공고 갯수
+    //    기업별 인턴 공고 갯수
     public int findCountByCompanyId(Long companyId, Search search) {
         return internNoticeMapper.selectInternNoticeCountByCompanyId(companyId, search);
     }
+
+    //    기업회원 별 인턴 공고
+    public List<InternNoticeDTO> findInternNotices(Long userId) {
+        return internNoticeMapper.selectListById(userId);
+
+    }
+
 }
+
+

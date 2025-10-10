@@ -32,4 +32,8 @@ public interface ExperienceNoticeMapper {
 
 //    기업별 체험 공고 갯수
     public int selectExperienceNoticeCountByCompanyId(@Param("companyId") Long companyId, @Param("search") Search search);
+
+//    기업별 체험 공고 조회
+    public List<ExperienceNoticeDTO> selectListById(Long userId);
+
 }
