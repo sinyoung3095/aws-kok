@@ -13,6 +13,5 @@
                    #{advertisementId}
                )
     </insert>
-    
 </mapper>
 
