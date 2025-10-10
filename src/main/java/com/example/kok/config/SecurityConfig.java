@@ -32,25 +32,25 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/api/auth/**",
-                                "/member/join",
-                                "/member/login",
-                                "/admin/login",
-                                "/css/**",
-                                "/js/**",
-                                "/fonts/**",
-                                "/images/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole(UserRole.ADMIN.name())
-                        .requestMatchers("/enterprise-console/**").hasRole(UserRole.COMPANY.name())
-                        .anyRequest().authenticated()
-                )
+//                .csrf(AbstractHttpConfigurer::disable)
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 //                .authorizeHttpRequests(auth -> auth
-//                        .anyRequest().permitAll()   // 임시 모든 요청 허용
+//                        .requestMatchers(
+//                                "/api/auth/**",
+//                                "/member/join",
+//                                "/member/login",
+//                                "/admin/login",
+//                                "/css/**",
+//                                "/js/**",
+//                                "/fonts/**",
+//                                "/images/**").permitAll()
+//                        .requestMatchers("/admin/**").hasRole(UserRole.ADMIN.name())
+//                        .requestMatchers("/enterprise-console/**").hasRole(UserRole.COMPANY.name())
+//                        .anyRequest().authenticated()
 //                )
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().permitAll()   // 임시 모든 요청 허용
+                )
                 .exceptionHandling(exceptions ->
                         exceptions.authenticationEntryPoint(jwtAuthenticationHandler)
                                 .accessDeniedHandler(jwtAuthorizationHandler)

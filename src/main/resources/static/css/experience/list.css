@@ -562,7 +562,7 @@
 .ad-banner {
     position: relative;
     max-width: 287px;
-    max-height: 143px;
+    /*max-height: 143px;*/
     background-color: #eee;
     border-radius: 12px;
     overflow: hidden;
