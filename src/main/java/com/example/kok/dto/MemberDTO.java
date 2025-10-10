@@ -18,4 +18,5 @@ public class MemberDTO {
     private String createdDateTime;
     private String updatedDateTime;
     private String jobName;
+    private int postsCount;
 }

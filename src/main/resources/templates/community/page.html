@@ -41,19 +41,19 @@
                     <div class="etc-1" th:if="${member != null}">
                         <div class="etc-2">
                             <div class="etc-3">
-                                <img alt="image" width="60" height="60" src="/images/mypage/default.webp" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+                                <img alt="" width="60" height="60" src="/images/mypage/default.webp" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
                             </div>
                             <div class="etc-4">
                                 <div class="etc-5">
-                                    <p class="etc-6">이름</p>
+                                    <p class="etc-6" th:text="${member.username}"></p>
                                 </div>
-                                <p class="etc-7">직군</p>
+                                <p class="etc-7" th:text="${member.jobName != null ? member.jobName : '-'}"></p>
                             </div>
                         </div>
                         <div class="etc-8">
                             <div class="etc-9">
                                 <p class="etc-10">게시물</p>
-                                <p class="etc-11">0</p>
+                                <p class="etc-11" th:text="${member.postsCount}"></p>
                             </div>
                             <div class="etc-9">
                                 <p class="etc-10">팔로잉</p>
@@ -97,7 +97,7 @@
                                 <div class="post-8" style="border-bottom: 0;">
                                     <div class="post-9">
                                         <div>
-                                            <img alt="image" width="40" height="40"
+                                            <img alt="" width="40" height="40"
                                                  th:src="${notice.filePath}"
                                                  style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
                                         </div>
@@ -243,13 +243,13 @@
                         <div class="popup-header profile">
                             <div class="profile-header">
                                 <div class="profile-avatar">
-                                    <img alt="image" src="/images/mypage/default.webp">
+                                    <img alt="" src="/images/mypage/default.webp">
                                 </div>
                                 <div class="profile-info">
                                     <div class="profile-name">
-                                        <p class="member-name">이름</p>
+                                        <p class="member-name" th:text="${member.username}"></p>
                                     </div>
-                                    <p class="profile-category">직군</p>
+                                    <p class="profile-category" th:text="${member.jobName != null ? member.jobName : '-'}"></p>
                                 </div>
 
                                 <div class="popup-close-box">
@@ -328,9 +328,6 @@
     </main>
 </div>
 </body>
-<script th:inline="javascript">
-    const member = [[${member}]];
-</script>
 <script src="/js/community/post/module/layout.js"></script>
 <script src="/js/community/post/module/service.js"></script>
 <script src="/js/community/comment/module/layout.js"></script>

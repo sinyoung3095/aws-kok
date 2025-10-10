@@ -28,6 +28,7 @@ public class MemberServiceImpl implements MemberService {
     private final RequestInternDAO requestInternDAO;
     private final CommunityPostDAO  communityPostDAO;
     private final UserMemberDTO userMemberDTO;
+    private final MemberDTO memberDTO;
 
     @Override
     public void joinMember(MemberVO memberVO) {
@@ -105,6 +106,10 @@ public class MemberServiceImpl implements MemberService {
                             requestInternDAO.selectAllInternById(memberId);
                     List<PostDTO> posts =
                             communityPostDAO.findPostById(memberId);
+
+                    int postsCount = communityPostDAO.findPostsCountByMemberId(memberId);
+                    memberDTO.setPostsCount(postsCount);
+
                     userMemberDTO.setRequestExperiences(requestExperiences);
                     userMemberDTO.setRequestInterns(requestInterns);
                     userMemberDTO.setPosts(posts);

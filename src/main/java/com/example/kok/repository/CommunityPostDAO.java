@@ -58,4 +58,9 @@ public class CommunityPostDAO {
     public List<PostDTO> findPostById(Long id) {
         return communityPostMapper.selectPostById(id);
     };
+
+//    회원 별 게시글 갯수
+    public int findPostsCountByMemberId(Long memberId) {
+        return communityPostMapper.selectPostsCountByMemberId(memberId);
+    }
 }
