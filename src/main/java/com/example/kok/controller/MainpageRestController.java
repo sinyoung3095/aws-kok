@@ -32,15 +32,11 @@ public class MainpageRestController {
 
     @GetMapping("requestExperience")
     public List<RequestExperienceDTO> findRequestExperience(@AuthenticationPrincipal CustomUserDetails customUserDetails){
-<<<<<<< HEAD
         log.info(customUserDetails.toString());
-        return requestExperienceDAO.selectAllRequestById(customUserDetails.getId());
-=======
         return requestExperienceDAO.selectAllRequestByUserId(customUserDetails.getId());
     }
     @GetMapping("requestIntern")
     public List<RequestInternDTO> findRequestIntern(@AuthenticationPrincipal CustomUserDetails customUserDetails){
         return requestInternDAO.selectAllInternByUserId(customUserDetails.getId());
->>>>>>> main-page
     }
 }
