@@ -40,8 +40,6 @@ public class AdminReportServiceImpl implements AdminReportService {
         criteria.setHasPreviousPage(page > 1);
         criteria.setHasNextPage(page < criteria.getRealEnd());
 
-        log.info("이전 페이지 버튼: {}", criteria.isHasPreviousPage());
-        log.info("다음 페이지 버튼: {}", criteria.isHasNextPage());
 //        11개 가져왔으면, 마지막 1개 삭제
         if(criteria.isHasMore()){
             reports.remove(reports.size()-1);
@@ -73,11 +71,11 @@ public class AdminReportServiceImpl implements AdminReportService {
 //    신고 게시글 삭제
     @Override
     public void deleteReportPost(Long id) {
-        adminReportDAO.deleteReport(id);
-
         List<PostFileDTO> postFiles = communityPostFileDAO.findAllByPostId(id);
         postFiles.forEach((postFile) -> {
             s3Service.deleteFile(postFile.getPostFilePath());
         });
+
+        adminReportDAO.deleteReport(id);
     }
 }

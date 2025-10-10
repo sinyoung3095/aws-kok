@@ -11,7 +11,7 @@ public interface AdminAdvertisementService {
 
 //    광고 상세
     public AdminAdvertisementDTO advertisementDetail(Long id);
-    public void setPreSignedUrl(AdminAdvertisementDTO advertisementDTO);
+//    public void setPreSignedUrl(AdminAdvertisementDTO advertisementDTO);
 
 //    광고 승인
     public void accept(Long id);

@@ -31,8 +31,6 @@ public class AdminEmployServiceImpl implements AdminEmployService {
         listCriteria.setHasPreviousPage(page > 1);
         listCriteria.setHasNextPage(page < listCriteria.getRealEnd());
 
-        log.info("이전 페이지 버튼: {}", listCriteria.isHasPreviousPage());
-        log.info("다음 페이지 버튼: {}", listCriteria.isHasNextPage());
 //        11개 가져왔으면, 마지막 1개 삭제
         if(listCriteria.isHasMore()){
             internNotices.remove(internNotices.size()-1);
@@ -59,9 +57,6 @@ public class AdminEmployServiceImpl implements AdminEmployService {
         requestCriteria.setHasPreviousPage(page > 1);
         requestCriteria.setHasNextPage(5 < internRequests.size());
 
-        log.info("이전 페이지 버튼: {}", requestCriteria.isHasPreviousPage());
-        log.info("다음 페이지 버튼: {}", requestCriteria.isHasNextPage());
-        log.info("신청자 내역 총 개수: {}", adminEmployDAO.countRequest(id));
 //        6개 가져왔으면, 마지막 1개 삭제
         if(requestCriteria.isHasMore()){
             internRequests.remove(internRequests.size()-1);

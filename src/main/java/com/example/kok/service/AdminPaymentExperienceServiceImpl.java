@@ -33,8 +33,6 @@ public class AdminPaymentExperienceServiceImpl implements AdminPaymentExperience
         criteria.setHasPreviousPage(page > 1);
         criteria.setHasNextPage(page < criteria.getRealEnd());
 
-        log.info("이전 페이지 버튼: {}", criteria.isHasPreviousPage());
-        log.info("다음 페이지 버튼: {}", criteria.isHasNextPage());
 //        11개 가져왔으면, 마지막 1개 삭제
         if(criteria.isHasMore()){
             paymentExperienceList.remove(paymentExperienceList.size()-1);
