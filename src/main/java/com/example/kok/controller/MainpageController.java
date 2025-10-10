@@ -37,6 +37,7 @@ public class MainpageController {
     }
     @GetMapping("login-side-bar")
     public  String goToLoginSideBar(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model){
+        model.addAttribute("userDTO", customUserDetails);
         return "main-page/login-side-bar";
     }
     @GetMapping("404-page")
