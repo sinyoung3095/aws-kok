@@ -127,7 +127,6 @@ const layout = (() => {
                 `
             })
         } else {
-            console.log("------------------")
             experiencesText += `
                     <tr>
                         <td>-</td>
