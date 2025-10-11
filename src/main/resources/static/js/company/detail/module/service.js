@@ -5,8 +5,8 @@ const followService = (() => {
             method: "POST"
         });
 
-        const data = await response.json();
-        if (data === false) {
+        const checkExistLogin = await response.json();
+        if (checkExistLogin === false) {
             alert("로그인이 필요한 서비스입니다.");
             window.location.href = "/member/login";
             return false;
