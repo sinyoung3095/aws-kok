@@ -251,7 +251,7 @@ document.body.addEventListener("click", async (e) => {
 
             popup.classList.add("active");
         } catch (err) {
-            alert("게시글을 불러올 수 없습니다.");
+            // alert("게시글을 불러올 수 없습니다.");
         }
         return;
     }
@@ -275,7 +275,7 @@ document.body.addEventListener("click", async (e) => {
             await showComments(postId);
 
         } catch (err) {
-            alert("게시글을 불러올 수 없습니다.");
+            // alert("게시글을 불러올 수 없습니다.");
         }
         return;
     }
@@ -335,6 +335,9 @@ document.body.addEventListener("click", async (e) => {
 
         if (!liked) {
             const success = await postService.postLike(postId);
+
+            if (success === null) return;
+
             if (success) {
                 likeBtn.dataset.liked = "true";
                 likeCountEl.textContent = current + 1;
@@ -414,7 +417,10 @@ document.body.addEventListener("click", async (e) => {
         }
 
         try {
-            await postService.reportPost(postId);
+            const result = await postService.reportPost(postId);
+            if (result === null)
+                return;
+
             alert("신고가 접수되었습니다.");
             reportModal.style.display = "none";
         } catch (err) {

@@ -32,9 +32,13 @@ public class CommunityPostController {
 
 //    게시글 조회
     @GetMapping("/post/{id}")
-    public ResponseEntity<PostDTO> getOne(@PathVariable("id") Long id,
-                                          @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        Long memberId = (customUserDetails != null) ? customUserDetails.getId() : null;
+    public ResponseEntity<?> getOne(@PathVariable("id") Long id,
+                                    @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        if (customUserDetails == null) {
+            return ResponseEntity.ok(false);
+        }
+
+        Long memberId = customUserDetails.getId();
         PostDTO postDTO = communityPostService.getPost(id, memberId);
         return ResponseEntity.ok(postDTO);
     }

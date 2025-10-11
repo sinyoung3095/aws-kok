@@ -20,6 +20,10 @@ public class CommunityLikeController {
     @PostMapping
     public ResponseEntity<?> postLike(@RequestBody PostLikeDTO postLikeDTO,
                                       @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        if(customUserDetails == null) {
+            return ResponseEntity.ok(false);
+        }
+
         postLikeDTO.setMemberId(customUserDetails.getId());
         communityLikeService.postLike(postLikeDTO);
         return ResponseEntity.ok(postLikeDTO);
