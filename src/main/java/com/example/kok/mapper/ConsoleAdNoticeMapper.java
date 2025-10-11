@@ -1,5 +1,6 @@
 package com.example.kok.mapper;
 
+import com.example.kok.domain.ConsoleAdNoticeVO;
 import com.example.kok.dto.ConsoleAdNoticeDTO;
 import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.util.Criteria;
@@ -31,7 +32,7 @@ public interface ConsoleAdNoticeMapper {
     public ConsoleAdNoticeDTO selectAdDetailById(@Param("id") Long id);
 
 //    공고 수정 등록
-    public void updateNotice(ConsoleAdNoticeDTO adNoticeDTO);
+    public void updateNotice(ConsoleAdNoticeVO adNoticeVO);
 
 //    공고 수정 상세
     ConsoleAdNoticeDTO selectById(@Param("id") Long id);

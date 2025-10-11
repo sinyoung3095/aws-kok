@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.ConsoleProfileFileMapper">
+    <select id="selectProfileFileByCompanyId">
+        select
+            f.id,
+            f.file_origin_name as file_origin_name,
+            f.file_name as file_name,
+            f.file_path as file_path,
+            f.file_size as file_size,
+            f.file_content_type as file_content_type,
+            f.created_datetime,
+            f.updated_datetime
+        from tbl_file f
+             join tbl_company_background_file cbf
+                  on f.id = cbf.file_id
+        where cbf.company_id = #{companyId}
+        order by f.created_datetime desc
+    </select>
+
+    <!-- 파일 등록 -->
+    <insert id="insertFile" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_file (
+            file_origin_name,
+            file_name,
+            file_path,
+            file_size,
+            file_content_type
+        ) values (
+            #{fileOriginName},
+            #{fileName},
+            #{filePath},
+            #{fileSize},
+            #{fileContentType}
+        )
+    </insert>
+
+    <!-- 파일 연결 -->
+    <insert id="insertProfileFile">
+        insert into tbl_advertisement_background_file (file_id, company_id)
+        values (#{fileId}, #{companyId})
+    </insert>
+
+    <!-- 파일 삭제 -->
+    <delete id="deleteProfileFileByCompanyId">
+        delete from tbl_advertisement_background_file
+        where company_id = #{companyId}
+    </delete>
+</mapper>
+

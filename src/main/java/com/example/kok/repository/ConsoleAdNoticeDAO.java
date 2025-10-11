@@ -1,5 +1,6 @@
 package com.example.kok.repository;
 
+import com.example.kok.domain.ConsoleAdNoticeVO;
 import com.example.kok.dto.ConsoleAdNoticeDTO;
 import com.example.kok.dto.ConsoleInternNoticeRequestDTO;
 import com.example.kok.enumeration.RequestStatus;
@@ -46,8 +47,8 @@ public class ConsoleAdNoticeDAO {
     }
 
 //    공고 수정 등록
-    public void editNotice(ConsoleAdNoticeDTO adNoticeDTO) {
-        consoleAdMapper.updateNotice(adNoticeDTO);
+    public void editNotice(ConsoleAdNoticeVO adNoticeVO) {
+        consoleAdMapper.updateNotice(adNoticeVO);
     }
 
 //    공고 수정 상세
