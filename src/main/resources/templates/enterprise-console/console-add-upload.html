@@ -54,13 +54,13 @@
                                                     <div class="preview-head">2:1 (300x150)</div>
                                                     <div class="preview-main">
                                                         <div class="preview-img-wrap">
-                                                            <img th:if="${notice.files != null and !notice.files.isEmpty()}"
-                                                                 th:src="${notice.files[0].filePath}"
+                                                            <img th:if="${notice.uploadedFiles != null and !notice.uploadedFiles.isEmpty()}"
+                                                                 th:src="${notice.uploadedFiles[0].filePath}"
                                                                  alt="등록된 광고 배경 이미지"
                                                                  class="preview-img"
                                                                  id="add-back">
 
-                                                            <img th:unless="${notice.files != null and !notice.files.isEmpty()}"
+                                                            <img th:unless="${notice.uploadedFiles != null and !notice.uploadedFiles.isEmpty()}"
                                                                  src="/images/experience/ad_bg_img.jpg"
                                                                  alt="기본 이미지"
                                                                  class="preview-img"
@@ -110,7 +110,7 @@
                                                     </label>
                                                     <div class="sub-text">2:1 비율의 이미지를 업로드해주세요.</div>
                                                     <div class="sub-text">업로드하지 않으면 기본 이미지로 업로드됩니다.</div>
-                                                    <input type="file" name="uploadFiles" class="media-input" id="add-background">
+                                                    <input type="file" name="files" class="media-input" id="add-background">
                                                 </div>
                                             </div>
                                         </div>

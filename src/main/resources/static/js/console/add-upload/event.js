@@ -198,53 +198,41 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnRegisterAd = document.querySelector("#btn-register-ad");
     if(btnRegisterAd){
         btnRegisterAd.addEventListener("click", async () => {
-        const isMainValid = validateInput(inputMain, "메인 텍스트를 입력해주세요.");
-        const isSubValid = validateInput(inputSub, "서브 텍스트를 입력해주세요.");
-        const isDateValid = validateDate(okcheck);
+            const isMainValid = validateInput(inputMain, "메인 텍스트를 입력해주세요.");
+            const isSubValid = validateInput(inputSub, "서브 텍스트를 입력해주세요.");
+            const isDateValid = validateDate(okcheck);
 
-        // 하나라도 false면 return
-        if (!isMainValid || !isSubValid || !isDateValid) return;
+            // 하나라도 false면 return
+            if (!isMainValid || !isSubValid || !isDateValid) return;
 
-        // 모든 유효성 통과 시 실행
-        console.log("등록 처리 실행!");
+            // 모든 유효성 통과 시 실행
+            console.log("등록 처리 실행!");
 
-        // 결제 완료
-        try {
             const payInfo = {
                 price: 100,
                 duration: 2
             }
-            await pay(payInfo); // 결제 프로세스
+            await pay(payInfo);
 
-            // 결제 완료 후 form 자동 제출
-            const form = document.getElementById("adForm");
-            console.log("결제 완료! 광고 등록을 시작합니다.");
+            const data = {
+                advertisementMainText: document.querySelector("#ad-main-text").value,
+                advertisementSubText: document.querySelector("#ad-sub-text").value,
+                advertiseStartDatetime: document.querySelector("#start-date").value,
+                advertiseEndDatetime: document.querySelector("#end-date").value,
+                companyId: 1,
+                paymentPrice: document.querySelector(".start-price .price").textContent,
+                files: document.querySelector("#add-background").files
+            }
 
-            // 폼 전송
-            form.submit();
-        } catch (error) {
-            console.error("결제 또는 등록 중 오류", error);
-            alert("결제 또는 광고 등록 중 오류가 발생했습니다.");
-        }
-
-        // const data = {
-        //     advertisementMainText: document.querySelector("#ad-main-text").value,
-        //     advertisementSubText: document.querySelector("#ad-sub-text").value,
-        //     advertiseStartDatetime: document.querySelector("#start-date").value,
-        //     advertiseEndDatetime: document.querySelector("#end-date").value,
-        //     companyId: 1,
-        //     paymentPrice: document.querySelector(".start-price .price").value
-        // }
-        //
-        // try {
-        //     const result = await adService.register(data);
-        //     console.log("광고 등록 성공이당", result);
-        //     alert("광고가 등록되었습니다.");
-        // } catch (err) {
-        //     console.error(err);
-        //     alert("광고 등록 중 오류가 발생했습니다.");
-        // }
-    });
+            try {
+                const result = await adService.register(data);
+                console.log("광고 등록 성공이당", result);
+                alert("광고가 등록되었습니다.");
+            } catch (err) {
+                console.error(err);
+                alert("광고 등록 중 오류가 발생했습니다.");
+            }
+        });
     }
 
 });

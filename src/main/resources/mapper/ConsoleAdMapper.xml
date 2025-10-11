@@ -57,7 +57,9 @@
             and a.advertisement_request_status = 'accept'
     </select>
 
-    <insert id="insertAdvertisement" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertAdvertisement" useGeneratedKeys="true"
+            keyProperty="id"
+            parameterType="com.example.kok.dto.ConsoleAdNoticeDTO">
         insert into tbl_advertisement (
             advertisement_main_text,
             advertisement_sub_text,
@@ -68,14 +70,15 @@
             company_id
         )
         values (
-                   #{advertisementMainText},
-                   #{advertisementSubText},
-                   'await',
-                   'await',
-                   #{advertiseStartDatetime},
-                   #{advertiseEndDatetime},
-                   #{companyId}
-               )
+            #{advertisementMainText},
+            #{advertisementSubText},
+            'await',
+            'await',
+            #{advertiseStartDatetime},
+            #{advertiseEndDatetime},
+            #{companyId}
+        )
+        returning id
     </insert>
 
     <update id="updateNotice">
