@@ -1,7 +1,9 @@
 package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
+import com.example.kok.dto.AdvertisementDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
+import com.example.kok.service.AdvertisementService;
 import com.example.kok.service.CommunityPostService;
 import com.example.kok.service.ExperienceNoticeService;
 import com.example.kok.service.MemberService;
@@ -24,6 +26,7 @@ public class CommunityController {
     private final CommunityPostService communityPostService;
     private final ExperienceNoticeService experienceNoticeService;
     private final MemberService memberService;
+    private final AdvertisementService advertisementService;
 
     @GetMapping("/page")
     public String goToCommunityPage(Model model,
@@ -42,6 +45,9 @@ public class CommunityController {
 
         List<ExperienceNoticeDTO> latestFour = experienceNoticeService.findLatestFour();
         model.addAttribute("latestFour", latestFour);
+
+        List<AdvertisementDTO> advertisements = advertisementService.getAllAdvertisements();
+        model.addAttribute("advertisements", advertisements);
 
         return "community/page";
     }
