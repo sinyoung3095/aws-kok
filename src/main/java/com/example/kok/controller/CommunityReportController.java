@@ -19,10 +19,14 @@ public class CommunityReportController {
     private final CommunityReportService communityReportService;
 
     @PostMapping("/{postId}")
-    public ResponseEntity<String> reportPost(@PathVariable Long postId,
-                                             @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        Long memberId = customUserDetails.getId();
+    public ResponseEntity<?> reportPost(@PathVariable Long postId,
+                                        @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
+        if (customUserDetails == null) {
+            return ResponseEntity.ok(false);
+        }
+
+        Long memberId = customUserDetails.getId();
         boolean existReported = communityReportService.reportPost(postId, memberId);
 
         if (existReported) {

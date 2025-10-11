@@ -10,7 +10,15 @@ const postService = (() => {
     // 게시글 조회
     const getOne = async (id) => {
         const response = await fetch(`/api/community/post/${id}`);
-        return response.json();
+
+        const checkExistMember = await response.json();
+        if (checkExistMember === false) {
+            alert("게시글에 참여하려면 로그인이 필요합니다.");
+            window.location.href = "/member/login";
+            return null;
+        }
+
+        return checkExistMember;
     };
 
     // 글쓰기
@@ -64,6 +72,14 @@ const postService = (() => {
             body: JSON.stringify(postLikeDTO)
         });
 
+        const checkExistMember = await response.json();
+
+        if (checkExistMember === false) {
+            alert("게시글에 참여하려면 로그인이 필요합니다.");
+            window.location.href = "/member/login";
+            return null;
+        }
+
         if(response.ok) {
             console.log("좋아요 성공");
             return true;
@@ -88,6 +104,13 @@ const postService = (() => {
         const response = await fetch(`/api/report/${postId}`, {
             method: "POST"
         });
+
+        const checkExistMember = await response.json();
+        if (checkExistMember === false) {
+            alert("게시글에 참여하려면 로그인이 필요합니다.");
+            window.location.href = "/member/login";
+            return null;
+        }
 
         if (!response.ok) {
             const errorMessage = await response.text();
