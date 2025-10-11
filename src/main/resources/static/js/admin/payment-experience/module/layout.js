@@ -23,7 +23,7 @@ const layout = (() => {
         if(!adminPaymentExperienceCriteriaDTO.paymentExperienceList || adminPaymentExperienceCriteriaDTO.paymentExperienceList.length === 0){
             text += `
             <tr class="no-data">
-                <td colspan="6">
+                <td colspan="7">
                     결제 내역이 없습니다.
                 </td>
             </tr>

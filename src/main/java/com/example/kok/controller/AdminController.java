@@ -73,7 +73,6 @@ public class AdminController {
 //    배너 - 광고 신청
     @GetMapping("advertise")
     public String goToAdvertisePage(Model model) {
-        model.addAttribute("search", new Search());
         return "admin/advertise";
     }
     @GetMapping("advertise/accept/{id}")
@@ -107,7 +106,6 @@ public class AdminController {
 //    결제 - 광고
     @GetMapping("payment/advertise")
     public String goToPaymentAdvertisePage(Model model) {
-        model.addAttribute("search", new Search());
         return "admin/payment-advertise";
     }
 

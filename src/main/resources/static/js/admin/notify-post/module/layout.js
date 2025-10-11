@@ -2,19 +2,30 @@ const layout = (() => {
     const showList = (adminReportCriteriaDTO) => {
         const noticeListContainer = document.querySelector(".table-notice tbody");
         let text = ``;
-        adminReportCriteriaDTO.adminReportDTO.forEach((report) => {
+
+        if(!adminReportCriteriaDTO.adminReportDTO || adminReportCriteriaDTO.adminReportDTO.length === 0){
             text += `
-                <tr class="post-detail" data-id="${report.id}">
-                    <td class="td-date text-grey">${report.relativeDate}</td>
-                    <td class="td-title">
-                        <span class="notice-text">
-                            ${report.postContent}
-                        </span>
-                    </td>
-                    <td class="td-writer">${report.userEmail}</td>
-                </tr>
-           `;
-        });
+            <tr class="no-data">
+                <td colspan="3">
+                    결과가 없습니다.
+                </td>
+            </tr>
+            `;
+        } else {
+            adminReportCriteriaDTO.adminReportDTO.forEach((report) => {
+                text += `
+                    <tr class="post-detail" data-id="${report.id}">
+                        <td class="td-date text-grey">${report.relativeDate}</td>
+                        <td class="td-title">
+                            <span class="notice-text">
+                                ${report.postContent}
+                            </span>
+                        </td>
+                        <td class="td-writer">${report.userEmail}</td>
+                    </tr>
+               `;
+            });
+        }
         noticeListContainer.innerHTML = text;
 
         const pagination = document.querySelector(".pagination.kok-pagination");

@@ -8,7 +8,7 @@ const layout = (()=> {
         if(!bannerFileCriteriaDTO.bannerFileList || bannerFileCriteriaDTO.bannerFileList.length === 0){
             text += `
             <tr class="no-data">
-                <td colspan="6">
+                <td colspan="5">
                     등록된 배너가 없습니다.
                 </td>
             </tr>

@@ -3,41 +3,51 @@ const layout = (() => {
         const employListContainer = document.querySelector(".table.member-table tbody");
         let text = ``;
 
-        adminInternNoticeListCriteriaDTO.internNoticeList.forEach((intern) => {
+        if(!adminInternNoticeListCriteriaDTO.internNoticeList || adminInternNoticeListCriteriaDTO.internNoticeList.length === 0){
             text += `
-                <tr>
-                    <td class="td-name">
-                        <p>${intern.companyName}</p>
-                    </td>
-                    <td class="td-main-title">
-                        <p>${intern.internNoticeTitle}</p>
-                    </td>
-                    <td class="td-sub-title">
-                        <p>${intern.internNoticeSubTitle}</p>
-                    </td>
-                    <td class="td-status">
-                        <p>`;
-            if (intern.internNoticeStatus === 'active') {
-                text += `모집중`;
-            } else {
-                text += `모집 완료`;
-            }
-            text += `</p>
-                    </td>
-                    <td class="td-date">
-                        <p>${intern.internNoticeEndDate}</p>
-                    </td>  
-                    <td class="td-job">
-                        <p>${intern.jobName}</p>
-                    </td>
-                    <td class="td-action text-center">
-                        <div class="action-btn" data-id="${intern.id}">
-                            <i class="mdi mdi-chevron-right"></i>
-                        </div>
-                    </td>
-                </tr>
+            <tr class="no-data">
+                <td colspan="7">
+                    결과가 없습니다.
+                </td>
+            </tr>
             `;
-        });
+        } else {
+            adminInternNoticeListCriteriaDTO.internNoticeList.forEach((intern) => {
+                text += `
+                    <tr>
+                        <td class="td-name">
+                            <p>${intern.companyName}</p>
+                        </td>
+                        <td class="td-main-title">
+                            <p>${intern.internNoticeTitle}</p>
+                        </td>
+                        <td class="td-sub-title">
+                            <p>${intern.internNoticeSubTitle}</p>
+                        </td>
+                        <td class="td-status">
+                            <p>`;
+                    if (intern.internNoticeStatus === 'active') {
+                        text += `모집중`;
+                    } else {
+                        text += `모집 완료`;
+                    }
+                    text += `</p>
+                        </td>
+                        <td class="td-date">
+                            <p>${intern.internNoticeEndDate}</p>
+                        </td>  
+                        <td class="td-job">
+                            <p>${intern.jobName}</p>
+                        </td>
+                        <td class="td-action text-center">
+                            <div class="action-btn" data-id="${intern.id}">
+                                <i class="mdi mdi-chevron-right"></i>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
         employListContainer.innerHTML = text;
 
         // 페이지 번호

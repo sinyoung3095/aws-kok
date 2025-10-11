@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -40,8 +41,6 @@ public class AdminAdvertisementServiceImpl implements AdminAdvertisementService 
         criteria.setHasPreviousPage(page > 1);
         criteria.setHasNextPage(page < criteria.getRealEnd());
 
-        log.info("이전 페이지 버튼: {}", criteria.isHasPreviousPage());
-        log.info("다음 페이지 버튼: {}", criteria.isHasNextPage());
 //        11개 가져왔으면, 마지막 1개 삭제
         if(criteria.isHasMore()){
             advertisements.remove(advertisements.size()-1);
@@ -56,18 +55,25 @@ public class AdminAdvertisementServiceImpl implements AdminAdvertisementService 
 //    광고 상세
     @Override
     public AdminAdvertisementDTO advertisementDetail(Long id) {
-        return adminAdvertisementDAO.selectAdvertisement(id).orElseThrow(PostNotFoundException::new);
-    }
+        AdminAdvertisementDTO advertisementDTO = adminAdvertisementDAO.selectAdvertisement(id).orElseThrow(PostNotFoundException::new);
 
-    @Override
-    public void setPreSignedUrl(AdminAdvertisementDTO advertisementDTO){
         List<AdvertisementBackgroundFileDTO> files = advertisementBackgroundFileDAO.advertisementBackgroundFile(advertisementDTO.getId());
         files.forEach(file -> {
             file.setFilePath(s3Service.getPreSignedUrl(file.getFilePath(), Duration.ofMinutes(5)));
         });
-
         advertisementDTO.setAdvertisementBackgroundFiles(files);
+        log.info("담긴 파일 내용: {}", files);
+        return advertisementDTO;
     }
+
+//    @Override
+//    public void setPreSignedUrl(AdminAdvertisementDTO advertisementDTO){
+//        List<AdvertisementBackgroundFileDTO> files = advertisementBackgroundFileDAO.advertisementBackgroundFile(advertisementDTO.getId());
+//        files.forEach(file -> {
+//            file.setFilePath(s3Service.getPreSignedUrl(file.getFilePath(), Duration.ofMinutes(5)));
+//        });
+//        advertisementDTO.setAdvertisementBackgroundFiles(files);
+//    }
 
 //    광고 승인
     public void accept(Long id){

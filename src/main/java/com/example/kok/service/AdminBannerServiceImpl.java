@@ -75,8 +75,6 @@ public class AdminBannerServiceImpl implements AdminBannerService {
         criteria.setHasPreviousPage(page > 1);
         criteria.setHasNextPage(page < criteria.getRealEnd());
 
-        log.info("이전 페이지 버튼: {}", criteria.isHasPreviousPage());
-        log.info("다음 페이지 버튼: {}", criteria.isHasNextPage());
 //        11개 가져왔으면, 마지막 1개 삭제
         if(criteria.isHasMore()){
             bannerFiles.remove(bannerFiles.size()-1);
@@ -86,18 +84,6 @@ public class AdminBannerServiceImpl implements AdminBannerService {
         bannerFileCriteriaDTO.setCriteria(criteria);
         return bannerFileCriteriaDTO;
     }
-
-//    @Override
-//    public BannerFileDTO selectAllFiles(Long id){
-//        return adminBannerDAO.selectBannerFileById(id).orElseThrow(PostNotFoundException::new);
-//    }
-
-//    @Override
-//    public void setPreSignedUrl(BannerFileDTO bannerFileDTO) {
-//        log.info("setPreSignedUrl 실행됨");
-//        bannerFileDTO = adminBannerDAO.selectBannerFileById(bannerFileDTO.getId()).orElseThrow(PostNotFoundException::new);
-//        bannerFileDTO.setBannerFilePath(s3Service.getPreSignedUrl(bannerFileDTO.getBannerFilePath(), Duration.ofMinutes(5)));
-//    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
