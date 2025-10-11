@@ -19,10 +19,11 @@ searchModal.addEventListener("click", (e) => {
     }
 });
 document.querySelectorAll(".sidebar-item").forEach((el) => {
-    if(window.location.search.includes(el.id)){
-        el.classList.replace("sidebar-item", "sidebar-item-active");}
+    console.log(el.target.id);
+    if(window.location.search(el.target.id)){
+        el.classList.add("active");}
     else{
-        el.classList.replace("sidebar-item-active", "sidebar-item");}
+        el.classList.remove("active");}
 });
 
 // 사이드바 대카테고리

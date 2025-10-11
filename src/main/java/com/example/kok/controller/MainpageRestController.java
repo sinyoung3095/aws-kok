@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -31,12 +32,12 @@ public class MainpageRestController {
     }
 
     @GetMapping("requestExperience")
-    public List<RequestExperienceDTO> findRequestExperience(@AuthenticationPrincipal CustomUserDetails customUserDetails){
-        log.info(customUserDetails.toString());
-        return requestExperienceDAO.selectAllRequestByUserId(customUserDetails.getId());
+    public List<RequestExperienceDTO> findRequestExperience(@AuthenticationPrincipal CustomUserDetails customUserDetails,@RequestParam(required = false)Long experienceId){
+
+        return requestExperienceDAO.selectAllRequestByUserId(customUserDetails.getId(),experienceId);
     }
     @GetMapping("requestIntern")
-    public List<RequestInternDTO> findRequestIntern(@AuthenticationPrincipal CustomUserDetails customUserDetails){
-        return requestInternDAO.selectAllInternByUserId(customUserDetails.getId());
+    public List<RequestInternDTO> findRequestIntern(@AuthenticationPrincipal CustomUserDetails customUserDetails,@RequestParam(required = false)Long internId){
+        return requestInternDAO.selectAllInternByUserId(customUserDetails.getId(),internId);
     }
 }

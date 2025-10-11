@@ -22,7 +22,7 @@ public class RequestExperienceDAO {
         return requestExperienceMapper.selectRequestById(id);
     }
     //    지원 내역 목록 조회
-    public List<RequestExperienceDTO> selectAllRequestByUserId(Long id){
-        return requestExperienceMapper.selectRequestByUserId(id);
+    public List<RequestExperienceDTO> selectAllRequestByUserId(Long id,Long experienceId){
+        return requestExperienceMapper.selectRequestByUserId(id,experienceId);
     }
 }
