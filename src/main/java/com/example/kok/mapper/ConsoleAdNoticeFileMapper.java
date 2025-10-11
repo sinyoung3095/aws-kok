@@ -1,5 +1,7 @@
 package com.example.kok.mapper;
 
+import com.example.kok.dto.ConsoleAdNoticeDTO;
+import com.example.kok.dto.ConsoleAdNoticeFileDTO;
 import com.example.kok.dto.FileDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -15,7 +17,7 @@ public interface ConsoleAdNoticeFileMapper {
     void insertFile(FileDTO fileDTO);
 
 //    광고 파일 연결
-    void insertAdBackgroundFile(@Param("fileId") Long fileId, @Param("advertisementId") Long advertisementId);
+    void insertAdBackgroundFile(ConsoleAdNoticeFileDTO consoleFileDTO);
 
 //    광고 파일 삭제
     void deleteFilesByAdId(@Param("advertisementId") Long advertisementId);

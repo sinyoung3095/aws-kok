@@ -1,6 +1,8 @@
 
 package com.example.kok.repository;
 
+import com.example.kok.dto.ConsoleAdNoticeDTO;
+import com.example.kok.dto.ConsoleAdNoticeFileDTO;
 import com.example.kok.dto.FileDTO;
 import com.example.kok.dto.PostFileDTO;
 import com.example.kok.mapper.ConsoleAdNoticeFileMapper;
@@ -25,8 +27,8 @@ public class ConsoleAdNoticeFileDAO {
     }
 
     // 광고-파일 연결
-    public void linkFileToAdvertisement(Long fileId, Long advertisementId) {
-        fileMapper.insertAdBackgroundFile(fileId, advertisementId);
+    public void linkFileToAdvertisement(ConsoleAdNoticeFileDTO consoleFileDTO) {
+        fileMapper.insertAdBackgroundFile(consoleFileDTO);
     }
 
     // 광고에 연결된 파일 전체 삭제
