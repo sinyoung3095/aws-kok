@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(of="id")
 public class ConsoleAdNoticeDTO {
-    private long id; // 결제 id
+    private long id;
     private String advertisementMainText; // 광고 메인 텍스트
     private String advertisementSubText; // 광고 서브 텍스트
     private RequestStatus advertisementStatus; // 요청 상태
@@ -27,6 +27,6 @@ public class ConsoleAdNoticeDTO {
     private String updatedDateTime;
     private int paymentPrice; // 금액
 
-    private List<MultipartFile> uploadFiles;
-    private List<FileDTO> files;
+//    private List<MultipartFile> uploadFiles;
+    private List<FileDTO> uploadedFiles;
 }

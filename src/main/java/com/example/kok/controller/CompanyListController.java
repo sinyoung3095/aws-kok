@@ -28,7 +28,10 @@ public class CompanyListController {
 //    기업 목록
     @GetMapping("/{page}")
     public CompaniesCriteriaDTO getCompanyList(@PathVariable("page") int page, CompanySearch search, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        Long userId = customUserDetails.getId();
+        Long userId = null;
+        if (customUserDetails != null) {
+            userId = customUserDetails.getId();
+        }
         return companyService.getCompanyList(page, search, userId);
     }
 

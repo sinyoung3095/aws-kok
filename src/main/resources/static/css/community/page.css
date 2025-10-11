@@ -89,6 +89,7 @@ div {
     flex: 1 0 0;
     display: flex;
     overflow-y: auto;
+    height: 100vh;
 }
 
 .main-1{
@@ -1267,6 +1268,14 @@ div {
     font-size: 16px;
     font-weight: 500;
     line-height: 24px;
+}
+.etc .banner-list {
+    border-radius: 12px;
+}
+
+.etc .banner-list .ad-banner {
+    max-width: 100%;
+    max-height: 150px;
 }
 
 .reply{

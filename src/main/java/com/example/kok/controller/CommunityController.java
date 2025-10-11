@@ -29,25 +29,21 @@ public class CommunityController {
     public String goToCommunityPage(Model model,
                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
-        if (customUserDetails == null) {
-            return "redirect:/member/login";
+        Long memberId = null;
+        if (customUserDetails != null) {
+            memberId = customUserDetails.getId();
+            model.addAttribute("userDTO", customUserDetails);
+
+            memberService.findMembersByMemberId(memberId)
+                    .ifPresent(userMemberDTO -> model.addAttribute("member", userMemberDTO));
         }
 
-        Long memberId = customUserDetails.getId();
         model.addAttribute("posts", communityPostService.getList(1, memberId).getPosts());
 
         List<ExperienceNoticeDTO> latestFour = experienceNoticeService.findLatestFour();
         model.addAttribute("latestFour", latestFour);
 
-        model.addAttribute("userDTO", customUserDetails);
-
-        memberService.findMembersByMemberId(memberId)
-                .ifPresent(userMemberDTO -> {
-                    model.addAttribute("member", userMemberDTO);
-//                    log.info("커뮤니티 페이지 회원 정보: {}", userMemberDTO);
-                });
-//        log.info("로그인: {}", customUserDetails);
-
         return "community/page";
     }
+
 }

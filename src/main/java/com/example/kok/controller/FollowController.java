@@ -17,6 +17,9 @@ public class FollowController {
 
     @PostMapping("/{companyId}")
     public ResponseEntity<?> follow(@AuthenticationPrincipal CustomUserDetails userDetails, @PathVariable Long companyId) {
+        if(userDetails == null) {
+            return ResponseEntity.ok(false);
+        }
         followService.follow(userDetails.getId(), companyId);
         return ResponseEntity.ok().build();
     }
@@ -29,6 +32,9 @@ public class FollowController {
 
     @GetMapping("/{companyId}")
     public ResponseEntity<Boolean> isFollowing(@AuthenticationPrincipal CustomUserDetails userDetails, @PathVariable Long companyId) {
+        if(userDetails == null) {
+            return ResponseEntity.ok(false);
+        }
         boolean result = followService.isFollowing(userDetails.getId(), companyId);
         return ResponseEntity.ok(result);
     }
