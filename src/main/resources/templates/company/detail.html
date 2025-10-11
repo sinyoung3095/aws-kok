@@ -7,13 +7,28 @@
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/font/font.css">
     <link rel="stylesheet" href="/css/experience/list.css">
-    <link rel="stylesheet" href="/css/main-page/header.css">
     <link rel="stylesheet" href="/css/main-page/login-header.css">
+    <link rel="stylesheet" href="/css/main-page/header.css">
+    <link rel="stylesheet" href="/css/main-page/login-side-bar.css">
+    <link rel="stylesheet" href="/css/main-page/side-bar.css">
+    <link rel="stylesheet" href="/css/main-page/mobile-footer.css">
     <title th:text="${company.companyName} + ' | 콕'">기업홈 | 콕</title>
 </head>
 <body>
     <div id="main-content" class="main-content">
+        <th:block th:if="${userDTO == null}">
+            <div th:replace="~{main-page/side-bar}"></div>
+        </th:block>
+        <th:block th:if="${userDTO != null}">
+            <div th:replace="~{main-page/login-side-bar}"></div>
+        </th:block>
         <main class="main">
+            <th:block th:if="${userDTO == null}">
+                <div th:replace="~{main-page/header}"></div>
+            </th:block>
+            <th:block th:if="${userDTO != null}">
+                <div th:replace="~{main-page/login-header}"></div>
+            </th:block>
             <div class="content-layout scroll-y">
                 <div class="banner-section">
                     <div class="banner-container">
@@ -177,32 +192,14 @@
                             </ul>
                         </div>
                         <div class="content-box pd-0">
-                            <div class="banner-list">
-                                <div class="ad-banner">
+                            <div class="banner-list" th:if="${advertisements != null}">
+                                <div class="ad-banner" th:each="advertisement : ${advertisements}">
                                     <div class="ad-text-box">
-                                        <p class="title">1차세대 글로벌 광고 플랫폼 <br/>엔지니어 모집</p>
-                                        <p class="desc">최신 기술 환경에서 전문성을 키워나가세요.</p>
+                                        <p class="title" th:text="${advertisement.advertisementMainText}">
+                                        <p class="desc" th:text="${advertisement.advertisementSubText}"></p>
                                     </div>
                                     <div class="ad-img">
-                                        <img src="/images/experience/ad_bg_img.jpg" alt="">
-                                    </div>
-                                </div>
-                                <div class="ad-banner">
-                                    <div class="ad-text-box">
-                                        <p class="title">2차세대 글로벌 광고 플랫폼 <br/>엔지니어 모집</p>
-                                        <p class="desc">최신 기술 환경에서 전문성을 키워나가세요.</p>
-                                    </div>
-                                    <div class="ad-img">
-                                        <img src="/images/experience/ad_bg_img.jpg" alt="">
-                                    </div>
-                                </div>
-                                <div class="ad-banner">
-                                    <div class="ad-text-box">
-                                        <p class="title">3차세대 글로벌 광고 플랫폼 <br/>엔지니어 모집</p>
-                                        <p class="desc">최신 기술 환경에서 전문성을 키워나가세요.</p>
-                                    </div>
-                                    <div class="ad-img">
-                                        <img src="/images/experience/ad_bg_img.jpg" alt="">
+                                        <img th:src="${advertisement.filePath}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -211,6 +208,7 @@
                 </div>
             </div>
         </main>
+        <div th:replace="~{main-page/mobile-footer}"></div>
     </div>
 
     <!-- toast - red -->

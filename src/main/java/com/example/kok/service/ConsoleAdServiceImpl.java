@@ -8,6 +8,7 @@ import com.example.kok.repository.PaymentDAO;
 import com.example.kok.repository.PaymentUserDAO;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,8 +65,8 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
     }
 
     @Override
-    public void setPreSignedUrl(ConsoleAdNoticeDTO consoleAdNoticeDTO) {
-        List<FileDTO> files = consoleAdNoticeFileDAO.findAllByAdvertisementId(consoleAdNoticeDTO.getId());
+    public void setPreSignedUrl(ConsoleAdNoticeDTO consoleAdDTO) {
+        List<FileDTO> files = consoleAdNoticeFileDAO.findAllByAdvertisementId(consoleAdDTO.getId());
 
         files.forEach(file -> {
             file.setFilePath(
@@ -73,58 +74,63 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
             );
         });
 
-        consoleAdNoticeDTO.setFiles(files);
+        consoleAdDTO.setUploadedFiles(files);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void registerAdvertisement(ConsoleAdNoticeDTO adNoticeDTO, List<MultipartFile> multipartFiles) {
+    public void registerAdvertisement(ConsoleAdNoticeDTO consoleAdDTO, List<MultipartFile> multipartFiles) {
 //        광고 등록
-        consoleAdDAO.createAdvertisement(adNoticeDTO);
+        consoleAdDAO.createAdvertisement(consoleAdDTO);
 
         // 파일 업로드
-        if (multipartFiles != null && !multipartFiles.isEmpty()) {
-            multipartFiles.forEach(multipartFile -> {
-                if (multipartFile.isEmpty()) return;
+        multipartFiles.forEach(multipartFile -> {
+            if (multipartFile.isEmpty()) return;
 
-                try {
-                    // S3 업로드
-                    String s3Key = s3Service.uploadFile(multipartFile, getPath());
+            try {
+                // S3 업로드
+                String s3Key = s3Service.uploadFile(multipartFile, getPath());
 
-                    // 파일 DTO 구성
-                    FileDTO fileDTO = new FileDTO();
-                    fileDTO.setFileOriginName(multipartFile.getOriginalFilename());
-                    fileDTO.setFileName(UUID.randomUUID().toString());
-                    fileDTO.setFilePath(s3Key);
-                    fileDTO.setFileSize(String.valueOf(multipartFile.getSize()));
-                    fileDTO.setFileContentType(multipartFile.getContentType());
+                // 파일 DTO 구성
+                FileDTO fileDTO = new FileDTO();
+                fileDTO.setFileOriginName(multipartFile.getOriginalFilename());
+                fileDTO.setFileName(UUID.randomUUID().toString());
+                fileDTO.setFilePath(s3Key);
+                fileDTO.setFileSize(String.valueOf(multipartFile.getSize()));
+                fileDTO.setFileContentType(multipartFile.getContentType());
 
-                    // tbl_file 저장
-                    consoleAdNoticeFileDAO.saveFile(fileDTO);
+                // tbl_file 저장
+                consoleAdNoticeFileDAO.saveFile(fileDTO);
 
-                    // 광고-파일 연결
-                    consoleAdNoticeFileDAO.linkFileToAdvertisement(fileDTO.getId(), adNoticeDTO.getId());
+                ConsoleAdNoticeFileDTO consoleFileDTO = new ConsoleAdNoticeFileDTO();
+                consoleFileDTO.setFileId(fileDTO.getId());
+                consoleFileDTO.setAdvertisementId(consoleAdDTO.getId());
 
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-        }
+                System.out.println("🧩 연결하려는 광고 ID: " + consoleAdDTO.getId());
+                System.out.println("🧩 연결하려는 파일 ID: " + fileDTO.getId());
 
-        Long advertisementId = adNoticeDTO.getId();
+                // 광고-파일 연결
+                consoleAdNoticeFileDAO.linkFileToAdvertisement(consoleFileDTO);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        Long advertisementId = consoleAdDTO.getId();
 
 //        결제 등록
         PaymentDTO payment = new PaymentDTO();
         payment.setAdvertisementId(advertisementId);
-        payment.setUserId(adNoticeDTO.getCompanyId());
-        payment.setPaymentPrice(adNoticeDTO.getPaymentPrice());
+        payment.setUserId(consoleAdDTO.getCompanyId());
+        payment.setPaymentPrice(consoleAdDTO.getPaymentPrice());
         payment.setPaymentStatus(RequestStatus.AWAIT);
         paymentDAO.insertPayment(payment);
 
 //        결제사용자 등록
         PaymentUserDTO paymentUser = new PaymentUserDTO();
         paymentUser.setPaymentId(payment.getId());
-        paymentUser.setUserId(adNoticeDTO.getCompanyId());
+        paymentUser.setUserId(consoleAdDTO.getCompanyId());
         paymentUser.setAdvertisementId(advertisementId);
         paymentUserDAO.insertPaymentUser(paymentUser);
     }
@@ -138,33 +144,37 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
 //    광고 수정
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void modifyNotice(ConsoleAdNoticeDTO adNoticeDTO, List<MultipartFile> multipartFiles) {
-        consoleAdDAO.editNotice(adNoticeDTO);
+    @CacheEvict(value = "posts", key = "'post_' + #consoleAdDTO.id")
+    public void modifyNotice(ConsoleAdNoticeDTO consoleAdDTO, List<MultipartFile> multipartFiles) {
+        consoleAdDAO.editNotice(toConsoleAdVO(consoleAdDTO));
 
         if (multipartFiles != null && !multipartFiles.isEmpty()) {
-
-            for (MultipartFile multipartFile : multipartFiles) {
-                if (multipartFile.isEmpty()) continue;
+            multipartFiles.forEach((multipartFile) -> {
+                if (multipartFile.isEmpty()) return;
 
                 try {
                     String s3Key = s3Service.uploadFile(multipartFile, getPath());
-
                     FileDTO fileDTO = new FileDTO();
                     fileDTO.setFileOriginName(multipartFile.getOriginalFilename());
-                    fileDTO.setFileName(UUID.randomUUID().toString());
-                    fileDTO.setFilePath(s3Key);
+                    fileDTO.setFileName(s3Key.substring(s3Key.lastIndexOf("/") + 1));
                     fileDTO.setFileSize(String.valueOf(multipartFile.getSize()));
+                    fileDTO.setFilePath(s3Key);
                     fileDTO.setFileContentType(multipartFile.getContentType());
 
                     consoleAdNoticeFileDAO.saveFile(fileDTO);
 
-                    consoleAdNoticeFileDAO.linkFileToAdvertisement(fileDTO.getId(), adNoticeDTO.getId());
+                    ConsoleAdNoticeFileDTO consoleAdNoticeFileDTO = new ConsoleAdNoticeFileDTO();
+                    consoleAdNoticeFileDTO.setFileId(fileDTO.getId());
+                    consoleAdNoticeFileDTO.setAdvertisementId(consoleAdDTO.getId());
 
-                } catch (Exception e) {
+                    consoleAdNoticeFileDAO.linkFileToAdvertisement(consoleAdNoticeFileDTO);
+
+                } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            }
+            });
         }
+
     }
 
 //    광고 수정 상세

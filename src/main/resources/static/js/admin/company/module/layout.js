@@ -5,7 +5,7 @@ const layout = (() => {
 
         const countAmount = document.querySelector(".count-amount");
 
-        countAmount.innerText = result.adminCompanyDTOList.length;
+        countAmount.innerText = result.total;
 
         if (result.adminCompanyDTOList !== null && result.adminCompanyDTOList.length > 0) {
 
@@ -45,7 +45,7 @@ const layout = (() => {
 
         } else {
         text = `<tr class="no-data">
-                    <td colspan="6">결과가 없습니다.</td>
+                    <td colspan="7">결과가 없습니다.</td>
                 </tr>`;
 
 

@@ -1,7 +1,9 @@
 package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
+import com.example.kok.dto.AdvertisementDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
+import com.example.kok.service.AdvertisementService;
 import com.example.kok.service.CommunityPostService;
 import com.example.kok.service.ExperienceNoticeService;
 import com.example.kok.service.MemberService;
@@ -24,30 +26,30 @@ public class CommunityController {
     private final CommunityPostService communityPostService;
     private final ExperienceNoticeService experienceNoticeService;
     private final MemberService memberService;
+    private final AdvertisementService advertisementService;
 
     @GetMapping("/page")
     public String goToCommunityPage(Model model,
                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
-        if (customUserDetails == null) {
-            return "redirect:/member/login";
+        Long memberId = null;
+        if (customUserDetails != null) {
+            memberId = customUserDetails.getId();
+            model.addAttribute("userDTO", customUserDetails);
+
+            memberService.findMembersByMemberId(memberId)
+                    .ifPresent(userMemberDTO -> model.addAttribute("member", userMemberDTO));
         }
 
-        Long memberId = customUserDetails.getId();
         model.addAttribute("posts", communityPostService.getList(1, memberId).getPosts());
 
         List<ExperienceNoticeDTO> latestFour = experienceNoticeService.findLatestFour();
         model.addAttribute("latestFour", latestFour);
 
-        model.addAttribute("userDTO", customUserDetails);
-
-        memberService.findMembersByMemberId(memberId)
-                .ifPresent(userMemberDTO -> {
-                    model.addAttribute("member", userMemberDTO);
-//                    log.info("커뮤니티 페이지 회원 정보: {}", userMemberDTO);
-                });
-//        log.info("로그인: {}", customUserDetails);
+        List<AdvertisementDTO> advertisements = advertisementService.getAllAdvertisements();
+        model.addAttribute("advertisements", advertisements);
 
         return "community/page";
     }
+
 }

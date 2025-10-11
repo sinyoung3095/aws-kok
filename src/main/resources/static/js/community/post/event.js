@@ -13,8 +13,14 @@ const showList = async (page = 1) => {
 };
 showList(page);
 
-window.addEventListener("scroll", async () => {
-    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 100) {
+const mainContainer = document.querySelector(".main-0");
+
+mainContainer.addEventListener("scroll", async () => {
+    const scrollTop = mainContainer.scrollTop;
+    const clientHeight = mainContainer.clientHeight;
+    const scrollHeight = mainContainer.scrollHeight;
+
+    if (scrollTop + clientHeight >= scrollHeight - 100) {
         if (checkScroll) {
             postsCriteria = await showList(++page);
             checkScroll = false;
@@ -113,7 +119,9 @@ const addFiles = (files) => {
     render();
 };
 
-input.addEventListener('change', () => addFiles(input.files));
+if (input) {
+    input.addEventListener('change', () => addFiles(input.files));
+}
 
 // 글쓰기 / 수정 모달 관련
 const popup = document.getElementById("post-write-popup");
@@ -122,7 +130,9 @@ const closeBtn = document.querySelector(".popup-write-close");
 const writeTextarea = document.querySelector(".popup-textarea");
 const writeFiles = document.querySelector("#btn-add-photo");
 
-popup.dataset.mode = "write";
+if (popup) {
+    popup.dataset.mode = "write";
+}
 
 // 열기
 writeBtns.forEach((btn) => {
@@ -241,7 +251,7 @@ document.body.addEventListener("click", async (e) => {
 
             popup.classList.add("active");
         } catch (err) {
-            alert("게시글을 불러올 수 없습니다.");
+            // alert("게시글을 불러올 수 없습니다.");
         }
         return;
     }
@@ -265,7 +275,7 @@ document.body.addEventListener("click", async (e) => {
             await showComments(postId);
 
         } catch (err) {
-            alert("게시글을 불러올 수 없습니다.");
+            // alert("게시글을 불러올 수 없습니다.");
         }
         return;
     }
@@ -325,6 +335,9 @@ document.body.addEventListener("click", async (e) => {
 
         if (!liked) {
             const success = await postService.postLike(postId);
+
+            if (success === null) return;
+
             if (success) {
                 likeBtn.dataset.liked = "true";
                 likeCountEl.textContent = current + 1;
@@ -404,7 +417,10 @@ document.body.addEventListener("click", async (e) => {
         }
 
         try {
-            await postService.reportPost(postId);
+            const result = await postService.reportPost(postId);
+            if (result === null)
+                return;
+
             alert("신고가 접수되었습니다.");
             reportModal.style.display = "none";
         } catch (err) {

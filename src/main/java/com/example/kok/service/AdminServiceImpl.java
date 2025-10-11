@@ -37,8 +37,6 @@ public class AdminServiceImpl implements AdminService {
         listCriteria.setHasPreviousPage(page > 1);
         listCriteria.setHasNextPage(page < listCriteria.getRealEnd());
 
-        log.info("이전 페이지 버튼: {}", listCriteria.isHasPreviousPage());
-        log.info("다음 페이지 버튼: {}", listCriteria.isHasNextPage());
 //        11개 가져왔으면, 마지막 1개 삭제
         if(listCriteria.isHasMore()){
             experiences.remove(experiences.size()-1);
@@ -67,9 +65,6 @@ public class AdminServiceImpl implements AdminService {
         requestCriteria.setHasPreviousPage(page > 1);
         requestCriteria.setHasNextPage(5 < requestExperienceList.size());
 
-        log.info("이전 페이지 버튼: {}", requestCriteria.isHasPreviousPage());
-        log.info("다음 페이지 버튼: {}", requestCriteria.isHasNextPage());
-        log.info("신청자 내역 총 개수: {}", adminExperienceDAO.countRequestUser(id));
 //        6개 가져왔으면, 마지막 1개 삭제
         if(requestCriteria.isHasMore()){
             requestExperienceList.remove(requestExperienceList.size()-1);
@@ -84,9 +79,6 @@ public class AdminServiceImpl implements AdminService {
         experienceCriteria.setHasPreviousPage(page > 1);
         experienceCriteria.setHasNextPage(5 < userEvaluationList.size());
 
-        log.info("이전 페이지 버튼: {}", experienceCriteria.isHasPreviousPage());
-        log.info("다음 페이지 버튼: {}", experienceCriteria.isHasNextPage());
-        log.info("평가자 총 개수: {}", adminExperienceDAO.countUserEvaluation(id));
 //        6개 가져왔으면, 마지막 1개 삭제
         if(experienceCriteria.isHasMore()){
             userEvaluationList.remove(userEvaluationList.size()-1);

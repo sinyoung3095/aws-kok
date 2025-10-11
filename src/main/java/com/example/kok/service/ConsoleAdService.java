@@ -1,5 +1,7 @@
 package com.example.kok.service;
 
+import com.example.kok.domain.ConsoleAdNoticeVO;
+import com.example.kok.domain.PostVO;
 import com.example.kok.dto.ConsoleAdNoticeCriteriaDTO;
 import com.example.kok.dto.ConsoleAdNoticeDTO;
 import com.example.kok.dto.ConsoleInternNoticeRequestDTO;
@@ -25,5 +27,19 @@ public interface ConsoleAdService {
 
 //    광고 수정 상세
     public ConsoleAdNoticeDTO getNotice(Long advertisementId);
+
+    default ConsoleAdNoticeVO toConsoleAdVO(ConsoleAdNoticeDTO consoleAdDTO){
+        return ConsoleAdNoticeVO.builder()
+                .id(consoleAdDTO.getId())
+                .advertisementMainText(consoleAdDTO.getAdvertisementMainText())
+                .advertisementSubText(consoleAdDTO.getAdvertisementSubText())
+                .advertisementStatus(consoleAdDTO.getAdvertisementStatus())
+                .advertisementRequestStatus(consoleAdDTO.getAdvertisementRequestStatus())
+                .advertiseStartDatetime(consoleAdDTO.getAdvertiseStartDatetime())
+                .advertiseEndDatetime(consoleAdDTO.getAdvertiseEndDatetime())
+                .companyId(consoleAdDTO.getCompanyId())
+                .paymentPrice(consoleAdDTO.getPaymentPrice())
+                .build();
+    }
 
 }

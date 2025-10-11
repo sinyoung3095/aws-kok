@@ -4,11 +4,11 @@
     <select id="selectAdBackgroundFileByAdId">
         select
             f.id,
-            f.file_origin_name as file_origin_name,
-            f.file_name as file_name,
-            f.file_path as file_path,
-            f.file_size as file_size,
-            f.file_content_type as file_content_type,
+            f.file_origin_name,
+            f.file_name,
+            f.file_path,
+            f.file_size,
+            f.file_content_type,
             f.created_datetime,
             f.updated_datetime
         from tbl_file f
@@ -18,7 +18,7 @@
         order by f.created_datetime desc
     </select>
 
-    <!-- 파일 등록 -->
+    <!-- 이미지 등록 -->
     <insert id="insertFile" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_file (
             file_origin_name,
@@ -27,28 +27,28 @@
             file_size,
             file_content_type
         ) values (
-                     #{fileOriginName},
-                     #{fileName},
-                     #{filePath},
-                     #{fileSize},
-                     #{fileContentType}
-                 )
+            #{fileOriginName},
+            #{fileName},
+            #{filePath},
+            #{fileSize},
+            #{fileContentType}
+        )
     </insert>
 
-    <!-- 광고-파일 연결 -->
+    <!-- 광고 배경이미지 등록 -->
     <insert id="insertAdBackgroundFile">
         insert into tbl_advertisement_background_file (file_id, advertisement_id)
         values (#{fileId}, #{advertisementId})
     </insert>
 
-    <!-- 광고에 연결된 파일 삭제 -->
+    <!-- 광고 배경이미지 삭제 -->
     <delete id="deleteFilesByAdId">
-        DELETE FROM tbl_advertisement_background_file
-        WHERE advertisement_id = #{advertisementId}
+        delete from tbl_advertisement_background_file
+        where advertisement_id = #{advertisementId}
     </delete>
 
 
-    <!-- 파일 단독 삭제 -->
+    <!-- 이미지 삭제 -->
     <delete id="deleteFileById">
         delete from tbl_file
         where id = #{fileId}

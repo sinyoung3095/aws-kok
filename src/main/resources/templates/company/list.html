@@ -7,11 +7,28 @@
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/font/font.css">
     <link rel="stylesheet" href="/css/experience/list.css">
+    <link rel="stylesheet" href="/css/main-page/login-header.css">
+    <link rel="stylesheet" href="/css/main-page/header.css">
+    <link rel="stylesheet" href="/css/main-page/login-side-bar.css">
+    <link rel="stylesheet" href="/css/main-page/side-bar.css">
+    <link rel="stylesheet" href="/css/main-page/mobile-footer.css">
     <title>기업정보 | 콕</title>
 </head>
 <body>
     <div id="main-content" class="main-content">
+        <th:block th:if="${userDTO == null}">
+            <div th:replace="~{main-page/side-bar}"></div>
+        </th:block>
+        <th:block th:if="${userDTO != null}">
+            <div th:replace="~{main-page/login-side-bar}"></div>
+        </th:block>
         <main class="main">
+            <th:block th:if="${userDTO == null}">
+                <div th:replace="~{main-page/header}"></div>
+            </th:block>
+            <th:block th:if="${userDTO != null}">
+                <div th:replace="~{main-page/login-header}"></div>
+            </th:block>
             <div class="content-layout">
                 <div class="content">
                     <div class="main-wrapper">
@@ -163,40 +180,27 @@
                                 <div class="list-container pd-0">
                                     <!-- 기업 목록 -->
                                 </div>
-                                <div id="loading" style="display:none; text-align:center; margin-left:200px;">
-                                    <img src="/images/experience/loading.gif">
-                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="side-wrapper">
                         <!-- 로그인시 -->
-                        <div class="content-box" th:if="${user != null}">
+                        <div class="content-box" th:if="${userDTO != null}">
                             <div class="profile-card">
                                 <div class="profile-avatar">
                                     <img alt="image" width="60" height="60" srcset="" src="/images/mypage/default.webp" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
                                 </div>
                                 <div class="profile-info">
                                     <div class="profile-name">
-                                        <p class="member-name" th:text="${user.username}"></p>
+                                        <p class="member-name" th:text="${userDTO.username}"></p>
                                     </div>
-                                    <p class="member-role">-</p>
-                                </div>
-                                <div class="stats-list">
-                                    <div class="stat-item">
-                                        <p class="stat-label">게시물</p>
-                                        <p class="stat-value">0</p>
-                                    </div>
-                                    <div class="stat-item">
-                                        <p class="stat-label">팔로잉</p>
-                                        <p class="stat-value">0</p>
-                                    </div>
+                                    <p class="member-role" th:text="${userDTO.userRole}"></p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- 비로그인시 -->
-                        <div class="content-box" th:if="${user == null}">
+                        <div class="content-box" th:if="${userDTO == null}">
                             <div class="profile-card">
                                 <div class="profile-message">
                                     <p class="title">콕! 찍으면, <br/>오늘은 내가 그 회사의 직원</p>
@@ -209,32 +213,14 @@
                         </div>
                         
                         <div class="content-box pd-0">
-                            <div class="banner-list">
-                                <div class="ad-banner">
+                            <div class="banner-list" th:if="${advertisements != null}">
+                                <div class="ad-banner" th:each="advertisement : ${advertisements}">
                                     <div class="ad-text-box">
-                                        <p class="title">1차세대 글로벌 광고 플랫폼 <br/>엔지니어 모집</p>
-                                        <p class="desc">최신 기술 환경에서 전문성을 키워나가세요.</p>
+                                        <p class="title" th:text="${advertisement.advertisementMainText}">
+                                        <p class="desc" th:text="${advertisement.advertisementSubText}"></p>
                                     </div>
                                     <div class="ad-img">
-                                        <img src="/images/experience/ad_bg_img.jpg" alt="">
-                                    </div>
-                                </div>
-                                <div class="ad-banner">
-                                    <div class="ad-text-box">
-                                        <p class="title">2차세대 글로벌 광고 플랫폼 <br/>엔지니어 모집</p>
-                                        <p class="desc">최신 기술 환경에서 전문성을 키워나가세요.</p>
-                                    </div>
-                                    <div class="ad-img">
-                                        <img src="/images/experience/ad_bg_img.jpg" alt="">
-                                    </div>
-                                </div>
-                                <div class="ad-banner">
-                                    <div class="ad-text-box">
-                                        <p class="title">3차세대 글로벌 광고 플랫폼 <br/>엔지니어 모집</p>
-                                        <p class="desc">최신 기술 환경에서 전문성을 키워나가세요.</p>
-                                    </div>
-                                    <div class="ad-img">
-                                        <img src="/images/experience/ad_bg_img.jpg" alt="">
+                                        <img th:src="${advertisement.filePath}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -243,6 +229,7 @@
                 </div>
             </div>
         </main>
+        <div th:replace="~{main-page/mobile-footer}"></div>
     </div>
 
     <!-- toast - red -->

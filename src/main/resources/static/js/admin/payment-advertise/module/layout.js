@@ -20,41 +20,51 @@ const layout = (() => {
         const paymentListContainer = document.querySelector(".member-table tbody");
         let text = ``;
 
-        adminPaymentAdvertiseCriteriaDTO.paymentAdvertiseList.forEach((payment) => {
+        if(!adminPaymentAdvertiseCriteriaDTO.paymentAdvertiseList || adminPaymentAdvertiseCriteriaDTO.paymentAdvertiseList.length === 0){
             text += `
-                <tr>
-                    <td class="td-name">
-                        <p>${payment.companyName}</p>
-                    </td>
-                    <td class="td-id">
-                        <p>${payment.userEmail}</p>
-                    </td>
-                    <td class="td-start">
-                        <p>${payment.advertiseStartDatetime}</p>
-                    </td>
-                    <td class="td-end">
-                        <p>${payment.advertiseEndDatetime}</p>
-                    </td>  
-                    <td class="td-status">
-                        <p>`;
-            if (payment.advertisementStatus === 'await'){
-                text += `대기중`;
-            } else if (payment.advertisementStatus === 'accept') {
-                text += `진행중`;
-            } else {
-                text += `완료`;
-            }
-            text += `</p>
-                    </td>  
-                    <td class="td-pay">
-                        <p>${payment.paymentPrice}</p>
-                    </td>
-                    <td class="td-date">
-                        <p>${payment.relativeDate}</p>
-                    </td>
-                </tr>
+            <tr class="no-data">
+                <td colspan="7">
+                    결제 내역이 없습니다.
+                </td>
+            </tr>
             `;
-        });
+        } else {
+            adminPaymentAdvertiseCriteriaDTO.paymentAdvertiseList.forEach((payment) => {
+                text += `
+                    <tr>
+                        <td class="td-name">
+                            <p>${payment.companyName}</p>
+                        </td>
+                        <td class="td-id">
+                            <p>${payment.userEmail}</p>
+                        </td>
+                        <td class="td-start">
+                            <p>${payment.advertiseStartDatetime}</p>
+                        </td>
+                        <td class="td-end">
+                            <p>${payment.advertiseEndDatetime}</p>
+                        </td>  
+                        <td class="td-status">
+                            <p>`;
+                    if (payment.advertisementStatus === 'await') {
+                        text += `대기중`;
+                    } else if (payment.advertisementStatus === 'accept') {
+                        text += `진행중`;
+                    } else {
+                        text += `완료`;
+                    }
+                    text += `</p>
+                        </td>  
+                        <td class="td-pay">
+                            <p>${payment.paymentPrice}</p>
+                        </td>
+                        <td class="td-date">
+                            <p>${payment.relativeDate}</p>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
         paymentListContainer.innerHTML = text;
 
         // 페이징 숫자

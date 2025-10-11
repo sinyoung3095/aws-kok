@@ -25,15 +25,19 @@ public class CommunityPostController {
     @GetMapping("/{page}")
     public ResponseEntity<PostsCriteriaDTO> getPosts(@PathVariable("page") int page,
                                                      @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        Long memberId = customUserDetails.getId();
+        Long memberId = (customUserDetails != null) ? customUserDetails.getId() : null;
         PostsCriteriaDTO list = communityPostService.getList(page, memberId);
         return ResponseEntity.ok(list);
     }
 
 //    게시글 조회
     @GetMapping("/post/{id}")
-    public ResponseEntity<PostDTO> getOne(@PathVariable("id") Long id,
-                                          @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    public ResponseEntity<?> getOne(@PathVariable("id") Long id,
+                                    @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        if (customUserDetails == null) {
+            return ResponseEntity.ok(false);
+        }
+
         Long memberId = customUserDetails.getId();
         PostDTO postDTO = communityPostService.getPost(id, memberId);
         return ResponseEntity.ok(postDTO);

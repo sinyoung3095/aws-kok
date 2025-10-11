@@ -2,9 +2,16 @@ const followService = (() => {
 
     const follow = async (companyId) => {
         const response = await fetch(`/api/follow/${companyId}`, {
-            method: "POST",
+            method: "POST"
         });
-        return response.ok;
+
+        const checkExistLogin = await response.json();
+        if (checkExistLogin === false) {
+            alert("로그인이 필요한 서비스입니다.");
+            window.location.href = "/member/login";
+            return false;
+        }
+        return true;
     };
 
     const unfollow = async (companyId) => {

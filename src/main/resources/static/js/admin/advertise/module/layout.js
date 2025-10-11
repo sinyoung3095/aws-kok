@@ -59,43 +59,53 @@ const layout = (() => {
         const advertisementList = document.getElementById("advertisement-list");
         let text = ``;
 
-        adminAdvertisementCriteriaDTO.advertisements.forEach((advertisement) => {
+        if(!adminAdvertisementCriteriaDTO.advertisements || adminAdvertisementCriteriaDTO.advertisements.length === 0) {
             text += `
-                <tr>
-                    <td class="td-name">
-                        <p>${advertisement.companyName}</p>
-                    </td>
-                    <td class="td-main-title">
-                        <p>${advertisement.advertisementMainText}</p>
-                    </td>
-                    <td class="td-sub-title">
-                        <p>${advertisement.advertisementSubText}</p>
-                    </td>
-                    <td class="td-start">
-                        <p>${advertisement.advertiseStartDatetime}</p>
-                    </td>
-                    <td class="td-end">
-                        <p>${advertisement.advertiseEndDatetime}</p>
-                    </td>  
-                    <td class="td-status">
-                        <p>`;
-            if(advertisement.advertisementRequestStatus === 'await') {
-                text += `대기`;
-            } else if(advertisement.advertisementRequestStatus === 'accept') {
-                text += `승인`;
-            } else if(advertisement.advertisementRequestStatus === 'reject'){
-                text += `거절`;
-            }
-            text += `</p>
-                    </td>
-                    <td class="td-action text-center">
-                        <div class="action-btn" data-id="${advertisement.id}">
-                            <i class="mdi mdi-chevron-right"></i>
-                        </div>
-                    </td>
-                </tr>
+            <tr class="no-data">
+                <td colspan="7">
+                    결과가 없습니다.
+                </td>
+            </tr>
             `;
-        });
+        } else {
+            adminAdvertisementCriteriaDTO.advertisements.forEach((advertisement) => {
+                text += `
+                    <tr>
+                        <td class="td-name">
+                            <p>${advertisement.companyName}</p>
+                        </td>
+                        <td class="td-main-title">
+                            <p>${advertisement.advertisementMainText}</p>
+                        </td>
+                        <td class="td-sub-title">
+                            <p>${advertisement.advertisementSubText}</p>
+                        </td>
+                        <td class="td-start">
+                            <p>${advertisement.advertiseStartDatetime}</p>
+                        </td>
+                        <td class="td-end">
+                            <p>${advertisement.advertiseEndDatetime}</p>
+                        </td>  
+                        <td class="td-status">
+                            <p>`;
+                    if (advertisement.advertisementRequestStatus === 'await') {
+                        text += `대기`;
+                    } else if (advertisement.advertisementRequestStatus === 'accept') {
+                        text += `승인`;
+                    } else if (advertisement.advertisementRequestStatus === 'reject') {
+                        text += `거절`;
+                    }
+                    text += `</p>
+                        </td>
+                        <td class="td-action text-center">
+                            <div class="action-btn" data-id="${advertisement.id}">
+                                <i class="mdi mdi-chevron-right"></i>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
         advertisementList.innerHTML = text;
 
         // 페이지 번호
@@ -198,11 +208,9 @@ const layout = (() => {
                                                 <div class="flex-right"></div>
                                             </div>
                                             <!--  배경 이미지  -->`;
-                                            // if(!adminAdvertisementDTO.advertisementBackgroundFiles.filePath) {
-                                            //     text += ``;
-                                            // } else if(adminAdvertisementDTO.advertisementBackgroundFiles.filePath) {
-                                            //     text += `<img src="${adminAdvertisementDTO.advertisementBackgroundFiles.filePath}" height="100%" width="100%" alt="">`;
-                                            // }
+                                            if(adminAdvertisementDTO.advertisementBackgroundFiles.filePath && adminAdvertisementDTO.advertisementBackgroundFiles.filePath.length > 0) {
+                                                text += `<img src="${adminAdvertisementDTO.advertisementBackgroundFiles.filePath}" height="100%" width="100%" alt="">`;
+                                            }
         text += `
                                         </div>
                                     </div>
