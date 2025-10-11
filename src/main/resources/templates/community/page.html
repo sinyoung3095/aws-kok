@@ -109,27 +109,27 @@
                             </div>
                             <div class="etc-21">
                                 <!-- 신규 체험 공고 4개-->
-                                <a th:each="notice : ${latestFour}" th:href="@{/experience/list}">
+                                <a th:each="experience : ${latestFour}" th:href="@{/experience/list(sharedCompanyId=${experience.companyId}, sharedExperienceId=${experience.id})}">
                                     <div class="post-8" style="border-bottom: 0;">
                                         <div class="post-9">
                                             <div>
                                                 <img alt="" width="40" height="40"
-                                                     th:src="${notice.filePath}"
+                                                     th:src="${experience.filePath}"
                                                      style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
                                             </div>
                                             <div class="post-10">
                                                 <div class="post-14">
-                                                    <p class="post-15" th:text="${notice.companyName}"></p>
+                                                    <p class="post-15" th:text="${experience.companyName}"></p>
                                                 </div>
                                                 <div class="post-11">
                                                     <div class="post-12">
                                                         <div>
-                                                            <p class="post-13" th:text="${notice.experienceNoticeTitle}"></p>
+                                                            <p class="post-13" th:text="${experience.experienceNoticeTitle}"></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="post-14">
-                                                    <p class="post-15" th:text="${notice.experienceNoticeSubtitle}"></p>
+                                                    <p class="post-15" th:text="${experience.experienceNoticeSubtitle}"></p>
                                                 </div>
                                             </div>
                                         </div>
