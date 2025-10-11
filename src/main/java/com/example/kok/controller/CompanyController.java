@@ -1,7 +1,9 @@
 package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
+import com.example.kok.dto.AdvertisementDTO;
 import com.example.kok.dto.CompanyDTO;
+import com.example.kok.service.AdvertisementService;
 import com.example.kok.service.CompanyService;
 import com.example.kok.service.UserService;
 import com.example.kok.util.CompanySearch;
@@ -23,6 +25,7 @@ import java.util.List;
 public class CompanyController {
     private final CompanyService companyService;
     private final UserService userService;
+    private final AdvertisementService advertisementService;
 
 //    기업 목록
     @GetMapping("/list")
@@ -35,6 +38,9 @@ public class CompanyController {
             model.addAttribute("userDTO", customUserDetails);
         }
 
+        List<AdvertisementDTO> advertisements = advertisementService.getAllAdvertisements();
+        model.addAttribute("advertisements", advertisements);
+
         model.addAttribute("companies", companyService.getCompanyList(1, search, userId).getCompanies());
         return "company/list";
     }
@@ -42,11 +48,16 @@ public class CompanyController {
 //    기업 상세
     @GetMapping("/{companyId}")
     public String detailPage(@PathVariable Long companyId, Model model,  @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        model.addAttribute("userDTO", customUserDetails);
+
         CompanyDTO company = companyService.findCompanyById(companyId);
         model.addAttribute("company", company);
-        model.addAttribute("userDTO", customUserDetails);
+
         List<CompanyDTO> popularCompanies = companyService.getCompaniesByFollowerCount();
         model.addAttribute("popularCompanies", popularCompanies);
+
+        List<AdvertisementDTO> advertisements = advertisementService.getAllAdvertisements();
+        model.addAttribute("advertisements", advertisements);
 
         return "company/detail";
     }
