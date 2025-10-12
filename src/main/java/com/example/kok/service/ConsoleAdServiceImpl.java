@@ -2,10 +2,7 @@ package com.example.kok.service;
 
 import com.example.kok.dto.*;
 import com.example.kok.enumeration.RequestStatus;
-import com.example.kok.repository.ConsoleAdNoticeDAO;
-import com.example.kok.repository.ConsoleAdNoticeFileDAO;
-import com.example.kok.repository.PaymentDAO;
-import com.example.kok.repository.PaymentUserDAO;
+import com.example.kok.repository.*;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
@@ -30,6 +27,7 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
     private final S3Service s3Service;
     private final ConsoleAdNoticeDTO consoleAdDTO;
     private final ConsoleAdNoticeFileDAO consoleAdNoticeFileDAO;
+    private final ConsolePaymentDAO consolePaymentDAO;
 
     // 목록
     @Override
@@ -181,6 +179,20 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
     @Override
     public ConsoleAdNoticeDTO getNotice(Long id) {
         return consoleAdDAO.findById(id);
+    }
+
+//    광고 삭제
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteAdvertisement(Long advertisementId) {
+        // 광고와 연결된 파일 완전 삭제
+        consoleAdNoticeFileDAO.deleteAllFilesByAdvertisementId(advertisementId);
+
+        // 광고 관련 결제 삭제
+        consolePaymentDAO.deleteByAdvertisementId(advertisementId);
+
+        // 광고 자체 삭제
+        consoleAdDAO.deleteAdvertisementById(advertisementId);
     }
 
 }

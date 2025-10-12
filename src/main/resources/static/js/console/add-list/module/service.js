@@ -24,5 +24,23 @@ const adNoticeService = (() => {
         return data;
     }
 
-    return {getList:getList}
+    const deleteAd = async (id) => {
+        try {
+            const response = await fetch(`/enterprise-console/ad/${id}`, {
+                method: "DELETE",
+            });
+
+            if (!response.ok) {
+                throw new Error("삭제 요청 실패");
+            }
+
+            const result = await response.text(); // "success"
+            return result;
+        } catch (err) {
+            console.error("광고 삭제 중 오류:", err);
+            return null;
+        }
+    };
+
+    return {getList:getList, deleteAd:deleteAd}
 })();

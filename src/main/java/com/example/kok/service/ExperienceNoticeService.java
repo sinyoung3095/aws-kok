@@ -30,4 +30,7 @@ public interface ExperienceNoticeService {
 
 //    기업별 체험 공고
     public CompanyExperienceNoticeCriteriaDTO getExperienceNoticesByCompanyId(int page, Long companyId, Search search);
+
+//    커뮤니티 쪽 체험 공고 4개 조회
+    public List<ExperienceNoticeDTO> findLatestFourExperience();
 }

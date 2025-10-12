@@ -94,7 +94,8 @@
 
     <!-- 최신 체험 공고 4개 조회 -->
     <select id="selectLatestFour">
-        select c.user_id, c.company_name, cpf.file_id, f.file_path, en.experience_notice_title, en.experience_notice_subtitle, en.created_datetime, en.updated_datetime
+        select c.user_id, c.company_name, cpf.file_id, f.file_path, en.experience_notice_title,
+               en.experience_notice_subtitle, en.created_datetime, en.updated_datetime, en.company_id, en.id
         from tbl_company c
                  join tbl_experience_notice en on c.user_id = en.company_id
                  left join tbl_company_profile_file cpf on c.user_id = cpf.company_id
@@ -107,7 +108,7 @@
     <!-- 기업별 체험 공고 목록 -->
     <select id="selectExperienceNoticeByCompanyId" resultType="ExperienceNoticeDTO">
         select e.id, e.experience_notice_title, e.experience_notice_subtitle, e.experience_notice_etc,
-        e.experience_main_tasks, csc.id as scale_id, csc.company_scale_name, j.job_name
+        e.experience_main_tasks, csc.id as scale_id, csc.company_scale_name, j.job_name, e.company_id
         from tbl_experience_notice e
         join tbl_company c on c.user_id = e.company_id
         left join tbl_company_scale_category_bridge cscb on e.company_id = cscb.company_id

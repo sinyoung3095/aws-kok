@@ -11,6 +11,13 @@ import java.util.List;
 @Mapper
 public interface ConsolePaymentMapper {
 
+//    결제 등록
+    public void insertPayment(ConsolePaymentDTO payment);
+
+//    결제 삭제
+    public void deleteByAdvertisementId(Long advertisementId);
+    public void deletePaymentUserByAdvertisementId(Long advertisementId);
+
 //    결제 목록
     public List<ConsolePaymentDTO> selectPaymentByCompany(@Param("companyId") Long companyId,
                                                              @Param("criteria") Criteria criteria);
