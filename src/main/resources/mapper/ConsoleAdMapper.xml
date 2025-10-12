@@ -57,9 +57,7 @@
             and a.advertisement_request_status = 'accept'
     </select>
 
-    <insert id="insertAdvertisement" useGeneratedKeys="true"
-            keyProperty="id"
-            parameterType="com.example.kok.dto.ConsoleAdNoticeDTO">
+    <insert id="insertAdvertisement" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_advertisement (
             advertisement_main_text,
             advertisement_sub_text,
@@ -78,7 +76,21 @@
             #{advertiseEndDatetime},
             #{companyId}
         )
-        returning id
+    </insert>
+
+    <insert id="insertPayment" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_payment (
+            payment_price,
+            payment_status,
+            advertisement_id,
+            user_id
+        )
+        values (
+            #{paymentPrice},
+            'await',
+            #{advertisementId},
+            #{userId}
+        )
     </insert>
 
     <update id="updateNotice">
@@ -105,5 +117,10 @@
                  left join tbl_payment p on a.id = p.advertisement_id
         where a.id = #{id}
     </select>
+
+    <delete id="deleteById">
+        delete from tbl_advertisement
+        where id = #{id}
+    </delete>
 </mapper>
 

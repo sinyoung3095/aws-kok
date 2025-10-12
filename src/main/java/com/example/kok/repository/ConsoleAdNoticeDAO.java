@@ -41,19 +41,24 @@ public class ConsoleAdNoticeDAO {
         consoleAdMapper.insertAdvertisement(adNoticeDTO);
     }
 
-//    공고 상세
+//    광고 상세
     public ConsoleAdNoticeDTO findDetailById(Long id) {
         return consoleAdMapper.selectAdDetailById(id);
     }
 
-//    공고 수정 등록
+//    광고 수정 등록
     public void editNotice(ConsoleAdNoticeVO adNoticeVO) {
         consoleAdMapper.updateNotice(adNoticeVO);
     }
 
-//    공고 수정 상세
+//    광고 수정 상세
     public ConsoleAdNoticeDTO findById(Long id) {
         return consoleAdMapper.selectById(id);
+    }
+
+//    광고 삭제
+    public void deleteAdvertisementById(Long id) {
+        consoleAdMapper.deleteById(id);
     }
 
 }

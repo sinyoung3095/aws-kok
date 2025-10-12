@@ -98,41 +98,61 @@ compStatus.addEventListener("click", () => {
 });
 
 const adTable = document.querySelector("#ad-list-table");
+
 if (adTable) {
+    // 테이블 전체 클릭 이벤트 위임
     adTable.addEventListener("click", async (e) => {
-        const trs = document.querySelectorAll("#ad-list-table tr.list-tr");
-        trs.forEach((tr) => {
-        const hambugerBtn = tr.querySelector("button.hambuger");
-        const hambugerPopWrap = hambugerBtn
-            ? hambugerBtn.querySelector(".hambuger-pop-wrap")
-            : null;
+        const hambugerBtn = e.target.closest(".hambuger");
+        const redHamBtn = e.target.closest(".red-ham-list");
 
-        if (!hambugerBtn || !hambugerPopWrap) return;
-
-        // hambugerBtn.style.position = "relative";
-        // hambugerPopWrap.style.position = "absolute";
-
-        hambugerBtn.addEventListener("click", (e) => {
+        // 햄버거 버튼 클릭 시 팝업 열기
+        if (hambugerBtn) {
             e.stopPropagation();
 
-            // 모든 팝업 닫기
-            document
-                .querySelectorAll(".hambuger-pop-wrap")
-                .forEach((pop) => (pop.style.display = "none"));
+            document.querySelectorAll(".hambuger-pop-wrap")
+                .forEach(pop => pop.style.display = "none");
 
-            // 버튼 왼쪽 위에 위치시키기
-            const btnOffsetLeft = hambugerBtn.offsetLeft;
-            const btnOffsetTop = hambugerBtn.offsetTop;
+            // 현재 버튼 바로 다음에 있는 팝업 선택
+            const hambugerPopWrap = hambugerBtn.nextElementSibling;
+            if (!hambugerPopWrap) return;
 
-            hambugerPopWrap.style.right =
-                btnOffsetLeft + hambugerBtn.offsetWidth + "px"; // 버튼 오른쪽 옆
-            hambugerPopWrap.style.top = btnOffsetTop + "px"; // 버튼 상단 기준
-
+            // 팝업 위치 조정
+            const rect = hambugerBtn.getBoundingClientRect();
+            hambugerPopWrap.style.position = "absolute";
+            hambugerPopWrap.style.top = "50px";
+            hambugerPopWrap.style.right = "32px";
             hambugerPopWrap.style.display = "block";
-        });
+
+            return;
+        }
+
+        // 삭제 버튼 클릭 시 삭제 실행
+        if (redHamBtn) {
+            const tr = redHamBtn.closest(".list-tr");
+            const adId = tr?.dataset.id;
+            if (!adId) return;
+
+            const confirmDelete = confirm("정말 삭제하시겠습니까?");
+            if (!confirmDelete) return;
+
+            const result = await adNoticeService.deleteAd(adId);
+            if (result === "success") {
+                alert("광고가 삭제되었습니다!");
+                location.reload();
+            } else {
+                alert("삭제 실패! 다시 시도해주세요.");
+            }
+            return;
+        }
     });
+
+    // 외부 클릭 시 팝업 닫기
+    document.addEventListener("click", () => {
+        document.querySelectorAll(".hambuger-pop-wrap")
+            .forEach(pop => (pop.style.display = "none"));
     });
 }
+
 
 // 외부 클릭 시 모든 팝업 닫기
 document.addEventListener("click", (e) => {

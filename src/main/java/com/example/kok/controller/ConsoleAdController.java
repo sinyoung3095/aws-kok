@@ -22,22 +22,13 @@ import java.util.List;
 public class ConsoleAdController {
     private final ConsoleAdService consoleAdService;
 
-//    기업 콘솔 광고 목록
+    //    기업 콘솔 광고 목록
     @GetMapping("/list")
     public String goToList() {
-//        List<ConsoleAdNoticeDTO> latestFour = consoleAdService.findLatestFour();
-//        model.addAttribute("latestFour", latestFour);
-
         return "enterprise-console/console-add-list";
     }
 
-//    기업 콘솔 광고 등록
-//    @GetMapping("/upload")
-//    public String goToUpload() {
-//        return "enterprise-console/console-add-upload";
-//    }
-
-//    기업 콘솔 광고 등록/수정
+    //    기업 콘솔 광고 등록/수정
     @GetMapping(value = {"/create", "edit/{id}"})
     public String goToWrite(HttpServletRequest request, Model model, @PathVariable(required = false) Long id) {
         if(request.getRequestURI().contains("create")){
@@ -60,7 +51,7 @@ public class ConsoleAdController {
             @ModelAttribute ConsoleAdNoticeDTO adNoticeDTO,
             @RequestParam(value = "files", required = false) List<MultipartFile> multipartFiles) {
 
-        System.out.println("📂 파일 개수: " + (multipartFiles == null ? "null" : multipartFiles.size()));
+//        System.out.println("파일 개수: " + (multipartFiles == null ? "null" : multipartFiles.size()));
         adNoticeDTO.setCompanyId(1L);
 
         consoleAdService.registerAdvertisement(adNoticeDTO, multipartFiles);
@@ -73,14 +64,18 @@ public class ConsoleAdController {
             @ModelAttribute ConsoleAdNoticeDTO adNoticeDTO,
             @RequestParam(value = "files", required = false) List<MultipartFile> multipartFiles) {
 
-        System.out.println("📂 수정 시 파일 개수: " + (multipartFiles == null ? "null" : multipartFiles.size()));
+//        System.out.println("수정 시 파일 개수: " + (multipartFiles == null ? "null" : multipartFiles.size()));
         adNoticeDTO.setCompanyId(1L);
 
         consoleAdService.modifyNotice(adNoticeDTO, multipartFiles);
         return "redirect:/enterprise-console/ad/list";
     }
 
-
-
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    public String deleteAdvertisement(@PathVariable("id") Long id) {
+        consoleAdService.deleteAdvertisement(id);
+        return "success";
+    }
 
 }
