@@ -33,4 +33,6 @@ public interface InternNoticeMapper {
 
 //    최신 체험 공고 4개 조회
     public List<InternNoticeDTO> selectLatestFour();
+//    인턴 공고 리스트 조회
+    public List<InternNoticeDTO> selectAllByKeyword(String keyword);
 }

@@ -136,7 +136,7 @@
 }
 
 /* 선택된 버튼 css */
-.pc .sidebar-item-active {
+.pc .sidebar-item.active {
     align-items: center;
     border-radius: 8px;
     background: rgba(86,105,143,0.0600);
@@ -159,7 +159,7 @@
 }
 
 /* 선택된 버튼의 아이콘css */
-.pc .sidebar-item-icon-active {
+.pc .sidebar-item-icon.active {
     justify-content: center;
     align-items: center;
     color: #ffffff;

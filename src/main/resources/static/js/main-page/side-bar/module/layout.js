@@ -11,6 +11,41 @@ const layout = (()=>{
                             </div>
                     </div>`
         })
+        popularWarp.innerHTML=text;
     }
-    return{showPopularCompany:showPopularCompany}
+    const showExperience = (ExperienceNoticeDTO)=>{
+        const experienceWarp = document.getElementById("experienceWarp");
+        let text ='';
+        ExperienceNoticeDTO.forEach((ExperienceNoticeDTO,i)=>{
+            text+=
+                `<div class="search-modal-list-section" data-id="${ExperienceNoticeDTO.id}">
+            <span class="search-modal-list-number">${i+1}</span>
+            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                <div class="search-modal-list-member">
+                    <span class="search-modal-list-name">${ExperienceNoticeDTO.companyName}</span>
+                    <p class="search-modal-list-job">${ExperienceNoticeDTO.experienceNoticeTitle}</p>
+                </div>
+        </div>`
+        });
+        experienceWarp.innerHTML=text;
+
+    }
+    const showIntern = (InternNoticeDTO)=>{
+        const internWarp = document.getElementById("internWarp");
+        let text ='';
+        InternNoticeDTO.forEach((InternNoticeDTO,i)=>{
+            text+=
+                `<div class="search-modal-list-section" data-id="${InternNoticeDTO.id}">
+            <span class="search-modal-list-number">${i+1}</span>
+            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                <div class="search-modal-list-member">
+                    <span class="search-modal-list-name">${InternNoticeDTO.companyName}</span>
+                    <p class="search-modal-list-job">${InternNoticeDTO.internNoticeTitle}</p>
+                </div>
+        </div>`
+        });
+        internWarp.innerHTML=text;
+
+    }
+    return{showPopularCompany:showPopularCompany,showExperience:showExperience,showIntern:showIntern}
 })();

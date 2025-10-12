@@ -22,7 +22,7 @@
                     </a>
                     <button class="sidebar-search">
                         <div class="sidebar-search-text">
-                            <p class="sidebar-search-placeholder">기업, 체험공고, 고용공고</p>
+                            <p class="sidebar-search-placeholder">체험공고, 고용공고</p>
                         </div>
                         <div class="sidebar-search-shortcut">
                             <div class="sidebar-search-key">
@@ -41,9 +41,9 @@
                     <div class="sidebar-menu-list">
                         <div class="start-line">
                             <!-- 체험공고 -->
-                            <a href="">
-                                <div class="sidebar-item-active">
-                                    <div class="sidebar-item-icon-active">
+                            <a onclick="window.location.href='/experience/list'">
+                                <div id="experience" class="sidebar-item">
+                                    <div data-name="experience" class="sidebar-item-icon">
                                         <svg color="foregrounds.surface.inverted" fill="currentColor" height="19.2" role="img" width="19.2" viewBox="0 0 24 24">
                                             <path d="M11 4.85c-2.195-1.022-5.52-1.565-8.633.979A1 1 0 0 0 2 6.603V19a1 1 0 0 0 1.633.774c2.736-2.237 5.734-1.31 7.367-.255zm2 14.669c1.633-1.056 4.63-1.982 7.367.255A1 1 0 0 0 22 19V6.603a1 1 0 0 0-.367-.774C18.52 3.285 15.195 3.828 13 4.849z"></path>
                                         </svg>
@@ -56,9 +56,9 @@
                                 </div>
                             </a>
                             <!-- 인턴공고 -->
-                            <a href="">
-                                <div class="sidebar-item">
-                                    <div class="sidebar-item-icon">
+                            <a onclick="window.location.href='/intern/list'">
+                                <div id="intern" class="sidebar-item">
+                                    <div data-name="intern" class="sidebar-item-icon">
                                         <svg color="foregrounds.neutral.tertiary" fill="currentColor" height="19.2" role="img" width="19.2" viewBox="0 0 24 24">
                                             <path clip-rule="evenodd" d="M11 3a3 3 0 0 0-3 3v1H5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-8a3 3 0 0 0-3-3h-3V6a3 3 0 0 0-3-3zm3 4V6a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v1z" fill-rule="evenodd"></path>
                                         </svg>
@@ -71,9 +71,9 @@
                                 </div>
                             </a>
                             <!-- 커뮤니티 -->
-                            <a href="">
-                                <div class="sidebar-item">
-                                    <div class="sidebar-item-icon">
+                            <a onclick="window.location.href='/community/page'">
+                                <div id="community" class="sidebar-item">
+                                    <div data-name="community" class="sidebar-item-icon">
                                         <svg color="foregrounds.neutral.tertiary" fill="currentColor" height="19.2" role="img" width="19.2" viewBox="0 0 24 24">
                                             <path d="M15 5a3 3 0 0 0-3-3H5a3 3 0 0 0-3 3v9a1 1 0 0 0 1.555.832l2.496-1.664A1 1 0 0 1 6.606 13H7v-1a5 5 0 0 1 5-5h3z"></path>
                                             <path d="M12 9a3 3 0 0 0-3 3v5a3 3 0 0 0 3 3h5.394a1 1 0 0 1 .555.168l2.496 1.664A1 1 0 0 0 22 21v-9a3 3 0 0 0-3-3z"></path>
@@ -87,9 +87,9 @@
                                 </div>
                             </a>
                             <!-- 기업 --> 
-                            <a href="">
-                                <div class="sidebar-item">
-                                    <div class="sidebar-item-icon">
+                            <a onclick="window.location.href='/company/list'">
+                                <div id="company" class="sidebar-item">
+                                    <div data-name="company" class="sidebar-item-icon">
                                         <svg color="foregrounds.neutral.tertiary" fill="currentColor" height="19.2" role="img" width="19.2" viewBox="0 0 24 24">
                                             <path clip-rule="evenodd" d="M16.088 2.134a1 1 0 0 1 1.366.366l4 6.928a1 1 0 1 1-1.732 1l-5.196 3a2 2 0 0 1-2 0l-1.545.892 2.892 5.194a1 1 0 1 1-1.747.973l-2.37-4.255-1.736 4.154a1 1 0 0 1-1.845-.772L7.59 16.23a2 2 0 0 1-1.627-.168l-1.097.634a2 2 0 1 1-2-3.464l1.097-.634a2 2 0 0 1 1-1.732l4.562-2.634a2 2 0 0 1 1-1.732l5.197-3a1 1 0 0 1 .366-1.366" fill-rule="evenodd"></path>
                                         </svg>
@@ -166,9 +166,7 @@
                             <div class="sidebar-login-user-btn">
                                 <img alt="image" width="32" height="32" style="color:transparent;border-radius:999px;cursor:default;max-height:32px;max-width:32px;min-height:32px;min-width:32px;object-fit:contain" srcset="" src="/images/main-page/image.png">
                                 <div class="sidebar-login-user-wrap">
-                                    <span class="sidebar-login-user-name">회원이름</span>
-                                    <!-- 기업회원 경우에 기업명, 일반 회원은 공백 -->
-                                    <p class="sidebar-login-user-company">기업명</p>
+                                    <span class="sidebar-login-user-name" th:text="${userDTO.username}+' 님'"></span>
                                 </div>
                                 <div class="sidebar-login-user-icon-wrap">
                                     <div class="sidebar-login-user-icon">
@@ -197,7 +195,7 @@
                                 <path clip-rule="evenodd" d="M11 4.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4M3.2 11a7.8 7.8 0 1 1 13.852 4.921l3.514 3.514a.8.8 0 1 1-1.132 1.13l-3.513-3.513A7.8 7.8 0 0 1 3.2 11" fill-rule="evenodd"></path>
                             </svg>
                         </div>
-                        <input maxlength="50" placeholder="체험공고, 고용공고" class="search-modal-input" value="">
+                        <input id="search" maxlength="50" placeholder="체험공고, 고용공고" class="search-modal-input" value="">
                         <button class="close-search-modal">
                             <div class="close-search-modal-icon">
                                 <svg color="foregrounds.neutral.primary" fill="currentColor" height="20" role="img" width="20" viewBox="0 0 24 24">
@@ -213,126 +211,19 @@
                                 <div class="search-modal-body-wrap">
                                     <div class="search-modal-group">
                                         <div class="search-modal-group-section-active">
-                                            <p class="search-modal-group-context-active">회원</p>
+                                            <p class="search-modal-group-context-active">체험공고</p>
                                         </div>
                                         <div class="search-modal-group-section">
-                                            <p class="search-modal-group-context">기업</p>
+                                            <p class="search-modal-group-context">인턴공고</p>
                                         </div>
                                     </div>
-                                    <!-- 회원 클릭 시 -->
-                                    <div class="search-modal-list member-list">
-                                        <div class="search-modal-list-section">
-                                            <span class="search-modal-list-number">1</span>
-                                            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            <div class="search-modal-list-member">
-                                                <span class="search-modal-list-name">테스트</span>
-                                                <p class="search-modal-list-job">직군</p>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-list-section">
-                                            <span class="search-modal-list-number">1</span>
-                                            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            <div class="search-modal-list-member">
-                                                <span class="search-modal-list-name">테스트</span>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-list-section">
-                                            <span class="search-modal-list-number">1</span>
-                                            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            <div class="search-modal-list-member">
-                                                <span class="search-modal-list-name">테스트</span>
-                                                <p class="search-modal-list-job">직군</p>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-list-section">
-                                            <span class="search-modal-list-number">1</span>
-                                            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            <div class="search-modal-list-member">
-                                                <span class="search-modal-list-name">테스트</span>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-list-section">
-                                            <span class="search-modal-list-number">1</span>
-                                            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            <div class="search-modal-list-member">
-                                                <span class="search-modal-list-name">테스트</span>
-                                                <p class="search-modal-list-job">직군</p>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-list-section">
-                                            <span class="search-modal-list-number">1</span>
-                                            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            <div class="search-modal-list-member">
-                                                <span class="search-modal-list-name">테스트</span>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-list-section">
-                                            <span class="search-modal-list-number">1</span>
-                                            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            <div class="search-modal-list-member">
-                                                <span class="search-modal-list-name">테스트</span>
-                                                <p class="search-modal-list-job">직군</p>
-                                            </div>
-                                        </div>
+                                    <!-- 체험 공고 클릭 시 -->
+                                    <div id="experienceWarp" class="search-modal-list member-list">
+
                                     </div>
-                                    <!-- 기업 클릭 시(체험공고 순) -->
-                                    <div class="search-modal-list company-list">
-                                        <div class="search-modal-list-section">
-                                            <span class="search-modal-list-number">1</span>
-                                            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            <div class="search-modal-list-member">
-                                                <span class="search-modal-list-name">삼성</span>
-                                                <p class="search-modal-list-job">체험공고 70</p>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-list-section">
-                                            <span class="search-modal-list-number">1</span>
-                                            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            <div class="search-modal-list-member">
-                                                <span class="search-modal-list-name">삼성</span>
-                                                <p class="search-modal-list-job">체험공고 60</p>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-list-section">
-                                            <span class="search-modal-list-number">1</span>
-                                            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            <div class="search-modal-list-member">
-                                                <span class="search-modal-list-name">삼성</span>
-                                                <p class="search-modal-list-job">체험공고 50</p>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-list-section">
-                                            <span class="search-modal-list-number">1</span>
-                                            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            <div class="search-modal-list-member">
-                                                <span class="search-modal-list-name">삼성</span>
-                                                <p class="search-modal-list-job">체험공고 40</p>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-list-section">
-                                            <span class="search-modal-list-number">1</span>
-                                            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            <div class="search-modal-list-member">
-                                                <span class="search-modal-list-name">삼성</span>
-                                                <p class="search-modal-list-job">체험공고 30</p>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-list-section">
-                                            <span class="search-modal-list-number">1</span>
-                                            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            <div class="search-modal-list-member">
-                                                <span class="search-modal-list-name">삼성</span>
-                                                <p class="search-modal-list-job">체험공고 20</p>
-                                            </div>
-                                        </div>
-                                        <div class="search-modal-list-section">
-                                            <span class="search-modal-list-number">1</span>
-                                            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            <div class="search-modal-list-member">
-                                                <span class="search-modal-list-name">삼성</span>
-                                                <p class="search-modal-list-job">체험공고 10</p>
-                                            </div>
-                                        </div>
+                                    <!-- 인턴 공고 클릭 시 -->
+                                    <div id="internWarp" class="search-modal-list company-list">
+
                                     </div>
                                 </div>                               
                                 <!-- 오른쪽 리스트 -->
@@ -342,9 +233,11 @@
                                             <span class="search-modal-company-text">가장 주목받는 기업</span>
                                         </div>
                                         <div class="search-modal-company-all-wrap">
-                                            <button class="search-modal-company-all-button">
-                                                <p class="search-modal-company-all-text">모두 보기</p>
-                                            </button>
+                                            <a onclick="window.location.href='/company/list'">
+                                                <button class="search-modal-company-all-button">
+                                                    <p class="search-modal-company-all-text">모두 보기</p>
+                                                </button>
+                                            </a>
                                         </div>
                                     </div>
                                     <!-- 6개 기업 팔로워 순 -->
@@ -392,7 +285,7 @@
                                     <div class="setting-modal-member-profile-wrap">
                                         <img alt="image" width="32" height="32" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
                                         <div class="setting-modal-profile">
-                                            <p class="setting-modal-member-name">회원이름</p>
+                                            <p class="setting-modal-member-name" th:text="${userDTO.username}">회원이름</p>
                                             <p class="setting-modal-member-set">내 정보 및 로그인</p>
                                         </div>
                                     </div>
@@ -444,19 +337,19 @@
                                             <div class="setting-modal-my-profile-section">
                                                 <div class="setting-modal-profile-text-wrap">
                                                     <span class="setting-modal-profile-text">이름</span>
-                                                    <span class="setting-modal-profile-my-info-text">회원이름</span>
+                                                    <span class="setting-modal-profile-my-info-text" th:text="${userDTO.username}">회원이름</span>
                                                 </div>
                                             </div>
                                             <div class="setting-modal-my-profile-section">
                                                 <div class="setting-modal-profile-text-wrap">
                                                     <span class="setting-modal-profile-text">전화번호</span>
-                                                    <span class="setting-modal-profile-my-info-text">01012345678</span>
+                                                    <span class="setting-modal-profile-my-info-text" th:text="${userDTO.userPhone}">01012345678</span>
                                                 </div>
                                             </div>
                                             <div class="setting-modal-my-profile-section">
                                                 <div class="setting-modal-profile-text-wrap">
                                                     <span class="setting-modal-profile-text">이메일</span>
-                                                    <span class="setting-modal-profile-my-info-text">test@gmail.com</span>
+                                                    <span class="setting-modal-profile-my-info-text" th:text="${userDTO.userEmail}">test@gmail.com</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -529,7 +422,7 @@
                                         <div class="setting-modal-account-check-wrap">
                                             <div class="setting-modal-account-check-text">
                                                 <span class="setting-modal-account-check-main">가입일</span>
-                                                <span class="setting-modal-account-check-sub">2025년 9월 12일 (함께한지 1일째)</span>
+                                                <span class="setting-modal-account-check-sub" th:text="${userDTO.createdDateTime.split(' ')[0]}">2025년 9월 12일 (함께한지 1일째)</span>
                                             </div>     
                                         </div>
                                     </div>                    
@@ -761,5 +654,7 @@
         </div>
     </div>
 </body>
+<script src="/js/main-page/side-bar/module/service.js"></script>
+<script src="/js/main-page/side-bar/module/layout.js"></script>
 <script src="/js/main-page/side-bar/event.js"></script>
 </html>

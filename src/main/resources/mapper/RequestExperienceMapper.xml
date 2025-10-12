@@ -35,12 +35,16 @@
                r.request_experience_member_name,
                r.request_experience_member_email,
                r.request_experience_member_phone,
+               r.request_experience_member_url,
                r.created_datetime
         from tbl_company c
                  join tbl_experience_notice n
                       on c.user_id = n.company_id
                  join tbl_request_experience r
                       on n.id = r.experience_notice_id
-        where r.member_id = #{id};
+        where r.member_id = #{id}
+    <if test="experienceId != null">
+        and r.id = #{experienceId}
+    </if>
     </select>
 </mapper>

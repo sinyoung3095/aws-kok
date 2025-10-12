@@ -1,5 +1,6 @@
 package com.example.kok.repository;
 
+import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.dto.InternNoticeDTO;
 import com.example.kok.mapper.InternNoticeMapper;
 import com.example.kok.util.CompanyNoticeCriteria;
@@ -53,7 +54,10 @@ public class InternNoticeDAO {
     public List<InternNoticeDTO> findLatestFour() {
         return internNoticeMapper.selectLatestFour();
     }
-
+    //    인턴 공고 리스트 조회
+    public List<InternNoticeDTO> findAllByKeyword(String keyword) {
+        return internNoticeMapper.selectAllByKeyword(keyword);
+    };
 }
 
 
