@@ -13,6 +13,20 @@ import java.util.List;
 public class ConsolePaymentDAO {
     private final ConsolePaymentMapper consolePaymentMapper;
 
+//    결제 등록
+    public void insertPayment(ConsolePaymentDTO payment) {
+        consolePaymentMapper.insertPayment(payment);
+    }
+
+//    결제 삭제
+    public void deleteByAdvertisementId(Long advertisementId) {
+        // payment_user 삭제
+        consolePaymentMapper.deletePaymentUserByAdvertisementId(advertisementId);
+
+        // payment 삭제
+        consolePaymentMapper.deleteByAdvertisementId(advertisementId);
+    }
+
 //    결제 목록(전체)
     public List<ConsolePaymentDTO> findAllByCompany(Long companyId, Criteria criteria) {
         return consolePaymentMapper.selectPaymentByCompany(companyId, criteria);

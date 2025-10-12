@@ -23,6 +23,6 @@ public interface ConsoleAdNoticeFileMapper {
     void deleteFilesByAdId(@Param("advertisementId") Long advertisementId);
 
 //    파일 단독 삭제
-    void deleteFileById(@Param("fileId") Long fileId);
+    void deleteFileByAdvertisementId(@Param("advertisementId") Long advertisementId);
 
 }

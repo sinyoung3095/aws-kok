@@ -31,14 +31,12 @@ public class ConsoleAdNoticeFileDAO {
         fileMapper.insertAdBackgroundFile(consoleFileDTO);
     }
 
-    // 광고에 연결된 파일 전체 삭제
-    public void deleteFilesByAdvertisementId(Long advertisementId) {
+    public void deleteAllFilesByAdvertisementId(Long advertisementId) {
+        // 광고파일 연결 삭제
         fileMapper.deleteFilesByAdId(advertisementId);
-    }
 
-    // 파일 단독 삭제
-    public void deleteFile(Long fileId) {
-        fileMapper.deleteFileById(fileId);
+        // 파일 삭제
+        fileMapper.deleteFileByAdvertisementId(advertisementId);
     }
 
 }

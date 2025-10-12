@@ -25,7 +25,7 @@ public class ConsoleAdNoticeDTO {
     private long companyId; // 회사 아이디
     private String createdDateTime;
     private String updatedDateTime;
-    private int paymentPrice; // 금액
+    private long paymentPrice; // 금액
 
 //    private List<MultipartFile> uploadFiles;
     private List<FileDTO> uploadedFiles;

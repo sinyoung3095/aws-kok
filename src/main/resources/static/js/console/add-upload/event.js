@@ -191,6 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const checkBtn = document.querySelector(".confirm-btn");
     checkBtn.addEventListener("click", (e)=>{
         e.preventDefault();
+
         calculatePeriod()
     });
 
@@ -205,14 +206,15 @@ document.addEventListener("DOMContentLoaded", function () {
             // 하나라도 false면 return
             if (!isMainValid || !isSubValid || !isDateValid) return;
 
-            // 모든 유효성 통과 시 실행
-            console.log("등록 처리 실행!");
-
             const payInfo = {
                 price: 100,
                 duration: 2
             }
+
             await pay(payInfo);
+
+            const priceText = document.querySelector(".start-price .price").textContent;
+            const paymentPrice = Number(priceText.replace(/,/g, "").trim());
 
             const data = {
                 advertisementMainText: document.querySelector("#ad-main-text").value,
@@ -220,7 +222,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 advertiseStartDatetime: document.querySelector("#start-date").value,
                 advertiseEndDatetime: document.querySelector("#end-date").value,
                 companyId: 1,
-                paymentPrice: document.querySelector(".start-price .price").textContent,
+                paymentPrice: paymentPrice,
                 files: document.querySelector("#add-background").files
             }
 
