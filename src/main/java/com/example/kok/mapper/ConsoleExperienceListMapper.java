@@ -1,14 +1,13 @@
 package com.example.kok.mapper;
 
 import com.example.kok.dto.ConsoleExperienceListDTO;
-import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
+import com.example.kok.dto.ConsoleExperienceListRequestDTO;
 import com.example.kok.enumeration.Status;
 import com.example.kok.util.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface ConsoleExperienceListMapper {
@@ -33,21 +32,33 @@ public interface ConsoleExperienceListMapper {
                                            @Param("active") boolean active);
 
 //    공고 등록
-    public void insertNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO);
+    public void insertNotice(ConsoleExperienceListRequestDTO noticeRequestDTO);
 
 //    직군 등록
-    public void insertNoticeJobCategory(ConsoleExperienceNoticeRequestDTO noticeRequestDTO);
+    public void insertNoticeJobCategory(ConsoleExperienceListRequestDTO noticeRequestDTO);
 
 //    공고 상세
-    public ConsoleExperienceNoticeRequestDTO selectExperienceDetailById(@Param("id") Long id);
+    public ConsoleExperienceListRequestDTO selectExperienceDetailById(@Param("id") Long id);
 
 //    공고 수정 등록
-    public void updateNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO);
+    public void updateNotice(ConsoleExperienceListRequestDTO noticeRequestDTO);
 
 //    공고 수정 상세
-    ConsoleExperienceNoticeRequestDTO selectById(@Param("id") Long id);
+    ConsoleExperienceListRequestDTO selectById(@Param("id") Long id);
 
 //    직군 수정
-    public void updateNoticeJobCategory(ConsoleExperienceNoticeRequestDTO noticeRequestDTO);
+    public void updateNoticeJobCategory(ConsoleExperienceListRequestDTO noticeRequestDTO);
+
+//    지원서 삭제
+    public void deleteRequestExperienceByNoticeId(Long id);
+
+//    스크랩 삭제
+    public void deleteSaveExperienceByNoticeId(Long id);
+
+//    직군 매핑 삭제
+    public void deleteJobCategoryByNoticeId(Long id);
+
+//    공고 본체 삭제
+    public void deleteExperienceNoticeById(Long id);
 
 }

@@ -98,7 +98,6 @@ compStatus.addEventListener("click", () => {
 });
 
 const adTable = document.querySelector("#ad-list-table");
-
 if (adTable) {
     // 테이블 전체 클릭 이벤트 위임
     adTable.addEventListener("click", async (e) => {

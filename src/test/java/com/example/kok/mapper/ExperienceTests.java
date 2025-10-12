@@ -1,16 +1,12 @@
 package com.example.kok.mapper;
 
 import com.example.kok.dto.CompanyDTO;
-import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
-import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.dto.SaveExperienceNoticeDTO;
 import com.example.kok.repository.CompanyDAO;
 import com.example.kok.repository.ExperienceNoticeDAO;
 import com.example.kok.repository.SaveExperienceNoticeDAO;
 import com.example.kok.service.CompanyService;
 import com.example.kok.service.ExperienceNoticeService;
-import com.example.kok.util.Criteria;
-import com.example.kok.util.Search;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

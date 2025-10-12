@@ -1,10 +1,8 @@
 package com.example.kok.service;
 
 import com.example.kok.dto.ConsoleExperienceListCriteriaDTO;
-import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
+import com.example.kok.dto.ConsoleExperienceListRequestDTO;
 import com.example.kok.enumeration.Status;
-
-import java.util.Map;
 
 public interface ConsoleExperienceListService {
 //    공고 목록
@@ -14,14 +12,17 @@ public interface ConsoleExperienceListService {
     public void updateListStatus(Long noticeId, Status status);
 
 //    공고 상세
-    ConsoleExperienceNoticeRequestDTO getExperienceDetail(Long id);
+    ConsoleExperienceListRequestDTO getExperienceDetail(Long id);
 
 //    공고 등록
-    public void registerNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO);
+    public void registerNotice(ConsoleExperienceListRequestDTO noticeRequestDTO);
 
 //    공고 수정 등록
-    public void modifyNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO);
+    public void modifyNotice(ConsoleExperienceListRequestDTO noticeRequestDTO);
 
 //    공고 수정 상세
-    ConsoleExperienceNoticeRequestDTO getNotice(Long id);
+    ConsoleExperienceListRequestDTO getNotice(Long id);
+
+//    공고 삭제
+    public void deleteExperience(Long id);
 }

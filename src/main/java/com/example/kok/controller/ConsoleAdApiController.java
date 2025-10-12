@@ -1,16 +1,11 @@
 package com.example.kok.controller;
 
 import com.example.kok.dto.*;
-import com.example.kok.enumeration.Status;
 import com.example.kok.service.ConsoleAdService;
-import com.example.kok.service.ConsoleInternNoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 @Slf4j
 @RestController

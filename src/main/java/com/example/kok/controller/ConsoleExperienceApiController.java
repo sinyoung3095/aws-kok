@@ -3,7 +3,7 @@ package com.example.kok.controller;
 import com.example.kok.dto.ConsoleExperienceApplicantCriteriaDTO;
 import com.example.kok.dto.ConsoleExperienceListCriteriaDTO;
 import com.example.kok.dto.ConsoleExperienceListDTO;
-import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
+import com.example.kok.dto.ConsoleExperienceListRequestDTO;
 import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.enumeration.Status;
 import com.example.kok.service.ConsoleExperienceDetailService;
@@ -47,7 +47,7 @@ public class ConsoleExperienceApiController {
 
 //    공고 등록
     @PostMapping("/create")
-    public ResponseEntity<?> createNotice(@RequestBody ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
+    public ResponseEntity<?> createNotice(@RequestBody ConsoleExperienceListRequestDTO noticeRequestDTO) {
         experienceService.registerNotice(noticeRequestDTO);
         return ResponseEntity.ok(noticeRequestDTO);
     }
@@ -55,7 +55,7 @@ public class ConsoleExperienceApiController {
 //    공고 수정
     @PutMapping("/edit/{id}")
     public ResponseEntity<?> updateNotice(@PathVariable Long id,
-                                          @RequestBody ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
+                                          @RequestBody ConsoleExperienceListRequestDTO noticeRequestDTO) {
         noticeRequestDTO.setId(id);
         experienceService.modifyNotice(noticeRequestDTO);
 
@@ -72,6 +72,13 @@ public class ConsoleExperienceApiController {
         }
 
         return ResponseEntity.ok(experienceCriteriaDTO);
+    }
+
+//    삭제 추가
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteNotice(@PathVariable("id") Long id) {
+        experienceService.deleteExperience(id);
+        return ResponseEntity.ok("success");
     }
 
 }

@@ -1,10 +1,7 @@
 package com.example.kok.controller;
 
 import com.example.kok.dto.ConsoleAdNoticeDTO;
-import com.example.kok.dto.ConsoleInternNoticeRequestDTO;
-import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.service.ConsoleAdService;
-import com.example.kok.service.ConsoleInternNoticeService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

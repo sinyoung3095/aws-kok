@@ -48,7 +48,22 @@ const internNoticeService = (() => {
         return data;
     }
 
-    return {getList:getList, updateInternStatus:updateInternStatus}
+    // 삭제
+    const deleteIntern = async (id) => {
+        const response = await fetch(`/api/enterprise-console/intern/${id}`, {
+            method: "DELETE",
+        });
+
+        if (!response.ok) {
+            console.log("삭제 실패")
+        }
+
+        const result = await response.text();
+        console.log("삭제 성공:", result);
+        return result; // "success"
+    };
+
+    return {getList:getList, updateInternStatus:updateInternStatus, deleteIntern:deleteIntern}
 })();
 
 

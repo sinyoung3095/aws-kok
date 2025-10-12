@@ -545,6 +545,7 @@ button.red-ham-list{
     cursor: pointer;
     display: flex;
     position: relative;
+    width: 100%;
 }
 
 div.red-ham-list:hover{

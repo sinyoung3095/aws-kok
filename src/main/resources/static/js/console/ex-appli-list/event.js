@@ -20,7 +20,7 @@ statusButtons.forEach(btn => {
             status = "reject";
         } else {
             status = "";
-        }
+        }``
 
         filter(1);
     });

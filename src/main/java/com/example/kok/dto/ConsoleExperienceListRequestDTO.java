@@ -1,6 +1,5 @@
 package com.example.kok.dto;
 
-import com.example.kok.enumeration.Status;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +12,7 @@ import java.time.LocalDate;
 @Getter @Setter
 @ToString
 @EqualsAndHashCode(of="id")
-public class ConsoleExperienceNoticeRequestDTO {
+public class ConsoleExperienceListRequestDTO {
     private long id;
     private String experienceNoticeTitle; // 공고 제목
     private String experienceNoticeSubtitle; // 공고 부제목
