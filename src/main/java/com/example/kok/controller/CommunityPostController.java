@@ -3,6 +3,7 @@ package com.example.kok.controller;
 import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.PostDTO;
 import com.example.kok.dto.PostsCriteriaDTO;
+import com.example.kok.enumeration.UserRole;
 import com.example.kok.service.CommunityPostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,7 @@ public class CommunityPostController {
     @GetMapping("/post/{id}")
     public ResponseEntity<?> getOne(@PathVariable("id") Long id,
                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        if (customUserDetails == null) {
+        if (customUserDetails == null || customUserDetails.getUserRole() == UserRole.COMPANY) {
             return ResponseEntity.ok(false);
         }
 

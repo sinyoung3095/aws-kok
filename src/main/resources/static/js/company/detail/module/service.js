@@ -7,8 +7,7 @@ const followService = (() => {
 
         const checkExistLogin = await response.json();
         if (checkExistLogin === false) {
-            alert("로그인이 필요한 서비스입니다.");
-            window.location.href = "/member/login";
+            alert("일반 회원만 이용할 수 있습니다.");
             return false;
         }
         return true;
