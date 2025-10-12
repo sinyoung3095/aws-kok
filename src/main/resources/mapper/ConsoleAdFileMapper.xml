@@ -47,11 +47,14 @@
         where advertisement_id = #{advertisementId}
     </delete>
 
-
-    <!-- 이미지 삭제 -->
-    <delete id="deleteFileById">
+    <!-- 파일 자체 삭제 -->
+    <delete id="deleteFileByAdvertisementId">
         delete from tbl_file
-        where id = #{fileId}
+        where id in (
+            select file_id
+            from tbl_advertisement_background_file
+            where advertisement_id = #{advertisementId}
+        )
     </delete>
 </mapper>
 

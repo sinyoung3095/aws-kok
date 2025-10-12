@@ -3,7 +3,6 @@ package com.example.kok.service;
 import com.example.kok.dto.*;
 import com.example.kok.repository.CompanyProfileFileDAO;
 import com.example.kok.repository.ExperienceNoticeDAO;
-import com.example.kok.repository.FileDAO;
 import com.example.kok.repository.SaveExperienceNoticeDAO;
 import com.example.kok.util.CompanyNoticeCriteria;
 import com.example.kok.util.Criteria;
@@ -15,7 +14,6 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -158,5 +156,19 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
         companyExperienceNoticeCriteriaDTO.setCriteria(criteria);
         companyExperienceNoticeCriteriaDTO.setExperiences(notices);
         return companyExperienceNoticeCriteriaDTO;
+    }
+
+    @Override
+    public List<ExperienceNoticeDTO> findLatestFourExperience() {
+        List<ExperienceNoticeDTO> experienceNotices = experienceNoticeDAO.findLatestFour();
+
+        experienceNotices.forEach(experienceNotice -> {
+            if (experienceNotice.getFilePath() != null) {
+                String preSignedUrl = s3Service.getPreSignedUrl(experienceNotice.getFilePath(), Duration.ofMinutes(10));
+                experienceNotice.setFilePath(preSignedUrl);
+            }
+        });
+
+        return experienceNotices;
     }
 }

@@ -17,7 +17,7 @@
     <!-- 기업별 인턴 공고 목록 -->
     <select id="selectInternNoticeByCompanyId" resultType="InternNoticeDTO">
         select i.id, i.intern_notice_title, i.intern_notice_subtitle as internNoticeSubTitle, i.intern_notice_introduce_job,
-        i.intern_main_tasks, i.intern_notice_etc, csc.id as scale_id, csc.company_scale_name, j.job_name
+        i.intern_main_tasks, i.intern_notice_etc, csc.id as scale_id, csc.company_scale_name, j.job_name, i.company_id
         from tbl_intern_notice i
         join tbl_company c on c.user_id = i.company_id
         left join tbl_company_scale_category_bridge cscb on i.company_id = cscb.company_id

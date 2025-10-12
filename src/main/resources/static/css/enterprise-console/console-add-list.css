@@ -512,6 +512,7 @@ div.hambuger-list:hover{
 
 button.hambuger{
     position: relative;
+    cursor: pointer;
 }
 
 svg.hambuger-svg{
@@ -530,7 +531,7 @@ div.bar-hambuger{
 }
 
 div.red-ham-list,
-a.red-ham-list{
+button.red-ham-list{
     user-select: none;
     outline-style: none;
     color: #e7000b;
@@ -541,7 +542,7 @@ a.red-ham-list{
     border-radius: 6px;
     gap: 8px;
     align-items: center;
-    cursor: default;
+    cursor: pointer;
     display: flex;
     position: relative;
 }

@@ -28,13 +28,16 @@ public interface ConsoleAdNoticeMapper {
 //    등록
     public void insertAdvertisement(ConsoleAdNoticeDTO adNoticeDTO);
 
-//    공고 상세
+//    광고 상세
     public ConsoleAdNoticeDTO selectAdDetailById(@Param("id") Long id);
 
-//    공고 수정 등록
+//    광고 수정 등록
     public void updateNotice(ConsoleAdNoticeVO adNoticeVO);
 
-//    공고 수정 상세
+//    광고 수정 상세
     ConsoleAdNoticeDTO selectById(@Param("id") Long id);
+
+//    광고 삭제
+    public void deleteById(@Param("id") Long id);
 
 }

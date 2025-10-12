@@ -43,8 +43,8 @@ public class CommunityController {
 
         model.addAttribute("posts", communityPostService.getList(1, memberId).getPosts());
 
-        List<ExperienceNoticeDTO> latestFour = experienceNoticeService.findLatestFour();
-        model.addAttribute("latestFour", latestFour);
+        List<ExperienceNoticeDTO> latestFourExperience = experienceNoticeService.findLatestFourExperience();
+        model.addAttribute("latestFour", latestFourExperience);
 
         List<AdvertisementDTO> advertisements = advertisementService.getAllAdvertisements();
         model.addAttribute("advertisements", advertisements);
