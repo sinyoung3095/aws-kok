@@ -142,4 +142,18 @@
         order by created_datetime desc
         limit 4
     </select>
+    <!--  인턴 공고 리스트 조회 -->
+    <select id="selectAllByKeyword">
+        select i.intern_notice_title,i.id,c.company_name from tbl_intern_notice i join tbl_company c
+        on i.company_id = c.user_id
+        <if test="keyword!=null">
+            where c.company_name like concat('%', #{keyword}, '%')
+            or  i.intern_notice_title like concat('%', #{keyword}, '%')
+            or  i.intern_main_tasks like concat('%', #{keyword}, '%')
+            or  i.intern_notice_subtitle like concat('%', #{keyword}, '%')
+            or  i.intern_notice_introduce_job like concat('%', #{keyword}, '%')
+            or  i.intern_notice_etc like concat('%', #{keyword}, '%')
+        </if>
+        order by created_datetime desc
+    </select>
 </mapper>

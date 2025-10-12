@@ -38,10 +38,12 @@ public class MainpageController {
     @GetMapping("login-side-bar")
     public  String goToLoginSideBar(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model){
         model.addAttribute("userDTO", customUserDetails);
+        log.info(customUserDetails.toString());
         return "main-page/login-side-bar";
     }
     @GetMapping("404-page")
     public String goTo404Page(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model){
+
         model.addAttribute("userDTO", customUserDetails);
         return "main-page/404-page";
     }
