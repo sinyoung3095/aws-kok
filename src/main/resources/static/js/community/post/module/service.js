@@ -13,8 +13,7 @@ const postService = (() => {
 
         const checkExistMember = await response.json();
         if (checkExistMember === false) {
-            alert("게시글에 참여하려면 로그인이 필요합니다.");
-            window.location.href = "/member/login";
+            alert("일반 회원만 이용할 수 있습니다.");
             return null;
         }
 
@@ -75,8 +74,7 @@ const postService = (() => {
         const checkExistMember = await response.json();
 
         if (checkExistMember === false) {
-            alert("게시글에 참여하려면 로그인이 필요합니다.");
-            window.location.href = "/member/login";
+            alert("일반 회원만 이용할 수 있습니다.");
             return null;
         }
 
@@ -106,9 +104,11 @@ const postService = (() => {
         });
 
         const checkExistMember = await response.json();
+        const reportModal = document.querySelector(".report-7");
+
         if (checkExistMember === false) {
-            alert("게시글에 참여하려면 로그인이 필요합니다.");
-            window.location.href = "/member/login";
+            alert("일반 회원만 이용할 수 있습니다.");
+            reportModal.style.display = "none";
             return null;
         }
 
