@@ -22,6 +22,7 @@ CREATE TABLE tbl_request_experience (
 );
 
 select * from tbl_request_experience;
+select * from tbl_member;
 
 select * from tbl_request_experience_file;
 

@@ -208,8 +208,10 @@ const layout = (() => {
                                                 <div class="flex-right"></div>
                                             </div>
                                             <!--  배경 이미지  -->`;
-                                            if(adminAdvertisementDTO.advertisementBackgroundFiles.filePath && adminAdvertisementDTO.advertisementBackgroundFiles.filePath.length > 0) {
-                                                text += `<img src="${adminAdvertisementDTO.advertisementBackgroundFiles.filePath}" height="100%" width="100%" alt="">`;
+                                            if(adminAdvertisementDTO.advertisementBackgroundFiles && adminAdvertisementDTO.advertisementBackgroundFiles.length > 0) {
+                                                adminAdvertisementDTO.advertisementBackgroundFiles.forEach((file) => {
+                                                    text += `<img src="${file.filePath}" height="100%" width="100%" alt="">`;
+                                                });
                                             }
         text += `
                                         </div>
