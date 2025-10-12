@@ -61,7 +61,6 @@ public class ConsoleAdController {
             @ModelAttribute ConsoleAdNoticeDTO adNoticeDTO,
             @RequestParam(value = "files", required = false) List<MultipartFile> multipartFiles) {
 
-//        System.out.println("수정 시 파일 개수: " + (multipartFiles == null ? "null" : multipartFiles.size()));
         adNoticeDTO.setCompanyId(1L);
 
         consoleAdService.modifyNotice(adNoticeDTO, multipartFiles);

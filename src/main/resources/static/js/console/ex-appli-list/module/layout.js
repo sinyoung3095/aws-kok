@@ -6,10 +6,10 @@ const experienceDatailLayout = (() => {
                  <div class="card-title">
                  <!-- 전체 총 명수-->
                  </div>
-                <button class="download">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="download-svg"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-                    이력서 다운로드
-                </button>
+<!--                <button class="download">-->
+<!--                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="download-svg"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>-->
+<!--                    이력서 다운로드-->
+<!--                </button>-->
             </div>
             <div class="card-content">
                 <table class="list-list-table">

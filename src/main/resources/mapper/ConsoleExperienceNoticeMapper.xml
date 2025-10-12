@@ -74,7 +74,7 @@
     </select>
 
     <!-- 공고 상태 업데이트 (활성/비활성 전환) -->
-    <update id="updateListStatus">
+    <update id="updateNoticeStatus">
         update tbl_experience_notice
         set experience_notice_status = #{status}::status,
             updated_datetime = now()

@@ -199,6 +199,127 @@ p.top-p{
     margin-top: 4px;
 }
 
+/* 팝업 */
+.popup-container{
+    display: none;
+    pointer-events: auto;
+    animation: .15s ease;
+    background-color:#00000080;
+    z-index: 50;
+    inset:0px;
+    position: fixed;
+}
+
+.popup-container.active {
+    display: block;
+}
+
+.pop-content{
+    pointer-events: auto;
+    animation: .15s ease;
+    max-width: 512px;
+    transition-duration: .2s;
+    padding:24px;
+    background-color:#ffffff;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    gap:16px;
+    translate: -50% -50%;
+    width: 100%;
+    z-index: 50;
+    left: 50%;
+    top: 50%;
+    position: fixed;
+}
+
+.pop-title-wrap{
+    text-align: left;
+    gap: 8px;
+    flex-direction: column;
+    display: flex;
+}
+
+.pop-title{
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.55555;
+}
+
+.pop-desc{
+    color: #737373;
+    font-size: 14px;
+    line-height: 1.42857;
+}
+
+.pop-buttons{
+    justify-content: flex-end;
+    flex-direction: row;
+    gap: 8px;
+    display: flex;
+}
+
+.btn-no{
+    outline-style: none;
+    transition-property: color, box-shadow;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    transition-duration: .2s;
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 1px 2px 0 #0000000d;
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.42857;
+    padding-block: 8px;
+    padding-inline: 16px;
+    background-color: #ffffff;
+    border-color:#e5e5e5;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 8px;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    height: 36px;
+    display: inline-flex;
+}
+
+.btn-no:hover{
+    background-color: #fafafa;
+}
+
+.btn-yes{
+    outline-style: none;
+    transition-property: color, box-shadow;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    transition-duration: .2s;
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: 14px;
+    color: #fafafa;
+    line-height: 1.42857;
+    padding-block: 8px;
+    padding-inline: 16px;
+    background-color: #0aa5ff;
+    border-color:#e5e5e5;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 8px;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    height: 36px;
+    display: inline-flex;
+}
+
+.btn-yes:hover{
+    background-color: #40b9ff;
+}
+
+/*뒤로가기 버튼*/
 div.back-back{
     gap: 16px;
     align-items: center;
@@ -238,9 +359,15 @@ svg.back-svg{
     pointer-events: none
 }
 
+
+/*드롭다운 버튼*/
+.select-container {
+    position: relative;
+}
+
 .job {
     position: absolute;
-    bottom: 100%;   /* 버튼 바로 위에 */
+    top: 40px;
     left: 0;
     width: 100%;
     display: none;
@@ -256,6 +383,9 @@ svg.back-svg{
     cursor: default;
 }
 
+.job.active {
+    display: block;
+}
 
 .job-1 {
     display: block;         /* flex → block */
@@ -268,6 +398,7 @@ svg.back-svg{
 .job-1::-webkit-scrollbar {
     display: none;          /* 크롬/사파리 */
 }
+
 .job-1 {
     -ms-overflow-style: none;  /* IE, Edge */
     scrollbar-width: none;     /* Firefox */
@@ -295,6 +426,14 @@ svg.back-svg{
     transition: background-color 0.2s;
 }
 
+.job-3.active {
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center right 10px;
+    background-size: 24px 24px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23000000' viewBox='0 0 24 24'><path clip-rule='evenodd' d='M20.066 5.935a.8.8 0 0 1 0 1.13l-11 11a.8.8 0 0 1-1.131 0l-4-4a.8.8 0 0 1 1.13-1.13L8.5 16.369 18.935 5.935a.8.8 0 0 1 1.13 0' fill-rule='evenodd'/></svg>");
+}
+
 .job-3:hover {
     background-color: #e5e5e5; /* hover 배경 */
 }
@@ -310,6 +449,7 @@ svg.back-svg{
 }
 
 .job-6 {
+    margin: 0;
     font-size: 14px;
     line-height: 18px;         /* 세로 공간 여유 */
     color: rgba(18,19,20,1);
