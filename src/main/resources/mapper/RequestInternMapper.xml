@@ -47,7 +47,9 @@
                  join tbl_company c
                       on ino.company_id = c.user_id
         where ri.member_id = #{id}
-
+        <if test="internId != null">
+            and r.id = #{internId}
+        </if>
     </select>
 
 </mapper>

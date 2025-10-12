@@ -2,6 +2,7 @@ package com.example.kok.mapper;
 
 import com.example.kok.dto.RequestExperienceDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,5 +14,5 @@ public interface RequestExperienceMapper {
 //    멤버별 지원서 조회
     public List<RequestExperienceDTO> selectRequestById(Long id);
 //    지원 내역 목록 조회
-public List<RequestExperienceDTO> selectRequestByUserId(Long id);
+public List<RequestExperienceDTO> selectRequestByUserId(@Param("id") Long id,@Param("experienceId") Long experienceId);
 }

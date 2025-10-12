@@ -6,6 +6,7 @@ const searchCloseBtn = document.querySelector(".close-search-modal");
 
 openSearchBtn.addEventListener("click", async () => {
     searchModal.classList.add("active");
+    await service.getExperience(layout.showExperience);
     await service.getPopularCompany(layout.showPopularCompany);
 });
 
@@ -18,37 +19,52 @@ searchModal.addEventListener("click", (e) => {
         searchModal.classList.remove("active");
     }
 });
+// 사이드바 대카테고리
+document.querySelectorAll(".sidebar-item").forEach((el) => {
+    console.log(el.id);
+    if(window.location.href.includes(el.id)){
+        el.classList.add("active");}
+    else{
+        el.classList.remove("active");}
+});
+document.querySelectorAll(".sidebar-item-icon").forEach((el) => {
+
+    if(window.location.href.includes(el.dataset.name)){
+        el.classList.add("active");}
+    else{
+        el.classList.remove("active");}
+});
 
 // 사이드바 대카테고리
-document.querySelectorAll(".sidebar-menu .start-line a").forEach((link) => {
-    link.addEventListener("click", function (e) {
-        // 임시 페이지 이동 막기
-        // 서버 구상 시 제외하시면 됩니다
-        e.preventDefault();
-
-        document.querySelectorAll(".sidebar-item-active").forEach((el) => {
-            el.classList.replace("sidebar-item-active", "sidebar-item");
-        });
-        document.querySelectorAll(".sidebar-item-icon-active").forEach((el) => {
-            el.classList.replace(
-                "sidebar-item-icon-active",
-                "sidebar-item-icon"
-            );
-        });
-
-        const item = this.querySelector(".sidebar-item, .sidebar-item-active");
-        const icon = this.querySelector(
-            ".sidebar-item-icon, .sidebar-item-icon-active"
-        );
-
-        if (item) item.classList.replace("sidebar-item", "sidebar-item-active");
-        if (icon)
-            icon.classList.replace(
-                "sidebar-item-icon",
-                "sidebar-item-icon-active"
-            );
-    });
-});
+// document.querySelectorAll(".sidebar-menu .start-line a").forEach((link) => {
+//     link.addEventListener("click", function (e) {
+//         // 임시 페이지 이동 막기
+//         // 서버 구상 시 제외하시면 됩니다
+//         e.preventDefault();
+//
+//         document.querySelectorAll(".sidebar-item-active").forEach((el) => {
+//             el.classList.replace("sidebar-item-active", "sidebar-item");
+//         });
+//         document.querySelectorAll(".sidebar-item-icon-active").forEach((el) => {
+//             el.classList.replace(
+//                 "sidebar-item-icon-active",
+//                 "sidebar-item-icon"
+//             );
+//         });
+//
+//         const item = this.querySelector(".sidebar-item, .sidebar-item-active");
+//         const icon = this.querySelector(
+//             ".sidebar-item-icon, .sidebar-item-icon-active"
+//         );
+//
+//         if (item) item.classList.replace("sidebar-item", "sidebar-item-active");
+//         if (icon)
+//             icon.classList.replace(
+//                 "sidebar-item-icon",
+//                 "sidebar-item-icon-active"
+//             );
+//     });
+// });
 
 // 사업자 번호 더보기/접기
 const businessToggleBtn = document.querySelector(".sidebar-business-toggle");
@@ -72,7 +88,7 @@ const memberList = document.querySelector(".member-list");
 const companyList = document.querySelector(".company-list");
 
 tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
+    tab.addEventListener("click", async () => {
         const selected = tab.textContent.trim();
 
         tabs.forEach((t) => {
@@ -93,15 +109,43 @@ tabs.forEach((tab) => {
             p.classList.add("search-modal-group-context-active");
         }
 
-        if (selected === "회원") {
+        if (selected === "체험공고") {
             memberList.style.display = "flex";
             companyList.style.display = "none";
+            await service.getExperience(layout.showExperience);
         } else {
             memberList.style.display = "none";
             companyList.style.display = "flex";
+            await service.getIntern(layout.showIntern);
         }
     });
 });
+
+// 검색 기능
+const search = document.getElementById("search");
+search.addEventListener("keyup",async (e)=>{
+
+    if(e.key==="Enter"){
+        let keyword ='';
+        keyword = search.value;
+        console.log(tabs[0].classList.value.includes("active"));
+        if(tabs[0].classList.value.includes("active")){
+            console.log(keyword);
+            document.getElementById("experienceWarp").innerHTML='';
+            const result = await service.getExperience(layout.showExperience,keyword);
+            console.log(result);
+            if(result.id===null){
+                alert("검색하신 내용이 없습니다.")
+            }
+        }else{
+            document.getElementById("internWarp").innerHTML='';
+            const result = await service.getIntern(layout.showIntern,keyword);
+            if(result.id===null) {
+                alert("검색하신 내용이 없습니다.")
+            }
+        }
+    }
+})
 
 // 사이드바 설정 모달
 const settingBtn = document.querySelector(".sidebar-setting");

@@ -55,4 +55,8 @@ public class ExperienceNoticeDAO {
     public List<ExperienceNoticeDTO> selectListById(Long userId) {
         return experienceNoticeMapper.selectListById(userId);
     };
+//    체험 공고 리스트 조회
+    public List<ExperienceNoticeDTO> findAllByKeyword(String keyword) {
+    return experienceNoticeMapper.selectAllByKeyword(keyword);
+};
 }

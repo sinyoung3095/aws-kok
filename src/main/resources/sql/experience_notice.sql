@@ -59,3 +59,8 @@ values ('체험 제목26', '체험 부제목26', '직무 소개1', '참고사항
 
 insert into tbl_experience_notice (experience_notice_title, experience_notice_subtitle, experience_notice_introduce_job, experience_notice_etc, experience_start_date, experience_end_date, company_id, experience_main_tasks, experience_notice_start_date, experience_notice_end_date)
 values ('체험 제목26', '체험 부제목26', '직무 소개1', '참고사항1', '2025-09-25', '2025-09-26', 5, '주요업무1', '2025-09-25', '2025-11-26');
+
+select e.experience_notice_title,e.id,c.company_name from tbl_experience_notice e join tbl_company c
+on e.company_id = c.user_id
+where e.experience_notice_title LIKE '%체험%'
+order by created_datetime desc;
