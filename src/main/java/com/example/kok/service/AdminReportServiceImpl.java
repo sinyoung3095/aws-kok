@@ -60,7 +60,7 @@ public class AdminReportServiceImpl implements AdminReportService {
         adminReportDTO.setRelativeDate(relativeDate);
 
         List<PostFileDTO> files = communityPostFileDAO.findAllByPostId(adminReportDTO.getPostId());
-        files.forEach(file -> {
+        files.forEach((file) -> {
             file.setPostFilePath(s3Service.getPreSignedUrl(file.getPostFilePath(), Duration.ofMinutes(5)));
         });
         adminReportDTO.setPostFiles(files);
@@ -71,7 +71,9 @@ public class AdminReportServiceImpl implements AdminReportService {
 //    신고 게시글 삭제
     @Override
     public void deleteReportPost(Long id) {
-        List<PostFileDTO> postFiles = communityPostFileDAO.findAllByPostId(id);
+        AdminReportDTO adminReportDTO = adminReportDAO.reportDetail(id);
+
+        List<PostFileDTO> postFiles = communityPostFileDAO.findAllByPostId(adminReportDTO.getPostId());
         postFiles.forEach((postFile) -> {
             s3Service.deleteFile(postFile.getPostFilePath());
         });

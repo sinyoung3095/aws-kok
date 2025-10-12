@@ -24,7 +24,7 @@
                             </span>
                         </div>
                         <a class="app-name d-flex justify-content-between align-items-center">
-                            <span>Test님</span>
+                            <span th:text="${admin.username}"></span>
                         </a>
                     </div>
                 </div>
@@ -158,8 +158,8 @@
                             <!-- 상단 관리자 이메일 -->
                             <div class="user-menu">
                                 <div class="user-menu-wrapper d-flex align-items-center cursor-pointer" id="user-menu-handler">
-                                    <div class="user-avatar">T</div>
-                                    <div class="user-menu-email">test@gmail.com</div>
+                                    <div class="user-avatar">E</div>
+                                    <div class="user-menu-email" th:text="${admin.userEmail}"></div>
                                 </div>
                                 <!-- 리스트가 보여질 때 -->
                                 <!-- <div class="user-menu-content dropdown-menu dropdown-menu-right show" style="position: absolute; transform: translate3d(1698px, 62px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-end"> -->
