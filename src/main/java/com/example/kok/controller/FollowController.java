@@ -1,6 +1,7 @@
 package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
+import com.example.kok.enumeration.UserRole;
 import com.example.kok.service.FollowService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,7 @@ public class FollowController {
 
     @PostMapping("/{companyId}")
     public ResponseEntity<?> follow(@AuthenticationPrincipal CustomUserDetails userDetails, @PathVariable Long companyId) {
-        if(userDetails == null) {
+        if(userDetails == null || userDetails.getUserRole() == UserRole.COMPANY) {
             return ResponseEntity.ok(false);
         }
         followService.follow(userDetails.getId(), companyId);

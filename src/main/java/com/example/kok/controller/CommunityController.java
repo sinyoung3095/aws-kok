@@ -3,6 +3,7 @@ package com.example.kok.controller;
 import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.AdvertisementDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
+import com.example.kok.enumeration.UserRole;
 import com.example.kok.service.AdvertisementService;
 import com.example.kok.service.CommunityPostService;
 import com.example.kok.service.ExperienceNoticeService;
@@ -36,6 +37,8 @@ public class CommunityController {
         if (customUserDetails != null) {
             memberId = customUserDetails.getId();
             model.addAttribute("userDTO", customUserDetails);
+            model.addAttribute("isMember", customUserDetails.getUserRole() == UserRole.MEMBER);
+            model.addAttribute("isCompany", customUserDetails.getUserRole() == UserRole.COMPANY);
 
             memberService.findMembersByMemberId(memberId)
                     .ifPresent(userMemberDTO -> model.addAttribute("member", userMemberDTO));

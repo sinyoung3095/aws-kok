@@ -1,6 +1,7 @@
 package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
+import com.example.kok.enumeration.UserRole;
 import com.example.kok.service.CommunityReportService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,7 @@ public class CommunityReportController {
     public ResponseEntity<?> reportPost(@PathVariable Long postId,
                                         @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
-        if (customUserDetails == null) {
+        if (customUserDetails == null || customUserDetails.getUserRole() == UserRole.COMPANY) {
             return ResponseEntity.ok(false);
         }
 

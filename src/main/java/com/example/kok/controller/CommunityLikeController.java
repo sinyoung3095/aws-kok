@@ -2,6 +2,7 @@ package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.PostLikeDTO;
+import com.example.kok.enumeration.UserRole;
 import com.example.kok.service.CommunityLikeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,7 @@ public class CommunityLikeController {
     @PostMapping
     public ResponseEntity<?> postLike(@RequestBody PostLikeDTO postLikeDTO,
                                       @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        if(customUserDetails == null) {
+        if(customUserDetails == null || customUserDetails.getUserRole() == UserRole.COMPANY) {
             return ResponseEntity.ok(false);
         }
 

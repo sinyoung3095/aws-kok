@@ -16,18 +16,18 @@
     <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
 </head>
 <body>
-    <div id="main-content" class="main-content" style="height: 100%;">
-        <th:block th:if="${member == null}">
+    <div id="main-content" class="main-content">
+        <th:block th:if="${userDTO == null}">
             <div th:replace="~{main-page/side-bar}"></div>
         </th:block>
-        <th:block th:if="${member != null}">
+        <th:block th:if="${userDTO != null}">
             <div th:replace="~{main-page/login-side-bar}"></div>
         </th:block>
         <main class="main">
-            <th:block th:if="${member == null}">
+            <th:block th:if="${userDTO == null}">
                 <div th:replace="~{main-page/header}"></div>
             </th:block>
-            <th:block th:if="${member != null}">
+            <th:block th:if="${userDTO != null}">
                 <div th:replace="~{main-page/login-header}"></div>
             </th:block>
             <div class="main-0">
@@ -54,7 +54,7 @@
                     </div>
                     <div class="etc">
                         <!-- 프로필 -->
-                        <div class="etc-1" th:if="${member != null}">
+                        <div class="etc-1" th:if="${isMember}">
                             <div class="etc-2">
                                 <div class="etc-3">
                                     <img alt="" width="60" height="60" src="/images/mypage/default.webp" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
@@ -80,8 +80,21 @@
                                 글쓰기
                             </button>
                         </div>
+                        <div class="etc-1" th:if="${isCompany}">
+                            <div class="etc-2">
+                                <div class="etc-3">
+                                    <img alt="" width="60" height="60" src="/images/mypage/default.webp" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+                                </div>
+                                <div class="etc-4">
+                                    <div class="etc-5">
+                                        <p class="etc-6" th:text="${userDTO.username}"></p>
+                                    </div>
+                                    <p class="etc-7" th:text="${userDTO.userRole}"></p>
+                                </div>
+                            </div>
+                        </div>
                         <!-- 비 로그인 상태 -->
-                        <div class="etc-1" th:if="${member == null}">
+                        <div class="etc-1" th:if="${userDTO == null}">
                             <div class="etc-2">
                                 <div class="etc-4">
                                     <div class="etc-5">
@@ -301,7 +314,7 @@
 
 
                     <div class="hide-1">
-                        <button type="button" class="btn-write btn-primary popup-trigger" data-target="#post-write-popup" style="width: 70px;height: 40px;">글쓰기</button>
+                        <button type="button" class="btn-write btn-primary popup-trigger" data-target="#post-write-popup" style="width: 70px; height: 40px; margin-bottom: 50px;">글쓰기</button>
                     </div>
                     <div class="change">
                         <div class="del-1">
