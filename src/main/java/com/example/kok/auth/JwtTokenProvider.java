@@ -1,9 +1,6 @@
 package com.example.kok.auth;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.Cookie;
@@ -163,12 +160,29 @@ public class JwtTokenProvider {
 
         return refreshToken;
     }
+    //    쿠키와 Redis에서 각 RefreshToken을 가져와서 비교
+    public boolean checkRefreshTokenBetweenCookieAndRedis(String username, String cookieRefreshToken){
+        String redisRefreshToken = getRefreshToken(username);
+        return redisRefreshToken.equals(redisRefreshToken);
+    }
+
+    public boolean checkRefreshTokenBetweenCookieAndRedis(String username, String provider, String cookieRefreshToken){
+        String redisRefreshToken = getRefreshToken(username, provider);
+        return redisRefreshToken.equals(redisRefreshToken);
+    }
 
     public void deleteRefreshToken(String username) {
         redisTemplate.delete(REFRESH_TOKEN_PREFIX + username);
     }
     public void deleteRefreshToken(String username,String provider) {
         redisTemplate.delete(REFRESH_TOKEN_PREFIX +provider+"_"+ username);
+    }
+    public String getRefreshToken(String username) {
+        return (String) redisTemplate.opsForValue().get(REFRESH_TOKEN_PREFIX + username);
+    }
+
+    public String getRefreshToken(String username, String provider) {
+        return (String) redisTemplate.opsForValue().get(REFRESH_TOKEN_PREFIX + provider + "_" + username);
     }
 
 
@@ -244,5 +258,16 @@ public class JwtTokenProvider {
     private String getBlackListTokenKey(String token) {
 
         return DigestUtils.md5DigestAsHex(token.getBytes());
+    }
+    public boolean isTokenExpired(String token){
+        try {
+            Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+            Date expiration = claims.getExpiration();
+            return expiration.before(new Date());
+        } catch (ExpiredJwtException e){
+            return true;
+        } catch (Exception e){
+            return true;
+        }
     }
 }

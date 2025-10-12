@@ -1,6 +1,7 @@
 package com.example.kok.mapper;
 
 import com.example.kok.dto.UserMemberDTO;
+import com.example.kok.repository.MemberAlarmSettingDAO;
 import com.example.kok.repository.MemberDAO;
 import com.example.kok.repository.RequestExperienceDAO;
 import com.example.kok.service.MemberService;
@@ -23,11 +24,24 @@ public class MainpageTests {
     private MemberDAO memberDAO;
     @Autowired
     private RequestExperienceDAO requestExperienceDAO;
+    @Autowired
+    private MemberAlarmSettingDAO  memberAlarmSettingDAO;
 
     @Test
     public void mainpageTest(){
         long id = 2;
-        log.info(requestExperienceDAO.selectAllRequestById(id).toString());
+    }
+    @Test
+    public void updateTest(){
+        String keyword = "member_post_like_alarm";
+        Long id = 2L;
+        memberAlarmSettingDAO.updateByKeywordToActive(id, keyword);
+    }
+    @Test
+    public void updateTest2(){
+        String keyword = "member_post_like_alarm";
+        Long id = 2L;
+        memberAlarmSettingDAO.updateByKeywordToInactive(id, keyword);
     }
 
 }

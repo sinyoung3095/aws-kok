@@ -2,6 +2,7 @@ package com.example.kok.auth;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -48,6 +49,39 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 log.info("Authentication in SecurityContext: {}", SecurityContextHolder.getContext().getAuthentication());
             } else {
                 log.warn("Token is not valid");
+                if(token != null && jwtTokenProvider.isTokenExpired(token)){
+                    String cookieRefreshToken = null;
+                    String provider = null;
+
+                    if(request.getCookies() != null) {
+                        for (Cookie cookie : request.getCookies()) {
+                            if("refreshToken".equals(cookie.getName())){
+                                cookieRefreshToken = cookie.getValue();
+                            }
+                            if("provider".equals(cookie.getName())){
+                                provider = cookie.getValue();
+                            }
+                        }
+                    }
+                    String username = jwtTokenProvider.getUserName(cookieRefreshToken);
+//                    일반 로그인: provider(null), 키 값은 username만 필요
+//                    OAuth 로그인: provider(존재), 키 값은 username과 provider 둘 다 필요
+//                    위 상황에 따라 redis에서 refresh토큰의 key값이 다르기 때문에 각자 알맞게 검사해준다.
+                    boolean checkRefreshToken = provider != null ? jwtTokenProvider.checkRefreshTokenBetweenCookieAndRedis(username, cookieRefreshToken, provider)
+                            : jwtTokenProvider.checkRefreshTokenBetweenCookieAndRedis(username, cookieRefreshToken);
+
+                    if(checkRefreshToken) {
+                        if (cookieRefreshToken != null && jwtTokenProvider.validateToken(cookieRefreshToken)) {
+                            CustomUserDetails customUserDetails = (CustomUserDetails) jwtTokenProvider.getAuthentication(cookieRefreshToken).getPrincipal();
+                            String accessToken = jwtTokenProvider.createAccessToken(customUserDetails.getUsername());
+                            jwtTokenProvider.createRefreshToken(customUserDetails.getUsername());
+
+                            response.setHeader("Authorization", "Bearer " + accessToken);
+                            response.sendRedirect(request.getRequestURI());
+                            return;
+                        }
+                    }
+                }
             }
         } else {
             log.warn("No token found");

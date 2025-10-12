@@ -35,3 +35,4 @@ values
     (24, 'naver', null, '사진 취미'),
     (25, 'kok', null, '간단 프로필 없음'),
     (26, 'kok', null, '간단 프로필 없음');
+select * from tbl_member;
