@@ -11,4 +11,20 @@
         from tbl_member_alarm_setting
         where member_id=#{memberId}
     </select>
+<!--  멤버 id로 알람 테이블 전체 조회  -->
+    <select id="selectAllByMemberId">
+        select *
+        from tbl_member_alarm_setting
+        where member_id=#{memberId}
+    </select>
+    <update id="updateByKeywordToActive">
+        update tbl_member_alarm_setting
+        set ${keyword} = 'active'
+        where id = ${id}
+    </update>
+    <update id="updateByKeywordToInactive">
+        update tbl_member_alarm_setting
+        set ${keyword} = 'inactive'
+        where id = ${id}
+    </update>
 </mapper>

@@ -118,25 +118,25 @@ public class AuthController {
     }
 
 //    리프레시 토큰으로 엑세스 토큰 발급
-//    @GetMapping("refresh")
-//    public Map<String, String> refresh(@CookieValue(value = "refreshToken", required = false) String token){
-//        String username = jwtTokenProvider.getUserName(token);
-//        String refreshToken = jwtTokenProvider.getRefreshToken(username);
-//        if(refreshToken == null || !jwtTokenProvider.validateToken(refreshToken)){
-//            throw new RuntimeException("리프레시 토큰이 유효하지 않습니다.");
-//        }
-//
-//        CustomUserDetails customUserDetails = (CustomUserDetails) jwtTokenProvider.getAuthentication(refreshToken).getPrincipal();
-//        String accessToken = jwtTokenProvider.createAccessToken(customUserDetails.getUsername());
-//
-//        jwtTokenProvider.deleteRefreshToken(username);
-//        jwtTokenProvider.createRefreshToken(customUserDetails.getUsername());
-//
-//        Map<String, String> tokenMap = new HashMap<>();
-//        tokenMap.put("accessToken", accessToken);
-//
-//        return tokenMap;
-//    }
+    @GetMapping("refresh")
+    public Map<String, String> refresh(@CookieValue(value = "refreshToken", required = false) String token){
+        String username = jwtTokenProvider.getUserName(token);
+        String refreshToken = jwtTokenProvider.getRefreshToken(username);
+        if(refreshToken == null || !jwtTokenProvider.validateToken(refreshToken)){
+            throw new RuntimeException("리프레시 토큰이 유효하지 않습니다.");
+        }
+
+        CustomUserDetails customUserDetails = (CustomUserDetails) jwtTokenProvider.getAuthentication(refreshToken).getPrincipal();
+        String accessToken = jwtTokenProvider.createAccessToken(customUserDetails.getUsername());
+
+        jwtTokenProvider.deleteRefreshToken(username);
+        jwtTokenProvider.createRefreshToken(customUserDetails.getUsername());
+
+        Map<String, String> tokenMap = new HashMap<>();
+        tokenMap.put("accessToken", accessToken);
+
+        return tokenMap;
+    }
 //
 //    @GetMapping("/info")
 //    public MemberDTO getMyInfo(HttpServletRequest request) {

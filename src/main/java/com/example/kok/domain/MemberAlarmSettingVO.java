@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 public class MemberAlarmSettingVO extends Period{
     private Long id;
     private Long memberId;
-    private Status companyPostAlarm;
+    private Status memberPostLikeAlarm;
     private Status memberCommentAlarm;
     private Status memberReplyAlarm;
     private Status requestStatusAlarm;

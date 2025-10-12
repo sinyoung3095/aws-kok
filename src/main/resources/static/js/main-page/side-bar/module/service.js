@@ -42,5 +42,60 @@ const service = (()=>{
 
         return InternNoticeDTO;
     }
-    return {getPopularCompany:getPopularCompany,getExperience:getExperience,getIntern:getIntern}
+    const getAlarm = async ()=>{
+        const response = await fetch("/api/main/alarm");
+        const alarmDTO = await response.json();
+        const setting = document.getElementsByClassName("setting-modal-alarm-button");
+        const check = document.getElementsByClassName("setting-modal-alarm-button-check");
+
+        if(alarmDTO.memberPostLikeAlarm !=="active"){
+            setting[0].classList.toggle("off");
+            check[0].classList.toggle("off");
+        }
+        if(alarmDTO.memberCommentAlarm !=="active"){
+            setting[1].classList.toggle("off");
+            check[1].classList.toggle("off");
+        }
+        if(alarmDTO.memberReplyAlarm !=="active"){
+            setting[2].classList.toggle("off");
+            check[2].classList.toggle("off");
+        }
+        if(alarmDTO.request_status_alarm !=="active"){
+            setting[3].classList.toggle("off");
+            check[3].classList.toggle("off");
+        }
+        if(alarmDTO.company_notice_alarm !=="active"){
+            setting[4].classList.toggle("off");
+            check[4].classList.toggle("off");
+        }
+
+    }
+    const setActive = async (keyword)=>{
+        const response = await fetch("/api/main/active",{
+            method:'PATCH',
+            body: JSON.stringify(keyword),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || "Fetch error");
+        }
+    }
+    const setInactive = async (keyword)=>{
+        console.log(keyword);
+        const response = await fetch("/api/main/inactive",{
+            method:'PATCH',
+            body: JSON.stringify(keyword),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || "Fetch error");
+        }
+    }
+    return {getPopularCompany:getPopularCompany,getExperience:getExperience,getIntern:getIntern,getAlarm:getAlarm,setActive:setActive,setInactive:setInactive}
 })();

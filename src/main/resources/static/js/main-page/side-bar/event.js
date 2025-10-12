@@ -175,14 +175,20 @@ if (settingModal) {
         }
     });
 }
-
+service.getAlarm();
 // 알림 설정 토글
 document.querySelectorAll(".setting-modal-alarm-button").forEach((button) => {
     const check = button.querySelector(".setting-modal-alarm-button-check");
 
-    button.addEventListener("click", () => {
+    button.addEventListener("click", async () => {
         button.classList.toggle("off");
         check.classList.toggle("off");
+        if(button.classList.contains("off")){
+            console.log(button.dataset.keyword);
+            await service.setInactive({keyword:button.dataset.keyword});
+
+        }else{ await service.setActive({keyword:button.dataset.keyword});
+            }
     });
 });
 
