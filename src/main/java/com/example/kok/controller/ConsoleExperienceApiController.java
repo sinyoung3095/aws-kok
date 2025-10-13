@@ -1,17 +1,20 @@
 package com.example.kok.controller;
 
-import com.example.kok.dto.ConsoleExperienceApplicantCriteriaDTO;
-import com.example.kok.dto.ConsoleExperienceListCriteriaDTO;
-import com.example.kok.dto.ConsoleExperienceListDTO;
-import com.example.kok.dto.ConsoleExperienceListRequestDTO;
+import com.example.kok.dto.*;
 import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.enumeration.Status;
+import com.example.kok.service.ConsoleExperienceApplicationService;
 import com.example.kok.service.ConsoleExperienceDetailService;
 import com.example.kok.service.ConsoleExperienceListService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.kok.service.S3Service;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -20,6 +23,9 @@ import org.springframework.web.bind.annotation.*;
 public class ConsoleExperienceApiController {
     private final ConsoleExperienceListService experienceService;
     private final ConsoleExperienceDetailService experienceDetailService;
+    private final ConsoleExperienceApplicationService consoleExperienceApplicationService;
+    private final S3Service s3Service;
+
 
 //    공고 목록
     @GetMapping("/list/{companyId}/{page}")
@@ -80,5 +86,31 @@ public class ConsoleExperienceApiController {
         experienceService.deleteExperience(id);
         return ResponseEntity.ok("success");
     }
+
+//    여러 명의 지원자 상세 조회
+    @PostMapping("/{experienceNoticeId}/applicants/files")
+    public ResponseEntity<List<String>> getApplicantsFileUrls(
+            @PathVariable Long experienceNoticeId,
+            @RequestBody List<Long> memberIdList) {
+
+        List<String> downloadUrls = new ArrayList<>();
+
+        for (Long memberId : memberIdList) {
+            var file = consoleExperienceApplicationService.getApplicantDetail(memberId, experienceNoticeId);
+
+            if (file.getFilePath() != null && file.getFileName() != null) {
+                String downloadUrl = s3Service.getPreSignedDownloadUrl(
+                        file.getFilePath(),
+                        file.getFileName(),
+                        Duration.ofMinutes(5)
+                );
+                downloadUrls.add(downloadUrl);
+                log.info("🎯 PreSigned URL 발급됨: {}", downloadUrl);
+            }
+        }
+
+        return ResponseEntity.ok(downloadUrls);
+    }
+
 
 }
