@@ -122,30 +122,30 @@ tabs.forEach((tab) => {
 });
 
 // 검색 기능
-const search = document.getElementById("search");
-search.addEventListener("keyup",async (e)=>{
-
-    if(e.key==="Enter"){
-        let keyword ='';
-        keyword = search.value;
-        console.log(tabs[0].classList.value.includes("active"));
-        if(tabs[0].classList.value.includes("active")){
-            console.log(keyword);
-            document.getElementById("experienceWarp").innerHTML='';
-            const result = await sideService.getExperience(sideLayout.showExperience,keyword);
-            console.log(result);
-            if(result.id===null){
-                alert("검색하신 내용이 없습니다.")
-            }
-        }else{
-            document.getElementById("internWarp").innerHTML='';
-            const result = await sideService.getIntern(sideLayout.showIntern,keyword);
-            if(result.id===null) {
-                alert("검색하신 내용이 없습니다.")
-            }
-        }
-    }
-})
+// const search = document.getElementById("search");
+// search.addEventListener("keyup",async (e)=>{
+//
+//     if(e.key==="Enter"){
+//         let keyword ='';
+//         keyword = search.value;
+//         console.log(tabs[0].classList.value.includes("active"));
+//         if(tabs[0].classList.value.includes("active")){
+//             console.log(keyword);
+//             document.getElementById("experienceWarp").innerHTML='';
+//             const result = await sideService.getExperience(sideLayout.showExperience,keyword);
+//             console.log(result);
+//             if(result.id===null){
+//                 alert("검색하신 내용이 없습니다.")
+//             }
+//         }else{
+//             document.getElementById("internWarp").innerHTML='';
+//             const result = await sideService.getIntern(sideLayout.showIntern,keyword);
+//             if(result.id===null) {
+//                 alert("검색하신 내용이 없습니다.")
+//             }
+//         }
+//     }
+// })
 
 // 사이드바 설정 모달
 const settingBtn = document.querySelector(".sidebar-setting");
@@ -175,7 +175,7 @@ if (settingModal) {
         }
     });
 }
-sideService.getAlarm();
+// sideService.getAlarm();
 // 알림 설정 토글
 document.querySelectorAll(".setting-modal-alarm-button").forEach((button) => {
     const check = button.querySelector(".setting-modal-alarm-button-check");

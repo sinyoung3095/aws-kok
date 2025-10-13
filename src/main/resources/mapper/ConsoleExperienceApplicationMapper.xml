@@ -3,7 +3,7 @@
 <mapper namespace="com.example.kok.mapper.ConsoleExperienceApplicationMapper">
     <!-- 체험 상세 - 지원자 조회 -->
     <select id="selectApplicationDetail">
-        select
+        select distinct
             re.id as request_id,
             re.request_experience_status,
             re.created_datetime as request_datetime,
@@ -23,17 +23,20 @@
             join tbl_experience_notice en
                 on re.experience_notice_id = en.id
             left join tbl_member_storage_file msf
-                      on msf.member_id = u.id
+                  on msf.member_id = u.id
             left join tbl_file f
-                      on msf.file_id = f.id
+                  on msf.file_id = f.id
         where re.member_id = #{memberId}
             and en.id = #{experienceNoticeId}
         order by re.id desc
+        limit 1
     </select>
 
+    <!-- 이력서 -->
     <select id="selectResumeFileByMemberId" resultType="com.example.kok.dto.FileDTO">
         select
             f.id,
+            f.file_origin_name,
             f.file_path,
             f.file_name
         from tbl_request_experience re
@@ -43,5 +46,20 @@
                   on ref.file_id = f.id
         where re.member_id = #{memberId}
           and re.experience_notice_id = #{experienceNoticeId}
+    </select>
+
+    <select id="selectApplicantsByNoticeId">
+        select
+            re.id as request_id,
+            re.member_id as user_id,
+            re.request_experience_status,
+            u.user_name,
+            u.user_email,
+            u.user_phone,
+            re.created_datetime
+        from tbl_request_experience re
+                 join tbl_user u on re.member_id = u.id
+        where re.experience_notice_id = #{experienceNoticeId}
+        order by re.id desc
     </select>
 </mapper>

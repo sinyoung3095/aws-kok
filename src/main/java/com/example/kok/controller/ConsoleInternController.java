@@ -1,5 +1,7 @@
 package com.example.kok.controller;
 
+import com.example.kok.auth.CustomUserDetails;
+import com.example.kok.dto.ConsoleInternApplicantDTO;
 import com.example.kok.dto.ConsoleInternApplicantDTO;
 import com.example.kok.dto.ConsoleInternListDTO;
 import com.example.kok.dto.ConsoleInternListRequestDTO;
@@ -9,11 +11,14 @@ import com.example.kok.service.ConsoleInternListService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -49,13 +54,19 @@ public class ConsoleInternController {
 
 //    기업 콘솔 인턴 지원서 목록
     @GetMapping("/applicate-list/{internNoticeId}")
-    public String goToApplicateList(Model model,
-                                    @PathVariable("internNoticeId") Long internNoticeId) {
+    public String goToApplicateList(@AuthenticationPrincipal CustomUserDetails userDetails,
+                                    @PathVariable("internNoticeId") Long internNoticeId,
+                                    Model model) {
 
         ConsoleInternListDTO internDetail = consoleInternDetailService.getDetail(internNoticeId);
 
+        List<ConsoleInternApplicantDTO> applicants  =
+                consoleInternApplicationService.getApplicantsByNoticeId(internNoticeId);
+
+        model.addAttribute("userDetails", userDetails);
         model.addAttribute("internDetail", internDetail);
         model.addAttribute("internNoticeId", internNoticeId);
+        model.addAttribute("memberId", applicants.get(0).getUserId()); //지원자 id
         return "enterprise-console/console-intern-applicate-list";
     }
 
@@ -64,20 +75,23 @@ public class ConsoleInternController {
     @GetMapping("/application/{internNoticeId}/{memberId}")
     public String goToApplication(@PathVariable("internNoticeId") Long internNoticeId,
                                   @PathVariable("memberId") Long memberId,
+                                  @AuthenticationPrincipal CustomUserDetails userDetails,
                                   Model model) {
 
         ConsoleInternApplicantDTO applicantDetail =
                 consoleInternApplicationService.getApplicantDetail(memberId, internNoticeId);
 
+        model.addAttribute("userDetails", userDetails);
         model.addAttribute("applicantDetail", applicantDetail);
+        model.addAttribute("memberId", memberId); //지원자 id
 
         return "enterprise-console/console-intern-application";
     }
 
-    //    기업 콘솔 인턴 지원서
-    @GetMapping("/application")
-    public String goToApplication() {
-        return "enterprise-console/console-intern-application";
-    }
+//    기업 콘솔 인턴 지원서
+//    @GetMapping("/application")
+//    public String goToApplication() {
+//        return "enterprise-console/console-intern-application";
+//    }
 
 }

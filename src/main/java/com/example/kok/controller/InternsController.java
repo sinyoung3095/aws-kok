@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/interns/**")
+@RequestMapping("/api/interns")
 @RequiredArgsConstructor
 public class InternsController {
     private final InternNoticeService internNoticeService;

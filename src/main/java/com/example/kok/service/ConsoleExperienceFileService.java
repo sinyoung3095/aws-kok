@@ -9,11 +9,11 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ResumeFileService {
+public class ConsoleExperienceFileService {
     private final ConsoleExperienceApplicationDAO resumeFileDAO;
 
 //    조회
-    public Optional<FileDTO> getFile(Long memberId, Long experienceNoticeId) {
+    public Optional<FileDTO> getDownloadUrl(Long memberId, Long experienceNoticeId) {
         return resumeFileDAO.findResumeFileByMemberId(memberId, experienceNoticeId);
     }
 
