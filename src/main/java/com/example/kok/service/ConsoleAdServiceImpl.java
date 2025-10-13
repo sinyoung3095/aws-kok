@@ -104,8 +104,6 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
                 consoleFileDTO.setFileId(fileDTO.getId());
                 consoleFileDTO.setAdvertisementId(consoleAdDTO.getId());
 
-                System.out.println("🧩 연결하려는 광고 ID: " + consoleAdDTO.getId());
-                System.out.println("🧩 연결하려는 파일 ID: " + fileDTO.getId());
 
                 // 광고-파일 연결
                 consoleAdNoticeFileDAO.linkFileToAdvertisement(consoleFileDTO);

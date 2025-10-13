@@ -1,0 +1,64 @@
+package com.example.kok.mapper;
+
+import com.example.kok.dto.ConsoleInternListRequestDTO;
+import com.example.kok.dto.ConsoleInternListDTO;
+import com.example.kok.enumeration.Status;
+import com.example.kok.util.Criteria;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+@Mapper
+public interface ConsoleInternListMapper {
+
+//    공고 목록
+    public List<ConsoleInternListDTO> selectInternByCompany(@Param("companyId") Long companyId,
+                                                            @Param("criteria") Criteria criteria,
+                                                            @Param("status") Status status,
+                                                            @Param("keyword") String keyword);
+
+//    공고 개수(전체, 모집중)
+    public int selectCountByCompany(@Param("companyId") Long companyId,
+                                    @Param("status") Status status,
+                                    @Param("keyword") String keyword);
+
+//    공고 상태 변경
+    public void updateNoticeStatus(@Param("noticeId") Long noticeId,
+                                 @Param("status") Status status);
+
+//    지원자개수(활성화 공고 지원자, 누적 지원자)
+    public int selectRequestCountByCompany(@Param("companyId") Long companyId,
+                                           @Param("active") boolean active);
+
+//    공고 등록
+    public void insertNotice(ConsoleInternListRequestDTO noticeRequestDTO);
+
+//    직군 등록
+    public void insertNoticeJobCategory(ConsoleInternListRequestDTO noticeRequestDTO);
+
+//    공고 상세
+    public ConsoleInternListRequestDTO selectInternDetailById(@Param("id") Long id);
+
+//    공고 수정 등록
+    public void updateNotice(ConsoleInternListRequestDTO noticeRequestDTO);
+
+//    공고 수정 상세
+    ConsoleInternListRequestDTO selectById(@Param("id") Long id);
+
+//    직군 수정
+    public void updateNoticeJobCategory(ConsoleInternListRequestDTO noticeRequestDTO);
+
+//    지원서 삭제
+    public void deleteRequestInternByNoticeId(Long id);
+
+//    스크랩 삭제
+    public void deleteSaveInternByNoticeId(Long id);
+
+//    직군 매핑 삭제
+    public void deleteJobCategoryByNoticeId(Long id);
+
+//    공고 본체 삭제
+    public void deleteInternNoticeById(Long id);
+
+}

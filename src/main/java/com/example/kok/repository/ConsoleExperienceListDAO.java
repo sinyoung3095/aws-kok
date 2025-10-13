@@ -1,8 +1,7 @@
 package com.example.kok.repository;
 
-import com.example.kok.dto.ConsoleExperienceListCriteriaDTO;
 import com.example.kok.dto.ConsoleExperienceListDTO;
-import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
+import com.example.kok.dto.ConsoleExperienceListRequestDTO;
 import com.example.kok.enumeration.Status;
 import com.example.kok.mapper.ConsoleExperienceListMapper;
 import com.example.kok.util.Criteria;
@@ -10,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 @Repository
 @RequiredArgsConstructor
@@ -48,34 +46,52 @@ public class ConsoleExperienceListDAO {
     }
 
 //    공고 등록
-    public void createNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
+    public void createNotice(ConsoleExperienceListRequestDTO noticeRequestDTO) {
         consoleExperienceMapper.insertNotice(noticeRequestDTO);
     }
 
 //    직군 등록
-    public void createNoticeJobCategory(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
+    public void createNoticeJobCategory(ConsoleExperienceListRequestDTO noticeRequestDTO) {
         consoleExperienceMapper.insertNoticeJobCategory(noticeRequestDTO);
     }
 
 //    공고 상세
-    public ConsoleExperienceNoticeRequestDTO findDetailById(Long id) {
+    public ConsoleExperienceListRequestDTO findDetailById(Long id) {
         return consoleExperienceMapper.selectExperienceDetailById(id);
     }
 
 //    공고 수정 등록
-    public void editNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
+    public void editNotice(ConsoleExperienceListRequestDTO noticeRequestDTO) {
         consoleExperienceMapper.updateNotice(noticeRequestDTO);
     }
 
 //    직군 수정
-public void editNoticeJobCategory(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
-    consoleExperienceMapper.updateNoticeJobCategory(noticeRequestDTO);
-}
+    public void editNoticeJobCategory(ConsoleExperienceListRequestDTO noticeRequestDTO) {
+        consoleExperienceMapper.updateNoticeJobCategory(noticeRequestDTO);
+    }
 
 //    공고 수정 상세
-    public ConsoleExperienceNoticeRequestDTO findById(Long id) {
+    public ConsoleExperienceListRequestDTO findById(Long id) {
         return consoleExperienceMapper.selectById(id);
     }
 
+//    지원서 삭제
+    public void deleteRequestExperienceByNoticeId(Long id) {
+        consoleExperienceMapper.deleteRequestExperienceByNoticeId(id);
+    }
 
+//    스크랩 삭제
+    public void deleteSaveExperienceByNoticeId(Long id) {
+        consoleExperienceMapper.deleteSaveExperienceByNoticeId(id);
+    }
+
+//    직군 매핑 삭제
+    public void deleteJobCategoryByNoticeId(Long id) {
+        consoleExperienceMapper.deleteJobCategoryByNoticeId(id);
+    }
+
+//    공고 본체 삭제
+    public void deleteExperienceNoticeById(Long id) {
+        consoleExperienceMapper.deleteExperienceNoticeById(id);
+    }
 }

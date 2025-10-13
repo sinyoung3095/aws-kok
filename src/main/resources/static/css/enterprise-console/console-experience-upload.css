@@ -1150,3 +1150,7 @@ li.page-li > a.active{
     background-size: cover;
     transform: translateY(-50%);
 }
+
+.no-data td {
+    padding:40px 0;
+}

@@ -14,15 +14,15 @@ public interface ConsoleAdNoticeFileMapper {
     List<FileDTO> selectAdBackgroundFileByAdId(@Param("advertisementId") Long advertisementId);
 
 //    파일 등록
-    void insertFile(FileDTO fileDTO);
+    public void insertFile(FileDTO fileDTO);
 
 //    광고 파일 연결
-    void insertAdBackgroundFile(ConsoleAdNoticeFileDTO consoleFileDTO);
+    public void insertAdBackgroundFile(ConsoleAdNoticeFileDTO consoleFileDTO);
 
 //    광고 파일 삭제
-    void deleteFilesByAdId(@Param("advertisementId") Long advertisementId);
+    public void deleteFilesByAdId(@Param("advertisementId") Long advertisementId);
 
-//    파일 단독 삭제
-    void deleteFileByAdvertisementId(@Param("advertisementId") Long advertisementId);
+//    파일 자체 삭제
+    public void deleteFileByAdvertisementId(@Param("advertisementId") Long advertisementId);
 
 }

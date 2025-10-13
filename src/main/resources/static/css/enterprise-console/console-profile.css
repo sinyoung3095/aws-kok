@@ -223,7 +223,7 @@ div.profile-main-inner-2{
 
 div.profile-head{
     padding-inline: 24px;
-    gap: 6px;
+    gap: 24px;
     align-items: flex-start;
     grid-template-rows: auto auto;
     grid-auto-rows: min-content;

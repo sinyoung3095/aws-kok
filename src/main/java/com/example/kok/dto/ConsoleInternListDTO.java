@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Getter @Setter
 @ToString
 @EqualsAndHashCode(of="id")
-public class ConsoleInternNoticeDTO {
+public class ConsoleInternListDTO {
     private long id;
     private String internNoticeTitle;
     private String internNoticeSubtitle;

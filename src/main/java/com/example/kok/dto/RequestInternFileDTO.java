@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Getter @Setter
 @ToString
 @NoArgsConstructor
-@EqualsAndHashCode(of ="id")
+@EqualsAndHashCode(of ="fileId")
 public class RequestInternFileDTO {
     private long fileId;
     private long requestInternId;

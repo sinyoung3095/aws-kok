@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.kok.mapper.ConsoleBackgroundFileMapper">
+<mapper namespace="com.example.kok.mapper.ConsoleProfileBackgroundFileMapper">
     <select id="selectBackgroundFileByCompanyId">
         select
             f.id,
-            f.file_origin_name as file_origin_name,
-            f.file_name as file_name,
-            f.file_path as file_path,
-            f.file_size as file_size,
-            f.file_content_type as file_content_type,
+            f.file_origin_name,
+            f.file_name,
+            f.file_path,
+            f.file_size,
+            f.file_content_type,
             f.created_datetime,
             f.updated_datetime
         from tbl_file f
@@ -18,7 +18,7 @@
         order by f.created_datetime desc
     </select>
 
-    <!-- 파일 등록 -->
+    <!-- 이미지 등록 -->
     <insert id="insertFile" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_file (
             file_origin_name,
@@ -35,16 +35,26 @@
         )
     </insert>
 
-    <!-- 파일 연결 -->
+    <!-- 이미지 연결 -->
     <insert id="insertBackgroundFile">
         insert into tbl_company_background_file (file_id, company_id)
         values (#{fileId}, #{companyId})
     </insert>
 
-    <!-- 파일 삭제 -->
-    <delete id="deleteBackgroundFileByCompanyId">
-        delete from tbl_advertisement_background_file
+    <!-- 이미지 삭제 -->
+    <delete id="deleteFilesByProfileId">
+        delete from tbl_company_background_file
         where company_id = #{companyId}
+    </delete>
+
+    <!-- 파일 자체 삭제 -->
+    <delete id="deleteFileByCompanyId">
+        delete from tbl_file
+        where id in (
+            select file_id
+            from tbl_company_background_file
+            where company_id = #{companyId}
+        )
     </delete>
 </mapper>
 

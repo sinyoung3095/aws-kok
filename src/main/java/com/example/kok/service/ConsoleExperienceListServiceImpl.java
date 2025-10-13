@@ -2,7 +2,7 @@ package com.example.kok.service;
 
 import com.example.kok.dto.ConsoleExperienceListCriteriaDTO;
 import com.example.kok.dto.ConsoleExperienceListDTO;
-import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
+import com.example.kok.dto.ConsoleExperienceListRequestDTO;
 import com.example.kok.enumeration.Status;
 import com.example.kok.repository.ConsoleExperienceListDAO;
 import com.example.kok.util.Criteria;
@@ -52,13 +52,13 @@ public class ConsoleExperienceListServiceImpl implements ConsoleExperienceListSe
 
 //    공고 상세
     @Override
-    public ConsoleExperienceNoticeRequestDTO getExperienceDetail(Long id) {
+    public ConsoleExperienceListRequestDTO getExperienceDetail(Long id) {
         return consoleExperienceDAO.findDetailById(id);
     }
 
     @Override
     @Transactional
-    public void registerNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
+    public void registerNotice(ConsoleExperienceListRequestDTO noticeRequestDTO) {
 //        공고 등록
         consoleExperienceDAO.createNotice(noticeRequestDTO);
 
@@ -68,7 +68,7 @@ public class ConsoleExperienceListServiceImpl implements ConsoleExperienceListSe
 
     @Override
     @Transactional
-    public void modifyNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
+    public void modifyNotice(ConsoleExperienceListRequestDTO noticeRequestDTO) {
 //        공고 수정
         consoleExperienceDAO.editNotice(noticeRequestDTO);
 
@@ -78,8 +78,17 @@ public class ConsoleExperienceListServiceImpl implements ConsoleExperienceListSe
 
 //    공고 수정 상세
     @Override
-    public ConsoleExperienceNoticeRequestDTO getNotice(Long id) {
+    public ConsoleExperienceListRequestDTO getNotice(Long id) {
         return consoleExperienceDAO.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteExperience(Long id) {
+        consoleExperienceDAO.deleteRequestExperienceByNoticeId(id);
+        consoleExperienceDAO.deleteSaveExperienceByNoticeId(id);
+        consoleExperienceDAO.deleteJobCategoryByNoticeId(id);
+        consoleExperienceDAO.deleteExperienceNoticeById(id);
     }
 
 }

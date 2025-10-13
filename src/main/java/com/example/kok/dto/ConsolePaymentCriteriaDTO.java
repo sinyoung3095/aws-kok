@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-@EqualsAndHashCode(of ="id")
+//@EqualsAndHashCode(of ="id")
 public class ConsolePaymentCriteriaDTO {
     private List<ConsolePaymentDTO> payments;
     private int totalCount;

@@ -2,7 +2,7 @@ package com.example.kok.controller;
 
 import com.example.kok.dto.ConsoleExperienceApplicantDTO;
 import com.example.kok.dto.ConsoleExperienceListDTO;
-import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
+import com.example.kok.dto.ConsoleExperienceListRequestDTO;
 import com.example.kok.service.ConsoleExperienceApplicationService;
 import com.example.kok.service.ConsoleExperienceDetailService;
 import com.example.kok.service.ConsoleExperienceListService;
@@ -35,10 +35,10 @@ public class ConsoleExperienceController {
     public String goToWrite(HttpServletRequest request, Model model, @PathVariable(required = false) Long id) {
         if(request.getRequestURI().contains("create")){
             model.addAttribute("page","create");
-            model.addAttribute("notice", new ConsoleExperienceNoticeRequestDTO());
+            model.addAttribute("notice", new ConsoleExperienceListRequestDTO());
             return "enterprise-console/console-experience-update";
         }
-        ConsoleExperienceNoticeRequestDTO notice = consoleExperienceListService.getNotice(id);
+        ConsoleExperienceListRequestDTO notice = consoleExperienceListService.getNotice(id);
 
         model.addAttribute("page","edit");
         model.addAttribute("id", id);

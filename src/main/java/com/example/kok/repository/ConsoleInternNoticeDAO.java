@@ -1,9 +1,9 @@
 package com.example.kok.repository;
 
-import com.example.kok.dto.ConsoleInternNoticeDTO;
-import com.example.kok.dto.ConsoleInternNoticeRequestDTO;
+import com.example.kok.dto.ConsoleInternListDTO;
+import com.example.kok.dto.ConsoleInternListRequestDTO;
 import com.example.kok.enumeration.Status;
-import com.example.kok.mapper.ConsoleInternNoticeMapper;
+import com.example.kok.mapper.ConsoleInternListMapper;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -13,10 +13,10 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ConsoleInternNoticeDAO {
-    private final ConsoleInternNoticeMapper consoleInternMapper;
+    private final ConsoleInternListMapper consoleInternMapper;
 
 //    공고 목록(전체)
-    public List<ConsoleInternNoticeDTO> findAllByCompany(Long companyId, Criteria criteria, Status status, String keyword) {
+    public List<ConsoleInternListDTO> findAllByCompany(Long companyId, Criteria criteria, Status status, String keyword) {
         return consoleInternMapper.selectInternByCompany(companyId, criteria, status, keyword);
     }
 
@@ -46,34 +46,52 @@ public class ConsoleInternNoticeDAO {
     }
 
 //    공고 등록
-    public void createNotice(ConsoleInternNoticeRequestDTO noticeRequestDTO) {
+    public void createNotice(ConsoleInternListRequestDTO noticeRequestDTO) {
         consoleInternMapper.insertNotice(noticeRequestDTO);
     }
 
 //    직군 등록
-    public void createNoticeJobCategory(ConsoleInternNoticeRequestDTO noticeRequestDTO) {
+    public void createNoticeJobCategory(ConsoleInternListRequestDTO noticeRequestDTO) {
         consoleInternMapper.insertNoticeJobCategory(noticeRequestDTO);
     }
 
 //    공고 상세
-    public ConsoleInternNoticeRequestDTO findDetailById(Long id) {
+    public ConsoleInternListRequestDTO findDetailById(Long id) {
         return consoleInternMapper.selectInternDetailById(id);
     }
 
 //    공고 수정 등록
-    public void editNotice(ConsoleInternNoticeRequestDTO noticeRequestDTO) {
+    public void editNotice(ConsoleInternListRequestDTO noticeRequestDTO) {
         consoleInternMapper.updateNotice(noticeRequestDTO);
     }
 
 //    직군 수정
-public void editNoticeJobCategory(ConsoleInternNoticeRequestDTO noticeRequestDTO) {
+public void editNoticeJobCategory(ConsoleInternListRequestDTO noticeRequestDTO) {
     consoleInternMapper.updateNoticeJobCategory(noticeRequestDTO);
 }
 
 //    공고 수정 상세
-    public ConsoleInternNoticeRequestDTO findById(Long id) {
+    public ConsoleInternListRequestDTO findById(Long id) {
         return consoleInternMapper.selectById(id);
     }
 
+//    지원서 삭제
+    public void deleteRequestInternByNoticeId(Long id) {
+        consoleInternMapper.deleteRequestInternByNoticeId(id);
+    }
 
+//    스크랩 삭제
+    public void deleteSaveInternByNoticeId(Long id) {
+        consoleInternMapper.deleteSaveInternByNoticeId(id);
+    }
+
+//    직군 매핑 삭제
+    public void deleteJobCategoryByNoticeId(Long id) {
+        consoleInternMapper.deleteJobCategoryByNoticeId(id);
+    }
+
+//    공고 본체 삭제
+    public void deleteInternNoticeById(Long id) {
+        consoleInternMapper.deleteInternNoticeById(id);
+    }
 }

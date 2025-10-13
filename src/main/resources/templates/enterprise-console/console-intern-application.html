@@ -31,15 +31,15 @@
                     <div class="home-wrap-inner">
                         <div class="home-wrap-inner-2">
                             <div class="back-back">
-                                <button class="back-btn">
+                                <a th:href="@{'/enterprise-console/intern/applicate-list/' + ${applicantDetail.internNoticeId}}"  class="back-btn">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="back-svg"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
                                     뒤로가기
-                                </button>
+                                </a>
                             </div>
                             <div class="home-top">
-                                <div>
-                                    <h1 class="top-h1">test님의 지원서</h1>
-                                    <p class="top-p">지원한 공고 제목 들어갈 자리</p>
+                                <div class="home-top">
+                                    <h1 th:text="${applicantDetail.userName}" class="top-h1"></h1>
+                                    <p th:text="${applicantDetail.internNoticeTitle}" class="top-p">지원한 공고 제목 들어갈 자리</p>
                                 </div>
                             </div>
                             <div class="application-main">
@@ -58,26 +58,26 @@
                                                 <div class="info-line">
                                                     <div>
                                                         <label for="" class="info-key">이름</label>
-                                                        <div class="info-value">test</div>
+                                                        <div th:text="${applicantDetail.userName}" class="info-value"></div>
                                                     </div>
                                                     <div>
                                                         <label for="" class="info-key">전화번호</label>
-                                                        <div class="info-value">01012345678</div>
+                                                        <div th:text="${applicantDetail.userPhone}" class="info-value"></div>
                                                     </div>
                                                 </div>
                                                 <div class="info-line">
                                                     <div>
                                                         <label for="" class="info-key">이메일</label>
-                                                        <div class="info-value">test@gmail.com</div>
+                                                        <div th:text="${applicantDetail.userEmail}" class="info-value"></div>
                                                     </div>
-                                                    <div>
-                                                        <label for="" class="info-key">직군</label>
-                                                        <div class="info-value">SW 개발</div>
-                                                    </div>
-                                                    <div>
-                                                        <label for="" class="info-key">url</label>
-                                                        <a href="" class="info-key">www.kok.com</a>
-                                                    </div>
+<!--                                                    <div>-->
+<!--                                                        <label for="" class="info-key">직군</label>-->
+<!--                                                        <div class="info-value">SW 개발</div>-->
+<!--                                                    </div>-->
+<!--                                                    <div>-->
+<!--                                                        <label for="" class="info-key">url</label>-->
+<!--                                                        <a href="" class="info-key">www.kok.com</a>-->
+<!--                                                    </div>-->
                                                 </div>
                                             </div>
                                             <div class="table-wrap">
@@ -140,7 +140,7 @@
                                                                 <p class="appli-title-p">이력서</p>
                                                             </div>
                                                         </div>
-                                                        <button class="yeolgi">
+                                                        <button class="download-btn">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-3 w-3"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
                                                             다운로드
                                                         </button>
@@ -181,46 +181,43 @@
                                                 <label for="" class="info-key">지원 일시</label>
                                                 <div class="datetime-applicate">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datetime-svg"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                                                    <p class="datetime">2025-09-15 오후 2:07:27</p>
+                                                    <p th:text="${applicantDetail.requestDatetime}" class="datetime"></p>
                                                 </div>
                                             </div>
                                             <div class="yoso">
                                                 <label for="" class="info-key">상태 변경</label>
-                                                <button class="status-button">
-                                                    <span class="status-button-span">서류 검토 중</span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="down-svg" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+                                                <div class="select-container">
+                                                    <button class="status-button">
+                                                        <span class="status-button-span">서류 검토 중</span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="down-svg" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+                                                    </button>
                                                     <div class="job">
                                                         <div class="job-1">
                                                             <div class="job-2">
-                                                                <div class="job-3">
+                                                                <button type="button" class="job-3 active">
                                                                     <div class="job-5">
                                                                         <p class="job-6">서류 검토 중</p>
                                                                     </div>
-                                                                    <div class="setting-31">
-                                                                        <svg aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="24" role="img" width="24">
-                                                                            <path clip-rule="evenodd" d="M20.066 5.935a.8.8 0 0 1 0 1.13l-11 11a.8.8 0 0 1-1.131 0l-4-4a.8.8 0 0 1 1.13-1.13L8.5 16.369 18.935 5.935a.8.8 0 0 1 1.13 0" fill-rule="evenodd"></path>
-                                                                        </svg>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="job-3">
+                                                                </button>
+                                                                <button type="button" class="job-3">
                                                                     <div class="job-5">
                                                                         <p class="job-6">합격</p>
                                                                     </div>
-                                                                </div>
-                                                                <div class="job-3">
+                                                                </button>
+                                                                <button type="button" class="job-3">
                                                                     <div class="job-5">
                                                                         <p class="job-6">불합격</p>
                                                                     </div>
-                                                                </div>
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </button>
+                                                </div>
                                             </div>
                                             <div class="yoso">
                                                 <label for="" class="info-key">현재 상태</label>
                                                 <div class="status-mark">
-                                                    <span class="status-mark-span">서류 검토 중</span>
+                                                    <span th:text="${applicantDetail.requestInternStatus eq 'await' ? '서류 검토 중' : (applicantDetail.requestInternStatus eq 'accept' ? '합격' : '불합격')}" class="status-mark-span"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -233,15 +230,16 @@
             </div>
         </main>
     </div>
-    <div class="darkback" id="drkb" style="display: none;"></div>
-    <div class="sure" id="squa" style="display: none;">
-        <div class="sure-title">
-            <h2 class="sure-h2">test님의 지원서를 '합격' 상태로 변경하시겠습니까?</h2>
-            <p class="sure-p">진행 상태 변경이 바로 적용됩니다.</p>
-        </div>
-        <div class="sure-buttons">
-            <button class="sure-no">취소</button>
-            <button class="sure-yes">진행 상태 변경</button>
+    <div class="popup-container">
+        <div class="pop-content">
+            <div class="pop-title-wrap">
+                <h2 class="pop-title"><span th:text="${applicantDetail.userName}"></span>님의 지원서를 '합격' 상태로 변경하시겠습니까?</h2>
+                <p class="pop-desc">진행 상태 변경이 바로 적용됩니다.</p>
+            </div>
+            <div class="pop-buttons">
+                <button class="btn-no">취소</button>
+                <button class="btn-yes">진행 상태 변경</button>
+            </div>
         </div>
     </div>
 </body>

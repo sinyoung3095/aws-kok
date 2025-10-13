@@ -28,7 +28,6 @@ jobItems.forEach((item) => {
 const internTable = document.querySelector("#intern-list-table");
 if (internTable) {
     internTable.addEventListener("click", async (e) => {
-        // 모집 활성/비활성 토글 버튼
         const activeExp = e.target.closest("button.appli-active-btn");
         if (activeExp) {
             const tr = activeExp.closest("tr.body-tr");
@@ -65,46 +64,57 @@ if (internTable) {
             }
         }
 
-        const trs = document.querySelectorAll("#intern-list-table tr.body-tr");
-        trs.forEach((tr) => {
-            const hambugerBtn = tr.querySelector("button.hambuger");
-            const hambugerPopWrap = hambugerBtn
-                ? hambugerBtn.querySelector(".hambuger-pop-wrap")
-                : null;
+        // 햄버거 버튼 클릭
+        const hambugerBtn = e.target.closest("button.hambuger");
+        if (hambugerBtn) {
+            e.stopPropagation();
 
-            if (!hambugerBtn || !hambugerPopWrap) return;
-
-            hambugerBtn.addEventListener("click", (e) => {
-                e.stopPropagation();
-
-                // 모든 팝업 닫기
-                document
-                    .querySelectorAll(".hambuger-pop-wrap")
-                    .forEach((pop) => (pop.style.display = "none"));
-
-                // 버튼 옆에 위치시키기
-                const btnOffsetLeft = hambugerBtn.offsetLeft;
-                const btnOffsetTop = hambugerBtn.offsetTop;
-
-                hambugerPopWrap.style.right =
-                    btnOffsetLeft + hambugerBtn.offsetWidth + "px"; // 버튼 오른쪽 옆
-                hambugerPopWrap.style.top = btnOffsetTop + "px"; // 버튼 상단 기준
-
-                hambugerPopWrap.style.display = "block";
+            // 모든 팝업 닫기
+            document.querySelectorAll(".hambuger-pop-wrap").forEach((pop) => {
+                pop.style.display = "none";
             });
-        });
-    });
-}
 
-// 외부 클릭 시 모든 팝업 닫기
-document.addEventListener("click", (e) => {
-    document.querySelectorAll(".hambuger-pop-wrap").forEach((pop) => {
-        if (!pop.contains(e.target) && !pop.parentElement.contains(e.target)) {
-            pop.style.display = "none";
+            // 현재 버튼 다음 형제 팝업만 열기
+            const hambugerPopWrap = hambugerBtn.nextElementSibling;
+            if (hambugerPopWrap) {
+                hambugerPopWrap.style.position = "absolute";
+                hambugerPopWrap.style.top = "50px";
+                hambugerPopWrap.style.right = "32px";
+                hambugerPopWrap.style.display = "block";
+            }
+            return;
+        }
+
+        // 팝업 삭제하기 버튼 클릭
+        const deleteBtn = e.target.closest(".red-ham-list");
+        if (deleteBtn) {
+            const tr = deleteBtn.closest(".body-tr");
+            const noticeId = tr?.dataset.id;
+            if (!noticeId) return;
+
+            const confirmDelete = confirm("정말 이 공고를 삭제하시겠습니까?");
+            if (!confirmDelete) return;
+
+            const result = await internNoticeService.deleteIntern(noticeId);
+
+            if (result === "success") {
+                alert("공고가 삭제되었습니다!");
+                location.reload();
+            } else {
+                alert("삭제 실패! 다시 시도해주세요.");
+            }
         }
     });
-});
 
+    // 문서 아무 곳 클릭 시 팝업 닫기
+    document.addEventListener("click", (e) => {
+        if (!e.target.closest(".hambuger-pop-wrap") && !e.target.closest(".hambuger")) {
+            document.querySelectorAll(".hambuger-pop-wrap").forEach((pop) => {
+                pop.style.display = "none";
+            });
+        }
+    });
+}
 
 // ######################### 공고목록 ############################
 const companyId = 1;
