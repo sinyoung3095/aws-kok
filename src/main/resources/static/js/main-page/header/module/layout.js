@@ -1,4 +1,4 @@
-const layout = (() => {
+const headerLayout = (() => {
     const showExperienceList = (requestDTO) => {
         console.log(requestDTO)
         const experienceWarp = document.getElementById("experienceWarp");

@@ -6,8 +6,8 @@ const searchCloseBtn = document.querySelector(".close-search-modal");
 
 openSearchBtn.addEventListener("click", async () => {
     searchModal.classList.add("active");
-    await service.getExperience(layout.showExperience);
-    await service.getPopularCompany(layout.showPopularCompany);
+    await sideService.getExperience(sideLayout.showExperience);
+    await sideService.getPopularCompany(sideLayout.showPopularCompany);
 });
 
 searchCloseBtn.addEventListener("click", () => {
@@ -112,11 +112,11 @@ tabs.forEach((tab) => {
         if (selected === "체험공고") {
             memberList.style.display = "flex";
             companyList.style.display = "none";
-            await service.getExperience(layout.showExperience);
+            await sideService.getExperience(sideLayout.showExperience);
         } else {
             memberList.style.display = "none";
             companyList.style.display = "flex";
-            await service.getIntern(layout.showIntern);
+            await sideService.getIntern(sideLayout.showIntern);
         }
     });
 });
@@ -132,14 +132,14 @@ search.addEventListener("keyup",async (e)=>{
         if(tabs[0].classList.value.includes("active")){
             console.log(keyword);
             document.getElementById("experienceWarp").innerHTML='';
-            const result = await service.getExperience(layout.showExperience,keyword);
+            const result = await sideService.getExperience(sideLayout.showExperience,keyword);
             console.log(result);
             if(result.id===null){
                 alert("검색하신 내용이 없습니다.")
             }
         }else{
             document.getElementById("internWarp").innerHTML='';
-            const result = await service.getIntern(layout.showIntern,keyword);
+            const result = await sideService.getIntern(sideLayout.showIntern,keyword);
             if(result.id===null) {
                 alert("검색하신 내용이 없습니다.")
             }
@@ -175,7 +175,7 @@ if (settingModal) {
         }
     });
 }
-service.getAlarm();
+sideService.getAlarm();
 // 알림 설정 토글
 document.querySelectorAll(".setting-modal-alarm-button").forEach((button) => {
     const check = button.querySelector(".setting-modal-alarm-button-check");
@@ -185,9 +185,9 @@ document.querySelectorAll(".setting-modal-alarm-button").forEach((button) => {
         check.classList.toggle("off");
         if(button.classList.contains("off")){
             console.log(button.dataset.keyword);
-            await service.setInactive({keyword:button.dataset.keyword});
+            await sideService.setInactive({keyword:button.dataset.keyword});
 
-        }else{ await service.setActive({keyword:button.dataset.keyword});
+        }else{ await sideService.setActive({keyword:button.dataset.keyword});
             }
     });
 });

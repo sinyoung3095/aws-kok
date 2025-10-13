@@ -1,4 +1,4 @@
-const layout = (()=>{
+const sideLayout = (()=>{
     const showPopularCompany = (CompanyDTO) => {
         const popularWarp = document.getElementById("company-list-wrap");
         let text = '';
