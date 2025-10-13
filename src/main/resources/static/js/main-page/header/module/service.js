@@ -1,4 +1,4 @@
-const service = (()=>{
+const headerService = (()=>{
     const logout = async () => {
         const response = await fetch('/api/auth/logout', {
             method: 'POST',

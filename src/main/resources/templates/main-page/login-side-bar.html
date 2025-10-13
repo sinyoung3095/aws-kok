@@ -106,11 +106,21 @@
                 </div>
                 <div class="start-line">
                     <!-- 비로그인시 메뉴 삭제 -->
-                    <div class="sidebar-setting-wrap">
-                        <div class="sidebar-setting">
-                            <p class="sidebar-setting-text">설정</p>
+                    <th:block>
+                    <th:replace th:if="${userDTO.userRole=='COMPANY'}">
+
+                    </th:replace>
+                    </th:block>
+                    <th:block>
+                    <th:replace th:if="${userDTO.userRole=='MEMBER'}">
+                        <div class="sidebar-setting-wrap">
+                            <div class="sidebar-setting">
+                                <p class="sidebar-setting-text">설정</p>
+                            </div>
                         </div>
-                    </div>
+                    </th:replace>
+                    </th:block>
+
                     <!-- 비로그인시 메뉴 삭제 -->
                     <div class="sidebar-support-wrap">
                         <div class="sidebar-support">

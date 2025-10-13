@@ -104,7 +104,7 @@ if (historyBtn && historyModal) {
         if (settingHeaderModal) settingHeaderModal.style.display = "none";
         console.log(detail[0].className.includes("active"));
         historyModal.style.display = "flex";
-        await  service.getRequestExperience(layout.showExperienceList);
+        await  headerService.getRequestExperience(headerLayout.showExperienceList);
     });
 
 }
@@ -143,7 +143,7 @@ experienceTab.addEventListener("click", async () => {
     employContent.style.display = "none";
     experienceContent.style.display = "flex";
     console.log(detail[0].className.includes("active"));
-    await  service.getRequestExperience(layout.showExperienceList);
+    await  headerService.getRequestExperience(headerLayout.showExperienceList);
 });
 
 employmentTab.addEventListener("click", async() => {
@@ -159,7 +159,7 @@ employmentTab.addEventListener("click", async() => {
     employContent.style.display = "flex";
     experienceContent.style.display = "none";
     console.log(detail[0].className.includes("active"));
-    await service.getRequestIntern(layout.showInternList);
+    await headerService.getRequestIntern(headerLayout.showInternList);
 });
 // 지원내역 상세 모달
 const historyDetailModal = document.querySelector(
@@ -174,7 +174,7 @@ experienceWarp.addEventListener("click",async (e)=>{
     if(e.target.closest(".history-modal-main-section")){
         const experienceId = e.target.closest(".history-modal-main-section").dataset.id;
         console.log("체험 이벤트"+experienceId);
-        await service.getRequestExperience(layout.showExperienceDetail,experienceId);
+        await headerService.getRequestExperience(headerLayout.showExperienceDetail,experienceId);
         historyDetailModal.style.display = "flex";
     }
 
@@ -198,7 +198,7 @@ internWarp.addEventListener("click",async (e)=>{
     if(e.target.closest(".history-modal-main-section")){
         const internId = e.target.closest(".history-modal-main-section").dataset.id;
         console.log("인턴 이벤트"+internId);
-        await service.getRequestIntern(layout.showInternDetail,internId);
+        await headerService.getRequestIntern(headerLayout.showInternDetail,internId);
         historyDetailModal.style.display = "flex";
     }
 
@@ -213,7 +213,7 @@ if (historyDetailModal) {
 const logout = document.getElementById("logout");
 logout.addEventListener("click",async (e)=>{
     console.log("로그아웃 누름")
-    await service.logout();
+    await headerService.logout();
 
     location.href='/member/login';
 });
