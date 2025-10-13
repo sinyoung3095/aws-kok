@@ -74,7 +74,7 @@
     </select>
 
     <!-- 공고 상태 업데이트 (활성/비활성 전환) -->
-    <update id="updateListStatus">
+    <update id="updateNoticeStatus">
         update tbl_experience_notice
         set experience_notice_status = #{status}::status,
             updated_datetime = now()
@@ -157,8 +157,7 @@
         where experience_notice_id = #{id}
     </update>
 
-    <!-- 공고 상세 조회 (지원자/스크랩 수 포함) -->
-    <!-- 상세 페이지용 -->
+    <!-- 공고 상세 조회 - 지원자/스크랩 수 포함 -->
     <select id="selectExperienceDetailById">
         select
             en.id,
@@ -189,7 +188,7 @@
         group by en.id, jc.id, jc.job_name
     </select>
 
-    <!-- 단일 공고 조회 (수정 페이지용) -->
+    <!-- 단일 공고 조회 - 수정 페이지용 -->
     <select id="selectById">
         select
             en.id,
@@ -219,4 +218,28 @@
         where en.id = #{id}
         group by en.id, jc.id
     </select>
+
+    <!-- 체험 지원서 삭제 -->
+    <delete id="deleteRequestExperienceByNoticeId">
+        delete from tbl_request_experience
+        where experience_notice_id = #{id}
+    </delete>
+
+    <!-- 스크랩 데이터 삭제 -->
+    <delete id="deleteSaveExperienceByNoticeId">
+        delete from tbl_save_experience_notice
+        where experience_notice_id = #{id}
+    </delete>
+
+    <!-- 직군 매핑 삭제 -->
+    <delete id="deleteJobCategoryByNoticeId">
+        delete from tbl_experience_job_category
+        where experience_notice_id = #{id}
+    </delete>
+
+    <!-- 체험 공고 삭제 -->
+    <delete id="deleteExperienceNoticeById">
+        delete from tbl_experience_notice
+        where id = #{id}
+    </delete>
 </mapper>

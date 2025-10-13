@@ -7,6 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -19,17 +23,31 @@ public class ConsoleProfileController {
     @GetMapping("/profile")
 //    public String goToProfile(@RequestParam("userId") Long userId, Model model) {
     public String goToProfile(Model model) {
-        Long userId = 1L; // 테스트용
-        ConsoleCompanyProfileDTO profile = consoleProfileService.getProfile(userId);
+        Long companyId = 1L; // 테스트용
+        ConsoleCompanyProfileDTO profile = consoleProfileService.getProfile(companyId);
         model.addAttribute("profile", profile);
         return "enterprise-console/console-profile";
     }
 
 //    기업 프로필 수정 처리
     @PostMapping("/profile/update")
-    public String updateProfile(@ModelAttribute ConsoleCompanyProfileDTO companyProfileDTO) {
-        consoleProfileService.updateProfile(companyProfileDTO);
-        return "redirect:/enterprise-console/profile?userId=" + companyProfileDTO.getUserId();
+    public String updateProfile(
+            @ModelAttribute ConsoleCompanyProfileDTO companyProfileDTO,
+            @RequestParam(value = "profileFile", required = false) MultipartFile profileFile,
+            @RequestParam(value = "backgroundFile", required = false) MultipartFile backgroundFile
+    ) {
+        List<MultipartFile> multipartFiles = new ArrayList<>();
+
+        if (profileFile != null && !profileFile.isEmpty()) {
+            multipartFiles.add(profileFile);
+        }
+        if (backgroundFile != null && !backgroundFile.isEmpty()) {
+            multipartFiles.add(backgroundFile);
+        }
+
+        consoleProfileService.updateProfile(companyProfileDTO, multipartFiles);
+        return "redirect:/enterprise-console/profile?userId=" + companyProfileDTO.getCompanyId();
     }
+
 
 }

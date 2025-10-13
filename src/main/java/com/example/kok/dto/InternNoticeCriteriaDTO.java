@@ -10,7 +10,7 @@ import java.util.List;
 @Getter @Setter
 @ToString
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
+//@EqualsAndHashCode(of = "id")
 public class InternNoticeCriteriaDTO {
     private List<InternNoticeDTO> interns;
     private Criteria criteria;

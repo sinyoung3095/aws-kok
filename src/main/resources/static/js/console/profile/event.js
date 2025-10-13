@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const nameInputs = document.querySelectorAll(".name");
     const imgUpBtns = document.querySelectorAll(".img-up-btn-wrap");
     const categoryBtns = document.querySelectorAll(".category-button");
+    const form = document.getElementById("profile-form");
     let saveBtn = null;
 
     // 편집 모드로 전환
@@ -34,13 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
             </svg> 저장
         `;
         buttonWrap.appendChild(saveBtn);
-        console.log("✅ 저장버튼의 부모 form:", saveBtn.closest("form"));
 
-        saveBtn.addEventListener("click", function () {
-            // toggleEditMode(false);
-            console.log("✅ 저장 버튼 클릭됨");
-            document.getElementById("profile-form").submit();
-
+        form.addEventListener("submit", function () {
             setTimeout(() => toggleEditMode(false), 500);
         });
     }

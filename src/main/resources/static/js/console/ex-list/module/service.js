@@ -46,9 +46,25 @@ const experienceNoticeService = (() => {
         }
 
         return data;
-    }
+    };
 
-    return {getList:getList, updateExperienceStatus:updateExperienceStatus}
+    // 삭제
+    const deleteExperience = async (id) => {
+        const response = await fetch(`/api/enterprise-console/experience/${id}`, {
+            method: "DELETE",
+        });
+
+        if (!response.ok) {
+            console.log("삭제 실패")
+        }
+
+        const result = await response.text();
+        console.log("삭제 성공:", result);
+        return result; // "success"
+    };
+
+
+    return {getList:getList, updateExperienceStatus:updateExperienceStatus, deleteExperience:deleteExperience}
 })();
 
 

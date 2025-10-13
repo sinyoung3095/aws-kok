@@ -1,6 +1,6 @@
 package com.example.kok.mapper;
 
-import com.example.kok.dto.ConsoleInternNoticeDTO;
+import com.example.kok.dto.ConsoleInternListDTO;
 import com.example.kok.enumeration.Status;
 import com.example.kok.util.Criteria;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import java.util.List;
 @Slf4j
 public class ConsoleInternTests {
     @Autowired
-    private ConsoleInternNoticeMapper mapper;
+    private ConsoleInternListMapper mapper;
 
     @Test
     void testSelectInternByCompany() {
@@ -25,7 +25,7 @@ public class ConsoleInternTests {
         String keyword = "백엔드";
 
         // when
-        List<ConsoleInternNoticeDTO> result = mapper.selectInternByCompany(companyId, criteria, status, keyword);
+        List<ConsoleInternListDTO> result = mapper.selectInternByCompany(companyId, criteria, status, keyword);
 
         // then
 //        assertNotNull(result);

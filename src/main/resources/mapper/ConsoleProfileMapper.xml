@@ -3,7 +3,7 @@
 <mapper namespace="com.example.kok.mapper.ConsoleProfileMapper">
     <select id="selectCompanyProfileByUserId">
         select
-            c.user_id,
+            c.user_id as companyId,
             c.company_name,
             c.company_info,
             c.company_url,
@@ -21,7 +21,7 @@
                 on c.user_id = csb.company_id
             left join tbl_company_scale_category sc
                 on csb.company_scale_category_id = sc.id
-        where c.user_id = #{userId}
+        where c.user_id = #{companyId}
     </select>
 
     <!-- 기업 프로필 수정 -->
@@ -31,22 +31,22 @@
             company_name = #{companyName},
             company_info = #{companyInfo},
             company_url = #{companyUrl}
-        where user_id = #{userId}
+        where user_id = #{companyId}
     </update>
 
     <update id="updateCeoName">
         update tbl_user
         set user_name = #{ceoName}
-        where id = #{userId}
+        where id = #{companyId}
     </update>
 
     <update id="updateCompanySector">
         update tbl_company_sector_category
         set company_sector_id = (
             select id from tbl_company_sector
-                      where company_sector_name = #{companySectorName}
+                  where company_sector_name = #{companySectorName}
         )
-        where company_id = #{userId}
+        where company_id = #{companyId}
     </update>
 
     <update id="updateCompanyScale">
@@ -55,7 +55,7 @@
             select id from tbl_company_scale_category
                       where company_scale_name = #{companyScaleName}
         )
-        where company_id = #{userId}
+        where company_id = #{companyId}
     </update>
 </mapper>
 

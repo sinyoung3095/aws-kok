@@ -43,9 +43,8 @@
                                               th:action="@{/enterprise-console/profile/update}"
                                               th:object="${profile}"
                                               method="post"
-                                              enctype="multipart/form-data"
-                                              onsubmit="console.log('✅ form submit 발생');">
-                                            <input type="hidden" th:field="*{userId}">
+                                              enctype="multipart/form-data">
+                                            <input type="hidden" th:field="*{companyId}">
 
                                             <div class="profile-head">
                                                 <div class="profile-head-inner">
@@ -68,7 +67,11 @@
                                                 <div class="img-wrap">
                                                     <div class="back-wrap">
                                                         <div class="back-img-div">
-                                                            <img src="/images/mypage/banner.jpg" alt="" class="back-img">
+                                                            <img th:src="${profile.backgroundFiles != null && !profile.backgroundFiles.isEmpty()
+                                                            ? profile.backgroundFiles[0].filePath
+                                                            : '/images/mypage/banner.jpg'}"
+                                                                 alt="배경 이미지"
+                                                                 class="back-img">
                                                         </div>
                                                     </div>
                                                     <div class="img-up-btn-wrap" style="display: none;">
@@ -77,14 +80,18 @@
                                                             이미지 변경
                                                         </button>
                                                     </div>
-                                                    <input type="file" class="back-input">
+                                                    <input type="file" class="back-input" name="backgroundFile">
                                                 </div>
                                             </div>
                                             <div class="contents">
                                                 <p class="profile-label">프로필 이미지</p>
                                                 <div class="img-wrap">
                                                     <div class="pro-wrap">
-                                                        <img src="/images/member/kok_logo.png" alt="" class="profile-img">
+                                                        <img th:src="${(profile.uploadedFiles != null and !profile.uploadedFiles.isEmpty())
+                                                        ? profile.uploadedFiles[0].filePath
+                                                        : '/images/member/profile.png'}"
+                                                             alt="프로필 이미지"
+                                                             class="profile-img">
                                                     </div>
                                                     <div class="img-up-btn-wrap" style="display: none;">
                                                         <button class="img-up" id="prof-file-btn">
@@ -92,7 +99,7 @@
                                                             이미지 변경
                                                         </button>
                                                     </div>
-                                                    <input type="file" class="pro-input">
+                                                    <input type="file" class="pro-input" name="profileFile">
                                                 </div>
                                             </div>
                                             <div class="contents">

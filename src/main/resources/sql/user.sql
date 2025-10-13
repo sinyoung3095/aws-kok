@@ -19,6 +19,7 @@ create table tbl_user (
 
 alter table tbl_user add sns_email varchar(255);
 alter table tbl_user alter column user_email DROP not null;
+<<<<<<< HEAD
 -- select * from tbl_user;
 --
 -- insert into tbl_user(user_name, user_phone, user_email, user_password, user_role) values ('테스트', '01011111111', 'test1@gmail.com', '1234', 'company');
@@ -92,3 +93,7 @@ VALUES
     ('하사장', '010-2223-6660', 'ha@example.com', '1234', 'company'),
     ('신사장', '010-3334-7770', 'shin@example.com', '1234', 'company');
 
+=======
+
+select * from tbl_user;
+>>>>>>> console/ex-delete
