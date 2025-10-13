@@ -6,6 +6,7 @@
     <title>콕(KOK) 관리자</title>
     <link href="/images/member/kok_favicon.png" rel="icon" type="image/x-icon">
     <link rel="stylesheet" href="/css/admin/main-page.css">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
     <div id="kok">
@@ -199,7 +200,7 @@
                                             <div class="col-12 col-lg-6">
                                                 <div class="chart-box">
                                                     <div class="chart-wrapper">
-                                                        <div class="echarts-for-react kok-chart height-300" style="height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); position:relative;">
+                                                        <div id="first-chart" class="echarts-for-react kok-chart height-300" style="height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); position:relative;">
                                                             <div style="position: relative; width: 446px; height: 300px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
                                                                 <canvas width="669" height="450" style="position:absolute; left:0px; top:0px; width:446px; height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); padding:0px; margin:0px; border-width:0px;"></canvas>
                                                             </div>
@@ -223,7 +224,7 @@
                                             <div class="col-12 col-lg-6">
                                                 <div class="chart-box">
                                                     <div class="chart-wrapper">
-                                                        <div class="echarts-for-react kok-chart height-300" style="height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); position:relative;">
+                                                        <div id="second-chart" class="echarts-for-react kok-chart height-300" style="height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); position:relative;">
                                                             <div style="position:relative; width:446px; height:300px; padding:0px; margin:0px; border-width:0px; cursor:default;">
                                                                 <canvas width="669" height="450" style="position:absolute; left:0px; top:0px; width:446px; height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); padding:0px; margin:0px; border-width:0px;"></canvas>
                                                             </div>
@@ -245,7 +246,7 @@
                                             </div>
                                         </div>
                                         <div class="chart-box access-data-list">
-                                            <div class="row">
+                                            <div class="row" id="row">
                                                 <div class="col-12 col-md-6 col-lg-3">
                                                     <div class="access-data data-member-page">
                                                         <div class="title">[회원] 평균 체험 지원 수</div>
@@ -286,7 +287,7 @@
                                             <div class="box-header">
                                                 <div class="box-title"></div>
                                             </div>
-                                            <div class="box-body">
+                                            <div class="box-body" id="box-body">
                                                 <table class="user-price-table justify-table">
                                                     <thead>
                                                         <tr>
@@ -344,10 +345,11 @@
                                     </div>
                                 </div>
                                 <div class="chart-row row">
+                                    <!-- 세 번째 차트 -->
                                     <div class="col-12 col-lg-6">
                                         <div class="chart-box">
                                             <div class="chart-wrapper">
-                                                <div class="echarts-for-react kok-chart" style="height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); position:relative;">
+                                                <div id="third-chart" class="echarts-for-react kok-chart" style="height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); position:relative;">
                                                     <div style="position:relative; width:684px; height:300px; padding:0px; margin:0px; border-width:0px; cursor:default;">
                                                         <canvas width="1026" height="450" style="position:absolute; left:0px; top:0px; width:684px; height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); padding:0px; margin:0px; border-width:0px;"></canvas>
                                                     </div>
@@ -371,10 +373,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- 네 번째 차트 -->
                                     <div class="col-12 col-lg-6">
                                         <div class="chart-box">
                                             <div class="chart-wrapper">
-                                                <div class="echarts-for-react kok-chart" style="height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); position:relative;">
+                                                <div id="fourth-chart" class="echarts-for-react kok-chart" style="height:300px; user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); position:relative;">
                                                     <div style="position:relative; width:684px; height:300px; padding:0px; margin:0px; border-width:0px; cursor:default;">
                                                         <canvas width="1026" height="450" style="position:absolute; left:0px; top:0px; width:684px; height:300px; user-select: none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); padding:0px; margin:0px; border-width:0px;"></canvas>
                                                     </div>
@@ -408,6 +411,8 @@
         </div>
     </div>
 </body>
+<script src="/js/admin/main-page/module/service.js"></script>
+<script src="/js/admin/main-page/module/layout.js"></script>
 <script src="/js/admin/logout/module/service.js"></script>
 <script src="/js/admin/logout/event.js"></script>
 <script src="/js/admin/main-page/event.js"></script>
