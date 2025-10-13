@@ -28,6 +28,11 @@ public interface MemberMapper {
 //    아이디로 지원한 인턴 공고 조회
     public List<RequestInternDTO> selectInternByMemberId(Long memberId);
 
+//    아이디로 게시글 조회
+    public List<PostDTO> selectPostsByMemberId(Long memberId);
+
+//    아이디로 직군 조회
+    public String selectJobCategoryByMemberId(Long memberId);
 //    전화번호로 회원 sns이메일 조회
     public List<MemberDTO> selectLinkBYPhone(String userPhone);
 }

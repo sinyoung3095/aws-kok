@@ -1,6 +1,7 @@
 package com.example.kok.repository;
 
 import com.example.kok.domain.MemberVO;
+import com.example.kok.dto.PostDTO;
 import com.example.kok.dto.MemberDTO;
 import com.example.kok.dto.RequestExperienceDTO;
 import com.example.kok.dto.RequestInternDTO;
@@ -48,7 +49,16 @@ public class MemberDAO {
     public List<RequestInternDTO> findInternByMemberId(Long memberId) {
         return memberMapper.selectInternByMemberId(memberId);
     }
-//    전화번호로 회원 sns이메일 조회
+    //    아이디로 게시글 조회
+    public List<PostDTO> findPostsByMemberId(Long memberId) {
+        return memberMapper.selectPostsByMemberId(memberId);
+    }
+
+//    아이디로 직군 조회
+    public String findJobCategoryByMemberId(Long memberId) {
+        return memberMapper.selectJobCategoryByMemberId(memberId);
+    }
+    //    전화번호로 회원 sns이메일 조회
     public List<MemberDTO> findLink(String userPhone){
         return memberMapper.selectLinkBYPhone(userPhone);
     }

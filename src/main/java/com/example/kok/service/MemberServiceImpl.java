@@ -4,6 +4,7 @@ import com.example.kok.domain.MemberVO;
 import com.example.kok.dto.*;
 import com.example.kok.repository.*;
 import com.example.kok.util.Criteria;
+import com.example.kok.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -30,6 +32,9 @@ public class MemberServiceImpl implements MemberService {
     private final UserMemberDTO userMemberDTO;
     private final MemberDTO memberDTO;
     private final FollowDAO followDAO;
+    private final CommunityPostFileDAO communityPostFileDAO;
+    private final CommunityLikeDAO communityLikeDAO;
+    private final CommunityCommentService communityCommentService;
 
     @Override
     public void joinMember(MemberVO memberVO) {
@@ -131,6 +136,30 @@ public class MemberServiceImpl implements MemberService {
     public List<RequestInternDTO> findRequestInternByMemberId(Long memberId) {
         List<RequestInternDTO> requestInterns=memberDAO.findInternByMemberId(memberId);
         return requestInterns;
+    }
+
+    @Override
+    public List<PostDTO> findPostsByMemberId(Long memberId) {
+        List<PostDTO> posts=memberDAO.findPostsByMemberId(memberId);
+        posts.forEach(post -> {
+            post.setRelativeDate(DateUtils.toRelativeTime(post.getCreatedDateTime()));
+            post.setCommentsCount(communityCommentService.commentsCountByPostId(post.getId()));
+            List<PostFileDTO> postFiles = communityPostFileDAO.findAllByPostId(post.getId());
+            postFiles.forEach(postFile -> {
+                postFile.setPostFilePath(s3Service.getPreSignedUrl(postFile.getPostFilePath(), Duration.ofMinutes(10)));
+            });
+            post.setPostFiles(postFiles);
+
+            post.setLikesCount(communityLikeDAO.getPostLikeCount(post.getId()));
+            if (memberId != null) {
+                post.setOwner(memberId.equals(post.getMemberId()));
+                post.setLiked(communityLikeDAO.isexistLike(post.getId(), memberId));
+            } else {
+                post.setOwner(false);
+                post.setLiked(false);
+            }
+        });
+        return posts;
     }
 
     public String getPath() {

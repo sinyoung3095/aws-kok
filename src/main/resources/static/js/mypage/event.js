@@ -90,15 +90,6 @@ first.forEach((item) => {
         paymentList.classList.remove("active");
     });
 });
-// 게시물 삭제 버튼
-remove.forEach((remove) => {
-    remove.addEventListener("click", (e) => {
-        del.style.display = "flex";
-    });
-});
-cancle.addEventListener("click", (e) => {
-    del.style.display = "none";
-});
 
 // 저장한 공고 목록
 second.forEach((item) => {
@@ -155,10 +146,10 @@ third.forEach((item) => {
         fourth.forEach((fir) => {
             fir.classList.remove("active");
         });
-        list[1].classList.remove("active");
-        list[0].classList.remove("active");
-        list[2].classList.add("active");
-        list[3].classList.remove("active");
+        postsList.classList.remove("active");
+        savedList.classList.remove("active");
+        requestList.classList.add("active");
+        paymentList.classList.remove("active");
     });
 });
 // 결제 내역
@@ -174,118 +165,12 @@ fourth.forEach((item) => {
         third.forEach((fir) => {
             fir.classList.remove("active");
         });
-        list[1].classList.remove("active");
-        list[0].classList.remove("active");
-        list[2].classList.remove("active");
-        list[3].classList.add("active");
+        postsList.classList.remove("active");
+        savedList.classList.remove("active");
+        requestList.classList.remove("active");
+        paymentList.classList.add("active");
     });
 });
-
-// 지원 취소
-const btn = document.getElementsByClassName("retract-triger")[0];
-const retract = document.getElementsByClassName("retract")[0];
-const retractClose = document.getElementsByClassName("retract-12")[0];
-
-btn.addEventListener("click", (e) => {
-    retract.style.display = "flex";
-});
-retractClose.addEventListener("click", (e) => {
-    retract.style.display = "none";
-});
-
-//게시글 수정 팝업
-function popupFn() {
-    const triggers = document.querySelectorAll(".popup-trigger");
-    const popups = document.querySelectorAll(".popup-container");
-    const dropdowns = document.querySelectorAll(".option-menu");
-
-    if (!triggers) return;
-
-    // 팝업 - from 안의 버튼 submit 막기
-    document.addEventListener(
-        "submit",
-        (e) => {
-            if (e.target.closest(".popup-container")) {
-                e.preventDefault();
-            }
-        },
-        true
-    );
-
-    // 팝업 열기
-    triggers.forEach((trigger) => {
-        trigger.addEventListener("click", () => {
-            const target = trigger.getAttribute("data-target");
-            const popup = document.querySelector(target);
-
-            // 드롭다운도 전부 닫기
-            dropdowns.forEach((menu) => menu.classList.remove("active"));
-
-            // 다른 팝업 닫기 (data-sticky가 붙어있는 팝업 제외)
-            popups.forEach((pop) => {
-                if (!pop.hasAttribute("data-sticky")) {
-                    pop.classList.remove("active");
-                }
-            });
-
-            // 현재(부모) 팝업 닫기 - 스티키면 유지
-            const parentPopup = trigger.closest(".popup-container");
-            if (parentPopup && !parentPopup.hasAttribute("data-sticky")) {
-                parentPopup.classList.remove("active");
-            }
-            console.log(popup);
-            // 해당 팝업 열기
-            if (popup) {
-                const text =
-                    document.getElementsByClassName("popup-textarea")[0];
-                const image = document.getElementsByClassName(
-                    "popup-preview-inner"
-                )[0];
-                popup.classList.add("active");
-                text.value = "테스트용 글 확인";
-                image.innerHTML = `<div class="file-9">
-                                            <!-- 이미지들 -->
-                                            <div class="file-10">
-                                                <img class="img" alt="첨부 이미지 1" draggable="false" loading="eager" width="0" height="0" decoding="async" data-nimg="1" class="bd_1px_solid bd-c_strokes.surface.standard bdr_8px" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="../../static/images/mypage/IMG_4127_2025_09_11T05_25_47_988Z.webp" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
-                                            </div>
-                                            <div class="file-10">
-                                                <img class="img" alt="첨부 이미지 1" draggable="false" loading="eager" width="0" height="0" decoding="async" data-nimg="1" class="bd_1px_solid bd-c_strokes.surface.standard bdr_8px" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="../../static/images/mypage/2.webp" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
-                                            </div>
-                                            <div class="file-10">
-                                                <img class="img" alt="첨부 이미지 1" draggable="false" loading="eager" width="0" height="0" decoding="async" data-nimg="1" class="bd_1px_solid bd-c_strokes.surface.standard bdr_8px" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="../../static/images/mypage/3.webp" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
-                                            </div>
-                                        </div>`;
-            }
-            console.log(popup);
-        });
-    });
-
-    // 팝업 닫기 버튼
-    const popupRemoves = document.querySelectorAll(".popup-close");
-    popupRemoves.forEach((closeBtn) => {
-        closeBtn.addEventListener("click", () => {
-            const popup = closeBtn.closest(".popup-container");
-            if (popup) {
-                popup.classList.remove("active");
-            }
-        });
-    });
-
-    // 바깥 클릭 시 닫기
-    // document.addEventListener("click", (e) => {
-    //     document
-    //         .querySelectorAll(".popup-container.active")
-    //         .forEach((popup) => {
-    //             if (
-    //                 !e.target.closest(".popup-inner") &&
-    //                 !e.target.closest(".popup-trigger")
-    //             ) {
-    //                 popup.classList.remove("active");
-    //             }
-    //         });
-    // });
-}
-popupFn();
 
 // 드롭다운
 function dropdownFn() {
@@ -360,142 +245,295 @@ pageNum.forEach((page) => {
     });
 });
 
-// 댓글창 열기
-const replys = document.getElementsByClassName("reply-btn");
-const modal = document.getElementsByClassName("reply")[0];
-replys.forEach((reply) => {
-    reply.addEventListener("click", (e) => {
-        modal.style.display = "flex";
-    });
-});
-// 댓글 샌드위치 버튼 활성화
-const delet = document.getElementsByClassName("report-1");
-const dele = document.getElementsByClassName("del")[1];
-const delbtn = document.getElementsByClassName("delbtn");
-const delreport = document.getElementsByClassName("delbtn-1");
-delbtn.forEach((bt, i) => {
-    bt.addEventListener("click", (e) => {
-        if (
-            delreport[i].style.display === "none" ||
-            delreport[i].style.display === ""
-        ) {
-            if (bt === e.target) {
-                delreport[i].style.display = "flex";
-            } else {
-                delreport[i].style.display = "none";
-            }
-        } else {
-            delreport[i].style.display = "none";
-        }
-    });
-});
+const showPosts=async ()=>{
+    const request=await myPageService.getPostsList();
+    myPageLayout.showPosts(request);
 
-// 댓글 삭제 버튼 클릭시 경고창
-delreport.forEach((but) => {
-    but.addEventListener("click", (e) => {
-        delreport.forEach((rep) => {
-            rep.style.display = "none";
+    // 게시물 삭제 버튼
+    remove.forEach((remove) => {
+        remove.addEventListener("click", (e) => {
+            del.style.display = "flex";
         });
+    });
+    cancle.addEventListener("click", (e) => {
+        del.style.display = "none";
+    });
 
-        dele.style.display = "flex";
+    // 댓글창 열기
+    const replys = document.getElementsByClassName("reply-btn");
+    const modal = document.querySelector(".comment-modal");
+    let postId;
+    Array.from(replys).forEach((reply) => {
+        reply.addEventListener("click", async (e) => {
+            postId = reply.dataset.postId;
+            modal.style.display = "flex";
+            await showPostDetail(postId);
+            await showCommentsList(postId);
+            // 댓글 샌드위치 버튼 활성화
+            const delet = document.getElementsByClassName("report-1");
+            const dele = document.getElementsByClassName("del-post");
+            const delbtn = document.getElementsByClassName("delbtn");
+            const delreport = document.getElementsByClassName("delbtn-1");
+            Array.from(delbtn).forEach((bt, i) => {
+                bt.addEventListener("click", (e) => {
+                    if (
+                        delreport[i].style.display === "none" ||
+                        delreport[i].style.display === ""
+                    ) {
+                        if (bt === e.target) {
+                            delreport[i].style.display = "flex";
+                        } else {
+                            delreport[i].style.display = "none";
+                        }
+                    } else {
+                        delreport[i].style.display = "none";
+                    }
+                });
+            });
+
+            // 댓글 삭제 버튼 클릭시 경고창
+            Array.from(delreport).forEach((but) => {
+                but.addEventListener("click", (e) => {
+                    delreport.forEach((rep) => {
+                        rep.style.display = "none";
+                    });
+
+                    dele.style.display = "flex";
+                });
+            });
+            // 경고창 끄기
+            const dlecancle = document.getElementsByClassName("del-12")[1];
+            dlecancle.addEventListener("click", (e) => {
+                dele.style.display = "none";
+            });
+            // 댓글창 닫기
+            const replytext = document.querySelectorAll(".replytext");
+            const down = document.getElementById("down");
+            const change = document.querySelector(".change");
+            down.addEventListener("click", (e) => {
+                Array.from(replytext).forEach((text) => {
+                    if (text.value !== "") {
+                        change.style.display = "flex";
+                    }
+                });
+                if (change.style.display !== "flex") {
+                    modal.style.display = "none";
+                }
+            });
+        });
     });
-});
-// 경고창 끄기
-const dlecancle = document.getElementsByClassName("del-12")[1];
-dlecancle.addEventListener("click", (e) => {
-    dele.style.display = "none";
-});
-// 댓글창 닫기
-const replytext = document.getElementsByClassName("replytext");
-const down = document.getElementById("down");
-const change = document.getElementsByClassName("change")[0];
-down.addEventListener("click", (e) => {
-    replytext.forEach((text) => {
-        if (text.value !== "") {
-            change.style.display = "flex";
-        }
+
+
+    const changeCancle = document.querySelector(".keep-write");
+    const changeExit = document.querySelector(".exit-wrtie");
+    changeCancle.addEventListener("click", (e) => {
+        change.style.display = "none";
     });
-    if (change.style.display !== "flex") {
+    changeExit.addEventListener("click", (e) => {
+        Array.from(replytext).forEach((text) => {
+            text.value = "";
+        });
+        change.style.display = "none";
         modal.style.display = "none";
-    }
-});
-const changeCancle = document.getElementsByClassName("del-12")[2];
-const changeExit = document.getElementsByClassName("del-10")[2];
-changeCancle.addEventListener("click", (e) => {
-    change.style.display = "none";
-});
-changeExit.addEventListener("click", (e) => {
-    replytext.forEach((text) => {
-        text.value = "";
     });
-    change.style.display = "none";
-    modal.style.display = "none";
-});
-// 좋아요
-const hearts = document.getElementsByClassName("heart");
-hearts.forEach((heart, i) => {
-    heart.addEventListener("click", (e) => {
-        if (heart.style.fill === "red" || heart.style.fill === "") {
-            console.log("들어옴");
-            heart.style.fill = "white";
-            heart.style.stroke = "black";
-        } else {
-            heart.style.fill = "red";
-            heart.style.stroke = "red";
-        }
+    // 좋아요
+    const hearts = document.getElementsByClassName("heart");
+    Array.from(hearts).forEach((heart, i) => {
+        heart.addEventListener("click", (e) => {
+            if (heart.style.fill === "red" || heart.style.fill === "") {
+                console.log("들어옴");
+                heart.style.fill = "white";
+                heart.style.stroke = "black";
+            } else {
+                heart.style.fill = "red";
+                heart.style.stroke = "red";
+            }
+        });
     });
-});
-// 답글
-const comments = document.getElementsByClassName("comments");
-const commentbtn = document.getElementsByClassName("comment");
-commentbtn.forEach((comment, i) => {
-    comment.addEventListener("click", (e) => {
-        if (
-            comments[i].style.display === "none" ||
-            comments[i].style.display === ""
-        ) {
-            comments[i].style.display = "flex";
-        } else {
-            comments[i].style.display = "none";
-        }
+    // 답글
+    const comments = document.getElementsByClassName("comments");
+    const commentbtn = document.getElementsByClassName("comment");
+    Array.from(commentbtn).forEach((comment, i) => {
+        comment.addEventListener("click", (e) => {
+            if (
+                comments[i].style.display === "none" ||
+                comments[i].style.display === ""
+            ) {
+                comments[i].style.display = "flex";
+            } else {
+                comments[i].style.display = "none";
+            }
+        });
     });
-});
 
-// 답글 삭제 샌드위치
-const delbtn1 = document.getElementsByClassName("delbtn-0");
-const delreport1 = document.getElementsByClassName("delbtn-2");
-const delComment = document.getElementsByClassName("del-comment")[0];
-delbtn1.forEach((bt, i) => {
-    bt.addEventListener("click", (e) => {
-        if (
-            delreport1[i].style.display === "none" ||
-            delreport1[i].style.display === ""
-        ) {
-            if (bt === e.target) {
-                delreport1[i].style.display = "flex";
+    // 답글 삭제 샌드위치
+    const delbtn1 = document.getElementsByClassName("delbtn-0");
+    const delreport1 = document.getElementsByClassName("delbtn-2");
+    const delComment = document.querySelector(".del-comment");
+    Array.from(delbtn1).forEach((bt, i) => {
+        bt.addEventListener("click", (e) => {
+            if (
+                delreport1[i].style.display === "none" ||
+                delreport1[i].style.display === ""
+            ) {
+                if (bt === e.target) {
+                    delreport1[i].style.display = "flex";
+                } else {
+                    delreport1[i].style.display = "none";
+                }
             } else {
                 delreport1[i].style.display = "none";
             }
-        } else {
-            delreport1[i].style.display = "none";
-        }
+        });
     });
-});
-// 답글 삭제 버튼 클릭시 경고창
-delreport1.forEach((but) => {
-    but.addEventListener("click", (e) => {
-        delreport1.forEach((rep) => {
-            rep.style.display = "none";
+    // 답글 삭제 버튼 클릭시 경고창
+    Array.from(delreport1).forEach((but) => {
+        but.addEventListener("click", (e) => {
+            delreport1.forEach((rep) => {
+                rep.style.display = "none";
+            });
+
+            delComment.style.display = "flex";
+        });
+    });
+
+    const commentCancle = document.querySelector(".del-comment-btn");
+    const commentExit = document.querySelector(".del-comment-cancle-btn");
+    commentExit.addEventListener("click", (e) => {
+        delComment.style.display = "none";
+    });
+    commentCancle.addEventListener("click", (e) => {
+        delComment.style.display = "none";
+    });
+
+    return request;
+}
+
+const showPostDetail=async (id)=>{
+    const request=await myPageService.getPostDetail(id);
+    myPageLayout.showPostDetail(request);
+}
+
+const showCommentsList=async (postId)=>{
+    const request=await myPageService.getComments(postId);
+    myPageLayout.showCommentsList(request);
+}
+
+const showExperienceRequest=async ()=>{
+    const request=await myPageService.getExperienceList;
+    myPageLayout.showExperienceRequest(request);
+
+    // 지원 취소
+    const btn = document.getElementsByClassName("retract-triger")[0];
+    const retract = document.getElementsByClassName("retract")[0];
+    const retractClose = document.getElementsByClassName("retract-12")[0];
+
+    if(btn){
+        btn.addEventListener("click", (e) => {
+            retract.style.display = "flex";
+        });
+    }
+
+    retractClose.addEventListener("click", (e) => {
+        retract.style.display = "none";
+    });
+
+    //게시글 수정 팝업
+    function popupFn() {
+        const triggers = document.querySelectorAll(".popup-trigger");
+        const popups = document.querySelectorAll(".popup-container");
+        const dropdowns = document.querySelectorAll(".option-menu");
+
+        if (!triggers) return;
+
+        // 팝업 - from 안의 버튼 submit 막기
+        document.addEventListener(
+            "submit",
+            (e) => {
+                if (e.target.closest(".popup-container")) {
+                    e.preventDefault();
+                }
+            },
+            true
+        );
+
+        // 팝업 열기
+        triggers.forEach((trigger) => {
+            trigger.addEventListener("click", () => {
+                const target = trigger.getAttribute("data-target");
+                const popup = document.querySelector(target);
+
+                // 드롭다운도 전부 닫기
+                dropdowns.forEach((menu) => menu.classList.remove("active"));
+
+                // 다른 팝업 닫기 (data-sticky가 붙어있는 팝업 제외)
+                popups.forEach((pop) => {
+                    if (!pop.hasAttribute("data-sticky")) {
+                        pop.classList.remove("active");
+                    }
+                });
+
+                // 현재(부모) 팝업 닫기 - 스티키면 유지
+                const parentPopup = trigger.closest(".popup-container");
+                if (parentPopup && !parentPopup.hasAttribute("data-sticky")) {
+                    parentPopup.classList.remove("active");
+                }
+                console.log(popup);
+                // 해당 팝업 열기
+                if (popup) {
+                    const text =
+                        document.getElementsByClassName("popup-textarea")[0];
+                    const image = document.getElementsByClassName(
+                        "popup-preview-inner"
+                    )[0];
+                    popup.classList.add("active");
+                    text.value = "테스트용 글 확인";
+                    image.innerHTML = `<div class="file-9">
+                                                <!-- 이미지들 -->
+                                                <div class="file-10">
+                                                    <img class="img" alt="첨부 이미지 1" draggable="false" loading="eager" width="0" height="0" decoding="async" data-nimg="1" class="bd_1px_solid bd-c_strokes.surface.standard bdr_8px" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="../../static/images/mypage/IMG_4127_2025_09_11T05_25_47_988Z.webp" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
+                                                </div>
+                                                <div class="file-10">
+                                                    <img class="img" alt="첨부 이미지 1" draggable="false" loading="eager" width="0" height="0" decoding="async" data-nimg="1" class="bd_1px_solid bd-c_strokes.surface.standard bdr_8px" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="../../static/images/mypage/2.webp" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
+                                                </div>
+                                                <div class="file-10">
+                                                    <img class="img" alt="첨부 이미지 1" draggable="false" loading="eager" width="0" height="0" decoding="async" data-nimg="1" class="bd_1px_solid bd-c_strokes.surface.standard bdr_8px" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" src="../../static/images/mypage/3.webp" style="color: transparent; height: 320px; object-fit: cover; width: auto;">
+                                                </div>
+                                            </div>`;
+                }
+                console.log(popup);
+            });
         });
 
-        delComment.style.display = "flex";
-    });
-});
-const commentCancle = document.getElementsByClassName("del-10")[3];
-const commentExit = document.getElementsByClassName("del-12")[3];
-commentExit.addEventListener("click", (e) => {
-    delComment.style.display = "none";
-});
-commentCancle.addEventListener("click", (e) => {
-    delComment.style.display = "none";
-});
+        // 팝업 닫기 버튼
+        const popupRemoves = document.querySelectorAll(".popup-close");
+        popupRemoves.forEach((closeBtn) => {
+            closeBtn.addEventListener("click", () => {
+                const popup = closeBtn.closest(".popup-container");
+                if (popup) {
+                    popup.classList.remove("active");
+                }
+            });
+        });
+
+        // 바깥 클릭 시 닫기
+        // document.addEventListener("click", (e) => {
+        //     document
+        //         .querySelectorAll(".popup-container.active")
+        //         .forEach((popup) => {
+        //             if (
+        //                 !e.target.closest(".popup-inner") &&
+        //                 !e.target.closest(".popup-trigger")
+        //             ) {
+        //                 popup.classList.remove("active");
+        //             }
+        //         });
+        // });
+    }
+    popupFn();
+
+    return request;
+}
+
+document.addEventListener("DOMContentLoaded", showPosts());
+document.addEventListener("DOMContentLoaded", showExperienceRequest());
