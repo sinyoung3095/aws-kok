@@ -19,6 +19,7 @@ public class UserVO extends Period {
     private String userEmail;
     private String userPhone;
     private String snsEmail;
+    private String memberProfileUrl;
     private UserRole userRole;
     private Status userStatus;
 }

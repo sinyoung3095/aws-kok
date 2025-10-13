@@ -97,5 +97,14 @@ const sideService = (()=>{
             throw new Error(errorText || "Fetch error");
         }
     }
-    return {getPopularCompany:getPopularCompany,getExperience:getExperience,getIntern:getIntern,getAlarm:getAlarm,setActive:setActive,setInactive:setInactive}
+    const getLink= async (callback) =>{
+        const response = await fetch("/api/main/link");
+        const memberDTO = await response.json();
+        console.log(memberDTO);
+        if(callback){
+            return callback(memberDTO);
+        }
+        return memberDTO;
+    }
+    return {getPopularCompany:getPopularCompany,getExperience:getExperience,getIntern:getIntern,getAlarm:getAlarm,setActive:setActive,setInactive:setInactive,getLink:getLink}
 })();

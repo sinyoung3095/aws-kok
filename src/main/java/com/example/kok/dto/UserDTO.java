@@ -23,8 +23,10 @@ public class UserDTO {
     private UserRole userRole;
     private Provider memberProvider;
     private String snsEmail;
+    private String memberProfileUrl;
     private Status userStatus;
     private String createdDateTime;
     private String updatedDateTime;
     private String jobName;
+
 }

@@ -27,4 +27,7 @@ public interface MemberMapper {
 
 //    아이디로 지원한 인턴 공고 조회
     public List<RequestInternDTO> selectInternByMemberId(Long memberId);
+
+//    전화번호로 회원 sns이메일 조회
+    public List<MemberDTO> selectLinkBYPhone(String userPhone);
 }

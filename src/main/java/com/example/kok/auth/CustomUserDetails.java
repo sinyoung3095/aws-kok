@@ -24,6 +24,7 @@ public class CustomUserDetails implements UserDetails {
     private String userPhone;
     private String createdDateTime;
     private String snsEmail;
+    private String memberProfileUrl;
     private UserRole userRole;
     private Status userStatus;
     private String userJobName;
@@ -38,6 +39,7 @@ public class CustomUserDetails implements UserDetails {
         this.userPhone=userDTO.getUserPhone();
         this.createdDateTime=userDTO.getCreatedDateTime();
         this.snsEmail=userDTO.getSnsEmail();
+        this.memberProfileUrl=userDTO.getMemberProfileUrl();
         this.userRole=userDTO.getUserRole();
         this.userStatus=userDTO.getUserStatus();
         this.userJobName=userDTO.getJobName();

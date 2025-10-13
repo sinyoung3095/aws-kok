@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kok.mapper.MemberMapper">
     <insert id="insertMember">
-        insert into tbl_member(user_id,member_provider)
-        values(#{userId},#{memberProvider})
+        insert into tbl_member(user_id,member_provider,member_profile_url)
+        values(#{userId},#{memberProvider},#{memberProfileUrl})
     </insert>
 
     <sql id="search">
@@ -71,5 +71,13 @@
         select avg
         from view_member_with_evaluation
         where member_id=#{memberId}
+    </select>
+<!--  전화번호로 회원 sns이메일 조회  -->
+    <select id="selectLinkBYPhone">
+        select u.sns_email, m.member_provider from tbl_user u join tbl_member m
+        on u.id= m.user_id
+        where u.user_phone = #{userPhone} and u.user_status = 'active' and m.member_provider != 'kok'
+        order by m.member_provider DESC
+
     </select>
 </mapper>

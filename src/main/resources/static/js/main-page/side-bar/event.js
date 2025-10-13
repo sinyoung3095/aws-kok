@@ -153,11 +153,9 @@ const settingModal = document.querySelector(".sidebar-setting-modal");
 const settingCloseBtn = document.querySelector(
     ".sidebar-setting-modal-close-button"
 );
-
+sideService.getLink(sideLayout.showLink);
 if (settingBtn && settingModal) {
-    settingBtn.addEventListener("click", () => {
-        console.log("asdasdasda");
-
+    settingBtn.addEventListener("click",  () => {
         settingModal.style.display = "flex";
     });
 }
