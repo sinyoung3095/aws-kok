@@ -106,5 +106,42 @@ const sideService = (()=>{
         }
         return memberDTO;
     }
-    return {getPopularCompany:getPopularCompany,getExperience:getExperience,getIntern:getIntern,getAlarm:getAlarm,setActive:setActive,setInactive:setInactive,getLink:getLink}
+
+    const getSupportList = async (callback, page = 1, keyword = '') => {
+        const response = await fetch(`/api/side-bar/support/${page}?keyword=${keyword}`);
+        const adminNoticeCriteriaDTO = await response.json();
+        if(callback){
+            callback(adminNoticeCriteriaDTO);
+        }
+
+        if(response.ok) {
+            console.log("공지 게시글 존재")
+        }else if(response.status === 404){
+            console.log("공지 게시글 없음")
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+        return adminNoticeCriteriaDTO;
+    }
+
+    const getSupportDetail = async (callback, id = 1) => {
+        const response = await fetch(`/api/side-bar/support/detail/${id}`);
+        const adminNoticeDTO = await response.json();
+        if(callback){
+            callback(adminNoticeDTO);
+        }
+
+        if(response.ok) {
+            console.log("공지 상세 게시글 존재")
+        }else if(response.status === 404){
+            console.log("공지 상세 게시글 없음")
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+        return adminNoticeDTO;
+    }
+
+    return {getPopularCompany:getPopularCompany,getExperience:getExperience,getIntern:getIntern,getAlarm:getAlarm,setActive:setActive,setInactive:setInactive,getLink:getLink,getSupportList:getSupportList,getSupportDetail:getSupportDetail}
 })();

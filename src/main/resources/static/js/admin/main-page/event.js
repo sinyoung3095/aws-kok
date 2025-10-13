@@ -3,6 +3,10 @@ const icons = document.querySelectorAll(".icon-wrapper i");
 const userMenuWrapper = document.querySelector(".user-menu-wrapper");
 const userMenuContent = document.querySelector(".user-menu-content");
 
+// 메인 페이지
+service.getMainPage(layout.showAverage);
+service.getMainPage(layout.showTotal);
+
 // 사이드바 펼침/접힘
 sideMenuButtons.forEach((menu) => {
     menu.addEventListener("click", function () {
