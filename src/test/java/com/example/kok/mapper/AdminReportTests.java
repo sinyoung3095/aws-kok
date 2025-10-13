@@ -45,7 +45,7 @@ public class AdminReportTests {
         adminReportMapper.deleteReportPost(id);
         log.info("삭제 후 전체 개수: {}", adminReportMapper.selectReportCount());
     }
-
+//test
 
 //    DAO
     @Test
