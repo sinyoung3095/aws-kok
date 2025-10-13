@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 @Getter
 @ToString(callSuper=true)
-@EqualsAndHashCode(of="id", callSuper = false)
+@EqualsAndHashCode(of="companyId", callSuper = false)
 @SuperBuilder
 public class ConsoleCompanyProfileVO extends Period{
     private Long companyId;

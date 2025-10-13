@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Component
 @Getter @Setter
 @ToString
-@EqualsAndHashCode(of="id")
+@EqualsAndHashCode(of="requestId")
 public class ConsoleInternApplicantDTO {
     private long requestId; // 지원 요청 ID
     private String requestInternStatus; // 지원 상태

@@ -8,7 +8,7 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @ToString(callSuper=true)
-@EqualsAndHashCode(of="id", callSuper = false)
+@EqualsAndHashCode(of="fileId", callSuper = false)
 @SuperBuilder
 public class RequestExperienceFileVO extends Period{
     private long fileId;

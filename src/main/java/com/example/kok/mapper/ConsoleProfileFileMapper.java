@@ -2,10 +2,12 @@ package com.example.kok.mapper;
 
 import com.example.kok.dto.ConsoleProfileFileDTO;
 import com.example.kok.dto.FileDTO;
+import com.example.kok.dto.PostFileDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface ConsoleProfileFileMapper {
