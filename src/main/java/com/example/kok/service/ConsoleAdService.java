@@ -1,14 +1,10 @@
 package com.example.kok.service;
 
 import com.example.kok.domain.ConsoleAdNoticeVO;
-import com.example.kok.domain.PostVO;
 import com.example.kok.dto.ConsoleAdNoticeCriteriaDTO;
 import com.example.kok.dto.ConsoleAdNoticeDTO;
-import com.example.kok.dto.ConsoleInternNoticeRequestDTO;
-import com.example.kok.dto.PostDTO;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.Console;
 import java.util.List;
 
 public interface ConsoleAdService {

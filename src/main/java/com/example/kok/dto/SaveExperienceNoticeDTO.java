@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Getter @Setter
 @ToString
 @NoArgsConstructor
-@EqualsAndHashCode(of ="id")
+@EqualsAndHashCode(of ="memberId")
 public class SaveExperienceNoticeDTO {
     private long memberId;
     private long experienceNoticeId;

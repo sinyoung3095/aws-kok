@@ -2,11 +2,8 @@ package com.example.kok.repository;
 
 import com.example.kok.dto.ConsoleExperienceApplicantDTO;
 import com.example.kok.dto.ConsoleExperienceListDTO;
-import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
 import com.example.kok.enumeration.RequestStatus;
-import com.example.kok.enumeration.Status;
 import com.example.kok.mapper.ConsoleExperienceDetailMapper;
-import com.example.kok.mapper.ConsoleExperienceListMapper;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

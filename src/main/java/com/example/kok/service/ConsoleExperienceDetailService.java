@@ -1,11 +1,8 @@
 package com.example.kok.service;
 
 import com.example.kok.dto.ConsoleExperienceApplicantCriteriaDTO;
-import com.example.kok.dto.ConsoleExperienceListCriteriaDTO;
 import com.example.kok.dto.ConsoleExperienceListDTO;
-import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
 import com.example.kok.enumeration.RequestStatus;
-import com.example.kok.enumeration.Status;
 
 public interface ConsoleExperienceDetailService {
 //    공고 상세 내용

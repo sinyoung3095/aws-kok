@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Getter @Setter
 @ToString
 @NoArgsConstructor
-@EqualsAndHashCode(of ="id")
+@EqualsAndHashCode(of ="memberId")
 public class SaveInternNoticeDTO {
     private long memberId;
     private long internNoticeId;

@@ -2,7 +2,6 @@ package com.example.kok.repository;
 
 import com.example.kok.domain.ConsoleAdNoticeVO;
 import com.example.kok.dto.ConsoleAdNoticeDTO;
-import com.example.kok.dto.ConsoleInternNoticeRequestDTO;
 import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.mapper.ConsoleAdNoticeMapper;
 import com.example.kok.util.Criteria;

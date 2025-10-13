@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kok.mapper.ConsoleInternApplicationMapper">
+    <!-- 인턴 상세 - 지원자 조회 -->
+    <select id="selectApplicationDetail">
+        select
+            re.id as request_id,
+            re.request_intern_status,
+            re.created_datetime as request_datetime,
+            u.id as user_id,
+            u.user_name,
+            u.user_email,
+            u.user_phone,
+            inn.id as intern_notice_id,
+            inn.intern_notice_title,
+            inn.company_id
+        from tbl_request_intern re
+            join tbl_user u
+                on re.member_id = u.id
+            join tbl_intern_notice inn
+                on re.intern_notice_id = inn.id
+        where re.member_id = #{memberId}
+            and inn.id = #{internNoticeId}
+        order by re.id desc
+    </select>
+</mapper>

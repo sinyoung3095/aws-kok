@@ -10,9 +10,9 @@ import java.util.List;
 
 @Component
 @Getter @Setter @ToString
-public class ConsoleInternNoticeCriteriaDTO {
+public class ConsoleInternListCriteriaDTO {
     // 공고 리스트
-    private List<ConsoleInternNoticeDTO> internLists;
+    private List<ConsoleInternListDTO> internLists;
 
     // 공고 개수
     private int totalCount;

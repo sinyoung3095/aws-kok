@@ -35,7 +35,7 @@
         )
     </insert>
 
-    <!-- 광고 배경이미지 등록 -->
+    <!-- 광고 배경이미지 연결 -->
     <insert id="insertAdBackgroundFile">
         insert into tbl_advertisement_background_file (file_id, advertisement_id)
         values (#{fileId}, #{advertisementId})
