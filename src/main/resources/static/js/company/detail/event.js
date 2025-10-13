@@ -261,39 +261,6 @@ function sortBtnFn() {
 }
 sortBtnFn();
 
-// 광고 배너
-function bannerActiveFn() {
-    const banners = document.querySelectorAll(".banner-list .ad-banner");
-    let timer = null;
-    let currentIndex = -1;
-
-    if (!banners) return;
-
-    // 모두 숨기기
-    function hideAll() {
-        banners.forEach((banner) => banner.classList.remove("active"));
-    }
-
-    // 랜덤 배너 보이기
-    function showRandomBanner() {
-        hideAll();
-        let randomIndex;
-        do {
-            randomIndex = Math.floor(Math.random() * banners.length);
-        } while (randomIndex === currentIndex && banners.length > 1);
-        // 직전 배너와 겹치지 않게 처리
-        banners[randomIndex].classList.add("active");
-        currentIndex = randomIndex;
-    }
-
-    // 최초 실행
-    showRandomBanner();
-
-    // 3초마다 랜덤 배너 변경
-    timer = setInterval(showRandomBanner, 5000);
-}
-bannerActiveFn();
-
 const companyId = document.querySelector(".btn-follow").dataset.companyId;
 if (companyId) {
     let currentPage = 1;
@@ -380,3 +347,38 @@ if (companyId) {
         );
     }
 }
+
+// 광고 배너
+function bannerActiveFn() {
+    const banners = document.querySelectorAll(".banner-list .ad-banner");
+    let timer = null;
+    let currentIndex = -1;
+
+    if (!banners) return;
+
+    // 모두 숨기기
+    function hideAll() {
+        banners.forEach((banner) => banner.classList.remove("active"));
+    }
+
+    // 랜덤 배너 보이기
+    function showRandomBanner() {
+        hideAll();
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * banners.length);
+        } while (randomIndex === currentIndex && banners.length > 1);
+        // 직전 배너와 겹치지 않게 처리
+        banners[randomIndex].classList.add("active");
+        currentIndex = randomIndex;
+    }
+
+    // 최초 실행
+    showRandomBanner();
+
+    // 3초마다 랜덤 배너 변경
+    timer = setInterval(showRandomBanner, 5000);
+}
+bannerActiveFn();
+
+

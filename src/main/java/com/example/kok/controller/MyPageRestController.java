@@ -1,6 +1,7 @@
 package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
+import com.example.kok.dto.PostDTO;
 import com.example.kok.dto.RequestExperienceDTO;
 import com.example.kok.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,16 @@ public class MyPageRestController {
         List<RequestExperienceDTO> req=memberService.findRequestExperienceByMemberId(memberId);
         if(req.size()!=0){
             return ResponseEntity.ok(req);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/post-list")
+    public ResponseEntity<?> getPosts(@AuthenticationPrincipal CustomUserDetails customUserDetails){
+        long memberId=customUserDetails.getId();
+        List<PostDTO> posts=memberService.findPostsByMemberId(memberId);
+        if(posts.size()!=0){
+            return ResponseEntity.ok(posts);
         }
         return ResponseEntity.notFound().build();
     }

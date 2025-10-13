@@ -94,4 +94,14 @@ public class MemberMapperTests {
         System.out.println(memberService.findRequestExperienceByMemberId(16L));
         System.out.println(memberService.findRequestInternByMemberId(16L));
     }
+
+    @Test
+    public void postsTest(){
+        System.out.println(memberMapper.selectPostsByMemberId(16L));
+    }
+
+    @Test
+    public void postsServiceTest(){
+        System.out.println(memberService.findPostsByMemberId(16L));
+    }
 }
