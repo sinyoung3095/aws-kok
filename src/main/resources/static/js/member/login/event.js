@@ -80,7 +80,7 @@ loginButton.addEventListener("click",async (e)=>{
     const result = await memberService.login({userEmail:email,userPassword:password,userRole:role});
 
         if(result.accessToken){
-            location.href='/main-page/login-header';
+            location.href='/experience/list';
         }
 
 });

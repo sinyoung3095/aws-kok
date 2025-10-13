@@ -75,8 +75,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void joinSnsUser(UserDTO userDTO) {
+        log.info("userDTO={}", userDTO);
         userDAO.saveSnsUser(userDTO);
-        memberDAO.saveMember(MemberVO.builder().userId(userDTO.getId()).memberProvider(userDTO.getMemberProvider()).build());
+        memberDAO.saveMember(MemberVO.builder().userId(userDTO.getId()).memberProvider(userDTO.getMemberProvider()).memberProfileUrl(userDTO.getMemberProfileUrl()).build());
         memberAlarmSettingDAO.save(userDTO.getId());
     }
 

@@ -49,7 +49,8 @@
 
     <!--  sns 이메일로 조회  -->
     <select id="selectBySnsEmail">
-        select * from tbl_user
+        select u.id,u.user_name,u.user_phone,u.created_datetime,u.sns_email,u.user_role,m.member_provider,m.member_profile_url from tbl_user u join tbl_member m
+                 on u.id = m.user_id
         where sns_email = #{snsEmail} and user_status = 'active'
     </select>
     <!--  sns 이메일로 회원가입  -->
@@ -69,5 +70,4 @@
         on u.id = m.user_id
         where u.user_phone = #{userPhone} and m.member_provider = 'kok' and u.user_status = 'active'
     </select>
-
 </mapper>

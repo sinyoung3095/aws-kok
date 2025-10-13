@@ -55,10 +55,12 @@ public class UserController {
     @GetMapping("join-social")
     public String goToJoinSocialPage(@CookieValue(value = "userEmail", required = false) String userEmail,
                                      @CookieValue(value = "memberName", required = false) String userName,
+                                     @CookieValue(value = "profile", required = false) String profile,
                                      UserDTO userDTO, Model model,String provider) {
-
+        log.info("profileUrl:{}",profile);
         userDTO.setSnsEmail(userEmail);
         userDTO.setUserName(userName);
+        userDTO.setMemberProfileUrl(profile);
         model.addAttribute("userDTO", userDTO);
         model.addAttribute("provider", provider);
         log.info("Get userDTO:"+userDTO);

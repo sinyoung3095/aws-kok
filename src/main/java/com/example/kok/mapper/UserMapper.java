@@ -1,6 +1,7 @@
 package com.example.kok.mapper;
 
 import com.example.kok.domain.UserVO;
+import com.example.kok.dto.MemberDTO;
 import com.example.kok.dto.UserDTO;
 import org.apache.ibatis.annotations.Mapper;
 
