@@ -66,6 +66,19 @@
         where u.id=#{memberId}
     </select>
 
+<!--    회원 id로 게시글 목록 조회-->
+    <select id="selectPostsByMemberId">
+        select u.user_name, j.job_name, p.id, p.post_content, p.likes_count, p.post_status
+        from tbl_user u
+        join tbl_post p
+        on p.member_id=u.id
+        join tbl_user_job_category uj
+        on uj.user_id=u.id
+        join tbl_job_category j
+        on j.id=uj.job_category
+        where u.id=#{memberId}
+    </select>
+
 <!--    평점 평균 조회-->
     <select id="selectAvgByMemberId">
         select avg

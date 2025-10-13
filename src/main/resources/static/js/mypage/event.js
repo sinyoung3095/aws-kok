@@ -155,10 +155,10 @@ third.forEach((item) => {
         fourth.forEach((fir) => {
             fir.classList.remove("active");
         });
-        list[1].classList.remove("active");
-        list[0].classList.remove("active");
-        list[2].classList.add("active");
-        list[3].classList.remove("active");
+        postsList.classList.remove("active");
+        savedList.classList.remove("active");
+        requestList.classList.add("active");
+        paymentList.classList.remove("active");
     });
 });
 // 결제 내역
@@ -174,10 +174,10 @@ fourth.forEach((item) => {
         third.forEach((fir) => {
             fir.classList.remove("active");
         });
-        list[1].classList.remove("active");
-        list[0].classList.remove("active");
-        list[2].classList.remove("active");
-        list[3].classList.add("active");
+        postsList.classList.remove("active");
+        savedList.classList.remove("active");
+        requestList.classList.remove("active");
+        paymentList.classList.add("active");
     });
 });
 
@@ -499,3 +499,19 @@ commentExit.addEventListener("click", (e) => {
 commentCancle.addEventListener("click", (e) => {
     delComment.style.display = "none";
 });
+
+const showExperienceRequest=async ()=>{
+    const request=(await myPageService.getExperienceList)(myPageLayout.showExperienceRequest);
+
+    return request;
+}
+
+showExperienceRequest();
+
+const showExperienceRequest=async ()=>{
+    const request=(await myPageService.getExperienceList)(myPageLayout.showExperienceRequest);
+
+    return request;
+}
+
+showExperienceRequest();
