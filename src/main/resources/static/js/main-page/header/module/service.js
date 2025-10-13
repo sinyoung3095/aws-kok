@@ -19,9 +19,9 @@ const headerService = (()=>{
         }
         return requestDTO;
     }
-    const getRequestIntern = async (callback)=>{
+    const getRequestIntern = async (callback,internId='')=>{
             console.log("체험 서비스 들어옴");
-            const response = await fetch('/api/main/requestIntern?internId=${internId}');
+            const response = await fetch(`/api/main/requestIntern?internId=${internId}`);
             const requestDTO = await response.json();
             console.log(requestDTO);
             if(callback){

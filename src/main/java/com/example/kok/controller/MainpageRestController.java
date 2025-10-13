@@ -22,6 +22,7 @@ public class MainpageRestController {
     private final ExperienceNoticeDAO experienceNoticeDAO;
     private final InternNoticeDAO internNoticeDAO;
     private final MemberAlarmSettingDAO memberAlarmSettingDAO;
+    private final MemberDAO memberDAO;
 
     @GetMapping("popular")
     public List<CompanyDTO> findPopularCompany() {
@@ -69,6 +70,12 @@ public class MainpageRestController {
     public void updateInactive(@AuthenticationPrincipal CustomUserDetails customUserDetails,@RequestBody Map<String, String> keyword) {
 
         memberAlarmSettingDAO.updateByKeywordToInactive(customUserDetails.getId(), keyword.get("keyword"));
+    }
+
+    @GetMapping("link")
+    public List<MemberDTO> find(@AuthenticationPrincipal CustomUserDetails customUserDetails){
+        log.info(memberDAO.findLink(customUserDetails.getUserPhone()).toString());
+        return memberDAO.findLink(customUserDetails.getUserPhone());
     }
 
 }

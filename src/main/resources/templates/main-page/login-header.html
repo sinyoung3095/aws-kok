@@ -15,7 +15,16 @@
             <div class="header-space"></div>
             <div class="header-login-box">
                 <button type="button" class="header-login avatar">
+                    <th:block>
+                        <th:replace th:if="${userDTO.memberProfileUrl!= null}">
+                            <img class="account-info-popover" style="padding: 0px;color:transparent;border-radius:999px;cursor:default;max-height:36px;max-width:36px;min-height:36px;min-width:36px;object-fit:contain" th:src="${userDTO.memberProfileUrl}">
+                        </th:replace>
+                    </th:block>
+                    <th:block>
+                        <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')}">
                     <img class="account-info-popover" src="/images/main-page/image3.png">
+                        </th:replace>
+                    </th:block>
                 </button>
                 <input id="id" type="text" style="display: none" th:value="${userDTO.id}">
                 <!-- 프로필 드롭다운 -->
@@ -27,6 +36,8 @@
                         <div class="list-wrap">
                             <div class="list">
                                 <!-- 내 프로필 -->
+                                <th:block>
+                                    <th:replace th:if="${userDTO.userRole.getValue()=='member'}">
                                 <a onclick="window.location.href='/mypage/page'">
                                     <div class="profile-modal-list-section">
                                         <div class="profile-modal-list-content-wrap">
@@ -45,23 +56,52 @@
                                         </div>
                                     </div>
                                 </a>
-                                <!-- 지원 내역 -->
-                                <button type="button" class="profile-modal-list-section-history">
-                                    <div class="profile-modal-list-content-wrap">
-                                        <div class="profile-modal-list-content">
-                                            <div class="profile-modal-icon-wrap">
-                                                <div class="profile-modal-icon">
-                                                    <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24" viewBox="0 0 24 24">
-                                                        <path clip-rule="evenodd" d="m5.603 11.798.82-.853a.8.8 0 1 1 1.153 1.11L5.541 14.17l-.014.014-.165.163a.8.8 0 0 1-1.125 0l-2.3-2.278a.8.8 0 1 1 1.126-1.137L4 11.86c.076-4.804 4.041-8.66 8.9-8.66 4.906 0 8.9 3.93 8.9 8.8 0 4.869-3.994 8.8-8.9 8.8a8.92 8.92 0 0 1-6.919-3.265.8.8 0 1 1 1.238-1.014A7.32 7.32 0 0 0 12.9 19.2c4.041 0 7.3-3.233 7.3-7.2s-3.259-7.2-7.3-7.2c-3.972 0-7.189 3.124-7.297 6.998M13 8.2a.8.8 0 0 1 .8.8v3.072l2.644 1.763a.8.8 0 1 1-.888 1.33l-3-2a.8.8 0 0 1-.356-.665V9a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
-                                                    </svg>
+                                    </th:replace>
+                                </th:block>
+                                <th:block>
+                                    <th:replace th:if="${userDTO.userRole.getValue()=='company'}">
+                                        <a onclick="window.location.href='/company/list'">
+                                            <div class="profile-modal-list-section">
+                                                <div class="profile-modal-list-content-wrap">
+                                                    <div class="profile-modal-list-content">
+                                                        <div class="profile-modal-icon-wrap">
+                                                            <div class="profile-modal-icon">
+                                                                <svg color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24" viewBox="0 0 24 24">
+                                                                    <path clip-rule="evenodd" d="M12 3.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4M7.2 7a4.8 4.8 0 1 1 9.6 0 4.8 4.8 0 0 1-9.6 0M9 15.8A3.2 3.2 0 0 0 5.8 19v2a.8.8 0 0 1-1.6 0v-2A4.8 4.8 0 0 1 9 14.2h6a4.8 4.8 0 0 1 4.8 4.8v2a.8.8 0 0 1-1.6 0v-2a3.2 3.2 0 0 0-3.2-3.2z" fill-rule="evenodd"></path>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                        <div class="profile-modal-text-wrap">
+                                                            <p class="profile-modal-text">내 프로필</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="profile-modal-text-wrap">
-                                                <p class="profile-modal-text">지원 내역</p>
+                                        </a>
+                                    </th:replace>
+                                </th:block>
+                                <!-- 지원 내역 -->
+                                <th:block>
+                                    <th:replace th:if="${userDTO.userRole.getValue()=='member'}">
+                                        <button type="button" class="profile-modal-list-section-history">
+                                            <div class="profile-modal-list-content-wrap">
+                                                <div class="profile-modal-list-content">
+                                                    <div class="profile-modal-icon-wrap">
+                                                        <div class="profile-modal-icon">
+                                                            <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24" viewBox="0 0 24 24">
+                                                                <path clip-rule="evenodd" d="m5.603 11.798.82-.853a.8.8 0 1 1 1.153 1.11L5.541 14.17l-.014.014-.165.163a.8.8 0 0 1-1.125 0l-2.3-2.278a.8.8 0 1 1 1.126-1.137L4 11.86c.076-4.804 4.041-8.66 8.9-8.66 4.906 0 8.9 3.93 8.9 8.8 0 4.869-3.994 8.8-8.9 8.8a8.92 8.92 0 0 1-6.919-3.265.8.8 0 1 1 1.238-1.014A7.32 7.32 0 0 0 12.9 19.2c4.041 0 7.3-3.233 7.3-7.2s-3.259-7.2-7.3-7.2c-3.972 0-7.189 3.124-7.297 6.998M13 8.2a.8.8 0 0 1 .8.8v3.072l2.644 1.763a.8.8 0 1 1-.888 1.33l-3-2a.8.8 0 0 1-.356-.665V9a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-modal-text-wrap">
+                                                        <p class="profile-modal-text">지원 내역</p>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </button>
+                                        </button>
+                                    </th:replace>
+                                </th:block>
+
                                 <div  class="profile-modal-list-section">
                                     <div class="profile-modal-list-content-wrap">
                                         <div id="logout" class="profile-modal-list-content">

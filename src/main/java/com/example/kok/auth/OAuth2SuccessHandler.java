@@ -25,6 +25,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String provider = oAuth2User.getAttribute("provider");
         String email = oAuth2User.getAttribute("email");
         String name = oAuth2User.getAttribute("name");
+        String profile = oAuth2User.getAttribute("profile");
         boolean isExist = oAuth2User.getAttribute("exist");
         String role = oAuth2User.getAuthorities().stream().findFirst().orElseThrow(IllegalAccessError::new).getAuthority();
         String path = null;
@@ -61,6 +62,14 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         memberNameCookie.setMaxAge(60 * 60);
 
         response.addCookie(memberNameCookie);
+
+        Cookie memberProfileUrlCookie = new Cookie("profile", profile);
+        memberProfileUrlCookie.setHttpOnly(true);
+        memberProfileUrlCookie.setSecure(false);
+        memberProfileUrlCookie.setPath("/");
+        memberProfileUrlCookie.setMaxAge(60 * 60);
+
+        response.addCookie(memberProfileUrlCookie);
 
         response.sendRedirect(path);
     }

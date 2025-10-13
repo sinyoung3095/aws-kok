@@ -4,6 +4,8 @@ import com.example.kok.enumeration.Provider;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Getter
 @Setter
@@ -19,4 +21,5 @@ public class MemberDTO {
     private String updatedDateTime;
     private String jobName;
     private int postsCount;
+    private String snsEmail;
 }

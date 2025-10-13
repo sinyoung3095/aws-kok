@@ -341,3 +341,9 @@
         display: block;
     }
 }
+
+@media (min-width: 1024px) {
+    .top-wrap {
+        display: none;
+    }
+}
