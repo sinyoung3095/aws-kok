@@ -113,5 +113,75 @@ const sideLayout = (()=>{
         });
         link.innerHTML = text;
     }
-    return{showPopularCompany:showPopularCompany,showExperience:showExperience,showIntern:showIntern,showLink:showLink}
+
+    const showSupport = (adminNoticeCriteriaDTO) => {
+        const supportWrap = document.getElementById("support-wrap");
+        let text = ``;
+
+        adminNoticeCriteriaDTO.noticeList.forEach((notice) => {
+            text += `
+                <li class="customer-support-list-section" data-id="${notice.id}">
+                    <div class="customer-support-list-content">
+                        <span class="customer-support-list-title-wrap">
+                            <span class="customer-support-list-title-icon"></span>${notice.adminNoticeTitle}
+                        </span>
+                        <span class="customer-support-list-text">
+                            ${notice.adminNoticeContent}
+                        </span>
+                    </div>
+                </li>
+            `;
+        });
+        text += `
+            <div id="loading" style="display: none; width: 100px; height: 100px; margin: 0 auto;">
+                <img src="/images/experience/loading.gif" style="width: 100%; height: 100%">
+            </div>
+        `;
+        supportWrap.innerHTML = text;
+    }
+
+    const showSupportDetail = (adminNoticeDTO) => {
+        const supportDetailWrap = document.getElementById("member-support-detail");
+        let text = ``;
+
+        text += `
+            <div class="detail-sub-top">
+                <span class="detail-back-wrap" tabindex="0" role="button">
+                    <span class="detail-back-icon"></span>
+                </span>
+                <span class="detail-title-wrap">
+                    <span class="detail-title">
+<!--                        <span class="detail-title-section">계정 및 프로필</span>-->
+<!--                        <span class="detail-title-section-icon">/</span>-->
+                        <span class="detail-title-text">${adminNoticeDTO.adminNoticeTitle}</span>
+                    </span>
+                </span>
+            </div>
+            <div class="detail-main-body-wrap">
+                <div class="detail-main-body" id="detail-main-body">
+                    <div class="detail-main-content-wrap1">
+                        <div class="detail-main-content-wrap2">
+                            <div class="detail-main-content-wrap3" role="main">
+                                <article class="detail-main-article-wrap">
+                                    <div class="detail-main-article" role="article">
+<!--                                        <h3 onclick="" id="detail-main-title" class="detail-main-title">-->
+<!--                                            <span class="detail-main-title-text">고유계정 원칙이란?</span>-->
+<!--                                        </h3>-->
+                                        <span class="detail-main-content-text">
+                                            <br>
+                                            ${adminNoticeDTO.adminNoticeContent}
+                                        </span>
+                                        <span class="detail-main-content-space"></span>
+                                        <p class="detail-main-update-date">업데이트 날짜: ${adminNoticeDTO.updatedDateTime}</p>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        supportDetailWrap.innerHTML = text;
+    }
+    return{showPopularCompany:showPopularCompany,showExperience:showExperience,showIntern:showIntern,showLink:showLink,showSupport:showSupport,showSupportDetail:showSupportDetail}
 })();
