@@ -51,6 +51,8 @@ public class SecurityConfig {
                                 "/member/join-company",
                                 "/member/login",
                                 "/admin/login",
+                                "/experience/**",
+                                "/intern/**",
                                 "/company/**",
                                 "/community/**",
                                 "/css/**",

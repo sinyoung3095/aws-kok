@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/font/font.css">
     <link rel="stylesheet" href="/css/experience/list.css">
-    <link rel="stylesheet" href="/css/main-page/side-bar.css">
-    <link rel="stylesheet" href="/css/main-page/login-side-bar.css">
-    <link rel="stylesheet" href="/css/main-page/header.css">
-    <link rel="stylesheet" href="/css/main-page/login-header.css">
+<!--    <link rel="stylesheet" href="/css/main-page/side-bar.css">-->
+<!--    <link rel="stylesheet" href="/css/main-page/login-side-bar.css">-->
+<!--    <link rel="stylesheet" href="/css/main-page/header.css">-->
+<!--    <link rel="stylesheet" href="/css/main-page/login-header.css">-->
+<!--    <link rel="stylesheet" href="/css/main-page/mobile-header.css">-->
+<!--    <link rel="stylesheet" href="/css/main-page/mobile-footer.css">-->
+<!--    <link rel="stylesheet" href="/css/main-page/mobile-login-header.css">-->
     <title>체험공고 | 콕</title>
 </head>
 <body>
@@ -22,6 +25,12 @@
             <div th:replace="~{main-page/login-side-bar}"></div>
         </th:block>
         <main class="main">
+            <th:block th:if="${userDTO==null}">
+                <div th:replace="~{main-page/mobile-header}"></div>
+            </th:block>
+            <th:block th:if="${userDTO!=null}">
+                <div th:replace="~{main-page/mobile-login-header}"></div>
+            </th:block>
             <th:block th:if="${userDTO==null}">
                 <div th:replace="~{main-page/header}"></div>
             </th:block>
@@ -458,6 +467,7 @@
             </div>
         </div>
     </div>
+<div th:replace="~{main-page/mobile-footer}"></div>
 </body>
 <script th:inline="javascript">
     const experienceData = [[${experienceNoticeCriteria}]];
@@ -466,12 +476,12 @@
     const sharedCompanyId = [[${sharedCompanyId}]];
     const sharedExperienceId = [[${sharedExperienceId}]];
 </script>
-<script src="/js/main-page/header/module/service.js"></script>
-<script src="/js/main-page/header/module/layout.js"></script>
-<script src="/js/main-page/header/event.js"></script>
-<script src="/js/main-page/side-bar/module/service.js"></script>
-<script src="/js/main-page/side-bar/module/layout.js"></script>
-<script src="/js/main-page/side-bar/event.js"></script>
+<!--<script src="/js/main-page/header/module/service.js"></script>-->
+<!--<script src="/js/main-page/header/module/layout.js"></script>-->
+<!--<script src="/js/main-page/header/event.js"></script>-->
+<!--<script src="/js/main-page/side-bar/module/service.js"></script>-->
+<!--<script src="/js/main-page/side-bar/module/layout.js"></script>-->
+<!--<script src="/js/main-page/side-bar/event.js"></script>-->
 <script src="/js/experience/module/service.js"></script>
 <script src="/js/experience/module/layout.js"></script>
 <script src="/js/experience/event.js"></script>
