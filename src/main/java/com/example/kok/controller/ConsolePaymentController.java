@@ -1,5 +1,6 @@
 package com.example.kok.controller;
 
+import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.ConsolePaymentCriteriaDTO;
 import com.example.kok.service.ConsolePaymentService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import java.util.Collections;
 
@@ -23,9 +25,10 @@ public class ConsolePaymentController {
     @GetMapping
     public String goToList(
 //            @PathVariable("companyId") Long companyId,
-//            @PathVariable("page") int page,
+//            @PathVariable("page") int page, // 여기해야함
             @RequestParam(defaultValue = "1") int page,
-                           Model model) {
+            @AuthenticationPrincipal CustomUserDetails customUserDetails,
+            Model model) {
 
         Long companyId = 1L;
         ConsolePaymentCriteriaDTO payment = consolepaymentService.getList(companyId, page);

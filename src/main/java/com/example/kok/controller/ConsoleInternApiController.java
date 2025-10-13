@@ -60,7 +60,6 @@ public class ConsoleInternApiController {
         noticeRequestDTO.setId(id);
         internService.modifyNotice(noticeRequestDTO);
 
-        log.info("수정 요청 DTO = {}", noticeRequestDTO);
         return ResponseEntity.ok(noticeRequestDTO);
     }
 

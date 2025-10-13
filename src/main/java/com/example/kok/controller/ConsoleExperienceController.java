@@ -28,7 +28,11 @@ public class ConsoleExperienceController {
 
 //    기업 콘솔 체험 공고 목록
     @GetMapping("/list")
-    public String goToList() {
+    public String goToList(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
+        if (customUserDetails != null) {
+            log.info("로그인한 기업 ID: {}", customUserDetails.getId());
+            model.addAttribute("companyId", customUserDetails.getId());
+        }
         return "enterprise-console/console-experience-list";
     }
 

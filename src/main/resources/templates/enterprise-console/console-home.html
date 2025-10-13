@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="wrap-enter">
-        <div th:replace="~{/enterprise-console/console-sidebar.html :: sidebar}"></div>
+        <div th:replace="~{/enterprise-console/console-sidebar}"></div>
 
         <main class="main">
             <header class="header">
@@ -57,8 +57,8 @@
                                                 </div>
                                             </div>
                                             <div class="button-wrap">
-                                                <button class="white-button">체험 공고 목록</button>
-                                                <button class="black-button">체험 공고 등록</button>
+                                                <a href="/enterprise-console/experience/list" class="white-button">체험 공고 목록</a>
+                                                <a href="/enterprise-console/experience/create" class="black-button">체험 공고 등록</a>
                                             </div>
                                         </div>
                                     </div>
@@ -81,8 +81,8 @@
                                                 </div>
                                             </div>
                                             <div class="button-wrap">
-                                                <button class="white-button">인턴 고용 공고 목록</button>
-                                                <button class="black-button">인턴 고용 공고 등록</button>
+                                                <a href="/enterprise-console/intern/list" class="white-button">인턴 고용 공고 목록</a>
+                                                <a href="/enterprise-console/intern/create" class="black-button">인턴 고용 공고 등록</a>
                                             </div>
                                         </div>
                                     </div>
@@ -93,7 +93,7 @@
                                         </div>
                                         <div class="card-content">
                                             <div class="button-wrap">
-                                                <button class="white-button">광고 등록하기</button>
+                                                <a href="/enterprise-console/ad/list" class="white-button">광고 등록하기</a>
                                             </div>
                                         </div>
                                     </div>

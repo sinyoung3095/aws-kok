@@ -105,7 +105,7 @@ public class ConsoleExperienceApiController {
                         Duration.ofMinutes(5)
                 );
                 downloadUrls.add(downloadUrl);
-                log.info("🎯 PreSigned URL 발급됨: {}", downloadUrl);
+                log.info("======================", downloadUrl);
             }
         }
 

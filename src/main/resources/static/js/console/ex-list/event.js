@@ -119,7 +119,7 @@ if (experienceTable) {
 
 
 // ######################### 공고목록 ############################
-const companyId = 1;
+// const companyId = 1;
 const page = 1;
 let status = null;
 let keyword ="";
