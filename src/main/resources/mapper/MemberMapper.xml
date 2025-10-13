@@ -68,14 +68,21 @@
 
 <!--    회원 id로 게시글 목록 조회-->
     <select id="selectPostsByMemberId">
-        select u.user_name, j.job_name, p.id, p.post_content, p.likes_count, p.post_status
+        select u.user_name, p.id, p.post_content, p.likes_count, p.post_status, p.created_datetime
         from tbl_user u
         join tbl_post p
         on p.member_id=u.id
+        where u.id=#{memberId}
+    </select>
+
+<!--    회원 id로 직군 조회-->
+    <select id="selectJobCategoryByMemberId">
+        select j.job_name
+        from tbl_user u
         join tbl_user_job_category uj
-        on uj.user_id=u.id
+        on u.id = uj.user_id
         join tbl_job_category j
-        on j.id=uj.job_category
+        on uj.job_category = j.id
         where u.id=#{memberId}
     </select>
 

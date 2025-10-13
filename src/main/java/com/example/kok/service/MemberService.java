@@ -28,4 +28,7 @@ public interface MemberService {
 
 //    지원한 인턴 공고 조회
     public List<RequestInternDTO> findRequestInternByMemberId(Long memberId);
+
+//    작성 게시글 조회
+    public List<PostDTO> findPostsByMemberId(Long memberId);
 }

@@ -29,9 +29,13 @@ public class MyPageRestController {
         return ResponseEntity.notFound().build();
     }
 
-//    @GetMapping("/post-list")
-//    public ResponseEntity<?> getPosts(@AuthenticationPrincipal CustomUserDetails customUserDetails){
-//        long memberId=customUserDetails.getId();
-//        List<PostDTO> posts=memberService.
-//    }
+    @GetMapping("/post-list")
+    public ResponseEntity<?> getPosts(@AuthenticationPrincipal CustomUserDetails customUserDetails){
+        long memberId=customUserDetails.getId();
+        List<PostDTO> posts=memberService.findPostsByMemberId(memberId);
+        if(posts.size()!=0){
+            return ResponseEntity.ok(posts);
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

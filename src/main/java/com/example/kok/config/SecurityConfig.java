@@ -44,6 +44,8 @@ public class SecurityConfig {
                                 "/api/replies/**",
                                 "/api/follow/**",
                                 "/api/company/**",
+                                "/api/experiences/**",
+                                "/api/interns/**",
                                 "/member/join-member",
                                 "/member/join-social",
                                 "/member/join-company",

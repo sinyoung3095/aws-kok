@@ -30,4 +30,7 @@ public interface MemberMapper {
 
 //    아이디로 게시글 조회
     public List<PostDTO> selectPostsByMemberId(Long memberId);
+
+//    아이디로 직군 조회
+    public String selectJobCategoryByMemberId(Long memberId);
 }
