@@ -6,6 +6,7 @@ import com.example.kok.repository.ConsoleExperienceApplicationDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,37 @@ public class ConsoleExperienceApplicationServiceImpl implements ConsoleExperienc
         });
 
         return applicantDetail;
+    }
+
+    @Override
+    public List<ConsoleExperienceApplicantDTO> getApplicantsByNoticeId(Long experienceNoticeId) {
+        return consoleExperienceApplicationDAO.findApplicantsByNoticeId(experienceNoticeId);
+    }
+
+//    여러 명의 지원자 상세 조회
+    @Override
+    public List<ConsoleExperienceApplicantDTO> getApplicantsDetailsByMemberIds(Long experienceNoticeId, List<Long> memberIdList) {
+        List<ConsoleExperienceApplicantDTO> results = new ArrayList<>();
+
+        for (Long memberId : memberIdList) {
+            // 기존 단일 조회 재활용
+            ConsoleExperienceApplicantDTO applicantDetail =
+                    consoleExperienceApplicationDAO.findApplicantDetail(memberId, experienceNoticeId);
+
+            // 파일 정보 조회
+            Optional<FileDTO> fileInfo =
+                    consoleExperienceApplicationDAO.findResumeFileByMemberId(memberId, experienceNoticeId);
+
+            // 파일 있으면 DTO에 세팅
+            fileInfo.ifPresent(file -> {
+                applicantDetail.setFilePath(file.getFilePath());
+                applicantDetail.setFileName(file.getFileOriginName());
+            });
+
+            results.add(applicantDetail);
+        }
+
+        return results;
     }
 
 }

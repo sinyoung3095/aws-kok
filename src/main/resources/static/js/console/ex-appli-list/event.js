@@ -37,15 +37,35 @@ function filter(page = 1) {
     });
 };
 
-document.addEventListener("click", (e) => {
-    const row = e.target.closest(".body-tr");
+document.addEventListener("click", async (e) => {
+    const target = e.target.closest(".download");
+    if (!target) return;
 
-    if (row) {
-        const userId = row.dataset.userId;
+    const checkedBoxes = document.querySelectorAll(".check-download:checked");
+    const memberIdList = Array.from(checkedBoxes).map(el => el.dataset.memberId);
+    console.log("선택된자", memberIdList);
 
-        const url = `/enterprise-console/experience/application/${experienceNoticeId}/${userId}`;
-        window.location.href = url;
+    const urls = await experienceDatailService.downLoad(experienceNoticeId, memberIdList);
+    console.log("다운로드", urls);
+
+    for (let i = 0; i < urls.length; i++) {
+        const url = urls[i];
+        console.log(url);
+        location.href = url;
     }
+
+    // urls.forEach((url) => {
+    //     console.log(url);
+    //     location.href = url;
+    // });
+
+    console.log("다운로드 완료");
 });
+
+
+
+
+
+
 
 

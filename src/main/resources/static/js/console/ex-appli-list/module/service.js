@@ -25,7 +25,7 @@ const experienceDatailService = (() => {
 
     const updateStatus = async (requestId, statusValue) => {
         try {
-            const response = await fetch(`/api/enterprise-console/intern/status/${requestId}`, {
+            const response = await fetch(`/api/enterprise-console/experience/status/${requestId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -47,7 +47,23 @@ const experienceDatailService = (() => {
             return false;
         }
     };
-    return {getList:getList, updateStatus:updateStatus}
+
+    const downLoad = async (experienceNoticeId, memberIdList) => {
+        const response = await fetch(`/api/enterprise-console/experience/${experienceNoticeId}/applicants/files`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(memberIdList)
+        });
+
+        if (!response.ok) {
+            console.error("다운로드 실패", response.status);
+        }
+
+        const urls = await response.json();
+        return urls;
+    }
+
+    return {getList:getList, updateStatus:updateStatus, downLoad:downLoad}
 })();
 
 

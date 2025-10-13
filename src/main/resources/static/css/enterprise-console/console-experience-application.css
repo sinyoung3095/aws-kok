@@ -579,7 +579,8 @@ p.appli-title-p{
     line-height: 1.42857;
 }
 
-button.download-btn{
+button.download-btn,
+button.url-btn{
     padding-inline: 10px;
     outline-style: none;
     transition-property: color, box-shadow;
@@ -604,7 +605,8 @@ button.download-btn{
     display: inline-flex;
 }
 
-button.download-btn:hover{
+button.download-btn:hover,
+button.url-btn:hover{
     background-color: #f5f5f5;
 }
 

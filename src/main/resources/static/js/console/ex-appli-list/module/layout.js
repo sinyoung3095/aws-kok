@@ -64,10 +64,10 @@ const experienceDatailLayout = (() => {
 
         lists.forEach(list => {
             tbody.innerHTML += `
-                <tr class="body-tr" data-user-id="${list.userId}">
+                <tr class="body-tr" data-member-id="${list.userId}">
                     <td class="body-td">
                         <label style="display:block; width:100%; height:100%;">
-                            <input type="checkbox" name="" class="check-download">
+                            <input type="checkbox" name="" class="check-download" data-member-id="${list.userId}">
                         </label>
                     </td>
                     <td class="body-td">
@@ -84,6 +84,9 @@ const experienceDatailLayout = (() => {
                     <td class="body-td">${list.requestDatetime}</td>
                     <td class="body-td">
                         <span class="exp-status">${list.requestExperienceStatus === "await" ? "서류 검토 중" : list.requestExperienceStatus === "accept" ? "합격" : "불합격"}</span>
+                    </td>
+                    <td class="body-td">
+                        <a href="/enterprise-console/experience/application/${list.experienceNoticeId}/${list.userId}" class="more-btn">상세보기</a>
                     </td>
                 </tr>
             `;

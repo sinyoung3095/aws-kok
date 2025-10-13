@@ -22,7 +22,32 @@ const internDatailService = (() => {
 
         return data;
     }
-    return {getList:getList}
+
+    const updateStatus = async (requestId, statusValue) => {
+        try {
+            const response = await fetch(`/api/enterprise-console/intern/status/${requestId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    id: requestId,
+                    requestExperienceStatus: statusValue
+                })
+            });
+
+            if (response.ok) {
+                console.log("상태 변경 성공");
+                return true;
+            } else {
+                const err = await response.text();
+                console.log("상태 변경 실패", err);
+                return false;
+            }
+        } catch (error) {
+            console.error("서버 통신 오류:", error);
+            return false;
+        }
+    };
+    return {getList:getList, updateStatus:updateStatus}
 })();
 
 

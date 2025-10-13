@@ -6,6 +6,7 @@ import com.example.kok.dto.PostFileDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mapper
@@ -20,6 +21,9 @@ public interface ConsoleExperienceApplicationMapper {
     Optional<FileDTO> selectResumeFileByMemberId(
             @Param("memberId") Long memberId,
             @Param("experienceNoticeId") Long experienceNoticeId);
+
+//    공고별 지원자 목록
+    List<ConsoleExperienceApplicantDTO> selectApplicantsByNoticeId(@Param("experienceNoticeId") Long experienceNoticeId);
 
 
 }
