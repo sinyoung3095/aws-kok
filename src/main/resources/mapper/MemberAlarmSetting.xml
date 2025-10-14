@@ -38,7 +38,7 @@
                on f.member_id = a.member_id
             join tbl_user u
                on a.member_id = u.id
-        where e.id=${id} and a.company_notice_alarm = 'active'and u.user_status='active'
+        where e.id=${id} and a.company_experience_notice_alarm = 'active'and u.user_status='active'
 
     </select>
     <select id="selectByInturnNoticeId">
@@ -51,7 +51,7 @@
                                                                   on f.member_id = a.member_id
                                                              join tbl_user u
                                                                   on a.member_id = u.id
-        where i.id=${id} and a.company_notice_alarm = 'active'and u.user_status='active'
+        where i.id=${id} and a.company_intern_notice_alarm = 'active'and u.user_status='active'
 
     </select>
 </mapper>

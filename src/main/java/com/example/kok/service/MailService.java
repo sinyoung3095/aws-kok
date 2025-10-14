@@ -80,7 +80,7 @@ public class MailService {
 
         StringBuilder body = new StringBuilder();
         body.append("<html><body>");
-        body.append("<p>"+name+"님 팔로우 하신"+companyName+ "기업의 공지가 올라왔습니다."+"</p>");
+        body.append("<p>"+name+"님 팔로우 하신 "+companyName+ "기업의 공지가 올라왔습니다."+"</p>");
 
         body.append("</body></html>");
 

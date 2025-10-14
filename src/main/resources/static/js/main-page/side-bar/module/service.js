@@ -49,27 +49,14 @@ const sideService = (()=>{
         const check = document.getElementsByClassName("setting-modal-alarm-button-check");
         console.log(setting);
 console.log(alarmDTO);
-        if(alarmDTO.memberPostLikeAlarm !=='active'){
+        if(alarmDTO.companyExperienceNoticeAlarm !=='active'){
             setting[0].classList.add("off");
             check[0].classList.add("off");
         }
-        if(alarmDTO.memberCommentAlarm !=='active'){
+        if(alarmDTO.companyInternNoticeAlarm !=='active'){
             setting[1].classList.add("off");
             check[1].classList.add("off");
         }
-        if(alarmDTO.memberReplyAlarm !=='active'){
-            setting[2].classList.add("off");
-            check[2].classList.add("off");
-        }
-        if(alarmDTO.requestStatusAlarm !=='active'){
-            setting[3].classList.add("off");
-            check[3].classList.add("off");
-        }
-        if(alarmDTO.companyNoticeAlarm !=='active'){
-            setting[4].classList.add("off");
-            check[4].classList.add("off");
-        }
-
     }
     const setActive = async (keyword)=>{
         const response = await fetch("/api/main/active",{
