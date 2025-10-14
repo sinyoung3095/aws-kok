@@ -66,12 +66,7 @@ const layout = (()=>{
                 </li>
             `;
         });
-        text += `
-            <div id="loading" style="display: none; width: 100px; height: 100px; margin: 0 auto;">
-                <img src="/images/experience/loading.gif" style="width: 100%; height: 100%">
-            </div>
-        `;
-        supportWrap.innerHTML = text;
+        supportWrap.innerHTML += text;
     }
 
     const showSupportDetail = (adminNoticeDTO) => {
@@ -87,7 +82,7 @@ const layout = (()=>{
                     <span class="detail-title">
 <!--                        <span class="detail-title-section">계정 및 프로필</span>-->
 <!--                        <span class="detail-title-section-icon">/</span>-->
-                        <span class="detail-title-text">${adminNoticeDTO.adminNoticeTitle}</span>
+                        <span class="detail-title-text">콕(KOK) 고객지원</span>
                     </span>
                 </span>
             </div>
@@ -98,9 +93,9 @@ const layout = (()=>{
                             <div class="detail-main-content-wrap3" role="main">
                                 <article class="detail-main-article-wrap">
                                     <div class="detail-main-article" role="article">
-<!--                                        <h3 onclick="" id="detail-main-title" class="detail-main-title">-->
-<!--                                            <span class="detail-main-title-text">고유계정 원칙이란?</span>-->
-<!--                                        </h3>-->
+                                        <h3 onclick="" id="detail-main-title" class="detail-main-title">
+                                            <span class="detail-main-title-text">${adminNoticeDTO.adminNoticeTitle}</span>
+                                        </h3>
                                         <span class="detail-main-content-text">
                                             <br>
                                             ${adminNoticeDTO.adminNoticeContent}

@@ -234,50 +234,58 @@ const closeButton = document.querySelector(
     ".customer-support-top-close-button"
 );
 const scrollContainer = document.querySelector(".customer-support-body-wrap6");
+const scrollWrap = document.getElementById("support-wrap");
+const supportLoading = document.getElementById("supportLoading");
+supportLoading.style.display = "block";
 
-const showSupportList = async (page = 1) => {
-    const noticeCriteria = await service.getSupportList(layout.showSupport, page);
-    const loading = document.getElementById("loading");
-    loading.style.display = "block";
-
-    setTimeout(() => {
-        loading.style.display = "none";
-    }, 1000);
-
-    return noticeCriteria;
+let supportPage = 1;
+const showSupportList = async (supportPage = 1) => {
+    return await service.getSupportList(layout.showSupport, supportPage);
 }
-
-// let checkSupportScroll = true;
-// let noticeCriteria;
-//
-// onScroll = async function() {
-//     var scrollTop = scrollContainer.scrollTop;
-//     var clientHeight = scrollContainer.clientHeight;
-//     var scrollHeight = scrollContainer.scrollHeight;
-//
-//     if(scrollTop + clientHeight >= scrollHeight - 50) {
-//         if(checkSupportScroll) {
-//             noticeCriteria = await showSupportList(++page);
-//             checkSupportScroll = false;
-//         }
-//         setTimeout(() => {
-//             if(noticeCriteria != null && noticeCriteria.criteria.hasMore) {
-//                 checkSupportScroll = true;
-//             }
-//         }, 800);
-//     }
-// }
 
 if (supportButton && supportModal && closeButton) {
     supportButton.addEventListener("click", () => {
         supportModal.classList.add("active");
-        showSupportList();
+        setTimeout(() => {
+            document.getElementById("supportLoading").remove();
+            showSupportList();
+        }, 1000);
     });
 
     closeButton.addEventListener("click", () => {
         supportModal.classList.remove("active");
     });
 }
+
+let checkSupportScroll = true;
+let noticeCriteria;
+
+scrollWrap.addEventListener("scroll", async (e) => {
+    const supportScrollTop = e.target.scrollTop;
+    const supportClientHeight = e.target.clientHeight;
+    const supportScrollHeight = e.target.scrollHeight;
+    const supportWrap = document.getElementById("support-wrap");
+
+    if(supportScrollTop + supportClientHeight >= supportScrollHeight) {
+        if(checkSupportScroll) {
+            supportWrap.innerHTML += `
+                <li id="supportLoading" style="display: block; width: 100px; height: 100px; margin: 0 auto;">
+                    <img src="/images/experience/loading.gif" style="width: 100%; height: 100%" alt="loading">
+                </li>
+            `;
+            setTimeout(async () => {
+                document.getElementById("supportLoading").remove();
+                noticeCriteria = await showSupportList(++supportPage);
+            }, 1000);
+            checkSupportScroll = false;
+        }
+        setTimeout(() => {
+            if(noticeCriteria != null && noticeCriteria.noticeCriteria.hasMore) {
+                checkSupportScroll = true;
+            }
+        }, 1500);
+    }
+});
 
 // 고객지원 상세창
 // const faqItems = document.querySelectorAll(".customer-support-list-section");

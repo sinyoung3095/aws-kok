@@ -7,5 +7,4 @@ CREATE TABLE tbl_admin_notice (
     updated_datetime timestamp default now()
 );
 
-drop table tbl_admin_notice;
 select * from tbl_admin_notice order by id;
