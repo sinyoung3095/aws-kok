@@ -70,6 +70,32 @@ public class MailService {
 
         return code;
     }
+
+    public void sendMailByNotice(String email,String name,String noticeTitle,String companyName) throws MessagingException {
+
+
+        String receiver = email;
+        String sender = "sinyoung3095@gmail.com";
+        String title = "(콕)알림 : "+ noticeTitle;
+
+        StringBuilder body = new StringBuilder();
+        body.append("<html><body>");
+        body.append("<p>"+name+"님 팔로우 하신"+companyName+ "기업의 체험 공지가 올라왔습니다."+"</p>");
+
+        body.append("</body></html>");
+
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+
+        mimeMessageHelper.setFrom(sender);
+        mimeMessageHelper.setTo(receiver);
+        mimeMessageHelper.setSubject(title);
+        mimeMessageHelper.setText(body.toString(), true);
+
+
+
+        javaMailSender.send(mimeMessage);
+    }
 }
 
 

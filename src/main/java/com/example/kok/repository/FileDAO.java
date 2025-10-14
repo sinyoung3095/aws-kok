@@ -27,4 +27,8 @@ public class FileDAO {
         return fileMapper.selectFileByName(fileName);
     }
 
+//    id로 프사 조회
+    public FileDTO findFileById(Long id) {
+        return fileMapper.selectProfileById(id);
+    }
 }

@@ -31,4 +31,12 @@ sideToggleBtn.addEventListener("click", () => {
         extraText.style.display = "none";
         sideToggleBtn.textContent = "더보기";
     }
+
 });
+
+const logout = document.getElementsByClassName("sidebar-logout")[0];
+logout.addEventListener("click",async (e)=>{
+    await service.logout();
+
+    location.href='/member/login';
+})

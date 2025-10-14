@@ -7,6 +7,7 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Component
 @Getter @Setter
@@ -36,4 +37,5 @@ public class ExperienceNoticeDTO{
     private String jobName;
     private String companyScaleName;
     private Long remainingDays;
+    private List<UserDTO> users;
 }
