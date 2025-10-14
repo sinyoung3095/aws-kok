@@ -80,7 +80,9 @@ loginButton.addEventListener("click",async (e)=>{
     const result = await memberService.login({userEmail:email,userPassword:password,userRole:role});
 
         if(result.accessToken){
-            location.href='/experience/list';
+            if(checkRole.value==='member'){location.href='/experience/list';}
+            else{location.href='/enterprise-console/';}
+
         }
 
 });

@@ -3,11 +3,13 @@ package com.example.kok.controller;
 import com.example.kok.auth.JwtAuthenticationFilter;
 import com.example.kok.auth.JwtTokenProvider;
 import com.example.kok.dto.CompanyScaleCategoryBridgeDTO;
+import com.example.kok.dto.CompanySectorCategoryDTO;
 import com.example.kok.dto.UserDTO;
 import com.example.kok.enumeration.Provider;
 import com.example.kok.enumeration.UserRole;
 import com.example.kok.mybatis.handler.ProviderHandler;
 import com.example.kok.repository.CompanyScaleCategoryDAO;
+import com.example.kok.repository.CompanySectorCategoryDAO;
 import com.example.kok.repository.UserDAO;
 import com.example.kok.service.S3Service;
 import com.example.kok.service.UserService;
@@ -36,6 +38,7 @@ public class UserController {
     private final JwtTokenProvider  jwtTokenProvider;
     private final PasswordEncoder  passwordEncoder;
     private final CompanyScaleCategoryDAO  companyScaleCategoryDAO;
+    private final CompanySectorCategoryDAO companySectorCategoryDAO;
 
     @GetMapping("join-member")
     public String goToJoinPage() {
@@ -101,8 +104,12 @@ public class UserController {
                 userService.joinCompany(userDTO,multipartFiles);
                 CompanyScaleCategoryBridgeDTO companyScaleCategoryBridgeDTO =new CompanyScaleCategoryBridgeDTO();
                 companyScaleCategoryBridgeDTO.setCompanyId(userDTO.getId());
-                companyScaleCategoryBridgeDTO.setCompanyScaleCategoryId(2L);
+                companyScaleCategoryBridgeDTO.setCompanyScaleCategoryId(6L);
                 companyScaleCategoryDAO.insertScale(companyScaleCategoryBridgeDTO);
+                CompanySectorCategoryDTO companySectorCategoryDTO = new CompanySectorCategoryDTO();
+                companySectorCategoryDTO.setCompanyId(userDTO.getId());
+                companySectorCategoryDTO.setCompanySectorId(11L);
+                companySectorCategoryDAO.insertSector(companySectorCategoryDTO);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
