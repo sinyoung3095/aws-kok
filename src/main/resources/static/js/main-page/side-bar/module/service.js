@@ -47,6 +47,7 @@ const sideService = (()=>{
         const alarmDTO = await response.json();
         const setting = document.getElementsByClassName("setting-modal-alarm-button");
         const check = document.getElementsByClassName("setting-modal-alarm-button-check");
+        console.log(setting);
 console.log(alarmDTO);
         if(alarmDTO.memberPostLikeAlarm !=='active'){
             setting[0].classList.add("off");
@@ -60,11 +61,11 @@ console.log(alarmDTO);
             setting[2].classList.add("off");
             check[2].classList.add("off");
         }
-        if(alarmDTO.request_status_alarm !=='active'){
+        if(alarmDTO.requestStatusAlarm !=='active'){
             setting[3].classList.add("off");
             check[3].classList.add("off");
         }
-        if(alarmDTO.company_notice_alarm !=='active'){
+        if(alarmDTO.companyNoticeAlarm !=='active'){
             setting[4].classList.add("off");
             check[4].classList.add("off");
         }

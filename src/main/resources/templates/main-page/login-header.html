@@ -21,8 +21,13 @@
                         </th:replace>
                     </th:block>
                     <th:block>
-                        <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company') }">
+                        <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO == null }">
                     <img class="account-info-popover" src="/images/main-page/image3.png">
+                        </th:replace>
+                    </th:block>
+                    <th:block>
+                        <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO != null }">
+                            <img class="account-info-popover" th:src="${fileDTO.filePath}">
                         </th:replace>
                     </th:block>
                 </button>

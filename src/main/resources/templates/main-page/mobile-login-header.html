@@ -41,8 +41,13 @@
                             </th:replace>
                         </th:block>
                         <th:block>
-                            <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')}">
+                            <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO==null}">
                                 <img src="/images/main-page/image3.png">
+                            </th:replace>
+                        </th:block>
+                        <th:block>
+                            <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO!=null}">
+                                <img th:src="${fileDTO.filePath}">
                             </th:replace>
                         </th:block>
                     </div>
@@ -62,8 +67,13 @@
                         </th:replace>
                     </th:block>
                     <th:block>
-                        <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')}">
+                        <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO==null}">
                             <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                        </th:replace>
+                    </th:block>
+                    <th:block>
+                        <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO!=null}">
+                            <img alt="image" width="40" height="40" srcset="" th:src="${fileDTO.filePath}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
                         </th:replace>
                     </th:block>
                 </div>

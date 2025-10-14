@@ -6,3 +6,5 @@ CREATE TABLE tbl_user_profile_file (
     constraint fk_user_profile_file_user foreign key(user_id)
        references tbl_user(id)
 );
+
+select * from tbl_user_profile_file;

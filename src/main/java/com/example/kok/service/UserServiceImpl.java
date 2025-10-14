@@ -51,9 +51,10 @@ public class UserServiceImpl implements UserService {
         companyDTO.setUserId(userDTO.getId());
         companyDAO.saveCompany(companyDTO);
         FileDTO fileDTO = new FileDTO();
+        String s3Key = s3Service.uploadFile(multipartFiles, getPath());
         fileDTO.setFileOriginName(multipartFiles.getOriginalFilename());
         fileDTO.setFileName(multipartFiles.getOriginalFilename());
-        fileDTO.setFilePath(path);
+        fileDTO.setFilePath(s3Key);
         fileDTO.setFileContentType(multipartFiles.getContentType());
         fileDTO.setFileSize(multipartFiles.getSize()+"");
         fileDAO.saveFile(fileDTO);
