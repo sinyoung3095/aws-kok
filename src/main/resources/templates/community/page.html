@@ -254,7 +254,7 @@
                             <div class="popup-header profile">
                                 <div class="profile-header">
                                     <div class="profile-avatar">
-                                        <img alt="" src="/images/mypage/default.webp">
+                                        <img alt="" th:src="${member.memberProfileUrl != null ? member.memberProfileUrl : '/images/main-page/image2.png'}">
                                     </div>
                                     <div class="profile-info">
                                         <div class="profile-name">
