@@ -35,7 +35,7 @@ select * from tbl_experience_notice order by id desc;
 select * from tbl_request_experience order by id desc;
 
 insert into tbl_payment (payment_price, payment_paid_datetime, request_experience_id, user_id)
-values ('5000', '2025-10-09 15:12:47.797648', '50', '9');
+values ('5000', '2025-10-09 15:12:47.797648', '20', '16');
 
 insert into tbl_payment_user (payment_id, user_id, request_experience_id)
 values ('38', '8', '30'),

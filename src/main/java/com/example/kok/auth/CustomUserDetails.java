@@ -29,6 +29,7 @@ public class CustomUserDetails implements UserDetails {
     private Status userStatus;
     private String userJobName;
     private String companyName;
+    private String memberInfo;
 
     public CustomUserDetails(UserDTO userDTO){
         log.info("CustomUserDetails:{}",userDTO.toString());
@@ -44,6 +45,7 @@ public class CustomUserDetails implements UserDetails {
         this.userStatus=userDTO.getUserStatus();
         this.userJobName=userDTO.getJobName();
         this.companyName = userDTO.getCompanyName();
+        this.memberInfo=userDTO.getMemberInfo();
     }
 
     @Override

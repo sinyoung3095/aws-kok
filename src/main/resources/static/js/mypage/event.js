@@ -2,16 +2,20 @@ HTMLCollection.prototype.forEach = Array.prototype.forEach;
 const first = document.getElementsByClassName("first");
 const second = document.getElementsByClassName("second");
 const third = document.getElementsByClassName("third");
+const third1=document.getElementsByClassName("third-1")
 const fourth = document.getElementsByClassName("fourth");
 const list = document.getElementsByClassName("post-1");
 const savedList=document.getElementById("saved-list-wrap");
 const postsList=document.getElementById("my-posts-wrap");
 const requestList=document.getElementById("request-list-wrap");
+const internList=document.getElementById("intern-list-wrap");
 const paymentList=document.getElementById("payment-list-wrap");
 const close = document.getElementById("close");
 const setting = document.getElementsByClassName("setting")[0];
 const set = document.getElementsByClassName("set")[0];
-const submit = document.getElementsByClassName("setting-40")[0];
+const profileWrapCircle=document.querySelector(".setting-15.profileWrapCircle");
+const profileImgPop=document.querySelector(".profile-0");
+const submit = document.querySelector(".setting-40");
 const profile = document.getElementsByClassName("profile")[0];
 const profileset = document.getElementsByClassName("setting-16")[0];
 const label = document.getElementsByClassName("label")[0];
@@ -23,6 +27,13 @@ const cancle = document.getElementsByClassName("del-12")[0];
 const job = document.getElementsByClassName("setting-28")[0];
 const joblist = document.getElementsByClassName("job")[0];
 const listbtn = document.getElementById("list");
+const profileUpdate=document.querySelector(".profile-update");
+const profileDelete=document.querySelector(".profile-delete");
+const profileInput=document.querySelector(".profile-input");
+const profileImgRound=document.querySelector(".profile-img-round");
+const nameinput=document.querySelector(".name-input");
+const jobInput=document.querySelector(".job-input");
+const infoInput=document.querySelector(".info-input");
 
 label.addEventListener("click", (e) => {
     background.click();
@@ -37,13 +48,63 @@ close.addEventListener("click", (e) => {
     setting.style.display = "none";
 });
 // 프로필 편집 완료
-submit.addEventListener("click", (e) => {
-    setting.style.display = "none";
+submit.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const profileImgInput = profileInput.files[0];
+    const namein = nameinput.value;
+    const job = jobInput.value;
+    const info = infoInput.value;
+    const form=new FormData();
+    if(profileImgInput){
+        form.append("profileImgInput", profileImgInput);
+    }
+    if(namein){
+        form.append("name", namein);
+    }
+    if(job){
+        form.append("job", job);
+    }
+    if(info){
+        form.append("info", info);
+    }
+
+    await myPageService.profileUpdate(form);
+    console.log("수정")
+
+    if(profileUpdate.ok){
+        setting.style.display = "none";
+    } else {
+        alert("수정 실패"+profileUpdate.status);
+        setting.style.display = "none";
+    }
 });
-// 프로필 사진 변경
+profileWrapCircle.addEventListener("click", ()=>{
+    profileImgPop.style.display="flex";
+})
+// 프로필 사진 변경 창 띄우기
 profileset.addEventListener("click", (e) => {
     profile.style.display = "flex";
 });
+// 프로필 이미지 변경
+profileUpdate.addEventListener("click", ()=>{
+    profileImgPop.style.display="none";
+    profileInput.click();
+});
+profileInput.onchange=function (e){
+    const file=e.target.files[0];
+    if(!file) return;
+    const fileRead=new FileReader();
+    fileRead.onload=function (e2){
+        profileImgRound.src=e2.target.result;
+    }
+    fileRead.readAsDataURL(file);
+}
+// 프로필 삭제
+profileDelete.addEventListener("click", ()=>{
+    profileImgPop.style.display="none";
+    profileImgRound.src='/images/main-page/image.png';
+})
 // 직군 변경 모달
 job.addEventListener("click", (e) => {
     if (joblist.style.display === "none" || joblist.style.display === "") {
@@ -84,10 +145,14 @@ first.forEach((item) => {
         fourth.forEach((fir) => {
             fir.classList.remove("active");
         });
+        third1.forEach((th1)=>{
+            th1.classList.remove("active");
+        })
         postsList.classList.add("active");
         savedList.classList.remove("active");
         requestList.classList.remove("active");
         paymentList.classList.remove("active");
+        internList.classList.remove("active");
     });
 });
 
@@ -104,33 +169,14 @@ second.forEach((item) => {
         fourth.forEach((fir) => {
             fir.classList.remove("active");
         });
+        third1.forEach((th1)=>{
+            th1.classList.remove("active");
+        })
         savedList.classList.add("active");
         postsList.classList.remove("active");
         requestList.classList.remove("active");
         paymentList.classList.remove("active");
-    });
-});
-let count = 0;
-// 체험 공고 목록
-lists.forEach((list) => {
-    count++;
-    const experience = document.getElementById("experience");
-    const employ = document.getElementById("employ");
-    list.addEventListener("click", (e) => {
-        lists.forEach((all) => {
-            const allNotice = all.getElementsByClassName("notice")[0];
-            allNotice.classList.remove("active");
-        });
-        const notice = list.getElementsByClassName("notice")[0];
-        notice.classList.add("active");
-
-        if (list === lists[0]) {
-            experience.style.display = "contents";
-            employ.style.display = "none";
-        } else {
-            experience.style.display = "none";
-            employ.style.display = "contents";
-        }
+        internList.classList.remove("active");
     });
 });
 // 지원 내역
@@ -146,10 +192,39 @@ third.forEach((item) => {
         fourth.forEach((fir) => {
             fir.classList.remove("active");
         });
+        third1.forEach((th1)=>{
+            th1.classList.remove("active");
+        })
         postsList.classList.remove("active");
         savedList.classList.remove("active");
         requestList.classList.add("active");
         paymentList.classList.remove("active");
+        internList.classList.remove("active");
+        showExperienceRequest();
+    });
+});
+third1.forEach((item) => {
+    item.addEventListener("click", (e) => {
+        item.classList.add("active");
+        first.forEach((fir) => {
+            fir.classList.remove("active");
+        });
+        second.forEach((fir) => {
+            fir.classList.remove("active");
+        });
+        fourth.forEach((fir) => {
+            fir.classList.remove("active");
+        });
+        third.forEach((th)=>{
+            th.classList.remove("active");
+        })
+        postsList.classList.remove("active");
+        savedList.classList.remove("active");
+        internList.classList.add("active");
+        requestList.classList.remove("active");
+        paymentList.classList.remove("active");
+
+        showInternRequest();
     });
 });
 // 결제 내역
@@ -165,10 +240,14 @@ fourth.forEach((item) => {
         third.forEach((fir) => {
             fir.classList.remove("active");
         });
+        third1.forEach((th)=>{
+            th.classList.remove("active");
+        })
         postsList.classList.remove("active");
         savedList.classList.remove("active");
         requestList.classList.remove("active");
         paymentList.classList.add("active");
+        internList.classList.remove("active");
     });
 });
 
@@ -248,6 +327,8 @@ pageNum.forEach((page) => {
 const showPosts=async ()=>{
     const request=await myPageService.getPostsList();
     myPageLayout.showPosts(request);
+
+    const remove = document.getElementsByClassName("remove");
 
     // 게시물 삭제 버튼
     remove.forEach((remove) => {
@@ -412,31 +493,6 @@ const showPosts=async ()=>{
 const showPostDetail=async (id)=>{
     const request=await myPageService.getPostDetail(id);
     myPageLayout.showPostDetail(request);
-}
-
-const showCommentsList=async (postId)=>{
-    const request=await myPageService.getComments(postId);
-    myPageLayout.showCommentsList(request);
-}
-
-const showExperienceRequest=async ()=>{
-    const request=await myPageService.getExperienceList;
-    myPageLayout.showExperienceRequest(request);
-
-    // 지원 취소
-    const btn = document.getElementsByClassName("retract-triger")[0];
-    const retract = document.getElementsByClassName("retract")[0];
-    const retractClose = document.getElementsByClassName("retract-12")[0];
-
-    if(btn){
-        btn.addEventListener("click", (e) => {
-            retract.style.display = "flex";
-        });
-    }
-
-    retractClose.addEventListener("click", (e) => {
-        retract.style.display = "none";
-    });
 
     //게시글 수정 팝업
     function popupFn() {
@@ -531,9 +587,131 @@ const showExperienceRequest=async ()=>{
         // });
     }
     popupFn();
+}
+
+const showCommentsList=async (postId)=>{
+    const request=await myPageService.getComments(postId);
+    myPageLayout.showCommentsList(request);
 
     return request;
 }
 
-document.addEventListener("DOMContentLoaded", showPosts());
-document.addEventListener("DOMContentLoaded", showExperienceRequest());
+const showInternRequest=async ()=>{
+    const request=await myPageService.getInternList();
+    myPageLayout.showInternRequest(request);
+
+    // 지원 취소
+    const btn = document.querySelectorAll(".retract-triger");
+    const retract = document.querySelector(".intern-cancle");
+    const cancleReq=document.querySelector(".intern-cancle-10");
+    const retractClose = document.querySelector(".intern-cancle-12");
+
+    let reqId;
+
+    if(btn){
+        btn.forEach((bt)=>{
+            bt.addEventListener("click", (e) => {
+                retract.style.display = "flex";
+                reqId=bt.dataset.reqid;
+                // console.log(reqId);
+                cancleReq.addEventListener("click", ()=>{
+                // 지원 취소 fetch
+                    retract.style.display = "none";
+                    myPageService.deleteRequestIntern(reqId);
+                    showInternRequest();
+                })
+                retractClose.addEventListener("click", (e) => {
+                    retract.style.display = "none";
+                });
+            });
+        });
+    }
+    return request;
+}
+
+const showPaymentList=async ()=>{
+    const request=await myPageService.getPaymentList();
+    myPageLayout.showPaymentList(request);
+
+    return request;
+}
+
+const showSavedIntList=async ()=>{
+    const request=await myPageService.getSavedInternList();
+    await myPageLayout.showSavedIntList(request);
+
+    const expBtn=document.querySelector(".exp-btn");
+    const intBtn=document.querySelector(".intern-btn");
+    const experience = document.getElementById("experience-list");
+    const employ = document.getElementById("intern-list");
+
+    expBtn.addEventListener("click", ()=>{
+        intBtn.classList.remove("active");
+        expBtn.classList.add("active");
+        employ.style.display = "none";
+        experience.style.display = "contents";
+    });
+
+    return request;
+}
+
+const showSavedExpList=async ()=>{
+    const request=await myPageService.getSavedExperienceList();
+    await myPageLayout.showSavedExpList(request);
+
+    const expBtn=document.querySelector(".exp-btn");
+    const intBtn=document.querySelector(".intern-btn");
+    const experience = document.getElementById("experience-list");
+    const employ = document.getElementById("intern-list");
+
+    intBtn.addEventListener("click", ()=>{
+        expBtn.classList.remove("active");
+        intBtn.classList.add("active");
+        experience.style.display = "none";
+        employ.style.display = "contents";
+    });
+
+    return request;
+}
+
+const showExperienceRequest=async ()=>{
+    const request=await myPageService.getExperienceList();
+    myPageLayout.showExperienceRequest(request);
+
+    // 지원 취소
+    const btn = document.querySelectorAll(".retract-triger");
+    const retract = document.querySelector(".retract");
+    const cancleReq=document.querySelector(".retract-10");
+    const retractClose = document.querySelector(".retract-12");
+
+    let reqId;
+
+    if(btn){
+        btn.forEach((bt)=>{
+            bt.addEventListener("click", (e) => {
+                retract.style.display = "flex";
+                reqId=bt.dataset.reqid;
+                console.log(reqId);
+                cancleReq.addEventListener("click", ()=>{
+                // 지원 취소 fetch
+                    retract.style.display = "none";
+                    myPageService.deleteRequestExperience(reqId);
+                    showExperienceRequest();
+                })
+                retractClose.addEventListener("click", (e) => {
+                    retract.style.display = "none";
+                });
+            });
+        });
+    }
+    console.log(reqId);
+
+    return request;
+}
+
+document.addEventListener("DOMContentLoaded", showPosts);
+document.addEventListener("DOMContentLoaded", showExperienceRequest);
+document.addEventListener("DOMContentLoaded", showInternRequest);
+document.addEventListener("DOMContentLoaded", showPaymentList);
+document.addEventListener("DOMContentLoaded", showSavedIntList);
+document.addEventListener("DOMContentLoaded", showSavedExpList);

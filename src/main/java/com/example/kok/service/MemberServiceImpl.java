@@ -11,12 +11,14 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +41,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void joinMember(MemberVO memberVO) {
         memberDAO.saveMember(memberVO);
+    }
+
+    @Override
+    public void deleteProfile(Long id) {
+        memberDAO.deleteProfile(id);
     }
 
     @Override
@@ -160,6 +167,72 @@ public class MemberServiceImpl implements MemberService {
             }
         });
         return posts;
+    }
+
+    @Override
+    public List<PaymentDTO> findPaymentByMemberId(Long memberId) {
+        return memberDAO.findPaymentByMemberId(memberId);
+    }
+
+    @Override
+    public List<ExperienceNoticeDTO> findExperienceNoticeByMemberId(Long memberId) {
+        return memberDAO.findSavedExpByMemberId(memberId);
+    }
+
+    @Override
+    public List<InternNoticeDTO> findInternNoticeByMemberId(Long memberId) {
+        return memberDAO.findSavedInternNoticeByMemberId(memberId);
+    }
+
+    @Override
+    public void deleteRequestExperience(Long id) {
+        memberDAO.deleteExperienceRequest(id);
+    }
+
+    @Override
+    public void deleteRequestIntern(Long id) {
+        memberDAO.deleteInternRequest(id);
+    }
+
+    @Override
+    public void updateProfile(Long id, UserMemberDTO dto, MultipartFile profile) {
+        memberDAO.updateInfo(id, dto.getMemberInfo());
+        memberDAO.updateName(id, dto.getUserName());
+        memberDAO.updateJob(id, dto.getJobName());
+
+        if(profile != null) {
+            memberDAO.deleteProfile(id);
+
+            try {
+                String s3Key = s3Service.uploadFile(profile, getPath());
+
+                // 파일 DTO 생성
+                FileDTO fileDTO = new FileDTO();
+                fileDTO.setFileOriginName(profile.getOriginalFilename());
+                fileDTO.setFileName(UUID.randomUUID().toString());
+                fileDTO.setFilePath(s3Key);
+                fileDTO.setFileSize(String.valueOf(profile.getSize()));
+                fileDTO.setFileContentType(profile.getContentType());
+
+                // tbl_file 등록
+                memberDAO.saveFile(fileDTO);
+
+                // userProfileFile 등록
+                UserProfileFileDTO userProfileFileDTO = new UserProfileFileDTO();
+                userProfileFileDTO.setFileId(fileDTO.getId());
+                userProfileFileDTO.setId(dto.getId());
+
+                memberDAO.saveProfileFile(userProfileFileDTO);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+//        UserProfileFileDTO updatedProfile = getProfile(dto.getId());
+    }
+
+    @Override
+    public UserProfileFileDTO getProfile(Long id) {
+        return null;
     }
 
     public String getPath() {

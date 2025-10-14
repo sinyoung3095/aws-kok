@@ -1,11 +1,8 @@
 package com.example.kok.repository;
 
 import com.example.kok.domain.MemberVO;
-import com.example.kok.dto.PostDTO;
-import com.example.kok.dto.MemberDTO;
-import com.example.kok.dto.RequestExperienceDTO;
-import com.example.kok.dto.RequestInternDTO;
-import com.example.kok.dto.UserMemberDTO;
+import com.example.kok.dto.*;
+import com.example.kok.mapper.FileMapper;
 import com.example.kok.mapper.MemberMapper;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +17,26 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberDAO {
     private final MemberMapper memberMapper;
+    private final FileMapper fileMapper;
 
     public void saveMember(MemberVO memberVO) {
         log.info("memberVO={}", memberVO);
         memberMapper.insertMember(memberVO);
+    }
+
+//    프로필 사진 삭제
+    public void deleteProfile(Long id){
+        memberMapper.deleteProfile(id);
+    }
+
+//    파일 등록
+    public void saveFile(FileDTO fileDTO) {
+        fileMapper.insertFile(fileDTO);
+    }
+
+//    프로필 파일 등록
+    public void saveProfileFile(UserProfileFileDTO userProfileFileDTO) {
+        memberMapper.insertProfileFile(userProfileFileDTO);
     }
 
 //    회원 조회
@@ -61,5 +74,52 @@ public class MemberDAO {
     //    전화번호로 회원 sns이메일 조회
     public List<MemberDTO> findLink(String userPhone){
         return memberMapper.selectLinkBYPhone(userPhone);
+    }
+
+//    id로 결제내역 조회
+    public List<PaymentDTO> findPaymentByMemberId(Long memberId) {
+        return memberMapper.selectPaymentByMemberId(memberId);
+    }
+
+//    id로 저장 체험 조회
+    public List<ExperienceNoticeDTO> findSavedExpByMemberId(Long memberId) {
+        return memberMapper.selectSavedExpByMemberId(memberId);
+    }
+
+//    id로 저장 인턴 조회
+    public List<InternNoticeDTO> findSavedInternNoticeByMemberId(Long memberId) {
+        return memberMapper.selectSavedIntByMemberId(memberId);
+    }
+
+//    지원 id로 지원 취소
+//    체험
+    public void deleteExperienceRequest(Long id){
+        memberMapper.updateExpReq(id);
+    }
+
+//    인턴
+    public void deleteInternRequest(Long id){
+        memberMapper.updateIntReq(id);
+    }
+
+
+//    소개 수정
+    public void updateInfo(Long memberId, String info) {
+        memberMapper.updateProfileInfo(memberId, info);
+    }
+
+//    이름 수정
+    public void updateName(Long id, String name) {
+        memberMapper.updateProfileName(id, name);
+    }
+
+//    직군 변경
+    public void updateJob(Long id, String job) {
+        memberMapper.updateProfileCategory(id, job);
+    }
+
+//    직군 추가
+    public void plusJob(Long id, String job){
+        memberMapper.insertProfileJob(id, job);
     }
 }

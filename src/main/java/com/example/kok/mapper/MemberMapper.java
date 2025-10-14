@@ -13,6 +13,12 @@ import java.util.Optional;
 public interface MemberMapper {
     public void insertMember(MemberVO memberVO);
 
+//    프로필 사진 삭제
+    public void deleteProfile(Long id);
+
+//    프로필 사진 추가
+    public void insertProfileFile(UserProfileFileDTO userProfileFileDTO);
+
 //    회원 조회
     public List<UserMemberDTO> selectMembers(@Param("criteria") Criteria criteria,@Param("keyword") String keyword);
 
@@ -35,4 +41,26 @@ public interface MemberMapper {
     public String selectJobCategoryByMemberId(Long memberId);
 //    전화번호로 회원 sns이메일 조회
     public List<MemberDTO> selectLinkBYPhone(String userPhone);
+
+//    id로 결제내역 조회
+    public List<PaymentDTO> selectPaymentByMemberId(Long memberId);
+
+//    id로 저장한 체험 공고 조회
+    public List<ExperienceNoticeDTO> selectSavedExpByMemberId(Long memberId);
+
+//    id로 저장한 인턴 공고 조회
+    public List<InternNoticeDTO> selectSavedIntByMemberId(Long memberId);
+
+//    지원 id로 체험 지원 취소
+    public void updateExpReq(Long id);
+
+//    지원 id로 인턴 지원 취소
+    public void updateIntReq(Long id);
+
+//    프로필 수정
+    public void updateProfileInfo(Long memberId, String info);
+    public void updateProfileName(Long id, String name);
+    public void updateProfileCategory(Long id, String job);
+    public void insertProfileJob(Long id, String job);
+
 }

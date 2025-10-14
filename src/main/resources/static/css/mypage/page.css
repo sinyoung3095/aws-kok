@@ -407,7 +407,7 @@ div {
     display: flex;
 }
 .post-16{
-    display: block;
+    display: grid;
     white-space: pre-line;
     color: rgba(18,19,20,1);
     font-size: 16px;

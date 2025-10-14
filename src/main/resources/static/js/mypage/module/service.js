@@ -81,14 +81,78 @@ const myPageService = (() => {
         });
         return response.ok;
     };
+
+    // 저장 체험 목록 불러오기
+    const getSavedExperienceList = async () => {
+        const request = await fetch (`/api/mypage/saved-exp`);
+        const response = await request.json();
+
+        return response;
+    };
+
+    // 저장 인턴 목록 불러오기
+    const getSavedInternList = async () => {
+        const request = await fetch (`/api/mypage/saved-int`);
+        const response = await request.json();
+
+        return response;
+    };
     
     // 체험 목록 불러오기
-    const getExperienceList = async (page = 1, keyword = "") => {
+    const getExperienceList = async () => {
         const request = await fetch (`/api/mypage/request-list`);
         const response = await request.json();
 
         return response;
     };
+
+    // 지원 취소-체험
+    const deleteRequestExperience=async (requestId)=>{
+        const response=await fetch(`/api/mypage/delete-request/${requestId}`,{
+            method: "DELETE"
+        });
+
+        return response.ok;
+    }
+
+    // 지원 취소-인턴
+    const deleteRequestIntern=async (requestId)=>{
+        const response=await fetch(`/api/mypage/delete-intern/${requestId}`,{
+            method: "DELETE"
+        });
+
+        return response.ok;
+    }
+
+    // 인턴 목록 불러오기
+    const getInternList = async () => {
+        const request = await fetch (`/api/mypage/intern-list`);
+        const response = await request.json();
+
+        return response;
+    };
+    // 인턴 지원 취소하기
+    const deleteInternRequest=async ()=>{
+        const request=await fetch(`/api/`)
+    }
+    // 결제 목록 불러오기
+    const getPaymentList = async () => {
+        const request = await fetch (`/api/mypage/payment-list`);
+        const response = await request.json();
+
+        return response;
+    };
+
+    const profileUpdate=async (form)=>{
+        const response = await fetch(`/api/mypage/profile-update`,{
+            method: "POST",
+            body: form
+        });
+        console.log(response);
+        return response.ok;
+    }
     return { getPostsList:getPostsList, getPostDetail:getPostDetail, getExperienceList:getExperienceList, getComments:getComments, writeComment:writeComment, updateComment:updateComment, deleteComment:deleteComment,
-    getReplies:getReplies, writeReply:writeReply, updateReply:updateReply, deleteReply:deleteReply };
+    getReplies:getReplies, writeReply:writeReply, updateReply:updateReply, deleteReply:deleteReply, getInternList:getInternList, getPaymentList:getPaymentList,
+    getSavedExperienceList:getSavedExperienceList, getSavedInternList:getSavedInternList, deleteRequestExperience:deleteRequestExperience, deleteRequestIntern:deleteRequestIntern,
+    profileUpdate:profileUpdate};
 })();
