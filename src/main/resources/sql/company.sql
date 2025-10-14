@@ -9,9 +9,38 @@ create table tbl_company (
 
 alter table tbl_company DROP company_business_number;
 
+select * from tbl_file;
+
 select * from tbl_company;
+
+select * from tbl_company_profile_file;
+insert into tbl_company_profile_file (file_id, company_id)
+values (62,10);
+
+select * from tbl_company_background_file;
+insert into tbl_company_background_file (file_id, company_id)
+values (66,19);
+
+select * from tbl_company_scale_category_bridge;
+insert into tbl_company_scale_category_bridge (company_id, company_scale_category_id)
+values (10,5);
+delete from tbl_company_scale_category_bridge
+where company_id = 10;
+
+select * from tbl_company_sector;
+
+select * from tbl_company_sector_category;
+insert into tbl_company_sector_category (company_id, company_sector_id)
+values (19,3);
+
+select * from tbl_intern_notice;
+
+select * from tbl_user_profile_file;
+insert into tbl_user_profile_file (file_id, user_id)
+values (78,38);
+
 select * from tbl_user
-where user_role = 'company';
+where user_role = 'member';
 
 insert into tbl_user (user_name, user_phone, user_email, user_password, user_role)
 values

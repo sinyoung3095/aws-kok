@@ -103,6 +103,11 @@ const postService = (() => {
             method: "POST"
         });
 
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(errorMessage);
+        }
+
         const checkExistMember = await response.json();
         const reportModal = document.querySelector(".report-7");
 
@@ -112,10 +117,6 @@ const postService = (() => {
             return null;
         }
 
-        if (!response.ok) {
-            const errorMessage = await response.text();
-            throw new Error(errorMessage);
-        }
         return true;
     };
 
