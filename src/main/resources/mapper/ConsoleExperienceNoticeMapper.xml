@@ -25,6 +25,23 @@
              left join tbl_save_experience_notice sen
                        on en.id = sen.experience_notice_id
         where en.company_id = #{companyId}
+            <if test="status != null">
+                <choose>
+                    <when test="status.name() == 'ACTIVE'">
+                        and en.experience_notice_status = 'active'
+                    </when>
+                    <otherwise>
+                        and en.experience_notice_status = 'inactive'
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="keyword != null and keyword != ''">
+                and (
+                en.experience_notice_title like concat('%', #{keyword}, '%')
+                or en.experience_notice_subtitle like concat('%', #{keyword}, '%')
+                or jc.job_name like concat('%', #{keyword}, '%')
+                )
+            </if>
         group by en.id, jc.job_name
         order by en.id desc
         limit #{criteria.count} offset #{criteria.offset}

@@ -549,7 +549,7 @@ svg.img-up-svg{
     display: block;
  } */
 
- .job {
+.job {
     position: absolute;
     bottom: 100%;    /* 버튼 바로 위 */
     left: 0;         /* 버튼의 왼쪽 맞춤 */

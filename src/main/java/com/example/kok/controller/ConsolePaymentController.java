@@ -31,6 +31,9 @@ public class ConsolePaymentController {
             Model model) {
 
         Long companyId = customUserDetails.getId();
+        String companyName = customUserDetails.getCompanyName();
+        String memberName = customUserDetails.getUsername();
+
         ConsolePaymentCriteriaDTO payment = consolepaymentService.getList(companyId, page);
 
         if (payment == null) {
@@ -39,6 +42,8 @@ public class ConsolePaymentController {
         }
 
         model.addAttribute("payment", payment);
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("memberName", memberName);
 
         return "enterprise-console/console-payment";
     }
