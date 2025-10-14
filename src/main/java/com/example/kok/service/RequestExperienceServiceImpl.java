@@ -30,4 +30,9 @@ public class RequestExperienceServiceImpl implements RequestExperienceService {
         file.setRequestExperienceId(reqId);
         requestExperienceFileDAO.saveRequestFile(file);
     }
+
+    @Override
+    public String getFileName(Long memberId) {
+        return requestExperienceFileDAO.findFileNameByMemberId(memberId);
+    }
 }

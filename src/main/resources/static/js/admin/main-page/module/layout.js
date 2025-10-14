@@ -83,14 +83,14 @@ const layout = (() => {
                 <tbody>
                     <tr>
                         <td class="td-class" rowspan="2">결제</td>
-                        <td class="td-value value-new">${adminMainPageDTO.memberPaymentTotal}</td>
+                        <td class="td-value value-new">${adminMainPageDTO.memberPaymentTotalText}</td>
                         <td class="td-field">체험비</td>
                         <td class="td-value value-new">-</td>
                     </tr>
                     <tr>
                         <td class="td-value value-revisit">-</td>
                         <td class="td-field">광고비</td>
-                        <td class="td-value value-revisit">${adminMainPageDTO.companyPaymentTotal}</td>
+                        <td class="td-value value-revisit">${adminMainPageDTO.companyPaymentTotalText}</td>
                     </tr>
                     <tr>
                         <td class="td-divider" colspan="3"></td>

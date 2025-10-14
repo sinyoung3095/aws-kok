@@ -10,17 +10,20 @@ const inputName = document.getElementById("input-name");
 const inputNumber = document.getElementById("input-number");
 const inputEmail = document.getElementById("input-email");
 const inputPassword = document.getElementById("input-password");
+if(window.location.search.includes("error")){
+    alert("중복된 이메일입니다.");
+}
 
 // 이메일 검사
 const isValidEmail = (value) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 };
 // 전화번호 포맷팅
-function formatPhoneNumber(input) {
-    input.value = input.value
-        .replace(/[^0-9]/g, '')
-        .replace(/(^02|^01[0-9]|[0-9]{3})([0-9]+)?([0-9]{4})$/, '$1 $2 $3');
-}
+// function formatPhoneNumber(input) {
+//     input.value = input.value
+//         .replace(/[^0-9]/g, '')
+//         .replace(/(^02|^01[0-9]|[0-9]{3})([0-9]+)?([0-9]{4})$/, '$1 $2 $3');
+// }
 
 // 이름 오류 토스트
 function showNameErrorToast() {
@@ -54,10 +57,10 @@ function showPasswordErrorToast() {
 
 submitButton.addEventListener("click", (e) => {
     // 이름 공란
-    if (inputName.value.length === 0) {
+    if (inputName.value.length < 1) {
         showNameErrorToast();
         // 전화번호 공란 또는 길이 오류
-    } else if (inputNumber.value.trim().length < 13) {
+    } else if (inputNumber.value.trim().length < 11) {
         showNumberErrorToast();
         // 이메일 공란 또는 형식 오류
     } else if (inputEmail.value.length === 0 || !isValidEmail(inputEmail.value)) {

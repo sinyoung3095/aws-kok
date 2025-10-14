@@ -60,7 +60,6 @@ public class ConsoleInternApiController {
         noticeRequestDTO.setId(id);
         internService.modifyNotice(noticeRequestDTO);
 
-        log.info("수정 요청 DTO = {}", noticeRequestDTO);
         return ResponseEntity.ok(noticeRequestDTO);
     }
 
@@ -80,6 +79,6 @@ public class ConsoleInternApiController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteNotice(@PathVariable("id") Long id) {
         internService.deleteIntern(id);
-        return ResponseEntity.ok("success");
+        return ResponseEntity.ok("");
     }
 }

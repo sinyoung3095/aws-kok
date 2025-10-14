@@ -20,5 +20,7 @@ public class AdminMainPageDTO {
     private int companyInternNoticeTotal;
     private int companyNoticeTotal;
     private Long memberPaymentTotal;
+    private String memberPaymentTotalText;
     private Long companyPaymentTotal;
+    private String companyPaymentTotalText;
 }
