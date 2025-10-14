@@ -2,10 +2,13 @@ package com.example.kok.repository;
 
 import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.dto.MemberAlarmSettingDTO;
+import com.example.kok.dto.UserDTO;
 import com.example.kok.mapper.MemberAlarmSettingMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -33,7 +36,10 @@ public class MemberAlarmSettingDAO {
     public void updateByKeywordToInactive(Long id, String keyword){
         memberAlarmSettingMapper.updateByKeywordToInactive(id,keyword);
     }
-    public ExperienceNoticeDTO findEmailForSendMail(Long id){
+    public List<UserDTO> findEmailForExperienceSendMail(Long id){
+        return memberAlarmSettingMapper.selectByNoticeId(id);
+    }
+    public List<UserDTO> findEmailForInternSendMail(Long id){
         return memberAlarmSettingMapper.selectByNoticeId(id);
     }
 

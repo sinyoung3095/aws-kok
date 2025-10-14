@@ -57,6 +57,7 @@ public class ConsoleExperienceApiController {
     @PostMapping("/create")
     public ResponseEntity<?> createNotice(@RequestBody ConsoleExperienceListRequestDTO noticeRequestDTO) {
         experienceService.registerNotice(noticeRequestDTO);
+
         return ResponseEntity.ok(noticeRequestDTO);
     }
 

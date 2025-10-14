@@ -7,19 +7,22 @@ import com.example.kok.repository.MemberDAO;
 import com.example.kok.repository.RequestExperienceDAO;
 import com.example.kok.repository.UserDAO;
 import com.example.kok.service.MemberService;
+import com.example.kok.service.S3Service;
 import com.example.kok.util.Criteria;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
 @Slf4j
 public class MainpageTests {
-
+    @Autowired
+    private S3Service s3Service;
     @Autowired
     private MemberMapper memberMapper;
     @Autowired
@@ -49,8 +52,8 @@ public class MainpageTests {
     }
     @Test
     public void getUserDTO(){
-        String userDTO=userDAO.findByEmail("company@gmail.com").toString();
-        log.info("userDTO={}",userDTO);
+
+        log.info(s3Service.getPreSignedUrl("2025/10/14/745ae0c3-6b01-4570-9301-adbab5ea3803.png", Duration.ofDays(1L)));
     }
 
 }
