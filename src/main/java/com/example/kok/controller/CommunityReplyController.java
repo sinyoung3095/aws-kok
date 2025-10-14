@@ -41,9 +41,9 @@ public class CommunityReplyController {
                                          @RequestBody ReplyDTO replyDTO,
                                          @AuthenticationPrincipal CustomUserDetails user) {
 
-        log.info("user = {}", user);
-        log.info("replyId = {}", replyId);
-        log.info("replyDTO = {}", replyDTO);
+//        log.info("user = {}", user);
+//        log.info("replyId = {}", replyId);
+//        log.info("replyDTO = {}", replyDTO);
         replyDTO.setId(replyId);
         replyDTO.setMemberId(user.getId());
         communityReplyService.update(replyDTO);

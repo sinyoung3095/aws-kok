@@ -14,6 +14,7 @@ select * from tbl_report order by id;
 select * from tbl_post order by id;
 
 select * from tbl_report;
+select * from tbl_member;
 select * from tbl_post;
 select * from tbl_post_file;
 delete from tbl_report;
