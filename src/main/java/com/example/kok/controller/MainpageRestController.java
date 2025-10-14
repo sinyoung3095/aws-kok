@@ -58,6 +58,9 @@ public class MainpageRestController {
     //    멤버 알람 세팅 조회
     @GetMapping("alarm")
     public MemberAlarmSettingDTO findAllByMemberId(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        if(customUserDetails == null) {
+            return null;
+        }
         return memberAlarmSettingDAO.findAllByMemberId(customUserDetails.getId());
     }
 
@@ -74,6 +77,9 @@ public class MainpageRestController {
 
     @GetMapping("link")
     public List<MemberDTO> find(@AuthenticationPrincipal CustomUserDetails customUserDetails){
+        if(customUserDetails == null) {
+            return null;
+        }
         log.info(memberDAO.findLink(customUserDetails.getUserPhone()).toString());
         return memberDAO.findLink(customUserDetails.getUserPhone());
     }
