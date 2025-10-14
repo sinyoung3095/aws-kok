@@ -2,12 +2,10 @@ package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.AdvertisementDTO;
+import com.example.kok.dto.CompanyDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.enumeration.UserRole;
-import com.example.kok.service.AdvertisementService;
-import com.example.kok.service.CommunityPostService;
-import com.example.kok.service.ExperienceNoticeService;
-import com.example.kok.service.MemberService;
+import com.example.kok.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -28,17 +26,24 @@ public class CommunityController {
     private final ExperienceNoticeService experienceNoticeService;
     private final MemberService memberService;
     private final AdvertisementService advertisementService;
+    private final CompanyService companyService;
 
     @GetMapping("/page")
     public String goToCommunityPage(Model model,
                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
         Long memberId = null;
+
         if (customUserDetails != null) {
             memberId = customUserDetails.getId();
             model.addAttribute("userDTO", customUserDetails);
             model.addAttribute("isMember", customUserDetails.getUserRole() == UserRole.MEMBER);
             model.addAttribute("isCompany", customUserDetails.getUserRole() == UserRole.COMPANY);
+
+            if (customUserDetails.getUserRole() == UserRole.COMPANY) {
+                CompanyDTO companyDTO = companyService.findCompanyById(customUserDetails.getId());
+                model.addAttribute("companyDTO", companyDTO);
+            }
 
             memberService.findMembersByMemberId(memberId)
                     .ifPresent(userMemberDTO -> model.addAttribute("member", userMemberDTO));

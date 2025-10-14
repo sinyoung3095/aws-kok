@@ -1553,7 +1553,7 @@
     background: rgb(255, 255, 255) !important;
     overflow: hidden !important;
     bottom: 96px !important;
-    z-index: 1 !important;
+    z-index: 9999 !important;
     transition-property: width, height !important;
     transition-duration: .15s !important;
     transition-timing-function: ease-in-out !important;
