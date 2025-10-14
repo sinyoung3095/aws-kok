@@ -41,6 +41,10 @@ document.addEventListener("click", async (e) => {
     const target = e.target.closest(".download");
     if (!target) return;
 
+    // 로딩바 보이게 하기
+    const loading = document.querySelector(".loading");
+    loading.style.display = "block";
+
     const checkedBoxes = document.querySelectorAll(".check-download:checked");
     const memberIdList = [];
 
@@ -65,16 +69,16 @@ document.addEventListener("click", async (e) => {
             console.error(`Error fetching ${url}:`, err);
         }
     }
-    zip.generateAsync({ type: 'blob' }).then(content => {
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(content);
-        a.download = 'downloaded_files.zip';
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        URL.revokeObjectURL(a.href); // 메모리 해제
-        a.remove();
-    });
+    const content = await zip.generateAsync({ type: 'blob' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(content);
+    a.download = 'downloaded_files.zip';
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    URL.revokeObjectURL(a.href); // 메모리 해제
+    a.remove();
 
-    console.log("다운로드 완료");
+    //    로딩바 숨기기
+    loading.style.display = "none"
 });
