@@ -24,8 +24,9 @@ public class ConsoleProfileController {
 //    기업 콘솔 프로필 관리
     @GetMapping("/profile")
 //    public String goToProfile(@RequestParam("userId") Long userId, Model model) {
-    public String goToProfile(Model model) {
-        Long companyId = 1L; // 테스트용
+    public String goToProfile(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+                              Model model) {
+        Long companyId = customUserDetails.getId();
         ConsoleCompanyProfileDTO profile = consoleProfileService.getProfile(companyId);
         model.addAttribute("profile", profile);
         return "enterprise-console/console-profile";

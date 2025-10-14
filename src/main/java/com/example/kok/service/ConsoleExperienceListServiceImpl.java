@@ -68,12 +68,24 @@ public class ConsoleExperienceListServiceImpl implements ConsoleExperienceListSe
     @Override
     @Transactional
     public void registerNotice(ConsoleExperienceListRequestDTO noticeRequestDTO) {
+        System.out.println("registerNotice 시작");
+        System.out.println("INSERT 전 id: " + noticeRequestDTO.getId());
 //        공고 등록
         consoleExperienceDAO.createNotice(noticeRequestDTO);
+        System.out.println("INSERT 후 id: " + noticeRequestDTO.getId());
 
 //        직군 등록
         consoleExperienceDAO.createNoticeJobCategory(noticeRequestDTO);
+        System.out.println("직군 등록 완료");
+
         ExperienceNoticeDTO experienceNoticeDTO = memberAlarmSettingMapper.selectByNoticeId(noticeRequestDTO.getId());
+        System.out.println("selectByNoticeId 결과: " + experienceNoticeDTO);
+        if (experienceNoticeDTO == null) {
+            System.out.println("experienceNoticeDTO가 null입니다. noticeRequestDTO.id=" + noticeRequestDTO.getId());
+            return;
+        }
+
+
         experienceNoticeDTO.getUsers().forEach((userDTO) -> {
 
             if(userDTO.getUserEmail()!=null){

@@ -1,18 +1,4 @@
 const experienceRegisterService = (() => {
-    // const detail = async (id) => {
-    //     const response = await fetch(`/api/enterprise-console/experience/edit/${id}`);
-    //     // console.log("응답 상태코드:", response.status);
-    //
-    //     if (response.ok) {
-    //         const data = await response.json();
-    //         console.log("상세 데이터 있음", data);
-    //         return data;
-    //     } else {
-    //         console.error("상세 데이터 없음");
-    //         return null;
-    //     }
-    // };
-
     const register = async (data) => {
         const response = await fetch(`/api/enterprise-console/experience/create`, {
             method: "POST",

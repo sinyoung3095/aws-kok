@@ -29,8 +29,9 @@ public class ConsoleExperienceController {
 //    기업 콘솔 체험 공고 목록
     @GetMapping("/list")
     public String goToList(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
-        log.info("로그인한 기업 ID: {}", customUserDetails.getId());
-        model.addAttribute("companyId", customUserDetails.getId());
+        Long companyId = customUserDetails.getId();
+
+        model.addAttribute("companyId", companyId);
         model.addAttribute("userDTO", customUserDetails);
 
         return "enterprise-console/console-experience-list";
@@ -38,13 +39,22 @@ public class ConsoleExperienceController {
 
 //    기업 콘솔 체험 공고 등록, 수정
     @GetMapping(value = {"/create", "edit/{id}"})
-    public String goToWrite(HttpServletRequest request, Model model, @PathVariable(required = false) Long id,
-                            @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    public String goToWrite(HttpServletRequest request,
+                            @PathVariable(required = false) Long id,
+                            @AuthenticationPrincipal CustomUserDetails customUserDetails,
+                            Model model) {
+
         if(request.getRequestURI().contains("create")){
+
+            Long companyId = customUserDetails.getId();
+
             model.addAttribute("page","create");
             model.addAttribute("notice", new ConsoleExperienceListRequestDTO());
+            model.addAttribute("companyId", companyId);
+
             return "enterprise-console/console-experience-update";
         }
+
         ConsoleExperienceListRequestDTO notice = consoleExperienceListService.getNotice(id);
 
         Long companyId = customUserDetails.getId();
