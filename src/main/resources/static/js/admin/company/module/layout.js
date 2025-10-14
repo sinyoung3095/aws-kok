@@ -28,7 +28,7 @@ const layout = (() => {
                             <p>${company.userPhone}</p>
                         </td>
                         <td class="td-profile">
-                            <p>${company.companyUrl}</p>
+                            <p>${company.companyUrl ?? '-'}</p>
                         </td>
                         <td class="td-job">
                             <p>${company.jobName ?? '-'}</p>

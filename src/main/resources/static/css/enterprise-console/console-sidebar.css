@@ -190,6 +190,7 @@ button.logo-button{
     width: 100%;
     height: auto;
     display: flex;
+    cursor: pointer;
 }
 
 div.logo-img-div{
@@ -554,6 +555,7 @@ span.side-name{
 }
 
 span.side-job{
+    margin-top: 5px;
     font-size: 12px;
     line-height: 1.25;
     text-overflow: ellipsis;
@@ -568,10 +570,10 @@ span.side-job{
 }
 
 div.service-change-wrap{
-    position: fixed;
-    left: 0px;
+    display: none;
+    position: absolute;
+    right: calc(-100% + -40px);
     top: 0px;
-    transform: translate(244px, 16px);
     min-width: max-content;
     will-change: transform;
     z-index: 50;
@@ -611,7 +613,7 @@ div.bar-line-ch{
     margin-inline: -4px;
 }
 
-div.home-ch{
+.home-ch{
     user-select: none;
     outline-style: none;
     font-size: 14px;
@@ -625,11 +627,15 @@ div.home-ch{
     position: relative;
 }
 
-div.home-ch:hover{
+.home-ch:hover{
     background-color: oklch(.97 0 0);
 }
 
-div.home-ch-inner{
+.home-ch:hover .active-service {
+    display: block;
+}
+
+.home-ch-inner{
     line-height: 12px;
     font-size: 14px;
     text-align: left;
@@ -637,7 +643,7 @@ div.home-ch-inner{
     display: grid;
 }
 
-span.home-ch-title{
+.home-ch-title{
     font-weight: 600;
     line-height: 1.25;
     font-size: 14px;
@@ -646,13 +652,13 @@ span.home-ch-title{
     cursor: pointer;
 }
 
-span.home-ch-sub-title{
+.home-ch-sub-title{
     color: #737373;
     font-size: 12px;
     line-height: 1.25;
 }
 
-div.console-ch{
+.console-ch{
     user-select: none;
     outline-style: none;
     font-size: 14px;
@@ -666,11 +672,11 @@ div.console-ch{
     position: relative;
 }
 
-div.console-ch:hover{
+.console-ch:hover{
     background-color: oklch(.97 0 0);
 }
 
-div.console-ch-inner{
+.console-ch-inner{
     line-height: 12px;
     font-size: 14px;
     text-align: left;
@@ -678,7 +684,7 @@ div.console-ch-inner{
     display: grid;
 }
 
-span.console-ch-title{
+.console-ch-title{
     font-weight: 600;
     line-height: 1.25;
     font-size: 14px;
@@ -687,13 +693,14 @@ span.console-ch-title{
     cursor: pointer;
 }
 
-span.console-ch-sub-title{
+.console-ch-sub-title{
     color: #737373;
     font-size: 12px;
     line-height: 1.25;
 }
 
-div.active-service{
+.active-service{
+    display: none;
     background-color: #171717;
     border-radius: 999px;
     width: 8px;

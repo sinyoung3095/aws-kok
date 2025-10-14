@@ -69,6 +69,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void joinAdmin(UserDTO userDTO) {
+        userDTO.setUserPassword(passwordEncoder.encode(userDTO.getUserPassword()));
+        userDAO.saveAdmin(userDTO);
+    }
+
+    @Override
     public int searchUserByEmail(String email) {
         return userDAO.findUserByEmail(email);
     }

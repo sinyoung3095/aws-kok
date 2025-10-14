@@ -6,13 +6,13 @@ const layout = (() => {
         let rejectText = ``;
 
         acceptText += `
-            <span class="span-amount">${adminPaymentExperienceCriteriaDTO.paymentExperienceCount.acceptTotal}</span>
+            <span class="span-amount">${adminPaymentExperienceCriteriaDTO.paymentExperienceCount.acceptTotalText}</span>
             <span class="amount-unit">원</span>
         `;
         acceptTotal.innerHTML = acceptText;
 
         rejectText += `
-            <span class="span-amount">${adminPaymentExperienceCriteriaDTO.paymentExperienceCount.rejectTotal}</span>
+            <span class="span-amount">${adminPaymentExperienceCriteriaDTO.paymentExperienceCount.rejectTotalText}</span>
             <span class="amount-unit">원</span>
         `;
         acceptCount.innerHTML = rejectText;
@@ -58,7 +58,7 @@ const layout = (() => {
                 text += `</p>
                     </td>  
                     <td class="td-pay">
-                        <p>${payment.paymentPrice}</p>
+                        <p>${payment.paymentPriceText}</p>
                     </td>
                     <td class="td-date">
                         <p>${payment.relativeDate}</p>

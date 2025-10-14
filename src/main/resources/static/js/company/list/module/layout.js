@@ -20,16 +20,16 @@ const companyLayout = (() => {
             <div class="list-item" data-company-id="${company.userId}">
                 <button class="list-item-btn" onclick="window.location.href='/company/${company.userId}'">
                     <div class="list-item-background">
-                        <img src="${company.companyBackgroundFile || '/images/mypage/banner.jpg'}">
+                        <img src="${company.companyBackgroundFile}">
                     </div>
                     <div class="list-item-header">
                         <div class="list-item-thumb">
-                            <img src="${company.companyProfileFile || `/images/mypage/logo_1757380047672.webp`}">
+                            <img src="${company.companyProfileFile}">
                         </div>
                         <div class="list-item-content">
-                            <p class="list-item-category">${company.companySectorName || '산업분야'}</p>
+                            <p class="list-item-category">${company.companySectorName}</p>
                             <p class="list-item-name">${company.companyName}</p>
-                            <p class="list-item-description">${company.companyInfo || '기업소개'}</p>
+                            <p class="list-item-description">${company.companyInfo || '-'}</p>
                         </div>
                     </div>
                 </button>

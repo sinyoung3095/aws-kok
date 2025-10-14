@@ -37,6 +37,8 @@ public class ConsoleExperienceListServiceImpl implements ConsoleExperienceListSe
 
         List<ConsoleExperienceListDTO> notices = consoleExperienceDAO.findAllByCompany(companyId, criteria, status, keyword);
 
+
+
         criteria.setHasMore(notices.size() > criteria.getRowCount());
         if(criteria.isHasMore()){
             notices.remove(notices.size() - 1);
@@ -68,7 +70,7 @@ public class ConsoleExperienceListServiceImpl implements ConsoleExperienceListSe
     public void registerNotice(ConsoleExperienceListRequestDTO noticeRequestDTO) {
 //        공고 등록
         consoleExperienceDAO.createNotice(noticeRequestDTO);
-        log.info("id:{}",noticeRequestDTO.getId());
+
 //        직군 등록
         consoleExperienceDAO.createNoticeJobCategory(noticeRequestDTO);
 //        ExperienceNoticeDTO experienceNoticeDTO = memberAlarmSettingMapper.selectByNoticeId(noticeRequestDTO.getId());

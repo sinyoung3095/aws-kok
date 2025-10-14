@@ -1,10 +1,12 @@
 package com.example.kok.controller;
 
+import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.ConsoleAdNoticeDTO;
 import com.example.kok.service.ConsoleAdService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -59,9 +61,10 @@ public class ConsoleAdController {
     @PostMapping("/update")
     public String updateAdvertisement(
             @ModelAttribute ConsoleAdNoticeDTO adNoticeDTO,
-            @RequestParam(value = "files", required = false) List<MultipartFile> multipartFiles) {
+            @RequestParam(value = "files", required = false) List<MultipartFile> multipartFiles,
+            @AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
 
-        adNoticeDTO.setCompanyId(1L);
+        adNoticeDTO.setCompanyId(customUserDetails.getId());
 
         consoleAdService.modifyNotice(adNoticeDTO, multipartFiles);
         return "redirect:/enterprise-console/ad/list";

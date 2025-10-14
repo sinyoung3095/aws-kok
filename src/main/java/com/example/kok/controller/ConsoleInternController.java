@@ -88,10 +88,4 @@ public class ConsoleInternController {
         return "enterprise-console/console-intern-application";
     }
 
-//    기업 콘솔 인턴 지원서
-//    @GetMapping("/application")
-//    public String goToApplication() {
-//        return "enterprise-console/console-intern-application";
-//    }
-
 }

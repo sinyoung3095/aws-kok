@@ -27,6 +27,8 @@ public class AdminPaymentExperienceServiceImpl implements AdminPaymentExperience
         paymentExperienceList.forEach((payment) -> {
             String relativeDate = DateUtils.getCreatedDate(payment.getPaymentPaidDatetime());
             payment.setRelativeDate(relativeDate);
+            String paymentPriceText = String.format("%,d", payment.getPaymentPrice());
+            payment.setPaymentPriceText(paymentPriceText);
         });
 
         criteria.setHasMore(paymentExperienceList.size() > criteria.getRowCount());
@@ -40,7 +42,11 @@ public class AdminPaymentExperienceServiceImpl implements AdminPaymentExperience
 
         AdminPaymentExperienceCountDTO countDTO = new AdminPaymentExperienceCountDTO();
         countDTO.setAcceptTotal(adminPaymentExperienceDAO.totalAccept().getAcceptTotal());
+        String acceptTotalText = String.format("%,d", countDTO.getAcceptTotal());
         countDTO.setRejectTotal(adminPaymentExperienceDAO.totalReject().getRejectTotal());
+        String rejectTotalText = String.format("%,d", countDTO.getRejectTotal());
+        countDTO.setAcceptTotalText(acceptTotalText);
+        countDTO.setRejectTotalText(rejectTotalText);
 
         adminPaymentExperienceCriteriaDTO.setPaymentExperienceList(paymentExperienceList);
         adminPaymentExperienceCriteriaDTO.setCriteria(criteria);

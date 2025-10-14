@@ -3,6 +3,7 @@ package com.example.kok.controller;
 import com.example.kok.dto.*;
 import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.enumeration.Status;
+import com.example.kok.mapper.RequestExperienceFileMapper;
 import com.example.kok.service.ConsoleExperienceApplicationService;
 import com.example.kok.service.ConsoleExperienceDetailService;
 import com.example.kok.service.ConsoleExperienceListService;
@@ -24,6 +25,7 @@ public class ConsoleExperienceApiController {
     private final ConsoleExperienceListService experienceService;
     private final ConsoleExperienceDetailService experienceDetailService;
     private final ConsoleExperienceApplicationService consoleExperienceApplicationService;
+    private final RequestExperienceFileMapper requestExperienceFileMapper;
     private final S3Service s3Service;
 
 
@@ -90,14 +92,18 @@ public class ConsoleExperienceApiController {
 
 //    여러 명의 지원자 상세 조회
     @PostMapping("/{experienceNoticeId}/applicants/files")
-    public ResponseEntity<List<String>> getApplicantsFileUrls(
+    public ResponseEntity<RequestExperienceDownloadUrlDTO> getApplicantsFileUrls(
             @PathVariable Long experienceNoticeId,
             @RequestBody List<Long> memberIdList) {
 
+        RequestExperienceDownloadUrlDTO requestExperienceDownloadUrlDTO = new RequestExperienceDownloadUrlDTO();
+
         List<String> downloadUrls = new ArrayList<>();
+        List<String> fileNames = new ArrayList<>();
 
         for (Long memberId : memberIdList) {
-            var file = consoleExperienceApplicationService.getApplicantDetail(memberId, experienceNoticeId);
+            ConsoleExperienceApplicantDTO file = consoleExperienceApplicationService.getApplicantDetail(memberId, experienceNoticeId);
+            String fileName = requestExperienceFileMapper.selectFileNameByMemberId(memberId);
 
             if (file.getFilePath() != null && file.getFileName() != null) {
                 String downloadUrl = s3Service.getPreSignedDownloadUrl(
@@ -106,11 +112,17 @@ public class ConsoleExperienceApiController {
                         Duration.ofMinutes(5)
                 );
                 downloadUrls.add(downloadUrl);
-                log.info("🎯 PreSigned URL 발급됨: {}", downloadUrl);
             }
+
+            fileNames.add(fileName);
         }
 
-        return ResponseEntity.ok(downloadUrls);
+        requestExperienceDownloadUrlDTO.setUrls(downloadUrls);
+        requestExperienceDownloadUrlDTO.setFileNames(fileNames);
+
+
+
+        return ResponseEntity.ok(requestExperienceDownloadUrlDTO);
     }
 
 

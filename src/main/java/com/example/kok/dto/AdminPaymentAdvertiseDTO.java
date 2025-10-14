@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class AdminPaymentAdvertiseDTO {
     private Long id;
     private Long paymentPrice;
+    private String paymentPriceText;
     private RequestStatus paymentStatus;
     private String paymentPaidDatetime;
     private String relativeDate;

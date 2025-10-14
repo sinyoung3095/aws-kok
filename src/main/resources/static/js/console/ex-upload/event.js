@@ -2,7 +2,7 @@ const searchBtn = document.querySelector(".search-btn");
 const searchSpan = document.querySelector(".search-span");
 const dropdownMenu = document.querySelector(".dropdown-menu");
 const jobButtons = document.querySelectorAll(".dropdown-btn");
-const companyId = 1; //나중에 수정해야함
+// const companyId = 1; //나중에 수정해야함
 
 // 검색 버튼 클릭 시 드롭다운 열기/닫기
 searchBtn.addEventListener("click", (e) => {
@@ -266,7 +266,3 @@ textareas.forEach(textarea => {
         }
     });
 });
-
-// document.addEventListener("DOMContentLoaded", async () => {
-//     const data = await experienceRegisterService.detail(id);
-// });
