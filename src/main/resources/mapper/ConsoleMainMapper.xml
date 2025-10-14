@@ -3,7 +3,7 @@
 <mapper namespace="com.example.kok.mapper.ConsoleMainMapper">
     <!-- 활성화된 체험 공고 수 -->
     <select id="countActiveExperienceNotice">
-        select count(*)
+        select count(distinct id)
         from tbl_experience_notice
         where experience_notice_status = 'active'
           and company_id = #{companyId}
@@ -11,14 +11,14 @@
 
     <!-- 전체 체험 공고 수 -->
     <select id="countAllExperienceNotice">
-        select count(*)
+        select count(distinct id)
         from tbl_experience_notice
         where company_id = #{companyId}
     </select>
 
     <!-- 활성화된 인턴 공고 수 -->
     <select id="countActiveInternNotice">
-        select count(*)
+        select count(distinct id)
         from tbl_intern_notice
         where intern_notice_status = 'active'
           and company_id = #{companyId}
@@ -26,7 +26,7 @@
 
     <!-- 전체 인턴 고용 공고 수 -->
     <select id="countAllInternNotice">
-        select count(*)
+        select count(distinct id)
         from tbl_intern_notice
         where company_id = #{companyId}
     </select>

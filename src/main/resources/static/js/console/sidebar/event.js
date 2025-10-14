@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (serChButton && serChDiv) {
         serChButton.addEventListener("click", function (e) {
+            console.log("asdasd")
             if (serChDiv.style.display === "block") {
                 serChDiv.style.display = "none";
             } else {

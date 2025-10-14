@@ -49,7 +49,7 @@ public class ConsoleProfileController {
         }
 
         consoleProfileService.updateProfile(companyProfileDTO, multipartFiles);
-        return "redirect:/enterprise-console/profile?userId=" + companyProfileDTO.getCompanyId();
+        return "redirect:/enterprise-console/profile";
     }
 
 

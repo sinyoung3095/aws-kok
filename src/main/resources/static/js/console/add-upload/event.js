@@ -203,7 +203,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const isSubValid = validateInput(inputSub, "서브 텍스트를 입력해주세요.");
             const isDateValid = validateDate(okcheck);
 
-            // 하나라도 false면 return
             if (!isMainValid || !isSubValid || !isDateValid) return;
 
             const payInfo = {
@@ -217,6 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const paymentPrice = Number(priceText.replace(/,/g, "").trim());
 
             const data = {
+                id: document.querySelector("input[name='id']").value,
                 advertisementMainText: document.querySelector("#ad-main-text").value,
                 advertisementSubText: document.querySelector("#ad-sub-text").value,
                 advertiseStartDatetime: document.querySelector("#start-date").value,
