@@ -238,7 +238,7 @@ supportLoading.style.display = "block";
 
 let supportPage = 1;
 const showSupportList = async (supportPage = 1) => {
-    return await service.getSupportList(layout.showSupport, supportPage);
+    return await sideService.getSupportList(sideLayout.showSupport, supportPage);
 }
 
 if (supportButton && supportModal && closeButton) {
@@ -326,7 +326,7 @@ scrollContainer.addEventListener("click", async (e) => {
     const id = Number(listData.dataset.id);
     console.log(id);
 
-    await service.getSupportDetail(layout.showSupportDetail, id);
+    await sideService.getSupportDetail(sideLayout.showSupportDetail, id);
 
     // 닫기
     const detailCloseBtn = document.querySelector(".detail-top-close-button");
@@ -361,5 +361,5 @@ supportSearch.addEventListener("submit", async (e) => {
     const page = 1;
     const keyword = searchInput.value;
 
-    await service.getSupportList(layout.showSupport, page, keyword)
+    await sideService.getSupportList(sideLayout.showSupport, page, keyword)
 });

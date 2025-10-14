@@ -35,7 +35,11 @@ public class AdminMainPageServiceImpl implements AdminMainPageService {
         int companyNoticeTotal = mainPageDTO.getCompanyExperienceNoticeTotal() + mainPageDTO.getCompanyInternNoticeTotal();
         mainPageDTO.setCompanyNoticeTotal(companyNoticeTotal);
         mainPageDTO.setMemberPaymentTotal(adminMainPageDAO.memberPayTotal());
+        String memberPaymentTotalText = String.format("%,d", mainPageDTO.getMemberPaymentTotal());
+        mainPageDTO.setMemberPaymentTotalText(memberPaymentTotalText);
         mainPageDTO.setCompanyPaymentTotal(adminMainPageDAO.companyPayTotal());
+        String companyPaymentTotalText = String.format("%,d", mainPageDTO.getCompanyPaymentTotal());
+        mainPageDTO.setCompanyPaymentTotalText(companyPaymentTotalText);
 
         return mainPageDTO;
     }

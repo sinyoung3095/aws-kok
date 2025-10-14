@@ -30,6 +30,8 @@ public class AdminPaymentAdvertiseServiceImpl implements AdminPaymentAdvertiseSe
         paymentAdvertiseList.forEach((payment) -> {
             String relativeDate = DateUtils.getCreatedDate(payment.getPaymentPaidDatetime());
             payment.setRelativeDate(relativeDate);
+            String paymentPriceText = String.format("%,d", payment.getPaymentPrice());
+            payment.setPaymentPriceText(paymentPriceText);
         });
 
         criteria.setHasMore(paymentAdvertiseList.size() > criteria.getRowCount());
@@ -44,6 +46,8 @@ public class AdminPaymentAdvertiseServiceImpl implements AdminPaymentAdvertiseSe
         AdminPaymentAdvertiseCountDTO countDTO = new AdminPaymentAdvertiseCountDTO();
         countDTO.setAcceptTotal(adminPaymentAdvertiseDAO.totalAccept().getAcceptTotal());
         countDTO.setAcceptCount(adminPaymentAdvertiseDAO.countAccept().getAcceptCount());
+        String acceptTotalText = String.format("%,d", countDTO.getAcceptTotal());
+        countDTO.setAcceptTotalText(acceptTotalText);
 
         adminPaymentAdvertiseCriteriaDTO.setPaymentAdvertiseList(paymentAdvertiseList);
         adminPaymentAdvertiseCriteriaDTO.setCriteria(criteria);
