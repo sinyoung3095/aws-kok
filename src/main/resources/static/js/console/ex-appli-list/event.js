@@ -42,30 +42,39 @@ document.addEventListener("click", async (e) => {
     if (!target) return;
 
     const checkedBoxes = document.querySelectorAll(".check-download:checked");
-    const memberIdList = Array.from(checkedBoxes).map(el => el.dataset.memberId);
-    console.log("선택된자", memberIdList);
+    const memberIdList = [];
 
-    const urls = await experienceDatailService.downLoad(experienceNoticeId, memberIdList);
-    console.log("다운로드", urls);
+    for (let i = 0; i < checkedBoxes.length; i++) {
+        memberIdList.push(checkedBoxes[i].dataset.memberId);
+    }
+
+    const requestExperienceDownloadUrlDTO = await experienceDatailService.downLoad(experienceNoticeId, memberIdList);
+    const urls = requestExperienceDownloadUrlDTO.urls;
+    const fileNames = requestExperienceDownloadUrlDTO.fileNames;
+    const zip = new JSZip();
 
     for (let i = 0; i < urls.length; i++) {
         const url = urls[i];
-        console.log(url);
-        location.href = url;
-    }
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Failed to fetch: ${url}`);
+            const blob = await response.blob();
 
-    // urls.forEach((url) => {
-    //     console.log(url);
-    //     location.href = url;
-    // });
+            zip.file(fileNames[i], blob);
+        } catch (err) {
+            console.error(`Error fetching ${url}:`, err);
+        }
+    }
+    zip.generateAsync({ type: 'blob' }).then(content => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(content);
+        a.download = 'downloaded_files.zip';
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        URL.revokeObjectURL(a.href); // 메모리 해제
+        a.remove();
+    });
 
     console.log("다운로드 완료");
 });
-
-
-
-
-
-
-
-
