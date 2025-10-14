@@ -14,4 +14,6 @@ public interface FileMapper {
 
 //    fileName으로 id 조회
     public Long selectFileByName(String fileName);
+//    id로 프로필 조회
+    public FileDTO selectProfileById(Long id);
 }

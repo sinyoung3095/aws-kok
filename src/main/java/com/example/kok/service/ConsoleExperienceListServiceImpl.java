@@ -3,10 +3,14 @@ package com.example.kok.service;
 import com.example.kok.dto.ConsoleExperienceListCriteriaDTO;
 import com.example.kok.dto.ConsoleExperienceListDTO;
 import com.example.kok.dto.ConsoleExperienceListRequestDTO;
+import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.enumeration.Status;
+import com.example.kok.mapper.MemberAlarmSettingMapper;
 import com.example.kok.repository.ConsoleExperienceListDAO;
 import com.example.kok.util.Criteria;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +18,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ConsoleExperienceListServiceImpl implements ConsoleExperienceListService {
     private final ConsoleExperienceListDAO consoleExperienceDAO;
+    private final MemberAlarmSettingMapper memberAlarmSettingMapper;
+    private final MailService mailService;
 
     @Override
     public ConsoleExperienceListCriteriaDTO getList(Long companyId, int page, Status status, String keyword) {
@@ -61,9 +68,26 @@ public class ConsoleExperienceListServiceImpl implements ConsoleExperienceListSe
     public void registerNotice(ConsoleExperienceListRequestDTO noticeRequestDTO) {
 //        공고 등록
         consoleExperienceDAO.createNotice(noticeRequestDTO);
-
+        log.info("id:{}",noticeRequestDTO.getId());
 //        직군 등록
         consoleExperienceDAO.createNoticeJobCategory(noticeRequestDTO);
+        ExperienceNoticeDTO experienceNoticeDTO = memberAlarmSettingMapper.selectByNoticeId(noticeRequestDTO.getId());
+        experienceNoticeDTO.getUsers().forEach((userDTO) -> {
+
+            if(userDTO.getUserEmail()!=null){
+                try {
+                    mailService.sendMailByNotice(userDTO.getUserEmail(),userDTO.getUserName(),experienceNoticeDTO.getExperienceNoticeTitle(),experienceNoticeDTO.getCompanyName());
+                } catch (MessagingException e) {
+                    throw new RuntimeException(e);
+                }
+            }else{
+                try {
+                    mailService.sendMailByNotice(userDTO.getSnsEmail(),userDTO.getUserName(),experienceNoticeDTO.getExperienceNoticeTitle(),experienceNoticeDTO.getCompanyName());
+                } catch (MessagingException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 
     @Override
