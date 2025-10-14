@@ -85,6 +85,9 @@ const internDatailLayout = (() => {
                     <td class="body-td">
                         <span class="exp-status">${list.requestInternStatus === "await" ? "서류 검토 중" : list.requestInternStatus === "accept" ? "합격" : "불합격"}</span>
                     </td>
+                     <td class="body-td">
+                        <a href="/enterprise-console/intern/application/${list.internNoticeId}/${list.userId}" class="more-btn">상세보기</a>
+                    </td>
                 </tr>
             `;
         });

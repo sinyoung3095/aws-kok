@@ -11,10 +11,10 @@ const showList = async (page = 1) => {
 };
 showList(page);
 
-const scrollContainer = document.querySelector(".list-container.pd-0");
+const companyScrollContainer = document.querySelector(".list-container.pd-0");
 
-scrollContainer.addEventListener("scroll", async () => {
-    if (scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 100) {
+companyScrollContainer.addEventListener("scroll", async () => {
+    if (companyScrollContainer.scrollTop + companyScrollContainer.clientHeight >= companyScrollContainer.scrollHeight - 100) {
         if (checkScroll) {
             companiesCriteria = await showList(++page);
             checkScroll = false;

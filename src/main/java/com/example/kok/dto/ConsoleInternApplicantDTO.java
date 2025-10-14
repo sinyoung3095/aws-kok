@@ -1,5 +1,7 @@
 package com.example.kok.dto;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,4 +27,20 @@ public class ConsoleInternApplicantDTO {
     private long internNoticeId; // 공고 ID
     private String internNoticeTitle; // 공고 제목
     private long companyId; // 기업 ID
+
+    private Long resumeFileId;
+    private String filePath;
+    private String fileName;
+
+    @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            // this 객체를 JSON 문자열로 변환
+            return mapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return super.toString();
+        }
+    }
 }

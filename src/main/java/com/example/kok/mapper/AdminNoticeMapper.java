@@ -4,6 +4,7 @@ import com.example.kok.domain.AdminNoticeVO;
 import com.example.kok.dto.AdminNoticeDTO;
 import com.example.kok.util.Criteria;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,4 +28,10 @@ public interface AdminNoticeMapper {
 
 //    공지사항 삭제
     public void deleteNoticeFromId(Long id);
+
+//    지원 센터 - 목록
+    public List<AdminNoticeDTO> selectSupportNoticeAll (@Param("criteria") Criteria criteria,
+                                                        @Param("keyword") String keyword);
+//    지원 센터 - 개수
+    public int countSupportNoticeAll(String keyword);
 }

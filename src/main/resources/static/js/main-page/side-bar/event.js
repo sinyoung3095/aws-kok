@@ -231,10 +231,45 @@ const supportModal = document.getElementById("crisp-chatbox-chat");
 const closeButton = document.querySelector(
     ".customer-support-top-close-button"
 );
+const scrollContainer = document.querySelector(".customer-support-body-wrap6");
+
+const showSupportList = async (page = 1) => {
+    const noticeCriteria = await service.getSupportList(layout.showSupport, page);
+    const loading = document.getElementById("loading");
+    loading.style.display = "block";
+
+    setTimeout(() => {
+        loading.style.display = "none";
+    }, 1000);
+
+    return noticeCriteria;
+}
+
+// let checkSupportScroll = true;
+// let noticeCriteria;
+//
+// onScroll = async function() {
+//     var scrollTop = scrollContainer.scrollTop;
+//     var clientHeight = scrollContainer.clientHeight;
+//     var scrollHeight = scrollContainer.scrollHeight;
+//
+//     if(scrollTop + clientHeight >= scrollHeight - 50) {
+//         if(checkSupportScroll) {
+//             noticeCriteria = await showSupportList(++page);
+//             checkSupportScroll = false;
+//         }
+//         setTimeout(() => {
+//             if(noticeCriteria != null && noticeCriteria.criteria.hasMore) {
+//                 checkSupportScroll = true;
+//             }
+//         }, 800);
+//     }
+// }
 
 if (supportButton && supportModal && closeButton) {
     supportButton.addEventListener("click", () => {
         supportModal.classList.add("active");
+        showSupportList();
     });
 
     closeButton.addEventListener("click", () => {
@@ -243,33 +278,80 @@ if (supportButton && supportModal && closeButton) {
 }
 
 // 고객지원 상세창
-const faqItems = document.querySelectorAll(".customer-support-list-section");
-const detailModal = document.getElementById("crisp-chatbox-chat-detail");
-const detailCloseBtn = document.querySelector(".detail-top-close-button");
-const detailBackBtn = document.querySelector(".detail-back-wrap");
-const supportTab = document.querySelector(".detail-top-title-section2");
+// const faqItems = document.querySelectorAll(".customer-support-list-section");
+// const detailModal = document.getElementById("crisp-chatbox-chat-detail");
+// const detailCloseBtn = document.querySelector(".detail-top-close-button");
+// const detailBackBtn = document.querySelector(".detail-back-wrap");
+// const supportTab = document.querySelector(".detail-top-title-section2");
+//
+// faqItems.forEach((item) => {
+//     item.addEventListener("click", () => {
+//         if (detailModal) detailModal.classList.add("active");
+//     });
+// });
+//
+// if (detailCloseBtn) {
+//     detailCloseBtn.addEventListener("click", () => {
+//         if (detailModal) detailModal.classList.remove("active");
+//         if (supportModal) supportModal.classList.remove("active");
+//     });
+// }
+//
+// if (detailBackBtn) {
+//     detailBackBtn.addEventListener("click", () => {
+//         if (detailModal) detailModal.classList.remove("active");
+//     });
+// }
+//
+// if (supportTab) {
+//     supportTab.addEventListener("click", () => {
+//         if (detailModal) detailModal.classList.remove("active");
+//     });
+// }
 
-faqItems.forEach((item) => {
-    item.addEventListener("click", () => {
-        if (detailModal) detailModal.classList.add("active");
-    });
+// 고객지원 상세
+scrollContainer.addEventListener("click", async (e) => {
+    const detailModal = document.getElementById("crisp-chatbox-chat-detail");
+    if (detailModal) detailModal.classList.add("active");
+
+    const listData = e.target.closest(".customer-support-list-section");
+    const id = Number(listData.dataset.id);
+    console.log(id);
+
+    await service.getSupportDetail(layout.showSupportDetail, id);
+
+    // 닫기
+    const detailCloseBtn = document.querySelector(".detail-top-close-button");
+    const detailBackBtn = document.querySelector(".detail-back-wrap");
+    const supportTab = document.querySelector(".detail-top-title-section2");
+
+    if (detailCloseBtn) {
+        detailCloseBtn.addEventListener("click", () => {
+            if (detailModal) detailModal.classList.remove("active");
+            if (supportModal) supportModal.classList.remove("active");
+        });
+    }
+
+    if (detailBackBtn) {
+        detailBackBtn.addEventListener("click", () => {
+            if (detailModal) detailModal.classList.remove("active");
+        });
+    }
+
+    if (supportTab) {
+        supportTab.addEventListener("click", () => {
+            if (detailModal) detailModal.classList.remove("active");
+        });
+    }
 });
 
-if (detailCloseBtn) {
-    detailCloseBtn.addEventListener("click", () => {
-        if (detailModal) detailModal.classList.remove("active");
-        if (supportModal) supportModal.classList.remove("active");
-    });
-}
+// 고객지원 검색창
+const supportSearch = document.querySelector("form[name=form_helpdesk]");
+const searchInput = document.querySelector("input[name=helpdesk_search]");
+supportSearch.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const page = 1;
+    const keyword = searchInput.value;
 
-if (detailBackBtn) {
-    detailBackBtn.addEventListener("click", () => {
-        if (detailModal) detailModal.classList.remove("active");
-    });
-}
-
-if (supportTab) {
-    supportTab.addEventListener("click", () => {
-        if (detailModal) detailModal.classList.remove("active");
-    });
-}
+    await service.getSupportList(layout.showSupport, page, keyword)
+});
