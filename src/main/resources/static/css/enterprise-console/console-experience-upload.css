@@ -1039,7 +1039,7 @@ button.yeolgi:hover{
     background-color: #f5f5f5;
 }
 
-button.download{
+a.download{
     margin-right: 24px;
     margin-top: 8px;
     padding-inline: 12px;
@@ -1065,7 +1065,7 @@ button.download{
     display: inline-flex;
 }
 
-button.download:hover{
+a.download:hover{
     background-color: #f5f5f5;
 }
 
