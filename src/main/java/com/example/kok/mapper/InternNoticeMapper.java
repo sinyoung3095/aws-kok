@@ -35,4 +35,5 @@ public interface InternNoticeMapper {
     public List<InternNoticeDTO> selectLatestFour();
 //    인턴 공고 리스트 조회
     public List<InternNoticeDTO> selectAllByKeyword(String keyword);
+    public InternNoticeDTO selectCompanyNameById(Long id);
 }

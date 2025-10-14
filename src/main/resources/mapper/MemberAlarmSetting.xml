@@ -29,7 +29,7 @@
     </update>
     <!--  공고 id로 알림 보낼 email 조회  -->
     <select id="selectByNoticeId">
-        select e.id,e.experience_notice_title,c.company_name,u.user_name,u.userEmail,u.sns_email from tbl_experience_notice e
+        select u.user_name,u.user_email,u.sns_email from tbl_experience_notice e
             join tbl_company c
                on e.company_id = c.user_id
             join tbl_follow f
@@ -39,6 +39,19 @@
             join tbl_user u
                on a.member_id = u.id
         where e.id=${id} and a.company_notice_alarm = 'active'and u.user_status='active'
+
+    </select>
+    <select id="selectByInturnNoticeId">
+        select u.user_name,u.user_email,u.sns_email from tbl_intern_notice i
+                                                             join tbl_company c
+                                                                  on i.company_id = c.user_id
+                                                             join tbl_follow f
+                                                                  on c.user_id = f.company_id
+                                                             join tbl_member_alarm_setting a
+                                                                  on f.member_id = a.member_id
+                                                             join tbl_user u
+                                                                  on a.member_id = u.id
+        where i.id=${id} and a.company_notice_aglarm = 'active'and u.user_status='active'
 
     </select>
 </mapper>

@@ -177,8 +177,13 @@
                                             </th:replace>
                                         </th:block>
                                         <th:block>
-                                            <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')}">
+                                            <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO==null}">
                                                 <img alt="image" width="32" height="32" style="color:transparent;border-radius:999px;cursor:default;max-height:32px;max-width:32px;min-height:32px;min-width:32px;object-fit:contain" srcset="" src="/images/main-page/image.png">
+                                            </th:replace>
+                                        </th:block>
+                                        <th:block>
+                                            <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO!=null}">
+                                                <img alt="image" width="32" height="32" style="color:transparent;border-radius:999px;cursor:default;max-height:32px;max-width:32px;min-height:32px;min-width:32px;object-fit:contain" srcset="" th:src="${fileDTO.filePath}">
                                             </th:replace>
                                         </th:block>
                                         <div class="sidebar-login-user-wrap">
@@ -327,8 +332,13 @@
                                             </th:replace>
                                         </th:block>
                                         <th:block>
-                                            <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')}">
+                                            <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO==null}">
                                                 <img alt="image" width="32" height="32" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                                            </th:replace>
+                                        </th:block>
+                                        <th:block>
+                                            <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO!=null}">
+                                                <img alt="image" width="32" height="32" srcset="" th:src="${fileDTO.filePath}" style="color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
                                             </th:replace>
                                         </th:block>
                                         <div class="setting-modal-profile">
@@ -376,8 +386,13 @@
                                                     </th:replace>
                                                 </th:block>
                                                 <th:block>
-                                                    <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')}">
+                                                    <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO==null}">
                                                         <img alt="image" width="32" height="32" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                                                    </th:replace>
+                                                </th:block>
+                                                <th:block>
+                                                    <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO!=null}">
+                                                        <img alt="image" width="32" height="32" srcset="" th:src="${fileDTO.filePath}" style="color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
                                                     </th:replace>
                                                 </th:block>
                                                 <div class="setting-modal-text-wrap">

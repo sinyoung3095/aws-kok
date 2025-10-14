@@ -32,8 +32,9 @@ public class MainpageController {
     }
     @GetMapping("login-header")
     public String goToLoginHeader(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model){
-
         model.addAttribute("userDTO", customUserDetails);
+        FileDTO fileDTO = userProfileService.findProfileById(customUserDetails.getId());
+        model.addAttribute("fileDTO", fileDTO);
 
         log.info(model.toString());
         return "main-page/login-header";
@@ -45,6 +46,8 @@ public class MainpageController {
     @GetMapping("login-side-bar")
     public  String goToLoginSideBar(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model){
         model.addAttribute("userDTO", customUserDetails);
+        FileDTO fileDTO = userProfileService.findProfileById(customUserDetails.getId());
+        model.addAttribute("fileDTO", fileDTO);
         log.info(customUserDetails.toString());
         return "main-page/login-side-bar";
     }
@@ -55,7 +58,8 @@ public class MainpageController {
     }
     @GetMapping("mobile-login-header")
     public String goToMobileLoginHeader(@AuthenticationPrincipal CustomUserDetails customUserDetails,Model model){
-
+        FileDTO fileDTO = userProfileService.findProfileById(customUserDetails.getId());
+        model.addAttribute("fileDTO", fileDTO);
         model.addAttribute("userDTO", customUserDetails);
         return "main-page/mobile-login-header";
     }

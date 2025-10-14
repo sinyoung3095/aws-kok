@@ -47,26 +47,27 @@ const sideService = (()=>{
         const alarmDTO = await response.json();
         const setting = document.getElementsByClassName("setting-modal-alarm-button");
         const check = document.getElementsByClassName("setting-modal-alarm-button-check");
-
-        if(alarmDTO.memberPostLikeAlarm !=="active"){
-            setting[0].classList.toggle("off");
-            check[0].classList.toggle("off");
+        console.log(setting);
+console.log(alarmDTO);
+        if(alarmDTO.memberPostLikeAlarm !=='active'){
+            setting[0].classList.add("off");
+            check[0].classList.add("off");
         }
-        if(alarmDTO.memberCommentAlarm !=="active"){
-            setting[1].classList.toggle("off");
-            check[1].classList.toggle("off");
+        if(alarmDTO.memberCommentAlarm !=='active'){
+            setting[1].classList.add("off");
+            check[1].classList.add("off");
         }
-        if(alarmDTO.memberReplyAlarm !=="active"){
-            setting[2].classList.toggle("off");
-            check[2].classList.toggle("off");
+        if(alarmDTO.memberReplyAlarm !=='active'){
+            setting[2].classList.add("off");
+            check[2].classList.add("off");
         }
-        if(alarmDTO.request_status_alarm !=="active"){
-            setting[3].classList.toggle("off");
-            check[3].classList.toggle("off");
+        if(alarmDTO.requestStatusAlarm !=='active'){
+            setting[3].classList.add("off");
+            check[3].classList.add("off");
         }
-        if(alarmDTO.company_notice_alarm !=="active"){
-            setting[4].classList.toggle("off");
-            check[4].classList.toggle("off");
+        if(alarmDTO.companyNoticeAlarm !=='active'){
+            setting[4].classList.add("off");
+            check[4].classList.add("off");
         }
 
     }

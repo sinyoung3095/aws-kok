@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.kok.service.S3Service;
+import org.springframework.web.servlet.view.RedirectView;
+
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -55,9 +57,15 @@ public class ConsoleExperienceApiController {
 
 //    공고 등록
     @PostMapping("/create")
-    public ResponseEntity<?> createNotice(@RequestBody ConsoleExperienceListRequestDTO noticeRequestDTO) {
+    public RedirectView createNotice(@RequestBody ConsoleExperienceListRequestDTO noticeRequestDTO) {
+//        System.out.println("제목: " + noticeRequestDTO.getExperienceNoticeTitle());
+//        System.out.println("부제목: " + noticeRequestDTO.getExperienceNoticeSubtitle());
+//        System.out.println("직군: " + noticeRequestDTO.getJobCategoryId());
+//        System.out.println("회사 ID: " + noticeRequestDTO.getCompanyId());
+//        System.out.println("시작일: " + noticeRequestDTO.getExperienceStartDate());
+//        System.out.println("종료일: " + noticeRequestDTO.getExperienceEndDate());
         experienceService.registerNotice(noticeRequestDTO);
-        return ResponseEntity.ok(noticeRequestDTO);
+        return new RedirectView("enterprise-console/console-experience-list");
     }
 
 //    공고 수정
