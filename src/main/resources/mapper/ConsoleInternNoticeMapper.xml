@@ -36,9 +36,9 @@
             </if>
             <if test="keyword != null and keyword != ''">
                 and (
-                inn.intern_notice_title ilike concat('%', #{keyword}, '%')
-                or inn.intern_notice_subtitle ilike concat('%', #{keyword}, '%')
-                or jc.job_name ilike concat('%', #{keyword}, '%')
+                inn.intern_notice_title like concat('%', #{keyword}, '%')
+                or inn.intern_notice_subtitle like concat('%', #{keyword}, '%')
+                or jc.job_name like concat('%', #{keyword}, '%')
                 )
             </if>
         group by inn.id, jc.job_name

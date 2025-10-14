@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -50,6 +52,8 @@ public class ConsoleInternApiController {
     @PostMapping("/create")
     public ResponseEntity<?> createNotice(@RequestBody ConsoleInternListRequestDTO noticeRequestDTO) {
         internService.registerNotice(noticeRequestDTO);
+
+//        return ResponseEntity.ok(Map.of("redirectUrl", "/enterprise-console/intern/list"));
         return ResponseEntity.ok(noticeRequestDTO);
     }
 
@@ -60,6 +64,7 @@ public class ConsoleInternApiController {
         noticeRequestDTO.setId(id);
         internService.modifyNotice(noticeRequestDTO);
 
+//        return ResponseEntity.ok(Map.of("redirectUrl", "/enterprise-console/intern/list"));
         return ResponseEntity.ok(noticeRequestDTO);
     }
 

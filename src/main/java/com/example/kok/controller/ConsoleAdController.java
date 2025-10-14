@@ -25,8 +25,12 @@ public class ConsoleAdController {
     @GetMapping("/list")
     public String goToList(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
         Long companyId = customUserDetails.getId();
+        String companyName = customUserDetails.getCompanyName();
+        String memberName = customUserDetails.getUsername();
 
         model.addAttribute("companyId", companyId);
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("memberName", memberName);
         return "enterprise-console/console-add-list";
     }
 
@@ -43,11 +47,16 @@ public class ConsoleAdController {
         consoleAdService.setPreSignedUrl(notice);
 
         Long companyId = customUserDetails.getId();
+        String companyName = customUserDetails.getCompanyName();
+        String memberName = customUserDetails.getUsername();
 
         model.addAttribute("page","edit");
         model.addAttribute("id", id);
         model.addAttribute("notice", notice);
         model.addAttribute("companyId", companyId);
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("memberName", memberName);
+
         return "enterprise-console/console-add-upload";
     }
 
@@ -61,6 +70,7 @@ public class ConsoleAdController {
 
         consoleAdService.registerAdvertisement(adNoticeDTO, multipartFiles);
         return "redirect:/enterprise-console/ad/list";
+//        return "enterprise-console/console-add-upload";
     }
 
 

@@ -26,9 +26,17 @@ public class ConsoleProfileController {
 //    public String goToProfile(@RequestParam("userId") Long userId, Model model) {
     public String goToProfile(@AuthenticationPrincipal CustomUserDetails customUserDetails,
                               Model model) {
+
         Long companyId = customUserDetails.getId();
+        String companyName = customUserDetails.getCompanyName();
+        String memberName = customUserDetails.getUsername();
+
         ConsoleCompanyProfileDTO profile = consoleProfileService.getProfile(companyId);
+
         model.addAttribute("profile", profile);
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("memberName", memberName);
+
         return "enterprise-console/console-profile";
     }
 

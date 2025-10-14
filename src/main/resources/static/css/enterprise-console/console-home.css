@@ -186,6 +186,7 @@ div.card{
     flex-direction: column;
     height: 100%;
     display: flex;
+    min-height: 295px;
 }
 
 div.card-title{
@@ -215,6 +216,10 @@ div.card-content{
     flex-direction: column;
     flex: 1;
     display: flex;
+}
+
+div.card-content .table-wrap {
+    height: 100%;
 }
 
 div.content-main-div{
@@ -389,6 +394,7 @@ td.tbody-td1{
     font-size:14px;
     line-height: 1.42857;
     caption-side: bottom;
+    text-align: center;
 }
 
 td.tbody-td2{

@@ -213,7 +213,7 @@
                         <li class="side-prof-li">
                             <button class="side-prof-button side-hov">
                                 <div class="side-prof-div">
-<!--                                    <span th:text="${userDTO.userName}" class="side-name"></span>-->
+                                    <span th:text="${memberName}" class="side-name"></span>
                                     <span class="side-job">회사 산업 분야</span>
                                 </div>
                             </button>
@@ -232,5 +232,10 @@
     </div>
     <!-- 사이드바 끝 -->
 </body>
-<script src="/js/console/sidebar/event.js"></script>
+<script th:inline="javascript">
+    const companyName = [[${companyName}]];
+    const memberName = [[${memberName}]];
+    const customUserDetails = [[${customUserDetails}]];
+</script>
+<!--<script src="/js/console/sidebar/event.js"></script>-->
 </html>

@@ -28,50 +28,57 @@ public class ConsoleExperienceController {
 
 //    기업 콘솔 체험 공고 목록
     @GetMapping("/list")
-    public String goToList(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
+    public String goToList(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+                           Model model) {
+
         Long companyId = customUserDetails.getId();
+        String companyName = customUserDetails.getCompanyName();
+        String memberName = customUserDetails.getUsername();
 
         model.addAttribute("companyId", companyId);
-        model.addAttribute("userDTO", customUserDetails);
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("memberName", memberName);
 
         return "enterprise-console/console-experience-list";
     }
 
 //    기업 콘솔 체험 공고 등록, 수정
     @GetMapping(value = {"/create", "edit/{id}"})
-    public String goToWrite(HttpServletRequest request,
-                            @PathVariable(required = false) Long id,
+    public String goToWrite(@PathVariable(required = false) Long id,
                             @AuthenticationPrincipal CustomUserDetails customUserDetails,
+                            HttpServletRequest request,
                             Model model) {
-
-        if(request.getRequestURI().contains("create")){
-
-            Long companyId = customUserDetails.getId();
-
-            model.addAttribute("page","create");
-            model.addAttribute("notice", new ConsoleExperienceListRequestDTO());
-            model.addAttribute("companyId", companyId);
-
-            return "enterprise-console/console-experience-update";
-        }
 
         ConsoleExperienceListRequestDTO notice = consoleExperienceListService.getNotice(id);
 
         Long companyId = customUserDetails.getId();
+        String companyName = customUserDetails.getCompanyName();
+        String memberName = customUserDetails.getUsername();
 
-        model.addAttribute("userDTO", customUserDetails);
+        if(request.getRequestURI().contains("create")){
+            model.addAttribute("page","create");
+            model.addAttribute("notice", new ConsoleExperienceListRequestDTO());
+            model.addAttribute("companyId", companyId);
+            model.addAttribute("companyName", companyName);
+            model.addAttribute("memberName", memberName);
+
+            return "enterprise-console/console-experience-update";
+        }
+
         model.addAttribute("page","edit");
         model.addAttribute("id", id);
         model.addAttribute("notice", notice);
         model.addAttribute("companyId", companyId);
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("memberName", memberName);
+
         return "enterprise-console/console-experience-update";
     }
 
 //    기업 콘솔 체험 지원서 목록
     @GetMapping("/applicate-list/{experienceNoticeId}")
-    public String goToApplicateList(@AuthenticationPrincipal CustomUserDetails userDetails,
+    public String goToApplicateList(@AuthenticationPrincipal CustomUserDetails customUserDetails,
                                     @PathVariable("experienceNoticeId") Long experienceNoticeId,
-                                    @AuthenticationPrincipal CustomUserDetails customUserDetails,
                                     Model model) {
 
         ConsoleExperienceListDTO experienceDetail = consoleExperienceDetailService.getDetail(experienceNoticeId);
@@ -79,28 +86,40 @@ public class ConsoleExperienceController {
         List<ConsoleExperienceApplicantDTO> applicants  =
                 consoleExperienceApplicationService.getApplicantsByNoticeId(experienceNoticeId);
 
-        model.addAttribute("userDTO", customUserDetails);
-        model.addAttribute("userDetails", userDetails);
+        String companyName = customUserDetails.getCompanyName();
+        String memberName = customUserDetails.getUsername();
+
         model.addAttribute("experienceDetail", experienceDetail);
         model.addAttribute("experienceNoticeId", experienceNoticeId);
-        model.addAttribute("memberId", applicants.get(0).getUserId()); //지원자 id
+//        model.addAttribute("memberId", applicants.get(0).getUserId()); //지원자 id
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("memberName", memberName);
+
+        if (applicants != null && !applicants.isEmpty()) {//지원자 id
+            ConsoleExperienceApplicantDTO firstApplicant = applicants.get(0);
+            model.addAttribute("memberId", firstApplicant.getUserId());
+        }
+
         return "enterprise-console/console-experience-applicate-list";
     }
-
 
 //    기업 콘솔 체험 지원서
     @GetMapping("/application/{experienceNoticeId}/{memberId}")
     public String goToApplication(@PathVariable("experienceNoticeId") Long experienceNoticeId,
                                   @PathVariable("memberId") Long memberId,
-                                  @AuthenticationPrincipal CustomUserDetails userDetails,
+                                  @AuthenticationPrincipal CustomUserDetails customUserDetails,
                                   Model model) {
 
         ConsoleExperienceApplicantDTO applicantDetail =
                 consoleExperienceApplicationService.getApplicantDetail(memberId, experienceNoticeId);
 
-        model.addAttribute("userDetails", userDetails);
+        String companyName = customUserDetails.getCompanyName();
+        String memberName = customUserDetails.getUsername();
+
         model.addAttribute("applicantDetail", applicantDetail);
         model.addAttribute("memberId", memberId); //지원자 id
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("memberName", memberName);
 
 
         return "enterprise-console/console-experience-application";
