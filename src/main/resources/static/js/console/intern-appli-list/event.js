@@ -37,15 +37,15 @@ function filter(page = 1) {
     });
 };
 
-document.addEventListener("click", (e) => {
-    const row = e.target.closest(".body-tr");
-
-    if (row) {
-        const userId = row.dataset.userId;
-
-        const url = `/enterprise-console/intern/application/${internNoticeId}/${userId}`;
-        window.location.href = url;
-    }
-});
+// document.addEventListener("click", (e) => {
+//     const row = e.target.closest(".body-tr");
+//
+//     if (row) {
+//         const userId = row.dataset.userId;
+//
+//         const url = `/enterprise-console/intern/application/${internNoticeId}/${userId}`;
+//         window.location.href = url;
+//     }
+// });
 
 

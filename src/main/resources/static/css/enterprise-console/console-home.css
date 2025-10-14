@@ -253,7 +253,7 @@ div.button-wrap{
     color: #0a0a0a;
 }
 
-button.white-button{
+.white-button{
     outline-style: none;
     transition-property: color, box-shadow;
     transition-timing-function: cubic-bezier(.4,0,.2,1);
@@ -281,12 +281,12 @@ button.white-button{
     margin-block-end: 8px;
 }
 
-button.white-button:hover{
+.white-button:hover{
     color: #171717;
     background-color: oklch(.97 0 0);
 }
 
-button.black-button{
+.black-button{
     outline-style: none;
     transition-property: color, box-shadow;
     transition-timing-function:cubic-bezier(.4,0,.2,1);
@@ -313,7 +313,7 @@ button.black-button{
     display: inline-flex;
 }
 
-button.black-button:hover{
+.black-button:hover{
     background-color: #171717e6;
 }
 

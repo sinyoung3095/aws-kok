@@ -133,19 +133,25 @@
                                                 </div>
                                                 <div class="card-content">
                                                     <!-- 이력서일 경우 -->
-                                                    <div class="application">
+                                                    <div class="application" th:if="${applicantDetail.resumeFileId != null}">
                                                         <div class="application-title">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="appli-svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
                                                             <div class="appli-title-text">
                                                                 <p class="appli-title-p">이력서</p>
                                                             </div>
                                                         </div>
-                                                        <button class="download-btn">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-3 w-3"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+                                                        <button class="download-btn"
+                                                                th:data-file-id="${applicantDetail.resumeFileId}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                                 stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-3 w-3">
+                                                                <path d="M15 3h6v6"></path>
+                                                                <path d="M10 14 21 3"></path>
+                                                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                                            </svg>
                                                             다운로드
                                                         </button>
                                                     </div>
-                                                    <!-- 이력서일 경우 -->
 
                                                     <!-- URL일 경우 -->
                                                     <div class="application">
@@ -155,7 +161,7 @@
                                                                 <p class="appli-title-p">URL</p>
                                                             </div>
                                                         </div>
-                                                        <button class="yeolgi">
+                                                        <button class="url-btn">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-3 w-3"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
                                                             이동
                                                         </button>
@@ -243,5 +249,11 @@
         </div>
     </div>
 </body>
-<script src="/js/console/application/event.js"></script>
+<script th:inline="javascript">
+    const memberId = [[${memberId}]];
+    const internNoticeId = [[${internNoticeId}]];
+</script>
+</script>
+<script src="/js/console/sidebar/event.js"></script>
+<script src="/js/console/intern-application/event.js"></script>
 </html>

@@ -1,5 +1,6 @@
 package com.example.kok.repository;
 
+import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.dto.MemberAlarmSettingDTO;
 import com.example.kok.mapper.MemberAlarmSettingMapper;
 import lombok.RequiredArgsConstructor;
@@ -24,12 +25,16 @@ public class MemberAlarmSettingDAO {
     public MemberAlarmSettingDTO findAllByMemberId(Long memberId){
         return memberAlarmSettingMapper.selectAllByMemberId(memberId);
     }
+//    멤버 알람 활성화
     public void updateByKeywordToActive(Long id, String keyword){
          memberAlarmSettingMapper.updateByKeywordToActive(id,keyword);
     }
+//    멤버 알람 비활성화
     public void updateByKeywordToInactive(Long id, String keyword){
         memberAlarmSettingMapper.updateByKeywordToInactive(id,keyword);
-
+    }
+    public ExperienceNoticeDTO findEmailForSendMail(Long id){
+        return memberAlarmSettingMapper.selectByNoticeId(id);
     }
 
 

@@ -9,5 +9,16 @@ import org.springframework.stereotype.Component;
 @ToString
 @NoArgsConstructor
 public class AdminMainPageDTO {
-    private double memberRequestAvg;
+    private double memberExperienceRequestAvg;
+    private double memberInternRequestAvg;
+    private double companyExperienceNoticeAvg;
+    private double companyInternNoticeAvg;
+    private int memberExperienceRequestTotal;
+    private int memberInternRequestTotal;
+    private int memberRequestTotal;
+    private int companyExperienceNoticeTotal;
+    private int companyInternNoticeTotal;
+    private int companyNoticeTotal;
+    private Long memberPaymentTotal;
+    private Long companyPaymentTotal;
 }

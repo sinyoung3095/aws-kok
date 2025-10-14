@@ -70,10 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // 버튼이 없으면 리턴
     if (!downloadBtn) return;
 
-    // Thymeleaf에서 값 주입받기
-    const memberId = /*[[${applicantDetail.userId}]]*/ 0;
-    const experienceNoticeId = /*[[${applicantDetail.experienceNoticeId}]]*/ 0;
-
     downloadBtn.addEventListener("click", async () => {
         try {
             // 백엔드로 presigned URL 요청

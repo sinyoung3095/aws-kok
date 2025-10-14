@@ -1,5 +1,6 @@
 package com.example.kok.controller;
 
+import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.ConsoleExperienceApplicantDTO;
 import com.example.kok.dto.ConsoleExperienceListDTO;
 import com.example.kok.dto.ConsoleExperienceListRequestDTO;
@@ -9,11 +10,12 @@ import com.example.kok.service.ConsoleExperienceListService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -48,13 +50,19 @@ public class ConsoleExperienceController {
 
 //    기업 콘솔 체험 지원서 목록
     @GetMapping("/applicate-list/{experienceNoticeId}")
-    public String goToApplicateList(Model model,
-                                    @PathVariable("experienceNoticeId") Long experienceNoticeId) {
+    public String goToApplicateList(@AuthenticationPrincipal CustomUserDetails userDetails,
+                                    @PathVariable("experienceNoticeId") Long experienceNoticeId,
+                                    Model model) {
 
         ConsoleExperienceListDTO experienceDetail = consoleExperienceDetailService.getDetail(experienceNoticeId);
 
+        List<ConsoleExperienceApplicantDTO> applicants  =
+                consoleExperienceApplicationService.getApplicantsByNoticeId(experienceNoticeId);
+
+        model.addAttribute("userDetails", userDetails);
         model.addAttribute("experienceDetail", experienceDetail);
         model.addAttribute("experienceNoticeId", experienceNoticeId);
+        model.addAttribute("memberId", applicants.get(0).getUserId()); //지원자 id
         return "enterprise-console/console-experience-applicate-list";
     }
 
@@ -63,12 +71,16 @@ public class ConsoleExperienceController {
     @GetMapping("/application/{experienceNoticeId}/{memberId}")
     public String goToApplication(@PathVariable("experienceNoticeId") Long experienceNoticeId,
                                   @PathVariable("memberId") Long memberId,
+                                  @AuthenticationPrincipal CustomUserDetails userDetails,
                                   Model model) {
 
         ConsoleExperienceApplicantDTO applicantDetail =
                 consoleExperienceApplicationService.getApplicantDetail(memberId, experienceNoticeId);
 
+        model.addAttribute("userDetails", userDetails);
         model.addAttribute("applicantDetail", applicantDetail);
+        model.addAttribute("memberId", memberId); //지원자 id
+
 
         return "enterprise-console/console-experience-application";
     }
@@ -78,5 +90,6 @@ public class ConsoleExperienceController {
     public String goToReview() {
         return "enterprise-console/console-review";
     }
+
 
 }

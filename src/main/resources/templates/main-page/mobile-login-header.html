@@ -25,7 +25,7 @@
                 </button>
             </div>
             <div class="top-middle-section">
-                <a href="" class="top-middle">
+                <a onclick="window.location.href='/experience/list'" class="top-middle">
                     <div class="top-middle-button">
                         <img alt="image" width="32" height="32" srcset="" src="/images/member/kok_logo.png">
                     </div>
@@ -35,34 +35,52 @@
             <div class="top-right-section" >
                 <div class="top-right" style="cursor: default;">
                     <div class="top-right-button avatar" style="cursor: default;">
-                        <img src="/images/main-page/image3.png">
+                        <th:block>
+                            <th:replace th:if="${userDTO.memberProfileUrl!= null}">
+                                <img th:src="${userDTO.memberProfileUrl}">
+                            </th:replace>
+                        </th:block>
+                        <th:block>
+                            <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')}">
+                                <img src="/images/main-page/image3.png">
+                            </th:replace>
+                        </th:block>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- 사이드바 -->
-    <div role="dialog" id="radix-«Rirbdh8pb»" class="sidebar" tabindex="-1" style="pointer-events: auto;">
+    <div role="dialog" id="radix-«Rirbdh8pb»" class="mobile-sidebar" tabindex="-1" style="pointer-events: auto;">
         <div class="sidebar-list">
             <div class="sidebar-list-profile-section">
                 <!-- 회원 프로필 -->
                 <div class="sidebar-list-profile">
-                    <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                    <th:block>
+                        <th:replace th:if="${userDTO.memberProfileUrl!= null}">
+                            <img alt="image" width="40" height="40" srcset="" th:src="${userDTO.memberProfileUrl}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                        </th:replace>
+                    </th:block>
+                    <th:block>
+                        <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')}">
+                            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                        </th:replace>
+                    </th:block>
                 </div>
                 <div class="sidebar-list-info">
                     <div>
                         <!-- 회원 이름 -->
-                        <span class="sidebar-list-member-name">정희준</span>
+                        <span class="sidebar-list-member-name" th:text="${userDTO.username}+' 님'"></span>
                     </div>
                     <!-- 회원 직군 -->
-                    <span class="sidebar-list-member-job">SW 개발</span>
+                    <span class="sidebar-list-member-job"th:text="${userDTO.userJobName}"></span>
                 </div>
             </div>
             <div class="sidebar-line-wrap">
                 <div class="sidebar-line"></div>
             </div>
             <!-- 로그아웃 -->
-            <button class="sidebar-logout">
+            <button class="sidebar-logout" type="button">
                 <p class="sidebar-logout-text">로그아웃</p>
             </button>
             <div class="sidebar-line-wrap">
@@ -76,78 +94,18 @@
                 </div>
                 <div class="sidebar-list-notice">
                     <p class="sidebar-list-text">
-                        © 2025 Rocketpunch, 주식회사 더블에이스, 홍원표, 대한민국 서울특별시 성동구 성수일로10길 12, 12층 1호, 04793, support@rocketpunch.com, +82 10-2710-7121
+                        © 2025 Kok, 대한민국 서울특별시 강남구 테헤란로 146
                     </p>
                 </div>
                 <div class="sidebar-list-notice-detail">
                     <!-- 더보기 --> 
                     <div class="sidebar-list-notice">
                         <p class="sidebar-list-text">
-                            사업자등록번호 206-87-09615 <br>
+                            사업자등록번호 000-11-22222 <br>
                             <span class="extra-text">
-                                통신판매업신고번호 2025-서울성동-0105 <br>
-                                직업정보제공사업신고번호: J1202020240015 <br>
-                                유료직업소개사업등록번호: 제2025-3030135-14-5-00002
-                            </span>
-                        </p>
-                    </div>
-                    <div class="sidebar-list-notice">
-                        <p class="sidebar-list-text-detail">
-                            <span class="sidebar-list-text-button">더보기</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- 사이드바 -->
-    <div id="" class="mobile-sidebar" tabindex="-1" style="pointer-events: auto;">
-        <!-- 로그인후 -->
-        <div class="sidebar-list">
-            <div class="sidebar-list-profile-section">
-                <!-- 회원 프로필 -->
-                <div class="sidebar-list-profile">
-                    <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                </div>
-                <div class="sidebar-list-info">
-                    <div>
-                        <!-- 회원 이름 -->
-                        <span class="sidebar-list-member-name">정희준</span>
-                    </div>
-                    <!-- 회원 직군 -->
-                    <span class="sidebar-list-member-job">SW 개발</span>
-                </div>
-            </div>
-            <div class="sidebar-line-wrap">
-                <div class="sidebar-line"></div>
-            </div>
-            <!-- 로그아웃 -->
-            <button class="sidebar-logout">
-                <p class="sidebar-logout-text">로그아웃</p>
-            </button>
-            <div class="sidebar-line-wrap">
-                <div class="sidebar-line"></div>
-            </div>
-            <div class="sidebar-list-notice-section">
-                <div class="sidebar-list-notice">
-                    <p class="sidebar-list-text">
-                        본 서비스에서 제공하는 사용자의 개인정보 데이터를 포함하여 각 정보주체의 동의 없이 데이터를 무단으로 수집하는 행위를 금지 및 거부합니다. 공개된 데이터도 크롤링 등 기술적 장치를 이용해 허가 없이 수집하는 경우 개인정보 보호법에 따라 형사처벌 될 수 있음을 알려드립니다.
-                    </p>
-                </div>
-                <div class="sidebar-list-notice">
-                    <p class="sidebar-list-text">
-                        © 2025 Rocketpunch, 주식회사 더블에이스, 홍원표, 대한민국 서울특별시 성동구 성수일로10길 12, 12층 1호, 04793, support@rocketpunch.com, +82 10-2710-7121
-                    </p>
-                </div>
-                <div class="sidebar-list-notice-detail">
-                    <!-- 더보기 --> 
-                    <div class="sidebar-list-notice">
-                        <p class="sidebar-list-text">
-                            사업자등록번호 206-87-09615 <br>
-                            <span class="extra-text">
-                                통신판매업신고번호 2025-서울성동-0105 <br>
-                                직업정보제공사업신고번호: J1202020240015 <br>
-                                유료직업소개사업등록번호: 제2025-3030135-14-5-00002
+                                통신판매업신고번호 2025-서울역삼-0102 <br>
+                                직업정보제공사업신고번호: J12020202334456 <br>
+                                유료직업소개사업등록번호: 제2025-0000000-11-2-00003
                             </span>
                         </p>
                     </div>
@@ -161,5 +119,6 @@
         </div>
     </div>
 </body>
+<script src="/js/main-page/mobile-header/module/service.js"></script>
 <script src="/js/main-page/mobile-header/event.js"></script>
 </html>

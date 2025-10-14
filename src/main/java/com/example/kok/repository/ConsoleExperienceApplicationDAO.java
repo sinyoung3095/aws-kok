@@ -6,6 +6,7 @@ import com.example.kok.mapper.ConsoleExperienceApplicationMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -20,6 +21,11 @@ public class ConsoleExperienceApplicationDAO {
 
     public Optional<FileDTO> findResumeFileByMemberId(Long memberId, Long experienceNoticeId) {
         return consoleExperienceMapper.selectResumeFileByMemberId(memberId, experienceNoticeId);
+    }
+
+//    공고별 지원자 목록 조회
+    public List<ConsoleExperienceApplicantDTO> findApplicantsByNoticeId(Long experienceNoticeId) {
+        return consoleExperienceMapper.selectApplicantsByNoticeId(experienceNoticeId);
     }
 
 }
