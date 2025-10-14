@@ -47,6 +47,9 @@ public class SecurityConfig {
                                 "/api/experiences/**",
                                 "/api/interns/**",
                                 "/api/enterprise-console/**",
+                                "/enterprise-console/**",
+                                "/enterprise-console/experience/list/**",
+                                "/enterprise-console/experience/create/**",
                                 "/member/join-member",
                                 "/member/join-social",
                                 "/member/join-company",
@@ -61,7 +64,7 @@ public class SecurityConfig {
                                 "/fonts/**",
                                 "/images/**").permitAll()
                         .requestMatchers("/admin/**").hasRole(UserRole.ADMIN.name())
-                        .requestMatchers("/enterprise-console/**").hasRole("UserRole.COMPANY.name()")
+                        .requestMatchers("/enterprise-console/**").hasRole(UserRole.COMPANY.name())
                         .anyRequest().authenticated()
                 )
 //                .authorizeHttpRequests(auth -> auth

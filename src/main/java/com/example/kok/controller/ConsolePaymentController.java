@@ -30,7 +30,7 @@ public class ConsolePaymentController {
             @AuthenticationPrincipal CustomUserDetails customUserDetails,
             Model model) {
 
-        Long companyId = 1L;
+        Long companyId = customUserDetails.getId();;
         ConsolePaymentCriteriaDTO payment = consolepaymentService.getList(companyId, page);
 
         if (payment == null) {
