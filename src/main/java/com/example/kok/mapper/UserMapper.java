@@ -23,6 +23,8 @@ public Optional<UserDTO> selectByAdminEmail(String userEmail);
     public void insertMember(UserDTO userDTO);
 //    기업 회원 가입
     public void insertCompany(UserDTO userDTO);
+//    관리자 회원 가입
+    public void insertAdmin(UserDTO userDTO);
 //    이메일로 회원 수 조회
     public int selectCountByEmail(String userEmail);
 //    sns 이메일 조회

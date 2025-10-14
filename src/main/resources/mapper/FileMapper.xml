@@ -22,4 +22,14 @@
         from tbl_file
         where file_name=#{fileName}
     </select>
+    <!--  유저 아이디로 프로필 조회  -->
+    <select id="selectProfileById">
+        select f.file_path,f.id,f.file_origin_name,f.file_name,f.file_size,f.file_content_type
+        from tbl_user u
+                 join tbl_user_profile_file uf
+                      on u.id = uf.user_id
+                 join tbl_file f
+                      on uf.file_id = f.id
+        where u.id = #{id}  and u.user_status = 'active'
+    </select>
 </mapper>

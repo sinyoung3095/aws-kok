@@ -79,6 +79,6 @@ public class ConsoleInternApiController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteNotice(@PathVariable("id") Long id) {
         internService.deleteIntern(id);
-        return ResponseEntity.ok("success");
+        return ResponseEntity.ok("");
     }
 }

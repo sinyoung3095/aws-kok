@@ -25,6 +25,27 @@ public class AdminServiceImpl implements AdminService {
     private final AdminNoticeDAO adminNoticeDAO;
     private final AdminExperienceDAO adminExperienceDAO;
 
+//    지원 센터 - 목록
+    public AdminNoticeCriteriaDTO supportList(int page, String keyword){
+        AdminNoticeCriteriaDTO adminNoticeCriteriaDTO = new AdminNoticeCriteriaDTO();
+        Criteria criteria = new Criteria(page, adminNoticeDAO.supportNoticeCount(keyword));
+        List<AdminNoticeDTO> noticeList = adminNoticeDAO.supportNoticeList(criteria, keyword);
+
+        criteria.setHasMore(noticeList.size() > criteria.getRowCount());
+//        criteria.setHasPreviousPage(page > 1);
+//        criteria.setHasNextPage(page < criteria.getRealEnd());
+
+        //  11개 가져왔으면, 마지막 1개 삭제
+        if(criteria.isHasMore()){
+            noticeList.remove(noticeList.size() - 1);
+        }
+
+        adminNoticeCriteriaDTO.setNoticeList(noticeList);
+        adminNoticeCriteriaDTO.setNoticeCriteria(criteria);
+
+        return adminNoticeCriteriaDTO;
+    }
+
 //    체험
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -104,8 +125,9 @@ public class AdminServiceImpl implements AdminService {
     @Transactional(rollbackFor = Exception.class)
     public Optional<AdminNoticeDTO> getNotice (Long id) {
         Optional<AdminNoticeDTO> foundNotice = adminNoticeDAO.selectNotice(id);
-        foundNotice.ifPresent(notice -> {
+        foundNotice.ifPresent((notice) -> {
             notice.setCreatedDateTime(DateUtils.getCreatedDate(notice.getCreatedDateTime()));
+            notice.setUpdatedDateTime(DateUtils.getCreatedDate(notice.getUpdatedDateTime()));
         });
         return foundNotice;
     }

@@ -5,6 +5,7 @@ import com.example.kok.dto.AdminNoticeDTO;
 import com.example.kok.mapper.AdminNoticeMapper;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -43,5 +44,15 @@ public class AdminNoticeDAO {
 //    삭제
     public void deleteNotice (Long id){
         adminNoticeMapper.deleteNoticeFromId(id);
+    }
+
+//    지원센터 - 목록
+    public List<AdminNoticeDTO> supportNoticeList(@Param("criteria") Criteria criteria,
+                                                  @Param("keyword") String keyword){
+        return adminNoticeMapper.selectSupportNoticeAll(criteria, keyword);
+    }
+//    지원센터 - 개수
+    public int supportNoticeCount (String keyword){
+        return adminNoticeMapper.countSupportNoticeAll(keyword);
     }
 }

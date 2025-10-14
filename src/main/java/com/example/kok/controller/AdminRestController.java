@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/**")
@@ -18,6 +20,18 @@ public class AdminRestController {
     private final AdminEmployService adminEmployService;
     private final AdminPaymentAdvertiseService adminPaymentAdvertiseService;
     private final AdminPaymentExperienceService adminPaymentExperienceService;
+    private final AdminMainPageService adminMainPageService;
+
+//    메인 페이지
+    @GetMapping("mainPage")
+    public AdminMainPageDTO mainPage(){
+        return adminMainPageService.mainPage();
+    }
+
+    @GetMapping("mainPage/chart")
+    public List<ChartDTO> mainPageChart(){
+        return adminMainPageService.mainPageChart();
+    }
 
 //    공지 목록
     @GetMapping("support/{page}")

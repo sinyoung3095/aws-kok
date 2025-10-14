@@ -9,6 +9,7 @@ import java.io.IOException;
 public interface UserService {
     public void joinUser(UserDTO userDTO);
     public void joinCompany(UserDTO userDTO, MultipartFile multipartFiles) throws IOException;
+    public void joinAdmin(UserDTO userDTO);
     public int searchUserByEmail(String email);
     public void joinSnsUser(UserDTO userDTO);
 

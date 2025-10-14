@@ -27,6 +27,10 @@ public class UserDAO {
     public void saveCompany(UserDTO userDTO) {
         userMapper.insertCompany(userDTO);
     }
+//    관리자 회원 가입
+    public void saveAdmin(UserDTO userDTO) {
+        userMapper.insertAdmin(userDTO);
+    }
 //    이메일로 조회
     public int findUserByEmail(String email) {
         return userMapper.selectCountByEmail(email);

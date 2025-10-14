@@ -39,4 +39,7 @@ public interface AdminService {
                 .updatedDateTime(adminNoticeDTO.getUpdatedDateTime())
                 .build();
     }
+
+//    지원 센터 - 목록
+    public AdminNoticeCriteriaDTO supportList (int page, String keyword);
 }

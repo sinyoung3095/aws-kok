@@ -3,8 +3,12 @@
 <mapper namespace="com.example.kok.mapper.UserMapper">
     <!--  이메일로 전체 조회  -->
     <select id="selectByEmail">
-        select id, user_name, user_phone, user_email, user_password, user_role, user_status, created_datetime, updated_datetime
-        from tbl_user where user_email = #{userEmail} and user_status = 'active'
+        select u.id, u.user_name, u.user_phone, u.user_email, u.user_password, u.user_role, u.user_status, u.created_datetime, u.updated_datetime, j.job_name
+        from tbl_user u left join tbl_user_job_category uj
+        on u.id = uj.user_id
+        left join tbl_job_category j
+        on uj.job_category = j.id
+        where user_email = #{userEmail} and user_status = 'active'
     </select>
     <!--  이메일로 일반 회원 조회  -->
     <select id="selectByMemberEmail">
@@ -47,6 +51,12 @@
         values (#{userName},#{userPhone},#{userEmail},#{userPassword},'company')
     </insert>
 
+    <!--  관리자 회원 가입  -->
+    <insert id="insertAdmin" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_user (user_name, user_phone, user_email, user_password, user_role)
+        values (#{userName}, #{userPhone}, #{userEmail}, #{userPassword}, 'admin')
+    </insert>
+
     <!--  sns 이메일로 조회  -->
     <select id="selectBySnsEmail">
         select u.id,u.user_name,u.user_phone,u.created_datetime,u.sns_email,u.user_role,m.member_provider,m.member_profile_url from tbl_user u join tbl_member m
@@ -70,4 +80,5 @@
         on u.id = m.user_id
         where u.user_phone = #{userPhone} and m.member_provider = 'kok' and u.user_status = 'active'
     </select>
+
 </mapper>

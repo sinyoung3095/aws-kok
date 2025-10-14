@@ -1,9 +1,11 @@
 package com.example.kok.mapper;
 
+import com.example.kok.dto.UserDTO;
 import com.example.kok.dto.UserMemberDTO;
 import com.example.kok.repository.MemberAlarmSettingDAO;
 import com.example.kok.repository.MemberDAO;
 import com.example.kok.repository.RequestExperienceDAO;
+import com.example.kok.repository.UserDAO;
 import com.example.kok.service.MemberService;
 import com.example.kok.util.Criteria;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +28,8 @@ public class MainpageTests {
     private RequestExperienceDAO requestExperienceDAO;
     @Autowired
     private MemberAlarmSettingDAO  memberAlarmSettingDAO;
+    @Autowired
+    private UserDAO userDAO;
 
     @Test
     public void mainpageTest(){
@@ -42,6 +46,11 @@ public class MainpageTests {
         String keyword = "member_post_like_alarm";
         Long id = 2L;
         memberAlarmSettingDAO.updateByKeywordToInactive(id, keyword);
+    }
+    @Test
+    public void getUserDTO(){
+        String userDTO=userDAO.findByEmail("company@gmail.com").toString();
+        log.info("userDTO={}",userDTO);
     }
 
 }
