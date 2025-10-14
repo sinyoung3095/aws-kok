@@ -26,4 +26,5 @@ public class PaymentDTO {
 
     private String experienceNoticeTitle;
     private String requestExperienceStatus;
+    private String companyName;
 }

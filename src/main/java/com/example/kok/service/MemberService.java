@@ -34,4 +34,16 @@ public interface MemberService {
 
 //    결제내역 조회
     public List<PaymentDTO> findPaymentByMemberId(Long memberId);
+
+//    저장 체험 조회
+    public List<ExperienceNoticeDTO> findExperienceNoticeByMemberId(Long memberId);
+
+//    저장 인턴 조회
+    public List<InternNoticeDTO> findInternNoticeByMemberId(Long memberId);
+
+//    체험 지원 취소
+    public void deleteRequestExperience(Long id);
+
+//    인턴 지원 취소
+    public void deleteRequestIntern(Long id);
 }

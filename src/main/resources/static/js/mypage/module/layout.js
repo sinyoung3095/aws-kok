@@ -258,7 +258,7 @@ const myPageLayout = (() => {
                                 </div>
                             </div>
                         </div>`;
-            console.log(post.liked);
+            // console.log(post.liked);
 
         leftContainer.innerHTML=leftHtml;
         commentcount=post.commentsCount;
@@ -267,7 +267,7 @@ const myPageLayout = (() => {
 
     const showCommentsList=(comments)=>{
         const rightContainer=document.querySelector(".reply-right");
-        console.log(comments.length);
+        // console.log(comments.length);
         let rightHtml=`<div class="reply-2">
                             <!-- 댓글 상단 -->
                             <div class="reply-3">
@@ -389,7 +389,7 @@ const myPageLayout = (() => {
                                                 </div>
                                             </div>
                                         </div> `;
-            console.log(comment.liked);
+            // console.log(comment.liked);
 
             rightHtml += `<!-- 답글 모음 -->
                                         <div class="comment-contain">`;
@@ -457,7 +457,7 @@ const myPageLayout = (() => {
                                                     </div>
                                                 </div>   
                                             </div>`;
-                    console.log(reply.liked);
+                    // console.log(reply.liked);
                 })
                 rightHtml += `</div>`;
             }
@@ -530,6 +530,9 @@ const myPageLayout = (() => {
                 status='-';
             }
 
+            // console.log(req);
+            // console.log(req.id);
+
             html += `
                 <tr>
                                                     <td class="payment-3">
@@ -544,7 +547,7 @@ const myPageLayout = (() => {
                                                     <td class="payment-3">
                                                         <div>`;
             if(req.requestExperienceStatus==='await'){
-                html+=`<button class="post-23 retract-triger">
+                html+=`<button class="post-23 retract-triger" data-reqid="${req.id}">
                                                                 <span class="ai_center d_flex jc_center us_none white-space_nowrap p_0px_3px textStyle_Body.BodyS_Bold">지원 취소</span>
                                                             </button>`
             }else{
@@ -598,7 +601,7 @@ const myPageLayout = (() => {
                                                     <td class="payment-3">
                                                         <div>`;
             if(req.requestInternStatus==='await'){
-                html+=`<button class="post-23 retract-triger">
+                html+=`<button class="post-23 retract-triger" data-reqid="${req.id}">
                                                                 <span class="ai_center d_flex jc_center us_none white-space_nowrap p_0px_3px textStyle_Body.BodyS_Bold">지원 취소</span>
                                                             </button>`
             }else{
@@ -636,6 +639,11 @@ const myPageLayout = (() => {
             } else{
                 status='-';
             }
+            // console.log(pay.id);
+            const datetime=pay.paymentPaidDatetime.split(" ");
+            // console.log('datetime: ', datetime);
+            const date=datetime[0];
+            // console.log('date: ', date);
             html+=`<tr>
                                                     <td class="payment-3">
                                                         <p>${pay.companyName}</p>
@@ -644,14 +652,14 @@ const myPageLayout = (() => {
                                                         <p>${pay.experienceNoticeTitle}</p>
                                                     </td>  
                                                     <td class="payment-3">
-                                                        <p>${pay.requestExperienceStatus}</p>
+                                                        <p>${status}</p>
                                                     </td>
                                                     </td>  
                                                     <td class="payment-3">
-                                                        <p>${status}</p>
+                                                        <p>${pay.paymentPrice}</p>
                                                     </td>    
                                                     <td class="payment-3">
-                                                        <p>${pay.paymentPaidDatetime}</p>
+                                                        <p>${date}</p>
                                                     </td>
                                                 </tr>`;
         }
@@ -659,5 +667,150 @@ const myPageLayout = (() => {
         container.innerHTML=html;
     }
 
-    return {showPosts: showPosts, showPostDetail:showPostDetail, showCommentsList:showCommentsList, showExperienceRequest: showExperienceRequest, showInternRequest:showInternRequest, showPaymentList:showPaymentList};
+    const showSavedExpList=async (exps) => {
+        const container = document.querySelector("#experience-list");
+        if (!container) return;
+
+        if (!Array.isArray(exps) || exps.length === 0) {
+            container.innerHTML = '<div class="post-3">\n' +
+                '                                        <div class="post-13" style="padding-right: 0;padding-left: 0; justify-content: center; display: flex;">\n' +
+                '                                            <div class="post-14" style="margin: 0 auto;">\n' +
+                '                                                <div class="post-15" >\n' +
+                '                                                    <div class="post-8" style="margin: 0 auto;">\n' +
+                '                                                        <span>아직 저장한 체험 공고가 없습니다.</span>\n' +
+                '                                                    </div>\n' +
+                '                                                </div>\n' +
+                '                                                <div class="post-9" style="margin: 0 auto;">\n' +
+                '                                                    <p class="post-10">관심 있는 체험 공고를 찾아 저장하면 이곳에서 모아볼 수 있습니다.</p>\n' +
+                '                                                </div>\n' +
+                '                                            </div>\n' +
+                '                                            <div class="post-17">\n' +
+                '                                                <div class="post-18">\n' +
+                '                                                    <div class="post-19">\n' +
+                '                                                        <!-- 작성 버튼 -->\n' +
+                '                                                        <div class="content-14" style="width: 200px; margin: 0 auto;">\n' +
+                '                                                            <button class="set content-15" type="button" >\n' +
+                '                                                                <span class="content-16">체험 공고 둘러보기</span>\n' +
+                '                                                            </button>\n' +
+                '                                                        </div>\n' +
+                '                                                    </div>\n' +
+                '                                                </div>\n' +
+                '                                            </div>\n' +
+                '                                        </div>\n' +
+                '                                    </div>';
+            return;
+        }
+
+        let html = ``;
+
+        for (const exp of exps) {
+            const fileUrl = await fetch(`/api/experiences/profile?companyId=${exp.companyId}`)
+                .then(res => res.text());
+            html += `<div class="post-3">
+                                        <div class="post-4">
+                                            <div>
+                                                <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="${fileUrl}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            </div>
+                                            <div class="post-5">
+                                                <div class="post-9">
+                                                    <p class="post-10">${exp.companyName}</p>
+                                                </div>
+                                                <div class="post-6">
+                                                    <div class="post-7">
+                                                        <div>
+                                                            <p class="post-8">${exp.experienceNoticeTitle}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="post-9">
+                                                    <p class="post-10">${exp.experienceNoticeSubtitle}</p>
+                                                </div>
+                                            </div>
+                                            <!-- 취소버튼 -->
+                                            <div>
+<!--                                                <button class="post-23">-->
+<!--                                                    <span class="ai_center d_flex jc_center us_none white-space_nowrap p_0px_3px textStyle_Body.BodyS_Bold">저장 취소</span>-->
+<!--                                                </button>-->
+                                            </div>
+                                        </div>
+                                    </div>`;
+        }
+
+        container.innerHTML = html;
+    }
+
+    const showSavedIntList=async (ints) => {
+        const container = document.querySelector("#intern-list");
+        if (!container) return;
+
+        if (!Array.isArray(ints) || ints.length === 0) {
+            container.innerHTML = '<div class="post-3">\n' +
+                '                                        <div class="post-13" style="padding-right: 0;padding-left: 0; justify-content: center; display: flex;">\n' +
+                '                                            <div class="post-14" style="margin: 0 auto;">\n' +
+                '                                                <div class="post-15" >\n' +
+                '                                                    <div class="post-8" style="margin: 0 auto;">\n' +
+                '                                                        <span>아직 저장한 인턴 공고가 없습니다.</span>\n' +
+                '                                                    </div>\n' +
+                '                                                </div>\n' +
+                '                                                <div class="post-9" style="margin: 0 auto;">\n' +
+                '                                                    <p class="post-10">관심 있는 인턴 공고를 찾아 저장하면 이곳에서 모아볼 수 있습니다.</p>\n' +
+                '                                                </div>\n' +
+                '                                            </div>\n' +
+                '                                            <div class="post-17">\n' +
+                '                                                <div class="post-18">\n' +
+                '                                                    <div class="post-19">\n' +
+                '                                                        <!-- 작성 버튼 -->\n' +
+                '                                                        <div class="content-14" style="width: 200px; margin: 0 auto;">\n' +
+                '                                                            <button class="set content-15" type="button" >\n' +
+                '                                                                <span class="content-16">인턴 공고 둘러보기</span>\n' +
+                '                                                            </button>\n' +
+                '                                                        </div>\n' +
+                '                                                    </div>\n' +
+                '                                                </div>\n' +
+                '                                            </div>\n' +
+                '                                        </div>\n' +
+                '                                    </div>';
+            return;
+        }
+
+        let html = ``;
+
+        for (const int of ints) {
+            const fileUrl = await fetch(`/api/interns/profile?companyId=${int.companyId}`)
+                .then(res => res.text());
+            html += `<div class="post-3">
+                                        <div class="post-4">
+                                            <div>
+                                                <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="${fileUrl}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            </div>
+                                            <div class="post-5">
+                                                <div class="post-9">
+                                                    <p class="post-10">${int.companyName}</p>
+                                                </div>
+                                                <div class="post-6">
+                                                    <div class="post-7">
+                                                        <div>
+                                                            <p class="post-8">${int.internNoticeTitle}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="post-9">
+                                                    <p class="post-10">${int.internNoticeSubtitle}</p>
+                                                </div>
+                                            </div>
+                                            <!-- 취소버튼 -->
+                                            <div>
+                                                <button class="post-23">
+<!--                                                    <span class="ai_center d_flex jc_center us_none white-space_nowrap p_0px_3px textStyle_Body.BodyS_Bold">저장 취소</span>-->
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>`;
+        }
+
+        container.innerHTML = html;
+    }
+
+    return {showPosts: showPosts, showPostDetail:showPostDetail, showCommentsList:showCommentsList, showExperienceRequest: showExperienceRequest, showInternRequest:showInternRequest, showPaymentList:showPaymentList,
+    showSavedExpList:showSavedExpList, showSavedIntList:showSavedIntList};
 })();

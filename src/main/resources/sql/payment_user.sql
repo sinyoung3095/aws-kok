@@ -14,6 +14,8 @@ CREATE TABLE tbl_payment_user (
         references tbl_advertisement(id)
 );
 
+insert into
+
 select * from tbl_payment_user;
 
 -- 실제 결제된 시간 컬럼 삭제 -> payment로 이동(join해서 사용해야함)

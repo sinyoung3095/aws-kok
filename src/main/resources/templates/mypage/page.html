@@ -127,9 +127,15 @@
                                             <div class="setting-12">
                                                 <div class="setting-13">
                                                     <div class="setting-14">
-                                                        <div class="setting-15">
-                                                            <input type="file" style="display: none;">
-                                                            <img alt="image" draggable="false" loading="lazy" width="80" height="80" decoding="async" data-nimg="1" src="/images/mypage/default.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 80px; max-width: 80px; min-height: 80px; min-width: 80px; object-fit: contain;">
+                                                        <div class="setting-15 profileWrapCircle">
+                                                            <input type="file" style="display: none;" class="profile-input">
+                                                            <th:block th:if="${userDTO.memberProfileUrl!=null}">
+                                                                <img alt="image" class="profile-img-round" draggable="false" loading="lazy" width="80" height="80" decoding="async" data-nimg="1" th:src="${userDTO.memberProfileUrl}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 80px; max-width: 80px; min-height: 80px; min-width: 80px; object-fit: contain;">
+                                                            </th:block>
+                                                            <th:block th:if="${userDTO.memberProfileUrl==null}">
+                                                                <img alt="image" class="profile-img-round" draggable="false" loading="lazy" width="80" height="80" decoding="async" data-nimg="1" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 80px; max-width: 80px; min-height: 80px; min-width: 80px; object-fit: contain;">
+                                                            </th:block>
+<!--                                                            <img alt="image" draggable="false" loading="lazy" width="80" height="80" decoding="async" data-nimg="1" src="/images/mypage/default.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 80px; max-width: 80px; min-height: 80px; min-width: 80px; object-fit: contain;">-->
                                                             <div class="setting-16">
                                                                 <bytton class="setting-17">
                                                                     <div class="setting-18">
@@ -142,7 +148,7 @@
                                                             <div class="profile-0">
                                                                 <div class="profile-1">
                                                                     <div class="profile-2">
-                                                                        <div class="profile-3">
+                                                                        <div class="profile-3 profile-update">
                                                                             <div class="profile-4">
                                                                                 <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24">
                                                                                     <path d="M19 2.2H5C3.45 2.2 2.2 3.45 2.2 5v14c0 1.55 1.25 2.8 2.8 2.8h14c1.55 0 2.8-1.25 2.8-2.8V5c0-1.55-1.25-2.8-2.8-2.8m-14 18c-.66 0-1.2-.54-1.2-1.2v-5.17c1.83.11 3.56.59 5.11 1.37a14.8 14.8 0 0 0-2.92 5h-1zM20.2 19c0 .66-.54 1.2-1.2 1.2H7.7c.69-1.76 1.74-3.33 3.07-4.63l.46-.43c2.33-2.08 5.41-3.34 8.78-3.34h.2V19zm0-8.8H20c-3.81 0-7.29 1.44-9.91 3.81a14.9 14.9 0 0 0-6.29-1.79V5c0-.66.54-1.2 1.2-1.2h14c.66 0 1.2.54 1.2 1.2zM9.96 8.636c-.31-.22-.67-.29-.91-.29s-.6.07-.91.29c-.35.25-.59.66-.59 1.21s.24.96.59 1.21c.31.22.67.29.91.29s.6-.07.91-.29c.35-.25.59-.66.59-1.21s-.24-.96-.59-1.21"></path>
@@ -152,7 +158,7 @@
                                                                                 <p class="profile-6">프로필 이미지 변경</p>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="profile-3">
+                                                                        <div class="profile-3 profile-delete">
                                                                             <div class="profile-4">
                                                                                 <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24">
                                                                                     <path clip-rule="evenodd" d="M8.284 6.2H4a.8.8 0 1 0 0 1.6h1.2V18A2.8 2.8 0 0 0 8 20.8h8a2.8 2.8 0 0 0 2.8-2.8V7.8H20a.8.8 0 0 0 0-1.6h-4.284a3.801 3.801 0 0 0-7.432 0m1.666 0h4.1a2.2 2.2 0 0 0-4.1 0m7.25 1.6H6.8V18A1.2 1.2 0 0 0 8 19.2h8a1.2 1.2 0 0 0 1.2-1.2z" fill-rule="evenodd"></path>
@@ -173,7 +179,7 @@
                                                                 </div>
                                                                 <div class="setting-23">
                                                                     <div class="setting-24">
-                                                                        <input type="text" placeholder="표시될 이름을 입력해주세요." class="" value="김신영"  style="cursor: pointer;">
+                                                                        <input type="text" placeholder="표시될 이름을 입력해주세요." class="name-input" th:value="${userDTO.getUsername()}"  style="cursor: pointer;">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -184,7 +190,7 @@
                                                                 <div class="setting-28">
                                                                     <div class="setting-29">
                                                                         <div class="setting-30">
-                                                                            <input type="" placeholder="직군을 선택해주세요." readonly="" class="select" value="SW 개발" style="cursor: pointer;">
+                                                                            <input type="" placeholder="직군을 선택해주세요." readonly="" class="select job-input" th:value="${userDTO.getUserJobName()}" style="cursor: pointer;">
                                                                         </div>
                                                                     </div>
                                                                     <div class="setting-31">
@@ -267,7 +273,7 @@
                                                             </div>
                                                             <div class="setting-35">
                                                                 <div class="setting-36">
-                                                                    <textarea maxlength="300" placeholder="직무, 관심사, 경험 중심으로 나를 표현해 보세요." class="setting-37"></textarea>
+                                                                    <textarea maxlength="300" placeholder="직무, 관심사, 경험 중심으로 나를 표현해 보세요." th:value="${userDTO.memberInfo}" class="setting-37 info-input"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="setting-38">
@@ -314,12 +320,12 @@
                             <div class="post-2" style="align-items: start;">
                                 <div style="display: flex;">
                                     <div class="content-14 list" style="width: 65px; margin-left: 10px; margin-top: 10px; display: inline-block">
-                                        <button class="content-15 notice active" type="button" style=" border-radius: 10px;" >
+                                        <button class="content-15 exp-btn notice active" type="button" style=" border-radius: 10px;" >
                                             <span class="content-16">체험 공고</span>
                                         </button>
                                     </div>
                                     <div class="content-14 list" style="width: 65px; margin-left: 10px; margin-top: 10px; display: inline-block;">
-                                        <button class="content-15 notice" type="button" style=" border-radius: 10px;">
+                                        <button class="content-15 intern-btn notice" type="button" style=" border-radius: 10px;">
                                             <span class="content-16">인턴 공고</span>
                                         </button>
                                     </div>
@@ -327,232 +333,13 @@
                                 <!-- 체험 공고 -->
                                 <div id="experience-list" style="display: contents;">
                                     <!-- 저장한 체험 공고가 없을 때 -->
-                                    <div class="post-3">                        
-                                        <div class="post-13" style="padding-right: 0;padding-left: 0; justify-content: center; display: flex;">
-                                            <div class="post-14" style="margin: 0 auto;">
-                                                <div class="post-15" >
-                                                    <div class="post-8" style="margin: 0 auto;">
-                                                        <span>아직 저장한 체험 공고가 없습니다.</span>
-                                                    </div>
-                                                </div>
-                                                <div class="post-9" style="margin: 0 auto;">
-                                                    <p class="post-10">관심 있는 체험 공고를 찾아 저장하면 이곳에서 모아볼 수 있습니다.</p>
-                                                </div>
-                                            </div>
-                                            <div class="post-17">
-                                                <div class="post-18">
-                                                    <div class="post-19">
-                                                        <!-- 작성 버튼 -->
-                                                        <div class="content-14" style="width: 200px; margin: 0 auto;">
-                                                            <button class="set content-15" type="button" >
-                                                                <span class="content-16">체험 공고 둘러보기</span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 공고들 -->
-                                    <div class="post-3">
-                                        <div class="post-4">
-                                            <div>
-                                                <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="/images/mypage/logo_1757380047672.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            </div>
-                                            <div class="post-5">
-                                                <div class="post-9">
-                                                    <p class="post-10">애니포인트 미디어</p>
-                                                </div>
-                                                <div class="post-6">
-                                                    <div class="post-7">
-                                                        <div>
-                                                            <p class="post-8">주니어 백엔드 개발자</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="post-9">
-                                                    <p class="post-10">백엔드 개발 체험자를 모집합니다.</p>
-                                                </div>
-                                            </div>
-                                            <!-- 취소버튼 -->
-                                            <div>
-                                                <button class="post-23">
-                                                    <span class="ai_center d_flex jc_center us_none white-space_nowrap p_0px_3px textStyle_Body.BodyS_Bold">저장 취소</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="post-3">
-                                        <div class="post-4">
-                                            <div>
-                                                <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="/images/mypage/logo_1757380047672.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            </div>
-                                            <div class="post-5">
-                                                <div class="post-9">
-                                                    <p class="post-10">애니포인트 미디어</p>
-                                                </div>
-                                                <div class="post-6">
-                                                    <div class="post-7">
-                                                        <div>
-                                                            <p class="post-8">주니어 백엔드 개발자</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="post-9">
-                                                    <p class="post-10">백엔드 개발 체험자를 모집합니다.</p>
-                                                </div>
-                                            </div>
-                                            <!-- 취소버튼 -->
-                                            <div>
-                                                <button class="post-23">
-                                                    <span class="ai_center d_flex jc_center us_none white-space_nowrap p_0px_3px textStyle_Body.BodyS_Bold">저장 취소</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="post-3">
-                                        <div class="post-4">
-                                            <div>
-                                                <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="/images/mypage/logo_1757380047672.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            </div>
-                                            <div class="post-5">
-                                                <div class="post-9">
-                                                    <p class="post-10">애니포인트 미디어</p>
-                                                </div>
-                                                <div class="post-6">
-                                                    <div class="post-7">
-                                                        <div>
-                                                            <p class="post-8">주니어 백엔드 개발자</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="post-9">
-                                                    <p class="post-10">백엔드 개발 체험자를 모집합니다.</p>
-                                                </div>
-                                            </div>
-                                            <!-- 취소버튼 -->
-                                            <div>
-                                                <button class="post-23">
-                                                    <span class="ai_center d_flex jc_center us_none white-space_nowrap p_0px_3px textStyle_Body.BodyS_Bold">저장 취소</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <!-- 인턴 공고 -->
-                                <div id="employ" style="display: none;">
-                                    <!-- 저장한 인턴 공고가 없을 때 -->
-                                    <div  class="post-3">                        
-                                        <div class="post-13" style="padding-right: 0;padding-left: 0; justify-content: center; display: flex;">
-                                            <div class="post-14" style="margin: 0 auto;">
-                                                <div class="post-15" >
-                                                    <div class="post-8" style="margin: 0 auto;">
-                                                        <span>아직 저장한 인턴 공고가 없습니다.</span>
-                                                    </div>
-                                                </div>
-                                                <div class="post-9" style="margin: 0 auto;">
-                                                    <p class="post-10">관심 있는 인턴 공고를 찾아 저장하면 이곳에서 모아볼 수 있습니다.</p>
-                                                </div>
-                                            </div>
-                                            <div class="post-17">
-                                                <div class="post-18">
-                                                    <div class="post-19">
-                                                        <!-- 인턴으로 가기 버튼 -->
-                                                        <div class="content-14" style="width: 200px; margin: 0 auto;">
-                                                            <button class="set content-15" type="button" >
-                                                                <span class="content-16">인턴 공고 둘러보기</span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div id="intern-list" style="display: none;">
+
                                     <!-- 공고들 -->
-                                    <div class="post-3">
-                                        <div class="post-4">
-                                            <div>
-                                                <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="/images/mypage/logo_1757380047672.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            </div>
-                                            <div class="post-5">
-                                                <div class="post-9">
-                                                    <p class="post-10">애니포인트 미디어</p>
-                                                </div>
-                                                <div class="post-6">
-                                                    <div class="post-7">
-                                                        <div>
-                                                            <p class="post-8">주니어 백엔드 개발자</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="post-9">
-                                                    <p class="post-10">주니어 백엔드 개발자를 모집합니다.</p>
-                                                </div>
-                                            </div>
-                                            <!-- 취소버튼 -->
-                                            <div>
-                                                <button class="post-23">
-                                                    <span class="ai_center d_flex jc_center us_none white-space_nowrap p_0px_3px textStyle_Body.BodyS_Bold">저장 취소</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="post-3">
-                                        <div class="post-4">
-                                            <div>
-                                                <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="/images/mypage/logo_1757380047672.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            </div>
-                                            <div class="post-5">
-                                                <div class="post-9">
-                                                    <p class="post-10">애니포인트 미디어</p>
-                                                </div>
-                                                <div class="post-6">
-                                                    <div class="post-7">
-                                                        <div>
-                                                            <p class="post-8">주니어 백엔드 개발자</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="post-9">
-                                                    <p class="post-10">주니어 백엔드 개발자를 모집합니다.</p>
-                                                </div>
-                                            </div>
-                                            <!-- 취소버튼 -->
-                                            <div>
-                                                <button class="post-23">
-                                                    <span class="ai_center d_flex jc_center us_none white-space_nowrap p_0px_3px textStyle_Body.BodyS_Bold">저장 취소</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="post-3">
-                                        <div class="post-4">
-                                            <div>
-                                                <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="/images/mypage/logo_1757380047672.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                                            </div>
-                                            <div class="post-5">
-                                                <div class="post-9">
-                                                    <p class="post-10">애니포인트 미디어</p>
-                                                </div>
-                                                <div class="post-6">
-                                                    <div class="post-7">
-                                                        <div>
-                                                            <p class="post-8">주니어 백엔드 개발자</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="post-9">
-                                                    <p class="post-10">주니어 백엔드 개발자를 모집합니다.</p>
-                                                </div>
-                                            </div>
-                                            <!-- 취소버튼 -->
-                                            <div>
-                                                <button class="post-23">
-                                                    <span class="ai_center d_flex jc_center us_none white-space_nowrap p_0px_3px textStyle_Body.BodyS_Bold">저장 취소</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -651,6 +438,29 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div class="retract intern-cancle">
+                                        <div class="retract-1">
+                                            <div class="retract-2">
+                                                <div class="retract-3">
+                                                    <div class="retract-4">
+                                                        <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="40px" role="img" width="40px">
+                                                            <path clip-rule="evenodd" d="M8.284 6.2H4a.8.8 0 1 0 0 1.6h1.2V18A2.8 2.8 0 0 0 8 20.8h8a2.8 2.8 0 0 0 2.8-2.8V7.8H20a.8.8 0 0 0 0-1.6h-4.284a3.801 3.801 0 0 0-7.432 0m1.666 0h4.1a2.2 2.2 0 0 0-4.1 0m7.25 1.6H6.8V18A1.2 1.2 0 0 0 8 19.2h8a1.2 1.2 0 0 0 1.2-1.2z" fill-rule="evenodd"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="retract-5">
+                                                        <p class="retract-6">지원을 취소하시겠습니까?</p>
+                                                        <div class="retract-7">
+                                                            <p class="retract-8">지원 취소시 체험비용이 환불됩니다.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="retract-9">
+                                                    <button class="retract-10 intern-cancle-10"><span class="retract-11">취소하기</span></button>
+                                                    <button class="retract-12 intern-cancle-12"><span class="retract-11">닫기</span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -722,8 +532,7 @@
                             <div class="etc-7">
                                 <div class="etc-8">
                                     <p class="etc-9">보관함을 채워보세요.</p>
-                                    <p class="etc-10">나를 더 잘 소개할 수 있는 파일/URL을 등록하세요.
-        공고에 빠르게 지원하거나, 다른 기업으로부터 제안을 받아볼 수도 있습니다.</p>
+                                    <p class="etc-10">나를 더 잘 소개할 수 있는 파일/URL을 등록하세요. 공고에 빠르게 지원하거나, 다른 기업으로부터 제안을 받아볼 수도 있습니다.</p>
                                 </div>
                                 <button class="etc-11 popup-trigger" data-target="#dropdown1">
                                     <span class="etc-12">등록하기</span>

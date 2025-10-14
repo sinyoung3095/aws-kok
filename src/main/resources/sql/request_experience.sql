@@ -10,6 +10,7 @@ CREATE TABLE tbl_request_experience (
     request_experience_member_email varchar(255) not null,
     request_experience_member_phone varchar(255) not null,
     request_experience_member_url varchar(255),
+    request_experience_active status default 'active' not null,
     file_id bigint not null,
     constraint fk_request_experience_experience_notice foreign key(experience_notice_id)
         references tbl_experience_notice(id),
@@ -48,3 +49,4 @@ values (4, 2, 2,'김신영','ksy3095@naver.com','01051133095',2);
 insert into tbl_request_experience (experience_notice_id, member_id, member_alarm_setting_id,request_experience_member_name,request_experience_member_email,request_experience_member_phone,file_id)
 values (4, 1, 1,'김신영','ksy3095@naver.com','01012345678',2);
 
+alter table tbl_request_experience add request_experience_active status default 'active' not null;

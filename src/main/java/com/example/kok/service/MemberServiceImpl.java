@@ -167,6 +167,26 @@ public class MemberServiceImpl implements MemberService {
         return memberDAO.findPaymentByMemberId(memberId);
     }
 
+    @Override
+    public List<ExperienceNoticeDTO> findExperienceNoticeByMemberId(Long memberId) {
+        return memberDAO.findSavedExpByMemberId(memberId);
+    }
+
+    @Override
+    public List<InternNoticeDTO> findInternNoticeByMemberId(Long memberId) {
+        return memberDAO.findSavedInternNoticeByMemberId(memberId);
+    }
+
+    @Override
+    public void deleteRequestExperience(Long id) {
+        memberDAO.deleteExperienceRequest(id);
+    }
+
+    @Override
+    public void deleteRequestIntern(Long id) {
+        memberDAO.deleteInternRequest(id);
+    }
+
     public String getPath() {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");

@@ -38,4 +38,16 @@ public interface MemberMapper {
 
 //    id로 결제내역 조회
     public List<PaymentDTO> selectPaymentByMemberId(Long memberId);
+
+//    id로 저장한 체험 공고 조회
+    public List<ExperienceNoticeDTO> selectSavedExpByMemberId(Long memberId);
+
+//    id로 저장한 인턴 공고 조회
+    public List<InternNoticeDTO> selectSavedIntByMemberId(Long memberId);
+
+//    지원 id로 체험 지원 취소
+    public void updateExpReq(Long id);
+
+//    지원 id로 인턴 지원 취소
+    public void updateIntReq(Long id);
 }

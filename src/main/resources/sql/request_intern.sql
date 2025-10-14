@@ -41,3 +41,9 @@ values (2, 2, 1);
 select * from tbl_member;
 select * from tbl_user;
 select * from tbl_request_intern order by id;
+
+alter table tbl_request_intern add request_intern_active status default 'active' not null;
+
+update tbl_request_intern
+set request_intern_active='active'
+where id>0;

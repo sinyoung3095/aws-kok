@@ -81,6 +81,22 @@ const myPageService = (() => {
         });
         return response.ok;
     };
+
+    // 저장 체험 목록 불러오기
+    const getSavedExperienceList = async () => {
+        const request = await fetch (`/api/mypage/saved-exp`);
+        const response = await request.json();
+
+        return response;
+    };
+
+    // 저장 인턴 목록 불러오기
+    const getSavedInternList = async () => {
+        const request = await fetch (`/api/mypage/saved-int`);
+        const response = await request.json();
+
+        return response;
+    };
     
     // 체험 목록 불러오기
     const getExperienceList = async () => {
@@ -89,10 +105,25 @@ const myPageService = (() => {
 
         return response;
     };
-    // 체험 지원 취소하기
-    const deleteExperienceRequest=async ()=>{
-        const request=await fetch(`/api/`)
+
+    // 지원 취소-체험
+    const deleteRequestExperience=async (requestId)=>{
+        const response=await fetch(`/api/mypage/delete-request/${requestId}`,{
+            method: "DELETE"
+        });
+
+        return response.ok;
     }
+
+    // 지원 취소-인턴
+    const deleteRequestIntern=async (requestId)=>{
+        const response=await fetch(`/api/mypage/delete-intern/${requestId}`,{
+            method: "DELETE"
+        });
+
+        return response.ok;
+    }
+
     // 인턴 목록 불러오기
     const getInternList = async () => {
         const request = await fetch (`/api/mypage/intern-list`);
@@ -112,5 +143,6 @@ const myPageService = (() => {
         return response;
     };
     return { getPostsList:getPostsList, getPostDetail:getPostDetail, getExperienceList:getExperienceList, getComments:getComments, writeComment:writeComment, updateComment:updateComment, deleteComment:deleteComment,
-    getReplies:getReplies, writeReply:writeReply, updateReply:updateReply, deleteReply:deleteReply, getInternList:getInternList, deleteInternRequest:deleteInternRequest, getPaymentList:getPaymentList };
+    getReplies:getReplies, writeReply:writeReply, updateReply:updateReply, deleteReply:deleteReply, getInternList:getInternList, getPaymentList:getPaymentList,
+    getSavedExperienceList:getSavedExperienceList, getSavedInternList:getSavedInternList, deleteRequestExperience:deleteRequestExperience, deleteRequestIntern:deleteRequestIntern};
 })();

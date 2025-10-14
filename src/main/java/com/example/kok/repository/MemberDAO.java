@@ -63,4 +63,25 @@ public class MemberDAO {
     public List<PaymentDTO> findPaymentByMemberId(Long memberId) {
         return memberMapper.selectPaymentByMemberId(memberId);
     }
+
+//    id로 저장 체험 조회
+    public List<ExperienceNoticeDTO> findSavedExpByMemberId(Long memberId) {
+        return memberMapper.selectSavedExpByMemberId(memberId);
+    }
+
+//    id로 저장 인턴 조회
+    public List<InternNoticeDTO> findSavedInternNoticeByMemberId(Long memberId) {
+        return memberMapper.selectSavedIntByMemberId(memberId);
+    }
+
+//    지원 id로 지원 취소
+//    체험
+    public void deleteExperienceRequest(Long id){
+        memberMapper.updateExpReq(id);
+    }
+
+//    인턴
+    public void deleteInternRequest(Long id){
+        memberMapper.updateIntReq(id);
+    }
 }

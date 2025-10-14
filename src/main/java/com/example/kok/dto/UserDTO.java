@@ -29,4 +29,6 @@ public class UserDTO {
     private String updatedDateTime;
     private String jobName;
 
+    private String memberInfo;
+
 }

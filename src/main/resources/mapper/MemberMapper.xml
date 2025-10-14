@@ -52,6 +52,7 @@
         join tbl_company c
         on c.user_id=e.company_id
         where u.id=#{memberId}
+        and r.request_experience_active='active'
     </select>
     <!--    회원 id로 지원한 인턴 공고 목록 조회-->
     <select id="selectInternByMemberId">
@@ -64,6 +65,7 @@
         join tbl_company c
         on c.user_id=i.company_id
         where u.id=#{memberId}
+        and r.request_intern_active='active'
     </select>
 
 <!--    회원 id로 게시글 목록 조회-->
@@ -102,16 +104,80 @@
     </select>
 <!-- 결제 내역 조회-->
     <select id="selectPaymentByMemberId">
-        select p.id, e.experience_notice_title, r.request_experience_status, p.payment_price, p.payment_paid_datetime
+        select p.id, c.company_name, e.experience_notice_title, r.request_experience_status, p.payment_price, p.payment_paid_datetime
         from tbl_user u
-        join tbl_payment_user pu
-        on pu.user_id=u.id
         join tbl_payment p
-        on p.id=pu.payment_id
+        on p.user_id=u.id
         join tbl_request_experience r
         on p.request_experience_id=r.id
         join tbl_experience_notice e
         on e.id=r.experience_notice_id
+        join tbl_company c
+        on c.user_id=e.company_id
         where u.id=#{memberId}
     </select>
+
+<!--    저장된 체험 공고 조회-->
+    <select id="selectSavedExpByMemberId">
+        select e.id, e.company_id, e.experience_notice_title, e.experience_notice_status, e.experience_notice_subtitle, c.company_name
+        from tbl_save_experience_notice se
+        join tbl_user u
+        on u.id=se.member_id
+        join tbl_experience_notice e
+        on e.id=se.experience_notice_id
+        join tbl_company c
+        on c.user_id=e.company_id
+        where u.id=#{memberId}
+    </select>
+
+    <!--    저장된 인턴 공고 조회-->
+    <select id="selectSavedIntByMemberId">
+        select i.id, i.company_id, i.intern_notice_title, i.intern_notice_status, i.intern_notice_subtitle, c.company_name
+        from tbl_save_intern_notice sn
+        join tbl_user u
+        on u.id=sn.member_id
+        join tbl_intern_notice i
+        on i.id=sn.intern_notice_id
+        join tbl_company c
+        on c.user_id=i.company_id
+        where u.id=#{memberId}
+    </select>
+
+<!--    체험 지원 취소-->
+    <update id="updateExpReq">
+        update tbl_request_experience
+        set request_experience_active='inactive'
+        where id=#{id}
+    </update>
+
+<!--    인턴 지원 취소-->
+    <update id="updateIntReq">
+        update tbl_request_intern
+        set request_intern_active='inactive'
+        where id=#{id}
+    </update>
+
+<!--    프로필 업데이트-->
+    <update id="updateProfileString">
+        update tbl_member m
+        join tbl_user u
+        on m.user_id=u.id
+        set m.member_info=#{info}
+        and u.user_name=#{name}
+        where u.id=#{memberId}
+    </update>
+    <update id="updateProfileJob">
+        update tbl_user_job_category uj
+        join tbl_user u
+        on uj.user_id=u.id
+        set uj.job_category=#{JobCategoryId}
+        where u.id=#{memberId}
+    </update>
+    <insert id="insertProfileJob">
+        insert into tbl_user_job_category(user_id, job_category)
+        values(#{user_id}, #{jobCategoryId})
+    </insert>
+<!--    <update id="updateProfileUrl">-->
+<!--        -->
+<!--    </update>-->
 </mapper>
