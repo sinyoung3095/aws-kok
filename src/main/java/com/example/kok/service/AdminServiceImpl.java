@@ -32,8 +32,8 @@ public class AdminServiceImpl implements AdminService {
         List<AdminNoticeDTO> noticeList = adminNoticeDAO.supportNoticeList(criteria, keyword);
 
         criteria.setHasMore(noticeList.size() > criteria.getRowCount());
-        criteria.setHasPreviousPage(page > 1);
-        criteria.setHasNextPage(page < criteria.getRealEnd());
+//        criteria.setHasPreviousPage(page > 1);
+//        criteria.setHasNextPage(page < criteria.getRealEnd());
 
         //  11개 가져왔으면, 마지막 1개 삭제
         if(criteria.isHasMore()){

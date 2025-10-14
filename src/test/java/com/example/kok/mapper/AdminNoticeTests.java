@@ -25,10 +25,10 @@ public class AdminNoticeTests {
     //    Mapper
     @Test
     public void testInsertNotice () {
-        for(int i = 0; i < 15; i++) {
+        for(int i = 0; i < 134; i++) {
             AdminNoticeDTO adminNoticeDTO = new AdminNoticeDTO();
             adminNoticeDTO.setAdminNoticeTitle("공지 제목" + (i + 1));
-            adminNoticeDTO.setAdminNoticeContent("공지 게시글 내용" + (i + 1));
+            adminNoticeDTO.setAdminNoticeContent("본문의 첫줄은 부제목으로 사용됩니다. 그 아래로는 본문 내용이 들어갑니다. 공지 게시글 내용이 들어가는 공간입니다." + (i + 1));
 
             adminNoticeMapper.insertNotice(adminService.toVO(adminNoticeDTO));
             log.info("{}", adminNoticeDTO);

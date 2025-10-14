@@ -4,10 +4,10 @@ import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.common.exception.PostNotFoundException;
 import com.example.kok.dto.AdminNoticeDTO;
 import com.example.kok.dto.BannerFileDTO;
-import com.example.kok.service.AdminAdvertisementService;
-import com.example.kok.service.AdminBannerService;
-import com.example.kok.service.AdminReportService;
-import com.example.kok.service.AdminService;
+import com.example.kok.dto.UserDTO;
+import com.example.kok.enumeration.Provider;
+import com.example.kok.repository.UserDAO;
+import com.example.kok.service.*;
 import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,11 +29,27 @@ public class AdminController {
     private final AdminReportService adminReportService;
     private final AdminAdvertisementService adminAdvertisementService;
     private final AdminBannerService adminBannerService;
+    private final UserDAO userDAO;
+    private final UserService userService;
 
     //    관리자 등록
     @GetMapping("join")
-    public String goToJoinPage() {
-        return "admin/join";
+    public String joinAdmin(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        model.addAttribute("admin", customUserDetails);
+        return "/admin/join";
+    }
+
+    @PostMapping("join")
+    public RedirectView goToJoinPage(UserDTO userDTO) {
+        int count;
+        count = userDAO.findUserByEmail(userDTO.getUserEmail());
+        if(count == 0){
+            userDTO.setMemberProvider(Provider.KOK);
+            userService.joinAdmin(userDTO);
+            return new RedirectView("/admin/login");
+        } else {
+            return new RedirectView("/admin/join?error");
+        }
     }
 
 //    관리자 로그인
