@@ -13,11 +13,8 @@ import org.springframework.stereotype.Component;
 public class MemberAlarmSettingDTO {
     private Long id;
     private Long memberId;
-    private Status memberPostLikeAlarm;
-    private Status memberCommentAlarm;
-    private Status memberReplyAlarm;
-    private Status requestStatusAlarm;
-    private Status companyNoticeAlarm;
+    private Status companyExperienceNoticeAlarm;
+    private Status companyInternNoticeAlarm;
     private String createdDateTime;
     private String updatedDateTime;
 }
