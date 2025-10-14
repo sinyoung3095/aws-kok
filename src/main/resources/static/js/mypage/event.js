@@ -2,11 +2,13 @@ HTMLCollection.prototype.forEach = Array.prototype.forEach;
 const first = document.getElementsByClassName("first");
 const second = document.getElementsByClassName("second");
 const third = document.getElementsByClassName("third");
+const third1=document.getElementsByClassName("third-1")
 const fourth = document.getElementsByClassName("fourth");
 const list = document.getElementsByClassName("post-1");
 const savedList=document.getElementById("saved-list-wrap");
 const postsList=document.getElementById("my-posts-wrap");
 const requestList=document.getElementById("request-list-wrap");
+const internList=document.getElementById("intern-list-wrap");
 const paymentList=document.getElementById("payment-list-wrap");
 const close = document.getElementById("close");
 const setting = document.getElementsByClassName("setting")[0];
@@ -84,10 +86,14 @@ first.forEach((item) => {
         fourth.forEach((fir) => {
             fir.classList.remove("active");
         });
+        third1.forEach((th1)=>{
+            th1.classList.remove("active");
+        })
         postsList.classList.add("active");
         savedList.classList.remove("active");
         requestList.classList.remove("active");
         paymentList.classList.remove("active");
+        internList.classList.remove("active");
     });
 });
 
@@ -104,12 +110,17 @@ second.forEach((item) => {
         fourth.forEach((fir) => {
             fir.classList.remove("active");
         });
+        third1.forEach((th1)=>{
+            th1.classList.remove("active");
+        })
         savedList.classList.add("active");
         postsList.classList.remove("active");
         requestList.classList.remove("active");
         paymentList.classList.remove("active");
+        internList.classList.remove("active");
     });
 });
+
 let count = 0;
 // 체험 공고 목록
 lists.forEach((list) => {
@@ -146,10 +157,39 @@ third.forEach((item) => {
         fourth.forEach((fir) => {
             fir.classList.remove("active");
         });
+        third1.forEach((th1)=>{
+            th1.classList.remove("active");
+        })
         postsList.classList.remove("active");
         savedList.classList.remove("active");
         requestList.classList.add("active");
         paymentList.classList.remove("active");
+        internList.classList.remove("active");
+        showExperienceRequest();
+    });
+});
+third1.forEach((item) => {
+    item.addEventListener("click", (e) => {
+        item.classList.add("active");
+        first.forEach((fir) => {
+            fir.classList.remove("active");
+        });
+        second.forEach((fir) => {
+            fir.classList.remove("active");
+        });
+        fourth.forEach((fir) => {
+            fir.classList.remove("active");
+        });
+        third.forEach((th)=>{
+            th.classList.remove("active");
+        })
+        postsList.classList.remove("active");
+        savedList.classList.remove("active");
+        internList.classList.add("active");
+        requestList.classList.remove("active");
+        paymentList.classList.remove("active");
+
+        showInternRequest();
     });
 });
 // 결제 내역
@@ -419,21 +459,39 @@ const showCommentsList=async (postId)=>{
     myPageLayout.showCommentsList(request);
 }
 
+const showInternList=async ()=>{
+    const request=await myPageService.getInternList();
+    myPageLayout.showInternList(request);
+}
+
+const showPaymentList=async ()=>{
+    const request=await myPageService.getPaymentList();
+    myPageLayout.showPaymentList(request);
+}
+
 const showExperienceRequest=async ()=>{
-    const request=await myPageService.getExperienceList;
+    const request=await myPageService.getExperienceList();
     myPageLayout.showExperienceRequest(request);
 
     // 지원 취소
-    const btn = document.getElementsByClassName("retract-triger")[0];
-    const retract = document.getElementsByClassName("retract")[0];
-    const retractClose = document.getElementsByClassName("retract-12")[0];
+    const btn = document.querySelectorAll(".retract-triger");
+    const retract = document.querySelector(".retract");
+    const cancleReq=document.querySelector(".retract-10");
+    const retractClose = document.querySelector(".retract-12");
 
     if(btn){
-        btn.addEventListener("click", (e) => {
-            retract.style.display = "flex";
+        btn.forEach((bt)=>{
+            bt.addEventListener("click", (e) => {
+                retract.style.display = "flex";
+            });
         });
     }
 
+    cancleReq.addEventListener("click", ()=>{
+    // 지원 취소 fetch
+        retract.style.display = "none";
+        showExperienceRequest();
+    })
     retractClose.addEventListener("click", (e) => {
         retract.style.display = "none";
     });
@@ -535,5 +593,7 @@ const showExperienceRequest=async ()=>{
     return request;
 }
 
-document.addEventListener("DOMContentLoaded", showPosts());
-document.addEventListener("DOMContentLoaded", showExperienceRequest());
+document.addEventListener("DOMContentLoaded", showPosts);
+document.addEventListener("DOMContentLoaded", showExperienceRequest);
+document.addEventListener("DOMContentLoaded", showInternList);
+document.addEventListener("DOMContentLoaded", showPaymentList);

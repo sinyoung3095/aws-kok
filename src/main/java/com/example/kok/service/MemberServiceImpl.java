@@ -162,6 +162,11 @@ public class MemberServiceImpl implements MemberService {
         return posts;
     }
 
+    @Override
+    public List<PaymentDTO> findPaymentByMemberId(Long memberId) {
+        return memberDAO.findPaymentByMemberId(memberId);
+    }
+
     public String getPath() {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");

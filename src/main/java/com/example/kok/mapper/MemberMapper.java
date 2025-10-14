@@ -35,4 +35,7 @@ public interface MemberMapper {
     public String selectJobCategoryByMemberId(Long memberId);
 //    전화번호로 회원 sns이메일 조회
     public List<MemberDTO> selectLinkBYPhone(String userPhone);
+
+//    id로 결제내역 조회
+    public List<PaymentDTO> selectPaymentByMemberId(Long memberId);
 }

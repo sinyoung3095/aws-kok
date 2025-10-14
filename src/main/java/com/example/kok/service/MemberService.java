@@ -31,4 +31,7 @@ public interface MemberService {
 
 //    작성 게시글 조회
     public List<PostDTO> findPostsByMemberId(Long memberId);
+
+//    결제내역 조회
+    public List<PaymentDTO> findPaymentByMemberId(Long memberId);
 }

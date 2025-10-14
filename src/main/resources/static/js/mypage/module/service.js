@@ -83,12 +83,34 @@ const myPageService = (() => {
     };
     
     // 체험 목록 불러오기
-    const getExperienceList = async (page = 1, keyword = "") => {
+    const getExperienceList = async () => {
         const request = await fetch (`/api/mypage/request-list`);
         const response = await request.json();
 
         return response;
     };
+    // 체험 지원 취소하기
+    const deleteExperienceRequest=async ()=>{
+        const request=await fetch(`/api/`)
+    }
+    // 인턴 목록 불러오기
+    const getInternList = async () => {
+        const request = await fetch (`/api/mypage/intern-list`);
+        const response = await request.json();
+
+        return response;
+    };
+    // 인턴 지원 취소하기
+    const deleteInternRequest=async ()=>{
+        const request=await fetch(`/api/`)
+    }
+    // 결제 목록 불러오기
+    const getPaymentList = async () => {
+        const request = await fetch (`/api/mypage/payment-list`);
+        const response = await request.json();
+
+        return response;
+    };
     return { getPostsList:getPostsList, getPostDetail:getPostDetail, getExperienceList:getExperienceList, getComments:getComments, writeComment:writeComment, updateComment:updateComment, deleteComment:deleteComment,
-    getReplies:getReplies, writeReply:writeReply, updateReply:updateReply, deleteReply:deleteReply };
+    getReplies:getReplies, writeReply:writeReply, updateReply:updateReply, deleteReply:deleteReply, getInternList:getInternList, deleteInternRequest:deleteInternRequest, getPaymentList:getPaymentList };
 })();

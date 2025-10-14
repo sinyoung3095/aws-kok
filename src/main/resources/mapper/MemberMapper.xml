@@ -100,4 +100,18 @@
         order by m.member_provider DESC
 
     </select>
+<!-- 결제 내역 조회-->
+    <select id="selectPaymentByMemberId">
+        select p.id, e.experience_notice_title, r.request_experience_status, p.payment_price, p.payment_paid_datetime
+        from tbl_user u
+        join tbl_payment_user pu
+        on pu.user_id=u.id
+        join tbl_payment p
+        on p.id=pu.payment_id
+        join tbl_request_experience r
+        on p.request_experience_id=r.id
+        join tbl_experience_notice e
+        on e.id=r.experience_notice_id
+        where u.id=#{memberId}
+    </select>
 </mapper>

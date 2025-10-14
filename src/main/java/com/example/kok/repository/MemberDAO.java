@@ -1,11 +1,7 @@
 package com.example.kok.repository;
 
 import com.example.kok.domain.MemberVO;
-import com.example.kok.dto.PostDTO;
-import com.example.kok.dto.MemberDTO;
-import com.example.kok.dto.RequestExperienceDTO;
-import com.example.kok.dto.RequestInternDTO;
-import com.example.kok.dto.UserMemberDTO;
+import com.example.kok.dto.*;
 import com.example.kok.mapper.MemberMapper;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
@@ -61,5 +57,10 @@ public class MemberDAO {
     //    전화번호로 회원 sns이메일 조회
     public List<MemberDTO> findLink(String userPhone){
         return memberMapper.selectLinkBYPhone(userPhone);
+    }
+
+//    id로 결제내역 조회
+    public List<PaymentDTO> findPaymentByMemberId(Long memberId) {
+        return memberMapper.selectPaymentByMemberId(memberId);
     }
 }

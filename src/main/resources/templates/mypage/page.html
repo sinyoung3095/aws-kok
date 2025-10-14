@@ -12,14 +12,37 @@
     <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
 </head>
 <body>
-    <div id="main-content" class="main-content" style="height: 100%;">
-        <main class="main">    
+    <div id="main-content" class="main-content">
+        <th:block th:if="${userDTO==null}">
+            <div th:replace="~{main-page/side-bar}"></div>
+        </th:block>
+        <th:block th:if="${userDTO!=null}">
+            <div th:replace="~{main-page/login-side-bar}"></div>
+        </th:block>
+        <main class="main">
+            <th:block th:if="${userDTO==null}">
+                <div th:replace="~{main-page/mobile-header}"></div>
+            </th:block>
+            <th:block th:if="${userDTO!=null}">
+                <div th:replace="~{main-page/mobile-login-header}"></div>
+            </th:block>
+            <th:block th:if="${userDTO==null}">
+                <div th:replace="~{main-page/header}"></div>
+            </th:block>
+            <th:block th:if="${userDTO!=null}">
+                <div th:replace="~{main-page/login-header}"></div>
+            </th:block>
             <div class="main-0">
-                <div class="main-1">
+                <div class="main-1" style="display: none">
                     <div class="main-2">
                         <input type="file" style="display: none;">
                         <div class="main-3">
-                            <img alt="user-banner-image" loading="lazy" width="1000" height="200" decoding="async" data-nimg="1" class="main-4" src="/static/images/mypage/banner.jpg" style="color: transparent;">  
+                            <th:block th:if="${userDTO.memberProfileUrl!=null}">
+                                <img alt="user-banner-image" loading="lazy" width="1000" height="200" decoding="async" data-nimg="1" class="main-4" th:src="${userDTO.memberProfileUrl}" style="color: transparent;">
+                            </th:block>
+                            <th:block th:if="${userDTO.memberProfileUrl==null}">
+                                <img alt="user-banner-image" loading="lazy" width="1000" height="200" decoding="async" data-nimg="1" class="main-4" src="/images/main-page/image.png" style="color: transparent;">
+                            </th:block>
                             <div class="main-5">
                                 <div>
                                     <label for="background" class="label">                                                      
@@ -39,13 +62,19 @@
                             <div class="content-3">
                                 <div class="content-4">
                                     <div class="content-5">
-                                        <img alt="image" draggable="false" loading="lazy" width="60" height="60" decoding="async" data-nimg="1" srcset="" src="/images/mypage/default.webp" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+<!--                                        <img alt="image" draggable="false" loading="lazy" width="60" height="60" decoding="async" data-nimg="1" srcset="" th:src="${userDTO.memberProfileUrl}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">-->
+                                        <th:block th:if="${userDTO.memberProfileUrl!=null}">
+                                            <img alt="image" draggable="false" loading="lazy" width="60" height="60" decoding="async" data-nimg="1" srcset="" th:src="${userDTO.memberProfileUrl}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+                                        </th:block>
+                                        <th:block th:if="${userDTO.memberProfileUrl==null}">
+                                            <img alt="image" draggable="false" loading="lazy" width="60" height="60" decoding="async" data-nimg="1" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+                                        </th:block>
                                     </div>
                                     <div class="content-6">
                                         <div class="content-7">
-                                            <p class="content-8">지원자</p>
+                                            <p class="content-8" th:text="${userDTO.getUsername}"></p>
                                         </div>
-                                        <p class="content-9">SW개발자</p>
+                                        <p class="content-9" th:text="${userDTO.getUserJobName}"></p>
                                     </div>
                                 </div>
                                 <div class="content-10">
@@ -55,14 +84,14 @@
                                             <p class="content-13">0</p>
                                         </div>
                                     </a>
-                                    <div class="content-11">
-                                        <p class="content-12">팔로잉</p>
-                                        <p class="content-13">0</p>
-                                    </div>
+<!--                                    <div class="content-11">-->
+<!--                                        <p class="content-12">팔로잉</p>-->
+<!--                                        <p class="content-13" th:text=""></p>-->
+<!--                                    </div>-->
                                 </div>
                                 <div class="content-10">
                                     <div class="company-intro">
-                                        <p>한국 최대 비즈니스 소셜 네트워크</p>
+                                        <p></p>
                                     </div>
                                 </div>
                                 <div class="content-14">
@@ -266,7 +295,10 @@
                                         <p class="content-20 second">저장한 공고</p>
                                     </div>
                                     <div class="content-19 third">
-                                        <p class="content-20 third">지원 내역</p>
+                                        <p class="content-20 third">체험 지원 내역</p>
+                                    </div>
+                                    <div class="content-19 third-1">
+                                        <p class="content-20 third-1">인턴 지원 내역</p>
                                     </div>
                                     <div class="content-19 fourth">
                                         <p class="content-20 fourth">결제 내역</p>
@@ -293,7 +325,7 @@
                                     </div>
                                 </div>
                                 <!-- 체험 공고 -->
-                                <div id="experience" style="display: contents;">
+                                <div id="experience-list" style="display: contents;">
                                     <!-- 저장한 체험 공고가 없을 때 -->
                                     <div class="post-3">                        
                                         <div class="post-13" style="padding-right: 0;padding-left: 0; justify-content: center; display: flex;">
@@ -561,7 +593,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="payment-2">기업명</th>
-                                                    <th class="payment-2">체험공고 제목</th>       
+                                                    <th class="payment-2">공고 제목</th>
                                                     <th class="payment-2">지원상태</th>                                     
                                                     <th class="payment-2">비고</th>
                                                 </tr>
@@ -597,10 +629,35 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- 지원내역 -->
+                        <div class="post-1" id="intern-list-wrap">
+                            <div class="post-2" style="align-items: start;">
+                                <div id="interns" style="display: contents;">
+                                    <!-- 지원 내역이 있을 때 -->
+                                    <div class="payment">
+                                        <table class="payment-1">
+                                            <!-- 목록 -->
+                                            <thead>
+                                                <tr>
+                                                    <th class="payment-2">기업명</th>
+                                                    <th class="payment-2">공고 제목</th>
+                                                    <th class="payment-2">지원상태</th>
+                                                    <th class="payment-2">비고</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- 지원 내역들 -->
+                                            <tbody class="int-request-container">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- 결제내역 -->
                         <div class="post-1" id="payment-list-wrap">
                             <div class="post-2" style="align-items: start;">
-                                <div id="experience" style="display: contents;">
+                                <div id="" style="display: contents;">
                                     <!-- 결제 내역이 없을 때 -->
                                     <!-- <div class="post-3">                        
                                         <div class="post-13" style="padding-right: 0;padding-right: 0px;padding-left: 0; justify-content: center; display: flex;">
@@ -641,59 +698,8 @@
                                                 </tr>
                                             </thead>
                                             <!-- 결제 내역들 -->
-                                            <tbody class="">
-                                                <tr>
-                                                    <td class="payment-3">
-                                                        <p>코리아IT</p>
-                                                    </td>
-                                                    <td class="payment-3">
-                                                        <p>SW 개발 백엔드 체험</p>
-                                                    </td>  
-                                                    <td class="payment-3">
-                                                        <p>서류 접수</p>
-                                                    </td>
-                                                    </td>  
-                                                    <td class="payment-3">
-                                                        <p>20,000원</p>
-                                                    </td>    
-                                                    <td class="payment-3">
-                                                        <p>2025/08/05</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="payment-3">
-                                                        <p>코리아IT</p>
-                                                    </td>
-                                                    <td class="payment-3">
-                                                        <p>SW 개발 백엔드 체험</p>
-                                                    </td>  
-                                                    <td class="payment-3">
-                                                        <p>합격</p>
-                                                    </td>
-                                                    <td class="payment-3">
-                                                        <p>20,000원</p>
-                                                    </td>   
-                                                    <td class="payment-3">
-                                                        <p>2024/04/13</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="payment-3">
-                                                        <p>코리아IT</p>
-                                                    </td>
-                                                    <td class="payment-3">
-                                                        <p>SW 개발 백엔드 체험</p>
-                                                    </td>  
-                                                    <td class="payment-3">
-                                                        <p>불합격</p>
-                                                    </td>
-                                                    <td class="payment-3">
-                                                        <p>20,000원</p>
-                                                    </td>   
-                                                    <td class="payment-3">
-                                                        <p>2024/02/05</p>
-                                                    </td>
-                                                </tr>
+                                            <tbody class="payment-tbody">
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -1034,18 +1040,18 @@
         </div>
 
         <!-- toast - white -->
-        <div id="toast-white" class="toast-warning">
-            <div class="toast-warning-content">
-                <div class="toast-inner">
-                    <div class="toast-icon">
-                        <svg viewBox="0 0 24 24" fill="#fff" height="20" role="img" width="20">
-                            <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <p class="toast-text">업로드하려면 10자 이상 입력하거나 파일을 하나 이상 첨부해야 합니다.</p>
-                </div>
-            </div>
-        </div>
+<!--        <div id="toast-white" class="toast-warning">-->
+<!--            <div class="toast-warning-content">-->
+<!--                <div class="toast-inner">-->
+<!--                    <div class="toast-icon">-->
+<!--                        <svg viewBox="0 0 24 24" fill="#fff" height="20" role="img" width="20">-->
+<!--                            <path clip-rule="evenodd" d="M12 3.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4M2.2 12c0-5.412 4.388-9.8 9.8-9.8s9.8 4.388 9.8 9.8-4.388 9.8-9.8 9.8-9.8-4.387-9.8-9.8M12 8.19a.8.8 0 0 1 .8.8V9a.8.8 0 0 1-1.6 0v-.01a.8.8 0 0 1 .8-.8m0 3.01a.8.8 0 0 1 .8.8v3a.8.8 0 0 1-1.6 0v-3a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>-->
+<!--                        </svg>-->
+<!--                    </div>-->
+<!--                    <p class="toast-text">업로드하려면 10자 이상 입력하거나 파일을 하나 이상 첨부해야 합니다.</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <!-- popup - 닫기 메세지 -->
         <div id="message-popup2" class="popup-container pop-center pop-default">

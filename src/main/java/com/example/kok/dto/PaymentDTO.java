@@ -23,4 +23,7 @@ public class PaymentDTO {
     private long userId;
     private String createdDateTime;
     private String updatedDateTime;
+
+    private String experienceNoticeTitle;
+    private String requestExperienceStatus;
 }

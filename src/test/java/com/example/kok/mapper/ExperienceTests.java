@@ -1,7 +1,6 @@
 package com.example.kok.mapper;
 
 import com.example.kok.dto.CompanyDTO;
-import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.dto.SaveExperienceNoticeDTO;
 import com.example.kok.repository.CompanyDAO;
