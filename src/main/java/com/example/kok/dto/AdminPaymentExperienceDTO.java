@@ -19,6 +19,7 @@ public class AdminPaymentExperienceDTO {
     private String userName;
     private String userEmail;
     private Long paymentPrice;
+    private String paymentPriceText;
     private String paymentPaidDatetime;
     private String relativeDate;
     private String experienceNoticeTitle;

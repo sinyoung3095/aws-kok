@@ -44,7 +44,7 @@ loginButton.addEventListener("click", async (e) => {
         const role = 'admin'
         await adminService.login({userEmail: userEmail,userPassword:password,userRole: role});
 
-        location.href='/admin/main-page'
+        location.href='/admin'
     }
 
 });

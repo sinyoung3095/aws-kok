@@ -6,7 +6,7 @@ const layout = (() => {
         let countText = ``;
 
         totalText += `
-            <span class="span-amount">${adminPaymentAdvertiseCriteriaDTO.acceptCountTotal.acceptTotal}</span>
+            <span class="span-amount">${adminPaymentAdvertiseCriteriaDTO.acceptCountTotal.acceptTotalText}</span>
             <span class="amount-unit">원</span>
         `;
         acceptTotal.innerHTML = totalText;
@@ -56,7 +56,7 @@ const layout = (() => {
                     text += `</p>
                         </td>  
                         <td class="td-pay">
-                            <p>${payment.paymentPrice}</p>
+                            <p>${payment.paymentPriceText}</p>
                         </td>
                         <td class="td-date">
                             <p>${payment.relativeDate}</p>

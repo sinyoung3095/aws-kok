@@ -12,4 +12,5 @@ import org.springframework.stereotype.Component;
 public class AdminPaymentAdvertiseCountDTO {
     private Long acceptCount;
     private Long acceptTotal;
+    private String acceptTotalText;
 }
