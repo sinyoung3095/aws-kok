@@ -11,5 +11,7 @@ import org.springframework.stereotype.Component;
 @ToString
 public class AdminPaymentExperienceCountDTO {
     private Long acceptTotal;
+    private String acceptTotalText;
     private Long rejectTotal;
+    private String rejectTotalText;
 }
