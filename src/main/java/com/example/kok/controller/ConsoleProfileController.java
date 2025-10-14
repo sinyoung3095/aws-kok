@@ -1,9 +1,11 @@
 package com.example.kok.controller;
 
+import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.ConsoleCompanyProfileDTO;
 import com.example.kok.service.ConsoleProfileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;

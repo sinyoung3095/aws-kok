@@ -29,6 +29,7 @@ public class ConsoleExperienceFileDownloadController {
         log.info("memberId={}, experienceNoticeId={}, filePath={}, fileName={}",
                 memberId, experienceNoticeId, file.getFilePath(), file.getFileOriginName());
 
+
         String downloadUrl = s3Service.getPreSignedDownloadUrl(
                 file.getFilePath(),
                 file.getFileOriginName(),

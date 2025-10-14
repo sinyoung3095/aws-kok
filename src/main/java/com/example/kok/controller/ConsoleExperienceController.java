@@ -28,13 +28,18 @@ public class ConsoleExperienceController {
 
 //    기업 콘솔 체험 공고 목록
     @GetMapping("/list")
-    public String goToList() {
+    public String goToList(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
+        log.info("로그인한 기업 ID: {}", customUserDetails.getId());
+        model.addAttribute("companyId", customUserDetails.getId());
+        model.addAttribute("userDTO", customUserDetails);
+
         return "enterprise-console/console-experience-list";
     }
 
 //    기업 콘솔 체험 공고 등록, 수정
     @GetMapping(value = {"/create", "edit/{id}"})
-    public String goToWrite(HttpServletRequest request, Model model, @PathVariable(required = false) Long id) {
+    public String goToWrite(HttpServletRequest request, Model model, @PathVariable(required = false) Long id,
+                            @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         if(request.getRequestURI().contains("create")){
             model.addAttribute("page","create");
             model.addAttribute("notice", new ConsoleExperienceListRequestDTO());
@@ -42,9 +47,13 @@ public class ConsoleExperienceController {
         }
         ConsoleExperienceListRequestDTO notice = consoleExperienceListService.getNotice(id);
 
+        Long companyId = customUserDetails.getId();
+
+        model.addAttribute("userDTO", customUserDetails);
         model.addAttribute("page","edit");
         model.addAttribute("id", id);
         model.addAttribute("notice", notice);
+        model.addAttribute("companyId", companyId);
         return "enterprise-console/console-experience-update";
     }
 
@@ -52,6 +61,7 @@ public class ConsoleExperienceController {
     @GetMapping("/applicate-list/{experienceNoticeId}")
     public String goToApplicateList(@AuthenticationPrincipal CustomUserDetails userDetails,
                                     @PathVariable("experienceNoticeId") Long experienceNoticeId,
+                                    @AuthenticationPrincipal CustomUserDetails customUserDetails,
                                     Model model) {
 
         ConsoleExperienceListDTO experienceDetail = consoleExperienceDetailService.getDetail(experienceNoticeId);
@@ -59,6 +69,7 @@ public class ConsoleExperienceController {
         List<ConsoleExperienceApplicantDTO> applicants  =
                 consoleExperienceApplicationService.getApplicantsByNoticeId(experienceNoticeId);
 
+        model.addAttribute("userDTO", customUserDetails);
         model.addAttribute("userDetails", userDetails);
         model.addAttribute("experienceDetail", experienceDetail);
         model.addAttribute("experienceNoticeId", experienceNoticeId);
