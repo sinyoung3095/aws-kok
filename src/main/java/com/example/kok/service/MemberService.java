@@ -11,6 +11,9 @@ import java.util.Optional;
 public interface MemberService {
     public void joinMember(MemberVO memberVO);
 
+//    프로필 사진 삭제
+    public void deleteProfile(Long id);
+
 //    보관함에 이력서 넣기
     public void putFileAtStorage(List<MultipartFile> file, Long memberId);
 
@@ -46,4 +49,10 @@ public interface MemberService {
 
 //    인턴 지원 취소
     public void deleteRequestIntern(Long id);
+
+//    프로필 수정
+    public void updateProfile(Long id, UserMemberDTO dto, MultipartFile file);
+
+//    프로필 조회
+    public UserProfileFileDTO getProfile(Long id);
 }

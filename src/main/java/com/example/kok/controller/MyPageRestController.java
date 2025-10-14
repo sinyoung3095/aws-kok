@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.List;
@@ -100,18 +101,18 @@ public class MyPageRestController {
     }
 
 //    프로필 편집 완료
-//    @PostMapping("/profile-update")
-//    public void updateProfile(@AuthenticationPrincipal CustomUserDetails customUserDetails,
-//                              @RequestParam(value="profileImgInput", required=false)File file,
-//                              @RequestParam(value="name") String name,
-//                              @RequestParam(value="job", required=false) String job,
-//                              @RequestParam(value="info", required=false) String info){
-//        long memberId=customUserDetails.getId();
-//        UserMemberDTO member=new UserMemberDTO();
-//        member.setId(memberId);
-//        member.setUserName(name);
-//        member.setJobName(job);
-//        member.setMemberInfo(info);
-//        memberService.
-//    }
+    @PostMapping("/profile-update")
+    public void updateProfile(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+                              @RequestParam(value="profileImgInput", required=false) MultipartFile file,
+                              @RequestParam(value="name") String name,
+                              @RequestParam(value="job", required=false) String job,
+                              @RequestParam(value="info", required=false) String info){
+        long memberId=customUserDetails.getId();
+        UserMemberDTO member=new UserMemberDTO();
+        member.setId(memberId);
+        member.setUserName(name);
+        member.setJobName(job);
+        member.setMemberInfo(info);
+        memberService.updateProfile(memberId, member, file);
+    }
 }

@@ -15,7 +15,7 @@ const setting = document.getElementsByClassName("setting")[0];
 const set = document.getElementsByClassName("set")[0];
 const profileWrapCircle=document.querySelector(".setting-15.profileWrapCircle");
 const profileImgPop=document.querySelector(".profile-0");
-const submit = document.querySelector("setting-40");
+const submit = document.querySelector(".setting-40");
 const profile = document.getElementsByClassName("profile")[0];
 const profileset = document.getElementsByClassName("setting-16")[0];
 const label = document.getElementsByClassName("label")[0];
@@ -48,12 +48,36 @@ close.addEventListener("click", (e) => {
     setting.style.display = "none";
 });
 // 프로필 편집 완료
-submit.addEventListener("click", (e) => {
-    const profileImgInput=profileInput.value;
-    const name=nameinput.value;
-    const job=jobInput.value;
-    const info=infoInput.value;
-    setting.style.display = "none";
+submit.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const profileImgInput = profileInput.files[0];
+    const namein = nameinput.value;
+    const job = jobInput.value;
+    const info = infoInput.value;
+    const form=new FormData();
+    if(profileImgInput){
+        form.append("profileImgInput", profileImgInput);
+    }
+    if(namein){
+        form.append("name", namein);
+    }
+    if(job){
+        form.append("job", job);
+    }
+    if(info){
+        form.append("info", info);
+    }
+
+    await myPageService.profileUpdate(form);
+    console.log("수정")
+
+    if(profileUpdate.ok){
+        setting.style.display = "none";
+    } else {
+        alert("수정 실패"+profileUpdate.status);
+        setting.style.display = "none";
+    }
 });
 profileWrapCircle.addEventListener("click", ()=>{
     profileImgPop.style.display="flex";

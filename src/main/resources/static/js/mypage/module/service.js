@@ -142,7 +142,17 @@ const myPageService = (() => {
 
         return response;
     };
+
+    const profileUpdate=async (form)=>{
+        const response = await fetch(`/api/mypage/profile-update`,{
+            method: "POST",
+            body: form
+        });
+        console.log(response);
+        return response.ok;
+    }
     return { getPostsList:getPostsList, getPostDetail:getPostDetail, getExperienceList:getExperienceList, getComments:getComments, writeComment:writeComment, updateComment:updateComment, deleteComment:deleteComment,
     getReplies:getReplies, writeReply:writeReply, updateReply:updateReply, deleteReply:deleteReply, getInternList:getInternList, getPaymentList:getPaymentList,
-    getSavedExperienceList:getSavedExperienceList, getSavedInternList:getSavedInternList, deleteRequestExperience:deleteRequestExperience, deleteRequestIntern:deleteRequestIntern};
+    getSavedExperienceList:getSavedExperienceList, getSavedInternList:getSavedInternList, deleteRequestExperience:deleteRequestExperience, deleteRequestIntern:deleteRequestIntern,
+    profileUpdate:profileUpdate};
 })();
