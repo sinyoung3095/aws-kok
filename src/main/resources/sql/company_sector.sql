@@ -18,4 +18,8 @@ values
     ('건설업'),
     ('미디어/디자인'),
     ('은행/금융업'),
-    ('기관/협회');
+    ('기관/협회'),
+    ('미선택');
+
+insert into tbl_company_sector(company_sector_name)
+values('미선택');
