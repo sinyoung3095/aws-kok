@@ -3,6 +3,7 @@ package com.example.kok.controller;
 import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.AdvertisementDTO;
 import com.example.kok.dto.CompanyDTO;
+import com.example.kok.enumeration.UserRole;
 import com.example.kok.service.AdvertisementService;
 import com.example.kok.service.CompanyService;
 import com.example.kok.service.UserService;
@@ -36,6 +37,11 @@ public class CompanyController {
         if (customUserDetails != null) {
             userId = customUserDetails.getId();
             model.addAttribute("userDTO", customUserDetails);
+
+            if (customUserDetails.getUserRole() == UserRole.COMPANY) {
+                CompanyDTO companyDTO = companyService.findCompanyById(customUserDetails.getId());
+                model.addAttribute("companyDTO", companyDTO);
+            }
         }
 
         List<AdvertisementDTO> advertisements = advertisementService.getAllAdvertisements();
