@@ -30,7 +30,9 @@ insert into tbl_job_category (job_name) values
                                             ('식품/조리'),
                                             ('숙박/레저'),
                                             ('서비스'),
-                                            ('종교인');
+                                            ('종교인'),
+                                            ('미선택');
 
 select * from tbl_job_category;
 
+insert into tbl_job_category (job_name) values ('미선택');
