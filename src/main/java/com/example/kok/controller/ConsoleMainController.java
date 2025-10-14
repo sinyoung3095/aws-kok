@@ -24,6 +24,8 @@ public class ConsoleMainController {
     @GetMapping
     public String goToHome(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
         Long companyId = customUserDetails.getId();
+        String companyName = customUserDetails.getCompanyName();
+        String memberName = customUserDetails.getUsername();
 
         // 체험 공고
         int activeCount = consoleMainService.getActiveExperienceNoticeCount(companyId);
@@ -35,14 +37,14 @@ public class ConsoleMainController {
 
         List<ConsoleExperienceMemberDTO> recentMembers = consoleMainService.getRecentExperienceMembers(companyId);
 
-        model.addAttribute("userDTO", customUserDetails);
         model.addAttribute("activeCount", activeCount);
         model.addAttribute("totalCount", totalCount);
         model.addAttribute("activeInternCount", activeInternCount);
         model.addAttribute("totalInternCount", totalInternCount);
         model.addAttribute("recentMembers", recentMembers);
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("memberName", memberName);
 
         return "enterprise-console/console-home";
     }
-
 }

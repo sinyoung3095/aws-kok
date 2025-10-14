@@ -203,14 +203,7 @@ if(btnYegister) {
             }
             console.log("여기 확인",data);
 
-            try {
-                const result = await experienceRegisterService.register(data);
-                console.log("등록 성공이당", result);
-                alert("공고가 등록되었습니다.");
-            } catch (err) {
-                console.error(err);
-                alert("등록 중 오류가 발생했습니다.");
-            }
+            const result = await experienceRegisterService.register(data);
         } else {
             console.log("유효성 실패!!!!!");
         }

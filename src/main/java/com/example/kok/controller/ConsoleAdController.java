@@ -23,13 +23,20 @@ public class ConsoleAdController {
 
     //    기업 콘솔 광고 목록
     @GetMapping("/list")
-    public String goToList() {
+    public String goToList(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
+        Long companyId = customUserDetails.getId();
+        String companyName = customUserDetails.getCompanyName();
+        String memberName = customUserDetails.getUsername();
+
+        model.addAttribute("companyId", companyId);
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("memberName", memberName);
         return "enterprise-console/console-add-list";
     }
 
     //    기업 콘솔 광고 등록/수정
-    @GetMapping(value = {"/create", "edit/{id}"})
-    public String goToWrite(HttpServletRequest request, Model model, @PathVariable(required = false) Long id) {
+    @GetMapping(value = {"/create", "/edit/{id}"})
+    public String goToWrite(HttpServletRequest request, @PathVariable(required = false) Long id, @AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
         if(request.getRequestURI().contains("create")){
             model.addAttribute("page","create");
             model.addAttribute("notice", new ConsoleAdNoticeDTO());
@@ -39,22 +46,31 @@ public class ConsoleAdController {
 
         consoleAdService.setPreSignedUrl(notice);
 
+        Long companyId = customUserDetails.getId();
+        String companyName = customUserDetails.getCompanyName();
+        String memberName = customUserDetails.getUsername();
+
         model.addAttribute("page","edit");
         model.addAttribute("id", id);
         model.addAttribute("notice", notice);
+        model.addAttribute("companyId", companyId);
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("memberName", memberName);
+
         return "enterprise-console/console-add-upload";
     }
 
     @PostMapping("/create")
     public String registerAdvertisement(
             @ModelAttribute ConsoleAdNoticeDTO adNoticeDTO,
-            @RequestParam(value = "files", required = false) List<MultipartFile> multipartFiles) {
+            @RequestParam(value = "files", required = false) List<MultipartFile> multipartFiles,
+            @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
-//        System.out.println("파일 개수: " + (multipartFiles == null ? "null" : multipartFiles.size()));
-        adNoticeDTO.setCompanyId(1L);
+        adNoticeDTO.setCompanyId(customUserDetails.getId());
 
         consoleAdService.registerAdvertisement(adNoticeDTO, multipartFiles);
         return "redirect:/enterprise-console/ad/list";
+//        return "enterprise-console/console-add-upload";
     }
 
 

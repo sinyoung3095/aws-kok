@@ -4,7 +4,7 @@ const pay = async ({price, duration}) => {
         const response = await Bootpay.requestPayment({
             application_id: "687efac486cd66f61255b55c", //앱키
             price: price,
-            order_name: `배너 광고(${duration})`,
+            order_name: `배너 광고(${duration})일`,
             order_id: "TEST_ORDER_ID",
             pg: "토스",
             method: "토스",
@@ -18,7 +18,7 @@ const pay = async ({price, duration}) => {
             items: [
                 {
                     id: "item_id",
-                    name: `배너 광고(${duration})`,
+                    name: `배너 광고(${duration})일`,
                     qty: 1,
                     price: price,
                 },
@@ -33,8 +33,31 @@ const pay = async ({price, duration}) => {
             case "done":
                 console.log(response);
                 console.log("여기 맞는가")
-                // service.save();
-                // 결제 완료 처리
+
+                const priceText = document.querySelector(".start-price .price").textContent;
+                const paymentPrice = Number(priceText.replace(/,/g, "").trim());
+
+                const data = {
+                    id: document.querySelector("input[name='id']").value,
+                    advertisementMainText: document.querySelector("#ad-main-text").value,
+                    advertisementSubText: document.querySelector("#ad-sub-text").value,
+                    advertiseStartDatetime: document.querySelector("#start-date").value,
+                    advertiseEndDatetime: document.querySelector("#end-date").value,
+                    companyId: companyId,
+                    paymentPrice: paymentPrice,
+                    files: document.querySelector("#add-background").files
+                }
+
+                try {
+                    const result = await adService.register(data);
+                    console.log("광고 등록 성공이당", result);
+                } catch (err) {
+                    console.error(err);
+                    console.log("안됨");
+                }
+                break;
+            default:
+                console.log("결제 상태:", response.event);
                 break;
         }
     } catch (e) {
@@ -47,10 +70,13 @@ const pay = async ({price, duration}) => {
             case "cancel":
                 // 사용자가 결제창을 닫을때 호출
                 console.log(e.message);
+                console.log("사용자가 결제창을 닫았습니다.");
+                alert("결제가 취소되었습니다.");
                 break;
             case "error":
                 // 결제 승인 중 오류 발생시 호출
-                console.log(e.error_code);
+                console.log("결제 승인 오류", e.error_code);
+                alert("결제 중 오류가 발생했습니다.");
                 break;
         }
     }
@@ -203,7 +229,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const isSubValid = validateInput(inputSub, "서브 텍스트를 입력해주세요.");
             const isDateValid = validateDate(okcheck);
 
-            // 하나라도 false면 return
             if (!isMainValid || !isSubValid || !isDateValid) return;
 
             const payInfo = {
@@ -212,28 +237,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             await pay(payInfo);
-
-            const priceText = document.querySelector(".start-price .price").textContent;
-            const paymentPrice = Number(priceText.replace(/,/g, "").trim());
-
-            const data = {
-                advertisementMainText: document.querySelector("#ad-main-text").value,
-                advertisementSubText: document.querySelector("#ad-sub-text").value,
-                advertiseStartDatetime: document.querySelector("#start-date").value,
-                advertiseEndDatetime: document.querySelector("#end-date").value,
-                companyId: 1,
-                paymentPrice: paymentPrice,
-                files: document.querySelector("#add-background").files
-            }
-
-            try {
-                const result = await adService.register(data);
-                console.log("광고 등록 성공이당", result);
-                alert("광고가 등록되었습니다.");
-            } catch (err) {
-                console.error(err);
-                alert("광고 등록 중 오류가 발생했습니다.");
-            }
         });
     }
 
