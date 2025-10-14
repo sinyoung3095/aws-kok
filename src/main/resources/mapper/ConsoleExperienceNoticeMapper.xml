@@ -77,7 +77,7 @@
     </select>
 
     <!-- 체험 공고 등록 -->
-    <insert id="insertNotice" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertNotice" useGeneratedKeys="true" keyProperty="id" parameterType="ConsoleExperienceListRequestDTO">
         insert into tbl_experience_notice
         (
             experience_notice_title,
@@ -172,7 +172,7 @@
     </select>
 
     <!-- 단일 공고 조회 - 수정 페이지용 -->
-    <select id="selectById">
+    <select id="selectById" resultType="ExperienceNoticeDTO">
         select
             en.id,
             en.experience_notice_title,
