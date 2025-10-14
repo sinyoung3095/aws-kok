@@ -23,7 +23,7 @@ public class ConsoleMainController {
 //    기업 콘솔 홈
     @GetMapping
     public String goToHome(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
-        Long companyId = 1L;
+        Long companyId = customUserDetails.getId();
 
         // 체험 공고
         int activeCount = consoleMainService.getActiveExperienceNoticeCount(companyId);
@@ -35,6 +35,7 @@ public class ConsoleMainController {
 
         List<ConsoleExperienceMemberDTO> recentMembers = consoleMainService.getRecentExperienceMembers(companyId);
 
+        model.addAttribute("userDTO", customUserDetails);
         model.addAttribute("activeCount", activeCount);
         model.addAttribute("totalCount", totalCount);
         model.addAttribute("activeInternCount", activeInternCount);

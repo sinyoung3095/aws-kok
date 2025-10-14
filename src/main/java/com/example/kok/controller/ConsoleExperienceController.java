@@ -47,7 +47,7 @@ public class ConsoleExperienceController {
         }
         ConsoleExperienceListRequestDTO notice = consoleExperienceListService.getNotice(id);
 
-        Long companyId = customUserDetails.getId();;
+        Long companyId = customUserDetails.getId();
 
         model.addAttribute("userDTO", customUserDetails);
         model.addAttribute("page","edit");
