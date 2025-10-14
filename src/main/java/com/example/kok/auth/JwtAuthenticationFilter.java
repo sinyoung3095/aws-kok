@@ -64,9 +64,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         }
                     }
                     String username = jwtTokenProvider.getUserName(cookieRefreshToken);
-//                    일반 로그인: provider(null), 키 값은 username만 필요
-//                    OAuth 로그인: provider(존재), 키 값은 username과 provider 둘 다 필요
-//                    위 상황에 따라 redis에서 refresh토큰의 key값이 다르기 때문에 각자 알맞게 검사해준다.
+
                     boolean checkRefreshToken = provider != null ? jwtTokenProvider.checkRefreshTokenBetweenCookieAndRedis(username, cookieRefreshToken, provider)
                             : jwtTokenProvider.checkRefreshTokenBetweenCookieAndRedis(username, cookieRefreshToken);
 

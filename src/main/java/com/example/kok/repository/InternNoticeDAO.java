@@ -58,6 +58,9 @@ public class InternNoticeDAO {
     public List<InternNoticeDTO> findAllByKeyword(String keyword) {
         return internNoticeMapper.selectAllByKeyword(keyword);
     };
+    public InternNoticeDTO findCompanyNameById(Long id){
+        return internNoticeMapper.selectCompanyNameById(id);
+    }
 }
 
 
