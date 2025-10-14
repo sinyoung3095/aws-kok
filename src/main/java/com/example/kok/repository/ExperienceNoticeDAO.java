@@ -59,4 +59,7 @@ public class ExperienceNoticeDAO {
     public List<ExperienceNoticeDTO> findAllByKeyword(String keyword) {
     return experienceNoticeMapper.selectAllByKeyword(keyword);
 };
+    public ExperienceNoticeDTO findCompanyNameById(Long id){
+        return experienceNoticeMapper.selectCompanyNameById(id);
+    }
 }

@@ -2,8 +2,11 @@ package com.example.kok.mapper;
 
 import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.dto.MemberAlarmSettingDTO;
+import com.example.kok.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface MemberAlarmSettingMapper {
@@ -18,5 +21,6 @@ public interface MemberAlarmSettingMapper {
 //    멤버 알람 비활성화
     public void updateByKeywordToInactive(Long id, String keyword);
 //    멤버 체험 공고 알람 보내기 위한 아이디 조회
-    public ExperienceNoticeDTO selectByNoticeId(Long od);
+    public List<UserDTO> selectByNoticeId(Long od);
+    public List<UserDTO> selectByInturnNoticeId(Long od);
 }

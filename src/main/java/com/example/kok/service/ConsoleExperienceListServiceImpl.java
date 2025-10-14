@@ -71,23 +71,23 @@ public class ConsoleExperienceListServiceImpl implements ConsoleExperienceListSe
         log.info("id:{}",noticeRequestDTO.getId());
 //        직군 등록
         consoleExperienceDAO.createNoticeJobCategory(noticeRequestDTO);
-        ExperienceNoticeDTO experienceNoticeDTO = memberAlarmSettingMapper.selectByNoticeId(noticeRequestDTO.getId());
-        experienceNoticeDTO.getUsers().forEach((userDTO) -> {
-
-            if(userDTO.getUserEmail()!=null){
-                try {
-                    mailService.sendMailByNotice(userDTO.getUserEmail(),userDTO.getUserName(),experienceNoticeDTO.getExperienceNoticeTitle(),experienceNoticeDTO.getCompanyName());
-                } catch (MessagingException e) {
-                    throw new RuntimeException(e);
-                }
-            }else{
-                try {
-                    mailService.sendMailByNotice(userDTO.getSnsEmail(),userDTO.getUserName(),experienceNoticeDTO.getExperienceNoticeTitle(),experienceNoticeDTO.getCompanyName());
-                } catch (MessagingException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
+//        ExperienceNoticeDTO experienceNoticeDTO = memberAlarmSettingMapper.selectByNoticeId(noticeRequestDTO.getId());
+//        experienceNoticeDTO.getUsers().forEach((userDTO) -> {
+//
+//            if(userDTO.getUserEmail()!=null){
+//                try {
+//                    mailService.sendMailByNotice(userDTO.getUserEmail(),userDTO.getUserName(),experienceNoticeDTO.getExperienceNoticeTitle(),experienceNoticeDTO.getCompanyName());
+//                } catch (MessagingException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }else{
+//                try {
+//                    mailService.sendMailByNotice(userDTO.getSnsEmail(),userDTO.getUserName(),experienceNoticeDTO.getExperienceNoticeTitle(),experienceNoticeDTO.getCompanyName());
+//                } catch (MessagingException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        });
     }
 
     @Override

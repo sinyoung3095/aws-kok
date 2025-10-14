@@ -192,6 +192,8 @@ public class JwtTokenProvider {
     }
 
 
+
+
     public Claims getClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
@@ -259,6 +261,7 @@ public class JwtTokenProvider {
 
         return DigestUtils.md5DigestAsHex(token.getBytes());
     }
+
     public boolean isTokenExpired(String token){
         try {
             Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();

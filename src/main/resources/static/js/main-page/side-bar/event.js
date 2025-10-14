@@ -146,7 +146,7 @@ search.addEventListener("keyup",async (e)=>{
         }
     }
 })
-
+sideService.getAlarm();
 // 사이드바 설정 모달
 const settingBtn = document.querySelector(".sidebar-setting");
 const settingModal = document.querySelector(".sidebar-setting-modal");
@@ -173,7 +173,7 @@ if (settingModal) {
         }
     });
 }
-sideService.getAlarm();
+
 // 알림 설정 토글
 document.querySelectorAll(".setting-modal-alarm-button").forEach((button) => {
     const check = button.querySelector(".setting-modal-alarm-button-check");
@@ -181,6 +181,7 @@ document.querySelectorAll(".setting-modal-alarm-button").forEach((button) => {
     button.addEventListener("click", async () => {
         button.classList.toggle("off");
         check.classList.toggle("off");
+        await  sideService.getLink(sideLayout.showLink);
         if(button.classList.contains("off")){
             console.log(button.dataset.keyword);
             await sideService.setInactive({keyword:button.dataset.keyword});
