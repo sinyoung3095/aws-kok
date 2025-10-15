@@ -1,101 +1,102 @@
-const searchBtn = document.querySelector(".search-status-btn");
-const jobMenu = document.querySelector(".job");
-const jobItems = document.querySelectorAll(".job-3");
-const checkIcon = document.querySelector(".setting-31");
-const searchSpan = document.querySelector(".status-span");
+// const searchBtn = document.querySelector(".search-status-btn");
+// const jobMenu = document.querySelector(".job");
+// const jobItems = document.querySelectorAll(".job-3");
+// const checkIcon = document.querySelector(".setting-31");
+// const searchSpan = document.querySelector(".status-span");
+//
+// // 버튼 클릭 → 메뉴 표시/숨김 토글
+// // searchBtn.addEventListener("click", (e) => {
+// //     e.stopPropagation(); // 외부 클릭 이벤트 막기
+// //     jobMenu.style.display =
+// //         jobMenu.style.display === "block" ? "none" : "block";
+// // });
+//
+// // job-3 선택
+// jobItems.forEach((item) => {
+//     item.addEventListener("click", (e) => {
+//         e.stopPropagation();
+//
+//         // 체크마크 이동
+//         if (checkIcon.parentNode) checkIcon.parentNode.removeChild(checkIcon);
+//         item.appendChild(checkIcon);
+//
+//         // 선택 강조
+//         jobItems.forEach((j) => j.classList.remove("selected"));
+//         item.classList.add("selected");
+//
+//         // span 업데이트
+//         const text = item.querySelector(".job-6").innerText;
+//         // console.log(item.querySelector(".job-6"));
+//         // console.log(text);
+//         searchSpan.innerText = text;
+//
+//         // 메뉴 숨김
+//         jobMenu.style.display = "none";
+//     });
+// });
+//
+// // 외부 클릭 시 메뉴 숨김
+// document.addEventListener("click", () => {
+//     jobMenu.style.display = "none";
+// });
+//
+// const allStatus = document.querySelector(".all-status");
+// const doingStatus = document.querySelector(".doing-status");
+// const pendingStatus = document.querySelector(".pending-status");
+// const compStatus = document.querySelector(".complete-status");
+//
+// const ing = document.querySelectorAll(".ing");
+// const pend = document.querySelectorAll(".pend");
+// const comp = document.querySelectorAll(".comp");
+//
+// allStatus.addEventListener("click", () => {
+//     ing.forEach((tr) => {
+//         tr.style.display = "";
+//     });
+//     pend.forEach((tr) => {
+//         tr.style.display = "";
+//     });
+//     comp.forEach((tr) => {
+//         tr.style.display = "";
+//     });
+// });
+//
+// doingStatus.addEventListener("click", () => {
+//     ing.forEach((tr) => {
+//         tr.style.display = "";
+//     });
+//     pend.forEach((tr) => {
+//         tr.style.display = "none";
+//     });
+//     comp.forEach((tr) => {
+//         tr.style.display = "none";
+//     });
+// });
+//
+// pendingStatus.addEventListener("click", () => {
+//     ing.forEach((tr) => {
+//         tr.style.display = "none";
+//     });
+//     pend.forEach((tr) => {
+//         tr.style.display = "";
+//     });
+//     comp.forEach((tr) => {
+//         tr.style.display = "none";
+//     });
+// });
+//
+// compStatus.addEventListener("click", () => {
+//     ing.forEach((tr) => {
+//         tr.style.display = "none";
+//     });
+//     pend.forEach((tr) => {
+//         tr.style.display = "none";
+//     });
+//     comp.forEach((tr) => {
+//         tr.style.display = "";
+//     });
+// });
 
-// 버튼 클릭 → 메뉴 표시/숨김 토글
-searchBtn.addEventListener("click", (e) => {
-    e.stopPropagation(); // 외부 클릭 이벤트 막기
-    jobMenu.style.display =
-        jobMenu.style.display === "block" ? "none" : "block";
-});
-
-// job-3 선택
-jobItems.forEach((item) => {
-    item.addEventListener("click", (e) => {
-        e.stopPropagation();
-
-        // 체크마크 이동
-        if (checkIcon.parentNode) checkIcon.parentNode.removeChild(checkIcon);
-        item.appendChild(checkIcon);
-
-        // 선택 강조
-        jobItems.forEach((j) => j.classList.remove("selected"));
-        item.classList.add("selected");
-
-        // span 업데이트
-        const text = item.querySelector(".job-6").innerText;
-        // console.log(item.querySelector(".job-6"));
-        // console.log(text);
-        searchSpan.innerText = text;
-
-        // 메뉴 숨김
-        jobMenu.style.display = "none";
-    });
-});
-
-// 외부 클릭 시 메뉴 숨김
-document.addEventListener("click", () => {
-    jobMenu.style.display = "none";
-});
-
-const allStatus = document.querySelector(".all-status");
-const doingStatus = document.querySelector(".doing-status");
-const pendingStatus = document.querySelector(".pending-status");
-const compStatus = document.querySelector(".complete-status");
-
-const ing = document.querySelectorAll(".ing");
-const pend = document.querySelectorAll(".pend");
-const comp = document.querySelectorAll(".comp");
-
-allStatus.addEventListener("click", () => {
-    ing.forEach((tr) => {
-        tr.style.display = "";
-    });
-    pend.forEach((tr) => {
-        tr.style.display = "";
-    });
-    comp.forEach((tr) => {
-        tr.style.display = "";
-    });
-});
-
-doingStatus.addEventListener("click", () => {
-    ing.forEach((tr) => {
-        tr.style.display = "";
-    });
-    pend.forEach((tr) => {
-        tr.style.display = "none";
-    });
-    comp.forEach((tr) => {
-        tr.style.display = "none";
-    });
-});
-
-pendingStatus.addEventListener("click", () => {
-    ing.forEach((tr) => {
-        tr.style.display = "none";
-    });
-    pend.forEach((tr) => {
-        tr.style.display = "";
-    });
-    comp.forEach((tr) => {
-        tr.style.display = "none";
-    });
-});
-
-compStatus.addEventListener("click", () => {
-    ing.forEach((tr) => {
-        tr.style.display = "none";
-    });
-    pend.forEach((tr) => {
-        tr.style.display = "none";
-    });
-    comp.forEach((tr) => {
-        tr.style.display = "";
-    });
-});
 
 const adTable = document.querySelector("#ad-list-table");
 if (adTable) {
@@ -197,7 +198,6 @@ function getDisplayStatus(ad) {
 
 
 // ######################### 공고목록 ############################
-const companyId = 1;
 const page = 1;
 let keyword ="";
 

@@ -1,10 +1,8 @@
 package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
+import com.example.kok.dto.*;
 import com.example.kok.dto.ConsoleInternApplicantDTO;
-import com.example.kok.dto.ConsoleInternApplicantDTO;
-import com.example.kok.dto.ConsoleInternListDTO;
-import com.example.kok.dto.ConsoleInternListRequestDTO;
 import com.example.kok.service.ConsoleInternApplicationService;
 import com.example.kok.service.ConsoleInternDetailService;
 import com.example.kok.service.ConsoleInternListService;
@@ -31,30 +29,57 @@ public class ConsoleInternController {
 
     //    기업 콘솔 인턴 공고 목록
     @GetMapping("/list")
-    public String goToList() {
+    public String goToList(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+                           Model model) {
+
+        Long companyId = customUserDetails.getId();
+        String companyName = customUserDetails.getCompanyName();
+        String memberName = customUserDetails.getUsername();
+
+        model.addAttribute("companyId", companyId);
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("memberName", memberName);
+
         return "enterprise-console/console-intern-list";
     }
 
     //    기업 콘솔 인턴 공고 등록, 수정
     @GetMapping(value = {"/create", "edit/{id}"})
-    public String goToWrite(HttpServletRequest request, Model model, @PathVariable(required = false) Long id) {
+    public String goToWrite(@PathVariable(required = false) Long id,
+                            @AuthenticationPrincipal CustomUserDetails customUserDetails,
+                            HttpServletRequest request,
+                            Model model) {
+
+        ConsoleInternListRequestDTO notice = consoleInternListService.getNotice(id);
+
+        Long companyId = customUserDetails.getId();
+        String companyName = customUserDetails.getCompanyName();
+        String memberName = customUserDetails.getUsername();
+
         if(request.getRequestURI().contains("create")){
             model.addAttribute("page","create");
             model.addAttribute("notice", new ConsoleInternListRequestDTO());
+            model.addAttribute("companyId", companyId);
+            model.addAttribute("companyName", companyName);
+            model.addAttribute("memberName", memberName);
+
             return "enterprise-console/console-intern-update";
         }
-        ConsoleInternListRequestDTO notice = consoleInternListService.getNotice(id);
 
         model.addAttribute("page","edit");
         model.addAttribute("id", id);
         model.addAttribute("notice", notice);
+        model.addAttribute("companyId", companyId);
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("memberName", memberName);
+
         return "enterprise-console/console-intern-update";
     }
 
 
 //    기업 콘솔 인턴 지원서 목록
     @GetMapping("/applicate-list/{internNoticeId}")
-    public String goToApplicateList(@AuthenticationPrincipal CustomUserDetails userDetails,
+    public String goToApplicateList(@AuthenticationPrincipal CustomUserDetails customUserDetails,
                                     @PathVariable("internNoticeId") Long internNoticeId,
                                     Model model) {
 
@@ -63,27 +88,40 @@ public class ConsoleInternController {
         List<ConsoleInternApplicantDTO> applicants  =
                 consoleInternApplicationService.getApplicantsByNoticeId(internNoticeId);
 
-        model.addAttribute("userDetails", userDetails);
+        String companyName = customUserDetails.getCompanyName();
+        String memberName = customUserDetails.getUsername();
+
         model.addAttribute("internDetail", internDetail);
         model.addAttribute("internNoticeId", internNoticeId);
-        model.addAttribute("memberId", applicants.get(0).getUserId()); //지원자 id
+//        model.addAttribute("memberId", applicants.get(0).getUserId()); //지원자 id
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("memberName", memberName);
+
+        if (applicants != null && !applicants.isEmpty()) {//지원자 id
+            ConsoleInternApplicantDTO firstApplicant = applicants.get(0);
+            model.addAttribute("memberId", firstApplicant.getUserId());
+        }
+
         return "enterprise-console/console-intern-applicate-list";
     }
-
 
 //    기업 콘솔 인턴 지원서
     @GetMapping("/application/{internNoticeId}/{memberId}")
     public String goToApplication(@PathVariable("internNoticeId") Long internNoticeId,
                                   @PathVariable("memberId") Long memberId,
-                                  @AuthenticationPrincipal CustomUserDetails userDetails,
+                                  @AuthenticationPrincipal CustomUserDetails customUserDetails,
                                   Model model) {
 
         ConsoleInternApplicantDTO applicantDetail =
                 consoleInternApplicationService.getApplicantDetail(memberId, internNoticeId);
 
-        model.addAttribute("userDetails", userDetails);
+        String companyName = customUserDetails.getCompanyName();
+        String memberName = customUserDetails.getUsername();
+
         model.addAttribute("applicantDetail", applicantDetail);
         model.addAttribute("memberId", memberId); //지원자 id
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("memberName", memberName);
 
         return "enterprise-console/console-intern-application";
     }

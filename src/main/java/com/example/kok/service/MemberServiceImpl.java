@@ -196,9 +196,15 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void updateProfile(Long id, UserMemberDTO dto, MultipartFile profile) {
+        String JobCate=memberDAO.findJobCategoryByMemberId(id);
         memberDAO.updateInfo(id, dto.getMemberInfo());
         memberDAO.updateName(id, dto.getUserName());
-        memberDAO.updateJob(id, dto.getJobName());
+        if(JobCate.isEmpty()){
+            memberDAO.plusJob(id, dto.getJobName());
+        } else{
+            memberDAO.updateJob(id, dto.getJobName());
+        }
+
 
         if(profile != null) {
             memberDAO.deleteProfile(id);

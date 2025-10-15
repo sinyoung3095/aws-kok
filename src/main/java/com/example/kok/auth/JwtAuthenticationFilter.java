@@ -67,7 +67,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
             if(cookieRefreshToken != null) {
                 String username = jwtTokenProvider.getUserName(cookieRefreshToken);
-
+                log.info(username);
                 boolean checkRefreshToken = provider != null ? jwtTokenProvider.checkRefreshTokenBetweenCookieAndRedis(username, cookieRefreshToken, provider)
                         : jwtTokenProvider.checkRefreshTokenBetweenCookieAndRedis(username, cookieRefreshToken);
 

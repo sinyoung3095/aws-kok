@@ -26,10 +26,6 @@ public class ConsoleExperienceFileDownloadController {
         var file = fileService.getDownloadUrl(memberId, experienceNoticeId)
                 .orElseThrow(() -> new RuntimeException("파일 정보를 찾을 수 없습니다."));
 
-        log.info("memberId={}, experienceNoticeId={}, filePath={}, fileName={}",
-                memberId, experienceNoticeId, file.getFilePath(), file.getFileOriginName());
-
-
         String downloadUrl = s3Service.getPreSignedDownloadUrl(
                 file.getFilePath(),
                 file.getFileOriginName(),

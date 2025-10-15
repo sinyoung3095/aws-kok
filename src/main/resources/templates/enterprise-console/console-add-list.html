@@ -81,41 +81,41 @@
                                         <input type="text" class="search-input" placeholder="광고 제목 검색">
                                     </div>
                                 </div>
-                                <button class="search-status-btn">
-                                    <span class="status-span">모든 상태</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="down-svg" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
-                                    <div class="job">
-                                        <div class="job-1">
-                                            <div class="job-2">
-                                                <div class="job-3 all-status">
-                                                    <div class="job-5">
-                                                        <p class="job-6">모든 상태</p>
-                                                    </div>
-                                                    <div class="setting-31">
-                                                        <svg aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="24" role="img" width="24">
-                                                            <path clip-rule="evenodd" d="M20.066 5.935a.8.8 0 0 1 0 1.13l-11 11a.8.8 0 0 1-1.131 0l-4-4a.8.8 0 0 1 1.13-1.13L8.5 16.369 18.935 5.935a.8.8 0 0 1 1.13 0" fill-rule="evenodd"></path>
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                                <div class="job-3 doing-status">
-                                                    <div class="job-5">
-                                                        <p class="job-6">진행 중</p>
-                                                    </div>
-                                                </div>
-                                                <div class="job-3 pending-status">
-                                                    <div class="job-5">
-                                                        <p class="job-6">대기 중</p>
-                                                    </div>
-                                                </div>
-                                                <div class="job-3 complete-status">
-                                                    <div class="job-5">
-                                                        <p class="job-6">완료</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </button>
+<!--                                <button class="search-status-btn">-->
+<!--                                    <span class="status-span">모든 상태</span>-->
+<!--                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="down-svg" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>-->
+<!--                                    <div class="job">-->
+<!--                                        <div class="job-1">-->
+<!--                                            <div class="job-2">-->
+<!--                                                <div class="job-3 all-status">-->
+<!--                                                    <div class="job-5">-->
+<!--                                                        <p class="job-6">모든 상태</p>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="setting-31">-->
+<!--                                                        <svg aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="24" role="img" width="24">-->
+<!--                                                            <path clip-rule="evenodd" d="M20.066 5.935a.8.8 0 0 1 0 1.13l-11 11a.8.8 0 0 1-1.131 0l-4-4a.8.8 0 0 1 1.13-1.13L8.5 16.369 18.935 5.935a.8.8 0 0 1 1.13 0" fill-rule="evenodd"></path>-->
+<!--                                                        </svg>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="job-3 doing-status">-->
+<!--                                                    <div class="job-5">-->
+<!--                                                        <p class="job-6">진행 중</p>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="job-3 pending-status">-->
+<!--                                                    <div class="job-5">-->
+<!--                                                        <p class="job-6">대기 중</p>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="job-3 complete-status">-->
+<!--                                                    <div class="job-5">-->
+<!--                                                        <p class="job-6">완료</p>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </button>-->
                             </div>
                             <div class="card">
                                 <div class="list-top">
@@ -320,6 +320,9 @@
         </main>
     </div>
 </body>
+<script th:inline="javascript">
+    const companyId = [[${companyId}]];
+</script>
 <script src="/js/console/add-list/module/service.js"></script>
 <script src="/js/console/add-list/module/layout.js"></script>
 <script src="/js/console/add-list/event.js"></script>
