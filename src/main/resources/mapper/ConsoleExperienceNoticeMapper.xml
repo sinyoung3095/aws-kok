@@ -189,7 +189,7 @@
     </select>
 
     <!-- 단일 공고 조회 - 수정 페이지용 -->
-    <select id="selectById" resultType="ExperienceNoticeDTO">
+    <select id="selectById">
         select
             en.id,
             en.experience_notice_title,
