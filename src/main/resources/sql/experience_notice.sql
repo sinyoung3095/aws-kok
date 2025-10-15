@@ -43,7 +43,8 @@ update tbl_experience_notice
 set experience_notice_status = 'active'
 where experience_notice_status = 'inactive';
 
-select * from tbl_experience_notice;
+select * from tbl_experience_notice
+order by id;
 
 alter table tbl_experience_notice
     add column experience_main_tasks varchar(255);
