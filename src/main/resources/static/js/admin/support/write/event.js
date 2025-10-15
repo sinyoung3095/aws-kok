@@ -3,9 +3,6 @@ const icons = document.querySelectorAll(".icon-wrapper i");
 const userMenuWrapper = document.querySelector(".user-menu-wrapper");
 const userMenuContent = document.querySelector(".user-menu-content");
 
-// 목록
-service.getNotice(layout.showList);
-
 // 사이드바 펼침/접힘
 sideMenuButtons.forEach((menu) => {
     menu.addEventListener("click", function () {
@@ -38,29 +35,19 @@ document.addEventListener("click", (e) => {
     }
 });
 
-// 목록
-const pagination = document.querySelector(".pagination.kok-pagination");
-pagination.addEventListener("click", async (e) => {
-    e.preventDefault();
-    await service.getNotice(layout.showList, e.target.dataset.page);
+// 게시글 등록 시 공란 방지
+const writeForm = document.getElementById("faq-form");
+const noticeTitle = document.getElementById("faq-title");
+const noticeContent = document.getElementById("faq-content");
+const submitButton = document.getElementById("writeButton");
 
-    // 페이지 번호
-    const clickNum = e.target.closest("a[data-page]");
-    const pageNumber = parseInt(clickNum.dataset.page);
-
-    const pageNumsList = pagination.querySelectorAll("li.page-num");
-    pageNumsList.forEach((pageNum) => {
-        pageNum.classList.remove("active");
-    });
-
-    const currentList = Array.from(pageNumsList).find((pageNum) => {
-        const activeList = pageNum.querySelector("a.page-item-num");
-        return activeList && parseInt(activeList.dataset.page) === pageNumber;
-    });
-
-    if(currentList){
-        currentList.classList.add("active");
+submitButton.addEventListener("click", (e) => {
+    if(noticeTitle.value.length === 0) {
+        alert("제목을 입력해주세요");
+    } else if(noticeContent.value.length === 0) {
+        alert("내용을 입력해주세요");
+    } else {
+        writeForm.submit();
     }
 });
-
 
