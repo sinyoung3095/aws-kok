@@ -8,5 +8,5 @@ import java.util.Optional;
 
 
 public interface UserProfileService {
-    public FileDTO findProfileById(Long id);
+    public String findProfileById(Long id);
 }

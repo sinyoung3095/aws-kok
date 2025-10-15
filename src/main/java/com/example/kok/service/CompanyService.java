@@ -36,4 +36,5 @@ public interface CompanyService {
 //    아이디로 기업 조회
     public Optional<AdminCompanyDTO> findCompany(Long userId);
 
+    public List<CompanyDTO> findPopularCompanies();
 }

@@ -141,4 +141,5 @@ public class ConsoleProfileServiceImpl implements ConsoleProfileService {
         System.out.println("업데이트 완료 후 프로필 이미지 URL: " + updatedProfile.getUploadedFiles());
         System.out.println("업데이트 완료 후 배경 이미지 URL: " + updatedProfile.getBackgroundFiles());
     }
+
 }
