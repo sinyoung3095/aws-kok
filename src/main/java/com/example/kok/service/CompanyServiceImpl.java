@@ -1,9 +1,7 @@
 package com.example.kok.service;
 
 import com.example.kok.dto.*;
-import com.example.kok.repository.CompanyDAO;
-import com.example.kok.repository.ExperienceNoticeDAO;
-import com.example.kok.repository.InternNoticeDAO;
+import com.example.kok.repository.*;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.*;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +21,8 @@ public class CompanyServiceImpl implements CompanyService {
     private final S3Service s3Service;
     private final InternNoticeDAO internNoticeDAO;
     private final ExperienceNoticeDAO experienceNoticeDAO;
+    private final FollowDAO followDAO;
+    private final CompanyProfileFileDAO companyProfileFileDAO;
 
 
     @Override
@@ -105,7 +105,20 @@ public class CompanyServiceImpl implements CompanyService {
                 });
     }
 
-//    기업 목록
+    @Override
+    public List<CompanyDTO> findPopularCompanies() {
+        List<CompanyDTO> companyDTOs = followDAO.selectPopularCompany();
+        companyDTOs.forEach(companyDTO -> {
+
+            companyDTO.setCompanyProfileFile(companyProfileFileDAO.findFileByCompanyId(companyDTO.getUserId()).getFilePath());
+            if (companyDTO.getCompanyProfileFile() == null) {
+                companyDTO.setCompanyProfileFile("/images/main-page/image3.png");
+            }
+        });
+        return companyDTOs;
+    }
+
+    //    기업 목록
     @Override
     public CompaniesCriteriaDTO getCompanyList(int page, CompanySearch search, Long userId) {
 //        System.out.println("검색 한 내용 " + search);

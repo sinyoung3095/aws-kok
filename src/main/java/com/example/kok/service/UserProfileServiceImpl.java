@@ -15,13 +15,14 @@ public class UserProfileServiceImpl implements UserProfileService {
     private final FileDAO fileDAO;
     private final S3Service s3Service;
     @Override
-    public FileDTO findProfileById(Long id) {
+    public String findProfileById(Long id) {
         FileDTO file = fileDAO.findFileById(id);
+        String path = null;
         if(file!=null){
-            String preSignedUrl = s3Service.getPreSignedUrl(file.getFilePath(), Duration.ofMinutes(10));
-            file.setFilePath(preSignedUrl);
+            path = s3Service.getPreSignedUrl(file.getFilePath(), Duration.ofMinutes(10));
+
         }
 
-        return file;
+        return path;
     }
 }

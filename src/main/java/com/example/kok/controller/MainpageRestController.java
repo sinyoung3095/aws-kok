@@ -3,11 +3,13 @@ package com.example.kok.controller;
 import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.*;
 import com.example.kok.repository.*;
+import com.example.kok.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,18 +18,19 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Slf4j
 public class MainpageRestController {
-    private final FollowDAO followDAO;
     private final RequestExperienceDAO requestExperienceDAO;
     private final RequestInternDAO requestInternDAO;
     private final ExperienceNoticeDAO experienceNoticeDAO;
     private final InternNoticeDAO internNoticeDAO;
     private final MemberAlarmSettingDAO memberAlarmSettingDAO;
     private final MemberDAO memberDAO;
+    private final CompanyService companyService;
+
 
     @GetMapping("popular")
     public List<CompanyDTO> findPopularCompany() {
-        log.info(followDAO.selectPopularCompany().toString());
-        return followDAO.selectPopularCompany();
+
+        return companyService.findPopularCompanies() ;
     }
 
     @GetMapping("requestExperience")
