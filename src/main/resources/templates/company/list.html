@@ -184,8 +184,22 @@
                         </div>
                     </div>
                     <div class="side-wrapper">
-                        <!-- 로그인시 -->
-                        <div class="content-box" th:if="${userDTO != null}">
+                        <!-- 일반 로그인시 -->
+                        <div class="content-box" th:if="${isMember}">
+                            <div class="profile-card">
+                                <div class="profile-avatar">
+                                    <img alt="image" width="60" height="60" srcset="" th:src="${userDTO.memberProfileUrl != null ? userDTO.memberProfileUrl : '/images/main-page/image2.png'}" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+                                </div>
+                                <div class="profile-info">
+                                    <div class="profile-name">
+                                        <p class="member-name" th:text="${userDTO.username}"></p>
+                                    </div>
+                                    <p class="member-role" th:text="${userDTO.userRole}"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 기업 로그인시 -->
+                        <div class="content-box" th:if="${isCompany}">
                             <div class="profile-card">
                                 <div class="profile-avatar">
                                     <img alt="image" width="60" height="60" srcset="" th:src="${companyDTO.companyProfileFile != null ? companyDTO.companyProfileFile : '/images/main-page/image2.png'}" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
@@ -199,7 +213,7 @@
                             </div>
                         </div>
 
-                        <!-- 비로그인시 -->
+                        <!-- 비 로그인시 -->
                         <div class="content-box" th:if="${userDTO == null}">
                             <div class="profile-card">
                                 <div class="profile-message">
