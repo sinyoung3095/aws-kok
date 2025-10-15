@@ -105,6 +105,7 @@ public class MemberDAO {
 
 //    소개 수정
     public void updateInfo(Long memberId, String info) {
+        System.out.println("다오: " + info);
         memberMapper.updateProfileInfo(memberId, info);
     }
 
@@ -115,11 +116,13 @@ public class MemberDAO {
 
 //    직군 변경
     public void updateJob(Long id, String job) {
+        System.out.println("직군 변경 다오: " + job);
         memberMapper.updateProfileCategory(id, job);
     }
 
 //    직군 추가
     public void plusJob(Long id, String job){
+        System.out.println("직군 추가 다오: " + job);
         memberMapper.insertProfileJob(id, job);
     }
 }

@@ -113,6 +113,8 @@ public class MyPageRestController {
         member.setUserName(name);
         member.setJobName(job);
         member.setMemberInfo(info);
+        System.out.println("컨트롤러 인포: " + member.getMemberInfo());
+        System.out.println("컨트롤러 직군: " + member.getJobName());
         memberService.updateProfile(memberId, member, file);
     }
 }

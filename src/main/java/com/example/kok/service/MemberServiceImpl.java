@@ -199,6 +199,8 @@ public class MemberServiceImpl implements MemberService {
         String JobCate=memberDAO.findJobCategoryByMemberId(id);
         memberDAO.updateInfo(id, dto.getMemberInfo());
         memberDAO.updateName(id, dto.getUserName());
+        System.out.println("서비스 인포: " + dto.getMemberInfo());
+        System.out.println("서비스 직군: " + dto.getJobName());
         if(JobCate.isEmpty()){
             memberDAO.plusJob(id, dto.getJobName());
         } else{
