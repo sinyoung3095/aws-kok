@@ -1778,6 +1778,10 @@
     display: block !important;
 }
 
+#support-wrap {
+    height: 98%;
+}
+
 .customer-support-list {
     list-style-type: none !important;
     overflow-x: hidden !important;
