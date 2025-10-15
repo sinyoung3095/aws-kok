@@ -200,15 +200,16 @@ const layout = (() => {
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="info-layout detail-info">
-                                            <div class="info-title justify-content-between">
-                                                <div class="flex-left d-flex">
-                                                    <div class="title">이미지</div>
-                                                </div>
-                                                <div class="flex-right"></div>
-                                            </div>
-                                            <!--  배경 이미지  -->`;
+                                        <div class="info-layout detail-info">`;
                                             if(adminAdvertisementDTO.advertisementBackgroundFiles && adminAdvertisementDTO.advertisementBackgroundFiles.length > 0) {
+                                                text +=`
+                                                        <div class="info-title justify-content-between">
+                                                            <div class="flex-left d-flex">
+                                                                <div class="title">이미지</div>
+                                                            </div>
+                                                            <div class="flex-right"></div>
+                                                        </div>
+                                            <!--  배경 이미지  -->`;
                                                 adminAdvertisementDTO.advertisementBackgroundFiles.forEach((file) => {
                                                     text += `<img src="${file.filePath}" height="100%" width="100%" alt="">`;
                                                 });
