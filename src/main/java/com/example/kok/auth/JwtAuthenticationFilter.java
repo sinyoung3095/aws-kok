@@ -58,6 +58,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 for (Cookie cookie : request.getCookies()) {
                     if("refreshToken".equals(cookie.getName())){
                         cookieRefreshToken = cookie.getValue();
+                        log.info("cookieRefreshToken:{}", cookieRefreshToken);
                     }
                     if("provider".equals(cookie.getName())){
                         provider = cookie.getValue();
