@@ -22,7 +22,7 @@ public class FollowController {
             return ResponseEntity.ok(false);
         }
         followService.follow(userDetails.getId(), companyId);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(true);
     }
 
     @DeleteMapping("/{companyId}")
