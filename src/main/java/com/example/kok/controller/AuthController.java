@@ -115,6 +115,22 @@ public class AuthController {
         userEmailCookie.setMaxAge(0);
 
         response.addCookie(userEmailCookie);
+
+        Cookie providerCookie = new Cookie("provider", null);
+        providerCookie.setHttpOnly(true);
+        providerCookie.setSecure(true);
+        providerCookie.setPath("/");
+        providerCookie.setMaxAge(0);
+
+        response.addCookie(providerCookie);
+
+        Cookie profileCookie = new Cookie("profile", null);
+        profileCookie.setHttpOnly(true);
+        profileCookie.setSecure(true);
+        profileCookie.setPath("/");
+        profileCookie.setMaxAge(0);
+
+        response.addCookie(profileCookie);
     }
 
 //    리프레시 토큰으로 엑세스 토큰 발급
