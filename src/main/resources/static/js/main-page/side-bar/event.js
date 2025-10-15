@@ -122,12 +122,12 @@ tabs.forEach((tab) => {
 });
 
 // 검색 기능
-const search = document.getElementById("search");
-search.addEventListener("keyup",async (e)=>{
+const searchSide = document.getElementById("search");
+searchSide.addEventListener("keyup",async (e)=>{
 
     if(e.key==="Enter"){
         let keyword ='';
-        keyword = search.value;
+        keyword = searchSide.value;
         console.log(tabs[0].classList.value.includes("active"));
         if(tabs[0].classList.value.includes("active")){
             console.log(keyword);

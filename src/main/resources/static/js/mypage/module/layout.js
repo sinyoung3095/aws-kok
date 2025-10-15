@@ -62,12 +62,12 @@ const myPageLayout = (() => {
                 </div>
             </div>
             <!-- 삭제 버튼 -->
-            <div class="remove">
-                <button class="post-23" style="width: 50px; color: black; font-size: 15px; font-weight: 500;">
-                    <span
-                        class="ai_center d_flex jc_center us_none white-space_nowrap p_0px_3px textStyle_Body.BodyS_Bold">삭제</span>
-                </button>
-            </div>
+<!--            <div class="remove">-->
+<!--                <button class="post-23" style="width: 50px; color: black; font-size: 15px; font-weight: 500;">-->
+<!--                    <span-->
+<!--                        class="ai_center d_flex jc_center us_none white-space_nowrap p_0px_3px textStyle_Body.BodyS_Bold">삭제</span>-->
+<!--                </button>-->
+<!--            </div>-->
         </div>
         <div class="post-13">
             <div class="post-14">
@@ -105,18 +105,18 @@ const myPageLayout = (() => {
                 <div class="post-18">
                     <div class="post-19">
                         <!-- 좋아요 -->
-                        <button class="post-20" data-liked="${post.liked}">
-                            <div class="post-21">
-                                <svg class="heart" viewBox="0 0 24 24" fill="red" style="fill:${post.liked ? 'red' : 'white'}; stroke: red;" height="20"
-                                     role="img" width="20">
-                                    <path
-                                        d="M17.668 16.4c2.028-1.76 4.328-3.755 4.328-6.902a6.07 6.07 0 0 0-5.831-6.274 5.25 5.25 0 0 0-2.296.447l-.267.128a5.3 5.3 0 0 0-1.606 1.274 5.26 5.26 0 0 0-4.161-1.85 6.07 6.07 0 0 0-4.211 1.934l-.2.225a6.07 6.07 0 0 0-1.42 4.116l.005.29c.132 2.968 2.278 4.833 4.353 6.637v.001l.742.65.893.797a39 39 0 0 0 3.057 2.623l.109.065c.22.12.462.193.712.21l.125.005c.293 0 .58-.075.837-.215l.108-.065a39 39 0 0 0 3.151-2.707l.802-.716z"></path>
-                                </svg>
-                            </div>
-                            <div style="margin-left: 5px;">
-                                <p class="post-22">${post.likesCount}</p>
-                            </div>
-                        </button>
+<!--                        <button class="post-20" data-liked="${post.liked}">-->
+<!--                            <div class="post-21">-->
+<!--                                <svg class="heart" viewBox="0 0 24 24" fill="red" style="fill:${post.liked ? 'red' : 'white'}; stroke: red;" height="20"-->
+<!--                                     role="img" width="20">-->
+<!--                                    <path-->
+<!--                                        d="M17.668 16.4c2.028-1.76 4.328-3.755 4.328-6.902a6.07 6.07 0 0 0-5.831-6.274 5.25 5.25 0 0 0-2.296.447l-.267.128a5.3 5.3 0 0 0-1.606 1.274 5.26 5.26 0 0 0-4.161-1.85 6.07 6.07 0 0 0-4.211 1.934l-.2.225a6.07 6.07 0 0 0-1.42 4.116l.005.29c.132 2.968 2.278 4.833 4.353 6.637v.001l.742.65.893.797a39 39 0 0 0 3.057 2.623l.109.065c.22.12.462.193.712.21l.125.005c.293 0 .58-.075.837-.215l.108-.065a39 39 0 0 0 3.151-2.707l.802-.716z"></path>-->
+<!--                                </svg>-->
+<!--                            </div>-->
+<!--                            <div style="margin-left: 5px;">-->
+<!--                                <p class="post-22">${post.likesCount}</p>-->
+<!--                            </div>-->
+<!--                        </button>-->
                         <!-- 댓글 -->
                         <button class="post-20 reply-btn" data-post-id="${post.id}" >
                             <div class="post-21">
@@ -132,51 +132,51 @@ const myPageLayout = (() => {
                             </div>
                         </button>
                         <!-- 수정 -->
-                        <button class="post-20 popup-trigger" data-target="#post-write-popup">
-                            <div class="post-21">
-                                <svg class="icons" aria-label="icon" color="foregrounds.neutral.primary"
-                                     fill="currentColor" height="20" role="img" width="20">
-                                    <path clip-rule="evenodd"
-                                          d="M2.2 5A2.8 2.8 0 0 1 5 2.2h7a.8.8 0 0 1 0 1.6H5A1.2 1.2 0 0 0 3.8 5v14A1.2 1.2 0 0 0 5 20.2h14a1.2 1.2 0 0 0 1.2-1.2v-6a.8.8 0 1 1 1.6 0v6a2.8 2.8 0 0 1-2.8 2.8H5A2.8 2.8 0 0 1 2.2 19zm14.527-1.858a1.8 1.8 0 0 1 2.546 0l1.585 1.585a1.8 1.8 0 0 1 0 2.546l-8 8a1.8 1.8 0 0 1-1.272.527H10A1.8 1.8 0 0 1 8.2 14v-1.586c0-.477.19-.935.527-1.272zm1.414 1.131a.2.2 0 0 0-.282 0L16.13 6 18 7.87l1.727-1.727a.2.2 0 0 0 0-.283zM16.87 9 15 7.132l-5.141 5.141a.2.2 0 0 0-.059.141V14c0 .11.09.2.2.2h1.586a.2.2 0 0 0 .141-.058z"
-                                          fill-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <div style="margin-left: 5px;">
-                                <p class="post-22">수정</p>
-                            </div>
-                        </button>
+<!--                        <button class="post-20 popup-trigger" data-target="#post-write-popup">-->
+<!--                            <div class="post-21">-->
+<!--                                <svg class="icons" aria-label="icon" color="foregrounds.neutral.primary"-->
+<!--                                     fill="currentColor" height="20" role="img" width="20">-->
+<!--                                    <path clip-rule="evenodd"-->
+<!--                                          d="M2.2 5A2.8 2.8 0 0 1 5 2.2h7a.8.8 0 0 1 0 1.6H5A1.2 1.2 0 0 0 3.8 5v14A1.2 1.2 0 0 0 5 20.2h14a1.2 1.2 0 0 0 1.2-1.2v-6a.8.8 0 1 1 1.6 0v6a2.8 2.8 0 0 1-2.8 2.8H5A2.8 2.8 0 0 1 2.2 19zm14.527-1.858a1.8 1.8 0 0 1 2.546 0l1.585 1.585a1.8 1.8 0 0 1 0 2.546l-8 8a1.8 1.8 0 0 1-1.272.527H10A1.8 1.8 0 0 1 8.2 14v-1.586c0-.477.19-.935.527-1.272zm1.414 1.131a.2.2 0 0 0-.282 0L16.13 6 18 7.87l1.727-1.727a.2.2 0 0 0 0-.283zM16.87 9 15 7.132l-5.141 5.141a.2.2 0 0 0-.059.141V14c0 .11.09.2.2.2h1.586a.2.2 0 0 0 .141-.058z"-->
+<!--                                          fill-rule="evenodd"></path>-->
+<!--                                </svg>-->
+<!--                            </div>-->
+<!--                            <div style="margin-left: 5px;">-->
+<!--                                <p class="post-22">수정</p>-->
+<!--                            </div>-->
+<!--                        </button>-->
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- 삭제 모달 -->
-    <div class="del del-post">
-        <div class="del-1">
-            <div class="del-2">
-                <div class="del-3">
-                    <div class="del-4">
-                        <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="40px"
-                             role="img" width="40px">
-                            <path clip-rule="evenodd"
-                                  d="M8.284 6.2H4a.8.8 0 1 0 0 1.6h1.2V18A2.8 2.8 0 0 0 8 20.8h8a2.8 2.8 0 0 0 2.8-2.8V7.8H20a.8.8 0 0 0 0-1.6h-4.284a3.801 3.801 0 0 0-7.432 0m1.666 0h4.1a2.2 2.2 0 0 0-4.1 0m7.25 1.6H6.8V18A1.2 1.2 0 0 0 8 19.2h8a1.2 1.2 0 0 0 1.2-1.2z"
-                                  fill-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <div class="del-5">
-                        <p class="del-6">게시물을 삭제하시겠습니까?</p>
-                        <div class="del-7">
-                            <p class="del-8">삭제된 게시물은 다시 복구할 수 없으며, 게시물에서 발생한 다른 사용자의 좋아요, 댓글도 함께 삭제됩니다.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="del-9">
-                    <button class="del-10 delete-list-post"><span class="del-11">삭제하기</span></button>
-                    <button class="del-12 delete-list-post-cancle"><span class="del-11">닫기</span></button>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--    <div class="del del-post">-->
+<!--        <div class="del-1">-->
+<!--            <div class="del-2">-->
+<!--                <div class="del-3">-->
+<!--                    <div class="del-4">-->
+<!--                        <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="40px"-->
+<!--                             role="img" width="40px">-->
+<!--                            <path clip-rule="evenodd"-->
+<!--                                  d="M8.284 6.2H4a.8.8 0 1 0 0 1.6h1.2V18A2.8 2.8 0 0 0 8 20.8h8a2.8 2.8 0 0 0 2.8-2.8V7.8H20a.8.8 0 0 0 0-1.6h-4.284a3.801 3.801 0 0 0-7.432 0m1.666 0h4.1a2.2 2.2 0 0 0-4.1 0m7.25 1.6H6.8V18A1.2 1.2 0 0 0 8 19.2h8a1.2 1.2 0 0 0 1.2-1.2z"-->
+<!--                                  fill-rule="evenodd"></path>-->
+<!--                        </svg>-->
+<!--                    </div>-->
+<!--                    <div class="del-5">-->
+<!--                        <p class="del-6">게시물을 삭제하시겠습니까?</p>-->
+<!--                        <div class="del-7">-->
+<!--                            <p class="del-8">삭제된 게시물은 다시 복구할 수 없으며, 게시물에서 발생한 다른 사용자의 좋아요, 댓글도 함께 삭제됩니다.</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="del-9">-->
+<!--                    <button class="del-10 delete-list-post"><span class="del-11">삭제하기</span></button>-->
+<!--                    <button class="del-12 delete-list-post-cancle"><span class="del-11">닫기</span></button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>`;
         }
         container.innerHTML = html;
