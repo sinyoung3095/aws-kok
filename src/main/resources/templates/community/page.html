@@ -8,11 +8,6 @@
     <link rel="stylesheet" href="/font/font.css">
     <link rel="stylesheet" href="/css/community/page.css">
     <link rel="stylesheet" href="/css/experience/list.css">
-    <link rel="stylesheet" href="/css/main-page/login-header.css">
-    <link rel="stylesheet" href="/css/main-page/header.css">
-    <link rel="stylesheet" href="/css/main-page/login-side-bar.css">
-    <link rel="stylesheet" href="/css/main-page/side-bar.css">
-    <link rel="stylesheet" href="/css/main-page/mobile-footer.css">
     <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
 </head>
 <body>
@@ -24,6 +19,12 @@
             <div th:replace="~{main-page/login-side-bar}"></div>
         </th:block>
         <main class="main">
+            <th:block th:if="${userDTO==null}">
+                <div th:replace="~{main-page/mobile-header}"></div>
+            </th:block>
+            <th:block th:if="${userDTO!=null}">
+                <div th:replace="~{main-page/mobile-login-header}"></div>
+            </th:block>
             <th:block th:if="${userDTO == null}">
                 <div th:replace="~{main-page/header}"></div>
             </th:block>
