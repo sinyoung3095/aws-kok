@@ -261,7 +261,7 @@ function dropdownFn() {
     // 드롭다운 열기
     triggers.forEach((trigger) => {
         trigger.addEventListener("click", (e) => {
-            console.log("들어옴");
+            // console.log("들어옴");
             e.stopPropagation();
 
             // 다른 드롭다운 닫기
