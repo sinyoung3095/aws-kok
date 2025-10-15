@@ -47,10 +47,10 @@
         join tbl_company c on c.user_id=e.company_id
         left join tbl_company_scale_category_bridge b on e.company_id = b.company_id
         left join tbl_company_scale_category s on b.company_scale_category_id = s.id
-        left join tbl_experience_job_category ej on ej.experience_notice_id=e.id
-        left join tbl_job_category j on j.id=ej.job_category
+        join tbl_experience_job_category ej on ej.experience_notice_id=e.id
+        join tbl_job_category j on j.id=ej.job_category
         left join tbl_save_experience_notice sv on e.id = sv.experience_notice_id
-        where e.experience_end_date &gt;= now()
+        where e.experience_notice_end_date &gt;= now()
         and e.experience_notice_status='active'
         <include refid="search"></include>
         group by e.id,
