@@ -75,7 +75,7 @@ submit.addEventListener("click", async (e) => {
     if(profileUpdate.ok){
         setting.style.display = "none";
     } else {
-        alert("수정 실패"+profileUpdate.status);
+        // alert("수정 실패"+profileUpdate.status);
         setting.style.display = "none";
     }
 });

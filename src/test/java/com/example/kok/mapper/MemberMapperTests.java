@@ -111,4 +111,10 @@ public class MemberMapperTests {
         System.out.println(memberMapper.selectPaymentByMemberId(16L));
         System.out.println(memberService.findPaymentByMemberId(16L));
     }
+
+    @Test
+    public void profileUpdate(){
+//        memberDAO.plusJob(16L, "기획/전략");
+        System.out.println(memberDAO.findJobCategoryByMemberId(16L));
+    }
 }
