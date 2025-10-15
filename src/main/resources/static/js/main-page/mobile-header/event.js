@@ -34,8 +34,8 @@ sideToggleBtn.addEventListener("click", () => {
 
 });
 
-const logout = document.getElementsByClassName("sidebar-logout")[0];
-logout.addEventListener("click",async (e)=>{
+const moblogout = document.getElementsByClassName("sidebar-logout")[0];
+moblogout.addEventListener("click",async (e)=>{
     await service.logout();
 
     location.href='/member/login';
