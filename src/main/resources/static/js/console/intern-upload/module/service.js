@@ -21,8 +21,8 @@ const internRegisterService = (() => {
         });
 
         if (response.ok) {
-            // const result = await response.json();
-            // window.location.href = result.redirectUrl;
+            const result = await response.json();
+            window.location.href = result.redirectUrl;
             console.error("등록 성공: " + response.status);
         } else {
             console.error("등록 실패: " + response.status);

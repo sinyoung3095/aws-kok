@@ -19,6 +19,7 @@ import com.example.kok.service.S3Service;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -71,7 +72,10 @@ public class ConsoleExperienceApiController {
     @PostMapping("/create")
     public ResponseEntity<?> createNotice(@RequestBody ConsoleExperienceListRequestDTO noticeRequestDTO) {
         experienceService.registerNotice(noticeRequestDTO);
-        return ResponseEntity.ok(noticeRequestDTO);
+
+//        return ResponseEntity.ok(noticeRequestDTO);
+        return ResponseEntity.ok(Map.of("redirectUrl", "/enterprise-console/experience/list"));
+
     }
 
 //    공고 수정
@@ -82,6 +86,8 @@ public class ConsoleExperienceApiController {
         experienceService.modifyNotice(noticeRequestDTO);
 
         return ResponseEntity.ok(noticeRequestDTO);
+//        return ResponseEntity.ok(Map.of("redirectUrl", "/enterprise-console/experience/list"));
+
     }
 
 //    공고 상세 - 지원자

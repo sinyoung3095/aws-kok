@@ -256,11 +256,11 @@
                                             <div class="content-wrapper">
                                                 <div class="card-sub">
                                                     <label class="content-label">시작일<span class="must">*</span></label>
-                                                    <input type="text" id="experience_notice_start_date" class="content-input date-input" placeholder="yyyy-mm-dd" th:value="${notice.experienceNoticeStartDate}">
+                                                    <input type="text" id="experience-notice-start-date" class="content-input date-input" placeholder="yyyy-mm-dd" th:value="${notice.experienceNoticeStartDate}">
                                                 </div>
                                                 <div class="card-sub">
                                                     <label class="content-label">종료일<span class="must">*</span></label>
-                                                    <input type="text" id="experience_notice_end_date" class="content-input date-input" placeholder="yyyy-mm-dd" th:value="${notice.experienceNoticeEndDate}">
+                                                    <input type="text" id="experience-notice-end-date" class="content-input date-input" placeholder="yyyy-mm-dd" th:value="${notice.experienceNoticeEndDate}">
                                                 </div>
                                             </div>
                                         </div>
@@ -303,6 +303,7 @@
     </div>
 </body>
 <script th:inline="javascript">
+    const id = [[${id}]]
     const page = [[${page}]];
     const companyId = [[${companyId}]];
 </script>
