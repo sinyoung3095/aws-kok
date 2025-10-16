@@ -35,21 +35,7 @@
             <div class="top-right-section" >
                 <div class="top-right" style="cursor: default;">
                     <div class="top-right-button avatar" style="cursor: default;">
-                        <th:block>
-                            <th:replace th:if="${userDTO.memberProfileUrl!= null}">
-                                <img th:src="${userDTO.memberProfileUrl}">
-                            </th:replace>
-                        </th:block>
-                        <th:block>
-                            <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO==null}">
-                                <img src="/images/main-page/image3.png">
-                            </th:replace>
-                        </th:block>
-                        <th:block>
-                            <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO!=null}">
-                                <img th:src="${fileDTO.filePath}">
-                            </th:replace>
-                        </th:block>
+                        <img th:src="${userDTO.memberProfileUrl}">
                     </div>
                 </div>
             </div>
@@ -61,21 +47,7 @@
             <div class="sidebar-list-profile-section">
                 <!-- 회원 프로필 -->
                 <div class="sidebar-list-profile">
-                    <th:block>
-                        <th:replace th:if="${userDTO.memberProfileUrl!= null}">
-                            <img alt="image" width="40" height="40" srcset="" th:src="${userDTO.memberProfileUrl}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                        </th:replace>
-                    </th:block>
-                    <th:block>
-                        <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO==null}">
-                            <img alt="image" width="40" height="40" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                        </th:replace>
-                    </th:block>
-                    <th:block>
-                        <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO!=null}">
-                            <img alt="image" width="40" height="40" srcset="" th:src="${fileDTO.filePath}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
-                        </th:replace>
-                    </th:block>
+                    <img alt="image" width="40" height="40"  th:src="${userDTO.memberProfileUrl}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
                 </div>
                 <div class="sidebar-list-info">
                     <div>

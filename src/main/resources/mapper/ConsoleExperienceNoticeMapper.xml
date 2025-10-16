@@ -66,8 +66,8 @@
             </if>
             <if test="keyword != null and keyword != ''">
                 and (
-                    en.experience_notice_title ilike concat('%', #{keyword}, '%')
-                    or en.experience_notice_subtitle ilike concat('%', #{keyword}, '%')
+                    en.experience_notice_title like concat('%', #{keyword}, '%')
+                    or en.experience_notice_subtitle like concat('%', #{keyword}, '%')
                     or jc.job_name ilike concat('%', #{keyword}, '%')
                 )
             </if>
@@ -76,7 +76,7 @@
     <!-- 공고 상태 업데이트 (활성/비활성 전환) -->
     <update id="updateNoticeStatus">
         update tbl_experience_notice
-        set experience_notice_status = #{status}::status,
+        set experience_notice_status = #{status},
             updated_datetime = now()
         where id = #{noticeId}
     </update>
@@ -122,8 +122,8 @@
                 #{experienceNoticeIntroduceJob},
                 #{experienceMainTasks},
                 #{experienceNoticeEtc},
-                NOW(),
-                NOW()
+                now(),
+                now()
             )
     </insert>
 
@@ -173,8 +173,8 @@
             en.experience_notice_etc,
             jc.id as job_category_id,
             jc.job_name as job_category_name,
-            COUNT(distinct re.id) as applicant_count,
-            COUNT(distinct sen.member_id) as save_count
+            count(distinct re.id) as applicant_count,
+            count(distinct sen.member_id) as save_count
         from tbl_experience_notice en
                  join tbl_experience_job_category ejc
                       on en.id = ejc.experience_notice_id
@@ -204,17 +204,17 @@
             en.experience_notice_etc,
             jc.id as job_category_id,
             jc.job_name as job_category_name,
-            COUNT(distinct re.id) as applicant_count,
-            COUNT(distinct sen.member_id) as save_count
+            count(distinct re.id) as applicant_count,
+            count(distinct sen.member_id) as save_count
         from tbl_experience_notice en
-                 join tbl_experience_job_category ejc
-                      on en.id = ejc.experience_notice_id
-                 join tbl_job_category jc
-                      on ejc.job_category = jc.id
-                 left join tbl_request_experience re
-                           on en.id = re.experience_notice_id
-                 left join tbl_save_experience_notice sen
-                           on en.id = sen.experience_notice_id
+             join tbl_experience_job_category ejc
+                  on en.id = ejc.experience_notice_id
+             join tbl_job_category jc
+                  on ejc.job_category = jc.id
+             left join tbl_request_experience re
+                       on en.id = re.experience_notice_id
+             left join tbl_save_experience_notice sen
+                       on en.id = sen.experience_notice_id
         where en.id = #{id}
         group by en.id, jc.id
     </select>

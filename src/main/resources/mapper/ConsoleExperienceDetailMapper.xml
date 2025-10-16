@@ -46,7 +46,7 @@
         where en.id = #{experienceNoticeId}
             and u.user_status = 'active'
         <if test="status != null and status != ''">
-            and re.request_experience_status = #{status}::request_status
+            and re.request_experience_status = #{status}
         </if>
         order by re.id desc
         limit #{criteria.count} offset #{criteria.offset}
@@ -62,7 +62,7 @@
         where en.id = #{experienceNoticeId}
         and u.user_status = 'active'
         <if test="status != null and status != ''">
-            and re.request_experience_status = #{status}::request_status
+            and re.request_experience_status = #{status}
         </if>
     </select>
 </mapper>

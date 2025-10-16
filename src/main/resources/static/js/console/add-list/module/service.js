@@ -26,7 +26,7 @@ const adNoticeService = (() => {
 
     const deleteAd = async (id) => {
         try {
-            const response = await fetch(`/enterprise-console/ad/${id}`, {
+            const response = await fetch(`/api/enterprise-console/ad/${id}`, {
                 method: "DELETE",
             });
 

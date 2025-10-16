@@ -20,15 +20,16 @@ const internRegisterService = (() => {
             body: JSON.stringify(data),
         });
 
-        if (response.ok) {
-            const result = await response.json();
-            window.location.href = result.redirectUrl;
-            console.error("등록 성공: " + response.status);
-        } else {
+        if (!response.ok) {
             console.error("등록 실패: " + response.status);
-            return;
+            throw new Error("등록 실패");
         }
-        return await response.json();
+
+        const result = await response.json();
+        console.log("등록 성공: " + response.status);
+        window.location.href = result.redirectUrl;
+
+        return result;
     };
 
     // 인턴 공고 수정

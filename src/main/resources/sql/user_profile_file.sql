@@ -9,5 +9,5 @@ CREATE TABLE tbl_user_profile_file (
 
 select * from tbl_user_profile_file;
 
-delete from tbl_user_profile_file
-where user_id>0;
+insert into tbl_user_profile_file(file_id,user_id)
+values (9,30);

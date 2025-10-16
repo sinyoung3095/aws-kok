@@ -171,21 +171,7 @@
                             <th:replace th:if="${userDTO.userRole.getValue() == 'member' }">
                                 <a onclick="window.location.href='/mypage/page'">
                                     <div class="sidebar-login-user-btn">
-                                        <th:block>
-                                            <th:replace th:if="${userDTO.memberProfileUrl!= null}">
-                                                <img alt="image" width="32" height="32" style="color:transparent;border-radius:999px;cursor:default;max-height:32px;max-width:32px;min-height:32px;min-width:32px;object-fit:contain" srcset="" th:src="${userDTO.memberProfileUrl}">
-                                            </th:replace>
-                                        </th:block>
-                                        <th:block>
-                                            <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO==null}">
-                                                <img alt="image" width="32" height="32" style="color:transparent;border-radius:999px;cursor:default;max-height:32px;max-width:32px;min-height:32px;min-width:32px;object-fit:contain" srcset="" src="/images/main-page/image.png">
-                                            </th:replace>
-                                        </th:block>
-                                        <th:block>
-                                            <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO!=null}">
-                                                <img alt="image" width="32" height="32" style="color:transparent;border-radius:999px;cursor:default;max-height:32px;max-width:32px;min-height:32px;min-width:32px;object-fit:contain" srcset="" th:src="${fileDTO.filePath}">
-                                            </th:replace>
-                                        </th:block>
+                                        <img alt="image" width="32" height="32" style="color:transparent;border-radius:999px;cursor:default;max-height:32px;max-width:32px;min-height:32px;min-width:32px;object-fit:contain" srcset="" th:src="${userDTO.memberProfileUrl}">
                                         <div class="sidebar-login-user-wrap">
                                             <span class="sidebar-login-user-name" th:text="${userDTO.username}+' 님'"></span>
                                         </div>
@@ -265,7 +251,7 @@
 
                                     </div>
                                     <!-- 인턴 공고 클릭 시 -->
-                                    <div id="internWarp" class="search-modal-list company-list">
+                                    <div id="internWarp" class="search-modal-list company-list" style="display: none">
 
                                     </div>
                                 </div>                               
@@ -558,15 +544,14 @@
 <!--                                                </div>-->
 <!--                                            </li>                                           -->
                                         </ul>
-
                                     </div>
                                     <!-- 검색 -->
-                                    <div class="customer-support-bottom">
-                                        <form class="customer-support-search" name="form_helpdesk">
-                                            <span class="customer-support-search-icon"></span>
-                                            <input name="helpdesk_search" class="customer-support-search-text" placeholder="도움말 센터 검색..." type="text" maxlength="100">
-                                        </form>
-                                    </div>
+<!--                                    <div class="customer-support-bottom">-->
+<!--                                        <form class="customer-support-search" name="form_helpdesk">-->
+<!--                                            <span class="customer-support-search-icon"></span>-->
+<!--                                            <input name="helpdesk_search" class="customer-support-search-text" placeholder="도움말 센터 검색..." type="text" maxlength="100">-->
+<!--                                        </form>-->
+<!--                                    </div>-->
                                 </div>
                             </div>
                         </div>

@@ -19,8 +19,8 @@ public class ConsoleAdNoticeVO extends Period{
     private String advertisementSubText;
     private RequestStatus advertisementStatus;
     private RequestStatus advertisementRequestStatus;
-    private LocalDate advertiseStartDatetime;
-    private LocalDate advertiseEndDatetime;
+    private String advertiseStartDatetime;
+    private String advertiseEndDatetime;
     private long companyId;
     private long paymentPrice;
 }

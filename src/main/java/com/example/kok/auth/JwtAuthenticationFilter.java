@@ -58,6 +58,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 for (Cookie cookie : request.getCookies()) {
                     if("refreshToken".equals(cookie.getName())){
                         cookieRefreshToken = cookie.getValue();
+                        log.info("cookieRefreshToken:{}", cookieRefreshToken);
                     }
                     if("provider".equals(cookie.getName())){
                         provider = cookie.getValue();
@@ -67,15 +68,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if(cookieRefreshToken != null) {
                 String username = jwtTokenProvider.getUserName(cookieRefreshToken);
                 log.info(username);
-                boolean checkRefreshToken = provider != null ? jwtTokenProvider.checkRefreshTokenBetweenCookieAndRedis(username, cookieRefreshToken, provider)
+                boolean checkRefreshToken = provider != null ? jwtTokenProvider.checkRefreshTokenBetweenCookieAndRedis(username,provider,cookieRefreshToken)
                         : jwtTokenProvider.checkRefreshTokenBetweenCookieAndRedis(username, cookieRefreshToken);
 
                 if (checkRefreshToken) {
                     if (jwtTokenProvider.validateToken(cookieRefreshToken)) {
                         CustomUserDetails customUserDetails = (CustomUserDetails) jwtTokenProvider.getAuthentication(cookieRefreshToken).getPrincipal();
-                        String accessToken = jwtTokenProvider.createAccessToken(customUserDetails.getUserEmail());
-                        jwtTokenProvider.createRefreshToken(customUserDetails.getUserEmail());
+                        String accessToken =null;
+                        if(provider != null) {
+                            log.info("check{}", provider);
+                            log.info(customUserDetails.toString());
+                            accessToken = jwtTokenProvider.createAccessToken(customUserDetails.getSnsEmail(), provider);
+                            jwtTokenProvider.createRefreshToken(customUserDetails.getSnsEmail(), provider);
 
+
+                        }else{
+                            accessToken = jwtTokenProvider.createAccessToken(customUserDetails.getUserEmail());
+                            jwtTokenProvider.createRefreshToken(customUserDetails.getUserEmail());
+                        }
                         response.setHeader("Authorization", "Bearer " + accessToken);
                         response.sendRedirect(request.getRequestURI());
                         return;

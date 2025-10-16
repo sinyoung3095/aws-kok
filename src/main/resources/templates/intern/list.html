@@ -23,6 +23,12 @@
         </th:block>
         <main class="main main-wrap">
             <th:block th:if="${userDTO==null}">
+                <div th:replace="~{main-page/mobile-header}"></div>
+            </th:block>
+            <th:block th:if="${userDTO!=null}">
+                <div th:replace="~{main-page/mobile-login-header}"></div>
+            </th:block>
+            <th:block th:if="${userDTO==null}">
                 <div th:replace="~{main-page/header}"></div>
             </th:block>
             <th:block th:if="${userDTO!=null}">
@@ -458,6 +464,7 @@
             </div>
         </div>
     </div>
+    <div th:replace="~{main-page/mobile-footer}"></div>
 </body>
 <script th:inline="javascript">
     const internData = [[${internNoticeCriteria}]];

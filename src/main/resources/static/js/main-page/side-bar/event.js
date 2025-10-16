@@ -355,12 +355,12 @@ scrollContainer.addEventListener("click", async (e) => {
 });
 
 // 고객지원 검색창
-const supportSearch = document.querySelector("form[name=form_helpdesk]");
-const searchInput = document.querySelector("input[name=helpdesk_search]");
-supportSearch.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const page = 1;
-    const keyword = searchInput.value;
-
-    await sideService.getSupportList(sideLayout.showSupport, page, keyword)
-});
+// const supportSearch = document.querySelector("form[name=form_helpdesk]");
+// const searchInput = document.querySelector("input[name=helpdesk_search]");
+// supportSearch.addEventListener("submit", async (e) => {
+//     e.preventDefault();
+//     const page = 1;
+//     const keyword = searchInput.value;
+//
+//     await sideService.getSupportList(sideLayout.showSupport, page, keyword)
+// });

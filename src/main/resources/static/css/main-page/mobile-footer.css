@@ -51,7 +51,7 @@
     }
 
     /* 활성화 */
-    .footer-list-icon-active {
+    .footer-list-icon.active {
         border-radius: 0px;
         height: 24px;
         padding: 0px;
@@ -61,7 +61,7 @@
         color: #0aa5ff;
     }
 
-    .footer-list-text-active {
+    .footer-list-text.active {
         text-overflow: ellipsis;
         text-align: center;
         overflow: hidden;

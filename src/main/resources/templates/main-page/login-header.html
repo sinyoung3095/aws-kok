@@ -15,21 +15,7 @@
             <div class="header-space"></div>
             <div class="header-login-box">
                 <button type="button" class="header-login avatar">
-                    <th:block>
-                        <th:replace th:if="${userDTO.memberProfileUrl!= null}">
                             <img class="account-info-popover" style="padding: 0px;color:transparent;border-radius:999px;cursor:default;max-height:36px;max-width:36px;min-height:36px;min-width:36px;object-fit:contain" th:src="${userDTO.memberProfileUrl}">
-                        </th:replace>
-                    </th:block>
-                    <th:block>
-                        <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO == null }">
-                    <img class="account-info-popover" src="/images/main-page/image3.png">
-                        </th:replace>
-                    </th:block>
-                    <th:block>
-                        <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO != null }">
-                            <img class="account-info-popover" th:src="${fileDTO.filePath}">
-                        </th:replace>
-                    </th:block>
                 </button>
                 <input id="id" type="text" style="display: none" th:value="${userDTO.id}">
                 <!-- 프로필 드롭다운 -->

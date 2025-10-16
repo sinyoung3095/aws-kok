@@ -2,6 +2,7 @@ const sideService = (()=>{
     const getPopularCompany = async (callback)=>{
         const response = await fetch("/api/main/popular")
         const CompanyDTO = await response.json();
+        console.log(CompanyDTO);
         if(callback){
             callback(CompanyDTO);
         }

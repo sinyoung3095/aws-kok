@@ -5,6 +5,7 @@ import com.example.kok.dto.UserDTO;
 import com.example.kok.enumeration.Status;
 import com.example.kok.enumeration.UserRole;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+@Setter
 @Getter
 @ToString
 @Slf4j
