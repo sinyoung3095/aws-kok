@@ -1,10 +1,8 @@
 
 package com.example.kok.repository;
 
-import com.example.kok.dto.ConsoleAdNoticeDTO;
 import com.example.kok.dto.ConsoleAdNoticeFileDTO;
 import com.example.kok.dto.FileDTO;
-import com.example.kok.dto.PostFileDTO;
 import com.example.kok.mapper.ConsoleAdNoticeFileMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -13,7 +11,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ConsoleAdNoticeFileDAO {
+public class ConsoleAdFileDAO {
     private final ConsoleAdNoticeFileMapper fileMapper;
 
     // 광고 ID로 파일 목록 조회
@@ -31,11 +29,13 @@ public class ConsoleAdNoticeFileDAO {
         fileMapper.insertAdBackgroundFile(consoleFileDTO);
     }
 
-    public void deleteAllFilesByAdvertisementId(Long advertisementId) {
-        // 광고파일 연결 삭제
+    // 광고-파일 연결 삭제
+    public void deleteAdFileLinks(Long advertisementId) {
         fileMapper.deleteFilesByAdId(advertisementId);
+    }
 
-        // 파일 삭제
+    // 실제 파일 데이터 삭제
+    public void deleteFiles(Long advertisementId) {
         fileMapper.deleteFileByAdvertisementId(advertisementId);
     }
 

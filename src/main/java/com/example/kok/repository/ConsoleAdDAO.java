@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ConsoleAdNoticeDAO {
+public class ConsoleAdDAO {
     private final ConsoleAdNoticeMapper consoleAdMapper;
 
 //    목록(전체)
@@ -48,11 +48,6 @@ public class ConsoleAdNoticeDAO {
 //    광고 수정 등록
     public void editNotice(ConsoleAdNoticeVO adNoticeVO) {
         consoleAdMapper.updateNotice(adNoticeVO);
-    }
-
-//    광고 수정 상세
-    public ConsoleAdNoticeDTO findById(Long id) {
-        return consoleAdMapper.selectById(id);
     }
 
 //    광고 삭제

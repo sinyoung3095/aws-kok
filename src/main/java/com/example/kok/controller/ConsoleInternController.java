@@ -93,7 +93,6 @@ public class ConsoleInternController {
 
         model.addAttribute("internDetail", internDetail);
         model.addAttribute("internNoticeId", internNoticeId);
-//        model.addAttribute("memberId", applicants.get(0).getUserId()); //지원자 id
         model.addAttribute("companyName", companyName);
         model.addAttribute("memberName", memberName);
 

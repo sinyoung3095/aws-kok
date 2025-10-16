@@ -2,6 +2,7 @@ package com.example.kok.mapper;
 
 import com.example.kok.dto.ConsoleExperienceApplicantDTO;
 import com.example.kok.dto.ConsoleExperienceListDTO;
+import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.util.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -16,11 +17,11 @@ public interface ConsoleExperienceDetailMapper {
 
 //    지원 목록
     public List<ConsoleExperienceApplicantDTO> selectExperienceApplicantByCompany(@Param("experienceNoticeId") Long experienceNoticeId,
-                                                                                  @Param("status") String status,
+                                                                                  @Param("status") RequestStatus status,
                                                                                   @Param("criteria") Criteria criteria);
 
 //    지원 목록 개수
     public int selectExperienceApplicantCountByCompany(@Param("experienceNoticeId") Long experienceNoticeId,
-                                                       @Param("status") String status);
+                                                       @Param("status") RequestStatus status);
 
 }

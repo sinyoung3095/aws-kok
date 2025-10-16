@@ -504,6 +504,7 @@ a.hambuger-list{
     cursor: default;
     display: flex;
     position: relative;
+    cursor: pointer;
 }
 
 div.hambuger-list:hover{

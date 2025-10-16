@@ -91,7 +91,6 @@ public class ConsoleExperienceController {
 
         model.addAttribute("experienceDetail", experienceDetail);
         model.addAttribute("experienceNoticeId", experienceNoticeId);
-//        model.addAttribute("memberId", applicants.get(0).getUserId()); //지원자 id
         model.addAttribute("companyName", companyName);
         model.addAttribute("memberName", memberName);
 

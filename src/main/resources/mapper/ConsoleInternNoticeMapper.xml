@@ -73,7 +73,7 @@
 
     <update id="updateNoticeStatus">
         update tbl_intern_notice
-        set intern_notice_status = #{status}::status,
+        set intern_notice_status = #{status},
             updated_datetime = now()
         where id = #{noticeId}
     </update>
@@ -161,17 +161,17 @@
             inn.intern_notice_etc,
             jc.id as job_category_id,
             jc.job_name as job_category_name,
-            COUNT(distinct ri.id) as applicant_count,
-            COUNT(distinct sin.member_id) as save_count
+            count(distinct ri.id) as applicant_count,
+            count(distinct sin.member_id) as save_count
         from tbl_intern_notice inn
-                 join tbl_intern_job_category ijc
-                      on inn.id = ijc.intern_notice_id
-                 join tbl_job_category jc
-                      on ijc.job_category = jc.id
-                 left join tbl_request_intern ri
-                           on inn.id = ri.intern_notice_id
-                 left join tbl_save_intern_notice sin
-                           on inn.id = sin.intern_notice_id
+             join tbl_intern_job_category ijc
+                  on inn.id = ijc.intern_notice_id
+             join tbl_job_category jc
+                  on ijc.job_category = jc.id
+             left join tbl_request_intern ri
+                       on inn.id = ri.intern_notice_id
+             left join tbl_save_intern_notice sin
+                       on inn.id = sin.intern_notice_id
         where inn.id = #{id}
         group by inn.id, jc.id, jc.job_name
     </select>
@@ -190,17 +190,17 @@
             inn.intern_notice_etc,
             jc.id as job_category_id,
             jc.job_name as job_category_name,
-            COUNT(distinct ri.id) as applicant_count,
-            COUNT(distinct sin.member_id) as save_count
+            count(distinct ri.id) as applicant_count,
+            count(distinct sin.member_id) as save_count
         from tbl_intern_notice inn
-                 join tbl_intern_job_category ijc
-                      on inn.id = ijc.intern_notice_id
-                 join tbl_job_category jc
-                      on ijc.job_category = jc.id
-                 left join tbl_request_intern ri
-                           on inn.id = ri.intern_notice_id
-                 left join tbl_save_intern_notice sin
-                           on inn.id = sin.intern_notice_id
+             join tbl_intern_job_category ijc
+                  on inn.id = ijc.intern_notice_id
+             join tbl_job_category jc
+                  on ijc.job_category = jc.id
+             left join tbl_request_intern ri
+                       on inn.id = ri.intern_notice_id
+             left join tbl_save_intern_notice sin
+                       on inn.id = sin.intern_notice_id
         where inn.id = #{id}
         group by inn.id, jc.id
     </select>
