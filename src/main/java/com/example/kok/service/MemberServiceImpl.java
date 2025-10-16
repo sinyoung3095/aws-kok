@@ -211,7 +211,7 @@ public class MemberServiceImpl implements MemberService {
 
 
         if(profile != null) {
-            if(memberDAO.findMemberProfileEtc(id).get().getMemberProfileUrl()!=null){
+            if(memberDAO.findMemberProfileEtc(id)!=null){
                 memberDAO.deleteProfile(id);
             }
 
@@ -229,12 +229,12 @@ public class MemberServiceImpl implements MemberService {
                 fileDTO.setFileSize(String.valueOf(profile.getSize()));
                 fileDTO.setFileContentType(profile.getContentType());
 
-                System.out.println(fileDTO.getFileContentType());
+                System.out.println("filePath:"+fileDTO.getFilePath());
 
                 // tbl_file 등록
                 memberDAO.saveFile(fileDTO);
 
-                System.out.println("saveFile"+fileDTO.getFileContentType());
+//                System.out.println("saveFile"+fileDTO.getFileContentType());
 
                 // userProfileFile 등록
                 UserProfileFileDTO userProfileFileDTO = new UserProfileFileDTO();
@@ -261,7 +261,13 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Optional<UserMemberDTO> findProfileByMemberId(Long memberId) {
-        return memberDAO.findMemberProfileEtc(memberId);
+        Optional<UserMemberDTO> memberProfile=memberDAO.findMemberProfileEtc(memberId);
+        String preSignedUrl = s3Service.getPreSignedUrl(memberProfile.get().getMemberProfileUrl(), Duration.ofMinutes(5));
+        memberProfile.ifPresent(member->{
+            member.setMemberProfileUrl(preSignedUrl);
+        });
+//        memberProfile.setMemberProfileUrl(preSignedUrl);
+        return memberProfile;
     }
 
     public String getPath() {

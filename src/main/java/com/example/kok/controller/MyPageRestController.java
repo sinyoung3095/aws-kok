@@ -130,7 +130,7 @@ public class MyPageRestController {
         member.setMemberInfo(info);
 //        System.out.println("컨트롤러 인포: " + member.getMemberInfo());
 //        System.out.println("컨트롤러 직군: " + member.getJobName());
-        System.out.println(file.isEmpty());
+//        System.out.println(file.isEmpty());
         memberService.updateProfile(memberId, member, file);
     }
 }
