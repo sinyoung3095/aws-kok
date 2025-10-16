@@ -3,7 +3,7 @@ package com.example.kok.repository;
 import com.example.kok.dto.ConsoleInternListDTO;
 import com.example.kok.dto.ConsoleInternListRequestDTO;
 import com.example.kok.enumeration.Status;
-import com.example.kok.mapper.ConsoleInternListMapper;
+import com.example.kok.mapper.ConsoleInternNoticeMapper;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ConsoleInternNoticeDAO {
-    private final ConsoleInternListMapper consoleInternMapper;
+    private final ConsoleInternNoticeMapper consoleInternMapper;
 
 //    공고 목록(전체)
     public List<ConsoleInternListDTO> findAllByCompany(Long companyId, Criteria criteria, Status status, String keyword) {
@@ -90,8 +90,13 @@ public void editNoticeJobCategory(ConsoleInternListRequestDTO noticeRequestDTO) 
         consoleInternMapper.deleteJobCategoryByNoticeId(id);
     }
 
-//    공고 본체 삭제
+//    공고 삭제
     public void deleteInternNoticeById(Long id) {
         consoleInternMapper.deleteInternNoticeById(id);
+    }
+
+//    체험 공고 마감 처리
+    public void setNoticeStatusToInactive(){
+        consoleInternMapper.updateInternNoticeStatusToInactive();
     }
 }

@@ -2,12 +2,11 @@ package com.example.kok.domain;
 
 import com.example.kok.audit.Period;
 import com.example.kok.enumeration.RequestStatus;
+import com.example.kok.enumeration.Status;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-
-import java.time.LocalDate;
 
 @Getter
 @ToString(callSuper=true)
@@ -17,7 +16,7 @@ public class ConsoleAdNoticeVO extends Period{
     private long id;
     private String advertisementMainText;
     private String advertisementSubText;
-    private RequestStatus advertisementStatus;
+    private Status advertisementStatus;
     private RequestStatus advertisementRequestStatus;
     private String advertiseStartDatetime;
     private String advertiseEndDatetime;

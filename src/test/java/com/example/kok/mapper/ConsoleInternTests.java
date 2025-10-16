@@ -14,7 +14,7 @@ import java.util.List;
 @Slf4j
 public class ConsoleInternTests {
     @Autowired
-    private ConsoleInternListMapper mapper;
+    private ConsoleInternNoticeMapper mapper;
 
     @Test
     void testSelectInternByCompany() {

@@ -37,4 +37,6 @@ public interface ConsoleAdNoticeMapper {
 //    광고 삭제
     public void deleteById(@Param("id") Long id);
 
+//    광고 마감 처리
+    public void updateAdStatusToInactive();
 }
