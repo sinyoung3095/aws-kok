@@ -1,6 +1,5 @@
 package com.example.kok.controller;
 
-import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.common.exception.PostNotFoundException;
 import com.example.kok.dto.AdminNoticeCriteriaDTO;
 import com.example.kok.dto.AdminNoticeDTO;

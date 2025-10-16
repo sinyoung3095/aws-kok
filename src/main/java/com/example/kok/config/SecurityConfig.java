@@ -40,6 +40,8 @@ public class SecurityConfig {
                                 "/api/**",
                                 "/mail/**",
                                 "/sms/**",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
                                 "/enterprise-console/**",
                                 "/enterprise-console/experience/list/**",
                                 "/enterprise-console/experience/create/**",
