@@ -33,8 +33,8 @@ public class Interceptor implements HandlerInterceptor {
         if ("refreshToken".equals(cookie.getName())) {
             token = cookie.getValue();
             CustomUserDetails customUserDetails =(CustomUserDetails)jwtTokenProvider.getAuthentication(token).getPrincipal();
-
             mainpageService.findProfile(customUserDetails);
+            log.info(customUserDetails.toString());
             request.setAttribute("userDTO",customUserDetails);
         }
 
