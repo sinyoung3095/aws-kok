@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@Tag(name = "Post", description = "Post API")
+@Tag(name = "Post", description = "게시글 API")
 public interface CommunityPostControllerDocs {
 
 //    게시글 목록
@@ -35,7 +35,7 @@ public interface CommunityPostControllerDocs {
                                     @AuthenticationPrincipal CustomUserDetails customUserDetails);
 
 //    게시글 작성
-    @Operation(summary = "게시글 작성", description = "일반 회원이 게시글을 작성합니다. 파일 첨부도 가능합니다.",
+    @Operation(summary = "게시글 작성", description = "일반 회원이 파일 첨부도 가능한 게시글을 작성합니다.",
             parameters = {
                     @Parameter(name = "postContent", description = "게시글 내용"),
                     @Parameter(name = "files", description = "첨부 파일")
@@ -48,7 +48,10 @@ public interface CommunityPostControllerDocs {
 //    게시글 수정
     @Operation(summary = "게시글 수정", description = "기존 게시글 내용을 수정하거나 첨부파일을 추가/삭제합니다.",
             parameters = {
-                    @Parameter(name = "id", description = "수정할 게시글 ID")
+                    @Parameter(name = "id", description = "수정할 게시글 ID"),
+                    @Parameter(name = "postContent", description = "수정할 게시글 내용"),
+                    @Parameter(name = "deleteFiles", description = "수정할 게시글 파일"),
+                    @Parameter(name = "files", description = "추가할 게시글 파일")
             }
     )
     public ResponseEntity<?> update(@PathVariable("id") Long id,

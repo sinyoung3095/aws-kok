@@ -10,7 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@Tag(name = "PostLike", description = "PostLike API")
+@Tag(name = "PostLike", description = "게시글 좋아요 API")
 public interface CommunityLikeControllerDocs {
 
 //    게시글 좋아요
