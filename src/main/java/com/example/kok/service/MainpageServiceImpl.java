@@ -1,5 +1,6 @@
 package com.example.kok.service;
 
+import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.CompanyDTO;
 import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.dto.InternNoticeDTO;
@@ -19,6 +20,7 @@ public class MainpageServiceImpl implements MainpageService {
     private final ExperienceNoticeDAO experienceNoticeDAO;
     private final FollowDAO followDAO;
     private final CompanyProfileFileDAO companyProfileFileDAO;
+    private final UserProfileService userProfileService;
     @Override
     public List<CompanyDTO> findPopularCompanies() {
         List<CompanyDTO> companyDTOs = followDAO.selectPopularCompany();
@@ -56,5 +58,19 @@ public class MainpageServiceImpl implements MainpageService {
             }
         });
         return internNoticeDTOS;
+    }
+
+    @Override
+    public CustomUserDetails findProfile(CustomUserDetails customUserDetails) {
+        if(customUserDetails.getMemberProfileUrl()!=null){
+        }else {
+            if(userProfileService.findProfileById(customUserDetails.getId())!=null)
+            {customUserDetails.setMemberProfileUrl(userProfileService.findProfileById(customUserDetails.getId()));}
+            else{
+                customUserDetails.setMemberProfileUrl("/images/main-page/image3.png");
+            }
+
+        }
+        return customUserDetails;
     }
 }
