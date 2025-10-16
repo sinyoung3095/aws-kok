@@ -1,4 +1,11 @@
 const myPageService = (() => {
+    // 프로필 편집 누르면 정보 가져오기
+    const getProfile=async ()=>{
+        const profile=await fetch(`/api/mypage/profile-load`);
+        const response=await profile.json();
+
+        return response;
+    }
     // 게시글 목록
     const getPostsList=async (page=1, keyword="")=>{
         const list=await fetch(`/api/mypage/post-list`);
@@ -151,7 +158,7 @@ const myPageService = (() => {
         console.log(response);
         return response.ok;
     }
-    return { getPostsList:getPostsList, getPostDetail:getPostDetail, getExperienceList:getExperienceList, getComments:getComments, writeComment:writeComment, updateComment:updateComment, deleteComment:deleteComment,
+    return { getProfile:getProfile, getPostsList:getPostsList, getPostDetail:getPostDetail, getExperienceList:getExperienceList, getComments:getComments, writeComment:writeComment, updateComment:updateComment, deleteComment:deleteComment,
     getReplies:getReplies, writeReply:writeReply, updateReply:updateReply, deleteReply:deleteReply, getInternList:getInternList, getPaymentList:getPaymentList,
     getSavedExperienceList:getSavedExperienceList, getSavedInternList:getSavedInternList, deleteRequestExperience:deleteRequestExperience, deleteRequestIntern:deleteRequestIntern,
     profileUpdate:profileUpdate};

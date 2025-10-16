@@ -8,3 +8,6 @@ CREATE TABLE tbl_user_profile_file (
 );
 
 select * from tbl_user_profile_file;
+
+delete from tbl_user_profile_file
+where user_id>0;
