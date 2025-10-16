@@ -38,7 +38,7 @@ public class MainpageServiceImpl implements MainpageService {
     public List<ExperienceNoticeDTO> findExperienceNotices(String keyword) {
         List<ExperienceNoticeDTO> experienceNoticeDTOS = experienceNoticeDAO.findAllByKeyword(keyword);
         experienceNoticeDTOS.forEach(experienceNoticeDTO -> {
-            if(experienceNoticeDTO.getFilePath()==null){}
+            if(companyProfileFileDAO.findFileByCompanyId(experienceNoticeDTO.getCompanyId())==null){}
             else{
                 experienceNoticeDTO.setFilePath(s3Service.getPreSignedUrl(companyProfileFileDAO.findFileByCompanyId(experienceNoticeDTO.getCompanyId()).getFilePath(), Duration.ofMinutes(10)));
             }
@@ -50,7 +50,7 @@ public class MainpageServiceImpl implements MainpageService {
     public List<InternNoticeDTO> findInternNotices(String keyword) {
         List<InternNoticeDTO>  internNoticeDTOS = internNoticeDAO.findAllByKeyword(keyword);
         internNoticeDTOS.forEach(internNoticeDTO -> {
-            if(internNoticeDTO.getFilePath()==null){
+            if(companyProfileFileDAO.findFileByCompanyId(internNoticeDTO.getCompanyId())==null){
             }else{
                 internNoticeDTO.setFilePath(s3Service.getPreSignedUrl(companyProfileFileDAO.findFileByCompanyId(internNoticeDTO.getCompanyId()).getFilePath(), Duration.ofMinutes(10)));
             }

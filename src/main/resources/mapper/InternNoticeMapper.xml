@@ -144,7 +144,7 @@
     </select>
     <!--  인턴 공고 리스트 조회 -->
     <select id="selectAllByKeyword">
-        select i.intern_notice_title,i.id,c.company_name from tbl_intern_notice i join tbl_company c
+        select i.intern_notice_title,i.id,c.company_name,i.company_id from tbl_intern_notice i join tbl_company c
         on i.company_id = c.user_id
         <if test="keyword!=null">
             where c.company_name like concat('%', #{keyword}, '%')
