@@ -73,26 +73,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 if (checkRefreshToken) {
                     if (jwtTokenProvider.validateToken(cookieRefreshToken)) {
+                        CustomUserDetails customUserDetails = (CustomUserDetails) jwtTokenProvider.getAuthentication(cookieRefreshToken).getPrincipal();
+                        String accessToken =null;
                         if(provider != null) {
-                            CustomUserDetails customUserDetails = (CustomUserDetails) jwtTokenProvider.getAuthentication(cookieRefreshToken).getPrincipal();
                             log.info("check{}", provider);
                             log.info(customUserDetails.toString());
-                            String accessToken = jwtTokenProvider.createAccessToken(customUserDetails.getSnsEmail(), provider);
+                            accessToken = jwtTokenProvider.createAccessToken(customUserDetails.getSnsEmail(), provider);
                             jwtTokenProvider.createRefreshToken(customUserDetails.getSnsEmail(), provider);
 
-                            response.setHeader("Authorization", "Bearer " + accessToken);
-                            response.sendRedirect(request.getRequestURI());
-                            return;
+
                         }else{
-                            CustomUserDetails customUserDetails = (CustomUserDetails) jwtTokenProvider.getAuthentication(cookieRefreshToken).getPrincipal();
-
-                            String accessToken = jwtTokenProvider.createAccessToken(customUserDetails.getUserEmail());
+                            accessToken = jwtTokenProvider.createAccessToken(customUserDetails.getUserEmail());
                             jwtTokenProvider.createRefreshToken(customUserDetails.getUserEmail());
-
-                            response.setHeader("Authorization", "Bearer " + accessToken);
-                            response.sendRedirect(request.getRequestURI());
-
                         }
+                        response.setHeader("Authorization", "Bearer " + accessToken);
+                        response.sendRedirect(request.getRequestURI());
+                        return;
                     }
                 }
             }

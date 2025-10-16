@@ -8,3 +8,5 @@ CREATE TABLE tbl_advertisement_background_file (
 );
 
 select * from tbl_advertisement_background_file;
+insert into tbl_advertisement_background_file(file_id,advertisement_id)
+values (11,1);
