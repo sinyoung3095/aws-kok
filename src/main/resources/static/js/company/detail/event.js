@@ -246,7 +246,7 @@ function showFollowToast(toastEl, mainText, subText) {
 
 followEventFn();
 
-// 전체, 체험, 인턴 - 필터 버튼 클릭 시 active 클래스 토글
+// 체험, 인턴 - 필터 버튼 클릭 시 active 클래스 토글
 function sortBtnFn() {
     const sortBtns = document.querySelectorAll(".sort-options .sort-btn");
 
@@ -272,6 +272,23 @@ if (companyId) {
 
     showExperienceNoticeList();
 
+    // 초기화
+    document.addEventListener("click", (e) => {
+        const resetBtn = e.target.closest(".btn-reset");
+        if (resetBtn) {
+            if (keywordInput) keywordInput.value = "";
+            search.keyword = "";
+            currentPage = 1;
+            search.category = "experience";
+
+            sortBtns.forEach((b) => b.classList.remove("active"));
+            sortBtns[0].classList.add("active");
+
+            showExperienceNoticeList();
+        }
+    });
+
+
     // 검색
     if (keywordInput) {
         keywordInput.addEventListener("keydown", (e) => {
@@ -293,6 +310,8 @@ if (companyId) {
         btn.addEventListener("click", () => {
             sortBtns.forEach((b) => b.classList.remove("active"));
             btn.classList.add("active");
+
+            search.keyword = keywordInput.value.trim()
 
             const text = btn.textContent.trim();
             if (text === "체험") {

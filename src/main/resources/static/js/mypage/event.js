@@ -10,131 +10,21 @@ const postsList=document.getElementById("my-posts-wrap");
 const requestList=document.getElementById("request-list-wrap");
 const internList=document.getElementById("intern-list-wrap");
 const paymentList=document.getElementById("payment-list-wrap");
-const close = document.getElementById("close");
-const setting = document.getElementsByClassName("setting")[0];
-const set = document.getElementsByClassName("set")[0];
-const profileWrapCircle=document.querySelector(".setting-15.profileWrapCircle");
-const profileImgPop=document.querySelector(".profile-0");
-const submit = document.querySelector(".setting-40");
-const profile = document.getElementsByClassName("profile")[0];
-const profileset = document.getElementsByClassName("setting-16")[0];
-const label = document.getElementsByClassName("label")[0];
-const background = document.getElementById("background");
 const lists = document.getElementsByClassName("list");
 const remove = document.getElementsByClassName("remove");
 const del = document.getElementsByClassName("del")[0];
-const cancle = document.getElementsByClassName("del-12")[0];
-const job = document.getElementsByClassName("setting-28")[0];
-const joblist = document.getElementsByClassName("job")[0];
-const listbtn = document.getElementById("list");
-const profileUpdate=document.querySelector(".profile-update");
-const profileDelete=document.querySelector(".profile-delete");
-const profileInput=document.querySelector(".profile-input");
-const profileImgRound=document.querySelector(".profile-img-round");
-const nameinput=document.querySelector(".name-input");
-const jobInput=document.querySelector(".job-input");
-const infoInput=document.querySelector(".info-input");
+const set = document.getElementsByClassName("set")[0];
+const setting = document.getElementsByClassName("setting")[0];
 
-label.addEventListener("click", (e) => {
-    background.click();
-});
-// console.log(set);
 // 프로필 편집 열기
-set.addEventListener("click", (e) => {
+set.addEventListener("click", async (e) => {
+    await showProfileUpdate();
     setting.style.display = "flex";
 });
-// 프로필 편집 닫기
-close.addEventListener("click", (e) => {
-    setting.style.display = "none";
-});
-// 프로필 편집 완료
-submit.addEventListener("click", async (e) => {
-    e.preventDefault();
 
-    const profileImgInput = profileInput.files[0];
-    const namein = nameinput.value;
-    const job = jobInput.value;
-    const info = infoInput.value;
-    const form=new FormData();
-    if(profileImgInput){
-        form.append("profileImgInput", profileImgInput);
-    }
-    if(namein){
-        form.append("name", namein);
-    }
-    if(job){
-        form.append("job", job);
-    }
-    if(info){
-        form.append("info", info);
-    }
-
-    await myPageService.profileUpdate(form);
-    console.log("수정")
-
-    if(profileUpdate.ok){
-        setting.style.display = "none";
-    } else {
-        // alert("수정 실패"+profileUpdate.status);
-        setting.style.display = "none";
-    }
-});
-profileWrapCircle.addEventListener("click", ()=>{
-    profileImgPop.style.display="flex";
-})
-// 프로필 사진 변경 창 띄우기
-profileset.addEventListener("click", (e) => {
-    profile.style.display = "flex";
-});
-// 프로필 이미지 변경
-profileUpdate.addEventListener("click", ()=>{
-    profileImgPop.style.display="none";
-    profileInput.click();
-});
-profileInput.onchange=function (e){
-    const file=e.target.files[0];
-    if(!file) return;
-    const fileRead=new FileReader();
-    fileRead.onload=function (e2){
-        profileImgRound.src=e2.target.result;
-    }
-    fileRead.readAsDataURL(file);
-}
-// 프로필 삭제
-profileDelete.addEventListener("click", ()=>{
-    profileImgPop.style.display="none";
-    profileImgRound.src='/images/main-page/image.png';
-})
-// 직군 변경 모달
-job.addEventListener("click", (e) => {
-    if (joblist.style.display === "none" || joblist.style.display === "") {
-        joblist.style.display = "flex";
-        listbtn.innerHTML = `<path clip-rule="evenodd" d="M17.566 14.566a.8.8 0 0 0 0-1.132l-5-5a.8.8 0 0 0-1.132 0l-5 5a.8.8 0 0 0 1.132 1.132L12 10.13l4.434 4.435a.8.8 0 0 0 1.132 0" fill-rule="evenodd"></path>`;
-    } else {
-        joblist.style.display = "none";
-        listbtn.innerHTML = `<path clip-rule="evenodd" d="M6.434 9.435a.8.8 0 0 1 1.132 0L12 13.869l4.434-4.434a.8.8 0 1 1 1.132 1.13l-5 5a.8.8 0 0 1-1.132 0l-5-5a.8.8 0 0 1 0-1.13" fill-rule="evenodd"></path>`;
-    }
-});
-// 직군 변경하기
-const jobType = document.getElementsByClassName("job-3");
-const choice = document.getElementsByClassName("choice");
-const select = document.getElementsByClassName("select")[0];
-const jobName = document.getElementsByClassName("job-6");
-
-jobType.forEach((job, i) => {
-    job.addEventListener("click", (e) => {
-        choice.forEach((ch) => {
-            ch.classList.remove("active");
-        });
-        choice[i].classList.add("active");
-        select.value = jobName[i].innerText;
-        joblist.style.display = "none";
-        listbtn.innerHTML = `<path clip-rule="evenodd" d="M6.434 9.435a.8.8 0 0 1 1.132 0L12 13.869l4.434-4.434a.8.8 0 1 1 1.132 1.13l-5 5a.8.8 0 0 1-1.132 0l-5-5a.8.8 0 0 1 0-1.13" fill-rule="evenodd"></path>`;
-    });
-});
 // 내 게시물
 first.forEach((item) => {
-    item.addEventListener("click", (e) => {
+    item.addEventListener("click", async (e) => {
         item.classList.add("active");
         second.forEach((sec) => {
             sec.classList.remove("active");
@@ -145,7 +35,7 @@ first.forEach((item) => {
         fourth.forEach((fir) => {
             fir.classList.remove("active");
         });
-        third1.forEach((th1)=>{
+        third1.forEach((th1) => {
             th1.classList.remove("active");
         })
         postsList.classList.add("active");
@@ -153,12 +43,14 @@ first.forEach((item) => {
         requestList.classList.remove("active");
         paymentList.classList.remove("active");
         internList.classList.remove("active");
+
+        await showPosts();
     });
 });
 
 // 저장한 공고 목록
 second.forEach((item) => {
-    item.addEventListener("click", (e) => {
+    item.addEventListener("click", async (e) => {
         item.classList.add("active");
         first.forEach((fir) => {
             fir.classList.remove("active");
@@ -169,7 +61,7 @@ second.forEach((item) => {
         fourth.forEach((fir) => {
             fir.classList.remove("active");
         });
-        third1.forEach((th1)=>{
+        third1.forEach((th1) => {
             th1.classList.remove("active");
         })
         savedList.classList.add("active");
@@ -177,11 +69,14 @@ second.forEach((item) => {
         requestList.classList.remove("active");
         paymentList.classList.remove("active");
         internList.classList.remove("active");
+
+        await showSavedExpList();
+        await showSavedIntList();
     });
 });
 // 지원 내역
 third.forEach((item) => {
-    item.addEventListener("click", (e) => {
+    item.addEventListener("click", async (e) => {
         item.classList.add("active");
         first.forEach((fir) => {
             fir.classList.remove("active");
@@ -192,7 +87,7 @@ third.forEach((item) => {
         fourth.forEach((fir) => {
             fir.classList.remove("active");
         });
-        third1.forEach((th1)=>{
+        third1.forEach((th1) => {
             th1.classList.remove("active");
         })
         postsList.classList.remove("active");
@@ -200,11 +95,11 @@ third.forEach((item) => {
         requestList.classList.add("active");
         paymentList.classList.remove("active");
         internList.classList.remove("active");
-        showExperienceRequest();
+        await showExperienceRequest();
     });
 });
 third1.forEach((item) => {
-    item.addEventListener("click", (e) => {
+    item.addEventListener("click", async (e) => {
         item.classList.add("active");
         first.forEach((fir) => {
             fir.classList.remove("active");
@@ -215,7 +110,7 @@ third1.forEach((item) => {
         fourth.forEach((fir) => {
             fir.classList.remove("active");
         });
-        third.forEach((th)=>{
+        third.forEach((th) => {
             th.classList.remove("active");
         })
         postsList.classList.remove("active");
@@ -224,12 +119,12 @@ third1.forEach((item) => {
         requestList.classList.remove("active");
         paymentList.classList.remove("active");
 
-        showInternRequest();
+        await showInternRequest();
     });
 });
 // 결제 내역
 fourth.forEach((item) => {
-    item.addEventListener("click", (e) => {
+    item.addEventListener("click", async (e) => {
         item.classList.add("active");
         first.forEach((fir) => {
             fir.classList.remove("active");
@@ -240,7 +135,7 @@ fourth.forEach((item) => {
         third.forEach((fir) => {
             fir.classList.remove("active");
         });
-        third1.forEach((th)=>{
+        third1.forEach((th) => {
             th.classList.remove("active");
         })
         postsList.classList.remove("active");
@@ -248,6 +143,8 @@ fourth.forEach((item) => {
         requestList.classList.remove("active");
         paymentList.classList.add("active");
         internList.classList.remove("active");
+
+        await showPaymentList();
     });
 });
 
@@ -324,11 +221,135 @@ pageNum.forEach((page) => {
     });
 });
 
+const showProfileUpdate=async ()=>{
+    const request = await myPageService.getProfile();
+    myPageLayout.showProfileUpdate(request);
+
+    const close = document.getElementById("close");
+    const submit = document.querySelector(".setting-40");
+    const profileWrapCircle=document.querySelector(".setting-15.profileWrapCircle");
+    const profileImgPop=document.querySelector(".profile-0");
+    const profile = document.getElementsByClassName("profile")[0];
+    const profileset = document.getElementsByClassName("setting-16")[0];
+
+    const profileUpdate=document.querySelector(".profile-update");
+    const profileDelete=document.querySelector(".profile-delete");
+    const profileInput=document.querySelector(".profile-input");
+    const profileImgRound=document.querySelector(".profile-img-round");
+    const nameinput=document.querySelector(".name-input");
+    const jobInput=document.querySelector(".job-input");
+    const infoInput=document.querySelector(".info-input");
+    const job = document.getElementsByClassName("setting-28")[0];
+    const joblist = document.getElementsByClassName("job")[0];
+    const listbtn = document.getElementById("list");
+    // const label = document.getElementsByClassName("label")[0];
+    // const background = document.getElementById("background");
+
+    // label.addEventListener("click", (e) => {
+    //     background.click();
+    // });
+    // console.log(set);
+
+    // 프로필 편집 닫기
+    close.addEventListener("click", (e) => {
+        setting.style.display = "none";
+    });
+    // 프로필 편집 완료
+    submit.addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        const profileImgInput = profileInput.files[0];
+        const namein = nameinput.value;
+        const job = jobInput.value;
+        const info = infoInput.value;
+        const form=new FormData();
+        if(profileImgInput){
+            form.append("profileImgInput", profileImgInput);
+        }
+        if(namein){
+            form.append("name", namein);
+        }
+        if(job){
+            form.append("job", job);
+        }
+        if(info){
+            form.append("info", info);
+        }
+
+        await myPageService.profileUpdate(form);
+        console.log("수정")
+
+        if(profileUpdate.ok){
+            location.reload();
+            setting.style.display = "none";
+        } else {
+            alert("수정 실패"+profileUpdate.status);
+            setting.style.display = "none";
+            location.reload();
+        }
+    });
+    profileWrapCircle.addEventListener("click", ()=>{
+        profileImgPop.style.display="flex";
+    })
+    // 프로필 사진 변경 창 띄우기
+    profileset.addEventListener("click", (e) => {
+        profile.style.display = "flex";
+    });
+    // 프로필 이미지 변경
+    profileUpdate.addEventListener("click", ()=>{
+        profileImgPop.style.display="none";
+        profileInput.click();
+    });
+    profileInput.onchange=function (e){
+        const file=e.target.files[0];
+        if(!file) return;
+        const fileRead=new FileReader();
+        fileRead.onload=function (e2){
+            profileImgRound.src=e2.target.result;
+        }
+        fileRead.readAsDataURL(file);
+    }
+    // 프로필 삭제
+    profileDelete.addEventListener("click", ()=>{
+        profileImgPop.style.display="none";
+        profileImgRound.src='/images/main-page/image.png';
+    })
+    // 직군 변경 모달
+    job.addEventListener("click", (e) => {
+        if (joblist.style.display === "none" || joblist.style.display === "") {
+            joblist.style.display = "flex";
+            listbtn.innerHTML = `<path clip-rule="evenodd" d="M17.566 14.566a.8.8 0 0 0 0-1.132l-5-5a.8.8 0 0 0-1.132 0l-5 5a.8.8 0 0 0 1.132 1.132L12 10.13l4.434 4.435a.8.8 0 0 0 1.132 0" fill-rule="evenodd"></path>`;
+        } else {
+            joblist.style.display = "none";
+            listbtn.innerHTML = `<path clip-rule="evenodd" d="M6.434 9.435a.8.8 0 0 1 1.132 0L12 13.869l4.434-4.434a.8.8 0 1 1 1.132 1.13l-5 5a.8.8 0 0 1-1.132 0l-5-5a.8.8 0 0 1 0-1.13" fill-rule="evenodd"></path>`;
+        }
+    });
+    // 직군 변경하기
+    const jobType = document.getElementsByClassName("job-3");
+    const choice = document.getElementsByClassName("choice");
+    const select = document.getElementsByClassName("select")[0];
+    const jobName = document.getElementsByClassName("job-6");
+
+    jobType.forEach((job, i) => {
+        job.addEventListener("click", (e) => {
+            choice.forEach((ch) => {
+                ch.classList.remove("active");
+            });
+            choice[i].classList.add("active");
+            select.value = jobName[i].innerText;
+            joblist.style.display = "none";
+            listbtn.innerHTML = `<path clip-rule="evenodd" d="M6.434 9.435a.8.8 0 0 1 1.132 0L12 13.869l4.434-4.434a.8.8 0 1 1 1.132 1.13l-5 5a.8.8 0 0 1-1.132 0l-5-5a.8.8 0 0 1 0-1.13" fill-rule="evenodd"></path>`;
+        });
+    });
+}
+
 const showPosts=async ()=>{
     const request=await myPageService.getPostsList();
     myPageLayout.showPosts(request);
 
     const remove = document.getElementsByClassName("remove");
+    const cancle = document.getElementsByClassName("del-12")[0];
+    const del = document.getElementsByClassName("del")[0];
 
     // 게시물 삭제 버튼
     remove.forEach((remove) => {
@@ -339,6 +360,11 @@ const showPosts=async ()=>{
     cancle.addEventListener("click", (e) => {
         del.style.display = "none";
     });
+}
+
+const showPostDetail=async (id)=>{
+    const request=await myPageService.getPostDetail(id);
+    myPageLayout.showPostDetail(request);
 
     // 댓글창 열기
     const replys = document.getElementsByClassName("reply-btn");
@@ -487,13 +513,6 @@ const showPosts=async ()=>{
         delComment.style.display = "none";
     });
 
-    return request;
-}
-
-const showPostDetail=async (id)=>{
-    const request=await myPageService.getPostDetail(id);
-    myPageLayout.showPostDetail(request);
-
     //게시글 수정 팝업
     function popupFn() {
         const triggers = document.querySelectorAll(".popup-trigger");
@@ -593,7 +612,7 @@ const showCommentsList=async (postId)=>{
     const request=await myPageService.getComments(postId);
     myPageLayout.showCommentsList(request);
 
-    return request;
+    // return request;
 }
 
 const showInternRequest=async ()=>{
@@ -611,6 +630,7 @@ const showInternRequest=async ()=>{
     if(btn){
         btn.forEach((bt)=>{
             bt.addEventListener("click", (e) => {
+                const tr = e.target.closest("tr");
                 retract.style.display = "flex";
                 reqId=bt.dataset.reqid;
                 // console.log(reqId);
@@ -618,7 +638,7 @@ const showInternRequest=async ()=>{
                 // 지원 취소 fetch
                     retract.style.display = "none";
                     myPageService.deleteRequestIntern(reqId);
-                    showInternRequest();
+                    tr.style.display="none";
                 })
                 retractClose.addEventListener("click", (e) => {
                     retract.style.display = "none";
@@ -626,14 +646,14 @@ const showInternRequest=async ()=>{
             });
         });
     }
-    return request;
+    // return request;
 }
 
 const showPaymentList=async ()=>{
     const request=await myPageService.getPaymentList();
     myPageLayout.showPaymentList(request);
 
-    return request;
+    // return request;
 }
 
 const showSavedIntList=async ()=>{
@@ -652,7 +672,7 @@ const showSavedIntList=async ()=>{
         experience.style.display = "contents";
     });
 
-    return request;
+    // return request;
 }
 
 const showSavedExpList=async ()=>{
@@ -671,7 +691,7 @@ const showSavedExpList=async ()=>{
         employ.style.display = "contents";
     });
 
-    return request;
+    // return request;
 }
 
 const showExperienceRequest=async ()=>{
@@ -689,14 +709,15 @@ const showExperienceRequest=async ()=>{
     if(btn){
         btn.forEach((bt)=>{
             bt.addEventListener("click", (e) => {
+                const tr = e.target.closest("tr");
                 retract.style.display = "flex";
                 reqId=bt.dataset.reqid;
-                console.log(reqId);
+                // console.log(reqId);
                 cancleReq.addEventListener("click", ()=>{
+                    tr.style.display="none";
                 // 지원 취소 fetch
                     retract.style.display = "none";
                     myPageService.deleteRequestExperience(reqId);
-                    showExperienceRequest();
                 })
                 retractClose.addEventListener("click", (e) => {
                     retract.style.display = "none";
@@ -704,14 +725,15 @@ const showExperienceRequest=async ()=>{
             });
         });
     }
-    console.log(reqId);
+    // console.log(reqId);
 
-    return request;
+    // return request;
 }
 
 document.addEventListener("DOMContentLoaded", showPosts);
-document.addEventListener("DOMContentLoaded", showExperienceRequest);
-document.addEventListener("DOMContentLoaded", showInternRequest);
-document.addEventListener("DOMContentLoaded", showPaymentList);
-document.addEventListener("DOMContentLoaded", showSavedIntList);
-document.addEventListener("DOMContentLoaded", showSavedExpList);
+// document.addEventListener("DOMContentLoaded", showExperienceRequest);
+// document.addEventListener("DOMContentLoaded", showInternRequest);
+// document.addEventListener("DOMContentLoaded", showPaymentList);
+// document.addEventListener("DOMContentLoaded", showSavedIntList);
+// document.addEventListener("DOMContentLoaded", showSavedExpList);
+// document.addEventListener("DOMContentLoaded", showProfileUpdate);

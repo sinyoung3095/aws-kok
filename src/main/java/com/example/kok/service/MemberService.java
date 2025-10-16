@@ -55,4 +55,7 @@ public interface MemberService {
 
 //    프로필 조회
     public UserProfileFileDTO getProfile(Long id);
+
+//    회원 정보 조회
+    public Optional<UserMemberDTO> findProfileByMemberId(Long memberId);
 }

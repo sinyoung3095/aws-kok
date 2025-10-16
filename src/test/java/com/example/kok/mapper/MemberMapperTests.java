@@ -117,4 +117,10 @@ public class MemberMapperTests {
 //        memberDAO.plusJob(16L, "기획/전략");
         System.out.println(memberDAO.findJobCategoryByMemberId(16L));
     }
+
+    @Test
+    public void infoUpdate(){
+//        memberMapper.updateProfileInfo(23L, "sdfg");
+        memberDAO.updateInfo(23L, "ㄴㅇㄹ호");
+    }
 }
