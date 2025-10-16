@@ -11,9 +11,9 @@ select * from tbl_company_profile_file;
 select * from tbl_company_background_file;
 select * from tbl_file;
 insert into tbl_company_profile_file (file_id, company_id)
-values (69, 7);
+values (8, 24);
 insert into tbl_company_background_file (file_id, company_id)
-values (6, 10);
+values (8, 24);
 
 select * from tbl_company;
 delete from tbl_company_background_file;

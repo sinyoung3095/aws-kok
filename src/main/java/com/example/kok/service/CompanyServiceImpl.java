@@ -105,18 +105,6 @@ public class CompanyServiceImpl implements CompanyService {
                 });
     }
 
-    @Override
-    public List<CompanyDTO> findPopularCompanies() {
-        List<CompanyDTO> companyDTOs = followDAO.selectPopularCompany();
-        companyDTOs.forEach(companyDTO -> {
-
-            companyDTO.setCompanyProfileFile(companyProfileFileDAO.findFileByCompanyId(companyDTO.getUserId()).getFilePath());
-            if (companyDTO.getCompanyProfileFile() == null) {
-                companyDTO.setCompanyProfileFile("/images/main-page/image3.png");
-            }
-        });
-        return companyDTOs;
-    }
 
     //    기업 목록
     @Override

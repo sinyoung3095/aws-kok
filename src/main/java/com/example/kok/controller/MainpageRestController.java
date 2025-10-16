@@ -4,6 +4,7 @@ import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.*;
 import com.example.kok.repository.*;
 import com.example.kok.service.CompanyService;
+import com.example.kok.service.MainpageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,13 +25,13 @@ public class MainpageRestController {
     private final InternNoticeDAO internNoticeDAO;
     private final MemberAlarmSettingDAO memberAlarmSettingDAO;
     private final MemberDAO memberDAO;
-    private final CompanyService companyService;
+    private final MainpageService  mainpageService;
 
 
     @GetMapping("popular")
     public List<CompanyDTO> findPopularCompany() {
-
-        return companyService.findPopularCompanies() ;
+            log.info(mainpageService.findPopularCompanies().toString());
+        return mainpageService.findPopularCompanies() ;
     }
 
     @GetMapping("requestExperience")
@@ -47,15 +48,15 @@ public class MainpageRestController {
     //    체험 목록
     @GetMapping("experience")
     public List<ExperienceNoticeDTO> getExperience(@RequestParam(required = false) String keyword) {
-        log.info("search = {}", keyword);
-        return experienceNoticeDAO.findAllByKeyword(keyword);
+        log.info("experience search = {}", keyword);
+        return mainpageService.findExperienceNotices(keyword);
     }
 
     //    체험 목록
     @GetMapping("intern")
     public List<InternNoticeDTO> getIntern(@RequestParam(required = false) String keyword) {
-        log.info("search = {}", keyword);
-        return internNoticeDAO.findAllByKeyword(keyword);
+        log.info("intern search = {}", keyword);
+        return mainpageService.findInternNotices(keyword);
     }
 
     //    멤버 알람 세팅 조회

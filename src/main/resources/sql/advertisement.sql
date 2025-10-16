@@ -23,7 +23,7 @@ ALTER TABLE tbl_advertisement RENAME COLUMN end_advertise_datetime TO advertise_
 alter table tbl_advertisement add advertisement_request_status request_status not null default 'await';
 
 insert into tbl_advertisement (advertisement_main_text, advertisement_sub_text, advertise_start_datetime, advertise_end_datetime, company_id)
-values ('광고 제목06', '광고 부제목06', '2025-10-06', '2025-10-10', 10);
+values ('광고 제목06', '광고 부제목06', '2025-10-06', '2025-10-10', 11);
 
 select * from tbl_advertisement order by id;
 update tbl_advertisement set advertisement_status='accept'
