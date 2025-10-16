@@ -18,11 +18,8 @@ public interface ConsoleAdService {
 //    광고 등록
     public void registerAdvertisement(ConsoleAdNoticeDTO adNoticeDTO, List<MultipartFile> multipartFiles);
 
-//    광고 수정 등록
-    public void modifyNotice(ConsoleAdNoticeDTO adNoticeDTO, List<MultipartFile> multipartFiles);
-
-//    광고 수정 상세
-    public ConsoleAdNoticeDTO getNotice(Long advertisementId);
+//    광고 수정
+    public void updateAdvertisement(ConsoleAdNoticeDTO adNoticeDTO, List<MultipartFile> multipartFiles);
 
 //    광고 삭제
     public void deleteAdvertisement(Long advertisementId);

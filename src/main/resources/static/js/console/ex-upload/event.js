@@ -198,8 +198,8 @@ if(btnYegister) {
                 experienceNoticeIntroduceJob: document.querySelector("#introduce-job").value,
                 experienceMainTasks: document.querySelector("#main-tasks").value,
                 experienceNoticeEtc: document.querySelector("#notice-etc").value,
-                experienceNoticeStartDate: document.querySelector("#experience-start-date").value,
-                experienceNoticeEndDate: document.querySelector("#experience-end-date").value,
+                experienceNoticeStartDate: document.querySelector("#experience-notice-start-date").value,
+                experienceNoticeEndDate: document.querySelector("#experience-notice-end-date").value,
             }
             console.log("여기 확인",data);
 

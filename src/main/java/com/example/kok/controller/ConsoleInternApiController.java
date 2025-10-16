@@ -26,11 +26,10 @@ public class ConsoleInternApiController {
 
 //    공고 목록
     @GetMapping("/list/{companyId}/{page}")
-    public ResponseEntity<?> list(@PathVariable("companyId") Long companyId, @PathVariable("page") int page, @RequestParam(value = "status", required = false) String statusStr, @RequestParam(required = false) String keyword) {
-        Status status = null;
-        if (statusStr != null && !statusStr.isEmpty()) {
-            status = Status.valueOf(statusStr.toUpperCase());
-        }
+    public ResponseEntity<?> list(@PathVariable("companyId") Long companyId,
+                                  @PathVariable("page") int page,
+                                  @RequestParam(value = "status", required = false) Status status,
+                                  @RequestParam(required = false) String keyword) {
 
         ConsoleInternListCriteriaDTO internCriteriaDTO = internService.getList(companyId, page, status, keyword);
         if(internCriteriaDTO == null || internCriteriaDTO.getInternLists().size() == 0){

@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -14,15 +17,53 @@ import org.springframework.web.bind.annotation.*;
 public class ConsoleAdApiController {
     private final ConsoleAdService adService;
 
-    //    목록
+//    목록
     @GetMapping("/list/{companyId}/{page}")
-    public ResponseEntity<?> list(@PathVariable("companyId") Long companyId, @PathVariable("page") int page, @RequestParam(required = false) String keyword) {
+    public ResponseEntity<?> list(@PathVariable("companyId") Long companyId,
+                                  @PathVariable("page") int page,
+                                  @RequestParam(required = false) String keyword) {
+
         ConsoleAdNoticeCriteriaDTO adCriteriaDTO = adService.getList(companyId, page, keyword);
         if (adCriteriaDTO == null || adCriteriaDTO.getAdLists().size() == 0) {
             return ResponseEntity.ok(adCriteriaDTO);
         }
 
         return ResponseEntity.ok(adCriteriaDTO);
+    }
+
+//    등록
+    @PostMapping("/create")
+    public ResponseEntity<?> registerAdvertisement(
+            @ModelAttribute ConsoleAdNoticeDTO adNoticeDTO,
+            @RequestParam(value = "files", required = false) List<MultipartFile> multipartFiles) {
+
+        log.info("광고 등록 요청 들어옴????");
+
+        adService.registerAdvertisement(adNoticeDTO, multipartFiles);
+
+        return ResponseEntity.ok("");
+    }
+
+//    수정
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<?> updateAdvertisement(
+            @PathVariable("id") Long id,
+            @ModelAttribute ConsoleAdNoticeDTO adNoticeDTO,
+            @RequestParam(value = "files", required = false) List<MultipartFile> multipartFiles) {
+
+        log.info("광고 등록 요청 들어옴????");
+
+        adNoticeDTO.setId(id);
+        adService.updateAdvertisement(adNoticeDTO, multipartFiles);
+
+        return ResponseEntity.ok("");
+    }
+
+//    삭제
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteAd(@PathVariable("id") Long advertisementId) {
+        adService.deleteAdvertisement(advertisementId);
+        return ResponseEntity.ok("");
     }
 
 }

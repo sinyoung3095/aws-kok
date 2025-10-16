@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,12 +24,9 @@ public class ConsolePaymentController {
 
 //    기업 콘솔 결제내역
     @GetMapping
-    public String goToList(
-//            @PathVariable("companyId") Long companyId,
-//            @PathVariable("page") int page, // 여기해야함
-            @RequestParam(defaultValue = "1") int page,
-            @AuthenticationPrincipal CustomUserDetails customUserDetails,
-            Model model) {
+    public String goToList(@RequestParam(defaultValue = "1") int page,
+                           @AuthenticationPrincipal CustomUserDetails customUserDetails,
+                           Model model) {
 
         Long companyId = customUserDetails.getId();
         String companyName = customUserDetails.getCompanyName();

@@ -37,14 +37,10 @@ public class ConsoleExperienceApiController {
     @GetMapping("/list/{companyId}/{page}")
     public ResponseEntity<?> list(@PathVariable("companyId") Long companyId,
                                   @PathVariable("page") int page,
-                                  @RequestParam(value = "status", required = false) String statusStr,
+                                  @RequestParam(value = "status", required = false) Status status,
                                   @RequestParam(required = false) String keyword,
                                   @AuthenticationPrincipal CustomUserDetails customUserDetails,
                                   Model model) {
-        Status status = null;
-        if (statusStr != null && !statusStr.isEmpty()) {
-            status = Status.valueOf(statusStr.toUpperCase());
-        }
 
         ConsoleExperienceListCriteriaDTO experienceCriteriaDTO = experienceService.getList(companyId, page, status, keyword);
         if(experienceCriteriaDTO == null || experienceCriteriaDTO.getExperienceLists().size() == 0){

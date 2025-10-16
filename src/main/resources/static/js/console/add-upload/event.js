@@ -37,8 +37,11 @@ const pay = async ({price, duration}) => {
                 const priceText = document.querySelector(".start-price .price").textContent;
                 const paymentPrice = Number(priceText.replace(/,/g, "").trim());
 
+                const idInputBox = document.querySelector("input[name='id']");
+                const idCheck = idInputBox ? idInputBox.value : null;
+
                 const data = {
-                    id: document.querySelector("input[name='id']").value,
+                    id: idCheck,
                     advertisementMainText: document.querySelector("#ad-main-text").value,
                     advertisementSubText: document.querySelector("#ad-sub-text").value,
                     advertiseStartDatetime: document.querySelector("#start-date").value,
@@ -50,7 +53,7 @@ const pay = async ({price, duration}) => {
 
                 try {
                     const result = await adService.register(data);
-                    console.log("광고 등록 성공이당", result);
+                    console.log("광고 등록 성공이당");
                 } catch (err) {
                     console.error(err);
                     console.log("안됨");
@@ -224,12 +227,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // 광고 등록하기 버튼
     const btnRegisterAd = document.querySelector("#btn-register-ad");
     if(btnRegisterAd){
-        btnRegisterAd.addEventListener("click", async () => {
-            const isMainValid = validateInput(inputMain, "메인 텍스트를 입력해주세요.");
-            const isSubValid = validateInput(inputSub, "서브 텍스트를 입력해주세요.");
-            const isDateValid = validateDate(okcheck);
-
-            if (!isMainValid || !isSubValid || !isDateValid) return;
+        btnRegisterAd.addEventListener("click", async (e) => {
+            e.preventDefault();
 
             const payInfo = {
                 price: 100,
@@ -240,6 +239,31 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // 광고 수정하기 버튼
+    const btnUpdateAd = document.querySelector("#btn-update-ad");
+    if (btnUpdateAd) {
+        btnUpdateAd.addEventListener("click", async () => {
+            console.log("수정 버튼 클릭됨");
+
+            const data = {
+                advertisementMainText: document.querySelector("#ad-main-text").value,
+                advertisementSubText: document.querySelector("#ad-sub-text").value,
+                advertiseStartDatetime: document.querySelector("#start-date").value,
+                advertiseEndDatetime: document.querySelector("#end-date").value,
+                companyId: companyId,
+                files: document.querySelector("#add-background").files
+            };
+
+            try {
+                const result = await adService.update(id, data);
+                console.log("광고 수정 완료:", result);
+                alert("광고가 성공적으로 수정되었습니다!");
+                // location.href = "/enterprise-console/ad/list";
+            } catch (err) {
+                console.error("수정 중 오류 발생:", err);
+            }
+        });
+    }
 });
 
 
