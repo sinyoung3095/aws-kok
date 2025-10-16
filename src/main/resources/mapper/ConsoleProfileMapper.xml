@@ -21,7 +21,7 @@
                 on c.user_id = csb.company_id
             left join tbl_company_scale_category sc
                 on csb.company_scale_category_id = sc.id
-        where c.user_id = 19
+        where c.user_id = #{companyId}
     </select>
 
     <!-- 기업 프로필 수정 -->

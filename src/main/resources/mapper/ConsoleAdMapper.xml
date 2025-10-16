@@ -17,7 +17,7 @@
         where a.company_id = #{companyId}
         <if test="keyword != null and keyword != ''">
             and (
-            a.advertisement_main_text ilike concat('%', #{keyword}, '%')
+            a.advertisement_main_text like concat('%', #{keyword}, '%')
             )
         </if>
         group by
@@ -43,7 +43,7 @@
         </if>
         <if test="keyword != null and keyword != ''">
             and (
-            a.advertisement_main_text ilike concat('%', #{keyword}, '%')
+            a.advertisement_main_text like concat('%', #{keyword}, '%')
             )
         </if>
     </select>
@@ -72,8 +72,8 @@
             #{advertisementSubText},
             'await',
             'await',
-            #{advertiseStartDatetime},
-            #{advertiseEndDatetime},
+            #{advertiseStartDatetime}::date,
+            #{advertiseEndDatetime}::date,
             #{companyId}
         )
     </insert>
@@ -100,11 +100,11 @@
             advertisement_sub_text = #{advertisementSubText},
             advertise_start_datetime = #{advertiseStartDatetime},
             advertise_end_datetime = #{advertiseEndDatetime},
-            updated_datetime = NOW()
+            updated_datetime = now()
         where id = #{id}
     </update>
 
-    <select id="selectById" parameterType="long" resultType="com.example.kok.dto.ConsoleAdNoticeDTO">
+    <select id="selectAdDetailById">
         select
             a.id,
             a.advertisement_main_text,

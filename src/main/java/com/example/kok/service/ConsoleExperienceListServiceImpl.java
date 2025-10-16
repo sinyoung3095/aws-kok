@@ -37,8 +37,6 @@ public class ConsoleExperienceListServiceImpl implements ConsoleExperienceListSe
 
         List<ConsoleExperienceListDTO> notices = consoleExperienceDAO.findAllByCompany(companyId, criteria, status, keyword);
 
-
-
         criteria.setHasMore(notices.size() > criteria.getRowCount());
         if(criteria.isHasMore()){
             notices.remove(notices.size() - 1);

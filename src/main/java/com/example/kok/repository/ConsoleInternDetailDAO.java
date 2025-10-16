@@ -22,16 +22,12 @@ public class ConsoleInternDetailDAO {
 
 //    지원 목록
     public List<ConsoleInternApplicantDTO> findAllByCompany(Long companyId, RequestStatus status, Criteria criteria) {
-        String statusStr = (status != null) ? status.name().toLowerCase() : null;
-
-        return consoleInternMapper.selectInternApplicantByCompany(companyId, statusStr, criteria);
+        return consoleInternMapper.selectInternApplicantByCompany(companyId, status, criteria);
     }
 
 //    지원 목록 개수
     public int findCountByCompany(Long companyId, RequestStatus status) {
-        String statusStr = (status != null) ? status.name().toLowerCase() : null;
-
-        return consoleInternMapper.selectInternApplicantCountByCompany(companyId, statusStr);
+        return consoleInternMapper.selectInternApplicantCountByCompany(companyId, status);
     }
 
 }

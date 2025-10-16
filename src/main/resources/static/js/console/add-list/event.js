@@ -129,7 +129,7 @@ if (adTable) {
         // 삭제 버튼 클릭 시 삭제 실행
         if (redHamBtn) {
             const tr = redHamBtn.closest(".list-tr");
-            const adId = tr?.dataset.id;
+            const adId = tr.dataset.id;
             if (!adId) return;
 
             const confirmDelete = confirm("정말 삭제하시겠습니까?");
