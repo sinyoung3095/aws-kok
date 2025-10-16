@@ -91,4 +91,9 @@ public class ConsoleInternListServiceImpl implements ConsoleInternListService {
         consoleInternDAO.deleteInternNoticeById(id);
     }
 
+//    체험 공고 마감 처리
+    public void closeNotice(){
+        consoleInternDAO.setNoticeStatusToInactive();
+    }
+
 }

@@ -98,4 +98,9 @@ public class ConsoleExperienceListServiceImpl implements ConsoleExperienceListSe
         consoleExperienceDAO.deleteExperienceNoticeById(id);
     }
 
+//    체험 공고 마감 처리
+    public void closeNotice(){
+        consoleExperienceDAO.setNoticeStatusToInactive();
+    }
+
 }

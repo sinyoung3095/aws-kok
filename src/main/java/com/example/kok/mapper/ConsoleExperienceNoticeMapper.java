@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface ConsoleExperienceListMapper {
+public interface ConsoleExperienceNoticeMapper {
 
 //    공고 목록
     public List<ConsoleExperienceListDTO> selectExperienceByCompany(@Param("companyId") Long companyId,
@@ -18,7 +18,7 @@ public interface ConsoleExperienceListMapper {
                                                                     @Param("status") Status status,
                                                                     @Param("keyword") String keyword);
 
-//    공고 개수(전체, 모집중)
+//    공고 개수
     public int selectCountByCompany(@Param("companyId") Long companyId,
                                     @Param("status") Status status,
                                     @Param("keyword") String keyword);
@@ -58,7 +58,9 @@ public interface ConsoleExperienceListMapper {
 //    직군 매핑 삭제
     public void deleteJobCategoryByNoticeId(Long id);
 
-//    공고 본체 삭제
+//    공고 삭제
     public void deleteExperienceNoticeById(Long id);
 
+//    체험 공고 마감 처리
+    public void updateExperienceNoticeStatusToInactive();
 }
