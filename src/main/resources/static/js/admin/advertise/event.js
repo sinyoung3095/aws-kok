@@ -241,15 +241,3 @@ pagination.addEventListener("click", async (e) => {
     }
 });
 
-
-// confirmBtn.addEventListener("click", async (e) => {
-//     const page = 1;
-//     const keyword = content.value;
-//     const checked = document.querySelector('input[name="category"]:checked');
-//     const category = checked ? checked.value : '';
-//
-//     console.log(keyword);
-//     console.log(category);
-//
-//     await service.getAdvertisementList(layout.showList, page, keyword, category);
-// });
