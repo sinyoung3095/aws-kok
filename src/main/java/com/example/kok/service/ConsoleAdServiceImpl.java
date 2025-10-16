@@ -21,12 +21,12 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class ConsoleAdServiceImpl implements ConsoleAdService {
-    private final ConsoleAdNoticeDAO consoleAdDAO;
+    private final ConsoleAdDAO consoleAdDAO;
     private final PaymentDAO paymentDAO;
     private final PaymentUserDAO paymentUserDAO;
     private final S3Service s3Service;
     private final ConsoleAdNoticeDTO consoleAdDTO;
-    private final ConsoleAdNoticeFileDAO consoleAdNoticeFileDAO;
+    private final ConsoleAdFileDAO consoleAdFileDAO;
     private final ConsolePaymentDAO consolePaymentDAO;
 
     // 목록
@@ -64,7 +64,7 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
 
     @Override
     public void setPreSignedUrl(ConsoleAdNoticeDTO consoleAdDTO) {
-        List<FileDTO> files = consoleAdNoticeFileDAO.findAllByAdvertisementId(consoleAdDTO.getId());
+        List<FileDTO> files = consoleAdFileDAO.findAllByAdvertisementId(consoleAdDTO.getId());
 
         files.forEach(file -> {
             file.setFilePath(
@@ -98,7 +98,7 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
                 fileDTO.setFileContentType(multipartFile.getContentType());
 
                 // tbl_file 저장
-                consoleAdNoticeFileDAO.saveFile(fileDTO);
+                consoleAdFileDAO.saveFile(fileDTO);
 
                 ConsoleAdNoticeFileDTO consoleFileDTO = new ConsoleAdNoticeFileDTO();
                 consoleFileDTO.setFileId(fileDTO.getId());
@@ -106,7 +106,7 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
 
 
                 // 광고-파일 연결
-                consoleAdNoticeFileDAO.linkFileToAdvertisement(consoleFileDTO);
+                consoleAdFileDAO.linkFileToAdvertisement(consoleFileDTO);
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -141,7 +141,7 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     @CacheEvict(value = "posts", key = "'post_' + #consoleAdDTO.id")
-    public void modifyNotice(ConsoleAdNoticeDTO consoleAdDTO, List<MultipartFile> multipartFiles) {
+    public void updateAdvertisement(ConsoleAdNoticeDTO consoleAdDTO, List<MultipartFile> multipartFiles) {
         consoleAdDAO.editNotice(toConsoleAdVO(consoleAdDTO));
 
         if (multipartFiles != null && !multipartFiles.isEmpty()) {
@@ -157,13 +157,13 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
                     fileDTO.setFilePath(s3Key);
                     fileDTO.setFileContentType(multipartFile.getContentType());
 
-                    consoleAdNoticeFileDAO.saveFile(fileDTO);
+                    consoleAdFileDAO.saveFile(fileDTO);
 
                     ConsoleAdNoticeFileDTO consoleAdNoticeFileDTO = new ConsoleAdNoticeFileDTO();
                     consoleAdNoticeFileDTO.setFileId(fileDTO.getId());
                     consoleAdNoticeFileDTO.setAdvertisementId(consoleAdDTO.getId());
 
-                    consoleAdNoticeFileDAO.linkFileToAdvertisement(consoleAdNoticeFileDTO);
+                    consoleAdFileDAO.linkFileToAdvertisement(consoleAdNoticeFileDTO);
 
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -173,23 +173,21 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
 
     }
 
-//    광고 수정 상세
-    @Override
-    public ConsoleAdNoticeDTO getNotice(Long id) {
-        return consoleAdDAO.findById(id);
-    }
-
 //    광고 삭제
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteAdvertisement(Long advertisementId) {
-        // 광고와 연결된 파일 완전 삭제
-        consoleAdNoticeFileDAO.deleteAllFilesByAdvertisementId(advertisementId);
+//        광고-파일 연결 삭제
+        consoleAdFileDAO.deleteAdFileLinks(advertisementId);
 
-        // 광고 관련 결제 삭제
-        consolePaymentDAO.deleteByAdvertisementId(advertisementId);
+//        파일 삭제
+        consoleAdFileDAO.deleteFiles(advertisementId);
 
-        // 광고 자체 삭제
+//        결제 삭제
+        consolePaymentDAO.deletePaymentUserByAdvertisementId(advertisementId);
+        consolePaymentDAO.deletePaymentByAdvertisementId(advertisementId);
+
+//        광고 삭제
         consoleAdDAO.deleteAdvertisementById(advertisementId);
     }
 

@@ -18,12 +18,13 @@ public class ConsolePaymentDAO {
         consolePaymentMapper.insertPayment(payment);
     }
 
-//    결제 삭제
-    public void deleteByAdvertisementId(Long advertisementId) {
-        // payment_user 삭제
+//    결제 User 삭제
+    public void deletePaymentUserByAdvertisementId(Long advertisementId) {
         consolePaymentMapper.deletePaymentUserByAdvertisementId(advertisementId);
+    }
 
-        // payment 삭제
+//    결제 삭제
+    public void deletePaymentByAdvertisementId(Long advertisementId) {
         consolePaymentMapper.deleteByAdvertisementId(advertisementId);
     }
 

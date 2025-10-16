@@ -22,16 +22,12 @@ public class ConsoleExperienceDetailDAO {
 
 //    지원 목록
     public List<ConsoleExperienceApplicantDTO> findAllByCompany(Long companyId, RequestStatus status, Criteria criteria) {
-        String statusStr = (status != null) ? status.name().toLowerCase() : null;
-
-        return consoleExperienceMapper.selectExperienceApplicantByCompany(companyId, statusStr, criteria);
+        return consoleExperienceMapper.selectExperienceApplicantByCompany(companyId, status, criteria);
     }
 
 //    지원 목록 개수
     public int findCountByCompany(Long companyId, RequestStatus status) {
-        String statusStr = (status != null) ? status.name().toLowerCase() : null;
-
-        return consoleExperienceMapper.selectExperienceApplicantCountByCompany(companyId, statusStr);
+        return consoleExperienceMapper.selectExperienceApplicantCountByCompany(companyId, status);
     }
 
 }

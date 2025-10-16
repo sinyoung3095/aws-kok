@@ -21,7 +21,7 @@ import java.util.List;
 public class ConsoleAdController {
     private final ConsoleAdService consoleAdService;
 
-    //    기업 콘솔 광고 목록
+//    기업 콘솔 광고 목록
     @GetMapping("/list")
     public String goToList(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
         Long companyId = customUserDetails.getId();
@@ -34,15 +34,27 @@ public class ConsoleAdController {
         return "enterprise-console/console-add-list";
     }
 
-    //    기업 콘솔 광고 등록/수정
+//    기업 콘솔 광고 등록/수정
     @GetMapping(value = {"/create", "/edit/{id}"})
-    public String goToWrite(HttpServletRequest request, @PathVariable(required = false) Long id, @AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
+    public String goToWrite(HttpServletRequest request,
+                            @PathVariable(required = false) Long id,
+                            @AuthenticationPrincipal CustomUserDetails customUserDetails,
+                            Model model) {
+
         if(request.getRequestURI().contains("create")){
+            Long companyId = customUserDetails.getId();
+            String companyName = customUserDetails.getCompanyName();
+            String memberName = customUserDetails.getUsername();
+
             model.addAttribute("page","create");
             model.addAttribute("notice", new ConsoleAdNoticeDTO());
+            model.addAttribute("companyId", companyId);
+            model.addAttribute("companyName", companyName);
+            model.addAttribute("memberName", memberName);
+
             return "enterprise-console/console-add-upload";
         }
-        ConsoleAdNoticeDTO notice = consoleAdService.getNotice(id);
+        ConsoleAdNoticeDTO notice = consoleAdService.getDetail(id);
 
         consoleAdService.setPreSignedUrl(notice);
 
@@ -58,39 +70,6 @@ public class ConsoleAdController {
         model.addAttribute("memberName", memberName);
 
         return "enterprise-console/console-add-upload";
-    }
-
-    @PostMapping("/create")
-    public String registerAdvertisement(
-            @ModelAttribute ConsoleAdNoticeDTO adNoticeDTO,
-            @RequestParam(value = "files", required = false) List<MultipartFile> multipartFiles,
-            @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-
-        adNoticeDTO.setCompanyId(customUserDetails.getId());
-
-        consoleAdService.registerAdvertisement(adNoticeDTO, multipartFiles);
-        return "redirect:/enterprise-console/ad/list";
-//        return "enterprise-console/console-add-upload";
-    }
-
-
-    @PostMapping("/update")
-    public String updateAdvertisement(
-            @ModelAttribute ConsoleAdNoticeDTO adNoticeDTO,
-            @RequestParam(value = "files", required = false) List<MultipartFile> multipartFiles,
-            @AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
-
-        adNoticeDTO.setCompanyId(customUserDetails.getId());
-
-        consoleAdService.modifyNotice(adNoticeDTO, multipartFiles);
-        return "redirect:/enterprise-console/ad/list";
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseBody
-    public String deleteAdvertisement(@PathVariable("id") Long id) {
-        consoleAdService.deleteAdvertisement(id);
-        return "success";
     }
 
 }
