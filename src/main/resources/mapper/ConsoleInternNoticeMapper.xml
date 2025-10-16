@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.kok.mapper.ConsoleInternListMapper">
+<mapper namespace="com.example.kok.mapper.ConsoleInternNoticeMapper">
     <select id="selectInternByCompany">
         select inn.id,
                inn.intern_notice_title,
@@ -228,4 +228,13 @@
         delete from tbl_intern_notice
         where id = #{id}
     </delete>
+
+    <!-- 마감일 지나면 inactive -->
+    <update id="updateInternNoticeStatusToInactive">
+    <![CDATA[
+        update tbl_intern_notice
+        set intern_notice_status = 'inactive'
+        where intern_notice_end_date <= current_date
+        ]]>
+    </update>
 </mapper>

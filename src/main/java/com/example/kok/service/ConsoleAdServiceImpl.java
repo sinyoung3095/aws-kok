@@ -5,6 +5,7 @@ import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.repository.*;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ConsoleAdServiceImpl implements ConsoleAdService {
@@ -189,6 +191,11 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
 
 //        광고 삭제
         consoleAdDAO.deleteAdvertisementById(advertisementId);
+    }
+
+//    광고 마감 처리
+    public void closeAd(){
+        consoleAdDAO.setAdStatusToInactive();
     }
 
 }

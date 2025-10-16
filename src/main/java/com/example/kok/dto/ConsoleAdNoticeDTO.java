@@ -1,6 +1,7 @@
 package com.example.kok.dto;
 
 import com.example.kok.enumeration.RequestStatus;
+import com.example.kok.enumeration.Status;
 import lombok.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +19,7 @@ public class ConsoleAdNoticeDTO {
     private long id;
     private String advertisementMainText; // 광고 메인 텍스트
     private String advertisementSubText; // 광고 서브 텍스트
-    private RequestStatus advertisementStatus; // 요청 상태
+    private Status advertisementStatus; // 요청 상태
     private RequestStatus advertisementRequestStatus; // 승인 상태
     private String advertiseStartDatetime; // 광고 시작 날짜
     private String advertiseEndDatetime; // 광고 종료 날짜

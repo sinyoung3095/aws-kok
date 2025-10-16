@@ -3,7 +3,7 @@ package com.example.kok.repository;
 import com.example.kok.dto.ConsoleExperienceListDTO;
 import com.example.kok.dto.ConsoleExperienceListRequestDTO;
 import com.example.kok.enumeration.Status;
-import com.example.kok.mapper.ConsoleExperienceListMapper;
+import com.example.kok.mapper.ConsoleExperienceNoticeMapper;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -13,9 +13,9 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ConsoleExperienceListDAO {
-    private final ConsoleExperienceListMapper consoleExperienceMapper;
+    private final ConsoleExperienceNoticeMapper consoleExperienceMapper;
 
-//    공고 목록(전체)
+//    공고 목록
     public List<ConsoleExperienceListDTO> findAllByCompany(Long companyId, Criteria criteria, Status status, String keyword) {
         return consoleExperienceMapper.selectExperienceByCompany(companyId, criteria, status, keyword);
     }
@@ -90,8 +90,13 @@ public class ConsoleExperienceListDAO {
         consoleExperienceMapper.deleteJobCategoryByNoticeId(id);
     }
 
-//    공고 본체 삭제
+//    공고 삭제
     public void deleteExperienceNoticeById(Long id) {
         consoleExperienceMapper.deleteExperienceNoticeById(id);
+    }
+
+//    체험 공고 마감 처리
+    public void setNoticeStatusToInactive(){
+        consoleExperienceMapper.updateExperienceNoticeStatusToInactive();
     }
 }

@@ -24,6 +24,9 @@ public interface ConsoleAdService {
 //    광고 삭제
     public void deleteAdvertisement(Long advertisementId);
 
+//    광고 마감 처리
+    public void closeAd();
+
     default ConsoleAdNoticeVO toConsoleAdVO(ConsoleAdNoticeDTO consoleAdDTO){
         return ConsoleAdNoticeVO.builder()
                 .id(consoleAdDTO.getId())
