@@ -11,6 +11,7 @@ const companyNoticeLayout = (() => {
                 <div class="no-data">
                     <p class="title">체험 공고가 없습니다.</p>
                     <p class="description">팔로우하면 새 공고 알림을 받을 수 있어요.</p>
+                    <button type="button" class="btn-default btn-reset">초기화</button>
                 </div>
             `;
         } else {
@@ -39,6 +40,7 @@ const companyNoticeLayout = (() => {
                 <div class="no-data">
                     <p class="title">인턴 공고가 없습니다.</p>
                     <p class="description">팔로우하면 새 공고 알림을 받을 수 있어요.</p>
+                    <button type="button" class="btn-default btn-reset">초기화</button>
                 </div>
             `;
         } else {

@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/api/community")
 @Slf4j
 @RequiredArgsConstructor
-public class CommunityPostController {
+public class CommunityPostController implements CommunityPostControllerDocs{
     private final CommunityPostService communityPostService;
 
 //    게시글 목록 조회
