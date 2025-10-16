@@ -36,3 +36,5 @@ values
     (25, 'kok', null, '간단 프로필 없음'),
     (26, 'kok', null, '간단 프로필 없음');
 select * from tbl_member;
+
+alter table tbl_member alter column member_profile_url type varchar(1000);

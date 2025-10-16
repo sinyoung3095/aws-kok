@@ -52,6 +52,10 @@ public class MemberDAO {
     public Optional<UserMemberDTO> selectMember(Long memberId) {
         return memberMapper.selectMember(memberId);
     }
+//    아이디로 회원 프로필 기본 정보 조회
+    public Optional<UserMemberDTO> findMemberProfileEtc(Long memberId) {
+        return memberMapper.selectProfileMember(memberId);
+    }
 
 //    아이디로 지원한 체험 공고 조회
     public List<RequestExperienceDTO> findExperienceByMemberId(Long memberId) {
@@ -124,5 +128,10 @@ public class MemberDAO {
     public void plusJob(Long id, String job){
         System.out.println("직군 추가 다오: " + job);
         memberMapper.insertProfileJob(id, job);
+    }
+
+//    프로필 url 추가
+    public void updateProfileUrl(Long id, String s3Key) {
+        memberMapper.updateProfileUrl(id, s3Key);
     }
 }

@@ -28,6 +28,9 @@ public interface MemberMapper {
 //    아이디로 회원 조회
     public Optional<UserMemberDTO> selectMember(Long memberId);
 
+//    아이디로 회원 프로필 기본 정보 조회
+    public Optional<UserMemberDTO> selectProfileMember(Long memberId);
+
 //    아이디로 지원한 체험 공고 조회
     public List<RequestExperienceDTO> selectExperienceByMemberId(Long memberId);
 
@@ -62,5 +65,6 @@ public interface MemberMapper {
     public void updateProfileName(Long id, String name);
     public void updateProfileCategory(Long id, String job);
     public void insertProfileJob(Long id, String job);
+    public void updateProfileUrl(Long id, String s3Key);
 
 }
