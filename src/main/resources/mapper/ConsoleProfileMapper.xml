@@ -40,22 +40,20 @@
         where id = #{companyId}
     </update>
 
-    <update id="updateCompanySector">
-        update tbl_company_sector_category
-        set company_sector_id = (
-            select id from tbl_company_sector
-                  where company_sector_name = #{companySectorName}
-        )
-        where company_id = #{companyId}
-    </update>
+    <insert id="updateCompanySector">
+        insert into tbl_company_sector_category (company_id, company_sector_id)
+        values (
+               #{companyId},
+               (select id from tbl_company_sector where company_sector_name = #{companySectorName})
+           );
+    </insert>
 
-    <update id="updateCompanyScale">
-        update tbl_company_scale_category_bridge
-        set company_scale_category_id = (
-            select id from tbl_company_scale_category
-                      where company_scale_name = #{companyScaleName}
-        )
-        where company_id = #{companyId}
-    </update>
+    <insert id="updateCompanyScale">
+        insert into tbl_company_scale_category_bridge (company_id, company_scale_category_id)
+        values (
+               #{companyId},
+               (select id from tbl_company_scale_category where company_scale_name = #{companyScaleName})
+           );
+    </insert>
 </mapper>
 
