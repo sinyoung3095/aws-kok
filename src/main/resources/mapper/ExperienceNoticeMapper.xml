@@ -146,7 +146,7 @@
     </select>
 <!--  체험 공고 리스트 조회 -->
     <select id="selectAllByKeyword">
-        select e.experience_notice_title,e.id,c.company_name from tbl_experience_notice e join tbl_company c
+        select e.experience_notice_title,e.id,c.company_name,e.company_id from tbl_experience_notice e join tbl_company c
         on e.company_id = c.user_id
         <if test="keyword!=null">
             where c.company_name like concat('%', #{keyword}, '%')
