@@ -3,6 +3,7 @@ package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.FileDTO;
+import com.example.kok.service.MainpageService;
 import com.example.kok.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class MainpageController {
     private final UserProfileService userProfileService;
+    private final MainpageService mainpageService;
 
     @GetMapping("main-ex")
     public String  goToEx(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model){
@@ -32,19 +34,8 @@ public class MainpageController {
     }
     @GetMapping("login-header")
     public String goToLoginHeader(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model){
-        if(customUserDetails.getMemberProfileUrl()!=null){
-        }else {
-            if(userProfileService.findProfileById(customUserDetails.getId())!=null)
-            {customUserDetails.setMemberProfileUrl(userProfileService.findProfileById(customUserDetails.getId()));}
-            else{
-                customUserDetails.setMemberProfileUrl("/images/main-page/image3.png");
-            }
-
-        }
-        log.info("profile:{}",customUserDetails.getMemberProfileUrl());
+        mainpageService.findProfile(customUserDetails);
         model.addAttribute("userDTO", customUserDetails);
-
-        log.info(model.toString());
         return "main-page/login-header";
     }
     @GetMapping("side-bar")
@@ -53,16 +44,7 @@ public class MainpageController {
     }
     @GetMapping("login-side-bar")
     public  String goToLoginSideBar(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model){
-        if(customUserDetails.getMemberProfileUrl()!=null){
-        }else {
-            if(userProfileService.findProfileById(customUserDetails.getId())!=null)
-            {customUserDetails.setMemberProfileUrl(userProfileService.findProfileById(customUserDetails.getId()));}
-            else{
-                customUserDetails.setMemberProfileUrl("/images/main-page/image3.png");
-            }
-
-        }
-        log.info("profile:{}",customUserDetails.getMemberProfileUrl());
+        mainpageService.findProfile(customUserDetails);
         model.addAttribute("userDTO", customUserDetails);
         return "main-page/login-side-bar";
     }
@@ -73,16 +55,7 @@ public class MainpageController {
     }
     @GetMapping("mobile-login-header")
     public String goToMobileLoginHeader(@AuthenticationPrincipal CustomUserDetails customUserDetails,Model model){
-        if(customUserDetails.getMemberProfileUrl()!=null){
-        }else {
-            if(userProfileService.findProfileById(customUserDetails.getId())!=null)
-            {customUserDetails.setMemberProfileUrl(userProfileService.findProfileById(customUserDetails.getId()));}
-            else{
-                customUserDetails.setMemberProfileUrl("/images/main-page/image3.png");
-            }
-
-        }
-        log.info("profile:{}",customUserDetails.getMemberProfileUrl());
+        mainpageService.findProfile(customUserDetails);
         model.addAttribute("userDTO", customUserDetails);
         return "main-page/mobile-login-header";
     }

@@ -3,6 +3,7 @@ package com.example.kok.interceptor;
 import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.auth.JwtTokenProvider;
 import com.example.kok.repository.FileDAO;
+import com.example.kok.service.MainpageService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,20 +19,28 @@ import java.util.Arrays;
 @Slf4j
 @RequiredArgsConstructor
 public class Interceptor implements HandlerInterceptor {
-    private final FileDAO fileDAO;
-    private JwtTokenProvider jwtTokenProvider;
-//    전처리
-//    @Override
-//    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//
-//    for (Cookie cookie : request.getCookies()) {
-//        if ("refreshToken".equals(cookie.getName())) {
-//            Authentication authentication = cookie.;
-//        }
-//    }
-//        request.setAttribute("fileDTO",fileDAO.findFileById());
-//        return true;
-//    }
+    private final JwtTokenProvider jwtTokenProvider;
+    private final MainpageService mainpageService;
+
+
+    //    전처리
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        String token = null;
+        String provider = null;
+
+    for (Cookie cookie : request.getCookies()) {
+        if ("refreshToken".equals(cookie.getName())) {
+            token = cookie.getValue();
+            CustomUserDetails customUserDetails =(CustomUserDetails)jwtTokenProvider.getAuthentication(token).getPrincipal();
+
+            mainpageService.findProfile(customUserDetails);
+            request.setAttribute("userDTO",customUserDetails);
+        }
+
+    }
+        return true;
+    }
 
 //    후처리
     @Override
