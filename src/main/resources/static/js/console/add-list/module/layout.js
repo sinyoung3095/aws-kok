@@ -51,7 +51,7 @@ const adLayout = (() => {
                     <td class="list-list-td">${list.advertisementMainText}</td>
                     <td class="list-list-td">
                         <span class="list-table-span ${list.advertisementRequestStatus === "await" ? "await" : list.advertisementRequestStatus === "accept" ? "accept" : list.advertisementRequestStatus === "reject" ? "reject" : ""}">
-                            ${list.advertisementRequestStatus === "await" ? "대기중" : list.advertisementRequestStatus === "accept" ? "진행중" : list.advertisementRequestStatus === "reject" ? "반려" : ""}
+                            ${list.advertisementRequestStatus === "await" ? "대기중" : list.advertisementRequestStatus === "accept" ? "진행가능" : list.advertisementRequestStatus === "reject" ? "반려" : ""}
                         </span>
                     </td>
                     <td class="list-list-td">
