@@ -1,5 +1,214 @@
 let commentcount;
 const myPageLayout = (() => {
+    const showProfileUpdate=(profile)=>{
+        const container=document.getElementById("profile-wrap");
+        if(!container) return;
+
+        console.log(profile);
+        console.log("profile: "+profile.userName+profile.memberProfileUrl+profile.jobName+profile.memberInfo);
+        let userName=profile.userName;
+        let profileUrl=profile.memberProfileUrl;
+        let jobName;
+        if(profile.jobName) {
+            jobName = profile.jobName;
+        } else{
+            jobName="";
+        }
+        let info;
+        if(profile.memberInfo) {
+            info=profile.memberInfo;
+        } else{
+            info="";
+        }
+
+
+        let html=``;
+
+        html+=`<div class="setting-1">
+                                        <div class="setting-2">
+                                            <div class="setting-3">
+                                                <div class="setting-4">
+                                                    <div class="setting-5"></div>
+                                                    <div class="setting-6">
+                                                        <div class="setting-7">프로필 편집</div>
+                                                        <div class="setting-8">전체 공개</div>
+                                                    </div>
+                                                    <div class="setting-9">
+                                                    <button class="setting-10">
+                                                        <div class="setting-11">
+                                                            <svg id="close" aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="20" role="img" width="20">
+                                                                <path clip-rule="evenodd" d="M6.434 6.435a.8.8 0 0 1 1.132 0L12 10.869l4.434-4.434a.8.8 0 1 1 1.132 1.13L13.13 12l4.435 4.435a.8.8 0 1 1-1.132 1.13L12 13.133l-4.434 4.434a.8.8 0 0 1-1.132-1.131L10.87 12 6.434 7.566a.8.8 0 0 1 0-1.131" fill-rule="evenodd"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="setting-12">
+                                                <div class="setting-13">
+                                                    <div class="setting-14">
+                                                        <div class="setting-15 profileWrapCircle">
+                                                            <input type="file" name="memberProfileUrl" style="display: none;" class="profile-input">
+                                                            <img alt="image" class="profile-img-round" draggable="false" loading="lazy" width="80" height="80" decoding="async" data-nimg="1" src="${profileUrl||"/images/main-page/image.png"}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 80px; max-width: 80px; min-height: 80px; min-width: 80px; object-fit: contain;">
+                                                            <div class="setting-16">
+                                                                <bytton class="setting-17">
+                                                                    <div class="setting-18">
+                                                                        <svg aria-label="icon" color="white" fill="currentColor" height="21" role="img" width="21" style="margin-top: 0px; margin-left: -3px;margin-right: -1px; margin-bottom: 0px;" >
+                                                                            <path clip-rule="evenodd" d="M15.727 3.141a1.8 1.8 0 0 1 2.546 0l2.585 2.586a1.8 1.8 0 0 1 0 2.546l-12 12a1.8 1.8 0 0 1-1.272.527H5A1.8 1.8 0 0 1 3.2 19v-2.586c0-.477.19-.935.527-1.273zm1.414 1.132a.2.2 0 0 0-.282 0L15.13 6 18 8.869l1.727-1.728a.2.2 0 0 0 0-.282zM16.87 10 14 7.131l-9.141 9.142a.2.2 0 0 0-.06.141V19c0 .11.09.2.2.2h2.587a.2.2 0 0 0 .141-.058z" fill-rule="evenodd"></path>
+                                                                        </svg>
+                                                                    </div>
+                                                                </bytton>
+                                                            </div>
+                                                            <div class="profile-0">
+                                                                <div class="profile-1">
+                                                                    <div class="profile-2">
+                                                                        <div class="profile-3 profile-update">
+                                                                            <div class="profile-4">
+                                                                                <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24">
+                                                                                    <path d="M19 2.2H5C3.45 2.2 2.2 3.45 2.2 5v14c0 1.55 1.25 2.8 2.8 2.8h14c1.55 0 2.8-1.25 2.8-2.8V5c0-1.55-1.25-2.8-2.8-2.8m-14 18c-.66 0-1.2-.54-1.2-1.2v-5.17c1.83.11 3.56.59 5.11 1.37a14.8 14.8 0 0 0-2.92 5h-1zM20.2 19c0 .66-.54 1.2-1.2 1.2H7.7c.69-1.76 1.74-3.33 3.07-4.63l.46-.43c2.33-2.08 5.41-3.34 8.78-3.34h.2V19zm0-8.8H20c-3.81 0-7.29 1.44-9.91 3.81a14.9 14.9 0 0 0-6.29-1.79V5c0-.66.54-1.2 1.2-1.2h14c.66 0 1.2.54 1.2 1.2zM9.96 8.636c-.31-.22-.67-.29-.91-.29s-.6.07-.91.29c-.35.25-.59.66-.59 1.21s.24.96.59 1.21c.31.22.67.29.91.29s.6-.07.91-.29c.35-.25.59-.66.59-1.21s-.24-.96-.59-1.21"></path>
+                                                                                </svg>
+                                                                            </div>
+                                                                            <div class="profile-5">
+                                                                                <p class="profile-6">프로필 이미지 변경</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="profile-3 profile-delete">
+                                                                            <div class="profile-4">
+                                                                                <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24">
+                                                                                    <path clip-rule="evenodd" d="M8.284 6.2H4a.8.8 0 1 0 0 1.6h1.2V18A2.8 2.8 0 0 0 8 20.8h8a2.8 2.8 0 0 0 2.8-2.8V7.8H20a.8.8 0 0 0 0-1.6h-4.284a3.801 3.801 0 0 0-7.432 0m1.666 0h4.1a2.2 2.2 0 0 0-4.1 0m7.25 1.6H6.8V18A1.2 1.2 0 0 0 8 19.2h8a1.2 1.2 0 0 0 1.2-1.2z" fill-rule="evenodd"></path>
+                                                                                </svg>
+                                                                            </div>
+                                                                            <div class="profile-5">
+                                                                                <p class="profile-6">프로필 삭제</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="setting-19">
+                                                            <div class="setting-20">
+                                                                <div class="setting-21">
+                                                                    <div class="setting-22">표시될 이름</div>
+                                                                </div>
+                                                                <div class="setting-23">
+                                                                    <div class="setting-24">
+                                                                        <input type="text" name="userName" placeholder="표시될 이름을 입력해주세요." class="name-input" value="${userName}"  style="cursor: pointer;">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="setting-25">
+                                                                <div class="setting-26">
+                                                                    <div class="setting-27">직군</div>
+                                                                </div>
+                                                                <div class="setting-28">
+                                                                    <div class="setting-29">
+                                                                        <div class="setting-30">
+                                                                            <input type="" name="jobName" placeholder="직군을 선택해주세요." readonly="" class="select job-input" value="${jobName}" style="cursor: pointer;">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="setting-31">
+                                                                        <svg id="list" aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="24" role="img" width="24">
+                                                                            <path clip-rule="evenodd" d="M6.434 9.435a.8.8 0 0 1 1.132 0L12 13.869l4.434-4.434a.8.8 0 1 1 1.132 1.13l-5 5a.8.8 0 0 1-1.132 0l-5-5a.8.8 0 0 1 0-1.13" fill-rule="evenodd"></path>
+                                                                        </svg>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="job">
+                                                                <div class="job-1">
+                                                                    <div class="job-2">
+                                                                        <div class="job-3">
+                                                                            <div class="job-5">
+                                                                                <p class="job-6">SW 개발</p>
+                                                                            </div>
+                                                                            <div class="choice active">
+                                                                                <svg aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="24" role="img" width="24">
+                                                                                    <path clip-rule="evenodd" d="M20.066 5.935a.8.8 0 0 1 0 1.13l-11 11a.8.8 0 0 1-1.131 0l-4-4a.8.8 0 0 1 1.13-1.13L8.5 16.369 18.935 5.935a.8.8 0 0 1 1.13 0" fill-rule="evenodd"></path>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="job-3">
+                                                                            <div class="job-5">
+                                                                                <p class="job-6">데이터/AI</p>
+                                                                            </div>
+                                                                            <div class="choice">
+                                                                                <svg aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="24" role="img" width="24">
+                                                                                    <path clip-rule="evenodd" d="M20.066 5.935a.8.8 0 0 1 0 1.13l-11 11a.8.8 0 0 1-1.131 0l-4-4a.8.8 0 0 1 1.13-1.13L8.5 16.369 18.935 5.935a.8.8 0 0 1 1.13 0" fill-rule="evenodd"></path>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="job-3">
+                                                                            <div class="job-5">
+                                                                                <p class="job-6">기획/전략</p>
+                                                                            </div>
+                                                                            <div class="choice">
+                                                                                <svg aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="24" role="img" width="24">
+                                                                                    <path clip-rule="evenodd" d="M20.066 5.935a.8.8 0 0 1 0 1.13l-11 11a.8.8 0 0 1-1.131 0l-4-4a.8.8 0 0 1 1.13-1.13L8.5 16.369 18.935 5.935a.8.8 0 0 1 1.13 0" fill-rule="evenodd"></path>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="job-3">
+                                                                            <div class="job-5">
+                                                                                <p class="job-6">디자인/UX</p>
+                                                                            </div>
+                                                                            <div class="choice">
+                                                                                <svg aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="24" role="img" width="24">
+                                                                                    <path clip-rule="evenodd" d="M20.066 5.935a.8.8 0 0 1 0 1.13l-11 11a.8.8 0 0 1-1.131 0l-4-4a.8.8 0 0 1 1.13-1.13L8.5 16.369 18.935 5.935a.8.8 0 0 1 1.13 0" fill-rule="evenodd"></path>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="job-3">
+                                                                            <div class="job-5">
+                                                                                <p class="job-6">마케팅/PR</p>
+                                                                            </div>
+                                                                            <div class="choice">
+                                                                                <svg aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="24" role="img" width="24">
+                                                                                    <path clip-rule="evenodd" d="M20.066 5.935a.8.8 0 0 1 0 1.13l-11 11a.8.8 0 0 1-1.131 0l-4-4a.8.8 0 0 1 1.13-1.13L8.5 16.369 18.935 5.935a.8.8 0 0 1 1.13 0" fill-rule="evenodd"></path>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="job-3">
+                                                                            <div class="job-5">
+                                                                                <p class="job-6">경영/운영</p>
+                                                                            </div>
+                                                                            <div class="choice">
+                                                                                <svg aria-label="icon" color="foregrounds.neutral.tertiary" fill="currentColor" height="24" role="img" width="24">
+                                                                                    <path clip-rule="evenodd" d="M20.066 5.935a.8.8 0 0 1 0 1.13l-11 11a.8.8 0 0 1-1.131 0l-4-4a.8.8 0 0 1 1.13-1.13L8.5 16.369 18.935 5.935a.8.8 0 0 1 1.13 0" fill-rule="evenodd"></path>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="setting-32">
+                                                            <div class="setting-33">
+                                                                <div class="setting-34">소개</div>
+                                                            </div>
+                                                            <div class="setting-35">
+                                                                <div class="setting-36">
+                                                                    <textarea maxlength="300" name="memberInfo" placeholder="직무, 관심사, 경험 중심으로 나를 표현해 보세요." class="setting-37 info-input">${info}</textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="setting-38">
+                                                                <div class="setting-39">최대 300자까지 입력할 수 있습니다.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="setting-40">
+                                                        <button class="setting-41">
+                                                            <span class="setting-42">완료</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+
+        container.innerHTML=html;
+
+        return;
+    }
     const showPosts = (posts) => {
         const container = document.getElementById("my-posts-wrap");
         if (!container) return;
@@ -534,7 +743,7 @@ const myPageLayout = (() => {
             // console.log(req.id);
 
             html += `
-                <tr>
+                <tr data-reqid="${req.id}">
                                                     <td class="payment-3">
                                                         <p>${req.companyName || ''}</p>
                                                     </td>
@@ -811,6 +1020,6 @@ const myPageLayout = (() => {
         container.innerHTML = html;
     }
 
-    return {showPosts: showPosts, showPostDetail:showPostDetail, showCommentsList:showCommentsList, showExperienceRequest: showExperienceRequest, showInternRequest:showInternRequest, showPaymentList:showPaymentList,
+    return {showProfileUpdate:showProfileUpdate, showPosts: showPosts, showPostDetail:showPostDetail, showCommentsList:showCommentsList, showExperienceRequest: showExperienceRequest, showInternRequest:showInternRequest, showPaymentList:showPaymentList,
     showSavedExpList:showSavedExpList, showSavedIntList:showSavedIntList};
 })();

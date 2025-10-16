@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/mypage/**")
@@ -100,6 +101,20 @@ public class MyPageRestController {
         return ResponseEntity.notFound().build();
     }
 
+//    프로필 편집 누르면 뜨는 정보들
+    @GetMapping("/profile-load")
+    public ResponseEntity<?> getProfile(@AuthenticationPrincipal CustomUserDetails customUserDetails){
+        long memberId=customUserDetails.getId();
+        Optional<UserMemberDTO> member=memberService.findProfileByMemberId(memberId);
+//        System.out.println("이름: "+member.get().getUserName());
+//        System.out.println("인포: "+member.get().getMemberInfo());
+
+        if(member.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(member.get());
+    }
+
 //    프로필 편집 완료
     @PostMapping("/profile-update")
     public void updateProfile(@AuthenticationPrincipal CustomUserDetails customUserDetails,
@@ -113,8 +128,9 @@ public class MyPageRestController {
         member.setUserName(name);
         member.setJobName(job);
         member.setMemberInfo(info);
-        System.out.println("컨트롤러 인포: " + member.getMemberInfo());
-        System.out.println("컨트롤러 직군: " + member.getJobName());
+//        System.out.println("컨트롤러 인포: " + member.getMemberInfo());
+//        System.out.println("컨트롤러 직군: " + member.getJobName());
+//        System.out.println(file.isEmpty());
         memberService.updateProfile(memberId, member, file);
     }
 }

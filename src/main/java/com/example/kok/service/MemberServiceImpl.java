@@ -196,12 +196,14 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void updateProfile(Long id, UserMemberDTO dto, MultipartFile profile) {
-        String JobCate=memberDAO.findJobCategoryByMemberId(id);
+        String originJobCate=memberDAO.findJobCategoryByMemberId(id);
+
         memberDAO.updateInfo(id, dto.getMemberInfo());
         memberDAO.updateName(id, dto.getUserName());
-        System.out.println("서비스 인포: " + dto.getMemberInfo());
-        System.out.println("서비스 직군: " + dto.getJobName());
-        if(JobCate.isEmpty()){
+//        System.out.println("서비스 인포: " + dto.getMemberInfo());
+//        System.out.println("서비스 직군: " + dto.getJobName());
+//        System.out.println("서비스 프사 empty: "+profile.isEmpty());
+        if(originJobCate==null){
             memberDAO.plusJob(id, dto.getJobName());
         } else{
             memberDAO.updateJob(id, dto.getJobName());
@@ -209,10 +211,15 @@ public class MemberServiceImpl implements MemberService {
 
 
         if(profile != null) {
-            memberDAO.deleteProfile(id);
+            if(memberDAO.findMemberProfileEtc(id)!=null){
+                memberDAO.deleteProfile(id);
+            }
+
 
             try {
                 String s3Key = s3Service.uploadFile(profile, getPath());
+
+//                String s3Url = s3Service.getPreSignedUrl(s3Key, Duration.ofMinutes(5));
 
                 // 파일 DTO 생성
                 FileDTO fileDTO = new FileDTO();
@@ -222,16 +229,25 @@ public class MemberServiceImpl implements MemberService {
                 fileDTO.setFileSize(String.valueOf(profile.getSize()));
                 fileDTO.setFileContentType(profile.getContentType());
 
+                System.out.println("filePath:"+fileDTO.getFilePath());
+
                 // tbl_file 등록
                 memberDAO.saveFile(fileDTO);
+
+//                System.out.println("saveFile"+fileDTO.getFileContentType());
 
                 // userProfileFile 등록
                 UserProfileFileDTO userProfileFileDTO = new UserProfileFileDTO();
                 userProfileFileDTO.setFileId(fileDTO.getId());
                 userProfileFileDTO.setId(dto.getId());
 
+                System.out.println("userProfileFile등록"+userProfileFileDTO.getFileId());
+
                 memberDAO.saveProfileFile(userProfileFileDTO);
+                memberDAO.updateProfileUrl(id, s3Key);
+                System.out.println("saveProfileFile 실행");
             } catch (IOException e) {
+                e.printStackTrace();
                 throw new RuntimeException(e);
             }
         }
@@ -241,6 +257,17 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public UserProfileFileDTO getProfile(Long id) {
         return null;
+    }
+
+    @Override
+    public Optional<UserMemberDTO> findProfileByMemberId(Long memberId) {
+        Optional<UserMemberDTO> memberProfile=memberDAO.findMemberProfileEtc(memberId);
+        String preSignedUrl = s3Service.getPreSignedUrl(memberProfile.get().getMemberProfileUrl(), Duration.ofMinutes(5));
+        memberProfile.ifPresent(member->{
+            member.setMemberProfileUrl(preSignedUrl);
+        });
+//        memberProfile.setMemberProfileUrl(preSignedUrl);
+        return memberProfile;
     }
 
     public String getPath() {

@@ -14,7 +14,7 @@
 <!--    프로필 사진 추가-->
     <insert id="insertProfileFile">
         insert into tbl_user_profile_file(file_id, user_id)
-        values(#{fileId}, #{userId})
+        values(#{fileId}, #{id})
     </insert>
 
     <sql id="search">
@@ -49,6 +49,15 @@
 <select id="selectMember">
     select id, user_name, user_phone, user_email, user_role, sns_email, user_status, member_profile_url, avg_score, job_name
     from view_user_with_evaluation_and_job
+    where user_status = 'active' and user_role = 'member' and id = #{id}
+</select>
+
+<!-- 회원 아이디로 프로필 기본 정보 조회 -->
+<select id="selectProfileMember">
+    select v.id, v.user_name, v.user_phone, v.user_email, v.user_role, v.sns_email, v.user_status, v.member_profile_url, v.avg_score, v.job_name, m.member_info
+    from view_user_with_evaluation_and_job v
+    join tbl_member m
+    on v.id=m.user_id
     where user_status = 'active' and user_role = 'member' and id = #{id}
 </select>
 
@@ -194,7 +203,9 @@
                   where job_name = #{job}
             ))
     </insert>
-<!--    <update id="updateProfileUrl">-->
-<!--        -->
-<!--    </update>-->
+    <update id="updateProfileUrl">
+        update tbl_member
+        set member_profile_url=#{s3Key}
+        where user_id=#{id}
+    </update>
 </mapper>
