@@ -23,9 +23,9 @@
             join tbl_intern_notice inn
                 on re.intern_notice_id = inn.id
             left join tbl_member_storage_file msf
-                      on msf.member_id = u.id
+                  on msf.member_id = u.id
             left join tbl_file f
-                      on msf.file_id = f.id
+                  on msf.file_id = f.id
         where re.member_id = #{memberId}
             and inn.id = #{internNoticeId}
         order by re.id desc
@@ -40,10 +40,10 @@
             f.file_path,
             f.file_name
         from tbl_request_intern re
-                 join tbl_request_intern_file ref
-                      on re.id = ref.request_intern_id
-                 join tbl_file f
-                      on ref.file_id = f.id
+             join tbl_request_intern_file ref
+                  on re.id = ref.request_intern_id
+             join tbl_file f
+                  on ref.file_id = f.id
         where re.member_id = #{memberId}
           and re.intern_notice_id = #{internNoticeId}
     </select>
@@ -58,7 +58,7 @@
             u.user_phone,
             re.created_datetime
         from tbl_request_intern re
-                 join tbl_user u on re.member_id = u.id
+             join tbl_user u on re.member_id = u.id
         where re.intern_notice_id = #{internNoticeId}
         order by re.id desc
     </select>

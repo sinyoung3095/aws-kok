@@ -1,6 +1,7 @@
 const adService = (() => {
     // 광고 등록
     const register = async (data) => {
+
         const formData = new FormData();
 
         // 일반 텍스트 데이터 추가
@@ -11,11 +12,8 @@ const adService = (() => {
         formData.append("advertiseEndDatetime", data.advertiseEndDatetime);
         formData.append("paymentPrice", data.paymentPrice);
 
-        // 파일 추가 (있을 경우만)
-        if (data.files && data.files.length > 0) {
-            for (let file of data.files) {
-                formData.append("files", file);
-            }
+        if (document.querySelector("#add-background").files.length > 0) {
+            formData.append("files", document.querySelector("#add-background").files[0]);
         }
 
         const response = await fetch(`/api/enterprise-console/ad/create`, {
@@ -34,22 +32,15 @@ const adService = (() => {
 
     // 광고 수정
     const update = async (id, data) => {
+
         const formData = new FormData();
 
-        // 수정 시 텍스트 데이터
         formData.append("advertisementMainText", data.advertisementMainText);
         formData.append("advertisementSubText", data.advertisementSubText);
         formData.append("companyId", data.companyId);
         formData.append("advertiseStartDatetime", data.advertiseStartDatetime);
         formData.append("advertiseEndDatetime", data.advertiseEndDatetime);
         formData.append("paymentPrice", data.paymentPrice);
-
-        // 파일이 있다면 추가
-        if (data.files && data.files.length > 0) {
-            for (let file of data.files) {
-                formData.append("files", file);
-            }
-        }
 
         const response = await fetch(`/api/enterprise-console/ad/edit/${id}`, {
             method: "PUT",
