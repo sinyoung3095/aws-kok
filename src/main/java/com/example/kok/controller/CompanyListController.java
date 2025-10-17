@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/company")
 @Slf4j
 @RequiredArgsConstructor
-public class CompanyListController {
+public class CompanyListController implements CompanyListControllerDocs{
     private final CompanyService companyService;
     private final ExperienceNoticeService experienceNoticeService;
     private final InternNoticeService internNoticeService;

@@ -15,12 +15,12 @@ import java.util.List;
 @RequestMapping("/api/comments")
 @RequiredArgsConstructor
 @Slf4j
-public class CommunityCommentController {
+public class CommunityCommentController implements CommunityCommentControllerDocs{
     private final CommunityCommentService communityCommentService;
 
 //    댓글 작성
     @PostMapping
-    public ResponseEntity<?> write(@RequestBody CommentDTO commentDTO,
+    public ResponseEntity<CommentDTO> write(@RequestBody CommentDTO commentDTO,
                                    @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         commentDTO.setMemberId(customUserDetails.getId());
         commentDTO.setMemberProfileUrl(customUserDetails.getMemberProfileUrl());
@@ -29,7 +29,7 @@ public class CommunityCommentController {
     }
 //    댓글 목록
     @GetMapping("/{postId}")
-    public ResponseEntity<?> list(@PathVariable Long postId,
+    public ResponseEntity<List<CommentDTO>> list(@PathVariable Long postId,
                                   @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         Long memberId = customUserDetails.getId();
         List<CommentDTO> comments = communityCommentService.getComments(postId, memberId);
@@ -38,7 +38,7 @@ public class CommunityCommentController {
 
 //    댓글 수정
     @PutMapping("/{commentId}")
-    public ResponseEntity<?> updateComment(@PathVariable("commentId") Long commentId,
+    public ResponseEntity<CommentDTO> updateComment(@PathVariable("commentId") Long commentId,
                                            @RequestBody CommentDTO commentDTO,
                                            @AuthenticationPrincipal CustomUserDetails user) {
         commentDTO.setId(commentId);
@@ -50,7 +50,7 @@ public class CommunityCommentController {
 
 //    댓글 삭제
     @DeleteMapping("/{commentId}")
-    public ResponseEntity<?> deleteComment(@PathVariable("commentId") Long commentId) {
+    public ResponseEntity<CommentDTO> deleteComment(@PathVariable("commentId") Long commentId) {
         communityCommentService.delete(commentId);
         return ResponseEntity.noContent().build();
     }
