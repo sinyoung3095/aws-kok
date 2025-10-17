@@ -15,7 +15,7 @@
     <!--    지원서 넣기-->
     <insert id="insertRequest" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_request_intern(intern_notice_id, member_id, member_alarm_setting_id, request_intern_member_name, request_intern_member_email, request_intern_member_phone, request_intern_member_url, file_id)
-        values(#{internNoticeId}, #{memberId}, #{memberAlarmSettingId}, #{requestExperienceMemberName}, #{requestExperienceMemberEmail}, #{requestExperienceMemberPhone}, #{requestExperienceMemberUrl}, #{fileId})
+        values(#{internNoticeId}, #{memberId}, #{memberAlarmSettingId}, #{requestInternMemberName}, #{requestInternMemberEmail}, #{requestInternMemberPhone}, #{requestInternMemberUrl}, #{fileId})
     </insert>
 
     <!--  지원 목록 조회  -->

@@ -21,9 +21,12 @@ public class MyPageController {
     @GetMapping("page")
     public String goToMyPage(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
         Optional<UserMemberDTO> member=memberService.findProfileByMemberId(customUserDetails.getId());
-        String profileFile=member.get().getFilePath();
+        String profileFile=null;
+        if(member.get().getFilePath()!=null){
+            profileFile=member.get().getFilePath();
+        }
         model.addAttribute("profileFile", profileFile);
-        model.addAttribute("user", customUserDetails);
+//        model.addAttribute("user", customUserDetails);
         System.out.println(customUserDetails.getMemberProfileUrl());
         return "mypage/page";
     }
