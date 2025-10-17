@@ -23,6 +23,7 @@ public class UserMemberDTO {
     private String snsEmail;
     private Status userStatus;
     private String memberProfileUrl;
+    private String filePath;
     private String memberInfo;
     private String avgScore;
     private String jobName;
