@@ -49,7 +49,7 @@ const myPageLayout = (() => {
                                                     <div class="setting-14">
                                                         <div class="setting-15 profileWrapCircle">
                                                             <input type="file" name="memberProfileUrl" style="display: none;" class="profile-input">
-                                                            <img alt="image" class="profile-img-round" draggable="false" loading="lazy" width="80" height="80" decoding="async" data-nimg="1" src="${profileUrl||"/images/main-page/image.png"}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 80px; max-width: 80px; min-height: 80px; min-width: 80px; object-fit: contain;">
+                                                            <img alt="image" class="profile-img-round" draggable="false" loading="lazy" width="80" height="80" decoding="async" data-nimg="1" src="${profileFile||profileFile2 || '/images/main-page/image2.png'}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 80px; max-width: 80px; min-height: 80px; min-width: 80px; object-fit: contain;">
                                                             <div class="setting-16">
                                                                 <bytton class="setting-17">
                                                                     <div class="setting-18">
@@ -254,7 +254,7 @@ const myPageLayout = (() => {
         <div class="post-4">
             <div>
                 <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1"
-                     src="${post.memberProfileUrl || '/images/main-page/image2.png'}"
+                     src="${profileFile||profileFile2 || '/images/main-page/image2.png'}"
                      style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;"/>
             </div>
             <div class="post-5">

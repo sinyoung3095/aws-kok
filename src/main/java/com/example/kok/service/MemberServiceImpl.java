@@ -262,12 +262,24 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Optional<UserMemberDTO> findProfileByMemberId(Long memberId) {
         Optional<UserMemberDTO> memberProfile=memberDAO.findMemberProfileEtc(memberId);
-        String preSignedUrl = s3Service.getPreSignedUrl(memberProfile.get().getMemberProfileUrl(), Duration.ofMinutes(5));
-        memberProfile.ifPresent(member->{
+        if (memberProfile.isPresent()) {
+            UserMemberDTO member = memberProfile.get();
+            String profileKey = member.getMemberProfileUrl();
+            String preSignedUrl = null;
+
+            if (profileKey != null && !profileKey.isBlank() && !profileKey.startsWith("http")) {
+                try {
+                    preSignedUrl = s3Service.getPreSignedUrl(profileKey, Duration.ofMinutes(5));
+                } catch (Exception e) {
+                    System.out.println("S3 preSigned URL 생성 실패: " + e.getMessage());
+                    preSignedUrl = null;
+                }
+            }
+
             member.setFilePath(preSignedUrl);
-        });
-        System.out.println("#######################");
-        System.out.println(preSignedUrl);
+            System.out.println("#######################");
+            System.out.println(preSignedUrl);
+        }
 //        memberProfile.setMemberProfileUrl(preSignedUrl);
         return memberProfile;
     }
