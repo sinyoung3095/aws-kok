@@ -227,7 +227,7 @@ const layout = (() => {
             text += `
                 <a href="/admin/advertise/accept/${adminAdvertisementDTO.id}">
                         <button class="btn-apply btn">승인</button>
-                    </a>
+                </a>
                 <a href="/admin/advertise/reject/${adminAdvertisementDTO.id}">
                     <button class="btn-reject btn">거절</button>
                 </a>
