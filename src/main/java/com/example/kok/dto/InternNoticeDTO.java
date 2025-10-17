@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class InternNoticeDTO {
     private Long id;
     private String internNoticeTitle;
-    private String internNoticeSubTitle;
+    private String internNoticeSubtitle;
     private String internNoticeIntroduceJob;
     private String internNoticeMajorWork;
     private String internNoticeEtc;

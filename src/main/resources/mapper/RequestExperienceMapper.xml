@@ -55,6 +55,6 @@
         from tbl_request_experience
         where experience_notice_id=#{experienceNoticeId}
         and member_id=#{memberId}
-        and request_experience_status='active'
+        and request_experience_active='active'
     </select>
 </mapper>

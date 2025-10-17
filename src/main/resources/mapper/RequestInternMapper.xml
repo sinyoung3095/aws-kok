@@ -52,4 +52,12 @@
         </if>
     </select>
 
+<!--    지원서 개수 조회-->
+    <select id="countRequest">
+        select count(*)
+        from tbl_request_intern
+        where intern_notice_id=#{internNoticeId}
+        and member_id=#{memberId}
+        and request_intern_active='active'
+    </select>
 </mapper>
