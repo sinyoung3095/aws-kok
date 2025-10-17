@@ -14,27 +14,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface CommunityReplyControllerDocs {
 
 //    대댓글 작성
-    @Operation(summary = "게시글 상세", description = "게시글 ID를 이용해 상세 내용을 조회합니다.",
+    @Operation(summary = "대댓글 작성", description = "특정 댓글에 대한 대댓글을 작성합니다.",
             parameters = {
-                    @Parameter(name = "id", description = "게시글 ID")
+                    @Parameter(name = "replyDTO", description = "작성할 대댓글의 정보가 담긴 객체")
             }
     )
     public ResponseEntity<?> write(@RequestBody ReplyDTO replyDTO,
                                    @AuthenticationPrincipal CustomUserDetails customUserDetails);
 
 //    대댓글 목록
-    @Operation(summary = "게시글 상세", description = "게시글 ID를 이용해 상세 내용을 조회합니다.",
+    @Operation(summary = "대댓글 목록 조회", description = "특정 댓글에 달린 대댓글 목록을 조회합니다.",
             parameters = {
-                    @Parameter(name = "id", description = "게시글 ID")
+                    @Parameter(name = "commentId", description = "댓글 ID")
             }
     )
     public ResponseEntity<?> list(@PathVariable Long commentId,
                                   @AuthenticationPrincipal CustomUserDetails customUserDetails);
 
 //    대댓글 수정
-    @Operation(summary = "게시글 상세", description = "게시글 ID를 이용해 상세 내용을 조회합니다.",
+    @Operation(summary = "대댓글 수정", description = "작성한 대댓글의 내용을 수정합니다.",
             parameters = {
-                    @Parameter(name = "id", description = "게시글 ID")
+                    @Parameter(name = "replyId", description = "대댓글 ID"),
+                    @Parameter(name = "replyDTO", description = "작성할 대댓글의 정보가 담긴 객체")
             }
     )
     public ResponseEntity<?> updateReply(@PathVariable("replyId") Long replyId,
@@ -42,9 +43,9 @@ public interface CommunityReplyControllerDocs {
                                          @AuthenticationPrincipal CustomUserDetails user);
 
 //    대댓글 삭제
-    @Operation(summary = "게시글 상세", description = "게시글 ID를 이용해 상세 내용을 조회합니다.",
+    @Operation(summary = "대댓글 삭제", description = "특정 대댓글을 삭제합니다.",
             parameters = {
-                    @Parameter(name = "id", description = "게시글 ID")
+                    @Parameter(name = "replyId", description = "대댓글 ID")
             }
     )
     public ResponseEntity<?> deleteReply(@PathVariable("replyId") Long replyId);

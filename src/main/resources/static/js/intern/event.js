@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const fileUrlPre = await fetch(`/api/interns/profile?companyId=${companyId}`);
         const fileUrl = await fileUrlPre.text();
 
-        const endDate = new Date(detailData.notice.internEndDate);
+        const endDate = new Date(detailData.notice.internNoticeEndDate);
         const formatted = `${endDate.getFullYear()}년 ${endDate.getMonth() + 1}월 ${endDate.getDate()}일`;
 
         const isSavedPre= await fetch(`/api/interns/is-saved?internId=${internId}`);
