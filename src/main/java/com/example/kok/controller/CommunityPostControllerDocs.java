@@ -19,7 +19,7 @@ public interface CommunityPostControllerDocs {
 //    게시글 목록
     @Operation(summary = "게시글 목록", description = "커뮤니티 게시글 목록을 페이지 단위로 조회합니다. (무한 스크롤 지원)",
                 parameters = {
-                    @Parameter(name = "page", description = "조회 할 페이지 번호")
+                    @Parameter(name = "page", description = "조회할 페이지 번호")
                 }
     )
     public ResponseEntity<PostsCriteriaDTO> getPosts(@PathVariable("page") int page,
