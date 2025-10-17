@@ -54,7 +54,7 @@
             sum(case when advertisement_request_status = 'accept' then 1 else 0 end) as acceptCount,
             sum(case when advertisement_request_status = 'await' then 1 else 0 end) as awaitCount,
             sum(case when advertisement_request_status = 'reject' then 1 else 0 end) as rejectCount
-        FROM tbl_advertisement
+        from tbl_advertisement
     </select>
 
 <!--  광고 상세  -->

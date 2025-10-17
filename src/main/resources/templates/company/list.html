@@ -185,34 +185,35 @@
                     </div>
                     <div class="side-wrapper">
                         <!-- 일반 회원 로그인 -->
-                        <div class="content-box" th:if="${userDTO.userRole.getValue() == 'member' }">
-                            <div class="profile-card">
-                                <div class="profile-avatar">
-                                    <img alt="image" width="60" height="60" srcset="" th:src="${userDTO.memberProfileUrl != null ? userDTO.memberProfileUrl : '/images/main-page/image2.png'}" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
-                                </div>
-                                <div class="profile-info">
-                                    <div class="profile-name">
-                                        <p class="member-name" th:text="${userDTO.username}"></p>
+                        <th:block th:if="${userDTO != null}">
+                            <div class="content-box" th:if="${userDTO.userRole.getValue() == 'member' }">
+                                <div class="profile-card">
+                                    <div class="profile-avatar">
+                                        <img alt="image" width="60" height="60" srcset="" th:src="${userDTO.memberProfileUrl != null ? userDTO.memberProfileUrl : '/images/main-page/image2.png'}" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
                                     </div>
-                                    <p class="member-role" th:text="${userDTO.userRole}"></p>
+                                    <div class="profile-info">
+                                        <div class="profile-name">
+                                            <p class="member-name" th:text="${userDTO.username}"></p>
+                                        </div>
+                                        <p class="member-role" th:text="${userDTO.userRole}"></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- 기업 회원 로그인 -->
-                        <div class="content-box" th:if="${userDTO.userRole.getValue() == 'company' }">
-                            <div class="profile-card">
-                                <div class="profile-avatar">
-                                    <img alt="image" width="60" height="60" srcset="" th:src="${companyDTO.companyProfileFile != null ? companyDTO.companyProfileFile : '/images/main-page/image2.png'}" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
-                                </div>
-                                <div class="profile-info">
-                                    <div class="profile-name">
-                                        <p class="member-name" th:text="${userDTO.username}"></p>
+                            <!-- 기업 회원 로그인 -->
+                            <div class="content-box" th:if="${userDTO.userRole.getValue() == 'company' }">
+                                <div class="profile-card">
+                                    <div class="profile-avatar">
+                                        <img alt="image" width="60" height="60" srcset="" th:src="${companyDTO.companyProfileFile != null ? companyDTO.companyProfileFile : '/images/main-page/image2.png'}" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
                                     </div>
-                                    <p class="member-role" th:text="${companyDTO.companyName}"></p>
+                                    <div class="profile-info">
+                                        <div class="profile-name">
+                                            <p class="member-name" th:text="${userDTO.username}"></p>
+                                        </div>
+                                        <p class="member-role" th:text="${companyDTO.companyName}"></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
+                        </th:block>
                         <!-- 비 로그인시 -->
                         <div class="content-box" th:if="${userDTO == null}">
                             <div class="profile-card">

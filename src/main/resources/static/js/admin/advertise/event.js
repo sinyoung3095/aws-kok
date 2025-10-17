@@ -48,16 +48,6 @@ actionButtons.forEach((actionButton) => {
     });
 });
 
-closeButtons.forEach((closeButton) => {
-    closeButton.addEventListener("click", () => {
-        modal.classList.remove("show");
-        document.body.classList.remove("modal-open");
-        setTimeout(() => {
-            modal.style.display = "none";
-        }, 100);
-    });
-});
-
 modal.addEventListener("click", (e) => {
     if (e.target === modal) {
         modal.classList.remove("show");
@@ -166,6 +156,18 @@ advertiseListContainer.addEventListener("click",async (e)=>{
 
         // 광고 신청 상세정보
         await service.getAdvertisementDetail(layout.showDetail, id);
+        const closeButtons = document.querySelectorAll(".close");
+
+        closeButtons.forEach((closeButton) => {
+            closeButton.addEventListener("click", () => {
+                modal.classList.remove("show");
+                document.body.classList.remove("modal-open");
+                setTimeout(() => {
+                    modal.style.display = "none";
+                }, 100);
+            });
+        });
+
     }
 });
 
