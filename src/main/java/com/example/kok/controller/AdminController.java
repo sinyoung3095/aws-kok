@@ -1,5 +1,7 @@
 package com.example.kok.controller;
 
+import com.example.kok.aop.aspect.annotation.LogReturnStatus;
+import com.example.kok.aop.aspect.annotation.LogStatus;
 import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.common.exception.PostNotFoundException;
 import com.example.kok.dto.AdminNoticeDTO;
@@ -118,7 +120,6 @@ public class AdminController {
     }
     @PostMapping("banner/save")
     public RedirectView saveBanner(@RequestParam(value = "file", required = false) List<MultipartFile> multipartFiles) {
-        log.info("저장 컨트롤러 들어옴");
         adminBannerService.save(multipartFiles);
         return new RedirectView("/admin/banner");
     }
@@ -165,11 +166,11 @@ public class AdminController {
 
 //    고객지원 - 공지사항 상세
     @GetMapping("support/detail/{id}")
+    @LogReturnStatus
     public String goToSupportDetailPage(@PathVariable Long id,
                                         Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
         model.addAttribute("notice", adminService.getNotice(id).orElseThrow(PostNotFoundException::new));
-        log.info("noticeModel: {}", model);
         return "admin/support-detail";
     }
 

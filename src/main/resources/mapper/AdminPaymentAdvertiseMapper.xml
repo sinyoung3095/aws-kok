@@ -35,7 +35,7 @@
                 on a.id = p.advertisement_id
             join tbl_payment_user pu
                 on pu.payment_id = p.id and pu.advertisement_id = a.id
-        where u.user_role = 'company' and a.advertisement_request_status = 'accept'
+        where u.user_role = 'company' and a.advertisement_request_status = 'accept' and payment_status = 'accept'
         <include refid="searchCategory"/>
         <include refid="searchKeyword"/>
         order by p.id desc
@@ -54,7 +54,7 @@
                 on a.id = p.advertisement_id
             join tbl_payment_user pu
                 on pu.payment_id = p.id and pu.advertisement_id = a.id
-        where u.user_role = 'company' and a.advertisement_request_status = 'accept'
+        where u.user_role = 'company' and a.advertisement_request_status = 'accept' and payment_status = 'accept'
         <include refid="searchCategory"/>
         <include refid="searchKeyword"/>
     </select>
@@ -87,6 +87,6 @@
                       on a.id = p.advertisement_id
                  join tbl_payment_user pu
                       on pu.payment_id = p.id and pu.advertisement_id = a.id
-        where u.user_role = 'company' and a.advertisement_request_status = 'accept'
+        where u.user_role = 'company' and a.advertisement_request_status = 'accept' and payment_status = 'accept'
     </select>
 </mapper>

@@ -32,7 +32,6 @@
                 on en.id = ejc.experience_notice_id
             left join tbl_job_category jc
                 on ejc.job_category = jc.id
-        where experience_notice_status = 'active'
         <include refid="search"/>
         order by en.id desc
         limit #{criteria.count} offset #{criteria.offset}
@@ -47,7 +46,6 @@
                 on en.id = ejc.experience_notice_id
             left join tbl_job_category jc
                 on ejc.job_category = jc.id
-        where experience_notice_status = 'active'
         <include refid="search"/>
     </select>
 
@@ -70,7 +68,7 @@
         from tbl_experience_notice en
                  join tbl_company c
                       on en.company_id = c.user_id
-        where en.id = #{id} and experience_notice_status = 'active'
+        where en.id = #{id}
     </select>
 
     <select id="selectRequestUser">
