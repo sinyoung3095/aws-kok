@@ -11,13 +11,17 @@ const postService = (() => {
     const getOne = async (id) => {
         const response = await fetch(`/api/community/post/${id}`);
 
-        const checkExistMember = await response.json();
-        if (checkExistMember === false) {
+        if (response.status === 403) {
             alert("일반 회원만 이용할 수 있습니다.");
             return null;
         }
 
-        return checkExistMember;
+        if (!response.ok) {
+            console.error("게시글 조회 실패", response.status);
+            return null;
+        }
+
+        return await response.json();
     };
 
     // 글쓰기
@@ -50,7 +54,12 @@ const postService = (() => {
             body: formData
         });
 
-        return response.ok;
+        if (!response.ok) {
+            console.error("게시글 수정 실패", response.status);
+            return null;
+        }
+
+        return await response.json();
     };
 
     // 삭제
@@ -61,32 +70,26 @@ const postService = (() => {
 
     // 게시글 좋아요
     const postLike = async (postId) => {
-        const postLikeDTO = {
-            postId: postId
-        };
-
+        const postLikeDTO = { postId };
         const response = await fetch("/api/likes", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(postLikeDTO)
         });
 
-        const checkExistMember = await response.json();
-
-        if (checkExistMember === false) {
+        if (response.status === 403) {
             alert("일반 회원만 이용할 수 있습니다.");
             return null;
         }
 
-        if(response.ok) {
-            console.log("좋아요 성공");
-            return true;
-        } else{
+        if (!response.ok) {
             const errorMessage = await response.text();
-            console.log(errorMessage)
-            alert("이미 좋아요를 누른 게시글 입니다.");
+            console.error("좋아요 실패:", errorMessage);
+            alert("이미 좋아요를 누른 게시글입니다.");
             return false;
         }
+
+        return await response.json();
     };
 
     // 게시글 좋아요 취소
@@ -99,26 +102,27 @@ const postService = (() => {
 
     // 게시글 신고
     const reportPost = async (postId) => {
-        const response = await fetch(`/api/report/${postId}`, {
-            method: "POST"
-        });
+        const response = await fetch(`/api/report/${postId}`, { method: "POST" });
 
-        if (!response.ok) {
-            const errorMessage = await response.text();
-            throw new Error(errorMessage);
-        }
-
-        const checkExistMember = await response.json();
         const reportModal = document.querySelector(".report-7");
 
-        if (checkExistMember === false) {
+        if (response.status === 403) {
             alert("일반 회원만 이용할 수 있습니다.");
             reportModal.style.display = "none";
             return null;
         }
 
+        const message = await response.text();
+
+        if (!response.ok) {
+            alert(message);
+            return false;
+        }
+
+        alert(message);
         return true;
     };
+
 
     return { getList : getList, getOne : getOne, write : write, update : update, remove : remove,
         postLike : postLike, removeLike : removeLike, reportPost : reportPost};
