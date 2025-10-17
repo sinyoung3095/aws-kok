@@ -18,7 +18,7 @@ import java.util.Optional;
 @Slf4j
 @RequestMapping("/api/member/")
 @RequiredArgsConstructor
-public class AdminMembersApiController {
+public class AdminMembersApiController implements AdminMembersApiControllerDocs {
     @Autowired
     private MemberService memberService;
 

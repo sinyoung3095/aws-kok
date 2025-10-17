@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequestMapping("/api/likes")
 @RequiredArgsConstructor
-public class CommunityLikeController {
+public class CommunityLikeController implements CommunityLikeControllerDocs{
     private final CommunityLikeService communityLikeService;
 
 //    게시글 좋아요
     @PostMapping
-    public ResponseEntity<?> postLike(@RequestBody PostLikeDTO postLikeDTO,
+    public ResponseEntity<PostLikeDTO> postLike(@RequestBody PostLikeDTO postLikeDTO,
                                       @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         if(customUserDetails == null || customUserDetails.getUserRole() == UserRole.COMPANY) {
-            return ResponseEntity.ok(false);
+            return ResponseEntity.status(403).build();
         }
 
         postLikeDTO.setMemberId(customUserDetails.getId());
@@ -32,7 +32,7 @@ public class CommunityLikeController {
 
 //    게시글 좋아요 취소
     @DeleteMapping("/{postId}")
-    public ResponseEntity<?> removePostLike(@PathVariable Long postId,
+    public ResponseEntity<PostLikeDTO> removePostLike(@PathVariable Long postId,
                                             @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         Long memberId = customUserDetails.getId();
         communityLikeService.removePostLike(postId, memberId);
@@ -42,15 +42,17 @@ public class CommunityLikeController {
 
     // 좋아요 갯수 조회
     @GetMapping("/{postId}/count")
-    public ResponseEntity<?> getPostLikeCount(@PathVariable Long postId) {
-        return ResponseEntity.ok(communityLikeService.getPostLikeCount(postId));
+    public ResponseEntity<Long> getPostLikeCount(@PathVariable Long postId) {
+        Long count = (long) communityLikeService.getPostLikeCount(postId);
+        return ResponseEntity.ok(count);
     }
 
     // 좋아요 여부 확인
     @GetMapping("/{postId}/check")
-    public ResponseEntity<?> checkedPostLike(@PathVariable Long postId,
+    public ResponseEntity<Boolean> checkedPostLike(@PathVariable Long postId,
                                              @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         Long memberId = customUserDetails.getId();
-        return ResponseEntity.ok(communityLikeService.checkedPostLike(postId, memberId));
+        Boolean liked = communityLikeService.checkedPostLike(postId, memberId);
+        return ResponseEntity.ok(liked);
     }
 }

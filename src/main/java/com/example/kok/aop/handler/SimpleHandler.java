@@ -1,7 +1,6 @@
 package com.example.kok.aop.handler;
 
 import com.example.kok.aop.util.MethodMatcher;
-import com.example.kok.aop.util.MethodMatcher;
 import lombok.RequiredArgsConstructor;
 
 import java.lang.reflect.InvocationHandler;
@@ -10,7 +9,7 @@ import java.lang.reflect.Method;
 @RequiredArgsConstructor
 public class SimpleHandler implements InvocationHandler {
     private final Object target;
-    private final com.example.kok.aop.util.MethodMatcher methodMatcher;
+    private final MethodMatcher methodMatcher;
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

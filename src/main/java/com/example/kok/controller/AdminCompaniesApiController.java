@@ -19,7 +19,7 @@ import java.util.Optional;
 @Slf4j
 @RequestMapping("/api/company/")
 @RequiredArgsConstructor
-public class AdminCompaniesApiController {
+public class AdminCompaniesApiController implements AdminCompaniesApiControllerDocs{
     @Autowired
     private CompanyService companyService;
 
