@@ -55,4 +55,9 @@ public class ConsoleAdDAO {
         consoleAdMapper.deleteById(id);
     }
 
+//    광고 마감 처리
+    public void setAdStatusToInactive(){
+        consoleAdMapper.updateAdStatusToInactive();
+    }
+
 }

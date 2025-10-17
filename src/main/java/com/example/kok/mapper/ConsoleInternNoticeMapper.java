@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface ConsoleInternListMapper {
+public interface ConsoleInternNoticeMapper {
 
 //    공고 목록
     public List<ConsoleInternListDTO> selectInternByCompany(@Param("companyId") Long companyId,
@@ -58,7 +58,9 @@ public interface ConsoleInternListMapper {
 //    직군 매핑 삭제
     public void deleteJobCategoryByNoticeId(Long id);
 
-//    공고 본체 삭제
+//    공고 삭제
     public void deleteInternNoticeById(Long id);
 
+//    체험 공고 마감 처리
+    public void updateInternNoticeStatusToInactive();
 }

@@ -8,6 +8,7 @@ const adLayout = (() => {
                         <tr class="list-tr">
                             <th class="list-th">광고 메인 텍스트</th>
                             <th class="list-th">상태</th>
+                            <th class="list-th">상태</th>
                             <th class="list-th">금액</th>
                             <th class="list-th">기간</th>
                             <th class="list-th">작업</th>
@@ -37,8 +38,8 @@ const adLayout = (() => {
         if (!lists || lists.length === 0) {
             tbody.innerHTML = `
                 <tr class="body-tr no-data">
-                    <td class="body-td" colspan="5">
-                        <div class="text">조건에 맞는 공고가 없습니다.</div>
+                    <td class="body-td" colspan="6">
+                        <div class="text">광고가 없습니다.</div>
                     </td>
                 </tr>`;
             return;
@@ -50,7 +51,12 @@ const adLayout = (() => {
                     <td class="list-list-td">${list.advertisementMainText}</td>
                     <td class="list-list-td">
                         <span class="list-table-span ${list.advertisementRequestStatus === "await" ? "await" : list.advertisementRequestStatus === "accept" ? "accept" : list.advertisementRequestStatus === "reject" ? "reject" : ""}">
-                            ${list.advertisementRequestStatus === "await" ? "대기 중" : list.advertisementRequestStatus === "accept" ? "진행 중" : list.advertisementRequestStatus === "reject" ? "반려" : ""}
+                            ${list.advertisementRequestStatus === "await" ? "대기중" : list.advertisementRequestStatus === "accept" ? "진행가능" : list.advertisementRequestStatus === "reject" ? "반려" : ""}
+                        </span>
+                    </td>
+                    <td class="list-list-td">
+                        <span class="list-table-span ${list.advertisementStatus === "active" ? "active" : "inactive"}">
+                            ${list.advertisementStatus === "active" ? "진행중" : "완료"}
                         </span>
                     </td>
                     <td class="list-list-td">₩<span class="price">${list.paymentPrice}</span></td>

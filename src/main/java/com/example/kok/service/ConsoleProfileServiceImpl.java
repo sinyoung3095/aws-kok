@@ -5,6 +5,7 @@ import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.repository.*;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ConsoleProfileServiceImpl implements ConsoleProfileService {
@@ -34,6 +36,7 @@ public class ConsoleProfileServiceImpl implements ConsoleProfileService {
 
         // 프로필 이미지 조회
         List<FileDTO> profileFiles = consoleProfileFileDAO.findAllByProfileId(companyId);
+
         // 배경 이미지 조회
         List<FileDTO> backgroundFiles = consoleBackgroundFileDAO.findAllByProfileId(companyId);
 
@@ -84,8 +87,10 @@ public class ConsoleProfileServiceImpl implements ConsoleProfileService {
     @Transactional(rollbackFor = Exception.class)
     @CacheEvict(value = "profile", key = "'company_' + #companyProfileDTO.companyId")
     public void updateProfile(ConsoleCompanyProfileDTO companyProfileDTO, List<MultipartFile> multipartFiles) {
-        System.out.println("전달된 파일들 이름: " +
-                multipartFiles.stream().map(MultipartFile::getName).toList());
+        log.info("=== [Service] updateProfile() 호출 ===");
+        log.info("companyId: {}", companyProfileDTO.getCompanyId());
+        log.info("산업 분야: {}", companyProfileDTO.getCompanySectorName());
+        log.info("기업 규모: {}", companyProfileDTO.getCompanyScaleName());
 
         // 기본 기업 정보 수정
         consoleProfileDAO.updateCompanyProfile(toConsoleProfileVO(companyProfileDTO));
@@ -138,8 +143,6 @@ public class ConsoleProfileServiceImpl implements ConsoleProfileService {
         }
 
         ConsoleCompanyProfileDTO updatedProfile = getProfile(companyProfileDTO.getCompanyId());
-        System.out.println("업데이트 완료 후 프로필 이미지 URL: " + updatedProfile.getUploadedFiles());
-        System.out.println("업데이트 완료 후 배경 이미지 URL: " + updatedProfile.getBackgroundFiles());
     }
 
 }

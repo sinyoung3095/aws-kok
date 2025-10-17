@@ -25,4 +25,7 @@ public interface ConsoleExperienceListService {
 
 //    공고 삭제
     public void deleteExperience(Long id);
+
+//    체험 공고 마감 처리
+    public void closeNotice();
 }

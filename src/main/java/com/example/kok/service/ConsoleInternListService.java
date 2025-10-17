@@ -25,4 +25,7 @@ public interface ConsoleInternListService {
 
 //    공고 삭제
     public void deleteIntern(Long id);
+
+//    인턴 공고 마감 처리
+    public void closeNotice();
 }
