@@ -1,107 +1,41 @@
-// const searchBtn = document.querySelector(".search-status-btn");
-// const jobMenu = document.querySelector(".job");
-// const jobItems = document.querySelectorAll(".job-3");
-// const checkIcon = document.querySelector(".setting-31");
-// const searchSpan = document.querySelector(".status-span");
-//
-// // 버튼 클릭 → 메뉴 표시/숨김 토글
-// // searchBtn.addEventListener("click", (e) => {
-// //     e.stopPropagation(); // 외부 클릭 이벤트 막기
-// //     jobMenu.style.display =
-// //         jobMenu.style.display === "block" ? "none" : "block";
-// // });
-//
-// // job-3 선택
-// jobItems.forEach((item) => {
-//     item.addEventListener("click", (e) => {
-//         e.stopPropagation();
-//
-//         // 체크마크 이동
-//         if (checkIcon.parentNode) checkIcon.parentNode.removeChild(checkIcon);
-//         item.appendChild(checkIcon);
-//
-//         // 선택 강조
-//         jobItems.forEach((j) => j.classList.remove("selected"));
-//         item.classList.add("selected");
-//
-//         // span 업데이트
-//         const text = item.querySelector(".job-6").innerText;
-//         // console.log(item.querySelector(".job-6"));
-//         // console.log(text);
-//         searchSpan.innerText = text;
-//
-//         // 메뉴 숨김
-//         jobMenu.style.display = "none";
-//     });
-// });
-//
-// // 외부 클릭 시 메뉴 숨김
-// document.addEventListener("click", () => {
-//     jobMenu.style.display = "none";
-// });
-//
-// const allStatus = document.querySelector(".all-status");
-// const doingStatus = document.querySelector(".doing-status");
-// const pendingStatus = document.querySelector(".pending-status");
-// const compStatus = document.querySelector(".complete-status");
-//
-// const ing = document.querySelectorAll(".ing");
-// const pend = document.querySelectorAll(".pend");
-// const comp = document.querySelectorAll(".comp");
-//
-// allStatus.addEventListener("click", () => {
-//     ing.forEach((tr) => {
-//         tr.style.display = "";
-//     });
-//     pend.forEach((tr) => {
-//         tr.style.display = "";
-//     });
-//     comp.forEach((tr) => {
-//         tr.style.display = "";
-//     });
-// });
-//
-// doingStatus.addEventListener("click", () => {
-//     ing.forEach((tr) => {
-//         tr.style.display = "";
-//     });
-//     pend.forEach((tr) => {
-//         tr.style.display = "none";
-//     });
-//     comp.forEach((tr) => {
-//         tr.style.display = "none";
-//     });
-// });
-//
-// pendingStatus.addEventListener("click", () => {
-//     ing.forEach((tr) => {
-//         tr.style.display = "none";
-//     });
-//     pend.forEach((tr) => {
-//         tr.style.display = "";
-//     });
-//     comp.forEach((tr) => {
-//         tr.style.display = "none";
-//     });
-// });
-//
-// compStatus.addEventListener("click", () => {
-//     ing.forEach((tr) => {
-//         tr.style.display = "none";
-//     });
-//     pend.forEach((tr) => {
-//         tr.style.display = "none";
-//     });
-//     comp.forEach((tr) => {
-//         tr.style.display = "";
-//     });
-// });
-
-
 const adTable = document.querySelector("#ad-list-table");
 if (adTable) {
     // 테이블 전체 클릭 이벤트 위임
     adTable.addEventListener("click", async (e) => {
+        const activeExp = e.target.closest("button.appli-active-btn");
+        if (activeExp) {
+            const tr = activeExp.closest("tr.list-tr");
+            const activeCircle = activeExp.querySelector(".circle");
+
+            if (!activeCircle) return;
+
+            tr.querySelectorAll(".appli-active-btn").forEach(btn => {
+                btn.classList.remove("active");
+                btn.classList.remove("inactive");
+            });
+
+            // 현재 버튼 상태 확인 후 반대 상태로 토글
+            let statusValue;
+            if (activeExp.dataset.status === "inactive") {
+                activeExp.classList.add("active");
+                activeExp.dataset.status = "active";
+                statusValue = "active";
+            } else {
+                activeExp.classList.add("inactive");
+                activeExp.dataset.status = "inactive";
+                statusValue = "inactive";
+            }
+
+            // 상태 버튼 클릭시 확인
+            const noticeId = tr.dataset.id;
+            try {
+                const data = await adNoticeService.updateAdStatus(noticeId, statusValue);
+                console.log("DB 반영 성공:", data);
+            } catch (err) {
+                console.error("DB 반영 실패:", err);
+            }
+        }
+
         const hambugerBtn = e.target.closest(".hambuger");
         const redHamBtn = e.target.closest(".red-ham-list");
 

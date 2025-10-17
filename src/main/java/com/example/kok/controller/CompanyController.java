@@ -54,8 +54,7 @@ public class CompanyController {
 
 //    기업 상세
     @GetMapping("/{companyId}")
-    public String detailPage(@PathVariable Long companyId, Model model,  @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        model.addAttribute("userDTO", customUserDetails);
+    public String detailPage(@PathVariable Long companyId, Model model) {
 
         CompanyDTO company = companyService.findCompanyById(companyId);
         model.addAttribute("company", company);

@@ -44,8 +44,18 @@
                  join tbl_request_experience r
                       on n.id = r.experience_notice_id
         where r.member_id = #{id}
+        AND r.created_datetime >= NOW() - INTERVAL '3 MONTH'
     <if test="experienceId != null">
         and r.id = #{experienceId}
     </if>
+    </select>
+
+<!--    지원서 개수 조회-->
+    <select id="countRequest">
+        select count(id)
+        from tbl_request_experience
+        where experience_notice_id=#{experienceNoticeId}
+        and member_id=#{memberId}
+        and request_experience_status='active'
     </select>
 </mapper>

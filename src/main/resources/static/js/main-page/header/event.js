@@ -166,8 +166,8 @@ const historyDetailModal = document.querySelector(
     ".history-detail-modal-background"
 );
 // 체험 상세 모달 서비스
-const experienceWarp = document.getElementById("experienceWarp");
-experienceWarp.addEventListener("click",async (e)=>{
+const requestExperienceWarp = document.getElementById("requestExperienceWarp");
+requestExperienceWarp.addEventListener("click",async (e)=>{
     if(e.target.closest(".fail")){
         return;
     }
@@ -190,8 +190,8 @@ historyDetailModal.addEventListener("click",(e)=>{
 })
 
 // 인턴 상세모달 서비스
-const internWarp = document.getElementById("internWarp");
-internWarp.addEventListener("click",async (e)=>{
+const requestInternWarp = document.getElementById("requestInternWarp");
+requestInternWarp.addEventListener("click",async (e)=>{
     if(e.target.closest(".fail")){
         return;
     }

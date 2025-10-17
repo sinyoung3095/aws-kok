@@ -33,10 +33,10 @@ public class CommunityPostController implements CommunityPostControllerDocs{
 
 //    게시글 조회
     @GetMapping("/post/{id}")
-    public ResponseEntity<?> getOne(@PathVariable("id") Long id,
+    public ResponseEntity<PostDTO> getOne(@PathVariable("id") Long id,
                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         if (customUserDetails == null || customUserDetails.getUserRole() == UserRole.COMPANY) {
-            return ResponseEntity.ok(false);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
         Long memberId = customUserDetails.getId();
@@ -46,7 +46,7 @@ public class CommunityPostController implements CommunityPostControllerDocs{
 
 //    게시글 작성
     @PostMapping
-    public ResponseEntity<?> write(@RequestParam("postContent") String postContent,
+    public ResponseEntity<PostDTO> write(@RequestParam("postContent") String postContent,
                                    @RequestParam(value="files", required=false) List<MultipartFile> files,
                                    @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         PostDTO postDTO = new PostDTO();
@@ -54,12 +54,12 @@ public class CommunityPostController implements CommunityPostControllerDocs{
         postDTO.setMemberId(customUserDetails.getId());
 
         communityPostService.write(postDTO, files);
-        return ResponseEntity.status(HttpStatus.CREATED).body(postDTO.getId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(postDTO);
     }
 
 //    게시글 수정
     @PostMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Long id,
+    public ResponseEntity<PostDTO> update(@PathVariable("id") Long id,
                                     @RequestParam("postContent") String postContent,
                                     @RequestParam(value="deleteFiles", required=false) Long[] deleteFiles,
                                     @RequestParam(value="files", required=false) List<MultipartFile> files,
@@ -76,7 +76,7 @@ public class CommunityPostController implements CommunityPostControllerDocs{
 
 //    게시글 삭제
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> remove(@PathVariable("id") Long id) {
+    public ResponseEntity<PostDTO> remove(@PathVariable("id") Long id) {
         communityPostService.delete(id);
         return ResponseEntity.noContent().build();
     }

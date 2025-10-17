@@ -7,10 +7,10 @@ const adLayout = (() => {
                     <thead class="list-thead">
                         <tr class="list-tr">
                             <th class="list-th">광고 메인 텍스트</th>
-                            <th class="list-th">상태</th>
-                            <th class="list-th">상태</th>
-                            <th class="list-th">금액</th>
                             <th class="list-th">기간</th>
+                            <th class="list-th">금액</th>
+                            <th class="list-th">승인상태</th>
+                            <th class="list-th">상태</th>
                             <th class="list-th">작업</th>
                         </tr>
                     </thead>
@@ -50,17 +50,6 @@ const adLayout = (() => {
                 <tr class="list-tr ing" data-id="${list.id}">
                     <td class="list-list-td">${list.advertisementMainText}</td>
                     <td class="list-list-td">
-                        <span class="list-table-span ${list.advertisementRequestStatus === "await" ? "await" : list.advertisementRequestStatus === "accept" ? "accept" : list.advertisementRequestStatus === "reject" ? "reject" : ""}">
-                            ${list.advertisementRequestStatus === "await" ? "대기중" : list.advertisementRequestStatus === "accept" ? "진행가능" : list.advertisementRequestStatus === "reject" ? "반려" : ""}
-                        </span>
-                    </td>
-                    <td class="list-list-td">
-                        <span class="list-table-span ${list.advertisementStatus === "active" ? "active" : "inactive"}">
-                            ${list.advertisementStatus === "active" ? "진행중" : "완료"}
-                        </span>
-                    </td>
-                    <td class="list-list-td">₩<span class="price">${list.paymentPrice}</span></td>
-                    <td class="list-list-td">
                         <div class="table-date">
                             <div class="table-date-start">
                                 ${list.advertiseStartDatetime}
@@ -68,6 +57,21 @@ const adLayout = (() => {
                             <div class="table-date-end">
                                 ~ ${list.advertiseEndDatetime}
                             </div>
+                        </div>
+                    </td>
+                    <td class="list-list-td">₩<span class="price">${list.paymentPrice}</span></td>
+                    <td class="list-list-td">
+                        <span class="list-table-span ${list.advertisementRequestStatus === "await" ? "await" : list.advertisementRequestStatus === "accept" ? "accept" : list.advertisementRequestStatus === "reject" ? "reject" : ""}">
+                            ${list.advertisementRequestStatus === "await" ? "대기중" : list.advertisementRequestStatus === "accept" ? "진행가능" : list.advertisementRequestStatus === "reject" ? "반려" : ""}
+                        </span>
+                    </td>
+                    <td class="list-list-td">
+                        <div class="appli-active">
+                            ${list.advertisementRequestStatus === "accept" ? `
+                                <button class="appli-active-btn ${list.advertisementStatus === "active" ? "active" : "inactive"}">
+                                    <span class="circle"></span>
+                                </button>
+                            ` : ``}
                         </div>
                     </td>
                     <td class="list-list-td">

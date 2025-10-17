@@ -15,12 +15,12 @@ import java.util.List;
 @RequestMapping("/api/replies")
 @RequiredArgsConstructor
 @Slf4j
-public class CommunityReplyController {
+public class CommunityReplyController implements CommunityReplyControllerDocs{
     private final CommunityReplyService communityReplyService;
 
 //    대댓글 작성
     @PostMapping
-    public ResponseEntity<?> write(@RequestBody ReplyDTO replyDTO,
+    public ResponseEntity<ReplyDTO> write(@RequestBody ReplyDTO replyDTO,
                                    @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         replyDTO.setMemberId(customUserDetails.getId());
         communityReplyService.write(replyDTO);
@@ -29,7 +29,7 @@ public class CommunityReplyController {
 
 //    대댓글 목록
     @GetMapping("/{commentId}")
-    public ResponseEntity<?> list(@PathVariable Long commentId, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    public ResponseEntity<List<ReplyDTO>> list(@PathVariable Long commentId, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         Long memberId = customUserDetails.getId();
         List<ReplyDTO> replies = communityReplyService.getReplies(commentId, memberId);
         return ResponseEntity.ok(replies);
@@ -37,7 +37,7 @@ public class CommunityReplyController {
 
 //    대댓글 수정
     @PutMapping("/{replyId}")
-    public ResponseEntity<?> updateReply(@PathVariable("replyId") Long replyId,
+    public ResponseEntity<ReplyDTO> updateReply(@PathVariable("replyId") Long replyId,
                                          @RequestBody ReplyDTO replyDTO,
                                          @AuthenticationPrincipal CustomUserDetails user) {
 
@@ -52,7 +52,7 @@ public class CommunityReplyController {
 
 //    대댓글 삭제
     @DeleteMapping("/{replyId}")
-    public ResponseEntity<?> deleteReply(@PathVariable("replyId") Long replyId) {
+    public ResponseEntity<ReplyDTO> deleteReply(@PathVariable("replyId") Long replyId) {
         communityReplyService.delete(replyId);
         return ResponseEntity.noContent().build();
     }

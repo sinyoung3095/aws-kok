@@ -124,7 +124,7 @@
     </select>
 <!-- 결제 내역 조회-->
     <select id="selectPaymentByMemberId">
-        select p.id, c.company_name, e.experience_notice_title, r.request_experience_status, p.payment_price, p.payment_paid_datetime
+        select p.id, c.company_name, e.experience_notice_title, p.payment_status, p.payment_price, p.payment_paid_datetime
         from tbl_user u
         join tbl_payment p
         on p.user_id=u.id

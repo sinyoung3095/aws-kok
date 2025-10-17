@@ -37,6 +37,7 @@ public class MemberServiceImpl implements MemberService {
     private final CommunityPostFileDAO communityPostFileDAO;
     private final CommunityLikeDAO communityLikeDAO;
     private final CommunityCommentService communityCommentService;
+    private final PaymentDAO paymentDAO;
 
     @Override
     public void joinMember(MemberVO memberVO) {
@@ -186,6 +187,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void deleteRequestExperience(Long id) {
+        paymentDAO.canclePayment(id);
         memberDAO.deleteExperienceRequest(id);
     }
 

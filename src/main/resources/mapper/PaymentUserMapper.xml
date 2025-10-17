@@ -13,5 +13,9 @@
                    #{advertisementId}
                )
     </insert>
+    <insert id="insertPaymentUserByMember">
+        insert into tbl_payment_user(payment_id, user_id, request_experience_id)
+        values (#{paymentId}, #{userId}, #{requestExperienceId})
+    </insert>
 </mapper>
 

@@ -25,4 +25,12 @@ public class RequestExperienceDAO {
     public List<RequestExperienceDTO> selectAllRequestByUserId(Long id,Long experienceId){
         return requestExperienceMapper.selectRequestByUserId(id,experienceId);
     }
+//    지원 여부 판별
+    public boolean isRequested(RequestExperienceDTO requestExperienceDTO){
+        if(requestExperienceMapper.countRequest(requestExperienceDTO)>0){
+            return true;
+        } else{
+            return false;
+        }
+    }
 }

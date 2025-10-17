@@ -16,8 +16,8 @@ closeOutline.addEventListener("click",(e)=>{
     location.href='/experience/list';
 })
 
-if(window.location.search.includes("error")){
-    alert("입력하신 아이디가 없습니다.")
+if(window.location.search.includes("fail")){
+    alert("입력하신 정보가 없습니다.")
 }
 
 // 일반 로그인
