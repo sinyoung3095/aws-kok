@@ -3,6 +3,7 @@ package com.example.kok.service;
 import com.example.kok.domain.ConsoleAdNoticeVO;
 import com.example.kok.dto.ConsoleAdNoticeCriteriaDTO;
 import com.example.kok.dto.ConsoleAdNoticeDTO;
+import com.example.kok.enumeration.Status;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -20,6 +21,9 @@ public interface ConsoleAdService {
 
 //    광고 수정
     public void updateAdvertisement(ConsoleAdNoticeDTO adNoticeDTO, List<MultipartFile> multipartFiles);
+
+//    광고 상태 변경
+    public void updateListStatus(Long noticeId, Status status);
 
 //    광고 삭제
     public void deleteAdvertisement(Long advertisementId);

@@ -159,7 +159,7 @@
     <select id="selectCompanyNameById">
         select i.id, i.intern_notice_title, i.intern_notice_subtitle, i.intern_notice_introduce_job, i.intern_notice_etc, i.intern_main_tasks, i.intern_notice_start_date, i.intern_notice_end_date, i.intern_notice_status, i.created_datetime, i.updated_datetime, i.company_id,c.company_name
         from tbl_intern_notice i join tbl_company c
-                                          on i.company_id = c.user_id
+                                      on i.company_id = c.user_id
         where i.id=#{id}
           and i.intern_notice_status='active'
     </select>

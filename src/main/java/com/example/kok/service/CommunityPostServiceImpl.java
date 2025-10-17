@@ -54,6 +54,15 @@ public class CommunityPostServiceImpl implements CommunityPostService {
         posts.forEach(post -> {
             post.setRelativeDate(DateUtils.toRelativeTime(post.getCreatedDateTime()));
             post.setCommentsCount(communityCommentService.commentsCountByPostId(post.getId()));
+
+            if (post.getMemberProfileUrl() != null && !post.getMemberProfileUrl().isEmpty()) {
+                post.setMemberProfileUrl(
+                        s3Service.getPreSignedUrl(post.getMemberProfileUrl(), Duration.ofMinutes(10))
+                );
+            } else {
+                post.setMemberProfileUrl("/images/main-page/image3.png");
+            }
+
             List<PostFileDTO> postFiles = communityPostFileDAO.findAllByPostId(post.getId());
             postFiles.forEach(postFile -> {
                 postFile.setPostFilePath(s3Service.getPreSignedUrl(postFile.getPostFilePath(), Duration.ofMinutes(10)));
@@ -88,6 +97,14 @@ public class CommunityPostServiceImpl implements CommunityPostService {
         PostDTO postDTO = communityPostDAO.findById(id).orElseThrow(PostNotFoundException::new);
         postDTO.setRelativeDate(DateUtils.toRelativeTime(postDTO.getCreatedDateTime().split("\\.")[0]));
         postDTO.setCreatedDateTime(postDTO.getCreatedDateTime().split(" ")[0]);
+
+        if (postDTO.getMemberProfileUrl() != null && !postDTO.getMemberProfileUrl().isEmpty()) {
+            postDTO.setMemberProfileUrl(
+                    s3Service.getPreSignedUrl(postDTO.getMemberProfileUrl(), Duration.ofMinutes(10))
+            );
+        } else {
+            postDTO.setMemberProfileUrl("/images/main-page/image3.png");
+        }
 
         List<PostFileDTO> files = communityPostFileDAO.findAllByPostId(postDTO.getId());
         files.forEach(file -> {

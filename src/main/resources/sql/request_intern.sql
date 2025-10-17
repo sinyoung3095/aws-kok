@@ -30,8 +30,8 @@ alter table tbl_request_intern add file_id bigint not null;
 
 alter table tbl_request_intern add constraint fk_request_intern_file foreign key(file_id) references tbl_file(id);
 
-insert into tbl_request_intern (intern_notice_id, member_id, member_alarm_setting_id, evaluation_id, request_intern_member_email, request_intern_member_name, request_intern_member_phone, file_id)
-values (3, 16, 4, 4, 'wjddmsdb03@gmail.com', '정은유', '01089001950', 10);
+insert into tbl_request_intern (intern_notice_id, member_id, member_alarm_setting_id, request_intern_member_email, request_intern_member_name, request_intern_member_phone, file_id)
+values (3, 1, 1,  'wjddmsdb03@gmail.com', '정은유', '01089001950', 1);
 
 alter table tbl_request_intern drop evaluation_id;
 

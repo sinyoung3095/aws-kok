@@ -70,7 +70,7 @@ const experienceLayout = (() => {
                     </td>
                     <td class="body-td">
                         <div class="appli-active">
-                            <button class="appli-active-btn ${list.experienceNoticeStatus === "active" ? "active" : "gray"}"">
+                            <button class="appli-active-btn ${list.experienceNoticeStatus === "active" ? "active" : "inactive"}"">
                                 <span class="circle"></span>
                             </button>
                         </div>
