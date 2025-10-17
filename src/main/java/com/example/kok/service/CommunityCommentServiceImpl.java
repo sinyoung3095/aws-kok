@@ -10,6 +10,7 @@ import com.example.kok.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.util.List;
 
 @Service
@@ -17,6 +18,7 @@ import java.util.List;
 public class CommunityCommentServiceImpl implements CommunityCommentService {
     private final CommunityCommentDAO communityCommentDAO;
     private final CommunityReplyDAO communityReplyDAO;
+    private final S3Service s3Service;
 
 //    댓글 작성
     @Override
@@ -46,10 +48,26 @@ public class CommunityCommentServiceImpl implements CommunityCommentService {
             comment.setRelativeDate(DateUtils.toRelativeTime(comment.getCreatedDateTime()));
             comment.setOwner(memberId.equals(comment.getMemberId()));
 
+            if (comment.getMemberProfileUrl() != null && !comment.getMemberProfileUrl().isEmpty()) {
+                comment.setMemberProfileUrl(
+                        s3Service.getPreSignedUrl(comment.getMemberProfileUrl(), Duration.ofMinutes(10))
+                );
+            } else {
+                comment.setMemberProfileUrl("/images/main-page/image3.png");
+            }
+
             List<ReplyDTO> replies = communityReplyDAO.findAll(comment.getId());
             replies.forEach(reply -> {
                 reply.setRelativeDate(DateUtils.toRelativeTime(reply.getCreatedDateTime()));
                 reply.setOwner(memberId.equals(reply.getMemberId()));
+
+                if (reply.getMemberProfileUrl() != null && !reply.getMemberProfileUrl().isEmpty()) {
+                    reply.setMemberProfileUrl(
+                            s3Service.getPreSignedUrl(reply.getMemberProfileUrl(), Duration.ofMinutes(10))
+                    );
+                } else {
+                    reply.setMemberProfileUrl("/images/main-page/image3.png");
+                }
             });
 
             comment.setReplies(replies);
