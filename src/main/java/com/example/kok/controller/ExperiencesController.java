@@ -99,6 +99,24 @@ public class ExperiencesController {
         experienceNoticeService.deleteExp(deleteExp);
     }
 
+//    지원 여부 판별
+    @GetMapping("is-requested")
+    public boolean isRequested(@RequestParam Long experienceId,
+            @AuthenticationPrincipal CustomUserDetails customUserDetails){
+        if(customUserDetails!=null){
+            RequestExperienceDTO req=new RequestExperienceDTO();
+            req.setMemberId(customUserDetails.getId());
+            req.setExperienceNoticeId(experienceId);
+            boolean result=experienceNoticeService.isRequested(req);
+
+            System.out.println("체험공고id: "+experienceId);
+            System.out.println("멤버id: "+customUserDetails.getId());
+            System.out.println(experienceNoticeService.isRequested(req));
+            return result;
+        }
+        return false;
+    }
+
     //    저장 여부 판별
     @GetMapping("/is-saved")
     public boolean isSaved(@RequestParam Long experienceId,

@@ -839,13 +839,11 @@ const myPageLayout = (() => {
         let html=``;
 
         for(const pay of payments){
-            if(pay.requestExperienceStatus==='await'){
-                status='대기 중';
-            } else if(pay.requestExperienceStatus==='accept'){
-                status='합격';
-            } else if(pay.requestExperienceStatus==='reject'){
-                status='불합격';
-            } else{
+            if(pay.paymentStatus==='active'){
+                status='결제';
+            } else if(pay.paymentStatus==='inactive'){
+                status='환불';
+            }else{
                 status='-';
             }
             // console.log(pay.id);

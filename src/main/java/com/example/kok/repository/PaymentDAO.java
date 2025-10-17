@@ -13,4 +13,14 @@ public class PaymentDAO {
     public void insertPayment(PaymentDTO payment) {
         paymentMapper.insertPayment(payment);
     }
+
+//    체험비 결제
+    public void payRequestExp(PaymentDTO payment) {
+        paymentMapper.insertPaymentByMember(payment);
+    }
+
+//    체험 결제 상태 업데이트
+    public void canclePayment(Long id){
+        paymentMapper.updatePaymentByMember(id);
+    }
 }
