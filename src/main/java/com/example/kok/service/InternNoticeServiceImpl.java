@@ -36,7 +36,7 @@ public class InternNoticeServiceImpl implements InternNoticeService {
         Criteria criteria = new Criteria(page, internNoticeDAO.findCountAll());
         List<InternNoticeDTO> interns=internNoticeDAO.findAll(criteria, search);
         interns.forEach(intern -> {
-            LocalDate endDate = intern.getInternEndDate();
+            LocalDate endDate = intern.getInternNoticeEndDate();
             LocalDate today = LocalDate.now();
             if (endDate.isBefore(today)) {
                 long days = ChronoUnit.DAYS.between(today, endDate);
@@ -82,7 +82,7 @@ public class InternNoticeServiceImpl implements InternNoticeService {
         InternNoticeDTO result= internNoticeDAO.findById(id);
         String jobName= internNoticeDAO.findJobNameByID(id);
         result.setJobName(jobName);
-        LocalDate endDate = result.getInternEndDate();
+        LocalDate endDate = result.getInternNoticeEndDate();
             LocalDate today = LocalDate.now();
             if (!endDate.isBefore(today)) {
                 long days = ChronoUnit.DAYS.between(today, endDate);
@@ -116,7 +116,7 @@ public class InternNoticeServiceImpl implements InternNoticeService {
         List<InternNoticeDTO> interns = internNoticeDAO.findLatestFour();
 
         interns.forEach(intern -> {
-            LocalDate endDate = intern.getInternEndDate();
+            LocalDate endDate = intern.getInternNoticeEndDate();
             LocalDate today = LocalDate.now();
 
             if (endDate != null) {

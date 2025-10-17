@@ -16,7 +16,7 @@ public interface CommunityCommentControllerDocs {
 //    댓글 작성
     @Operation(summary = "댓글 작성", description = "특정 게시글에 댓글을 작성합니다.",
             parameters = {
-                    @Parameter(name = "commentDTO", description = "댓글 작성할 게시글의 정보가 담긴 객체")
+                    @Parameter(name = "commentDTO", description = "작성할 댓글의 정보가 담긴 객체")
             }
     )
     public ResponseEntity<?> write(@RequestBody CommentDTO commentDTO,
