@@ -37,12 +37,12 @@ public class MainpageRestController {
     @GetMapping("requestExperience")
     public List<RequestExperienceDTO> findRequestExperience(@AuthenticationPrincipal CustomUserDetails customUserDetails, @RequestParam(required = false) Long experienceId) {
 
-        return requestExperienceDAO.selectAllRequestByUserId(customUserDetails.getId(), experienceId);
+        return mainpageService.findRequestExperienceByCompanyId(customUserDetails.getId(), experienceId);
     }
 
     @GetMapping("requestIntern")
     public List<RequestInternDTO> findRequestIntern(@AuthenticationPrincipal CustomUserDetails customUserDetails, @RequestParam(required = false) Long internId) {
-        return requestInternDAO.selectAllInternByUserId(customUserDetails.getId(), internId);
+        return mainpageService.findRequestInternByCompanyId(customUserDetails.getId(), internId);
     }
 
     //    체험 목록

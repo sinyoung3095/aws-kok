@@ -13,7 +13,7 @@ const checkRole = document.getElementById("role");
 const closeOutline = document.getElementById("close-outline");4
 
 closeOutline.addEventListener("click",(e)=>{
-    window.location.href="/experience/list";
+    location.href='/experience/list';
 })
 
 if(window.location.search.includes("error")){

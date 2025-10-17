@@ -172,7 +172,7 @@
                             <th:replace th:if="${userDTO.userRole.getValue() == 'member' }">
                                 <a onclick="window.location.href='/mypage/page'">
                                     <div class="sidebar-login-user-btn">
-                                        <img alt="image" width="32" height="32" style="color:transparent;border-radius:999px;cursor:default;max-height:32px;max-width:32px;min-height:32px;min-width:32px;object-fit:contain" srcset="" th:src="${userDTO.memberProfileUrl}">
+                                        <img alt="image" width="32" height="32" style="background-color: #ccc;color:transparent;border-radius:999px;cursor:default;max-height:32px;max-width:32px;min-height:32px;min-width:32px;object-fit:contain" srcset="" th:src="${userDTO.memberProfileUrl}">
                                         <div class="sidebar-login-user-wrap">
                                             <span class="sidebar-login-user-name" th:text="${userDTO.username}+' 님'"></span>
                                         </div>
@@ -189,9 +189,9 @@
                         </th:block>
                         <th:block>
                             <th:replace th:if="${userDTO.userRole.getValue() == 'company' }">
-                                <a onclick="window.location.href='/enterprise-console/'">
+                                <a onclick="window.location.href='/enterprise-console'">
                                     <div class="sidebar-login-user-btn">
-                                        <img alt="image" width="32" height="32" style="color:transparent;border-radius:999px;cursor:default;max-height:32px;max-width:32px;min-height:32px;min-width:32px;object-fit:contain" srcset="" src="/images/main-page/image.png">
+                                        <img alt="image" width="32" height="32" style="background-color: #ccc;color:transparent;border-radius:999px;cursor:default;max-height:32px;max-width:32px;min-height:32px;min-width:32px;object-fit:contain" srcset="" th:src="${userDTO.memberProfileUrl}">
                                         <div class="sidebar-login-user-wrap">
                                             <span class="sidebar-login-user-name" th:text="${userDTO.username}+' 님'"></span>
                                         </div>
@@ -313,21 +313,7 @@
                                         </div>
                                     </div>
                                     <div class="setting-modal-member-profile-wrap">
-                                        <th:block>
-                                            <th:replace th:if="${userDTO.memberProfileUrl!= null}">
-                                                <img alt="image" width="32" height="32" srcset="" th:src="${userDTO.memberProfileUrl}" style="color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
-                                            </th:replace>
-                                        </th:block>
-                                        <th:block>
-                                            <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO==null}">
-                                                <img alt="image" width="32" height="32" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
-                                            </th:replace>
-                                        </th:block>
-                                        <th:block>
-                                            <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO!=null}">
-                                                <img alt="image" width="32" height="32" srcset="" th:src="${fileDTO.filePath}" style="color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
-                                            </th:replace>
-                                        </th:block>
+                                                <img alt="image" width="32" height="32" srcset="" th:src="${userDTO.memberProfileUrl}" style="background-color: #ccc; color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
                                         <div class="setting-modal-profile">
                                             <p class="setting-modal-member-name" th:text="${userDTO.username}">회원이름</p>
                                             <p class="setting-modal-member-set">내 정보 및 로그인</p>
@@ -367,21 +353,7 @@
                                         </div>
                                         <div class="setting-modal-my-profile">
                                             <div class="setting-modal-move-wrap">
-                                                <th:block>
-                                                    <th:replace th:if="${userDTO.memberProfileUrl!= null}">
-                                                        <img alt="image" width="32" height="32" srcset="" th:src="${userDTO.memberProfileUrl}" style="color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
-                                                    </th:replace>
-                                                </th:block>
-                                                <th:block>
-                                                    <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO==null}">
-                                                        <img alt="image" width="32" height="32" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
-                                                    </th:replace>
-                                                </th:block>
-                                                <th:block>
-                                                    <th:replace th:if="${userDTO.memberProfileUrl== null && (userDTO.userRole.getValue()=='member'||userDTO.userRole.getValue()=='company')&&fileDTO!=null}">
-                                                        <img alt="image" width="32" height="32" srcset="" th:src="${fileDTO.filePath}" style="color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
-                                                    </th:replace>
-                                                </th:block>
+                                                        <img alt="image" width="32" height="32" srcset="" th:src="${userDTO.memberProfileUrl}" style="background-color: #ccc; color: transparent; border-radius: 999px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
                                                 <div class="setting-modal-text-wrap">
                                                     <p class="setting-modal-text-info">프로필 수정을 찾고 계신가요?</p>
                                                     <p class="setting-modal-text-move">내 프로필에서 관리할 수 있습니다.</p>
