@@ -37,8 +37,6 @@ public class ConsoleAdApiController {
             @ModelAttribute ConsoleAdNoticeDTO adNoticeDTO,
             @RequestParam(value = "files", required = false) List<MultipartFile> multipartFiles) {
 
-        log.info("광고 등록 요청 들어옴????");
-
         adService.registerAdvertisement(adNoticeDTO, multipartFiles);
 
         return ResponseEntity.ok("");
@@ -51,12 +49,19 @@ public class ConsoleAdApiController {
             @ModelAttribute ConsoleAdNoticeDTO adNoticeDTO,
             @RequestParam(value = "files", required = false) List<MultipartFile> multipartFiles) {
 
-        log.info("광고 등록 요청 들어옴????");
-
         adNoticeDTO.setId(id);
         adService.updateAdvertisement(adNoticeDTO, multipartFiles);
 
         return ResponseEntity.ok("");
+    }
+
+//    광고 상태 변경
+    @PutMapping("/{id}/status")
+    public ResponseEntity<?> updateNoticeStatus(@PathVariable("id") Long id,
+                                                @RequestBody ConsoleAdNoticeDTO consoleAdDTO) {
+        adService.updateListStatus(id, consoleAdDTO.getAdvertisementStatus());
+
+        return ResponseEntity.ok(consoleAdDTO);
     }
 
 //    삭제
