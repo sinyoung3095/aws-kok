@@ -106,6 +106,7 @@ public class MyPageRestController {
     public ResponseEntity<?> getProfile(@AuthenticationPrincipal CustomUserDetails customUserDetails){
         long memberId=customUserDetails.getId();
         Optional<UserMemberDTO> member=memberService.findProfileByMemberId(memberId);
+
 //        System.out.println("이름: "+member.get().getUserName());
 //        System.out.println("인포: "+member.get().getMemberInfo());
 

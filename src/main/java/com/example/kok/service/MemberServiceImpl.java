@@ -229,7 +229,7 @@ public class MemberServiceImpl implements MemberService {
                 fileDTO.setFileSize(String.valueOf(profile.getSize()));
                 fileDTO.setFileContentType(profile.getContentType());
 
-                System.out.println("filePath:"+fileDTO.getFilePath());
+//                System.out.println("filePath:"+fileDTO.getFilePath());
 
                 // tbl_file 등록
                 memberDAO.saveFile(fileDTO);
@@ -264,8 +264,10 @@ public class MemberServiceImpl implements MemberService {
         Optional<UserMemberDTO> memberProfile=memberDAO.findMemberProfileEtc(memberId);
         String preSignedUrl = s3Service.getPreSignedUrl(memberProfile.get().getMemberProfileUrl(), Duration.ofMinutes(5));
         memberProfile.ifPresent(member->{
-            member.setMemberProfileUrl(preSignedUrl);
+            member.setFilePath(preSignedUrl);
         });
+        System.out.println("#######################");
+        System.out.println(preSignedUrl);
 //        memberProfile.setMemberProfileUrl(preSignedUrl);
         return memberProfile;
     }
