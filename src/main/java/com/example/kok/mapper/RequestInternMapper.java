@@ -20,4 +20,7 @@ public interface RequestInternMapper {
 //    멤버별 지원서 조회
     public List<RequestInternDTO> selectRequestById(Long id);
 
+//    지원서 개수 조회
+    public int countRequest(RequestInternDTO requestInternDTO);
+
 }
