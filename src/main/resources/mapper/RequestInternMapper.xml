@@ -40,15 +40,24 @@
 
     <!--  인턴 지원 내역 조회  -->
     <select id="selectRequestInternByUserId">
-        select c.company_name, ino.intern_notice_title, ri.request_intern_status ,ri.created_datetime
-        from tbl_request_intern ri
-                 join tbl_intern_notice ino
-                      on ri.intern_notice_id = ino.id
-                 join tbl_company c
-                      on ino.company_id = c.user_id
-        where ri.member_id = #{id}
+        SELECT ri.id,
+        c.user_id,
+        c.company_name,
+        ino.intern_notice_title,
+        ri.request_intern_status,
+        ri.created_datetime,
+        ri.request_intern_member_name,
+        ri.request_intern_member_email,
+        ri.request_intern_member_phone,
+        ri.request_intern_member_url,
+        ri.file_id
+        FROM tbl_request_intern ri
+        JOIN tbl_intern_notice ino ON ri.intern_notice_id = ino.id
+        JOIN tbl_company c ON ino.company_id = c.user_id
+        WHERE ri.member_id = #{id}
+        AND ri.created_datetime >= NOW() - INTERVAL '3 MONTH'
         <if test="internId != null">
-            and r.id = #{internId}
+            AND ri.id = #{internId}
         </if>
     </select>
 

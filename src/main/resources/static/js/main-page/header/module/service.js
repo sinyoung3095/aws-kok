@@ -12,22 +12,22 @@ const headerService = (()=>{
     const getRequestExperience = async (callback,experienceId='')=>{
         console.log(experienceId);
         const response = await fetch(`/api/main/requestExperience?experienceId=${experienceId}`);
-        const requestListDTO = await response.json();
-        console.log(requestListDTO);
+        const experienceListDTO = await response.json();
+        console.log(experienceListDTO.toString());
         if(callback){
-            return callback(requestListDTO);
+            return callback(experienceListDTO);
         }
-        return requestListDTO;
+        return experienceListDTO;
     }
     const getRequestIntern = async (callback,internId='')=>{
             console.log("체험 서비스 들어옴");
             const response = await fetch(`/api/main/requestIntern?internId=${internId}`);
-            const requestListDTO = await response.json();
-            console.log(requestListDTO);
-            if(requestListDTO){
-                return callback(requestListDTO);
+            const internListDTO = await response.json();
+            console.log(internListDTO);
+            if(internListDTO){
+                return callback(internListDTO);
             }
-            return requestListDTO;
+            return internListDTO;
         }
 
 
