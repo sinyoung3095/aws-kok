@@ -38,7 +38,7 @@ public class InternNoticeDTO {
     private String companyScaleName;
     private Long remainingDays;
     private String internNoticeStartDate;
-    private String internNoticeEndDate;
+    private LocalDate internNoticeEndDate;
     private String createdDateTime;
     private String updatedDateTime;
 }

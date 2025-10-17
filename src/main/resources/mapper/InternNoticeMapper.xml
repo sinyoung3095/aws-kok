@@ -71,8 +71,8 @@
         i.intern_notice_subtitle,
         i.intern_notice_etc,
         i.intern_main_tasks,
-        i.intern_start_date,
-        i.intern_end_date,
+        i.intern_notice_start_date,
+        i.intern_notice_end_date,
         i.intern_notice_status,
         i.created_datetime,
         i.updated_datetime,
@@ -89,7 +89,7 @@
         left join tbl_intern_job_category ej on ej.intern_notice_id=i.id
         left join tbl_job_category j on j.id=ej.job_category
         left join tbl_save_intern_notice sv on i.id = sv.intern_notice_id
-        where i.intern_end_date &gt;= now()
+        where i.intern_notice_end_date &gt;= now()
         and i.intern_notice_status='active'
         <include refid="search"></include>
         group by i.id,
@@ -97,8 +97,8 @@
         i.intern_notice_subtitle,
         i.intern_notice_etc,
         i.intern_main_tasks,
-        i.intern_start_date,
-        i.intern_end_date,
+        i.intern_notice_start_date,
+        i.intern_notice_end_date,
         i.intern_notice_status,
         i.created_datetime,
         i.updated_datetime,
@@ -115,7 +115,7 @@
     </select>
     <!--    체험 공고 단일 조회-->
     <select id="selectById">
-        select id, intern_notice_title, intern_notice_subtitle, intern_notice_introduce_job, intern_notice_etc, intern_main_tasks, intern_start_date, intern_end_date, intern_notice_status, created_datetime, updated_datetime, company_id
+        select id, intern_notice_title, intern_notice_subtitle, intern_notice_introduce_job, intern_notice_etc, intern_main_tasks, intern_notice_start_date, intern_notice_end_date, intern_notice_status, created_datetime, updated_datetime, company_id
         from tbl_intern_notice
         where id=#{id}
           and intern_notice_status='active'
@@ -159,7 +159,7 @@
     <select id="selectCompanyNameById">
         select i.id, i.intern_notice_title, i.intern_notice_subtitle, i.intern_notice_introduce_job, i.intern_notice_etc, i.intern_main_tasks, i.intern_notice_start_date, i.intern_notice_end_date, i.intern_notice_status, i.created_datetime, i.updated_datetime, i.company_id,c.company_name
         from tbl_intern_notice i join tbl_company c
-                                          on i.company_id = c.user_id
+                                      on i.company_id = c.user_id
         where i.id=#{id}
           and i.intern_notice_status='active'
     </select>

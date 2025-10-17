@@ -36,7 +36,7 @@ public class InternNoticeServiceImpl implements InternNoticeService {
         Criteria criteria = new Criteria(page, internNoticeDAO.findCountAll());
         List<InternNoticeDTO> interns=internNoticeDAO.findAll(criteria, search);
         interns.forEach(intern -> {
-            LocalDate endDate = intern.getInternEndDate();
+            LocalDate endDate = intern.getInternNoticeEndDate();
             LocalDate today = LocalDate.now();
             if (endDate.isBefore(today)) {
                 long days = ChronoUnit.DAYS.between(today, endDate);
@@ -82,22 +82,22 @@ public class InternNoticeServiceImpl implements InternNoticeService {
         InternNoticeDTO result= internNoticeDAO.findById(id);
         String jobName= internNoticeDAO.findJobNameByID(id);
         result.setJobName(jobName);
-        LocalDate endDate = result.getInternEndDate();
-            LocalDate today = LocalDate.now();
-            if (!endDate.isBefore(today)) {
-                long days = ChronoUnit.DAYS.between(today, endDate);
-                result.setRemainingDays(days);
-            } else {
-                result.setRemainingDays(0L); // endDate보다 today가 이전일 경우 0
-            }
-            fileService.findFileByCompanyId(result.getCompanyId())
-                    .ifPresentOrElse(fileDTO -> {
-                        result.setFileName(fileDTO.getFileName());
-                        result.setFilePath(fileDTO.getFilePath());
-                    }, ()->{
-                        result.setFileName("image.png");
-                        result.setFilePath("");
-                    });
+        LocalDate endDate = result.getInternNoticeEndDate();
+        LocalDate today = LocalDate.now();
+        if (!endDate.isBefore(today)) {
+            long days = ChronoUnit.DAYS.between(today, endDate);
+            result.setRemainingDays(days);
+        } else {
+            result.setRemainingDays(0L); // endDate보다 today가 이전일 경우 0
+        }
+        fileService.findFileByCompanyId(result.getCompanyId())
+                .ifPresentOrElse(fileDTO -> {
+                    result.setFileName(fileDTO.getFileName());
+                    result.setFilePath(fileDTO.getFilePath());
+                }, ()->{
+                    result.setFileName("image.png");
+                    result.setFilePath("");
+                });
         return result;
     }
 
@@ -116,7 +116,7 @@ public class InternNoticeServiceImpl implements InternNoticeService {
         List<InternNoticeDTO> interns = internNoticeDAO.findLatestFour();
 
         interns.forEach(intern -> {
-            LocalDate endDate = intern.getInternEndDate();
+            LocalDate endDate = intern.getInternNoticeEndDate();
             LocalDate today = LocalDate.now();
 
             if (endDate != null) {
@@ -148,7 +148,7 @@ public class InternNoticeServiceImpl implements InternNoticeService {
         return result;
     }
 
-//    기업별 인턴 공고 목록
+    //    기업별 인턴 공고 목록
     @Override
     public CompanyInternNoticeCriteriaDTO getInternNoticesByCompanyId(int page, Long companyId, Search search) {
         int total = internNoticeDAO.findCountByCompanyId(companyId, search);
