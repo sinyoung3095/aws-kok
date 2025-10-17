@@ -13,23 +13,23 @@
 </head>
 <body>
     <div id="main-content" class="main-content">
-        <th:block th:if="${user==null}">
+        <th:block th:if="${userDTO==null}">
             <div th:replace="~{main-page/side-bar}"></div>
         </th:block>
-        <th:block th:if="${user!=null}">
+        <th:block th:if="${userDTO!=null}">
             <div th:replace="~{main-page/login-side-bar}"></div>
         </th:block>
         <main class="main">
-            <th:block th:if="${user==null}">
+            <th:block th:if="${userDTO==null}">
                 <div th:replace="~{main-page/mobile-header}"></div>
             </th:block>
-            <th:block th:if="${user!=null}">
+            <th:block th:if="${userDTO!=null}">
                 <div th:replace="~{main-page/mobile-login-header}"></div>
             </th:block>
-            <th:block th:if="${user==null}">
+            <th:block th:if="${userDTO==null}">
                 <div th:replace="~{main-page/header}"></div>
             </th:block>
-            <th:block th:if="${user!=null}">
+            <th:block th:if="${userDTO!=null}">
                 <div th:replace="~{main-page/login-header}"></div>
             </th:block>
             <div class="main-0">
@@ -37,10 +37,10 @@
                     <div class="main-2">
                         <input type="file" style="display: none;">
                         <div class="main-3">
-                            <th:block th:if="${user.memberProfileUrl!=null}">
-                                <img alt="user-banner-image" loading="lazy" width="1000" height="200" decoding="async" data-nimg="1" class="main-4" th:src="${user.memberProfileUrl}" style="color: transparent;">
+                            <th:block th:if="${userDTO.memberProfileUrl!=null}">
+                                <img alt="user-banner-image" loading="lazy" width="1000" height="200" decoding="async" data-nimg="1" class="main-4" th:src="${userDTO.memberProfileUrl}" style="color: transparent;">
                             </th:block>
-                            <th:block th:if="${user.memberProfileUrl==null}">
+                            <th:block th:if="${userDTO.memberProfileUrl==null}">
                                 <img alt="user-banner-image" loading="lazy" width="1000" height="200" decoding="async" data-nimg="1" class="main-4" src="/images/main-page/image.png" style="color: transparent;">
                             </th:block>
                             <div class="main-5">
@@ -62,22 +62,22 @@
                             <div class="content-3">
                                 <div class="content-4">
                                     <div class="content-5">
-<!--                                        <img alt="image" draggable="false" loading="lazy" width="60" height="60" decoding="async" data-nimg="1" srcset="" th:src="${user.memberProfileUrl}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">-->
+<!--                                        <img alt="image" draggable="false" loading="lazy" width="60" height="60" decoding="async" data-nimg="1" srcset="" th:src="${userDTO.memberProfileUrl}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">-->
                                         <th:block th:if="${profileFile}!=null">
                                             <img alt="image" draggable="false" loading="lazy" width="60" height="60" decoding="async" data-nimg="1" srcset="" th:src="${profileFile}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
                                         </th:block>
-                                        <th:block th:if="${profileFile == null and user.memberProfileUrl != null}">
-                                            <img alt="image" draggable="false" loading="lazy" width="60" height="60" decoding="async" data-nimg="1" srcset="" th:src="${user.memberProfileUrl}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+                                        <th:block th:if="${profileFile == null and userDTO.memberProfileUrl != null}">
+                                            <img alt="image" draggable="false" loading="lazy" width="60" height="60" decoding="async" data-nimg="1" srcset="" th:src="${userDTO.memberProfileUrl}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
                                         </th:block>
-                                        <th:block th:if="${profileFile == null and user.memberProfileUrl == null}">
+                                        <th:block th:if="${profileFile == null and userDTO.memberProfileUrl == null}">
                                             <img alt="image" draggable="false" loading="lazy" width="60" height="60" decoding="async" data-nimg="1" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
                                         </th:block>
                                     </div>
                                     <div class="content-6">
                                         <div class="content-7">
-                                            <p class="content-8" th:text="${user.getUsername}"></p>
+                                            <p class="content-8" th:text="${userDTO.getUsername}"></p>
                                         </div>
-                                        <p class="content-9" th:text="${user.getUserJobName}"></p>
+                                        <p class="content-9" th:text="${userDTO.getUserJobName}"></p>
                                     </div>
                                 </div>
                                 <div class="content-10">
@@ -740,6 +740,10 @@
 
     </div>
 </body>
+<script th:inline="javascript">
+    const profileFile = [[${profileFile}]];
+    const profileFile2=[[${userDTO.memberProfileUrl}]];
+</script>
 <!--<script src="/js/experience/event.js"></script>-->
 <script src="/js/mypage/module/service.js"></script>
 <script src="/js/mypage/module/layout.js"></script>
