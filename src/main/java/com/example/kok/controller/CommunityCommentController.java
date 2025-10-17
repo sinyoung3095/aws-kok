@@ -23,6 +23,7 @@ public class CommunityCommentController {
     public ResponseEntity<?> write(@RequestBody CommentDTO commentDTO,
                                    @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         commentDTO.setMemberId(customUserDetails.getId());
+        commentDTO.setMemberProfileUrl(customUserDetails.getMemberProfileUrl());
         communityCommentService.write(commentDTO);
         return ResponseEntity.ok(commentDTO);
     }
@@ -41,6 +42,7 @@ public class CommunityCommentController {
                                            @RequestBody CommentDTO commentDTO,
                                            @AuthenticationPrincipal CustomUserDetails user) {
         commentDTO.setId(commentId);
+        commentDTO.setMemberProfileUrl(user.getMemberProfileUrl());
         commentDTO.setMemberId(user.getId());
         communityCommentService.update(commentDTO);
         return ResponseEntity.ok().build();

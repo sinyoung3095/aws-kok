@@ -36,7 +36,6 @@ public class CompanyController {
 
         if (customUserDetails != null) {
             userId = customUserDetails.getId();
-            model.addAttribute("userDTO", customUserDetails);
             model.addAttribute("isMember", customUserDetails.getUserRole() == UserRole.MEMBER);
             model.addAttribute("isCompany", customUserDetails.getUserRole() == UserRole.COMPANY);
 
