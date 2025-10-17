@@ -137,3 +137,10 @@ insert into tbl_intern_notice (
 values
     ('에코빌더스 인턴', '스마트 건축 인턴십', '친환경 자재 조사', '현장 안전 관리', 'CAD 도면 작성',
      '2025-10-10', '2026-01-10', '2025-09-25', '2025-10-15', 'active', 5);
+
+-- 인턴 기한 삭제
+alter table tbl_intern_notice
+    drop intern_start_date;
+
+alter table tbl_intern_notice
+    drop intern_end_date;
