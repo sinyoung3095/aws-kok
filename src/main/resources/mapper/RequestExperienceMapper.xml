@@ -29,6 +29,7 @@
     <!--  지원 내역 목록 조회  -->
     <select id="selectRequestByUserId">
         select r.id,
+               c.user_id,
                c.company_name,
                n.experience_notice_title,
                r.request_experience_status,

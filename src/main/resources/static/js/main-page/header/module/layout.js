@@ -1,19 +1,19 @@
 const headerLayout = (() => {
-    const showExperienceList = (requestDTO) => {
-        console.log(requestDTO)
+    const showExperienceList = (requestListDTO) => {
+        console.log(requestListDTO)
         const experienceWarp = document.getElementById("experienceWarp");
         let text = '';
-        requestDTO.forEach((request) => {
-            if (request.requestExperienceStatus === 'await') {
-                text += `<div class="history-modal-main-section" data-id="${request.id}">
+        requestListDTO.forEach((requestListDTO) => {
+            if (requestListDTO.requestExperienceStatus === 'await') {
+                text += `<div class="history-modal-main-section" data-id="${requestListDTO.id}">
                             <div class="history-modal-main-company-wrap">
                                 <!-- 기업 프로필 이미지 -->
-                                <img alt="image" width="32" height="32" srcSet="" src="/images/main-page/image.png"
+                                <img alt="image" width="32" height="32"  th:src="${requestListDTO.companyProfileUrl}"
                                      style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;"/>
                                 <div class="history-modal-main-section-info">
-                                    <span class="history-modal-main-company-name">${request.companyName}</span>
-                                    <span class="history-modal-main-announce-title">${request.experienceNoticeTitle}</span>
-                                    <p class="history-modal-main-apply-date">지원일: </p><p class="history-modal-main-apply-date">${request.createdDateTime.split(" ")[0]}</p>
+                                    <span class="history-modal-main-company-name">${requestListDTO.companyName}</span>
+                                    <span class="history-modal-main-announce-title">${requestListDTO.experienceNoticeTitle}</span>
+                                    <p class="history-modal-main-apply-date">지원일: </p><p class="history-modal-main-apply-date">${requestListDTO.createdDateTime.split(" ")[0]}</p>
                                 </div>
                                 <div class="history-modal-main-apply-status-wrap">
                                     <div class="history-modal-main-apply-status">
@@ -22,16 +22,16 @@ const headerLayout = (() => {
                                 </div>
                             </div>
                         </div>`
-            } else if (request.requestExperienceStatus === 'accept') {
-                text += `<div class="history-modal-main-section" data-id="${request.id}">
+            } else if (requestListDTO.requestExperienceStatus === 'accept') {
+                text += `<div class="history-modal-main-section" data-id="${requestListDTO.id}">
                             <div class="history-modal-main-company-wrap">
                                 <!-- 기업 프로필 이미지 -->
-                                <img alt="image" width="32" height="32" srcSet="" src="/images/main-page/image.png"
+                                <img alt="image" width="32" height="32"  th:src="${requestListDTO.companyProfileUrl}"
                                      style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;"/>
                                 <div class="history-modal-main-section-info">
-                                    <span class="history-modal-main-company-name">${request.companyName}</span>
-                                    <span class="history-modal-main-announce-title">${request.experienceNoticeTitle}</span>
-                                    <p class="history-modal-main-apply-date">지원일: </p><p class="history-modal-main-apply-date">${request.createdDateTime.split(" ")[0]}</p>
+                                    <span class="history-modal-main-company-name">${requestListDTO.companyName}</span>
+                                    <span class="history-modal-main-announce-title">${requestListDTO.experienceNoticeTitle}</span>
+                                    <p class="history-modal-main-apply-date">지원일: </p><p class="history-modal-main-apply-date">${requestListDTO.createdDateTime.split(" ")[0]}</p>
                                 </div>
                                 <div class="history-modal-main-apply-status-wrap">
                                     <div class="history-modal-main-apply-status">
@@ -44,12 +44,12 @@ const headerLayout = (() => {
                 text += `<div class="history-modal-main-section fail">
                             <div class="history-modal-main-company-wrap-fail">
                                 <!-- 기업 프로필 이미지 -->
-                                <img alt="image" width="32" height="32" srcSet="" src="/images/main-page/image.png"
+                                <img alt="image" width="32" height="32"  th:src="${requestListDTO.companyProfileUrl}"
                                      style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;"/>
                                 <div class="history-modal-main-section-info">
-                                    <span class="history-modal-main-company-name">${request.companyName}</span>
-                                    <span class="history-modal-main-announce-title">${request.experienceNoticeTitle}</span>
-                                    <p class="history-modal-main-apply-date">지원일: </p><p class="history-modal-main-apply-date">${request.createdDateTime.split(" ")[0]}</p>
+                                    <span class="history-modal-main-company-name">${requestListDTO.companyName}</span>
+                                    <span class="history-modal-main-announce-title">${requestListDTO.experienceNoticeTitle}</span>
+                                    <p class="history-modal-main-apply-date">지원일: </p><p class="history-modal-main-apply-date">${requestListDTO.createdDateTime.split(" ")[0]}</p>
                                 </div>
                                 <div class="history-modal-main-apply-status-wrap">
                                     <div class="history-modal-main-apply-status">
@@ -62,20 +62,20 @@ const headerLayout = (() => {
         })
         experienceWarp.innerHTML = text;
     }
-    const showInternList = (requestDTO) => {
+    const showInternList = (requestListDTO) => {
         const internWarp = document.getElementById("internWarp");
         let text = '';
-        requestDTO.forEach((request) => {
-            if (request.requestInternStatus === 'await') {
-                text += `<div class="history-modal-main-section" data-id="${request.id}">
+        requestListDTO.forEach((requestListDTO) => {
+            if (requestListDTO.requestInternStatus === 'await') {
+                text += `<div class="history-modal-main-section" data-id="${requestListDTO.id}">
                             <div class="history-modal-main-company-wrap">
                                 <!-- 기업 프로필 이미지 -->
-                                <img alt="image" width="32" height="32" srcSet="" src="/images/main-page/image.png"
+                                <img alt="image" width="32" height="32" th:src="${requestListDTO.companyProfileUrl}"
                                      style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;"/>
                                 <div class="history-modal-main-section-info">
-                                    <span class="history-modal-main-company-name">${request.companyName}</span>
-                                    <span class="history-modal-main-announce-title">${request.internNoticeTitle}</span>
-                                    <p class="history-modal-main-apply-date">지원일: </p><p class="history-modal-main-apply-date">${request.createdDateTime.split(" ")[0]}</p>
+                                    <span class="history-modal-main-company-name">${requestListDTO.companyName}</span>
+                                    <span class="history-modal-main-announce-title">${requestListDTO.internNoticeTitle}</span>
+                                    <p class="history-modal-main-apply-date">지원일: </p><p class="history-modal-main-apply-date">${requestListDTO.createdDateTime.split(" ")[0]}</p>
                                 </div>
                                 <div class="history-modal-main-apply-status-wrap">
                                     <div class="history-modal-main-apply-status">
@@ -84,16 +84,16 @@ const headerLayout = (() => {
                                 </div>
                             </div>
                         </div>`
-            } else if (request.requestInternStatus === 'accept') {
-                text += `<div class="history-modal-main-section" data-id="${request.id}">
+            } else if (requestListDTO.requestInternStatus === 'accept') {
+                text += `<div class="history-modal-main-section" data-id="${requestListDTO.id}">
                             <div class="history-modal-main-company-wrap">
                                 <!-- 기업 프로필 이미지 -->
-                                <img alt="image" width="32" height="32" srcSet="" src="/images/main-page/image.png"
+                                <img alt="image" width="32" height="32" th:src="${requestListDTO.companyProfileUrl}"
                                      style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;"/>
                                 <div class="history-modal-main-section-info">
-                                    <span class="history-modal-main-company-name">${request.companyName}</span>
-                                    <span class="history-modal-main-announce-title">${request.internNoticeTitle}</span>
-                                    <p class="history-modal-main-apply-date">지원일: </p><p class="history-modal-main-apply-date">${request.createdDateTime.split(" ")[0]}</p>
+                                    <span class="history-modal-main-company-name">${requestListDTO.companyName}</span>
+                                    <span class="history-modal-main-announce-title">${requestListDTO.internNoticeTitle}</span>
+                                    <p class="history-modal-main-apply-date">지원일: </p><p class="history-modal-main-apply-date">${requestListDTO.createdDateTime.split(" ")[0]}</p>
                                 </div>
                                 <div class="history-modal-main-apply-status-wrap">
                                     <div class="history-modal-main-apply-status">
@@ -106,12 +106,12 @@ const headerLayout = (() => {
                 text += `<div class="history-modal-main-section fail">
                             <div class="history-modal-main-company-wrap-fail">
                                 <!-- 기업 프로필 이미지 -->
-                                <img alt="image" width="32" height="32" srcSet="" src="/images/main-page/image.png"
+                                <img alt="image" width="32" height="32"  th:src="${requestListDTO.companyProfileUrl}"
                                      style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;"/>
                                 <div class="history-modal-main-section-info">
-                                    <span class="history-modal-main-company-name">${request.companyName}</span>
-                                    <span class="history-modal-main-announce-title">${request.internNoticeTitle}</span>
-                                    <p class="history-modal-main-apply-date">지원일: </p><p class="history-modal-main-apply-date">${request.createdDateTime.split(" ")[0]}</p>
+                                    <span class="history-modal-main-company-name">${requestListDTO.companyName}</span>
+                                    <span class="history-modal-main-announce-title">${requestListDTO.internNoticeTitle}</span>
+                                    <p class="history-modal-main-apply-date">지원일: </p><p class="history-modal-main-apply-date">${requestListDTO.createdDateTime.split(" ")[0]}</p>
                                 </div>
                                 <div class="history-modal-main-apply-status-wrap">
                                     <div class="history-modal-main-apply-status">
@@ -124,9 +124,9 @@ const headerLayout = (() => {
         })
         internWarp.innerHTML = text;
     }
-    const showExperienceDetail = (requestDTO) =>{
+    const showExperienceDetail = (requestListDTO) =>{
         const warp = document.querySelector(".history-detail-modal-wrap");
-        console.log("디테일 레이아웃" + requestDTO)
+        console.log("디테일 레이아웃" + requestListDTO)
 
         let text =
             `<div class="history-detail-modal">
@@ -144,7 +144,7 @@ const headerLayout = (() => {
                         </div>
                         <div class="history-detail-modal-top-middle">
                             <div class="history-detail-modal-main-text">지원서</div>
-                            <div class="history-detail-modal-sub-text" >지원일: ${requestDTO[0].createdDateTime.split(" ")[0]}</div>
+                            <div class="history-detail-modal-sub-text" >지원일: ${requestListDTO[0].createdDateTime.split(" ")[0]}</div>
                         </div>
                         <div class="history-detail-modal-top-right">
                             <button class="history-detail-modal-top-right-button">
@@ -158,18 +158,18 @@ const headerLayout = (() => {
                         <!-- 신청한 공고의 상세 페이지로 이동 -->
                         <a href="" class="history-detail-modal-body-content">
                             <div class="history-detail-modal-info-wrap">
-                                <img alt="image" width="32" height="32" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                                <img alt="image" width="32" height="32"  th:src="${requestListDTO.companyProfileUrl}" style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
                                     <div class="history-detail-modal-info">
-                                        <span class="info-company-name">${requestDTO[0].companyName}</span>
-                                        <span class="info-experience-title" >${requestDTO[0].experienceNoticeTitle}</span>
-                                        <p class="info-apply-date" >지원일: ${requestDTO[0].createdDateTime.split(" ")[0]}</p>
+                                        <span class="info-company-name">${requestListDTO[0].companyName}</span>
+                                        <span class="info-experience-title" >${requestListDTO[0].experienceNoticeTitle}</span>
+                                        <p class="info-apply-date" >지원일: ${requestListDTO[0].createdDateTime.split(" ")[0]}</p>
                                     </div>
                                     <div class="history-detail-modal-status-wrap">
                                         <div class="history-detail-modal-status">`
-            if(requestDTO[0].requestInternStatus === 'accept') {
-                text += `<span className="history-detail-modal-status-text">합격</span>`
+            if(requestListDTO[0].requestInternStatus === 'accept') {
+                text += `<span class="history-detail-modal-status-text">합격</span>`
             }else {
-                text += `<span className="history-detail-modal-status-text">서류 접수</span>`
+                text += `<span class="history-detail-modal-status-text">서류 접수</span>`
             }
 
         text += `
@@ -184,7 +184,7 @@ const headerLayout = (() => {
                                 </div>
                                 <div class="body-section-user-info-wrap">
                                     <div class="body-section-user-info-text-wrap">
-                                        <p class="body-section-user-info-text">${requestDTO[0].requestExperienceMemberName}</p>
+                                        <p class="body-section-user-info-text">${requestListDTO[0].requestExperienceMemberName}</p>
                                     </div>
                                 </div>
                             </div>
@@ -194,7 +194,7 @@ const headerLayout = (() => {
                                 </div>
                                 <div class="body-section-user-info-wrap">
                                     <div class="body-section-user-info-text-wrap">
-                                        <p class="body-section-user-info-text">${requestDTO[0].requestExperienceMemberEmail}</p>
+                                        <p class="body-section-user-info-text">${requestListDTO[0].requestExperienceMemberEmail}</p>
                                     </div>
                                 </div>
                             </div>
@@ -204,7 +204,7 @@ const headerLayout = (() => {
                                 </div>
                                 <div class="body-section-user-info-wrap">
                                     <div class="body-section-user-info-text-wrap">
-                                        <p class="body-section-user-info-text">${requestDTO[0].requestExperienceMemberPhone}</p>
+                                        <p class="body-section-user-info-text">${requestListDTO[0].requestExperienceMemberPhone}</p>
                                     </div>
                                 </div>
                             </div>
@@ -216,11 +216,11 @@ const headerLayout = (() => {
                                 </div>
                                 <div class="body-section-user-info-wrap">
                                     <div class="body-section-user-info-text-wrap">`
-                            if(requestDTO[0].requestExperienceMemberUrl === null){
+                            if(requestListDTO[0].requestExperienceMemberUrl === null){
                                 text+= `<a  class="body-section-user-url-text" >입력하신 url이 없습니다.</a>`
                             }else{
 
-                                text+= `<a href="${requestDTO[0].requestExperienceMemberUrl}" class="body-section-user-url-text" >${requestDTO[0].requestExperienceMemberUrl}</a>`
+                                text+= `<a href="${requestListDTO[0].requestExperienceMemberUrl}" class="body-section-user-url-text" >${requestListDTO[0].requestExperienceMemberUrl}</a>`
                             }
         text+=`
                                     </div>
@@ -239,7 +239,7 @@ const headerLayout = (() => {
             `
         warp.innerHTML=text;
     }
-    const showInternDetail = (requestDTO) =>{
+    const showInternDetail = (requestListDTO) =>{
         const warp = document.querySelector(".history-detail-modal-wrap");
         let text =
             `<div class="history-detail-modal">
@@ -257,7 +257,7 @@ const headerLayout = (() => {
                         </div>
                         <div class="history-detail-modal-top-middle">
                             <div class="history-detail-modal-main-text">지원서</div>
-                            <div class="history-detail-modal-sub-text" >지원일: ${requestDTO[0].createdDateTime.split(" ")[0]}</div>
+                            <div class="history-detail-modal-sub-text" >지원일: ${requestListDTO[0].createdDateTime.split(" ")[0]}</div>
                         </div>
                         <div class="history-detail-modal-top-right">
                             <button class="history-detail-modal-top-right-button">
@@ -271,15 +271,15 @@ const headerLayout = (() => {
                         <!-- 신청한 공고의 상세 페이지로 이동 -->
                         <a href="" class="history-detail-modal-body-content">
                             <div class="history-detail-modal-info-wrap">
-                                <img alt="image" width="32" height="32" srcset="" src="/images/main-page/image.png" style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
+                                <img alt="image" width="32" height="32"  th:src="${requestListDTO.companyProfileUrl}" style="color: transparent; border-radius: 4.8px; cursor: default; max-height: 32px; max-width: 32px; min-height: 32px; min-width: 32px; object-fit: contain;">
                                     <div class="history-detail-modal-info">
-                                        <span class="info-company-name">${requestDTO[0].companyName}</span>
-                                        <span class="info-experience-title" >${requestDTO[0].internNoticeTitle}</span>
-                                        <p class="info-apply-date" >지원일: ${requestDTO[0].createdDateTime.split(" ")[0]}</p>
+                                        <span class="info-company-name">${requestListDTO[0].companyName}</span>
+                                        <span class="info-experience-title" >${requestListDTO[0].internNoticeTitle}</span>
+                                        <p class="info-apply-date" >지원일: ${requestListDTO[0].createdDateTime.split(" ")[0]}</p>
                                     </div>
                                     <div class="history-detail-modal-status-wrap">
                                         <div class="history-detail-modal-status">`
-        if(requestDTO[0].requestInternStatus === 'accept') {
+        if(requestListDTO[0].requestInternStatus === 'accept') {
             text += `<span class="history-detail-modal-status-text">합격</span>`
         }else {
             text += `<span class="history-detail-modal-status-text">서류 접수</span>`
@@ -297,7 +297,7 @@ const headerLayout = (() => {
                                 </div>
                                 <div class="body-section-user-info-wrap">
                                     <div class="body-section-user-info-text-wrap">
-                                        <p class="body-section-user-info-text">${requestDTO[0].requestInternMemberName}</p>
+                                        <p class="body-section-user-info-text">${requestListDTO[0].requestInternMemberName}</p>
                                     </div>
                                 </div>
                             </div>
@@ -307,7 +307,7 @@ const headerLayout = (() => {
                                 </div>
                                 <div class="body-section-user-info-wrap">
                                     <div class="body-section-user-info-text-wrap">
-                                        <p class="body-section-user-info-text">${requestDTO[0].requestInternMemberEmail}</p>
+                                        <p class="body-section-user-info-text">${requestListDTO[0].requestInternMemberEmail}</p>
                                     </div>
                                 </div>
                             </div>
@@ -317,7 +317,7 @@ const headerLayout = (() => {
                                 </div>
                                 <div class="body-section-user-info-wrap">
                                     <div class="body-section-user-info-text-wrap">
-                                        <p class="body-section-user-info-text">${requestDTO[0].requestInternMemberPhone}</p>
+                                        <p class="body-section-user-info-text">${requestListDTO[0].requestInternMemberPhone}</p>
                                     </div>
                                 </div>
                             </div>
@@ -329,11 +329,11 @@ const headerLayout = (() => {
                                 </div>
                                 <div class="body-section-user-info-wrap">
                                     <div class="body-section-user-info-text-wrap">`
-        if(requestDTO[0].requestInternMemberUrl === null){
+        if(requestListDTO[0].requestInternMemberUrl === null){
             text+= `<a  class="body-section-user-url-text" >입력하신 url이 없습니다.</a>`
         }else{
 
-            text+= `<a href="${requestDTO[0].requestInternMemberUrl}" class="body-section-user-url-text" >${requestDTO[0].requestInternMemberUrl}</a>`
+            text+= `<a href="${requestListDTO[0].requestInternMemberUrl}" class="body-section-user-url-text" >${requestListDTO[0].requestInternMemberUrl}</a>`
         }
         text+=`
                                     </div>

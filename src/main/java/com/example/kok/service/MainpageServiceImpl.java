@@ -1,9 +1,8 @@
 package com.example.kok.service;
 
 import com.example.kok.auth.CustomUserDetails;
-import com.example.kok.dto.CompanyDTO;
-import com.example.kok.dto.ExperienceNoticeDTO;
-import com.example.kok.dto.InternNoticeDTO;
+import com.example.kok.dto.*;
+import com.example.kok.enumeration.UserRole;
 import com.example.kok.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +20,8 @@ public class MainpageServiceImpl implements MainpageService {
     private final FollowDAO followDAO;
     private final CompanyProfileFileDAO companyProfileFileDAO;
     private final UserProfileService userProfileService;
+    private final RequestInternDAO requestInternDAO;
+    private final RequestExperienceDAO requestExperienceDAO;
     @Override
     public List<CompanyDTO> findPopularCompanies() {
         List<CompanyDTO> companyDTOs = followDAO.selectPopularCompany();
@@ -64,13 +65,47 @@ public class MainpageServiceImpl implements MainpageService {
     public CustomUserDetails findProfile(CustomUserDetails customUserDetails) {
         if(customUserDetails.getMemberProfileUrl()!=null){
         }else {
-            if(userProfileService.findProfileById(customUserDetails.getId())!=null)
-            {customUserDetails.setMemberProfileUrl(userProfileService.findProfileById(customUserDetails.getId()));}
-            else{
-                customUserDetails.setMemberProfileUrl("/images/main-page/image3.png");
+            if(customUserDetails.getUserRole()== UserRole.MEMBER) {
+                if (userProfileService.findProfileById(customUserDetails.getId()) != null) {
+                    customUserDetails.setMemberProfileUrl(userProfileService.findProfileById(customUserDetails.getId()));
+                } else {
+                    customUserDetails.setMemberProfileUrl("/images/main-page/image3.png");
+                }
+            }else{
+                if(companyProfileFileDAO.findFileByCompanyId(customUserDetails.getId()).getFilePath()!=null){
+                    customUserDetails.setMemberProfileUrl(s3Service.getPreSignedUrl(companyProfileFileDAO.findFileByCompanyId(customUserDetails.getId()).getFilePath(), Duration.ofMinutes(10)));
+                }else{
+                    customUserDetails.setMemberProfileUrl("/images/main-page/image3.png");
+                }
             }
 
         }
         return customUserDetails;
+    }
+
+    @Override
+    public List<RequestExperienceDTO> findRequestExperienceByCompanyId(Long companyId,Long experienceId) {
+        List<RequestExperienceDTO> requestExperienceDTO = requestExperienceDAO.selectAllRequestByUserId(companyId, experienceId);
+        requestExperienceDTO.forEach(experienceDTO -> {
+            if(companyProfileFileDAO.findFileByCompanyId(experienceDTO.getUserId()).getFilePath()!=null){
+                experienceDTO.setCompanyProfileUrl(s3Service.getPreSignedUrl(companyProfileFileDAO.findFileByCompanyId(experienceDTO.getUserId()).getFilePath(),Duration.ofMinutes(10)));
+            }else{
+                experienceDTO.setCompanyProfileUrl("/images/main-page/image.png");
+            }
+        });
+        return requestExperienceDTO;
+    }
+
+    @Override
+    public List<RequestInternDTO> findRequestInternByCompanyId(Long companyId,Long internId) {
+        List<RequestInternDTO> requestInternDTO = requestInternDAO.selectAllInternByUserId(companyId, internId);
+        requestInternDTO.forEach(internDTO -> {
+            if(companyProfileFileDAO.findFileByCompanyId(internDTO.getUserId()).getFilePath()!=null){
+                internDTO.setCompanyProfileUrl(s3Service.getPreSignedUrl(companyProfileFileDAO.findFileByCompanyId(internDTO.getUserId()).getFilePath(),Duration.ofMinutes(10)));
+            }else{
+                internDTO.setCompanyProfileUrl("/images/main-page/image.png");
+            }
+        });
+        return requestInternDTO;
     }
 }

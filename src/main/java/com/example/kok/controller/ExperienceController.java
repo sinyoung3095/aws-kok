@@ -27,7 +27,7 @@ public class ExperienceController {
         ExperienceNoticeCriteriaDTO dto =experienceNoticeService.selectAllExperienceNotice(page, search);
 //        System.out.println(dto);
         model.addAttribute("experienceNoticeCriteria", dto);
-        model.addAttribute("userDTO", customUserDetails);
+//        model.addAttribute("userDTO", customUserDetails);
         model.addAttribute("search", search);
         model.addAttribute("sharedCompanyId", sharedCompanyId);
         model.addAttribute("sharedExperienceId", sharedExperienceId);

@@ -10,4 +10,4 @@ CREATE TABLE tbl_user_profile_file (
 select * from tbl_user_profile_file;
 
 insert into tbl_user_profile_file(file_id,user_id)
-values (9,30);
+values (1,1);

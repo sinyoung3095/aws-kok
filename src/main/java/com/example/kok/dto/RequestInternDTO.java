@@ -18,6 +18,8 @@ public class RequestInternDTO {
     private long internNoticeId;
     private long memberAlarmSettingId;
     private long evaluationId;
+    private long userId;
+    private String companyProfileUrl;
     private String companyName;
     private String internNoticeTitle;
     private String createdDateTime;
