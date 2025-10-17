@@ -62,18 +62,8 @@ public class AdminAdvertisementServiceImpl implements AdminAdvertisementService 
             file.setFilePath(s3Service.getPreSignedUrl(file.getFilePath(), Duration.ofMinutes(5)));
         });
         advertisementDTO.setAdvertisementBackgroundFiles(files);
-        log.info("담긴 파일 내용: {}", files);
         return advertisementDTO;
     }
-
-//    @Override
-//    public void setPreSignedUrl(AdminAdvertisementDTO advertisementDTO){
-//        List<AdvertisementBackgroundFileDTO> files = advertisementBackgroundFileDAO.advertisementBackgroundFile(advertisementDTO.getId());
-//        files.forEach(file -> {
-//            file.setFilePath(s3Service.getPreSignedUrl(file.getFilePath(), Duration.ofMinutes(5)));
-//        });
-//        advertisementDTO.setAdvertisementBackgroundFiles(files);
-//    }
 
 //    광고 승인
     public void accept(Long id){
