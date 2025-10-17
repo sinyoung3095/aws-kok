@@ -34,4 +34,10 @@ public class RequestInternServiceImpl implements RequestInternService {
         file.setRequestInternId(reqId);
         requestInternFileDAO.saveRequestFile(file);
     }
+
+    @Override
+    public boolean isRequested(RequestInternDTO requestInternDTO) {
+        System.out.println("서비스 임플: "+requestInternDAO.isRequested(requestInternDTO));
+        return requestInternDAO.isRequested(requestInternDTO);
+    }
 }

@@ -79,7 +79,8 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
         ExperienceNoticeDTO result= experienceNoticeDAO.findById(id);
         String jobName= experienceNoticeDAO.findJobNameByID(id);
         result.setJobName(jobName);
-        LocalDate endDate = result.getExperienceEndDate();
+        System.out.println(result);
+        LocalDate endDate = result.getExperienceNoticeEndDate();
             LocalDate today = LocalDate.now();
             if (!endDate.isBefore(today)) {
                 long days = ChronoUnit.DAYS.between(today, endDate);
@@ -148,7 +149,7 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
     @Override
     public boolean isRequested(RequestExperienceDTO requestExperienceDTO) {
         boolean result=requestExperienceDAO.isRequested(requestExperienceDTO);
-        return false;
+        return result;
     }
 
     //    기업별 체험 공고

@@ -1,5 +1,6 @@
 package com.example.kok.mapper;
 
+import com.example.kok.dto.RequestExperienceDTO;
 import com.example.kok.repository.RequestExperienceDAO;
 import com.example.kok.service.RequestExperienceService;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,15 @@ public class RequestExperienceMapperTests {
     public void requestExperienceDAOTest(){
         requestExperienceDAO.selectAllRequestById(1L);
         log.info("requestExperienceMapperTest: {}", requestExperienceDAO.selectAllRequestById(1L));
+
+    }
+
+    @Test
+    public void requestedTest(){
+        RequestExperienceDTO req = new RequestExperienceDTO();
+        req.setExperienceNoticeId(23L);
+        req.setMemberId(26L);
+        System.out.println("다오: "+requestExperienceDAO.isRequested(req));
 
     }
 }
