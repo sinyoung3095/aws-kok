@@ -1,6 +1,6 @@
 CREATE TABLE tbl_request_experience_file (
     id bigint generated always as identity primary key,
-    file_id bigint primary key,
+    file_id bigint ,
     request_experience_id bigint not null,
     constraint fk_request_experience_file_file foreign key(file_id)
         references tbl_file(id),
