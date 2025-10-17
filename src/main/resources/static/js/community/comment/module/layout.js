@@ -11,8 +11,8 @@ const commentLayout = (() => {
                 <div class="post-9">
                     <div>
                         <img alt="image" width="25" height="25"
-                             src="${comment.memberProfileUrl || '/images/main-page/image2.png'}"
-                             style="border-radius:999px; max-height:25px; max-width:40px; min-height:40px; min-width:40px; object-fit:contain;">
+                             src="${comment.memberProfileUrl || '/images/main-page/image3.png'}"
+                             style="border-radius:999px; max-height:25px; max-width:40px; min-height:40px; min-width:40px; object-fit:contain; background-color: #ccc;">
                     </div>
                     <div class="post-10">
                         <div class="post-11">
@@ -132,8 +132,8 @@ const commentLayout = (() => {
                             <div class="post-9">
                                 <div>
                                     <img alt="image" width="25" height="25"
-                                         src="${reply.memberProfileUrl || '/images/main-page/image2.png'}"
-                                         style="border-radius:999px; max-height:25px; max-width:40px;">
+                                         src="${reply.memberProfileUrl || '/images/main-page/image3.png'}"
+                                         style="border-radius:999px; max-height:25px; max-width:40px; background-color: #ccc;">
                                 </div>
                                 <div class="post-10">
                                     <div class="post-11">

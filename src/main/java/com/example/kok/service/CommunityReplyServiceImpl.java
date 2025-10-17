@@ -6,12 +6,14 @@ import com.example.kok.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class CommunityReplyServiceImpl implements CommunityReplyService {
     private final CommunityReplyDAO communityReplyDAO;
+    private final S3Service s3Service;
 
 //    대댓글 작성
     @Override
@@ -39,6 +41,7 @@ public class CommunityReplyServiceImpl implements CommunityReplyService {
         replies.forEach(reply -> {
             reply.setRelativeDate(DateUtils.toRelativeTime(reply.getCreatedDateTime()));
             reply.setOwner(memberId != null && memberId.equals(reply.getMemberId()));
+
         });
 
         return replies;

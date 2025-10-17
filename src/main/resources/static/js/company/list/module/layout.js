@@ -24,7 +24,7 @@ const companyLayout = (() => {
                     </div>
                     <div class="list-item-header">
                         <div class="list-item-thumb">
-                            <img src="${company.companyProfileFile || '/images/main-page/image3.png'}">
+                            <img src="${company.companyProfileFile || '/images/main-page/image3.png'}" style="background-color: #ccc; border-radius: 999px;">
                         </div>
                         <div class="list-item-content">
                             <p class="list-item-category">${company.companySectorName|| '-'}</p>
