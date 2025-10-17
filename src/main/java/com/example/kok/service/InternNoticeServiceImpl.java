@@ -83,6 +83,23 @@ public class InternNoticeServiceImpl implements InternNoticeService {
         String jobName= internNoticeDAO.findJobNameByID(id);
         result.setJobName(jobName);
         LocalDate endDate = result.getInternNoticeEndDate();
+<<<<<<< HEAD
+        LocalDate today = LocalDate.now();
+        if (!endDate.isBefore(today)) {
+            long days = ChronoUnit.DAYS.between(today, endDate);
+            result.setRemainingDays(days);
+        } else {
+            result.setRemainingDays(0L); // endDate보다 today가 이전일 경우 0
+        }
+        fileService.findFileByCompanyId(result.getCompanyId())
+                .ifPresentOrElse(fileDTO -> {
+                    result.setFileName(fileDTO.getFileName());
+                    result.setFilePath(fileDTO.getFilePath());
+                }, ()->{
+                    result.setFileName("image.png");
+                    result.setFilePath("");
+                });
+=======
             LocalDate today = LocalDate.now();
             if (!endDate.isBefore(today)) {
                 long days = ChronoUnit.DAYS.between(today, endDate);
@@ -98,6 +115,7 @@ public class InternNoticeServiceImpl implements InternNoticeService {
                         result.setFileName("image.png");
                         result.setFilePath("");
                     });
+>>>>>>> bd2a9253a6d5bbb85876bc1701e806bdc3392177
         return result;
     }
 
@@ -148,7 +166,7 @@ public class InternNoticeServiceImpl implements InternNoticeService {
         return result;
     }
 
-//    기업별 인턴 공고 목록
+    //    기업별 인턴 공고 목록
     @Override
     public CompanyInternNoticeCriteriaDTO getInternNoticesByCompanyId(int page, Long companyId, Search search) {
         int total = internNoticeDAO.findCountByCompanyId(companyId, search);
