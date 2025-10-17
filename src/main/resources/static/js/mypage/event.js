@@ -283,7 +283,7 @@ const showProfileUpdate=async ()=>{
             location.reload();
             setting.style.display = "none";
         } else {
-            alert("수정 실패"+profileUpdate.status);
+            // alert("수정 실패"+profileUpdate.status);
             setting.style.display = "none";
             location.reload();
         }

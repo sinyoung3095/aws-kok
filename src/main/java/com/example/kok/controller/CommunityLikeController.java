@@ -40,13 +40,13 @@ public class CommunityLikeController {
     }
 
 
-    // 추천 갯수 조회
+    // 좋아요 갯수 조회
     @GetMapping("/{postId}/count")
     public ResponseEntity<?> getPostLikeCount(@PathVariable Long postId) {
         return ResponseEntity.ok(communityLikeService.getPostLikeCount(postId));
     }
 
-    // 추천 여부 확인
+    // 좋아요 여부 확인
     @GetMapping("/{postId}/check")
     public ResponseEntity<?> checkedPostLike(@PathVariable Long postId,
                                              @AuthenticationPrincipal CustomUserDetails customUserDetails) {

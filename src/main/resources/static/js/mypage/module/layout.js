@@ -7,7 +7,7 @@ const myPageLayout = (() => {
         console.log(profile);
         console.log("profile: "+profile.userName+profile.memberProfileUrl+profile.jobName+profile.memberInfo);
         let userName=profile.userName;
-        let profileUrl=profile.memberProfileUrl;
+        let profileUrl=profile.filePath;
         let jobName;
         if(profile.jobName) {
             jobName = profile.jobName;
