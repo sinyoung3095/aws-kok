@@ -2,6 +2,7 @@ package com.example.kok.service;
 
 import com.example.kok.dto.*;
 import com.example.kok.enumeration.RequestStatus;
+import com.example.kok.enumeration.Status;
 import com.example.kok.repository.*;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,6 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
     private final PaymentDAO paymentDAO;
     private final PaymentUserDAO paymentUserDAO;
     private final S3Service s3Service;
-    private final ConsoleAdNoticeDTO consoleAdDTO;
     private final ConsoleAdFileDAO consoleAdFileDAO;
     private final ConsolePaymentDAO consolePaymentDAO;
 
@@ -175,7 +175,13 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
 
     }
 
-//    광고 삭제
+//    광고 상태 변경
+    @Override
+    public void updateListStatus(Long noticeId, Status status) {
+        consoleAdDAO.updateNoticeStatus(noticeId, status);
+    }
+
+    //    광고 삭제
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteAdvertisement(Long advertisementId) {

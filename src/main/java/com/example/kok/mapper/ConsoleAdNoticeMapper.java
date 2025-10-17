@@ -3,6 +3,7 @@ package com.example.kok.mapper;
 import com.example.kok.domain.ConsoleAdNoticeVO;
 import com.example.kok.dto.ConsoleAdNoticeDTO;
 import com.example.kok.enumeration.RequestStatus;
+import com.example.kok.enumeration.Status;
 import com.example.kok.util.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -33,6 +34,10 @@ public interface ConsoleAdNoticeMapper {
 
 //    광고 수정
     public void updateNotice(ConsoleAdNoticeVO adNoticeVO);
+
+//    공고 상태 변경
+    public void updateNoticeStatus(@Param("noticeId") Long noticeId,
+                                   @Param("status") Status status);
 
 //    광고 삭제
     public void deleteById(@Param("id") Long id);

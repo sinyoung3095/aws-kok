@@ -42,14 +42,14 @@ if (internTable) {
             activeExp.classList.add("active");
             expStatus.classList.add("active");
 
-            if (expStatus.classList.contains("gray")) {
-                activeExp.classList.remove("gray");
-                expStatus.classList.remove("gray");
+            if (expStatus.classList.contains("inactive")) {
+                activeExp.classList.remove("inactive");
+                expStatus.classList.remove("inactive");
                 expStatus.innerText = "모집 중";
                 statusValue = "active";
             } else {
-                activeExp.classList.add("gray");
-                expStatus.classList.add("gray");
+                activeExp.classList.add("inactive");
+                expStatus.classList.add("inactive");
                 expStatus.innerText = "모집 완료";
                 statusValue = "inactive";
             }

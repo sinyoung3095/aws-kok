@@ -785,6 +785,7 @@ span.exp-status.gray{
     color: #171717;
 }
 
+/*토글*/
 div.appli-active{
     gap: 8px;
     align-items: center;
@@ -792,6 +793,7 @@ div.appli-active{
 }
 
 button.appli-active-btn{
+    cursor: pointer;
     background-color: #171717;
     outline-style: none;
     transition-property: all;
@@ -809,11 +811,11 @@ button.appli-active-btn{
     display: inline-flex;
 }
 
-button.appli-active-btn.gray{
+button.appli-active-btn.inactive{
     background-color: #e5e5e5;
 }
 
-button.appli-active-btn.gray>span.circle{
+button.appli-active-btn.inactive>span.circle{
     transform: translateX(calc(100% - 30px));
 }
 
