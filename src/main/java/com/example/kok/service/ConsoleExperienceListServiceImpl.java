@@ -52,6 +52,7 @@ public class ConsoleExperienceListServiceImpl implements ConsoleExperienceListSe
         return consoleExperienceNoticeCriteriaDTO;
     }
 
+//    공고 상태 변경
     @Override
     public void updateListStatus(Long noticeId, Status status) {
         consoleExperienceDAO.updateNoticeStatus(noticeId, status);

@@ -24,6 +24,29 @@ const adNoticeService = (() => {
         return data;
     }
 
+    const updateAdStatus = async (noticeId, statusValue) => {
+        const data = { id: noticeId, advertisementStatus: statusValue };
+
+        const response = await fetch(`/api/enterprise-console/ad/${noticeId}/status`, {
+            method:"PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        if(response.ok) {
+            console.log("상태변경 성공")
+        }else if(response.status === 404){
+            console.log("상태변경 실패")
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+
+        return data;
+    };
+
     const deleteAd = async (id) => {
         try {
             const response = await fetch(`/api/enterprise-console/ad/${id}`, {
@@ -42,5 +65,5 @@ const adNoticeService = (() => {
         }
     };
 
-    return {getList:getList, deleteAd:deleteAd}
+    return {getList:getList, updateAdStatus:updateAdStatus, deleteAd:deleteAd}
 })();
