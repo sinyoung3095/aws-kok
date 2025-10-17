@@ -17,5 +17,20 @@
                    now()
                )
     </insert>
+
+<!--    체험비 납부-->
+    <insert id="insertPaymentByMember" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_payment(payment_price, request_experience_id, user_id, payment_paid_datetime)
+        values (
+                #{paymentPrice}, #{requestExperienceId}, #{userId}, now()
+               )
+    </insert>
+
+<!--    체험 지원 취소 시 status update-->
+    <update id="updatePaymentByMember">
+        update tbl_payment
+        set payment_status='inactive'
+        where request_experience_id=#{id}
+    </update>
 </mapper>
 

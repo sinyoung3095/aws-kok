@@ -15,4 +15,8 @@ public class PaymentUserDAO {
     public void insertPaymentUser(PaymentUserDTO paymentUser) {
         paymentUserMapper.insertPaymentUser(paymentUser);
     }
+
+    public void payRequestUserExp(PaymentUserDTO paymentUser) {
+        paymentUserMapper.insertPaymentUserByMember(paymentUser);
+    }
 }

@@ -566,6 +566,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if(e.target.classList.contains("popup-trigger")){
             await quickApplyPopupFn();
             const trigger=e.target;
+            const requestToast = document.querySelector("#toast-white");
+            const textBox = requestToast.querySelector("p");
             const dropdowns = document.querySelectorAll(".option-menu");
 
             // console.log("간편지원하기 클릭됨");
@@ -573,6 +575,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const popup = document.querySelector(target);
             const applyBtn=e.target;
             const expId = Number(applyBtn.dataset.experienceid);
+
+            const isRequestedPre=await fetch(`/api/experiences/is-requested?experienceId=${expId}`);
+            const isRequested=isRequestedPre.json();
+            const isRequestedDetail=isRequested;
+
+            if(isRequestedDetail){
+                textBox.textContent="이미 지원한 공고입니다."
+                showingToast=true;
+                return;
+            }
 
             nowExperienceId=expId;
 
@@ -1232,13 +1244,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 requestExperienceDTO.requestExperienceMemberUrl = url.value;
             }
 
-            await fetch(`/api/experiences/request`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(requestExperienceDTO)
-            })
+            await experienceService.pay(1000, requestExperienceDTO);
+
             // const memberName=name.value;
             // const memberEmail=email.value;
             // const memberPhone=phone.value;

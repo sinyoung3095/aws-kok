@@ -28,6 +28,9 @@ public interface ExperienceNoticeService {
 //    공고 저장 여부 판별
     public boolean isSavedExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO);
 
+//    공고 지원 여부 판별
+    public boolean isRequested(RequestExperienceDTO requestExperienceDTO);
+
 //    기업별 체험 공고
     public CompanyExperienceNoticeCriteriaDTO getExperienceNoticesByCompanyId(int page, Long companyId, Search search);
 
