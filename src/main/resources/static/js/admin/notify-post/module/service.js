@@ -7,9 +7,9 @@ const service = (() => {
         }
 
         if(response.ok) {
-            console.log("신고 게시글 존재")
+            console.log("신고 게시글 존재");
         }else if(response.status === 404){
-            console.log("신고 게시글 없음")
+            console.log("신고 게시글 없음");
         }else {
             const error = await response.text()
             console.log(error);
@@ -26,9 +26,9 @@ const service = (() => {
         }
 
         if(response.ok) {
-            console.log("신고 상세 게시글 존재")
+            console.log("신고 상세 게시글 존재");
         }else if(response.status === 404){
-            console.log("신고 상세 게시글 없음")
+            console.log("신고 상세 게시글 없음");
         }else {
             const error = await response.text()
             console.log(error);

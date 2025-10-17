@@ -1,5 +1,7 @@
 package com.example.kok.controller;
 
+import com.example.kok.aop.aspect.annotation.LogReturnStatus;
+import com.example.kok.aop.aspect.annotation.LogStatus;
 import com.example.kok.dto.*;
 import com.example.kok.enumeration.Provider;
 import com.example.kok.repository.UserDAO;
@@ -48,17 +50,15 @@ public class AdminRestController implements AdminRestControllerDocs {
 //    공지 목록
     @GetMapping("support/{page}")
     public ResponseEntity<AdminNoticeCriteriaDTO> list(@PathVariable("page") int page){
-        log.info("page = {}", page);
         AdminNoticeCriteriaDTO adminNoticeCriteriaDTO = adminService.getList(page);
         return ResponseEntity.ok(adminNoticeCriteriaDTO);
     }
 
 //    체험 목록
     @GetMapping("experience/{page}")
+    @LogReturnStatus
     public ResponseEntity<AdminExperienceListDTO> getExperience(@PathVariable("page") int page,
                                                 @RequestParam(required = false) String keyword){
-        log.info("page = {}", page);
-        log.info("search = {}", keyword);
         AdminExperienceListDTO adminExperienceListDTO = adminService.getExperience(page, keyword);
         return ResponseEntity.ok(adminExperienceListDTO);
     }
@@ -66,8 +66,6 @@ public class AdminRestController implements AdminRestControllerDocs {
 //    체험 상세
     @GetMapping("experience/detail/{id}/{page}")
     public ResponseEntity<AdminExperienceDetailDTO> getExperienceDetail(@PathVariable("id")Long id, @PathVariable("page")int page){
-        log.info("page = {}", page);
-        log.info("id = {}", id);
         AdminExperienceDetailDTO adminExperienceDetailDTO = adminService.getExperienceDetail(page, id);
         return ResponseEntity.ok(adminExperienceDetailDTO);
     }
@@ -76,7 +74,6 @@ public class AdminRestController implements AdminRestControllerDocs {
     @GetMapping("employ/{page}")
     public ResponseEntity<AdminInternNoticeListCriteriaDTO> getInternNoticeList(@PathVariable("page") int page,
                                                                 @RequestParam(required = false) String keyword){
-        log.info("page = {}", page);
         AdminInternNoticeListCriteriaDTO adminInternNoticeListCriteriaDTO = adminEmployService.getList(page, keyword);
         return ResponseEntity.ok(adminInternNoticeListCriteriaDTO);
     }
@@ -85,8 +82,6 @@ public class AdminRestController implements AdminRestControllerDocs {
     @GetMapping("employ/detail/{id}/{page}")
     public ResponseEntity<AdminInternNoticeDetailCriteriaDTO> getInternNoticeDetail(@PathVariable("id")Long id,
                                                                     @PathVariable("page")int page){
-        log.info("page = {}", page);
-        log.info("id = {}", id);
         AdminInternNoticeDetailCriteriaDTO adminInternNoticeDetailCriteriaDTO = adminEmployService.getDetail(page, id);
         return ResponseEntity.ok(adminInternNoticeDetailCriteriaDTO);
     }
@@ -94,21 +89,21 @@ public class AdminRestController implements AdminRestControllerDocs {
 //    신고 게시글 목록
     @GetMapping("notify/post/{page}")
     public ResponseEntity<AdminReportCriteriaDTO> getNotifyList(@PathVariable("page") int page){
-        log.info("page = {}", page);
         AdminReportCriteriaDTO adminReportCriteriaDTO = adminReportService.getReportList(page);
         return ResponseEntity.ok(adminReportCriteriaDTO);
     }
 
 //    신고 게시글 상세
     @GetMapping("notify/post/detail/{id}")
+    @LogStatus
     public ResponseEntity<AdminReportDTO> getNotifyDetail(@PathVariable("id")Long id){
-        log.info("id = {}", id);
         AdminReportDTO adminReportDTO = adminReportService.getReportDetail(id);
         return ResponseEntity.ok(adminReportDTO);
     }
 
 //    배너 - 광고 목록
     @GetMapping("advertise/{page}")
+    @LogReturnStatus
     public ResponseEntity<AdminAdvertisementCriteriaDTO> getAdvertisementList(@PathVariable("page") int page,
                                                               @RequestParam(required = false) String keyword,
                                                               @RequestParam(required = false) String category){
@@ -119,7 +114,6 @@ public class AdminRestController implements AdminRestControllerDocs {
 //    배너 - 광고 상세
     @GetMapping("advertise/detail/{id}")
     public ResponseEntity<AdminAdvertisementDTO> getAdvertisementDetail(@PathVariable("id")Long id){
-        log.info("id = {}", id);
         AdminAdvertisementDTO adminAdvertisementDTO = adminAdvertisementService.advertisementDetail(id);
         return ResponseEntity.ok(adminAdvertisementDTO);
     }
@@ -127,7 +121,6 @@ public class AdminRestController implements AdminRestControllerDocs {
 //    배너 - 현수막
     @GetMapping("banner/{page}")
     public ResponseEntity<BannerFileCriteriaDTO> getBanner(@PathVariable("page") int page){
-        log.info("page = {}", page);
         BannerFileCriteriaDTO bannerFileCriteriaDTO = adminBannerService.bannerList(page);
         return ResponseEntity.ok(bannerFileCriteriaDTO);
     }
@@ -137,7 +130,6 @@ public class AdminRestController implements AdminRestControllerDocs {
     public ResponseEntity<AdminPaymentAdvertiseCriteriaDTO> getPaymentAdvertise(@PathVariable("page") int page,
                                                                 @RequestParam(required = false) String keyword,
                                                                 @RequestParam(required = false) String category){
-        log.info("page = {}", page);
         AdminPaymentAdvertiseCriteriaDTO adminPaymentAdvertiseCriteriaDTO = adminPaymentAdvertiseService.paymentAdvertiseList(page, keyword, category);
         return ResponseEntity.ok(adminPaymentAdvertiseCriteriaDTO);
     }
@@ -147,7 +139,6 @@ public class AdminRestController implements AdminRestControllerDocs {
     public ResponseEntity<AdminPaymentExperienceCriteriaDTO> getPaymentExperience(@PathVariable("page") int page,
                                                                   @RequestParam(required = false) String keyword,
                                                                   @RequestParam(required = false) String category){
-        log.info("page = {}", page);
         AdminPaymentExperienceCriteriaDTO adminPaymentExperienceCriteriaDTO = adminPaymentExperienceService.getPaymentExperienceList(page, keyword, category);
         return ResponseEntity.ok(adminPaymentExperienceCriteriaDTO);
     }

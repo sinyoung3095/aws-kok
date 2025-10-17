@@ -34,7 +34,6 @@ public class AdminBannerServiceImpl implements AdminBannerService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void save(List<MultipartFile> multipartFiles) {
-        log.info("save 메서드 실행됨");
 
         multipartFiles.forEach((multipartFile) -> {
             if(multipartFile.getOriginalFilename().equals("")){

@@ -12,8 +12,6 @@ public interface AdminBannerService {
 
 //    파일 목록 조회
     public BannerFileCriteriaDTO bannerList(int page);
-//    public BannerFileDTO selectAllFiles(Long id);
-//    public void setPreSignedUrl(BannerFileDTO bannerFileDTO);
 
 //    파일 삭제
     public void delete(Long id);
