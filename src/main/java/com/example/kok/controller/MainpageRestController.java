@@ -18,7 +18,7 @@ import java.util.Map;
 @RequestMapping("/api/main/**")
 @RequiredArgsConstructor
 @Slf4j
-public class MainpageRestController {
+public class MainpageRestController implements MainpageRestControllerDocs {
     private final RequestExperienceDAO requestExperienceDAO;
     private final RequestInternDAO requestInternDAO;
     private final ExperienceNoticeDAO experienceNoticeDAO;

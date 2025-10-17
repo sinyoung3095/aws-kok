@@ -153,25 +153,7 @@ public class AuthController {
 
         return tokenMap;
     }
-//
-//    @GetMapping("/info")
-//    public MemberDTO getMyInfo(HttpServletRequest request) {
-//        String token = jwtTokenProvider.parseTokenFromHeader(request);
-//        if (token == null) {
-//            throw new RuntimeException("토큰이 없습니다.");
-//        }
-//
-//        // 블랙리스트 체크 추가
-//        if (jwtTokenProvider.isTokenBlackList(token)) {
-//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "로그아웃된 토큰입니다.");
-//        }
-//
-//        String memberEmail = jwtTokenProvider.getUserName(token);
-//        String provider = (String) jwtTokenProvider.getClaims(token).get("provider");
-//        MemberDTO member = memberService.getMember(memberEmail, provider);
-//
-//        return member;
-//    }
+
 }
 
 
