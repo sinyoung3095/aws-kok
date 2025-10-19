@@ -1,7 +1,7 @@
 CREATE TABLE tbl_payment (
     id bigint generated always as identity primary key,
     payment_price bigint not null,
-    payment_status request_status not null default 'await',
+    payment_status status not null default 'active',
     payment_paid_datetime timestamp,
     advertisement_id bigint,
     request_experience_id bigint,

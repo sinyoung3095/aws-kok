@@ -120,9 +120,9 @@
                                             <div class="date-wrap">
                                                 <div class="date-main">
                                                     <div class="input-wrap create-input-wrap">
-                                                        <input th:value="${notice.advertiseStartDatetime}" type="text" id="start-date" class="date-input" placeholder="시작일" th:attr="readonly=${page} == 'create' ? true : false">
-                                                        <input th:value="${notice.advertiseEndDatetime}" type="text" id="end-date" class="date-input" placeholder="종료일">
-                                                        <button type="button" class="confirm-btn">✓</button>
+                                                        <input th:value="${notice.advertiseStartDatetime}" th:disabled="${page != 'create'}" type="text" id="start-date" class="date-input" placeholder="시작일" th:attr="readonly=${page} == 'create' ? true : false">
+                                                        <input th:value="${notice.advertiseEndDatetime}" th:disabled="${page != 'create'}" type="text" id="end-date" class="date-input" placeholder="종료일">
+                                                        <button type="button" class="confirm-btn" th:disabled="${page != 'create'}">✓</button>
                                                     </div>
                                                 </div>
                                                 <div class="date-sub">

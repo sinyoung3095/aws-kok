@@ -589,3 +589,12 @@ input:disabled {
     font-size: 13px;
     margin-top: 5px;
 }
+
+.date-input:disabled {
+    opacity: .5;
+}
+
+.confirm-btn button:disabled {
+    cursor: default;
+    opacity: .5;
+}

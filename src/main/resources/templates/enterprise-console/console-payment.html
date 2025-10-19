@@ -76,9 +76,8 @@
                                                         </td>
                                                         <!-- 상태 -->
                                                         <td class="body-td tac" th:switch="${payment.paymentStatus.name()}">
-                                                            <span th:case="'AWAIT'" class="exp-status status-await">대기</span>
-                                                            <span th:case="'ACCEPT'" class="exp-status status-accept">결제</span>
-                                                            <span th:case="'REJECT'" class="exp-status status-reject">취소</span>
+                                                            <span th:case="'ACTIVE'" class="exp-status status-accept">결제</span>
+                                                            <span th:case="'INACTIVE'" class="exp-status status-reject">취소</span>
                                                         </td>
                                                     </tr>
                                                     <!-- 결제내역이 없을 때 -->

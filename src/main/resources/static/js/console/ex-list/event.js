@@ -61,26 +61,25 @@ if (experienceTable) {
     experienceTable.addEventListener("click", async (e) => {
         const activeExp = e.target.closest("button.appli-active-btn");
         if (activeExp) {
-            const tr = activeExp.closest("tr.body-tr");
-            const expStatus = tr.querySelector("span.exp-status");
+            const btn = e.target.closest(".appli-active-btn");
+            const tr = btn.closest(".body-tr");
+            const span = tr.querySelector(".exp-status");
+            const isActive = btn.classList.contains("active");
 
-            tr.querySelectorAll(".appli-active-btn").forEach(btn => {
+            if (isActive) {
                 btn.classList.remove("active");
-            });
-            activeExp.classList.add("active");
-            expStatus.classList.add("active");
-
-            let statusValue;
-            if (expStatus.classList.contains("inactive")) {
-                activeExp.classList.remove("inactive");
-                expStatus.classList.remove("inactive");
-                expStatus.innerText = "모집 중";
-                statusValue = "active";
-            } else {
-                activeExp.classList.add("inactive");
-                expStatus.classList.add("inactive");
-                expStatus.innerText = "모집 완료";
+                btn.classList.add("inactive");
+                span.classList.remove("active");
+                span.classList.add("inactive");
+                span.innerText = "모집 완료";
                 statusValue = "inactive";
+            } else {
+                btn.classList.remove("inactive");
+                btn.classList.add("active");
+                span.classList.remove("inactive");
+                span.classList.add("active");
+                span.innerText = "모집중";
+                statusValue = "active";
             }
 
             const noticeId = tr.dataset.id;

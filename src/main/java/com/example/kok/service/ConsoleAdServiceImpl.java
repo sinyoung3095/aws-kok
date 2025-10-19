@@ -122,7 +122,7 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
         payment.setAdvertisementId(advertisementId);
         payment.setUserId(consoleAdDTO.getCompanyId());
         payment.setPaymentPrice(consoleAdDTO.getPaymentPrice());
-        payment.setPaymentStatus(RequestStatus.AWAIT);
+        payment.setPaymentStatus(Status.ACTIVE);
         paymentDAO.insertPayment(payment);
 
 //        결제사용자 등록
