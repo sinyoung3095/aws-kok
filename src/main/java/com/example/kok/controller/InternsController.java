@@ -125,6 +125,21 @@ public class InternsController {
         return ResponseEntity.notFound().build();
     }
 
+    //    지원 여부 판별
+    @GetMapping("is-requested")
+    public boolean isRequested(@RequestParam Long internId,
+            @AuthenticationPrincipal CustomUserDetails customUserDetails){
+        if(customUserDetails!=null){
+            RequestInternDTO intern=new RequestInternDTO();
+            intern.setMemberId(customUserDetails.getId());
+            intern.setInternNoticeId(internId);
+            boolean result=requestInternService.isRequested(intern);
+            System.out.println("컨트롤러: "+result);
+            return result;
+        }
+        return false;
+    }
+
 //    간편지원 완료
     @PostMapping("/request")
     public void requestIntern(@RequestBody RequestInternDTO requestInternDTO,

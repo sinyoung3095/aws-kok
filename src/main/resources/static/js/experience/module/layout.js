@@ -32,7 +32,7 @@ const experienceLayout = (() => {
                             </div>
                             <div class="list-item-meta-field">
                                 <p class="list-item-label">규모</p>
-                                <div class="list-item-value"><p>${exp.companyScaleName || ''}</p></div>
+                                <div class="list-item-value"><p>${exp.companyScaleName || '-'}</p></div>
                             </div>
                         </div>
                     </button>

@@ -15,4 +15,7 @@ public interface RequestExperienceMapper {
     public List<RequestExperienceDTO> selectRequestById(Long id);
 //    지원 내역 목록 조회
 public List<RequestExperienceDTO> selectRequestByUserId(@Param("id") Long id,@Param("experienceId") Long experienceId);
+
+// 멤버 id와 공고 id로 지원서 개수 가져오기
+    public int countRequest(RequestExperienceDTO requestExperienceDTO);
 }

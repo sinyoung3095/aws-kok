@@ -909,13 +909,25 @@ button.list-item-header .list-item-title {
   border-bottom: 1px solid rgba(24,37,61,0.0600);
 }
 
+/*.detail-meta-item-import.detail-meta-item {*/
+/*  width: 100%*/
+/*}*/
+/*.detail-meta-item-import.detail-meta {*/
+/*    grid-template-columns: repeat(1, 1fr);*/
+/*  width: 100%*/
+/*}*/
+
 .detail-meta-item .meta-label {
-    flex: 1;
+    flex: 0 0 120px;
     color: rgba(18,19,20,0.6000);
 }
 
 .detail-meta-item .meta-value {
     flex: 2;
+}
+
+.meta-item-full{
+    grid-column: 1/-1;
 }
 
 /* deadline-info */

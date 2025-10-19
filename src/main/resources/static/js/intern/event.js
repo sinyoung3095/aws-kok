@@ -514,6 +514,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if(e.target.classList.contains("popup-trigger")){
             await quickApplyPopupFn();
             const trigger=e.target;
+            const requestToast = document.querySelector("#toast-white");
+            const textBox = requestToast.querySelector("p");
             const dropdowns = document.querySelectorAll(".option-menu");
 
             // console.log("간편지원하기 클릭됨");
@@ -521,6 +523,24 @@ document.addEventListener("DOMContentLoaded", () => {
             const popup = document.querySelector(target);
             const applyBtn=e.target;
             const intId = Number(applyBtn.dataset.internid);
+
+            const isRequestedPre=await fetch(`/api/interns/is-requested?internId=${intId}`);
+            const isRequestedIntern=isRequestedPre.json();
+            const isRequestedDetail=isRequestedIntern;
+
+            console.log(isRequestedDetail);
+
+            if(isRequestedDetail){
+                textBox.textContent="이미 지원한 공고입니다."
+                requestToast.classList.add("show");
+                showingToast=true;
+                setTimeout(() => {
+                    requestToast.classList.remove("show");
+                    showingToast = false;
+                }, 2000);
+                // showingToast=true;
+                return;
+            }
 
             nowInternId=intId;
 

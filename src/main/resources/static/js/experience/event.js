@@ -326,8 +326,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const fileUrlPre = await fetch(`/api/experiences/profile?companyId=${companyId}`);
         const fileUrl = await fileUrlPre.text();
 
+        const startDate=new Date(detailData.notice.experienceStartDate);
         const endDate = new Date(detailData.notice.experienceEndDate);
-        const formatted = `${endDate.getFullYear()}년 ${endDate.getMonth() + 1}월 ${endDate.getDate()}일`;
+        const formattedStart = `${startDate.getFullYear()}년 ${startDate.getMonth() + 1}월 ${startDate.getDate()}일`;
+        const formattedEnd = `${endDate.getFullYear()}년 ${endDate.getMonth() + 1}월 ${endDate.getDate()}일`;
+
+        // const expNoticeStartDate=new Date(detailData.notice.experienceNoticeStartDate);
+        const expNoticeEndDate=new Date(detailData.notice.experienceNoticeEndDate);
+        // const expNoticeStartFormatted=`${expNoticeStartDate.getFullYear()}년 ${expNoticeStartDate.getMonth() + 1}월 ${expNoticeStartDate.getDate()}일`;
+        const expNoticeEndFormatted=`${expNoticeEndDate.getFullYear()}년 ${expNoticeEndDate.getMonth() + 1}월 ${expNoticeEndDate.getDate()}일`;
 
         const isSavedPre= await fetch(`/api/experiences/is-saved?experienceId=${experienceId}`);
         console.log(isSavedPre);
@@ -385,13 +392,17 @@ document.addEventListener("DOMContentLoaded", () => {
                                         </li>
                                         <li class="detail-meta-item">
                                             <p class="meta-label">회사 규모</p>
-                                            <p class="meta-value">${detailData.company.scaleName}</p>
+                                            <p class="meta-value">${detailData.company.scaleName||'-'}</p>
+                                        </li>
+                                        <li class="detail-meta-item detail-meta-item-import meta-item-full">
+                                            <p class="meta-label">체험일</p>
+                                            <p class="meta-value">${formattedStart}~${formattedEnd}</p>
                                         </li>
                                     </ul>
 
                                     <div class="deadline-info">
                                         <p class="deadline-remain">지원 마감까지 ${detailData.notice.remainingDays}일 남음</p>
-                                        <p class="deadline-description">${formatted}까지 지원할 수 있습니다.</p>
+                                        <p class="deadline-description">${expNoticeEndFormatted}까지 지원할 수 있습니다.</p>
                                     </div>
 
                                     <div class="detail-description">
@@ -566,6 +577,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if(e.target.classList.contains("popup-trigger")){
             await quickApplyPopupFn();
             const trigger=e.target;
+            const requestToast = document.querySelector("#toast-white");
+            const textBox = requestToast.querySelector("p");
             const dropdowns = document.querySelectorAll(".option-menu");
 
             // console.log("간편지원하기 클릭됨");
@@ -573,6 +586,22 @@ document.addEventListener("DOMContentLoaded", () => {
             const popup = document.querySelector(target);
             const applyBtn=e.target;
             const expId = Number(applyBtn.dataset.experienceid);
+
+            const isRequestedPre=await fetch(`/api/experiences/is-requested?experienceId=${expId}`);
+            const isRequested=isRequestedPre.json();
+            const isRequestedDetail=isRequested;
+
+            if(isRequestedDetail){
+                textBox.textContent="이미 지원한 공고입니다."
+                requestToast.classList.add("show");
+                showingToast=true;
+                setTimeout(() => {
+                    requestToast.classList.remove("show");
+                    showingToast = false;
+                }, 2000);
+                // showingToast=true;
+                return;
+            }
 
             nowExperienceId=expId;
 
@@ -1232,13 +1261,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 requestExperienceDTO.requestExperienceMemberUrl = url.value;
             }
 
-            await fetch(`/api/experiences/request`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(requestExperienceDTO)
-            })
+            await experienceService.pay(1000, requestExperienceDTO);
+
             // const memberName=name.value;
             // const memberEmail=email.value;
             // const memberPhone=phone.value;

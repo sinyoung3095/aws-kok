@@ -3,6 +3,7 @@ package com.example.kok.repository;
 import com.example.kok.domain.ConsoleAdNoticeVO;
 import com.example.kok.dto.ConsoleAdNoticeDTO;
 import com.example.kok.enumeration.RequestStatus;
+import com.example.kok.enumeration.Status;
 import com.example.kok.mapper.ConsoleAdNoticeMapper;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
@@ -25,9 +26,14 @@ public class ConsoleAdDAO {
         return consoleAdMapper.selectCountByCompany(companyId, status, keyword);
     }
 
-//    활성화 상태 광고
+//    광고 승인 상태
     public int findActiveCountByCompany(Long companyId, RequestStatus status, String keyword) {
         return consoleAdMapper.selectCountByCompany(companyId, status, keyword);
+    }
+
+//    공고 상태 변경
+    public void updateNoticeStatus(Long noticeId, Status status) {
+        consoleAdMapper.updateNoticeStatus(noticeId, status);
     }
 
 //    총 금액

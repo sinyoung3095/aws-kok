@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/report")
 @Slf4j
 @RequiredArgsConstructor
-public class CommunityReportController {
+public class CommunityReportController implements CommunityReportControllerDocs{
     private final CommunityReportService communityReportService;
 
     @PostMapping("/{postId}")
-    public ResponseEntity<?> reportPost(@PathVariable Long postId,
+    public ResponseEntity<String> reportPost(@PathVariable Long postId,
                                         @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
         if (customUserDetails == null || customUserDetails.getUserRole() == UserRole.COMPANY) {
-            return ResponseEntity.ok(false);
+            return ResponseEntity.status(403).body("일반 회원만 이용할 수 있습니다.");
         }
 
         Long memberId = customUserDetails.getId();

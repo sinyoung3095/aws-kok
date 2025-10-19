@@ -1,6 +1,7 @@
 package com.example.kok.dto;
 
 import com.example.kok.enumeration.RequestStatus;
+import com.example.kok.enumeration.Status;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ import java.util.List;
 public class PaymentDTO {
     private long id;
     private long paymentPrice;
-    private RequestStatus paymentStatus;
+    private Status paymentStatus;
     private String paymentPaidDatetime;
     private long advertisementId;
     private long requestExperienceId;

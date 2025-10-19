@@ -105,6 +105,14 @@
         where id = #{id}
     </update>
 
+    <!-- 광고 상태 업데이트 (활성/비활성 전환) -->
+    <update id="updateNoticeStatus">
+        update tbl_advertisement
+        set advertisement_status = #{status},
+            updated_datetime = now()
+        where id = #{noticeId}
+    </update>
+
     <select id="selectAdDetailById">
         select
             a.id,

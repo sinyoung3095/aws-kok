@@ -70,7 +70,7 @@ const internLayout = (() => {
                     </td>
                     <td class="body-td">
                         <div class="appli-active">
-                            <button class="appli-active-btn ${list.internNoticeStatus === "active" ? "active" : "gray"}"">
+                            <button class="appli-active-btn ${list.internNoticeStatus === "active" ? "active" : "inactive"}"">
                                 <span class="circle"></span>
                             </button>
                         </div>
