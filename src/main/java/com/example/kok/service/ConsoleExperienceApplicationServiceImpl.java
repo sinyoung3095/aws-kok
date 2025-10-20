@@ -3,6 +3,7 @@ package com.example.kok.service;
 import com.example.kok.dto.ConsoleExperienceApplicantDTO;
 import com.example.kok.dto.FileDTO;
 import com.example.kok.dto.RequestExperienceDTO;
+import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.repository.ConsoleExperienceApplicationDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -69,7 +70,9 @@ public class ConsoleExperienceApplicationServiceImpl implements ConsoleExperienc
     public boolean isEvalOk(Long experienceNoticeId, Long memberId) {
         RequestExperienceDTO exp=consoleExperienceApplicationDAO.findEvalOk(experienceNoticeId, memberId);
         LocalDate now = LocalDate.now();
-        if(exp.getRequestExperienceStatus().equals("accept")&&exp.getExperienceEndDate().isBefore(now)){
+        System.out.println("accept: "+exp.getRequestExperienceStatus());
+        System.out.println("time: "+ exp.getExperienceEndDate().isBefore(now));
+        if(exp.getRequestExperienceStatus().equals(RequestStatus.ACCEPT)&&exp.getExperienceEndDate().isBefore(now)){
             return true;
         } else{
             return false;
