@@ -1,8 +1,8 @@
 package com.example.kok.service;
 
-import com.example.kok.dto.ConsoleExperienceListCriteriaDTO;
-import com.example.kok.dto.ConsoleExperienceListDTO;
-import com.example.kok.dto.ConsoleExperienceListRequestDTO;
+import com.example.kok.dto.ConsoleExperienceNoticeCriteriaDTO;
+import com.example.kok.dto.ConsoleExperienceNoticeDTO;
+import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
 import com.example.kok.enumeration.Status;
 import com.example.kok.mapper.MemberAlarmSettingMapper;
 import com.example.kok.repository.ConsoleExperienceNoticeDAO;
@@ -23,8 +23,8 @@ public class ConsoleExperienceNoticeServiceImpl implements ConsoleExperienceNoti
     private final MailService mailService;
 
     @Override
-    public ConsoleExperienceListCriteriaDTO getList(Long companyId, int page, Status status, String keyword) {
-        ConsoleExperienceListCriteriaDTO consoleExperienceNoticeCriteriaDTO = new ConsoleExperienceListCriteriaDTO();
+    public ConsoleExperienceNoticeCriteriaDTO getList(Long companyId, int page, Status status, String keyword) {
+        ConsoleExperienceNoticeCriteriaDTO consoleExperienceNoticeCriteriaDTO = new ConsoleExperienceNoticeCriteriaDTO();
 
         int totalCount = consoleExperienceDAO.findCountByCompany(companyId, status, keyword);
         int activeCount = consoleExperienceDAO.findActiveCountByCompany(companyId, Status.ACTIVE, keyword);
@@ -33,7 +33,7 @@ public class ConsoleExperienceNoticeServiceImpl implements ConsoleExperienceNoti
 
         Criteria criteria = new Criteria(page, totalCount);
 
-        List<ConsoleExperienceListDTO> notices = consoleExperienceDAO.findAllByCompany(companyId, criteria, status, keyword);
+        List<ConsoleExperienceNoticeDTO> notices = consoleExperienceDAO.findAllByCompany(companyId, criteria, status, keyword);
 
         criteria.setHasMore(notices.size() > criteria.getRowCount());
         if(criteria.isHasMore()){
@@ -58,13 +58,13 @@ public class ConsoleExperienceNoticeServiceImpl implements ConsoleExperienceNoti
 
 //    공고 상세
     @Override
-    public ConsoleExperienceListRequestDTO getExperienceDetail(Long id) {
+    public ConsoleExperienceNoticeRequestDTO getExperienceDetail(Long id) {
         return consoleExperienceDAO.findDetailById(id);
     }
 
     @Override
     @Transactional
-    public void registerNotice(ConsoleExperienceListRequestDTO noticeRequestDTO) {
+    public void registerNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
 //        공고 등록
         consoleExperienceDAO.createNotice(noticeRequestDTO);
 
@@ -74,7 +74,7 @@ public class ConsoleExperienceNoticeServiceImpl implements ConsoleExperienceNoti
 
     @Override
     @Transactional
-    public void modifyNotice(ConsoleExperienceListRequestDTO noticeRequestDTO) {
+    public void modifyNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
 //        공고 수정
         consoleExperienceDAO.editNotice(noticeRequestDTO);
 
@@ -84,7 +84,7 @@ public class ConsoleExperienceNoticeServiceImpl implements ConsoleExperienceNoti
 
 //    공고 수정 상세
     @Override
-    public ConsoleExperienceListRequestDTO getNotice(Long id) {
+    public ConsoleExperienceNoticeRequestDTO getNotice(Long id) {
         return consoleExperienceDAO.findById(id);
     }
 

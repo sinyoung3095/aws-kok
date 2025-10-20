@@ -30,31 +30,27 @@ if (internTable) {
     internTable.addEventListener("click", async (e) => {
         const activeExp = e.target.closest("button.appli-active-btn");
         if (activeExp) {
-            const tr = activeExp.closest("tr.body-tr");
-            const activeCircle = activeExp.querySelector(".circle");
-            const expStatus = tr.querySelector("span.exp-status");
+            const btn = e.target.closest(".appli-active-btn");
+            const tr = btn.closest(".body-tr");
+            const span = tr.querySelector(".exp-status");
+            const isActive = btn.classList.contains("active");
 
-            if (!activeCircle || !expStatus) return;
-
-            tr.querySelectorAll(".appli-active-btn").forEach(btn => {
+            if (isActive) {
                 btn.classList.remove("active");
-            });
-            activeExp.classList.add("active");
-            expStatus.classList.add("active");
-
-            if (expStatus.classList.contains("inactive")) {
-                activeExp.classList.remove("inactive");
-                expStatus.classList.remove("inactive");
-                expStatus.innerText = "모집 중";
-                statusValue = "active";
-            } else {
-                activeExp.classList.add("inactive");
-                expStatus.classList.add("inactive");
-                expStatus.innerText = "모집 완료";
+                btn.classList.add("inactive");
+                span.classList.remove("active");
+                span.classList.add("inactive");
+                span.innerText = "모집 완료";
                 statusValue = "inactive";
+            } else {
+                btn.classList.remove("inactive");
+                btn.classList.add("active");
+                span.classList.remove("inactive");
+                span.classList.add("active");
+                span.innerText = "모집중";
+                statusValue = "active";
             }
 
-            // 상태 버튼 클릭시 확인
             const noticeId = tr.dataset.id;
             try {
                 const data = await internNoticeService.updateInternStatus(noticeId, statusValue);
