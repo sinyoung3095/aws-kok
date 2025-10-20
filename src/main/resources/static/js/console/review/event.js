@@ -1,23 +1,24 @@
 const submitBtn=document.querySelector(".submit-btn");
+const radioBtns = document.querySelectorAll(".radio-label");
 
 submitBtn.addEventListener("click", async () => {
-    const radioBtns = document.querySelectorAll(".radio-label");
-    let checked = 0;
-    let score = 0;
-    radioBtns.forEach((btn) => {
-        if (btn.checked) {
-            checked++;
-            score += btn.value;
-        }
-    });
-    if (checked < 16) {
+    const checkedCount = document.querySelectorAll('input[type="radio"]:checked');
+    if (checkedCount.length < 16) {
         alert("모든 항목을 선택해주세요.")
     } else {
-        const text = document.querySelector(".text-area");
+        const text = document.getElementById("text-review");
+        let sum = 0;
+        console.log(text.textContent.length);
+        console.log(text.textContent);
+        console.log(text.valueOf());
+        console.log(text.valueOf().length);
+        checkedCount.forEach(radio => {
+          sum += Number(radio.value);
+        });
+        const avg = sum / 16;
         if (text.textContent.length < 1) {
             alert("총평을 반드시 입력해주세요.")
         } else {
-            const avg=score/16;
             const evaluation = {
                 requestExperienceId: 12,
                 memberId: memberId,
