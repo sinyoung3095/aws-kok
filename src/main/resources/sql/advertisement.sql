@@ -14,7 +14,7 @@ CREATE TABLE tbl_advertisement (
 );
 
 update tbl_advertisement
-set advertisement_status = 'active'
+set advertisement_status='active'
 where id > 0;
 
 select * from tbl_advertisement;

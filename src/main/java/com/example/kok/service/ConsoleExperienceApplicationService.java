@@ -13,4 +13,7 @@ public interface ConsoleExperienceApplicationService {
 
 //    여러 명의 지원자 상세 조회
     List<ConsoleExperienceApplicantDTO> getApplicantsDetailsByMemberIds(Long experienceNoticeId, List<Long> memberIdList);
+
+//    평가하기 가능 여부 조회
+    public boolean isEvalOk(Long experienceNoticeId, Long memberId);
 }
