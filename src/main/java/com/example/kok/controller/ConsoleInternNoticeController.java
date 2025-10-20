@@ -40,7 +40,7 @@ public class ConsoleInternNoticeController {
         model.addAttribute("companyName", companyName);
         model.addAttribute("memberName", memberName);
 
-        return "enterprise-console/console-intern-list";
+        return "enterprise-console/intern/console-intern-list";
     }
 
     //    기업 콘솔 인턴 공고 등록, 수정
@@ -50,7 +50,7 @@ public class ConsoleInternNoticeController {
                             HttpServletRequest request,
                             Model model) {
 
-        ConsoleInternListRequestDTO notice = consoleInternNoticeService.getNotice(id);
+        ConsoleInternNoticeRequestDTO notice = consoleInternNoticeService.getNotice(id);
 
         Long companyId = customUserDetails.getId();
         String companyName = customUserDetails.getCompanyName();
@@ -58,12 +58,12 @@ public class ConsoleInternNoticeController {
 
         if(request.getRequestURI().contains("create")){
             model.addAttribute("page","create");
-            model.addAttribute("notice", new ConsoleInternListRequestDTO());
+            model.addAttribute("notice", new ConsoleInternNoticeRequestDTO());
             model.addAttribute("companyId", companyId);
             model.addAttribute("companyName", companyName);
             model.addAttribute("memberName", memberName);
 
-            return "enterprise-console/console-intern-update";
+            return "enterprise-console/intern/console-intern-update";
         }
 
         model.addAttribute("page","edit");
@@ -83,7 +83,7 @@ public class ConsoleInternNoticeController {
                                     @PathVariable("internNoticeId") Long internNoticeId,
                                     Model model) {
 
-        ConsoleInternListDTO internDetail = consoleInternDetailService.getDetail(internNoticeId);
+        ConsoleInternNoticeDTO internDetail = consoleInternDetailService.getDetail(internNoticeId);
 
         List<ConsoleInternApplicantDTO> applicants  =
                 consoleInternApplicationService.getApplicantsByNoticeId(internNoticeId);
@@ -101,7 +101,7 @@ public class ConsoleInternNoticeController {
             model.addAttribute("memberId", firstApplicant.getUserId());
         }
 
-        return "enterprise-console/console-intern-applicate-list";
+        return "enterprise-console/intern/console-intern-applicate-list";
     }
 
 //    기업 콘솔 인턴 지원서
@@ -122,7 +122,7 @@ public class ConsoleInternNoticeController {
         model.addAttribute("companyName", companyName);
         model.addAttribute("memberName", memberName);
 
-        return "enterprise-console/console-intern-application";
+        return "enterprise-console/intern/console-intern-application";
     }
 
 }

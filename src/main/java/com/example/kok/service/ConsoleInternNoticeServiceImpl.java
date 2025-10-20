@@ -1,8 +1,8 @@
 package com.example.kok.service;
 
-import com.example.kok.dto.ConsoleInternListCriteriaDTO;
-import com.example.kok.dto.ConsoleInternListDTO;
-import com.example.kok.dto.ConsoleInternListRequestDTO;
+import com.example.kok.dto.ConsoleInternNoticeCriteriaDTO;
+import com.example.kok.dto.ConsoleInternNoticeDTO;
+import com.example.kok.dto.ConsoleInternNoticeRequestDTO;
 import com.example.kok.enumeration.Status;
 import com.example.kok.repository.ConsoleInternNoticeDAO;
 import com.example.kok.util.Criteria;
@@ -18,8 +18,8 @@ public class ConsoleInternNoticeServiceImpl implements ConsoleInternNoticeServic
     private final ConsoleInternNoticeDAO consoleInternDAO;
 
     @Override
-    public ConsoleInternListCriteriaDTO getList(Long companyId, int page, Status status, String keyword) {
-        ConsoleInternListCriteriaDTO consoleInternListCriteriaDTO = new ConsoleInternListCriteriaDTO();
+    public ConsoleInternNoticeCriteriaDTO getList(Long companyId, int page, Status status, String keyword) {
+        ConsoleInternNoticeCriteriaDTO consoleInternNoticeCriteriaDTO = new ConsoleInternNoticeCriteriaDTO();
 
         int totalCount = consoleInternDAO.findCountByCompany(companyId, status, keyword);
         int activeCount = consoleInternDAO.findActiveCountByCompany(companyId, Status.ACTIVE, keyword);
@@ -28,21 +28,21 @@ public class ConsoleInternNoticeServiceImpl implements ConsoleInternNoticeServic
 
         Criteria criteria = new Criteria(page, totalCount);
 
-        List<ConsoleInternListDTO> notices = consoleInternDAO.findAllByCompany(companyId, criteria, status, keyword);
+        List<ConsoleInternNoticeDTO> notices = consoleInternDAO.findAllByCompany(companyId, criteria, status, keyword);
 
         criteria.setHasMore(notices.size() > criteria.getRowCount());
         if(criteria.isHasMore()){
             notices.remove(notices.size() - 1);
         }
 
-        consoleInternListCriteriaDTO.setInternLists(notices);
-        consoleInternListCriteriaDTO.setCriteria(criteria);
-        consoleInternListCriteriaDTO.setTotalCount(totalCount);
-        consoleInternListCriteriaDTO.setActiveTotalCount(activeCount);
-        consoleInternListCriteriaDTO.setTotalRequestCount(requestCount);
-        consoleInternListCriteriaDTO.setActiveRequestCount(activeRequestCount);
+        consoleInternNoticeCriteriaDTO.setInternLists(notices);
+        consoleInternNoticeCriteriaDTO.setCriteria(criteria);
+        consoleInternNoticeCriteriaDTO.setTotalCount(totalCount);
+        consoleInternNoticeCriteriaDTO.setActiveTotalCount(activeCount);
+        consoleInternNoticeCriteriaDTO.setTotalRequestCount(requestCount);
+        consoleInternNoticeCriteriaDTO.setActiveRequestCount(activeRequestCount);
 
-        return consoleInternListCriteriaDTO;
+        return consoleInternNoticeCriteriaDTO;
     }
 
     @Override
@@ -52,13 +52,13 @@ public class ConsoleInternNoticeServiceImpl implements ConsoleInternNoticeServic
 
 //    공고 상세
     @Override
-    public ConsoleInternListRequestDTO getDetail(Long id) {
+    public ConsoleInternNoticeRequestDTO getDetail(Long id) {
         return consoleInternDAO.findDetailById(id);
     }
 
     @Override
     @Transactional
-    public void registerNotice(ConsoleInternListRequestDTO noticeRequestDTO) {
+    public void registerNotice(ConsoleInternNoticeRequestDTO noticeRequestDTO) {
 //        공고 등록
         consoleInternDAO.createNotice(noticeRequestDTO);
 
@@ -68,7 +68,7 @@ public class ConsoleInternNoticeServiceImpl implements ConsoleInternNoticeServic
 
     @Override
     @Transactional
-    public void modifyNotice(ConsoleInternListRequestDTO noticeRequestDTO) {
+    public void modifyNotice(ConsoleInternNoticeRequestDTO noticeRequestDTO) {
 //        공고 수정
         consoleInternDAO.editNotice(noticeRequestDTO);
 
@@ -78,7 +78,7 @@ public class ConsoleInternNoticeServiceImpl implements ConsoleInternNoticeServic
 
 //    공고 수정 상세
     @Override
-    public ConsoleInternListRequestDTO getNotice(Long id) {
+    public ConsoleInternNoticeRequestDTO getNotice(Long id) {
         return consoleInternDAO.findById(id);
     }
 

@@ -1,7 +1,7 @@
 package com.example.kok.repository;
 
-import com.example.kok.dto.ConsoleExperienceListDTO;
-import com.example.kok.dto.ConsoleExperienceListRequestDTO;
+import com.example.kok.dto.ConsoleExperienceNoticeDTO;
+import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
 import com.example.kok.enumeration.Status;
 import com.example.kok.mapper.ConsoleExperienceNoticeMapper;
 import com.example.kok.util.Criteria;
@@ -16,7 +16,7 @@ public class ConsoleExperienceNoticeDAO {
     private final ConsoleExperienceNoticeMapper consoleExperienceMapper;
 
 //    공고 목록
-    public List<ConsoleExperienceListDTO> findAllByCompany(Long companyId, Criteria criteria, Status status, String keyword) {
+    public List<ConsoleExperienceNoticeDTO> findAllByCompany(Long companyId, Criteria criteria, Status status, String keyword) {
         return consoleExperienceMapper.selectExperienceByCompany(companyId, criteria, status, keyword);
     }
 
@@ -46,32 +46,32 @@ public class ConsoleExperienceNoticeDAO {
     }
 
 //    공고 등록
-    public void createNotice(ConsoleExperienceListRequestDTO noticeRequestDTO) {
+    public void createNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
         consoleExperienceMapper.insertNotice(noticeRequestDTO);
     }
 
 //    직군 등록
-    public void createNoticeJobCategory(ConsoleExperienceListRequestDTO noticeRequestDTO) {
+    public void createNoticeJobCategory(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
         consoleExperienceMapper.insertNoticeJobCategory(noticeRequestDTO);
     }
 
 //    공고 상세
-    public ConsoleExperienceListRequestDTO findDetailById(Long id) {
+    public ConsoleExperienceNoticeRequestDTO findDetailById(Long id) {
         return consoleExperienceMapper.selectExperienceDetailById(id);
     }
 
 //    공고 수정 등록
-    public void editNotice(ConsoleExperienceListRequestDTO noticeRequestDTO) {
+    public void editNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
         consoleExperienceMapper.updateNotice(noticeRequestDTO);
     }
 
 //    직군 수정
-    public void editNoticeJobCategory(ConsoleExperienceListRequestDTO noticeRequestDTO) {
+    public void editNoticeJobCategory(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
         consoleExperienceMapper.updateNoticeJobCategory(noticeRequestDTO);
     }
 
 //    공고 수정 상세
-    public ConsoleExperienceListRequestDTO findById(Long id) {
+    public ConsoleExperienceNoticeRequestDTO findById(Long id) {
         return consoleExperienceMapper.selectById(id);
     }
 

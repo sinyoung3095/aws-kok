@@ -17,6 +17,7 @@ const experienceLayout = (() => {
                                 <th class="list-head-sub">마감일</th>
                                 <th class="list-head-sub">상태</th>
                                 <th class="list-head-sub">모집 중</th>
+                                <th class="list-head-sub"></th>
                             </tr>
                         </thead>
                         <tbody class="list-list-tbody">
@@ -40,9 +41,9 @@ const experienceLayout = (() => {
         const tbody = document.querySelector("#experience-list-table .list-list-tbody");
         if (!tbody) return;
 
-        tbody.innerHTML = "";
+        let text = "";
         if (!lists || lists.length === 0) {
-            tbody.innerHTML = `
+            text = `
                 <tr class="body-tr no-data">
                     <td class="body-td" colspan="9">
                         <div class="text">조건에 맞는 공고가 없습니다.</div>
@@ -52,7 +53,7 @@ const experienceLayout = (() => {
         }
 
         lists.forEach(list => {
-            tbody.innerHTML += `
+            text += `
                 <tr class="body-tr" data-id="${list.id}">
                     <td class="body-td">
                         <div>
@@ -64,16 +65,25 @@ const experienceLayout = (() => {
                     <td class="body-td"><span class="span-number">${list.applicantCount}</span> 명</td>
                     <td class="body-td"><span class="span-number">${list.saveCount}</span> 명</td>
                     <td class="body-td">${list.experienceStartDate}</td>
-                    <td class="body-td">${list.experienceEndDate}</td>
+                    <td class="body-td end-date">${list.experienceEndDate}</td>
                     <td class="body-td">
                         <span class="exp-status ${list.experienceNoticeStatus === "active" ? "active" : "inactive"}"">${list.experienceNoticeStatus == "active" ? "모집중" : "모집 완료"}</span>
                     </td>
                     <td class="body-td">
+                `;
+            const endDate = new Date(list.experienceEndDate);
+            endDate.setHours(23, 59, 59, 999);
+
+            if(endDate.getTime() >= new Date().getTime()) {
+                text += `
                         <div class="appli-active">
                             <button class="appli-active-btn ${list.experienceNoticeStatus === "active" ? "active" : "inactive"}"">
                                 <span class="circle"></span>
                             </button>
                         </div>
+                    `;
+            }
+                text += `
                     </td>
                     <td class="body-td">
                         <button class="hambuger">
@@ -101,6 +111,7 @@ const experienceLayout = (() => {
                 </tr>
             `;
         });
+        tbody.innerHTML += text;
     }
 
     // 페이지네이션 - layout

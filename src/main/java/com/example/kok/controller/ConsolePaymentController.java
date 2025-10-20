@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -43,7 +42,7 @@ public class ConsolePaymentController {
         model.addAttribute("companyName", companyName);
         model.addAttribute("memberName", memberName);
 
-        return "enterprise-console/console-payment";
+        return "enterprise-console/payment/console-payment";
     }
 
 }

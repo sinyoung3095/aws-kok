@@ -1,7 +1,7 @@
 package com.example.kok.mapper;
 
 import com.example.kok.dto.ConsoleExperienceApplicantDTO;
-import com.example.kok.dto.ConsoleExperienceListDTO;
+import com.example.kok.dto.ConsoleExperienceNoticeDTO;
 import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.util.Criteria;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,7 +13,7 @@ import java.util.List;
 public interface ConsoleExperienceDetailMapper {
 
 //    공고 상세 내용
-    ConsoleExperienceListDTO selectExperienceDatailByCompany(@Param("experienceNoticeId") Long experienceNoticeId);
+    ConsoleExperienceNoticeDTO selectExperienceDatailByCompany(@Param("experienceNoticeId") Long experienceNoticeId);
 
 //    지원 목록
     public List<ConsoleExperienceApplicantDTO> selectExperienceApplicantByCompany(@Param("experienceNoticeId") Long experienceNoticeId,

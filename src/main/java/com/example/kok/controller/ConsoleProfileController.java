@@ -37,7 +37,7 @@ public class ConsoleProfileController {
         model.addAttribute("companyName", companyName);
         model.addAttribute("memberName", memberName);
 
-        return "enterprise-console/console-profile";
+        return "enterprise-console/profile/console-profile";
     }
 
 //    기업 프로필 수정 처리

@@ -2,7 +2,7 @@ package com.example.kok.service;
 
 import com.example.kok.dto.ConsoleInternApplicantCriteriaDTO;
 import com.example.kok.dto.ConsoleInternApplicantDTO;
-import com.example.kok.dto.ConsoleInternListDTO;
+import com.example.kok.dto.ConsoleInternNoticeDTO;
 import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.repository.ConsoleInternDetailDAO;
 import com.example.kok.util.Criteria;
@@ -17,7 +17,7 @@ public class ConsoleInternDetailServiceImpl implements ConsoleInternDetailServic
     private final ConsoleInternDetailDAO consoleInternDAO;
 
     @Override
-    public ConsoleInternListDTO getDetail(Long internNoticeId) {
+    public ConsoleInternNoticeDTO getDetail(Long internNoticeId) {
         return consoleInternDAO.findInternDetailByCompany(internNoticeId);
     }
 
