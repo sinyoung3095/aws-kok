@@ -66,7 +66,7 @@ const experienceLayout = (() => {
                     <td class="body-td">${list.experienceStartDate}</td>
                     <td class="body-td">${list.experienceEndDate}</td>
                     <td class="body-td">
-                        <span class="exp-status ${list.experienceNoticeStatus === "active" ? "active" : "gray"}"">${list.experienceNoticeStatus == "inactive" ? "모집 완료" : "모집 중"}</span>
+                        <span class="exp-status ${list.experienceNoticeStatus === "active" ? "active" : "inactive"}"">${list.experienceNoticeStatus == "active" ? "모집중" : "모집 완료"}</span>
                     </td>
                     <td class="body-td">
                         <div class="appli-active">
