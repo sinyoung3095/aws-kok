@@ -1,7 +1,7 @@
 package com.example.kok.repository;
 
 import com.example.kok.dto.ConsoleExperienceApplicantDTO;
-import com.example.kok.dto.ConsoleExperienceListDTO;
+import com.example.kok.dto.ConsoleExperienceNoticeDTO;
 import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.mapper.ConsoleExperienceDetailMapper;
 import com.example.kok.util.Criteria;
@@ -16,7 +16,7 @@ public class ConsoleExperienceDetailDAO {
     private final ConsoleExperienceDetailMapper consoleExperienceMapper;
 
 //    공고 상세 내용
-    public ConsoleExperienceListDTO findExperienceDetailByCompany(Long experienceNoticeId) {
+    public ConsoleExperienceNoticeDTO findExperienceDetailByCompany(Long experienceNoticeId) {
         return consoleExperienceMapper.selectExperienceDatailByCompany(experienceNoticeId);
     }
 

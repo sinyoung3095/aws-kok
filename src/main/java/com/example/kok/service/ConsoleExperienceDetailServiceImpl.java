@@ -2,12 +2,10 @@ package com.example.kok.service;
 
 import com.example.kok.dto.*;
 import com.example.kok.enumeration.RequestStatus;
-import com.example.kok.enumeration.Status;
 import com.example.kok.repository.ConsoleExperienceDetailDAO;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,7 +15,7 @@ public class ConsoleExperienceDetailServiceImpl implements ConsoleExperienceDeta
     private final ConsoleExperienceDetailDAO consoleExperienceDAO;
 
     @Override
-    public ConsoleExperienceListDTO getDetail(Long experienceNoticeId) {
+    public ConsoleExperienceNoticeDTO getDetail(Long experienceNoticeId) {
         return consoleExperienceDAO.findExperienceDetailByCompany(experienceNoticeId);
     }
 

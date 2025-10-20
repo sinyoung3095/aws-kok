@@ -39,7 +39,7 @@ public class ConsoleExperienceNoticeController {
         model.addAttribute("companyName", companyName);
         model.addAttribute("memberName", memberName);
 
-        return "enterprise-console/console-experience-list";
+        return "enterprise-console/experience/console-experience-list";
     }
 
 //    기업 콘솔 체험 공고 등록, 수정
@@ -49,7 +49,7 @@ public class ConsoleExperienceNoticeController {
                             HttpServletRequest request,
                             Model model) {
 
-        ConsoleExperienceListRequestDTO notice = consoleExperienceNoticeService.getNotice(id);
+        ConsoleExperienceNoticeRequestDTO notice = consoleExperienceNoticeService.getNotice(id);
 
         Long companyId = customUserDetails.getId();
         String companyName = customUserDetails.getCompanyName();
@@ -57,12 +57,12 @@ public class ConsoleExperienceNoticeController {
 
         if(request.getRequestURI().contains("create")){
             model.addAttribute("page","create");
-            model.addAttribute("notice", new ConsoleExperienceListRequestDTO());
+            model.addAttribute("notice", new ConsoleExperienceNoticeRequestDTO());
             model.addAttribute("companyId", companyId);
             model.addAttribute("companyName", companyName);
             model.addAttribute("memberName", memberName);
 
-            return "enterprise-console/console-experience-update";
+            return "enterprise-console/experience/console-experience-update";
         }
 
         model.addAttribute("page","edit");
@@ -81,7 +81,7 @@ public class ConsoleExperienceNoticeController {
                                     @PathVariable("experienceNoticeId") Long experienceNoticeId,
                                     Model model) {
 
-        ConsoleExperienceListDTO experienceDetail = consoleExperienceDetailService.getDetail(experienceNoticeId);
+        ConsoleExperienceNoticeDTO experienceDetail = consoleExperienceDetailService.getDetail(experienceNoticeId);
 
         List<ConsoleExperienceApplicantDTO> applicants  =
                 consoleExperienceApplicationService.getApplicantsByNoticeId(experienceNoticeId);
@@ -99,7 +99,7 @@ public class ConsoleExperienceNoticeController {
             model.addAttribute("memberId", firstApplicant.getUserId());
         }
 
-        return "enterprise-console/console-experience-applicate-list";
+        return "enterprise-console/experience/console-experience-applicate-list";
     }
 
 //    기업 콘솔 체험 지원서
@@ -121,7 +121,7 @@ public class ConsoleExperienceNoticeController {
         model.addAttribute("memberName", memberName);
 
 
-        return "enterprise-console/console-experience-application";
+        return "enterprise-console/experience/console-experience-application";
     }
 
 //    기업 콘솔 평가서
@@ -141,7 +141,8 @@ public class ConsoleExperienceNoticeController {
         model.addAttribute("exp", exp);
         Long companyId=customUserDetails.getId();
         model.addAttribute("companyId", companyId);
-        return "enterprise-console/console-review";
+
+        return "enterprise-console/experience/console-review";
     }
 
 //    평가할 수 있는지 여부
