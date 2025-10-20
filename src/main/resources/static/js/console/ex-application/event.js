@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const popupTitle = popup.querySelector(".pop-title");
     const btnNo = popup.querySelector(".btn-no");
     const btnYes = popup.querySelector(".btn-yes");
+    const evalBtn=document.querySelector(".new-exp");
     let selectedStatus = "";
     let confirmedStatus = "";
 
@@ -61,6 +62,24 @@ document.addEventListener("DOMContentLoaded", () => {
             dropdown.classList.remove("active");
         }
     });
+
+//     평가하기 버튼
+    evalBtn.addEventListener("click", async () => {
+        const evalPre = await fetch(`/enterprise-console/experience/isEvalOk?experienceNoticeId=${experienceNoticeId}&memberId=${memberId}`);
+        const evalOk=await evalPre.json();
+        const eval=evalOk;
+
+        console.log(eval);
+
+        if(eval){
+            const goToReview=await fetch(`/enterprise-console/experience/review?memberId=${memberId}&experienceNoticeId=${experienceNoticeId}`);
+            await goToReview;
+        }
+        else{
+            alert("평가가 불가능합니다. 합격 여부, 체험 종료일을 확인해 주세요.")
+        }
+
+    })
 
 });
 

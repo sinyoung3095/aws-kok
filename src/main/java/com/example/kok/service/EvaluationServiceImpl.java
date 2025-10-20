@@ -1,0 +1,16 @@
+package com.example.kok.service;
+
+import com.example.kok.dto.EvaluationDTO;
+import com.example.kok.repository.EvaluationDAO;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class EvaluationServiceImpl implements EvaluationService {
+    private final EvaluationDAO evaluationDAO;
+    @Override
+    public void review(EvaluationDTO evaluation) {
+        evaluationDAO.insertEvaluation(evaluation);
+    }
+}
