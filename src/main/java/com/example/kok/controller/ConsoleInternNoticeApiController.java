@@ -1,11 +1,9 @@
 package com.example.kok.controller;
 
-import com.example.kok.dto.ConsoleInternApplicantCriteriaDTO;
-import com.example.kok.dto.ConsoleInternNoticeCriteriaDTO;
-import com.example.kok.dto.ConsoleInternNoticeDTO;
-import com.example.kok.dto.ConsoleInternNoticeRequestDTO;
+import com.example.kok.dto.*;
 import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.enumeration.Status;
+import com.example.kok.service.ConsoleInternApplicationService;
 import com.example.kok.service.ConsoleInternDetailService;
 import com.example.kok.service.ConsoleInternNoticeService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +20,7 @@ import java.util.Map;
 public class ConsoleInternNoticeApiController {
     private final ConsoleInternNoticeService internService;
     private final ConsoleInternDetailService internDetailService;
+    private final ConsoleInternApplicationService consoleInternApplicationService;
 
 
 //    공고 목록
@@ -85,4 +84,18 @@ public class ConsoleInternNoticeApiController {
         internService.deleteIntern(id);
         return ResponseEntity.ok("");
     }
+
+//    지원자 상태 변경
+    @PutMapping("/applicant/{id}/status")
+    public ResponseEntity<?> updateApplicantStatus(
+            @PathVariable("id") Long userId,
+            @RequestBody ConsoleInternApplicantDTO applicantDTO) {
+
+        log.info("[지원자 상태 변경 요청] userId: {}, status: {}, requestInternStatus: {}",
+                userId, applicantDTO.getRequestInternStatus(), applicantDTO.getInternNoticeId());
+
+        consoleInternApplicationService.updateApplicantStatus(userId, applicantDTO.getInternNoticeId(), applicantDTO.getRequestInternStatus());
+        return ResponseEntity.ok("지원자 상태가 변경되었습니다.");
+    }
+
 }

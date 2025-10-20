@@ -1,5 +1,6 @@
 package com.example.kok.dto;
 
+import com.example.kok.enumeration.RequestStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.EqualsAndHashCode;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Component
@@ -16,8 +18,8 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of="requestId")
 public class ConsoleInternApplicantDTO {
     private long requestId; // 지원 요청 ID
-    private String requestInternStatus; // 지원 상태
-    private LocalDateTime requestDatetime; // 지원 일시
+    private RequestStatus requestInternStatus; // 지원 상태
+    private LocalDate requestDatetime; // 지원 일시
 
     private long userId; // 지원자 ID
     private String userName; // 지원자 이름

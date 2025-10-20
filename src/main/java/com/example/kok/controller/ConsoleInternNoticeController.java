@@ -43,7 +43,7 @@ public class ConsoleInternNoticeController {
         return "enterprise-console/intern/console-intern-list";
     }
 
-    //    기업 콘솔 인턴 공고 등록, 수정
+//    기업 콘솔 인턴 공고 등록, 수정
     @GetMapping(value = {"/create", "edit/{id}"})
     public String goToWrite(@PathVariable(required = false) Long id,
                             @AuthenticationPrincipal CustomUserDetails customUserDetails,

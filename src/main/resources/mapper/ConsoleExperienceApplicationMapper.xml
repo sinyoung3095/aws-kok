@@ -63,7 +63,7 @@
         order by re.id desc
     </select>
 
-<!--    평가하기 가능 여부 판별에 필요한 요소 조회-->
+    <!-- 평가하기 가능 여부 판별에 필요한 요소 조회-->
     <select id="selectEvalOk">
         select e.experience_end_date, re.experience_notice_id, re.request_experience_status, re.member_id
         from tbl_experience_notice e
@@ -74,4 +74,13 @@
         where e.id=#{experienceNoticeId}
         and u.id=#{memberId}
     </select>
+
+    <!-- 지원자 상태 변경 -->
+    <update id="updateApplicantStatus">
+        update tbl_request_experience
+        set request_experience_status = #{requestExperienceStatus}::request_status,
+            updated_datetime = now()
+        where member_id = #{userId}
+            and experience_notice_id = #{experienceNoticeId};
+    </update>
 </mapper>

@@ -194,23 +194,25 @@
                                                 <label for="" class="info-key">상태 변경</label>
                                                 <div class="select-container">
                                                     <button class="status-button">
-                                                        <span class="status-button-span">서류 검토 중</span>
+                                                        <span class="status-button-span"
+                                                              th:text="${applicantDetail.requestInternStatus.name() == 'ACCEPT' ? '합격'
+                                                              : (applicantDetail.requestInternStatus.name() == 'REJECT' ? '불합격' : '서류 검토 중')}"></span>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="down-svg" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
                                                     </button>
                                                     <div class="job">
                                                         <div class="job-1">
                                                             <div class="job-2">
-                                                                <button type="button" class="job-3 active">
+                                                                <button type="button" class="job-3" th:classappend="${applicantDetail.requestInternStatus.name() == 'AWAIT' ? ' active' : ''}">
                                                                     <div class="job-5">
                                                                         <p class="job-6">서류 검토 중</p>
                                                                     </div>
                                                                 </button>
-                                                                <button type="button" class="job-3">
+                                                                <button type="button" class="job-3" th:classappend="${applicantDetail.requestInternStatus.name() == 'ACCEPT' ? ' active' : ''}">
                                                                     <div class="job-5">
                                                                         <p class="job-6">합격</p>
                                                                     </div>
                                                                 </button>
-                                                                <button type="button" class="job-3">
+                                                                <button type="button" class="job-3" th:classappend="${applicantDetail.requestInternStatus.name() == 'REJECT' ? ' active' : ''}">
                                                                     <div class="job-5">
                                                                         <p class="job-6">불합격</p>
                                                                     </div>
@@ -223,7 +225,8 @@
                                             <div class="yoso">
                                                 <label for="" class="info-key">현재 상태</label>
                                                 <div class="status-mark">
-                                                    <span th:text="${applicantDetail.requestInternStatus eq 'await' ? '서류 검토 중' : (applicantDetail.requestInternStatus eq 'accept' ? '합격' : '불합격')}" class="status-mark-span"></span>
+                                                    <span class="status-mark-span" th:text="${applicantDetail.requestInternStatus.name() == 'ACCEPT' ? '합격'
+                                                    : (applicantDetail.requestInternStatus.name() == 'REJECT' ? '불합격' : '서류 검토 중')}"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -255,5 +258,6 @@
 </script>
 </script>
 <script src="/js/console/sidebar/event.js"></script>
+<script src="/js/console/intern-application/module/service.js"></script>
 <script src="/js/console/intern-application/event.js"></script>
 </html>
