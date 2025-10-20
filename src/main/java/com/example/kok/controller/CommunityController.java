@@ -1,5 +1,6 @@
 package com.example.kok.controller;
 
+import com.example.kok.aop.aspect.annotation.LogReturnStatus;
 import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.AdvertisementDTO;
 import com.example.kok.dto.CompanyDTO;
@@ -30,6 +31,7 @@ public class CommunityController {
     private final CompanyService companyService;
 
     @GetMapping("/page")
+    @LogReturnStatus
     public String goToCommunityPage(Model model,
                                     @RequestParam(required = false) String sharedPostId,
                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
