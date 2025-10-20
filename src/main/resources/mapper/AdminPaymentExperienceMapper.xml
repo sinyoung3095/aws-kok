@@ -72,7 +72,7 @@
                   on en.id = re.experience_notice_id
              join tbl_company c
                   on en.company_id = c.user_id
-        where p.payment_status = 'accept' or p.payment_status = 'await'
+        where p.payment_status = 'active'
     </select>
 
 <!--  거절된 결제 총액  -->
@@ -87,6 +87,6 @@
                   on en.id = re.experience_notice_id
              join tbl_company c
                   on en.company_id = c.user_id
-        where p.payment_status = 'reject'
+        where p.payment_status = 'inactive'
     </select>
 </mapper>

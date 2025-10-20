@@ -136,6 +136,7 @@ public class AdminRestController implements AdminRestControllerDocs {
 
 //    결제 - 체험
     @GetMapping("payment/experience/{page}")
+    @LogReturnStatus
     public ResponseEntity<AdminPaymentExperienceCriteriaDTO> getPaymentExperience(@PathVariable("page") int page,
                                                                   @RequestParam(required = false) String keyword,
                                                                   @RequestParam(required = false) String category){
