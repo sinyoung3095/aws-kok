@@ -69,9 +69,7 @@ public class ConsoleExperienceNoticeApiController {
     public ResponseEntity<?> createNotice(@RequestBody ConsoleExperienceListRequestDTO noticeRequestDTO) {
         experienceService.registerNotice(noticeRequestDTO);
 
-//        return ResponseEntity.ok(noticeRequestDTO);
-        return ResponseEntity.ok(Map.of("redirectUrl", "/enterprise-console/experience/list"));
-
+        return ResponseEntity.ok(noticeRequestDTO);
     }
 
 //    공고 수정
@@ -82,7 +80,6 @@ public class ConsoleExperienceNoticeApiController {
         experienceService.modifyNotice(noticeRequestDTO);
 
         return ResponseEntity.ok(noticeRequestDTO);
-//        return ResponseEntity.ok(Map.of("redirectUrl", "/enterprise-console/experience/list"));
 
     }
 

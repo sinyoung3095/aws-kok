@@ -45,6 +45,6 @@ public class ConsoleMainController {
         model.addAttribute("companyName", companyName);
         model.addAttribute("memberName", memberName);
 
-        return "enterprise-console/console-home";
+        return "enterprise-console/main/console-home";
     }
 }

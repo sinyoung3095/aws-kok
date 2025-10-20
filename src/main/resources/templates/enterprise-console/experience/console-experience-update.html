@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/enterprise-console/console-experience-upload.css">
-    <link rel="stylesheet" href="/css/enterprise-console/console-sidebar.css">
-    <link rel="stylesheet" href="/css/enterprise-console/console-header.css">
+    <link rel="stylesheet" href="/css/enterprise-console/experience/console-experience-upload.css">
+    <link rel="stylesheet" href="/css/enterprise-console/sidebar/console-sidebar.css">
+    <link rel="stylesheet" href="/css/enterprise-console/main/console-header.css">
     <link rel="stylesheet" href="/font/font.css">
     <link rel="shorcut icon" href="/images/member/kok_favicon.png" type="image/x-icon">
-    <title>인턴 공고 수정 | 콕</title>
+    <title>체험 공고 수정 | 콕</title>
 </head>
 <body>
     <div class="wrap-enter">
-        <div th:replace="~{/enterprise-console/console-sidebar}"></div>
+        <div th:replace="~{/enterprise-console/sidebar/console-sidebar}"></div>
 
         <main class="main">
             <header class="header">
@@ -32,13 +32,13 @@
                         <div class="upload-wrap-inner2">
                             <div th:if="${page} == 'create'" class="home-top">
                                 <div>
-                                    <h1 class="top-h1">인턴 공고 등록하기</h1>
-                                    <p class="top-p">새로운 인턴 공고를 등록하세요</p>
+                                    <h1 class="top-h1">체험 공고 등록하기</h1>
+                                    <p class="top-p">새로운 체험 공고를 등록하세요</p>
                                 </div>
                             </div>
                             <div th:unless="${page} == 'create'" class="home-top">
                                 <div class="back-back">
-                                    <a href="/enterprise-console/intern/list" class="back-btn">
+                                    <a href="/enterprise-console/experience/list" class="back-btn">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="back-svg"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
                                         뒤로가기
                                     </a>
@@ -46,7 +46,7 @@
                                 <div class="home-top-title-wrap">
                                     <div>
                                         <h1 class="top-h1">공고 수정하기</h1>
-                                        <p class="top-p">등록한 인턴 공고를 수정하세요.</p>
+                                        <p class="top-p">등록한 체험 공고를 수정하세요.</p>
                                     </div>
                                 </div>
                             </div>
@@ -54,30 +54,30 @@
                                 <div class="write-area">
                                     <div class="cards">
                                         <div class="card-title">
-                                            <div class="main-title">인턴 고용 정보</div>
-                                            <div class="sub-title">기본적인 인턴 고용 정보를 입력하세요</div>
+                                            <div class="main-title">체험 정보</div>
+                                            <div class="sub-title">기본적인 체험 정보를 입력하세요</div>
                                         </div>
                                         <div class="card-content">
                                             <div class="contents-line">
                                                 <div class="contents">
                                                     <label class="content-label">
-                                                        인턴 공고 제목
+                                                        체험 공고 제목
                                                         <span class="must">*</span>
                                                         <span class="content-span">
                                                             (최대 30자)
                                                         </span>
                                                     </label>
-                                                    <input th:value="${notice.internNoticeTitle}" type="text" id="content-title" class="content-input validate-length" maxlength="30" placeholder="예: 프론트엔드 개발자">
+                                                    <input type="text" id="content-title" class="content-input validate-length" maxlength="30" placeholder="예: 프론트엔드 개발자" th:value="${notice.experienceNoticeTitle}">
                                                 </div>
                                                 <div class="contents">
                                                     <label class="content-label">
-                                                        인턴 공고 부제목
+                                                        체험 공고 부제목
                                                         <span class="must">*</span>
                                                         <span class="content-span">
                                                             (최대 50자)
                                                         </span>
                                                     </label>
-                                                    <input type="text" id="content-subtitle" class="content-input validate-length" maxlength="50" placeholder="기술 스택, 주요 업무, 키워드" th:value="${notice.internNoticeSubtitle}">
+                                                    <input type="text" id="content-subtitle" class="content-input validate-length" maxlength="50" placeholder="기술 스택, 주요 업무, 키워드" th:value="${notice.experienceNoticeSubtitle}">
                                                 </div>
                                                 <div class="contents dropdown-container">
                                                     <label class="content-label">
@@ -210,32 +210,44 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="contents">
+                                                    <label class="content-label">
+                                                        체험일
+                                                        <span class="must">*</span>
+                                                        <span class="content-span">(시작일, 종료일)</span>
+                                                    </label>
+                                                    <div class="flex gap-10 align-items-center date-input-wrap">
+                                                        <input type="text" id="experience-start-date" class="content-input date-input" placeholder="yyyy-mm-dd" th:value="${notice.experienceStartDate}">
+                                                        <span>~</span>
+                                                        <input type="text" id="experience-end-date" class="content-input date-input" placeholder="yyyy-mm-dd" th:value="${notice.experienceEndDate}">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="cards">
                                         <div class="card-title">
-                                            <div class="main-title">인턴 공고 상세</div>
-                                            <div class="sub-title">상세한 인턴 공고 내용을 작성하세요</div>
+                                            <div class="main-title">체험 공고 상세</div>
+                                            <div class="sub-title">상세한 체험 내용을 작성하세요</div>
                                         </div>
                                         <div class="card-content">
                                             <div class="contents">
                                                 <label class="content-label">직무소개<span class="must">*</span></label>
-                                                <textarea name="" id="introduce-job" class="textarea" th:text="${notice.internNoticeIntroduceJob}">test</textarea>
+                                                <textarea name="" id="introduce-job" class="textarea" th:text="${notice.experienceNoticeIntroduceJob}"></textarea>
                                             </div>
                                             <div class="contents">
                                                 <label class="content-label">주요 업무<span class="must">*</span></label>
-                                                <textarea name="" id="main-tasks" class="textarea" th:text="${notice.internMainTasks}">test</textarea>
+                                                <textarea name="" id="main-tasks" class="textarea" th:text="${notice.experienceMainTasks}"></textarea>
                                             </div>
                                             <div class="contents">
                                                 <label class="content-label">참고사항<span class="must">*</span></label>
-                                                <textarea name="" id="notice-etc" class="textarea" th:text="${notice.internNoticeEtc}">test</textarea>
+                                                <textarea name="" id="notice-etc" class="textarea" th:text="${notice.experienceNoticeEtc}"></textarea>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="select-area">
-                                    <div class="cards">
+                                    <div class="cards contents">
                                         <div class="card-title">
                                             <div class="main-title">게시 기간</div>
                                             <div class="sub-title">한국 표준시 기준</div>
@@ -244,11 +256,11 @@
                                             <div class="content-wrapper">
                                                 <div class="card-sub">
                                                     <label class="content-label">시작일<span class="must">*</span></label>
-                                                    <input type="text" id="intern-notice-start-date" class="content-input date-input" placeholder="yyyy-mm-dd" th:value="${notice.internNoticeStartDate}">
+                                                    <input type="text" id="experience-notice-start-date" class="content-input date-input" placeholder="yyyy-mm-dd" th:value="${notice.experienceNoticeStartDate}">
                                                 </div>
                                                 <div class="card-sub">
                                                     <label class="content-label">종료일<span class="must">*</span></label>
-                                                    <input type="text" id="intern-notice-end-date" class="content-input date-input" placeholder="yyyy-mm-dd" th:value="${notice.internNoticeEndDate}">
+                                                    <input type="text" id="experience-notice-end-date" class="content-input date-input" placeholder="yyyy-mm-dd" th:value="${notice.experienceNoticeEndDate}">
                                                 </div>
                                             </div>
                                         </div>
@@ -275,7 +287,7 @@
     <div class="popup-container">
         <div class="pop-content">
             <div th:if="${page} == 'create'" class="pop-title-wrap">
-                <h2 class="pop-title">인턴 공고를 등록하시겠습니까?</h2>
+                <h2 class="pop-title">체험 공고를 등록하시겠습니까?</h2>
                 <p class="pop-desc">공고가 즉시 활성화됩니다.</p>
             </div>
             <div th:unless="${page} == 'create'" class="pop-title-wrap">
@@ -284,8 +296,8 @@
             </div>
             <div class="pop-buttons">
                 <button class="btn-no">취소</button>
-                <button th:if="${page} == 'create'" id="btn-register-intern" class="btn-yes">등록하기</button>
-                <button th:unless="${page} == 'create'" id="btn-update-intern" class="btn-yes">수정하기</button>
+                <button th:if="${page} == 'create'" id="btn-register-experience" class="btn-yes">등록하기</button>
+                <button th:unless="${page} == 'create'" id="btn-update-experience" class="btn-yes">수정하기</button>
             </div>
         </div>
     </div>
@@ -295,7 +307,7 @@
     const page = [[${page}]];
     const companyId = [[${companyId}]];
 </script>
-<script src="/js/console/intern-upload/module/service.js"></script>
-<script src="/js/console/intern-upload/event.js"></script>
+<script src="/js/console/ex-upload/module/service.js"></script>
+<script src="/js/console/ex-upload/event.js"></script>
 <script src="/js/console/sidebar/event.js"></script>
 </html>

@@ -40,7 +40,7 @@ public class ConsoleInternNoticeController {
         model.addAttribute("companyName", companyName);
         model.addAttribute("memberName", memberName);
 
-        return "enterprise-console/console-intern-list";
+        return "enterprise-console/intern/console-intern-list";
     }
 
     //    기업 콘솔 인턴 공고 등록, 수정
@@ -63,7 +63,7 @@ public class ConsoleInternNoticeController {
             model.addAttribute("companyName", companyName);
             model.addAttribute("memberName", memberName);
 
-            return "enterprise-console/console-intern-update";
+            return "enterprise-console/intern/console-intern-update";
         }
 
         model.addAttribute("page","edit");
@@ -101,7 +101,7 @@ public class ConsoleInternNoticeController {
             model.addAttribute("memberId", firstApplicant.getUserId());
         }
 
-        return "enterprise-console/console-intern-applicate-list";
+        return "enterprise-console/intern/console-intern-applicate-list";
     }
 
 //    기업 콘솔 인턴 지원서
@@ -122,7 +122,7 @@ public class ConsoleInternNoticeController {
         model.addAttribute("companyName", companyName);
         model.addAttribute("memberName", memberName);
 
-        return "enterprise-console/console-intern-application";
+        return "enterprise-console/intern/console-intern-application";
     }
 
 }
