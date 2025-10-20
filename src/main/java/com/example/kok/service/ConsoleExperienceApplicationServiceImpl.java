@@ -2,10 +2,12 @@ package com.example.kok.service;
 
 import com.example.kok.dto.ConsoleExperienceApplicantDTO;
 import com.example.kok.dto.FileDTO;
+import com.example.kok.dto.RequestExperienceDTO;
 import com.example.kok.repository.ConsoleExperienceApplicationDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +63,17 @@ public class ConsoleExperienceApplicationServiceImpl implements ConsoleExperienc
         }
 
         return results;
+    }
+
+//    평가하기 가능 여부 조회
+    public boolean isEvalOk(Long experienceNoticeId, Long memberId) {
+        RequestExperienceDTO exp=consoleExperienceApplicationDAO.findEvalOk(experienceNoticeId, memberId);
+        LocalDate now = LocalDate.now();
+        if(exp.getRequestExperienceStatus().equals("accept")&&exp.getExperienceEndDate().isBefore(now)){
+            return true;
+        } else{
+            return false;
+        }
     }
 
 }

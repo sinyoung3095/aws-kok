@@ -62,4 +62,16 @@
         where re.experience_notice_id = #{experienceNoticeId}
         order by re.id desc
     </select>
+
+<!--    평가하기 가능 여부 판별에 필요한 요소 조회-->
+    <select id="selectEvalOk">
+        select e.experience_end_date, re.experience_notice_id, re.request_experience_status, re.member_id
+        from tbl_experience_notice e
+        join tbl_request_experience re
+        on e.id=re.experience_notice_id
+        join tbl_user u
+        on re.member_id=u.id
+        where e.id=#{experienceNoticeId}
+        and u.id=#{memberId}
+    </select>
 </mapper>

@@ -1,7 +1,9 @@
 package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
+import com.example.kok.dto.AdvertisementDTO;
 import com.example.kok.dto.ExperienceNoticeCriteriaDTO;
+import com.example.kok.service.AdvertisementService;
 import com.example.kok.service.ExperienceNoticeService;
 import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
@@ -10,11 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/experience/**")
 @RequiredArgsConstructor
 public class ExperienceController {
     private final ExperienceNoticeService experienceNoticeService;
+    private final AdvertisementService advertisementService;
 //    체험 목록으로 이동
     @GetMapping("list")
     public String goToExpList(@RequestParam(defaultValue = "1") int page, Model model,
@@ -31,6 +36,10 @@ public class ExperienceController {
         model.addAttribute("search", search);
         model.addAttribute("sharedCompanyId", sharedCompanyId);
         model.addAttribute("sharedExperienceId", sharedExperienceId);
+        List<AdvertisementDTO> advertisements = advertisementService.getAllAdvertisements();
+//        System.out.println("##############################################");
+//        System.out.println(advertisements);
+        model.addAttribute("advertisements", advertisements);
         return "experience/list";
     }
 }

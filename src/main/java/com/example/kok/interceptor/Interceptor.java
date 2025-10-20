@@ -27,20 +27,24 @@ public class Interceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = null;
-        String provider = null;
 
-    for (Cookie cookie : request.getCookies()) {
-        if ("refreshToken".equals(cookie.getName())) {
-            token = cookie.getValue();
-            CustomUserDetails customUserDetails =(CustomUserDetails)jwtTokenProvider.getAuthentication(token).getPrincipal();
-            mainpageService.findProfile(customUserDetails);
-            log.info(customUserDetails.toString());
-            request.setAttribute("userDTO",customUserDetails);
+        Cookie[] cookies = request.getCookies(); // null일 수 있음
+        if (cookies != null) { // ✅ null 체크 추가
+            for (Cookie cookie : cookies) {
+                if ("refreshToken".equals(cookie.getName())) {
+                    token = cookie.getValue();
+                    CustomUserDetails customUserDetails =
+                        (CustomUserDetails) jwtTokenProvider.getAuthentication(token).getPrincipal();
+                    mainpageService.findProfile(customUserDetails);
+                    log.info(customUserDetails.toString());
+                    request.setAttribute("userDTO", customUserDetails);
+                }
+            }
         }
 
-    }
         return true;
     }
+
 
 //    후처리
     @Override
