@@ -375,6 +375,23 @@ const showPosts=async ()=>{
     cancle.addEventListener("click", (e) => {
         del.style.display = "none";
     });
+
+    const postWraps=document.querySelectorAll(".go-to-post");
+
+    if(postWraps.length>0){
+        postWraps.forEach((wrap)=>{
+            wrap.addEventListener("click", ()=>{
+                console.log("클릭됨");
+                const postId=wrap.dataset.postId;
+                window.location.href=`/community/page?sharedPostId=${postId}`;
+            });
+        });
+    } else{
+         const goToCoBtn=document.querySelector(".go-to-commu");
+        goToCoBtn.addEventListener("click",()=>{
+            window.location.href=`/community/page`;
+        });
+    }
 }
 
 const showPostDetail=async (id)=>{
@@ -687,7 +704,17 @@ const showSavedIntList=async ()=>{
         experience.style.display = "contents";
     });
 
-    // return request;
+    const wrapDiv=document.querySelectorAll(".intern-saved");
+
+    wrapDiv.forEach((div)=>{
+        div.addEventListener("click", (e)=>{
+            // console.log(e);
+            const companyId=parseInt(e.currentTarget.dataset.companyId, 10);
+            const internId=parseInt(e.currentTarget.dataset.internId, 10);
+            // console.log(companyId, experienceId);
+            window.location.href=`/intern/list?sharedCompanyId=${companyId}&sharedInternId=${internId}`;
+        });
+    });
 }
 
 const showSavedExpList=async ()=>{
@@ -704,6 +731,18 @@ const showSavedExpList=async ()=>{
         intBtn.classList.add("active");
         experience.style.display = "none";
         employ.style.display = "contents";
+    });
+
+    const wrapDiv=document.querySelectorAll(".experience-saved");
+
+    wrapDiv.forEach((div)=>{
+        div.addEventListener("click", (e)=>{
+            // console.log(e);
+            const companyId=parseInt(e.currentTarget.dataset.companyId, 10);
+            const experienceId=parseInt(e.currentTarget.dataset.experienceId, 10);
+            // console.log(companyId, experienceId);
+            window.location.href=`/experience/list?sharedCompanyId=${companyId}&sharedExperienceId=${experienceId}`;
+        });
     });
 
     // return request;

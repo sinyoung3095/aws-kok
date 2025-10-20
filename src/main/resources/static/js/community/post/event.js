@@ -13,6 +13,28 @@ const showList = async (page = 1) => {
 };
 showList(page);
 
+document.addEventListener("DOMContentLoaded", async () => {
+    const sharedPostId = window.sharedPostId;
+
+    if (sharedPostId) {
+        try {
+            const post = await postService.getOne(sharedPostId);
+            postLayout.showDetail(post);
+
+            const modal = document.getElementById("post-detail-modal");
+            modal.style.display = "flex";
+            modal.dataset.postId = sharedPostId;
+
+            const commentContainer = modal.querySelector(".reply-10");
+            commentContainer.innerHTML = "";
+            await showComments(sharedPostId);
+        } catch (err) {
+            console.error("공유 게시글 불러오기 실패:", err);
+        }
+    }
+});
+
+
 const mainContainer = document.querySelector(".main-0");
 
 mainContainer.addEventListener("scroll", async () => {

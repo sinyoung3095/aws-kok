@@ -95,6 +95,7 @@
         join tbl_post p
         on p.member_id=u.id
         where u.id=#{memberId}
+        and p.post_status='active'
     </select>
 
 <!--    회원 id로 직군 조회-->

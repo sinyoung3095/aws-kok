@@ -344,6 +344,9 @@
         <div th:replace="~{main-page/mobile-footer}"></div>
     </div>
 </body>
+<script th:inline="javascript">
+    window.sharedPostId = /*[[${sharedPostId}]]*/ null;
+</script>
 <script src="/js/community/post/module/layout.js"></script>
 <script src="/js/community/post/module/service.js"></script>
 <script src="/js/community/comment/module/layout.js"></script>

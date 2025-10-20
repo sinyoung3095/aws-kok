@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -30,8 +31,13 @@ public class CommunityController {
 
     @GetMapping("/page")
     public String goToCommunityPage(Model model,
+                                    @RequestParam(required = false) String sharedPostId,
                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
+        if(sharedPostId!=null){
+            model.addAttribute("sharedPostId", sharedPostId);
+            System.out.println("sharedPostId: "+sharedPostId);
+        }
         Long memberId = null;
 
         if (customUserDetails != null) {
