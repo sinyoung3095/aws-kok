@@ -7,7 +7,7 @@ const myPageLayout = (() => {
         console.log(profile);
         console.log("profile: "+profile.userName+profile.memberProfileUrl+profile.jobName+profile.memberInfo);
         let userName=profile.userName;
-        let profileUrl=profile.filePath;
+        // let profileUrl=profile.filePath;
         let jobName;
         if(profile.jobName) {
             jobName = profile.jobName;
@@ -213,8 +213,10 @@ const myPageLayout = (() => {
         const container = document.getElementById("my-posts-wrap");
         if (!container) return;
 
+        let html = ``;
+
         if (!Array.isArray(posts) || posts.length === 0) {
-            container.innerHTML = `<div class="post-2">
+            html = `<div class="post-2">
     <div class="post-3">
         <div class="post-13" style="padding-right: 0;padding-left: 0; justify-content: center; display: flex;">
             <div class="post-14" style="margin: 0 auto;">
@@ -232,8 +234,8 @@ const myPageLayout = (() => {
                     <div class="post-19">
                         <!-- 작성 버튼 -->
                         <div class="content-14" style="width: 200px; margin: 0 auto;">
-                            <button class="set content-15" type="button">
-                                <span class="content-16">작성하러 가기</span>
+                            <button class="set content-15 go-to-commu" type="button">
+                                <span class="content-16">커뮤니티로 가기</span>
                             </button>
                         </div>
                     </div>
@@ -242,9 +244,10 @@ const myPageLayout = (() => {
         </div>
     </div>
 </div>`;
+            container.innerHTML = html;
             return;
         }
-        let html = ``;
+
 
         for (const post of posts) {
 
@@ -878,8 +881,13 @@ const myPageLayout = (() => {
         const container = document.querySelector("#experience-list");
         if (!container) return;
 
+        let html = ``;
+
+        console.log(!Array.isArray(exps));
+        console.log(exps.length);
+
         if (!Array.isArray(exps) || exps.length === 0) {
-            container.innerHTML = '<div class="post-3">\n' +
+            html = '<div class="post-3">\n' +
                 '                                        <div class="post-13" style="padding-right: 0;padding-left: 0; justify-content: center; display: flex;">\n' +
                 '                                            <div class="post-14" style="margin: 0 auto;">\n' +
                 '                                                <div class="post-15" >\n' +
@@ -896,7 +904,7 @@ const myPageLayout = (() => {
                 '                                                    <div class="post-19">\n' +
                 '                                                        <!-- 작성 버튼 -->\n' +
                 '                                                        <div class="content-14" style="width: 200px; margin: 0 auto;">\n' +
-                '                                                            <button class="set content-15" type="button" >\n' +
+                '                                                            <button class="set content-15 go-to-exp" type="button" >\n' +
                 '                                                                <span class="content-16">체험 공고 둘러보기</span>\n' +
                 '                                                            </button>\n' +
                 '                                                        </div>\n' +
@@ -905,10 +913,11 @@ const myPageLayout = (() => {
                 '                                            </div>\n' +
                 '                                        </div>\n' +
                 '                                    </div>';
+            container.innerHTML = html;
             return;
         }
 
-        let html = ``;
+
 
         for (const exp of exps) {
             const fileUrl = await fetch(`/api/experiences/profile?companyId=${exp.companyId}`)
@@ -950,8 +959,10 @@ const myPageLayout = (() => {
         const container = document.querySelector("#intern-list");
         if (!container) return;
 
+        let html = ``;
+
         if (!Array.isArray(ints) || ints.length === 0) {
-            container.innerHTML = '<div class="post-3">\n' +
+            html = '<div class="post-3">\n' +
                 '                                        <div class="post-13" style="padding-right: 0;padding-left: 0; justify-content: center; display: flex;">\n' +
                 '                                            <div class="post-14" style="margin: 0 auto;">\n' +
                 '                                                <div class="post-15" >\n' +
@@ -968,7 +979,7 @@ const myPageLayout = (() => {
                 '                                                    <div class="post-19">\n' +
                 '                                                        <!-- 작성 버튼 -->\n' +
                 '                                                        <div class="content-14" style="width: 200px; margin: 0 auto;">\n' +
-                '                                                            <button class="set content-15" type="button" >\n' +
+                '                                                            <button class="set content-15 go-to-int" type="button" >\n' +
                 '                                                                <span class="content-16">인턴 공고 둘러보기</span>\n' +
                 '                                                            </button>\n' +
                 '                                                        </div>\n' +
@@ -977,10 +988,11 @@ const myPageLayout = (() => {
                 '                                            </div>\n' +
                 '                                        </div>\n' +
                 '                                    </div>';
+            container.innerHTML = html;
             return;
         }
 
-        let html = ``;
+
 
         for (const int of ints) {
             const fileUrl = await fetch(`/api/interns/profile?companyId=${int.companyId}`)
