@@ -13,3 +13,10 @@ CREATE TABLE tbl_post_like (
         references tbl_member_alarm_setting(id)
 );
 
+delete from tbl_post_like
+where id>0;
+
+select * from tbl_post_like;
+
+ALTER TABLE tbl_post_like
+ALTER COLUMN member_alarm_setting_id DROP NOT NULL;

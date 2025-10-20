@@ -20,7 +20,9 @@ public interface MemberService {
 //    이력서들 조회
     public List<FileDTO> findFilesByMemberId(Long memberId);
 
-//    모든 회원 조회
+    public void deleteFileByFileId(Long fileId);
+
+    //    모든 회원 조회
     public AdminMemberCriteriaDTO findUserMembers(int page, String keyword);
 
 //    회원별 모든 이력 조회

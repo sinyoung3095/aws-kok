@@ -13,4 +13,7 @@ public interface MemberStorageFileMapper {
 
 //    멤버 id로 보관함 파일 조회
     public List<FileDTO> selectStorageFilesByMemberId(Long memberId);
+
+//    파일 id로 삭제
+    public void deleteStorageFileByFileId(Long fileId);
 }

@@ -733,6 +733,14 @@ document.addEventListener("DOMContentLoaded", () => {
         // 해당 팝업 열기
         popup.classList.add("active");
 
+        // 추가 등혹
+        const plusStorageBtn=document.getElementById("file-add-btn");
+        if(plusStorageBtn){
+            plusStorageBtn.addEventListener("click", ()=>{
+                saveStorageFilePop.classList.add("active");
+            })
+        }
+
         // 이력서 등록하기
         const putFileBtn = document.querySelector(".btn-primary.popup-trigger");
         if (putFileBtn) {
@@ -842,13 +850,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 인풋 파일 등록
     function fileInputFn() {
+        console.log("fileInputFn() 실행");
         const fileInput = document.getElementById("file-input");
         const formFileLabel = document.querySelector(".form-file-label");
 
         if (!fileInput) return;
 
         fileInput.addEventListener("change", () => {
-            if (fileInput.files.length > 0) {
+            if (fileInput.files.length > 0&&fileInput.files.length<2) {
                 console.log("화면에 파일 이름 띄우기");
                 formFileLabel.textContent = fileInput.files[0].name;
             }else if(fileInput.files.length>1){
