@@ -251,9 +251,11 @@ const myPageLayout = (() => {
 
         for (const post of posts) {
 
+            const postId=post.id;
+
             html += `<div class="post-2">
     <!-- 첫게시글 -->
-    <div class="post-3">
+    <div class="post-3 go-to-post" data-post-id="${postId}">
         <div class="post-4">
             <div>
                 <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1"
@@ -920,10 +922,13 @@ const myPageLayout = (() => {
 
 
         for (const exp of exps) {
+
+            const saveCompanyId=exp.companyId;
+            const saveExpId=exp.id;
             const fileUrl = await fetch(`/api/experiences/profile?companyId=${exp.companyId}`)
                 .then(res => res.text());
             html += `<div class="post-3">
-                                        <div class="post-4">
+                                        <div class="post-4 experience-saved" data-company-id="${saveCompanyId}" data-experience-id="${saveExpId}">
                                             <div>
                                                 <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="${fileUrl}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
                                             </div>
@@ -995,10 +1000,12 @@ const myPageLayout = (() => {
 
 
         for (const int of ints) {
+            const saveCompanyId=int.companyId;
+            const saveIntId=int.id;
             const fileUrl = await fetch(`/api/interns/profile?companyId=${int.companyId}`)
                 .then(res => res.text());
             html += `<div class="post-3">
-                                        <div class="post-4">
+                                        <div class="post-4 intern-saved" data-company-id="${saveCompanyId}" data-intern-id="${saveIntId}">
                                             <div>
                                                 <img alt="image" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="${fileUrl}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
                                             </div>
@@ -1018,11 +1025,11 @@ const myPageLayout = (() => {
                                                 </div>
                                             </div>
                                             <!-- 취소버튼 -->
-                                            <div>
-                                                <button class="post-23">
-<!--                                                    <span class="ai_center d_flex jc_center us_none white-space_nowrap p_0px_3px textStyle_Body.BodyS_Bold">저장 취소</span>-->
-                                                </button>
-                                            </div>
+<!--                                            <div>-->
+<!--                                                <button class="post-23">-->
+<!--&lt;!&ndash;                                                    <span class="ai_center d_flex jc_center us_none white-space_nowrap p_0px_3px textStyle_Body.BodyS_Bold">저장 취소</span>&ndash;&gt;-->
+<!--                                                </button>-->
+<!--                                            </div>-->
                                         </div>
                                     </div>`;
         }

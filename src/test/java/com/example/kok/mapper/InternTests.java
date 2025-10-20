@@ -1,9 +1,7 @@
 package com.example.kok.mapper;
 
-import com.example.kok.controller.InternsController;
 import com.example.kok.dto.SaveInternNoticeDTO;
 import com.example.kok.repository.InternNoticeDAO;
-import com.example.kok.repository.SaveExperienceNoticeDAO;
 import com.example.kok.repository.SaveInternNoticeDAO;
 import com.example.kok.service.InternNoticeService;
 import com.example.kok.util.Criteria;

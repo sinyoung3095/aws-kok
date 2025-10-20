@@ -20,7 +20,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/interns/**")
 @RequiredArgsConstructor
-public class InternsController {
+public class InternRestController implements InternRestControllerDocs {
     private final InternNoticeService internNoticeService;
     private final CompanyProfileFileDAO companyProfileFileDAO;
     private final CompanyService companyService;
@@ -30,8 +30,8 @@ public class InternsController {
 //    목록
     @GetMapping("/{page}")
     public ResponseEntity<?> intList(@PathVariable("page") int page, Search search) {
-        System.out.println("#######################################################");
-        System.out.println(page);
+//        System.out.println("#######################################################");
+//        System.out.println(page);
         InternNoticeCriteriaDTO internNoticeCriteriaDTO = internNoticeService.selectAllInternNotice(page, search);
         if(internNoticeCriteriaDTO.getInterns().size()==0||internNoticeCriteriaDTO==null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(internNoticeCriteriaDTO);
