@@ -45,6 +45,11 @@ first.forEach((item) => {
         internList.classList.remove("active");
 
         await showPosts();
+
+        const goToCoBtn=document.querySelector(".go-to-commu");
+        goToCoBtn.addEventListener("click",()=>{
+            window.location.href=`/community/page`;
+        });
     });
 });
 
@@ -72,6 +77,16 @@ second.forEach((item) => {
 
         await showSavedExpList();
         await showSavedIntList();
+
+        const goToExpBtn=document.querySelector(".go-to-exp");
+        goToExpBtn.addEventListener("click",()=>{
+            window.location.href=`/experience/list`;
+        });
+
+        const goToIntBtn=document.querySelector(".go-to-int");
+        goToIntBtn.addEventListener("click",()=>{
+            window.location.href=`/intern/list`;
+        });
     });
 });
 // 지원 내역

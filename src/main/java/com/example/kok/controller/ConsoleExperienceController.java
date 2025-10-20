@@ -127,15 +127,20 @@ public class ConsoleExperienceController {
 //    기업 콘솔 평가서
     @GetMapping("/review")
     public String goToReview(@RequestParam("experienceNoticeId") Long experienceNoticeId,
-                                  @RequestParam("memberId") Long memberId, Model model) {
+                                  @RequestParam("memberId") Long memberId,
+                             @RequestParam("requestExperienceId") Long requestExperienceId,
+                             @AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
         model.addAttribute("memberId", memberId);
         model.addAttribute("experienceNoticeId", experienceNoticeId);
+        model.addAttribute("requestExperienceId", requestExperienceId);
         UserDTO user=new UserDTO();
         user=userService.findById(memberId);
         ExperienceNoticeDTO exp=new ExperienceNoticeDTO();
         exp=experienceNoticeService.findNoticeById(experienceNoticeId);
         model.addAttribute("user", user);
         model.addAttribute("exp", exp);
+        Long companyId=customUserDetails.getId();
+        model.addAttribute("companyId", companyId);
         return "enterprise-console/console-review";
     }
 
@@ -149,16 +154,9 @@ public class ConsoleExperienceController {
 
 //    평가하기
     @PostMapping("/go-review")
-    public String goReview(@RequestBody EvaluationDTO evaluation, @AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
+    @ResponseBody
+    public void goReview(@RequestBody EvaluationDTO evaluation) {
         evaluationService.review(evaluation);
-        Long companyId = customUserDetails.getId();
-        String companyName = customUserDetails.getCompanyName();
-        String memberName = customUserDetails.getUsername();
-
-        model.addAttribute("companyId", companyId);
-        model.addAttribute("companyName", companyName);
-        model.addAttribute("memberName", memberName);
-        return "enterprise-console/console-experience-list";
     }
 
 
