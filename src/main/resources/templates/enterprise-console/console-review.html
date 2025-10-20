@@ -228,7 +228,7 @@
                                             <!-- 종합 잠재력 평가 -->
                                             <div class="section">
                                                 <h3>총평</h3>
-                                                <textarea placeholder="지원자에 대해 간단한 총평을 작성해주세요." class="text-area"></textarea>
+                                                <textarea placeholder="지원자에 대해 간단한 총평을 작성해주세요." id="text-review"></textarea>
                                             </div>
                                         </div>
                                         </div>
@@ -249,6 +249,11 @@
         </main>
     </div>
 </body>
+<script th:inline="javascript">
+    const memberId = [[${memberId}]];
+    const requestExperienceId = [[${requestExperienceId}]];
+    const companyId=[[${companyId}]];
+</script>
 <script src="/js/console/review/event.js"></script>
 <script src="/js/console/sidebar/event.js"></script>
 </html>

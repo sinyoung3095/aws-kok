@@ -16,6 +16,8 @@ create table  tbl_evaluation (
 );
 
 select * from tbl_evaluation;
+delete from tbl_evaluation
+    where id>6;
 insert into tbl_evaluation (evaluation_content, evaluation_avg_score, request_experience_id, member_id, company_id)
 values ('한 줄 평가5', '4.5', '15', '26', '1');
 

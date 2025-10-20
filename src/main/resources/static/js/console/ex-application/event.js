@@ -72,8 +72,10 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(eval);
 
         if(eval){
-            const goToReview=await fetch(`/enterprise-console/experience/review?memberId=${memberId}&experienceNoticeId=${experienceNoticeId}`);
-            await goToReview;
+            console.log("eval true if문 들어옴")
+            // const goToReview=await fetch(`/enterprise-console/experience/review?memberId=${memberId}&experienceNoticeId=${experienceNoticeId}`);
+            // await goToReview;
+            window.location.href = `/enterprise-console/experience/review?memberId=${memberId}&experienceNoticeId=${experienceNoticeId}&requestExperienceId=${applicantDetail.requestId}`;
         }
         else{
             alert("평가가 불가능합니다. 합격 여부, 체험 종료일을 확인해 주세요.")
