@@ -4,7 +4,7 @@ import com.example.kok.dto.ConsoleInternListCriteriaDTO;
 import com.example.kok.dto.ConsoleInternListRequestDTO;
 import com.example.kok.enumeration.Status;
 
-public interface ConsoleInternListService {
+public interface ConsoleInternNoticeService {
 //    공고 목록
     public ConsoleInternListCriteriaDTO getList(Long companyId, int page, Status status, String keyword);
 

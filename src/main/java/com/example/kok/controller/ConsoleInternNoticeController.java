@@ -5,7 +5,7 @@ import com.example.kok.dto.*;
 import com.example.kok.dto.ConsoleInternApplicantDTO;
 import com.example.kok.service.ConsoleInternApplicationService;
 import com.example.kok.service.ConsoleInternDetailService;
-import com.example.kok.service.ConsoleInternListService;
+import com.example.kok.service.ConsoleInternNoticeService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +22,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/enterprise-console/intern")
 @RequiredArgsConstructor
-public class ConsoleInternController {
-    private final ConsoleInternListService consoleInternListService;
+public class ConsoleInternNoticeController {
+    private final ConsoleInternNoticeService consoleInternNoticeService;
     private final ConsoleInternDetailService consoleInternDetailService;
     private final ConsoleInternApplicationService consoleInternApplicationService;
 
@@ -50,7 +50,7 @@ public class ConsoleInternController {
                             HttpServletRequest request,
                             Model model) {
 
-        ConsoleInternListRequestDTO notice = consoleInternListService.getNotice(id);
+        ConsoleInternListRequestDTO notice = consoleInternNoticeService.getNotice(id);
 
         Long companyId = customUserDetails.getId();
         String companyName = customUserDetails.getCompanyName();

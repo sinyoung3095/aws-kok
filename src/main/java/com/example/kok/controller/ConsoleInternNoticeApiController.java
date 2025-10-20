@@ -7,7 +7,7 @@ import com.example.kok.dto.ConsoleInternListRequestDTO;
 import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.enumeration.Status;
 import com.example.kok.service.ConsoleInternDetailService;
-import com.example.kok.service.ConsoleInternListService;
+import com.example.kok.service.ConsoleInternNoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +19,8 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/enterprise-console/intern")
-public class ConsoleInternApiController {
-    private final ConsoleInternListService internService;
+public class ConsoleInternNoticeApiController {
+    private final ConsoleInternNoticeService internService;
     private final ConsoleInternDetailService internDetailService;
 
 
