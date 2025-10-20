@@ -3,12 +3,10 @@ package com.example.kok.service;
 import com.example.kok.dto.ConsoleExperienceListCriteriaDTO;
 import com.example.kok.dto.ConsoleExperienceListDTO;
 import com.example.kok.dto.ConsoleExperienceListRequestDTO;
-import com.example.kok.dto.ExperienceNoticeDTO;
 import com.example.kok.enumeration.Status;
 import com.example.kok.mapper.MemberAlarmSettingMapper;
-import com.example.kok.repository.ConsoleExperienceListDAO;
+import com.example.kok.repository.ConsoleExperienceNoticeDAO;
 import com.example.kok.util.Criteria;
-import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,8 +17,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ConsoleExperienceListServiceImpl implements ConsoleExperienceListService {
-    private final ConsoleExperienceListDAO consoleExperienceDAO;
+public class ConsoleExperienceNoticeServiceImpl implements ConsoleExperienceNoticeService {
+    private final ConsoleExperienceNoticeDAO consoleExperienceDAO;
     private final MemberAlarmSettingMapper memberAlarmSettingMapper;
     private final MailService mailService;
 

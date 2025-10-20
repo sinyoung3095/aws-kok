@@ -4,7 +4,7 @@ import com.example.kok.dto.ConsoleExperienceListCriteriaDTO;
 import com.example.kok.dto.ConsoleExperienceListRequestDTO;
 import com.example.kok.enumeration.Status;
 
-public interface ConsoleExperienceListService {
+public interface ConsoleExperienceNoticeService {
 //    공고 목록
     public ConsoleExperienceListCriteriaDTO getList(Long companyId, int page, Status status, String keyword);
 

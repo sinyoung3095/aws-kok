@@ -7,7 +7,7 @@ import com.example.kok.enumeration.Status;
 import com.example.kok.mapper.RequestExperienceFileMapper;
 import com.example.kok.service.ConsoleExperienceApplicationService;
 import com.example.kok.service.ConsoleExperienceDetailService;
-import com.example.kok.service.ConsoleExperienceListService;
+import com.example.kok.service.ConsoleExperienceNoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +25,8 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/enterprise-console/experience")
-public class ConsoleExperienceApiController {
-    private final ConsoleExperienceListService experienceService;
+public class ConsoleExperienceNoticeApiController {
+    private final ConsoleExperienceNoticeService experienceService;
     private final ConsoleExperienceDetailService experienceDetailService;
     private final ConsoleExperienceApplicationService consoleExperienceApplicationService;
     private final RequestExperienceFileMapper requestExperienceFileMapper;

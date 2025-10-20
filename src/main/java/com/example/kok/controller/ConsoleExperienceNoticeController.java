@@ -18,8 +18,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/enterprise-console/experience")
 @RequiredArgsConstructor
-public class ConsoleExperienceController {
-    private final ConsoleExperienceListService consoleExperienceListService;
+public class ConsoleExperienceNoticeController {
+    private final ConsoleExperienceNoticeService consoleExperienceNoticeService;
     private final ConsoleExperienceDetailService consoleExperienceDetailService;
     private final ConsoleExperienceApplicationService consoleExperienceApplicationService;
     private final UserService userService;
@@ -49,7 +49,7 @@ public class ConsoleExperienceController {
                             HttpServletRequest request,
                             Model model) {
 
-        ConsoleExperienceListRequestDTO notice = consoleExperienceListService.getNotice(id);
+        ConsoleExperienceListRequestDTO notice = consoleExperienceNoticeService.getNotice(id);
 
         Long companyId = customUserDetails.getId();
         String companyName = customUserDetails.getCompanyName();
