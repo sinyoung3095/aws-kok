@@ -5,6 +5,7 @@ import com.example.kok.enumeration.Status;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Component
@@ -17,7 +18,7 @@ public class ConsolePaymentDTO {
     private long id;
     private long paymentPrice; // 결제 금액
     private Status paymentStatus; // 결제 상태
-    private LocalDateTime paymentPaidDatetime; // 결제일
+    private LocalDate paymentPaidDatetime; // 결제일
 
     private long userId; // 결제한 회사
 

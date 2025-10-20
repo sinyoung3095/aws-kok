@@ -5,7 +5,7 @@
         select
             a.advertisement_main_text,
             p.payment_price,
-            p.payment_paid_datetime,
+            p.payment_paid_datetime::date,
             p.payment_status
         from tbl_payment_user pu
                  join tbl_payment p

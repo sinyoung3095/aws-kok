@@ -123,14 +123,6 @@ function getDisplayStatus(ad) {
     return '대기중';
 }
 
-// 사용 예시
-// data.adLists.forEach(ad => {
-//     const status = getDisplayStatus(ad);
-//     console.log(`${ad.advertisementMainText} → ${status}`);
-// });
-
-
-
 // ######################### 공고목록 ############################
 const page = 1;
 let keyword ="";

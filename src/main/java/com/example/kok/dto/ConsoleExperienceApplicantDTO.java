@@ -1,5 +1,6 @@
 package com.example.kok.dto;
 
+import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.enumeration.Status;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,8 +19,8 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of="requestId")
 public class ConsoleExperienceApplicantDTO {
     private long requestId; // 지원 요청 ID
-    private String requestExperienceStatus; // 지원 상태
-    private LocalDateTime requestDatetime; // 지원 일시
+    private RequestStatus requestExperienceStatus; // 지원 상태
+    private LocalDate requestDatetime; // 지원 일시
 
     private long userId; // 지원자 ID
     private String userName; // 지원자 이름

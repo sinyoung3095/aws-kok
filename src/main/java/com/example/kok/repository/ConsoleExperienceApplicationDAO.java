@@ -3,6 +3,7 @@ package com.example.kok.repository;
 import com.example.kok.dto.ConsoleExperienceApplicantDTO;
 import com.example.kok.dto.FileDTO;
 import com.example.kok.dto.RequestExperienceDTO;
+import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.mapper.ConsoleExperienceApplicationMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -29,9 +30,14 @@ public class ConsoleExperienceApplicationDAO {
         return consoleExperienceMapper.selectApplicantsByNoticeId(experienceNoticeId);
     }
 
-//    평가하기 가능 여부 판변
+//    평가하기 가능 여부 판별
     public RequestExperienceDTO findEvalOk(Long experienceNoticeId, Long memberId) {
         return consoleExperienceMapper.selectEvalOk(experienceNoticeId, memberId);
+    }
+
+//    지원자 상태 변경
+    public void updateApplicantStatus(Long userId, Long experienceNoticeId, RequestStatus requestExperienceStatus) {
+        consoleExperienceMapper.updateApplicantStatus(userId, experienceNoticeId, requestExperienceStatus);
     }
 
 }

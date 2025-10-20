@@ -1,6 +1,7 @@
 package com.example.kok.service;
 
 import com.example.kok.dto.ConsoleExperienceApplicantDTO;
+import com.example.kok.enumeration.RequestStatus;
 
 import java.util.List;
 
@@ -16,4 +17,7 @@ public interface ConsoleExperienceApplicationService {
 
 //    평가하기 가능 여부 조회
     public boolean isEvalOk(Long experienceNoticeId, Long memberId);
+
+//    지원자 상태 변경
+    public void updateApplicantStatus(Long userId, Long experienceNoticeId, RequestStatus requestStatus);
 }

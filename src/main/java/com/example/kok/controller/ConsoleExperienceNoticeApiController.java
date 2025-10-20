@@ -144,5 +144,17 @@ public class ConsoleExperienceNoticeApiController {
         return ResponseEntity.ok(requestExperienceDownloadUrlDTO);
     }
 
+//    지원자 상태 변경
+    @PutMapping("/applicant/{id}/status")
+    public ResponseEntity<?> updateApplicantStatus(
+            @PathVariable("id") Long userId,
+            @RequestBody ConsoleExperienceApplicantDTO applicantDTO) {
+
+        log.info("[지원자 상태 변경 요청] userId: {}, status: {}, requestExperienceStatus: {}",
+                userId, applicantDTO.getRequestExperienceStatus(), applicantDTO.getExperienceNoticeId());
+
+        consoleExperienceApplicationService.updateApplicantStatus(userId, applicantDTO.getExperienceNoticeId(), applicantDTO.getRequestExperienceStatus());
+        return ResponseEntity.ok("지원자 상태가 변경되었습니다.");
+    }
 
 }

@@ -7,6 +7,7 @@ import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.repository.ConsoleExperienceApplicationDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -77,6 +78,12 @@ public class ConsoleExperienceApplicationServiceImpl implements ConsoleExperienc
         } else{
             return false;
         }
+    }
+
+//    지원자 상태 변경
+    @Override
+    public void updateApplicantStatus(Long userId, Long experienceNoticeId, RequestStatus requestExperienceStatus) {
+        consoleExperienceApplicationDAO.updateApplicantStatus(userId, experienceNoticeId, requestExperienceStatus);
     }
 
 }

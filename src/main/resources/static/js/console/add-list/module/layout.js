@@ -59,7 +59,7 @@ const adLayout = (() => {
                             </div>
                         </div>
                     </td>
-                    <td class="list-list-td">₩<span class="price">${list.paymentPrice}</span></td>
+                    <td class="list-list-td">₩<span class="price">${Number(list.paymentPrice).toLocaleString()}</span></td>
                     <td class="list-list-td">
                         <span class="list-table-span ${list.advertisementRequestStatus === "await" ? "await" : list.advertisementRequestStatus === "accept" ? "accept" : list.advertisementRequestStatus === "reject" ? "reject" : ""}">
                             ${list.advertisementRequestStatus === "await" ? "대기중" : list.advertisementRequestStatus === "accept" ? "진행가능" : list.advertisementRequestStatus === "reject" ? "반려" : ""}
@@ -145,7 +145,7 @@ const adLayout = (() => {
                     <div class="card-title-text">총 금액</div>
                 </div>
                 <div class="card-content">
-                    <div class="card-main">￦<span class="price">${data.activeTotalPrice}</span></div>
+                    <div class="card-main">￦<span class="price">${Number(data.activeTotalPrice).toLocaleString()}</span></div>
                     <p class="card-content-p">진행중인 총 광고 비용</p>
                 </div>
             </div>
