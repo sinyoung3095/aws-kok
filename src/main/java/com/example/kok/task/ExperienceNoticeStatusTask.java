@@ -1,8 +1,8 @@
 package com.example.kok.task;
 
 import com.example.kok.service.ConsoleAdService;
-import com.example.kok.service.ConsoleExperienceListService;
-import com.example.kok.service.ConsoleInternListService;
+import com.example.kok.service.ConsoleExperienceNoticeService;
+import com.example.kok.service.ConsoleInternNoticeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 public class ExperienceNoticeStatusTask {
-    private final ConsoleExperienceListService consoleExperienceListService;
-    private final ConsoleInternListService consoleInternListService;
+    private final ConsoleExperienceNoticeService consoleExperienceNoticeService;
+    private final ConsoleInternNoticeService consoleInternNoticeService;
     private final ConsoleAdService consoleAdService;
     /*
      *   0 * * * * * : 매 분 0초마다
@@ -28,8 +28,8 @@ public class ExperienceNoticeStatusTask {
 //    매일 12시
     @Scheduled(cron="0 0/1 * * * *")
     public void task(){
-        consoleExperienceListService.closeNotice();
-        consoleInternListService.closeNotice();
+        consoleExperienceNoticeService.closeNotice();
+        consoleInternNoticeService.closeNotice();
         consoleAdService.closeAd();
     }
 }

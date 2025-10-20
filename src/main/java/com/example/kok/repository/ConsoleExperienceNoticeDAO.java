@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ConsoleExperienceListDAO {
+public class ConsoleExperienceNoticeDAO {
     private final ConsoleExperienceNoticeMapper consoleExperienceMapper;
 
 //    공고 목록

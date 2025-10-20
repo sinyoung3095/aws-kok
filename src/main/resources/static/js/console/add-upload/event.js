@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     } else {
                         resultDate.innerText = diffDays + "일";
                         const price = diffDays * 200000;
-                        resultPrice.innerText = price.toLocaleString();
+                        resultPrice.innerText = price;
                         date2.innerText = "광고 기간: " + diffDays + "일";
                         okcheck = true;
                     }
@@ -253,6 +253,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             await pay(payInfo);
+
+            window.location.href = "/enterprise-console/ad/list";
+
         });
     }
 
@@ -288,20 +291,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (isValid) return;
 
+            const priceText = document.querySelector(".start-price .price").textContent;
+            const paymentPrice = Number(priceText.replace(/,/g, "").trim());
+
             const data = {
                 advertisementMainText: document.querySelector("#ad-main-text").value,
                 advertisementSubText: document.querySelector("#ad-sub-text").value,
                 advertiseStartDatetime: document.querySelector("#start-date").value,
                 advertiseEndDatetime: document.querySelector("#end-date").value,
                 companyId: companyId,
+                paymentPrice: paymentPrice,
                 files: document.querySelector("#add-background").files
             };
 
             try {
-                const result = await adService.update(id, data);
-                console.log("광고 수정 완료:", result);
+                await adService.update(id, data);
                 alert("광고가 성공적으로 수정되었습니다!");
-                location.href = "/enterprise-console/ad/list";
+                window.location.href = "/enterprise-console/ad/list";
             } catch (err) {
                 console.error("수정 중 오류 발생", err);
             }

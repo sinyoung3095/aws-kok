@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ConsoleInternListServiceImpl implements ConsoleInternListService {
+public class ConsoleInternNoticeServiceImpl implements ConsoleInternNoticeService {
     private final ConsoleInternNoticeDAO consoleInternDAO;
 
     @Override
