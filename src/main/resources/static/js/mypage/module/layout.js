@@ -1037,6 +1037,280 @@ const myPageLayout = (() => {
         container.innerHTML = html;
     }
 
+    const showStorage=async (storages)=>{
+        const container=document.getElementById("add-area");
+        if(!container) return;
+
+        console.log("레이아웃 storages: ", storages);
+
+        let html = ``;
+
+        if (storages.length <1) {
+            html+=`<div class="etc-2">
+                                <div class="etc-3">
+                                    <div class="etc-4">
+                                        <div class="etc-5">
+                                            <p class="etc-6">보관함</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="etc-7">
+                                <div class="etc-8">
+                                    <p class="etc-9">보관함을 채워보세요.</p>
+                                    <p class="etc-10">나를 더 잘 소개할 수 있는 파일/URL을 등록하세요. 공고에 빠르게 지원하거나, 다른 기업으로부터 제안을 받아볼 수도 있습니다.</p>
+                                </div>
+                                <button class="etc-11 popup-trigger plus-storage" data-target="#dropdown1">
+                                    <span class="etc-12">등록하기</span>
+                                </button>
+                                <div style="height: 0;">
+                                    <div class="popup-action">
+                                        <div id="dropdown1" class="option-menu" style="top: 0; left: 0;">
+                                            <ul class="option-list">
+                                                <li class="option-item">
+                                                    <button class="option-btn dropdown-trigger" data-target="#popup3">
+                                                        <div>
+                                                            <svg fill="currentColor" height="24" role="img" width="24">
+                                                                <path clip-rule="evenodd" d="M5 4.8A1.2 1.2 0 0 0 3.8 6v12A1.2 1.2 0 0 0 5 19.2h14a1.2 1.2 0 0 0 1.2-1.2V9A1.2 1.2 0 0 0 19 7.8h-5.93a2.8 2.8 0 0 1-2.33-1.247l-.812-1.218A1.2 1.2 0 0 0 8.93 4.8zM2.2 6A2.8 2.8 0 0 1 5 3.2h3.93a2.8 2.8 0 0 1 2.33 1.247l.812 1.219a1.2 1.2 0 0 0 .998.534H19A2.8 2.8 0 0 1 21.8 9v9a2.8 2.8 0 0 1-2.8 2.8H5A2.8 2.8 0 0 1 2.2 18z" fill-rule="evenodd"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <p>파일 추가하기</p>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- popup - 이력서등록 -->
+                                    <!-- data-sticky="true" 남아야 하는 팝업일때 붙임 -->
+                                    <div id="popup3" class="popup-container pop-center storage-pop" data-sticky="true">
+                                        <div class="popup-inner">
+                                            <div class="popup-header">
+                                                <strong class="popup-title">보관함 등록</strong>
+                                                <button class="popup-close popup-library-close">닫기</button>
+                                            </div>
+                                            <form action="">
+                                                <div class="popup-body">
+                                                    <div class="form-list form-grid">
+<!--                                                        <div class="form-item flex-1-1">-->
+<!--                                                            <label class="form-label" for="type-input">유형<span class="must">*</span></label>-->
+<!--                                                            <div class="form-field form-field-dropdown">-->
+<!--                                                                <input type="text" id="type-input" class="dropdown-trigger" data-target="#dropdown2" placeholder="선택 또는 입력" readonly>-->
+
+<!--                                                                <div id="dropdown2" class="option-menu">-->
+<!--                                                                    <ul class="option-list">-->
+<!--                                                                        <li class="option-item option-input">-->
+<!--                                                                            <button type="button" class="option-btn">-->
+<!--                                                                                <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24">-->
+<!--                                                                                    <path clip-rule="evenodd" d="M12 4.2a.8.8 0 0 1 .8.8v6.2H19a.8.8 0 0 1 0 1.6h-6.2V19a.8.8 0 0 1-1.6 0v-6.2H5a.8.8 0 0 1 0-1.6h6.2V5a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>-->
+<!--                                                                                </svg>-->
+<!--                                                                                <p>직접 입력</p>-->
+<!--                                                                            </button>-->
+<!--                                                                        </li>-->
+<!--                                                                        <li class="option-item">-->
+<!--                                                                            <button type="button" class="option-btn">-->
+<!--                                                                                <p>이력서</p>-->
+<!--                                                                            </button>-->
+<!--                                                                        </li>-->
+<!--                                                                        <li class="option-item">-->
+<!--                                                                            <button type="button" class="option-btn">-->
+<!--                                                                                <p>포트폴리오</p>-->
+<!--                                                                            </button>-->
+<!--                                                                        </li>-->
+<!--                                                                        <li class="option-item">-->
+<!--                                                                            <button type="button" class="option-btn">-->
+<!--                                                                                <p>자기소개서</p>-->
+<!--                                                                            </button>-->
+<!--                                                                        </li>-->
+<!--                                                                    </ul>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+                                                        <div class="form-item flex-3">
+                                                            <label class="form-label" for="file-input">파일<span class="must">*</span></label>
+                                                            <div class="form-field">
+                                                                <!-- 실제 파일 input은 숨김 -->
+                                                                <input type="file" id="file-input" hidden multiple>
+                                                                <!-- 파일명이 표시될 커스텀 영역 -->
+                                                                <label for="file-input" class="form-file-label">파일</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="popup-action">
+                                                    <button id="pop-apply" class="pop-btn btn-primary">등록하기</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <!-- popup - 닫기 메세지 -->
+                                    <div id="popup5" class="popup-container pop-center pop-default">
+                                        <div class="popup-inner">
+                                            <div class="popup-body">
+                                                <div class="popup-title-box">
+                                                    <strong class="popup-title">변경사항이 저장되지 않았습니다.</strong>
+                                                    <p class="popup-sub-title">지금 나가면 변경사항이 반영되지 않습니다.<br/>그래도 나가시겠습니까?</p>
+                                                </div>
+                                            </div>
+                                            <div class="popup-action popup-btn-row">
+                                                <button id="" class="pop-btn btn-primary popup-all-close">저장하지 않고 나가기</button>
+                                                <button id="" class="pop-btn btn-default">계속 작성하기</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+            container.innerHTML=html;
+            return;
+        } else{
+            html+=`<div class="etc-2">
+                                <div class="etc-3">
+                                    <div class="etc-4">
+                                        <div class="etc-5">
+                                            <p class="etc-6">보관함</p>
+                                            <div id="plus" class="dropdown-trigger plus-storage" data-target="#dropdown4">
+                                                <svg fill="currentColor" height="24" role="img" width="24">
+                                                    <path clip-rule="evenodd" d="M12 4.2a.8.8 0 0 1 .8.8v6.2H19a.8.8 0 0 1 0 1.6h-6.2V19a.8.8 0 0 1-1.6 0v-6.2H5a.8.8 0 0 1 0-1.6h6.2V5a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div style="height: 0;">
+                                            <div class="popup-action">
+                                                <div id="dropdown4" class="option-menu" style="top: 0px;">
+                                                    <ul class="option-list">
+                                                        <li class="option-item">
+                                                            <button class="option-btn dropdown-trigger" data-target="#popup3">
+                                                                <div>
+                                                                    <svg fill="currentColor" height="24" role="img" width="24">
+                                                                        <path clip-rule="evenodd" d="M5 4.8A1.2 1.2 0 0 0 3.8 6v12A1.2 1.2 0 0 0 5 19.2h14a1.2 1.2 0 0 0 1.2-1.2V9A1.2 1.2 0 0 0 19 7.8h-5.93a2.8 2.8 0 0 1-2.33-1.247l-.812-1.218A1.2 1.2 0 0 0 8.93 4.8zM2.2 6A2.8 2.8 0 0 1 5 3.2h3.93a2.8 2.8 0 0 1 2.33 1.247l.812 1.219a1.2 1.2 0 0 0 .998.534H19A2.8 2.8 0 0 1 21.8 9v9a2.8 2.8 0 0 1-2.8 2.8H5A2.8 2.8 0 0 1 2.2 18z" fill-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </div>
+                                                                <p>파일 추가하기</p>
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="popup3" class="popup-container pop-center storage-pop" data-sticky="true">
+                                        <div class="popup-inner">
+                                            <div class="popup-header">
+                                                <strong class="popup-title">보관함 등록</strong>
+                                                <button class="popup-close popup-library-close">닫기</button>
+                                            </div>
+                                            <form action="">
+                                                <div class="popup-body">
+                                                    <div class="form-list form-grid">
+                                                        <div class="form-item flex-1-1">
+                                                            <label class="form-label" for="type-input">유형<span class="must">*</span></label>
+                                                            <div class="form-field form-field-dropdown">
+                                                                <input type="text" id="type-input" class="dropdown-trigger" data-target="#dropdown2" placeholder="선택 또는 입력" readonly>
+
+                                                                <div id="dropdown2" class="option-menu">
+                                                                    <ul class="option-list">
+                                                                        <li class="option-item option-input">
+                                                                            <button type="button" class="option-btn">
+                                                                                <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="24" role="img" width="24">
+                                                                                    <path clip-rule="evenodd" d="M12 4.2a.8.8 0 0 1 .8.8v6.2H19a.8.8 0 0 1 0 1.6h-6.2V19a.8.8 0 0 1-1.6 0v-6.2H5a.8.8 0 0 1 0-1.6h6.2V5a.8.8 0 0 1 .8-.8" fill-rule="evenodd"></path>
+                                                                                </svg>
+                                                                                <p>직접 입력</p>
+                                                                            </button>
+                                                                        </li>
+                                                                        <li class="option-item">
+                                                                            <button type="button" class="option-btn">
+                                                                                <p>이력서</p>
+                                                                            </button>
+                                                                        </li>
+                                                                        <li class="option-item">
+                                                                            <button type="button" class="option-btn">
+                                                                                <p>포트폴리오</p>
+                                                                            </button>
+                                                                        </li>
+                                                                        <li class="option-item">
+                                                                            <button type="button" class="option-btn">
+                                                                                <p>자기소개서</p>
+                                                                            </button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-item flex-3">
+                                                            <label class="form-label" for="file-input">파일<span class="must">*</span></label>
+                                                            <div class="form-field">
+                                                                <!-- 실제 파일 input은 숨김 -->
+                                                                <input type="file" id="file-input" hidden multiple>
+                                                                <!-- 파일명이 표시될 커스텀 영역 -->
+                                                                <label for="file-input" class="form-file-label">파일</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="popup-action">
+                                                    <button id="pop-apply" class="pop-btn btn-primary">등록하기</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+            html+=`<div class="etc-7" style="margin:0 auto;">
+                                <div class="etc-8" style="width: 250px;">
+                                    <ul class="form-list file-list form-row">`;
+            storages.forEach((sto)=>{
+                const originName = sto.fileOriginName;
+                const extensionName = originName.split(".").pop();
+                const fileId = sto.id;
+                // console.log(fileId);
+                let extension = "";
+                if (extensionName === "xlsx" || extensionName === "xlsm" || extensionName === "xls" || extensionName === "xlsb" || extensionName === "xltx" || extensionName === "xltm") {
+                    extension = "excel";
+                } else if (extensionName === "pdf") {
+                    extension = "pdf";
+                } else if (extensionName === "ppt" || extensionName === "pptx" || extensionName === "pptm" || extensionName === "potx") {
+                    extension = "ppt";
+                } else if (extensionName === "docx" || extensionName === "doc") {
+                    extension = "docx";
+                } else {
+                    extension = "default";
+                }
+                html+=`<li class="form-item" data-file-id="${fileId}">
+                                            <div class="file-container">
+                                                <div class="file-icon">
+                                                    <img src="/images/experience/icon_file_${extension}.svg" alt="">
+                                                </div>
+                                                <div class="file-info">
+                                                    <p class="file-label">${originName}</p>
+<!--                                                    <span class="file-name">파일이름.xlsx</span>-->
+                                                </div>
+                                            </div>
+                                            <div class="btn-check-container">
+                                                <div class="radio-box hidden">
+                                                    <svg aria-label="icon" color="foregrounds.neutral.primary" fill="currentColor" height="25px" role="img" width="25px">
+                                                        <path clip-rule="evenodd" d="M8.284 6.2H4a.8.8 0 1 0 0 1.6h1.2V18A2.8 2.8 0 0 0 8 20.8h8a2.8 2.8 0 0 0 2.8-2.8V7.8H20a.8.8 0 0 0 0-1.6h-4.284a3.801 3.801 0 0 0-7.432 0m1.666 0h4.1a2.2 2.2 0 0 0-4.1 0m7.25 1.6H6.8V18A1.2 1.2 0 0 0 8 19.2h8a1.2 1.2 0 0 0 1.2-1.2z" fill-rule="evenodd"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </li>`;
+            });
+            html+=`</ul>
+                                </div>
+                            </div>`;
+            container.innerHTML=html;
+            return;
+        }
+    }
+
+    // const showAdds=async (adds)=>{
+    //     const container=document.querySelector(".etc-25");
+    //     if(!container) return;
+    //
+    //     let html;
+    //     if(adds)
+    // }
+
     return {showProfileUpdate:showProfileUpdate, showPosts: showPosts, showPostDetail:showPostDetail, showCommentsList:showCommentsList, showExperienceRequest: showExperienceRequest, showInternRequest:showInternRequest, showPaymentList:showPaymentList,
-    showSavedExpList:showSavedExpList, showSavedIntList:showSavedIntList};
+    showSavedExpList:showSavedExpList, showSavedIntList:showSavedIntList, showStorage:showStorage};
 })();

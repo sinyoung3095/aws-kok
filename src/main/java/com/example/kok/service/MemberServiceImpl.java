@@ -11,7 +11,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -79,6 +78,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public List<FileDTO> findFilesByMemberId(Long memberId) {
         return memberStorageFileDAO.findFilesByMemberId(memberId);
+    }
+
+    @Override
+    public void deleteFileByFileId(Long fileId){
+        memberStorageFileDAO.deleteFileByFileId(fileId);
     }
 
 //    회원 전체조회
