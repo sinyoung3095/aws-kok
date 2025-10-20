@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // 팝업 확인(진행 상태 변경) 버튼
-    btnYes.addEventListener("click", () => {
+    btnYes.addEventListener("click", async () => {
         if (!selectedStatus) return;
 
         // 선택한 상태 반영
@@ -54,6 +54,19 @@ document.addEventListener("DOMContentLoaded", () => {
         statusSpan.textContent = confirmedStatus;
         popup.classList.remove("active");
 
+        const statusMap = {
+            "합격": "accept",
+            "불합격": "reject",
+            "서류 검토 중": "await"
+        };
+
+        const statusValue = statusMap[confirmedStatus] || confirmedStatus.toLowerCase();
+
+        try {
+            await applicationExperienceService.updateStatus(memberId, experienceNoticeId, statusValue);
+        } catch (error) {
+            alert("상태 변경에 실패했습니다.");
+        }
     });
 
     // 바깥 클릭 시 닫기

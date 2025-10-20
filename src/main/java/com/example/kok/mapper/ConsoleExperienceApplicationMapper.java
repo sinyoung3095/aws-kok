@@ -4,6 +4,7 @@ import com.example.kok.dto.ConsoleExperienceApplicantDTO;
 import com.example.kok.dto.FileDTO;
 import com.example.kok.dto.PostFileDTO;
 import com.example.kok.dto.RequestExperienceDTO;
+import com.example.kok.enumeration.RequestStatus;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -29,5 +30,9 @@ public interface ConsoleExperienceApplicationMapper {
 //    평가하기 가능 여부
     public RequestExperienceDTO selectEvalOk(Long experienceNoticeId, Long memberId);
 
+//    지원자 상태 변경
+    public void updateApplicantStatus(@Param("userId") Long userId,
+                                      @Param("experienceNoticeId") Long experienceNoticeId,
+                                      @Param("requestExperienceStatus") RequestStatus requestExperienceStatus);
 
 }

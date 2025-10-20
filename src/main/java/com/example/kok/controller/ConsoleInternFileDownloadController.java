@@ -16,14 +16,14 @@ import java.time.Duration;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/files/intern")
-public class ConsoleinternFileDownloadController {
+public class ConsoleInternFileDownloadController {
     private final ConsoleInternFileService fileService;
     private final S3Service s3Service;
 
-    @GetMapping("/download/{noticeId}/{memberId}")
-    public ResponseEntity<String> downloadFile(@PathVariable Long memberId, @PathVariable Long noticeId) {
+    @GetMapping("/download/{internNoticeId}/{memberId}")
+    public ResponseEntity<String> downloadFile(@PathVariable Long internNoticeId, @PathVariable Long memberId) {
 
-        var file = fileService.getDownloadUrl(memberId, noticeId)
+        var file = fileService.getDownloadUrl(memberId, internNoticeId)
                 .orElseThrow(() -> new RuntimeException("파일 정보를 찾을 수 없습니다."));
 
         String downloadUrl = s3Service.getPreSignedDownloadUrl(
