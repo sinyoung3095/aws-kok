@@ -50,7 +50,7 @@ public class ConsoleInternNoticeController {
                             HttpServletRequest request,
                             Model model) {
 
-        ConsoleInternListRequestDTO notice = consoleInternNoticeService.getNotice(id);
+        ConsoleInternNoticeRequestDTO notice = consoleInternNoticeService.getNotice(id);
 
         Long companyId = customUserDetails.getId();
         String companyName = customUserDetails.getCompanyName();
@@ -58,7 +58,7 @@ public class ConsoleInternNoticeController {
 
         if(request.getRequestURI().contains("create")){
             model.addAttribute("page","create");
-            model.addAttribute("notice", new ConsoleInternListRequestDTO());
+            model.addAttribute("notice", new ConsoleInternNoticeRequestDTO());
             model.addAttribute("companyId", companyId);
             model.addAttribute("companyName", companyName);
             model.addAttribute("memberName", memberName);
@@ -83,7 +83,7 @@ public class ConsoleInternNoticeController {
                                     @PathVariable("internNoticeId") Long internNoticeId,
                                     Model model) {
 
-        ConsoleInternListDTO internDetail = consoleInternDetailService.getDetail(internNoticeId);
+        ConsoleInternNoticeDTO internDetail = consoleInternDetailService.getDetail(internNoticeId);
 
         List<ConsoleInternApplicantDTO> applicants  =
                 consoleInternApplicationService.getApplicantsByNoticeId(internNoticeId);

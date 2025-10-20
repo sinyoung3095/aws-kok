@@ -49,7 +49,7 @@ public class ConsoleExperienceNoticeController {
                             HttpServletRequest request,
                             Model model) {
 
-        ConsoleExperienceListRequestDTO notice = consoleExperienceNoticeService.getNotice(id);
+        ConsoleExperienceNoticeRequestDTO notice = consoleExperienceNoticeService.getNotice(id);
 
         Long companyId = customUserDetails.getId();
         String companyName = customUserDetails.getCompanyName();
@@ -57,7 +57,7 @@ public class ConsoleExperienceNoticeController {
 
         if(request.getRequestURI().contains("create")){
             model.addAttribute("page","create");
-            model.addAttribute("notice", new ConsoleExperienceListRequestDTO());
+            model.addAttribute("notice", new ConsoleExperienceNoticeRequestDTO());
             model.addAttribute("companyId", companyId);
             model.addAttribute("companyName", companyName);
             model.addAttribute("memberName", memberName);
@@ -81,7 +81,7 @@ public class ConsoleExperienceNoticeController {
                                     @PathVariable("experienceNoticeId") Long experienceNoticeId,
                                     Model model) {
 
-        ConsoleExperienceListDTO experienceDetail = consoleExperienceDetailService.getDetail(experienceNoticeId);
+        ConsoleExperienceNoticeDTO experienceDetail = consoleExperienceDetailService.getDetail(experienceNoticeId);
 
         List<ConsoleExperienceApplicantDTO> applicants  =
                 consoleExperienceApplicationService.getApplicantsByNoticeId(experienceNoticeId);

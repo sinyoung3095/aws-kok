@@ -1,27 +1,27 @@
 package com.example.kok.service;
 
-import com.example.kok.dto.ConsoleInternListCriteriaDTO;
-import com.example.kok.dto.ConsoleInternListRequestDTO;
+import com.example.kok.dto.ConsoleInternNoticeCriteriaDTO;
+import com.example.kok.dto.ConsoleInternNoticeRequestDTO;
 import com.example.kok.enumeration.Status;
 
 public interface ConsoleInternNoticeService {
 //    공고 목록
-    public ConsoleInternListCriteriaDTO getList(Long companyId, int page, Status status, String keyword);
+    public ConsoleInternNoticeCriteriaDTO getList(Long companyId, int page, Status status, String keyword);
 
 //    공고 상태 변경
     public void updateListStatus(Long noticeId, Status status);
 
 //    공고 상세
-    ConsoleInternListRequestDTO getDetail(Long id);
+    ConsoleInternNoticeRequestDTO getDetail(Long id);
 
 //    공고 등록
-    public void registerNotice(ConsoleInternListRequestDTO noticeRequestDTO);
+    public void registerNotice(ConsoleInternNoticeRequestDTO noticeRequestDTO);
 
 //    공고 수정 등록
-    public void modifyNotice(ConsoleInternListRequestDTO noticeRequestDTO);
+    public void modifyNotice(ConsoleInternNoticeRequestDTO noticeRequestDTO);
 
 //    공고 수정 상세
-    ConsoleInternListRequestDTO getNotice(Long id);
+    ConsoleInternNoticeRequestDTO getNotice(Long id);
 
 //    공고 삭제
     public void deleteIntern(Long id);

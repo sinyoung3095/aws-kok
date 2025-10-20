@@ -19,7 +19,6 @@ import com.example.kok.service.S3Service;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @RestController
@@ -42,7 +41,7 @@ public class ConsoleExperienceNoticeApiController {
                                   @AuthenticationPrincipal CustomUserDetails customUserDetails,
                                   Model model) {
 
-        ConsoleExperienceListCriteriaDTO experienceCriteriaDTO = experienceService.getList(companyId, page, status, keyword);
+        ConsoleExperienceNoticeCriteriaDTO experienceCriteriaDTO = experienceService.getList(companyId, page, status, keyword);
         if(experienceCriteriaDTO == null || experienceCriteriaDTO.getExperienceLists().size() == 0){
             return ResponseEntity.ok(experienceCriteriaDTO);
         }
@@ -59,14 +58,14 @@ public class ConsoleExperienceNoticeApiController {
 //    공고 상태 변경
     @PutMapping("/{id}/status")
     public ResponseEntity<?> updateNoticeStatus(@PathVariable("id") Long id,
-                                          @RequestBody ConsoleExperienceListDTO consoleExperienceDTO) {
+                                          @RequestBody ConsoleExperienceNoticeDTO consoleExperienceDTO) {
         experienceService.updateListStatus(id, consoleExperienceDTO.getExperienceNoticeStatus());
         return ResponseEntity.ok(consoleExperienceDTO);
     }
 
 //    공고 등록
     @PostMapping("/create")
-    public ResponseEntity<?> createNotice(@RequestBody ConsoleExperienceListRequestDTO noticeRequestDTO) {
+    public ResponseEntity<?> createNotice(@RequestBody ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
         experienceService.registerNotice(noticeRequestDTO);
 
         return ResponseEntity.ok(noticeRequestDTO);
@@ -75,7 +74,7 @@ public class ConsoleExperienceNoticeApiController {
 //    공고 수정
     @PutMapping("/edit/{id}")
     public ResponseEntity<?> updateNotice(@PathVariable Long id,
-                                          @RequestBody ConsoleExperienceListRequestDTO noticeRequestDTO) {
+                                          @RequestBody ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
         noticeRequestDTO.setId(id);
         experienceService.modifyNotice(noticeRequestDTO);
 

@@ -4,13 +4,11 @@ import com.example.kok.enumeration.Status;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-
 @Component
 @Getter @Setter
 @ToString
 @EqualsAndHashCode(of="id")
-public class ConsoleExperienceListDTO {
+public class ConsoleExperienceNoticeDTO {
     private long id;
     private String experienceNoticeTitle;
     private String experienceNoticeSubtitle;

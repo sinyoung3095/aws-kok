@@ -8,9 +8,9 @@ import java.util.List;
 
 @Component
 @Getter @Setter @ToString
-public class ConsoleExperienceListCriteriaDTO {
+public class ConsoleExperienceNoticeCriteriaDTO {
     // 공고 리스트
-    private List<ConsoleExperienceListDTO> experienceLists;
+    private List<ConsoleExperienceNoticeDTO> experienceLists;
 
     // 공고 개수
     private int totalCount;

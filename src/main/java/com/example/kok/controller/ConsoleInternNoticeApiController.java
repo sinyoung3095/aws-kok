@@ -1,9 +1,9 @@
 package com.example.kok.controller;
 
 import com.example.kok.dto.ConsoleInternApplicantCriteriaDTO;
-import com.example.kok.dto.ConsoleInternListCriteriaDTO;
-import com.example.kok.dto.ConsoleInternListDTO;
-import com.example.kok.dto.ConsoleInternListRequestDTO;
+import com.example.kok.dto.ConsoleInternNoticeCriteriaDTO;
+import com.example.kok.dto.ConsoleInternNoticeDTO;
+import com.example.kok.dto.ConsoleInternNoticeRequestDTO;
 import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.enumeration.Status;
 import com.example.kok.service.ConsoleInternDetailService;
@@ -31,7 +31,7 @@ public class ConsoleInternNoticeApiController {
                                   @RequestParam(value = "status", required = false) Status status,
                                   @RequestParam(required = false) String keyword) {
 
-        ConsoleInternListCriteriaDTO internCriteriaDTO = internService.getList(companyId, page, status, keyword);
+        ConsoleInternNoticeCriteriaDTO internCriteriaDTO = internService.getList(companyId, page, status, keyword);
         if(internCriteriaDTO == null || internCriteriaDTO.getInternLists().size() == 0){
             return ResponseEntity.ok(internCriteriaDTO);
         }
@@ -42,14 +42,14 @@ public class ConsoleInternNoticeApiController {
 //    공고 상태 변경
     @PutMapping("/{id}/status")
     public ResponseEntity<?> updateNoticeStatus(@PathVariable("id") Long id,
-                                          @RequestBody ConsoleInternListDTO consoleInternDTO) {
+                                          @RequestBody ConsoleInternNoticeDTO consoleInternDTO) {
         internService.updateListStatus(id, consoleInternDTO.getInternNoticeStatus());
         return ResponseEntity.ok(consoleInternDTO);
     }
 
 //    공고 등록
     @PostMapping("/create")
-    public ResponseEntity<?> createNotice(@RequestBody ConsoleInternListRequestDTO noticeRequestDTO) {
+    public ResponseEntity<?> createNotice(@RequestBody ConsoleInternNoticeRequestDTO noticeRequestDTO) {
         internService.registerNotice(noticeRequestDTO);
 
         return ResponseEntity.ok(Map.of("redirectUrl", "/enterprise-console/intern/list"));
@@ -59,7 +59,7 @@ public class ConsoleInternNoticeApiController {
 //    공고 수정
     @PutMapping("/edit/{id}")
     public ResponseEntity<?> updateNotice(@PathVariable Long id,
-                                          @RequestBody ConsoleInternListRequestDTO noticeRequestDTO) {
+                                          @RequestBody ConsoleInternNoticeRequestDTO noticeRequestDTO) {
         noticeRequestDTO.setId(id);
         internService.modifyNotice(noticeRequestDTO);
 

@@ -25,38 +25,8 @@ jobItems.forEach((item) => {
     });
 });
 
-const priceText = document.querySelector(".span-number");
-const priceNum = Number(priceText);
-console.log(priceNum);
-
-// 마감일 지났을때 버튼 숨기기 함수
-function hideExpiredButtons() {
-    const today = new Date();
-    const listTr = document.querySelectorAll("tr.body-tr");
-
-    listTr.forEach(tr => {
-        const endDateText = tr.querySelector(".end-date").textContent.trim();
-        const activeExp = tr.querySelector("button.appli-active-btn");
-
-        const endDate = new Date(endDateText);
-
-        console.log("endDate:", endDate);
-        console.log("today:", today);
-
-        if (endDate < today) {
-            console.log("마감됨:", tr.dataset.id);
-            activeExp.style.display = "none";
-        }
-    });
-}
-
-
 const experienceTable = document.querySelector("#experience-list-table");
 if (experienceTable) {
-
-    // 마감일 지났을때 버튼 안보이게
-    hideExpiredButtons()
-
     // 모집 상태 토글
     experienceTable.addEventListener("click", async (e) => {
         const activeExp = e.target.closest("button.appli-active-btn");

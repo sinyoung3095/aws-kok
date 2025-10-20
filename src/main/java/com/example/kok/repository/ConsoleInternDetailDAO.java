@@ -1,7 +1,7 @@
 package com.example.kok.repository;
 
 import com.example.kok.dto.ConsoleInternApplicantDTO;
-import com.example.kok.dto.ConsoleInternListDTO;
+import com.example.kok.dto.ConsoleInternNoticeDTO;
 import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.mapper.ConsoleInternDetailMapper;
 import com.example.kok.util.Criteria;
@@ -16,7 +16,7 @@ public class ConsoleInternDetailDAO {
     private final ConsoleInternDetailMapper consoleInternMapper;
 
 //    공고 상세 내용
-    public ConsoleInternListDTO findInternDetailByCompany(Long internNoticeId) {
+    public ConsoleInternNoticeDTO findInternDetailByCompany(Long internNoticeId) {
         return consoleInternMapper.selectInternDatailByCompany(internNoticeId);
     }
 
