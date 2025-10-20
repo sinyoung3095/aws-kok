@@ -17,7 +17,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/mypage/**")
 @RequiredArgsConstructor
-public class MyPageRestController {
+public class MyPageRestController implements MyPageRestControllerDocs {
     private final MemberService memberService;
     private final ExperienceNoticeService experienceNoticeService;
 

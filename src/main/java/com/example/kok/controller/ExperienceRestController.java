@@ -1,7 +1,6 @@
 package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
-import com.example.kok.common.exception.MemberNotFoundException;
 import com.example.kok.dto.*;
 import com.example.kok.repository.CompanyProfileFileDAO;
 import com.example.kok.service.CompanyService;
@@ -13,19 +12,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/experiences/**")
 @RequiredArgsConstructor
-public class ExperiencesController {
+public class ExperienceRestController implements ExperienceRestControllerDocs{
     private final ExperienceNoticeService experienceNoticeService;
     private final CompanyProfileFileDAO companyProfileFileDAO;
     private final CompanyService companyService;
