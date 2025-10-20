@@ -14,12 +14,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/enterprise-console/ad")
-public class ConsoleAdApiController {
+public class ConsoleAdApiController implements ConsoleAdApiControllerDocs {
     private final ConsoleAdService adService;
 
 //    목록
     @GetMapping("/list/{companyId}/{page}")
-    public ResponseEntity<?> list(@PathVariable("companyId") Long companyId,
+    public ResponseEntity<ConsoleAdNoticeCriteriaDTO> list(@PathVariable("companyId") Long companyId,
                                   @PathVariable("page") int page,
                                   @RequestParam(required = false) String keyword) {
 

@@ -17,7 +17,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/enterprise-console/intern")
-public class ConsoleInternNoticeApiController {
+public class ConsoleInternNoticeApiController implements ConsoleInternNoticeApiControllerDocs {
     private final ConsoleInternNoticeService internService;
     private final ConsoleInternDetailService internDetailService;
     private final ConsoleInternApplicationService consoleInternApplicationService;
@@ -25,7 +25,7 @@ public class ConsoleInternNoticeApiController {
 
 //    공고 목록
     @GetMapping("/list/{companyId}/{page}")
-    public ResponseEntity<?> list(@PathVariable("companyId") Long companyId,
+    public ResponseEntity<ConsoleInternNoticeCriteriaDTO> list(@PathVariable("companyId") Long companyId,
                                   @PathVariable("page") int page,
                                   @RequestParam(value = "status", required = false) Status status,
                                   @RequestParam(required = false) String keyword) {
@@ -51,8 +51,7 @@ public class ConsoleInternNoticeApiController {
     public ResponseEntity<?> createNotice(@RequestBody ConsoleInternNoticeRequestDTO noticeRequestDTO) {
         internService.registerNotice(noticeRequestDTO);
 
-        return ResponseEntity.ok(Map.of("redirectUrl", "/enterprise-console/intern/list"));
-//        return ResponseEntity.ok(noticeRequestDTO);
+        return ResponseEntity.ok(noticeRequestDTO);
     }
 
 //    공고 수정
@@ -62,13 +61,12 @@ public class ConsoleInternNoticeApiController {
         noticeRequestDTO.setId(id);
         internService.modifyNotice(noticeRequestDTO);
 
-//        return ResponseEntity.ok(Map.of("redirectUrl", "/enterprise-console/intern/list"));
         return ResponseEntity.ok(noticeRequestDTO);
     }
 
 //    공고 상세 - 지원자
     @GetMapping("/applicate-list/{internNoticeId}/{page}")
-    public ResponseEntity<?> applicateList(@PathVariable("internNoticeId") Long internNoticeId, @PathVariable("page") int page, @RequestParam(value = "status", required = false) RequestStatus status) {
+    public ResponseEntity<ConsoleInternApplicantCriteriaDTO> applicateList(@PathVariable("internNoticeId") Long internNoticeId, @PathVariable("page") int page, @RequestParam(value = "status", required = false) RequestStatus status) {
 
         ConsoleInternApplicantCriteriaDTO internCriteriaDTO = internDetailService.getApplicateList(internNoticeId, page, status);
         if(internCriteriaDTO == null || internCriteriaDTO.getApplicantLists().size() == 0){
@@ -90,9 +88,6 @@ public class ConsoleInternNoticeApiController {
     public ResponseEntity<?> updateApplicantStatus(
             @PathVariable("id") Long userId,
             @RequestBody ConsoleInternApplicantDTO applicantDTO) {
-
-        log.info("[지원자 상태 변경 요청] userId: {}, status: {}, requestInternStatus: {}",
-                userId, applicantDTO.getRequestInternStatus(), applicantDTO.getInternNoticeId());
 
         consoleInternApplicationService.updateApplicantStatus(userId, applicantDTO.getInternNoticeId(), applicantDTO.getRequestInternStatus());
         return ResponseEntity.ok("지원자 상태가 변경되었습니다.");

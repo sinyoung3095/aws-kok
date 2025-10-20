@@ -24,7 +24,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/enterprise-console/experience")
-public class ConsoleExperienceNoticeApiController {
+public class ConsoleExperienceNoticeApiController implements ConsoleExperienceNoticeApiControllerDocs {
     private final ConsoleExperienceNoticeService experienceService;
     private final ConsoleExperienceDetailService experienceDetailService;
     private final ConsoleExperienceApplicationService consoleExperienceApplicationService;
@@ -34,7 +34,7 @@ public class ConsoleExperienceNoticeApiController {
 
 //    공고 목록
     @GetMapping("/list/{companyId}/{page}")
-    public ResponseEntity<?> list(@PathVariable("companyId") Long companyId,
+    public ResponseEntity<ConsoleExperienceNoticeCriteriaDTO> list(@PathVariable("companyId") Long companyId,
                                   @PathVariable("page") int page,
                                   @RequestParam(value = "status", required = false) Status status,
                                   @RequestParam(required = false) String keyword,
@@ -84,7 +84,7 @@ public class ConsoleExperienceNoticeApiController {
 
 //    공고 상세 - 지원자
     @GetMapping("/applicate-list/{experienceNoticeId}/{page}")
-    public ResponseEntity<?> applicateList(@PathVariable("experienceNoticeId") Long experienceNoticeId,
+    public ResponseEntity<ConsoleExperienceApplicantCriteriaDTO> applicateList(@PathVariable("experienceNoticeId") Long experienceNoticeId,
                                            @PathVariable("page") int page,
                                            @RequestParam(value = "status", required = false) RequestStatus status,
                                            @AuthenticationPrincipal CustomUserDetails customUserDetails,
@@ -149,9 +149,6 @@ public class ConsoleExperienceNoticeApiController {
     public ResponseEntity<?> updateApplicantStatus(
             @PathVariable("id") Long userId,
             @RequestBody ConsoleExperienceApplicantDTO applicantDTO) {
-
-        log.info("[지원자 상태 변경 요청] userId: {}, status: {}, requestExperienceStatus: {}",
-                userId, applicantDTO.getRequestExperienceStatus(), applicantDTO.getExperienceNoticeId());
 
         consoleExperienceApplicationService.updateApplicantStatus(userId, applicantDTO.getExperienceNoticeId(), applicantDTO.getRequestExperienceStatus());
         return ResponseEntity.ok("지원자 상태가 변경되었습니다.");
