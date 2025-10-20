@@ -349,33 +349,38 @@ document.body.addEventListener("click", async (e) => {
     const likeBtn = target.closest(".like-btn");
     if (likeBtn) {
         const postId = likeBtn.dataset.postId;
-        const likeCountEl = likeBtn.querySelector(".post-25");
-        const heartIcon = likeBtn.querySelector(".heart");
+        const isDetail = !!document.querySelector("#post-detail-modal .like-btn[data-post-id='" + postId + "']");
+        const detailLikeBtn = document.querySelector("#post-detail-modal .like-btn[data-post-id='" + postId + "']");
+        const listLikeBtn = document.querySelector(`.post-8[data-post-id="${postId}"] .like-btn`);
 
+        const currentCountEl = likeBtn.querySelector(".post-25");
+        const currentHeartEl = likeBtn.querySelector(".heart");
         let liked = likeBtn.dataset.liked === "true";
-        let current = parseInt(likeCountEl.textContent) || 0;
+        let current = parseInt(currentCountEl.textContent) || 0;
 
-        if (!liked) {
-            const success = await postService.postLike(postId);
+        const success = liked
+            ? await postService.removeLike(postId)
+            : await postService.postLike(postId);
 
-            if (success === null) return;
+        if (!success) return;
 
-            if (success) {
-                likeBtn.dataset.liked = "true";
-                likeCountEl.textContent = current + 1;
-                heartIcon.style.fill = "red";
-                heartIcon.style.stroke = "red";
-            }
-        } else {
-            const success = await postService.removeLike(postId);
-            if (success) {
-                likeBtn.dataset.liked = "false";
-                likeCountEl.textContent = Math.max(0, current - 1);
-                heartIcon.style.fill = "white";
-                heartIcon.style.stroke = "red";
-            }
+        const newLiked = !liked;
+        const newCount = liked ? current - 1 : current + 1;
+        const newFill = newLiked ? "red" : "white";
+
+        if (detailLikeBtn) {
+            detailLikeBtn.dataset.liked = newLiked;
+            detailLikeBtn.querySelector(".post-25").textContent = newCount;
+            detailLikeBtn.querySelector(".heart").style.fill = newFill;
+        }
+
+        if (listLikeBtn) {
+            listLikeBtn.dataset.liked = newLiked;
+            listLikeBtn.querySelector(".post-25").textContent = newCount;
+            listLikeBtn.querySelector(".heart").style.fill = newFill;
         }
     }
+
 
     // 신고 버튼 토글
     if (target.closest(".btn")) {
