@@ -98,7 +98,6 @@ public class InternNoticeServiceImpl implements InternNoticeService {
                     result.setFileName("image.png");
                     result.setFilePath("");
                 });
-
         return result;
     }
 

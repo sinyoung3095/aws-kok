@@ -25,4 +25,13 @@ public class RequestInternDAO {
     public List<RequestInternDTO> selectAllInternByUserId(Long id,Long internId){
         return  requestInternMapper.selectRequestInternByUserId(id,internId);
     }
+
+//    지원 여부 판별
+    public boolean isRequested(RequestInternDTO requestInternDTO){
+        if(requestInternMapper.countRequest(requestInternDTO)>0){
+            return true;
+        }
+//        System.out.println(requestInternMapper.countRequest(requestInternDTO));
+        return false;
+    }
 }

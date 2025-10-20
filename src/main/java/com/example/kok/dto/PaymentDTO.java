@@ -1,8 +1,12 @@
 package com.example.kok.dto;
 
+import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.enumeration.Status;
 import lombok.*;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Component
 @Getter

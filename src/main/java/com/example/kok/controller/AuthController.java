@@ -30,7 +30,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/auth/**")
 @RequiredArgsConstructor
-public class AuthController {
+public class AuthController implements AuthControllerDocs{
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
     private final HttpServletResponse response;
@@ -132,46 +132,6 @@ public class AuthController {
 
         response.addCookie(profileCookie);
     }
-
-//    리프레시 토큰으로 엑세스 토큰 발급
-    @GetMapping("refresh")
-    public Map<String, String> refresh(@CookieValue(value = "refreshToken", required = false) String token){
-        String username = jwtTokenProvider.getUserName(token);
-        String refreshToken = jwtTokenProvider.getRefreshToken(username);
-        if(refreshToken == null || !jwtTokenProvider.validateToken(refreshToken)){
-            throw new RuntimeException("리프레시 토큰이 유효하지 않습니다.");
-        }
-
-        CustomUserDetails customUserDetails = (CustomUserDetails) jwtTokenProvider.getAuthentication(refreshToken).getPrincipal();
-        String accessToken = jwtTokenProvider.createAccessToken(customUserDetails.getUsername());
-
-        jwtTokenProvider.deleteRefreshToken(username);
-        jwtTokenProvider.createRefreshToken(customUserDetails.getUsername());
-
-        Map<String, String> tokenMap = new HashMap<>();
-        tokenMap.put("accessToken", accessToken);
-
-        return tokenMap;
-    }
-//
-//    @GetMapping("/info")
-//    public MemberDTO getMyInfo(HttpServletRequest request) {
-//        String token = jwtTokenProvider.parseTokenFromHeader(request);
-//        if (token == null) {
-//            throw new RuntimeException("토큰이 없습니다.");
-//        }
-//
-//        // 블랙리스트 체크 추가
-//        if (jwtTokenProvider.isTokenBlackList(token)) {
-//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "로그아웃된 토큰입니다.");
-//        }
-//
-//        String memberEmail = jwtTokenProvider.getUserName(token);
-//        String provider = (String) jwtTokenProvider.getClaims(token).get("provider");
-//        MemberDTO member = memberService.getMember(memberEmail, provider);
-//
-//        return member;
-//    }
 }
 
 
