@@ -3,6 +3,7 @@ package com.example.kok.mapper;
 import com.example.kok.dto.ConsoleExperienceApplicantDTO;
 import com.example.kok.dto.FileDTO;
 import com.example.kok.dto.PostFileDTO;
+import com.example.kok.dto.RequestExperienceDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -24,6 +25,9 @@ public interface ConsoleExperienceApplicationMapper {
 
 //    공고별 지원자 목록
     List<ConsoleExperienceApplicantDTO> selectApplicantsByNoticeId(@Param("experienceNoticeId") Long experienceNoticeId);
+
+//    평가하기 가능 여부
+    public RequestExperienceDTO selectEvalOk(Long experienceNoticeId, Long memberId);
 
 
 }

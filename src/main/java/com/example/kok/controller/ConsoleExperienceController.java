@@ -1,15 +1,12 @@
 package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
-import com.example.kok.dto.ConsoleExperienceApplicantDTO;
-import com.example.kok.dto.ConsoleExperienceListDTO;
-import com.example.kok.dto.ConsoleExperienceListRequestDTO;
-import com.example.kok.service.ConsoleExperienceApplicationService;
-import com.example.kok.service.ConsoleExperienceDetailService;
-import com.example.kok.service.ConsoleExperienceListService;
+import com.example.kok.dto.*;
+import com.example.kok.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +22,11 @@ public class ConsoleExperienceController {
     private final ConsoleExperienceListService consoleExperienceListService;
     private final ConsoleExperienceDetailService consoleExperienceDetailService;
     private final ConsoleExperienceApplicationService consoleExperienceApplicationService;
+    private final UserService userService;
+    private final ExperienceNoticeService experienceNoticeService;
+    private final EvaluationService evaluationService;
 
-//    기업 콘솔 체험 공고 목록
+    //    기업 콘솔 체험 공고 목록
     @GetMapping("/list")
     public String goToList(@AuthenticationPrincipal CustomUserDetails customUserDetails,
                            Model model) {
@@ -126,8 +126,39 @@ public class ConsoleExperienceController {
 
 //    기업 콘솔 평가서
     @GetMapping("/review")
-    public String goToReview() {
+    public String goToReview(@RequestParam("experienceNoticeId") Long experienceNoticeId,
+                                  @RequestParam("memberId") Long memberId, Model model) {
+        model.addAttribute("memberId", memberId);
+        model.addAttribute("experienceNoticeId", experienceNoticeId);
+        UserDTO user=new UserDTO();
+        user=userService.findById(memberId);
+        ExperienceNoticeDTO exp=new ExperienceNoticeDTO();
+        exp=experienceNoticeService.findNoticeById(experienceNoticeId);
+        model.addAttribute("user", user);
+        model.addAttribute("exp", exp);
         return "enterprise-console/console-review";
+    }
+
+//    평가할 수 있는지 여부
+    @GetMapping("/isEvalOk")
+    public ResponseEntity<Boolean> isEvalOk(@RequestParam("experienceNoticeId") Long experienceNoticeId,
+                                            @RequestParam("memberId") Long memberId) {
+        boolean result=consoleExperienceApplicationService.isEvalOk(experienceNoticeId, memberId);
+        return ResponseEntity.ok(result);
+    }
+
+//    평가하기
+    @PostMapping("/go-review")
+    public String goReview(@RequestBody EvaluationDTO evaluation, @AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
+        evaluationService.review(evaluation);
+        Long companyId = customUserDetails.getId();
+        String companyName = customUserDetails.getCompanyName();
+        String memberName = customUserDetails.getUsername();
+
+        model.addAttribute("companyId", companyId);
+        model.addAttribute("companyName", companyName);
+        model.addAttribute("memberName", memberName);
+        return "enterprise-console/console-experience-list";
     }
 
 

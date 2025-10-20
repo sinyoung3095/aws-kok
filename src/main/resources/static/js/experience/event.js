@@ -588,8 +588,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const expId = Number(applyBtn.dataset.experienceid);
 
             const isRequestedPre=await fetch(`/api/experiences/is-requested?experienceId=${expId}`);
-            const isRequested=isRequestedPre.json();
+            const isRequested=await isRequestedPre.json();
             const isRequestedDetail=isRequested;
+
+            // console.log(isRequestedDetail);
 
             if(isRequestedDetail){
                 textBox.textContent="이미 지원한 공고입니다."

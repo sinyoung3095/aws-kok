@@ -77,6 +77,8 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
     @Override
     public ExperienceNoticeDTO findNoticeById(Long id) {
         ExperienceNoticeDTO result= experienceNoticeDAO.findById(id);
+        System.out.println(id);
+        System.out.println(result);
         String jobName= experienceNoticeDAO.findJobNameByID(id);
         result.setJobName(jobName);
         System.out.println(result);

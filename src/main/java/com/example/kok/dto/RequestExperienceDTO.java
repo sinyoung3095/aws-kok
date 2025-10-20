@@ -4,6 +4,8 @@ import com.example.kok.enumeration.RequestStatus;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 @Getter @Setter
 @ToString
@@ -27,4 +29,5 @@ public class RequestExperienceDTO {
     private String requestExperienceMemberPhone;
     private String requestExperienceMemberUrl;
     private long fileId;
+    private LocalDate experienceEndDate;
 }
