@@ -47,6 +47,8 @@ public class CommunityPostServiceImpl implements CommunityPostService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
+//    실행되는 동안 오류 발생 시 롤백하기 위한 선언
     public PostsCriteriaDTO getList(int page, Long memberId) {
         Criteria criteria = new Criteria(page, communityPostDAO.findCountAll());
         List<PostDTO> posts = communityPostDAO.findAll(criteria);

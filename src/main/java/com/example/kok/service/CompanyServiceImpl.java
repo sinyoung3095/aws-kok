@@ -7,6 +7,7 @@ import com.example.kok.util.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.util.List;
@@ -108,6 +109,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     //    기업 목록
     @Override
+    @Transactional(rollbackFor = Exception.class)
+//    실행되는 동안 오류 발생 시 롤백하기 위한 선언
     public CompaniesCriteriaDTO getCompanyList(int page, CompanySearch search, Long userId) {
 //        System.out.println("검색 한 내용 " + search);
 
