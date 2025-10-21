@@ -388,6 +388,20 @@ svg.svg-updown{
     margin-left: auto;
 }
 
+svg.svg-right{
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    transition-duration: .2s;
+    transition-property: transform, translate, scale, rotate;
+    transition-timing-function: linear;
+    margin-left: auto;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 4px;
+    box-sizing: content-box;
+}
+
 div.exp-wrap{
     padding: 8px;
     flex-direction: column;

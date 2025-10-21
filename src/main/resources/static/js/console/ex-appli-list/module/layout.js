@@ -86,7 +86,11 @@ const experienceDatailLayout = (() => {
                         <span class="exp-status">${list.requestExperienceStatus === "await" ? "서류 검토 중" : list.requestExperienceStatus === "accept" ? "합격" : "불합격"}</span>
                     </td>
                     <td class="body-td">
-                        <a href="/enterprise-console/experience/application/${list.experienceNoticeId}/${list.userId}" class="more-btn">상세보기</a>
+                        <a href="/enterprise-console/experience/application/${list.experienceNoticeId}/${list.userId}" class="more-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-right">
+                                <path d="m9 18 6-6-6-6"></path>
+                            </svg>
+                        </a>
                     </td>
                 </tr>
             `;

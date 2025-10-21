@@ -68,14 +68,13 @@ if (internTable) {
             // 모든 팝업 닫기
             document.querySelectorAll(".hambuger-pop-wrap").forEach((pop) => {
                 pop.style.display = "none";
+                pop.classList.remove("active");
             });
 
             // 현재 버튼 다음 형제 팝업만 열기
             const hambugerPopWrap = hambugerBtn.nextElementSibling;
             if (hambugerPopWrap) {
-                hambugerPopWrap.style.position = "absolute";
-                hambugerPopWrap.style.top = "50px";
-                hambugerPopWrap.style.right = "32px";
+                hambugerPopWrap.classList.add("active");
                 hambugerPopWrap.style.display = "block";
             }
             return;
