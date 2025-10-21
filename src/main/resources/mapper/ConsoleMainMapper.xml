@@ -37,7 +37,7 @@
             u.user_name,
             u.user_email,
             u.user_phone,
-            re.created_datetime as request_date,
+            re.created_datetime::date as request_date,
             en.id as experience_notice_id,
             en.experience_notice_title
         from tbl_request_experience re
