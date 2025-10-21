@@ -622,6 +622,7 @@ body button.category-sub.active{
 }
 
 div.list-list{
+    overflow-y: auto;
     box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
     color: #0a0a0a;
     padding-block: 24px;
@@ -734,6 +735,12 @@ td.body-td{
     vertical-align: middle;
     padding: 8px;
     /*cursor: pointer;*/
+}
+
+.body-tr:last-child td.body-td .hambuger-pop-wrap.active,
+.body-tr:nth-last-child(2) td.body-td .hambuger-pop-wrap.active{
+    top: auto;
+    bottom: 50px;
 }
 
 div.td-title{
@@ -872,6 +879,13 @@ div.hambuger-pop-wrap {
     min-width: max-content;
     z-index: 1000;
     top: 0;
+}
+
+div.hambuger-pop-wrap.active {
+    display: block;
+    position: absolute;
+    top: 50px;
+    right: 32px;
 }
 
 div.hambuger-pop{

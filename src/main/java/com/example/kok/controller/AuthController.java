@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,11 +22,13 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @Slf4j
 @RestController
@@ -36,25 +39,12 @@ public class AuthController implements AuthControllerDocs{
     private final JwtTokenProvider jwtTokenProvider;
     private final HttpServletResponse response;
     private final MemberService memberService;
+    private final RedisTemplate redisTemplate;
 
 //    로그인
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody UserDTO userDTO,HttpServletRequest request ,HttpServletResponse response) {
 
-//        if(request.getCookies()!=null){
-//            for (Cookie cookie : request.getCookies()) {
-//
-//                    Cookie cookie1 = new Cookie(cookie.getName(), null);
-//                    cookie1.setHttpOnly(true);
-//                    cookie1.setSecure(false);
-//                    cookie1.setPath("/");
-//                    cookie1.setMaxAge(0);
-//
-//                    response.addCookie(cookie1);
-//
-//
-//            }
-//        }
         try {
             log.info("login 들어옴");
             Authentication authentication =
@@ -80,6 +70,36 @@ public class AuthController implements AuthControllerDocs{
         } catch(AuthenticationException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "로그인 실패: " + e.getMessage()));
+        }
+    }
+
+    @PostMapping("/reset-cookies")
+    public void resetCookies(HttpServletRequest req, HttpServletResponse res){
+        Cookie[] cookies = req.getCookies();
+        log.info("Cookies are {}", cookies);
+        if (cookies != null) {
+            boolean accessTokenExists = false;
+            for (Cookie cookie : cookies) {
+                if ("accessToken".equals(cookie.getName())) {
+                    accessTokenExists = true;
+                    break;
+                }
+            }
+            if (!accessTokenExists) {
+                for (Cookie cookie : cookies) {
+                    Cookie newCookie = new Cookie(cookie.getName(), null);
+                    newCookie.setHttpOnly(true);
+                    newCookie.setSecure(false);
+                    newCookie.setPath("/");
+                    newCookie.setMaxAge(0);
+                    res.addCookie(newCookie);
+                }
+            }
+        }
+
+        Set<String> keys = redisTemplate.keys("refresh:*");
+        if(!keys.isEmpty()){
+            redisTemplate.delete(keys);
         }
     }
 
