@@ -41,8 +41,10 @@ public class AuthController implements AuthControllerDocs{
     public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
             log.info(userDTO.toString());
         try {
+            log.info("login 들어옴");
             Authentication authentication =
                     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDTO.getUserEmail(), userDTO.getUserPassword()));
+            log.info("자격증명 중");
             CustomUserDetails user = (CustomUserDetails) authentication.getPrincipal();
             if(!user.getUserRole().getValue().equals(userDTO.getUserRole().getValue())){
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "로그인 실패"));

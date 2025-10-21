@@ -13,4 +13,7 @@ public class CompanyProfileFileDAO {
     public CompanyProfileFileDTO findFileByCompanyId(Long companyId){
         return companyProfileFileMapper.selectByCompanyId(companyId);
     }
+    public int findCountByCompanyId(Long companyId){
+        return companyProfileFileMapper.selectCountByCompanyId(companyId);
+    }
 }

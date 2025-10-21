@@ -5,10 +5,19 @@
     <select id="selectByCompanyId">
         select c.user_id, cp.company_id, f.id, f.file_origin_name, f.file_name, f.file_path, f.file_size, f.file_content_type
         from tbl_company c
-        join tbl_company_profile_file cp
+        left join tbl_company_profile_file cp
         on cp.company_id=c.user_id
         join tbl_file f
         on cp.file_id=f.id
+        where c.user_id=#{companyId}
+    </select>
+    <select id="selectCountByCompanyId">
+        select COUNT(*)
+        from tbl_company c
+                 left join tbl_company_profile_file cp
+                           on cp.company_id=c.user_id
+                 join tbl_file f
+                      on cp.file_id=f.id
         where c.user_id=#{companyId}
     </select>
 </mapper>
