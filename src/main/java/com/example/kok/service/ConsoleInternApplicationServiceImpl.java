@@ -2,6 +2,7 @@ package com.example.kok.service;
 
 import com.example.kok.dto.ConsoleInternApplicantDTO;
 import com.example.kok.dto.FileDTO;
+import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.repository.ConsoleInternApplicationDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,5 +36,12 @@ public class ConsoleInternApplicationServiceImpl implements ConsoleInternApplica
     public List<ConsoleInternApplicantDTO> getApplicantsByNoticeId(Long internNoticeId) {
         return consoleInternApplicationDAO.findApplicantsByNoticeId(internNoticeId);
     }
+
+//    지원자 상태 변경
+    @Override
+    public void updateApplicantStatus(Long userId, Long internNoticeId, RequestStatus requestInternStatus) {
+        consoleInternApplicationDAO.updateApplicantStatus(userId, internNoticeId, requestInternStatus);
+    }
+
 
 }

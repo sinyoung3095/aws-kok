@@ -31,9 +31,6 @@ const pay = async ({price, duration}) => {
         });
         switch (response.event) {
             case "done":
-                console.log(response);
-                console.log("여기 맞는가")
-
                 const priceText = document.querySelector(".start-price .price").textContent;
                 const paymentPrice = Number(priceText.replace(/,/g, "").trim());
 
@@ -53,14 +50,11 @@ const pay = async ({price, duration}) => {
 
                 try {
                     const result = await adService.register(data);
-                    console.log("광고 등록 성공이당");
                 } catch (err) {
                     console.error(err);
-                    console.log("안됨");
                 }
                 break;
             default:
-                console.log("결제 상태:", response.event);
                 break;
         }
     } catch (e) {
@@ -87,8 +81,8 @@ const pay = async ({price, duration}) => {
 
 document.addEventListener("DOMContentLoaded", function () {
     const inputMain = document.getElementById("ad-main-text");
-    const h6 = document.querySelector("h6.pre-h6");
     const inputSub = document.getElementById("ad-sub-text");
+    const h6 = document.querySelector("h6.pre-h6");
     const p = document.querySelector("p.pre-p");
 
     let okcheck = false;
@@ -136,12 +130,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const endDateInput = document.getElementById("end-date");
 
     if (page === "create") {
-        const startInput = document.querySelector("#start-date");
-        const endInput = document.querySelector("#end-date");
-
-        if (!startInput || !endInput) return;
-        if (startInput.value && endInput.value) return;
-
         const today = new Date();
         const twoDaysLater = new Date(today);
         twoDaysLater.setDate(today.getDate() + 2);
@@ -153,8 +141,8 @@ document.addEventListener("DOMContentLoaded", function () {
             return `${y}-${m}-${day}`;
         };
 
-        startInput.value = formatted(twoDaysLater);
-        endInput.value = formatted(twoDaysLater);
+        startDateInput.value = formatted(twoDaysLater);
+        endDateInput.value = formatted(twoDaysLater);
     }
 
     // 달력 input
@@ -207,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     } else {
                         resultDate.innerText = diffDays + "일";
                         const price = diffDays * 200000;
-                        resultPrice.innerText = price.toLocaleString();
+                        resultPrice.innerText = price;
                         date2.innerText = "광고 기간: " + diffDays + "일";
                         okcheck = true;
                     }
@@ -230,12 +218,44 @@ document.addEventListener("DOMContentLoaded", function () {
         btnRegisterAd.addEventListener("click", async (e) => {
             e.preventDefault();
 
+            const inputMain = document.querySelector("#ad-main-text");
+            const inputSub = document.querySelector("#ad-sub-text");
+            const startDate = document.querySelector("#start-date");
+            const endDate = document.querySelector("#end-date");
+
+            // 유효성 검사
+            let isValid = false;
+            [inputMain, inputSub, startDate, endDate].forEach(el => el.style.border = "");
+
+            if (!inputMain.value.trim() || inputMain.value.length > 30) {
+                inputMain.style.border = "2px solid red";
+                isValid = true;
+            }
+            if (!inputSub.value.trim() || inputSub.value.length > 50) {
+                inputSub.style.border = "2px solid red";
+                isValid = true;
+            }
+            if (!startDate.value.trim()) {
+                startDate.style.border = "2px solid red";
+                isValid = true;
+            }
+            if (!endDate.value.trim()) {
+                endDate.style.border = "2px solid red";
+                isValid = true;
+            }
+
+            if (isValid) return;
+
+
             const payInfo = {
                 price: 100,
                 duration: 2
             }
 
             await pay(payInfo);
+
+            window.location.href = "/enterprise-console/ad/list";
+
         });
     }
 
@@ -243,7 +263,36 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnUpdateAd = document.querySelector("#btn-update-ad");
     if (btnUpdateAd) {
         btnUpdateAd.addEventListener("click", async () => {
-            console.log("수정 버튼 클릭됨");
+            const inputMain = document.querySelector("#ad-main-text");
+            const inputSub = document.querySelector("#ad-sub-text");
+            const startDate = document.querySelector("#start-date");
+            const endDate = document.querySelector("#end-date");
+
+            // 유효성 검사
+            let isValid = false;
+            [inputMain, inputSub, startDate, endDate].forEach(el => el.style.border = "");
+
+            if (!inputMain.value.trim() || inputMain.value.length > 30) {
+                inputMain.style.border = "2px solid red";
+                isValid = true;
+            }
+            if (!inputSub.value.trim() || inputSub.value.length > 50) {
+                inputSub.style.border = "2px solid red";
+                isValid = true;
+            }
+            if (!startDate.value.trim()) {
+                startDate.style.border = "2px solid red";
+                isValid = true;
+            }
+            if (!endDate.value.trim()) {
+                endDate.style.border = "2px solid red";
+                isValid = true;
+            }
+
+            if (isValid) return;
+
+            const priceText = document.querySelector(".start-price .price").textContent;
+            const paymentPrice = Number(priceText.replace(/,/g, "").trim());
 
             const data = {
                 advertisementMainText: document.querySelector("#ad-main-text").value,
@@ -251,16 +300,27 @@ document.addEventListener("DOMContentLoaded", function () {
                 advertiseStartDatetime: document.querySelector("#start-date").value,
                 advertiseEndDatetime: document.querySelector("#end-date").value,
                 companyId: companyId,
+                paymentPrice: paymentPrice,
                 files: document.querySelector("#add-background").files
             };
 
             try {
-                const result = await adService.update(id, data);
-                console.log("광고 수정 완료:", result);
+                await adService.update(id, data);
                 alert("광고가 성공적으로 수정되었습니다!");
-                // location.href = "/enterprise-console/ad/list";
+                window.location.href = "/enterprise-console/ad/list";
             } catch (err) {
-                console.error("수정 중 오류 발생:", err);
+                console.error("수정 중 오류 발생", err);
+            }
+        });
+    }
+});
+
+["#ad-main-text", "#ad-sub-text", "#start-date", "#end-date"].forEach(selector => {
+    const el = document.querySelector(selector);
+    if (el) {
+        el.addEventListener("input", () => {
+            if (el.value.trim()) {
+                el.style.border = "";
             }
         });
     }

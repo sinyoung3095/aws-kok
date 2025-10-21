@@ -1,7 +1,7 @@
 package com.example.kok.mapper;
 
-import com.example.kok.dto.ConsoleExperienceListDTO;
-import com.example.kok.dto.ConsoleExperienceListRequestDTO;
+import com.example.kok.dto.ConsoleExperienceNoticeDTO;
+import com.example.kok.dto.ConsoleExperienceNoticeRequestDTO;
 import com.example.kok.enumeration.Status;
 import com.example.kok.util.Criteria;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,10 +13,10 @@ import java.util.List;
 public interface ConsoleExperienceNoticeMapper {
 
 //    공고 목록
-    public List<ConsoleExperienceListDTO> selectExperienceByCompany(@Param("companyId") Long companyId,
-                                                                    @Param("criteria") Criteria criteria,
-                                                                    @Param("status") Status status,
-                                                                    @Param("keyword") String keyword);
+    public List<ConsoleExperienceNoticeDTO> selectExperienceByCompany(@Param("companyId") Long companyId,
+                                                                      @Param("criteria") Criteria criteria,
+                                                                      @Param("status") Status status,
+                                                                      @Param("keyword") String keyword);
 
 //    공고 개수
     public int selectCountByCompany(@Param("companyId") Long companyId,
@@ -32,22 +32,22 @@ public interface ConsoleExperienceNoticeMapper {
                                            @Param("active") boolean active);
 
 //    공고 등록
-    public void insertNotice(ConsoleExperienceListRequestDTO noticeRequestDTO);
+    public void insertNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO);
 
 //    직군 등록
-    public void insertNoticeJobCategory(ConsoleExperienceListRequestDTO noticeRequestDTO);
+    public void insertNoticeJobCategory(ConsoleExperienceNoticeRequestDTO noticeRequestDTO);
 
 //    공고 상세
-    public ConsoleExperienceListRequestDTO selectExperienceDetailById(@Param("id") Long id);
+    public ConsoleExperienceNoticeRequestDTO selectExperienceDetailById(@Param("id") Long id);
 
 //    공고 수정 등록
-    public void updateNotice(ConsoleExperienceListRequestDTO noticeRequestDTO);
+    public void updateNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO);
 
 //    공고 수정 상세
-    ConsoleExperienceListRequestDTO selectById(@Param("id") Long id);
+    ConsoleExperienceNoticeRequestDTO selectById(@Param("id") Long id);
 
 //    직군 수정
-    public void updateNoticeJobCategory(ConsoleExperienceListRequestDTO noticeRequestDTO);
+    public void updateNoticeJobCategory(ConsoleExperienceNoticeRequestDTO noticeRequestDTO);
 
 //    지원서 삭제
     public void deleteRequestExperienceByNoticeId(Long id);

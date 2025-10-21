@@ -23,7 +23,6 @@ public class ConsoleProfileController {
 
 //    기업 콘솔 프로필 관리
     @GetMapping("/profile")
-//    public String goToProfile(@RequestParam("userId") Long userId, Model model) {
     public String goToProfile(@AuthenticationPrincipal CustomUserDetails customUserDetails,
                               Model model) {
 
@@ -37,22 +36,16 @@ public class ConsoleProfileController {
         model.addAttribute("companyName", companyName);
         model.addAttribute("memberName", memberName);
 
-        return "enterprise-console/console-profile";
+        return "enterprise-console/profile/console-profile";
     }
 
-//    기업 프로필 수정 처리
+//    기업 프로필 수정
     @PostMapping("/profile/update")
     public String updateProfile(
             @ModelAttribute ConsoleCompanyProfileDTO companyProfileDTO,
             @RequestParam(value = "profileFile", required = false) MultipartFile profileFile,
             @RequestParam(value = "backgroundFile", required = false) MultipartFile backgroundFile
     ) {
-        log.info("=== [Controller] 기업 프로필 업데이트 요청 ===");
-        log.info("기업명: {}", companyProfileDTO.getCompanyName());
-        log.info("산업 분야: {}", companyProfileDTO.getCompanySectorName());
-        log.info("기업 규모: {}", companyProfileDTO.getCompanyScaleName());
-        log.info("대표자명: {}", companyProfileDTO.getCeoName());
-
         List<MultipartFile> multipartFiles = new ArrayList<>();
 
         if (profileFile != null && !profileFile.isEmpty()) {

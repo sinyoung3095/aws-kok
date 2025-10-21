@@ -63,31 +63,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-    const downloadBtn = document.querySelector(".download-btn");
-
-    // 버튼이 없으면 리턴
-    if (!downloadBtn) return;
-
-    downloadBtn.addEventListener("click", async () => {
-        try {
-            // 백엔드로 presigned URL 요청
-            const response = await fetch(`/files/download/${experienceNoticeId}/${memberId}`);
-
-            if (!response.ok) {
-                alert("이력서 파일을 찾을 수 없습니다.");
-                return;
-            }
-
-            // presigned URL 문자열 반환
-            const downloadUrl = await response.text();
-
-            // 새 창에서 다운로드 실행
-            window.open(downloadUrl, "_blank");
-        } catch (error) {
-            console.error("다운로드 중 오류 발생:", error);
-            alert("다운로드 중 오류가 발생했습니다.");
-        }
-    });
-});

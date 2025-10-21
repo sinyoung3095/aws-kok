@@ -158,8 +158,35 @@ const myPageService = (() => {
         console.log(response);
         return response.ok;
     }
+
+    const loadStorage=async ()=>{
+        const request=await fetch(`/api/member/storage/load`);
+        const responsePre=await request.json();
+        const response=responsePre;
+
+        console.log("서비스 response: ", response);
+        console.log(typeof response);
+
+        return response;
+    }
+
+    const deleteStorage=async (fileId)=>{
+        const response=await fetch(`/api/member/storage/delete?fileId=${fileId}`,{
+            method: "DELETE"
+        });
+
+        return response.ok;
+    }
+
+    const saveStorage=async (files)=>{
+        const response=await fetch(`/api/member/storage/save?files=${files}`, {
+            method: "POST"
+        });
+
+        return response.ok;
+    }
     return { getProfile:getProfile, getPostsList:getPostsList, getPostDetail:getPostDetail, getExperienceList:getExperienceList, getComments:getComments, writeComment:writeComment, updateComment:updateComment, deleteComment:deleteComment,
     getReplies:getReplies, writeReply:writeReply, updateReply:updateReply, deleteReply:deleteReply, getInternList:getInternList, getPaymentList:getPaymentList,
     getSavedExperienceList:getSavedExperienceList, getSavedInternList:getSavedInternList, deleteRequestExperience:deleteRequestExperience, deleteRequestIntern:deleteRequestIntern,
-    profileUpdate:profileUpdate};
+    profileUpdate:profileUpdate, loadStorage:loadStorage, deleteStorage:deleteStorage, saveStorage:saveStorage};
 })();

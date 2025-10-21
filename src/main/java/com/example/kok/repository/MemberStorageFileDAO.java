@@ -22,4 +22,9 @@ public class MemberStorageFileDAO {
     public List<FileDTO> findFilesByMemberId(Long memberId) {
         return memberStorageFileMapper.selectStorageFilesByMemberId(memberId);
     }
+
+//    파일 id로 보관함 파일 삭제
+    public void deleteFileByFileId(Long fileId) {
+        memberStorageFileMapper.deleteStorageFileByFileId(fileId);
+    }
 }

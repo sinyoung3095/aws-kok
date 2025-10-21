@@ -94,7 +94,7 @@
     </select>
 
     <!-- 체험 공고 등록 -->
-    <insert id="insertNotice" useGeneratedKeys="true" keyProperty="id" parameterType="ConsoleExperienceListRequestDTO">
+    <insert id="insertNotice" useGeneratedKeys="true" keyProperty="id" parameterType="ConsoleExperienceNoticeRequestDTO">
         insert into tbl_experience_notice
         (
             experience_notice_title,

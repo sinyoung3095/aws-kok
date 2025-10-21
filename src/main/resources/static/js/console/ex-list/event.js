@@ -25,62 +25,31 @@ jobItems.forEach((item) => {
     });
 });
 
-const priceText = document.querySelector(".span-number");
-const priceNum = Number(priceText);
-console.log(priceNum);
-
-// 마감일 지났을때 버튼 숨기기 함수
-function hideExpiredButtons() {
-    const today = new Date();
-    const listTr = document.querySelectorAll("tr.body-tr");
-
-    listTr.forEach(tr => {
-        const endDateText = tr.querySelector(".end-date").textContent.trim();
-        const activeExp = tr.querySelector("button.appli-active-btn");
-
-        const endDate = new Date(endDateText);
-
-        console.log("endDate:", endDate);
-        console.log("today:", today);
-
-        if (endDate < today) {
-            console.log("마감됨:", tr.dataset.id);
-            activeExp.style.display = "none";
-        }
-    });
-}
-
-
 const experienceTable = document.querySelector("#experience-list-table");
 if (experienceTable) {
-
-    // 마감일 지났을때 버튼 안보이게
-    hideExpiredButtons()
-
     // 모집 상태 토글
     experienceTable.addEventListener("click", async (e) => {
         const activeExp = e.target.closest("button.appli-active-btn");
         if (activeExp) {
-            const tr = activeExp.closest("tr.body-tr");
-            const expStatus = tr.querySelector("span.exp-status");
+            const btn = e.target.closest(".appli-active-btn");
+            const tr = btn.closest(".body-tr");
+            const span = tr.querySelector(".exp-status");
+            const isActive = btn.classList.contains("active");
 
-            tr.querySelectorAll(".appli-active-btn").forEach(btn => {
+            if (isActive) {
                 btn.classList.remove("active");
-            });
-            activeExp.classList.add("active");
-            expStatus.classList.add("active");
-
-            let statusValue;
-            if (expStatus.classList.contains("inactive")) {
-                activeExp.classList.remove("inactive");
-                expStatus.classList.remove("inactive");
-                expStatus.innerText = "모집 중";
-                statusValue = "active";
-            } else {
-                activeExp.classList.add("inactive");
-                expStatus.classList.add("inactive");
-                expStatus.innerText = "모집 완료";
+                btn.classList.add("inactive");
+                span.classList.remove("active");
+                span.classList.add("inactive");
+                span.innerText = "모집 완료";
                 statusValue = "inactive";
+            } else {
+                btn.classList.remove("inactive");
+                btn.classList.add("active");
+                span.classList.remove("inactive");
+                span.classList.add("active");
+                span.innerText = "모집중";
+                statusValue = "active";
             }
 
             const noticeId = tr.dataset.id;

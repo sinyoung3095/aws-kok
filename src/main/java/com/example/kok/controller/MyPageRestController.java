@@ -17,7 +17,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/mypage/**")
 @RequiredArgsConstructor
-public class MyPageRestController {
+public class MyPageRestController implements MyPageRestControllerDocs {
     private final MemberService memberService;
     private final ExperienceNoticeService experienceNoticeService;
 
@@ -26,10 +26,8 @@ public class MyPageRestController {
     public ResponseEntity getSavedExp(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         long memberId=customUserDetails.getId();
         List<ExperienceNoticeDTO> list=memberService.findExperienceNoticeByMemberId(memberId);
-        if(list.size()!=0){
-            return ResponseEntity.ok(list);
-        }
-        return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(list);
     }
 
     //    저장한 인턴 공고
@@ -37,10 +35,8 @@ public class MyPageRestController {
     public ResponseEntity getSavedInt(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         long memberId=customUserDetails.getId();
         List<InternNoticeDTO> list=memberService.findInternNoticeByMemberId(memberId);
-        if(list.size()!=0){
-            return ResponseEntity.ok(list);
-        }
-        return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(list);
     }
 
 //    지원한 체험 공고
@@ -48,10 +44,8 @@ public class MyPageRestController {
     public ResponseEntity<?> getRequests(@AuthenticationPrincipal CustomUserDetails customUserDetails){
         long memberId=customUserDetails.getId();
         List<RequestExperienceDTO> req=memberService.findRequestExperienceByMemberId(memberId);
-        if(req.size()!=0){
-            return ResponseEntity.ok(req);
-        }
-        return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(req);
     }
 
 //    체험 지원 취소
@@ -66,10 +60,8 @@ public class MyPageRestController {
     public ResponseEntity<?> getInterns(@AuthenticationPrincipal CustomUserDetails customUserDetails){
         long memberId=customUserDetails.getId();
         List<RequestInternDTO> req=memberService.findRequestInternByMemberId(memberId);
-        if(req.size()!=0){
-            return ResponseEntity.ok(req);
-        }
-        return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(req);
     }
 
     //    인턴 지원 취소
@@ -84,10 +76,8 @@ public class MyPageRestController {
     public ResponseEntity<?> getPosts(@AuthenticationPrincipal CustomUserDetails customUserDetails){
         long memberId=customUserDetails.getId();
         List<PostDTO> posts=memberService.findPostsByMemberId(memberId);
-        if(posts.size()!=0){
-            return ResponseEntity.ok(posts);
-        }
-        return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(posts);
     }
 
 //    결제 내역
@@ -95,10 +85,8 @@ public class MyPageRestController {
     public ResponseEntity<?> getPayments(@AuthenticationPrincipal CustomUserDetails customUserDetails){
         long memberId=customUserDetails.getId();
         List<PaymentDTO> payments=memberService.findPaymentByMemberId(memberId);
-        if(payments.size()!=0){
-            return ResponseEntity.ok(payments);
-        }
-        return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(payments);
     }
 
 //    프로필 편집 누르면 뜨는 정보들

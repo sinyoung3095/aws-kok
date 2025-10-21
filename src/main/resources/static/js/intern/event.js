@@ -525,7 +525,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const intId = Number(applyBtn.dataset.internid);
 
             const isRequestedPre=await fetch(`/api/interns/is-requested?internId=${intId}`);
-            const isRequestedIntern=isRequestedPre.json();
+            const isRequestedIntern=await isRequestedPre.json();
             const isRequestedDetail=isRequestedIntern;
 
             console.log(isRequestedDetail);

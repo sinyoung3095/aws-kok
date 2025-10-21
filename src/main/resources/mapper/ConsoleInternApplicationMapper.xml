@@ -40,10 +40,10 @@
             f.file_path,
             f.file_name
         from tbl_request_intern re
-             join tbl_request_intern_file ref
-                  on re.id = ref.request_intern_id
+             join tbl_request_intern_file rif
+                  on re.id = rif.request_intern_id
              join tbl_file f
-                  on ref.file_id = f.id
+                  on rif.file_id = f.id
         where re.member_id = #{memberId}
           and re.intern_notice_id = #{internNoticeId}
     </select>
@@ -62,4 +62,13 @@
         where re.intern_notice_id = #{internNoticeId}
         order by re.id desc
     </select>
+
+    <!-- 지원자 상태 변경 -->
+    <update id="updateApplicantStatus">
+        update tbl_request_intern
+        set request_intern_status = #{requestInternStatus}::request_status,
+            updated_datetime = now()
+        where member_id = #{userId}
+          and intern_notice_id = #{internNoticeId};
+    </update>
 </mapper>

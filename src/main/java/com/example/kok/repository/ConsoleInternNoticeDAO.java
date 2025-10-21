@@ -1,7 +1,7 @@
 package com.example.kok.repository;
 
-import com.example.kok.dto.ConsoleInternListDTO;
-import com.example.kok.dto.ConsoleInternListRequestDTO;
+import com.example.kok.dto.ConsoleInternNoticeDTO;
+import com.example.kok.dto.ConsoleInternNoticeRequestDTO;
 import com.example.kok.enumeration.Status;
 import com.example.kok.mapper.ConsoleInternNoticeMapper;
 import com.example.kok.util.Criteria;
@@ -16,7 +16,7 @@ public class ConsoleInternNoticeDAO {
     private final ConsoleInternNoticeMapper consoleInternMapper;
 
 //    공고 목록(전체)
-    public List<ConsoleInternListDTO> findAllByCompany(Long companyId, Criteria criteria, Status status, String keyword) {
+    public List<ConsoleInternNoticeDTO> findAllByCompany(Long companyId, Criteria criteria, Status status, String keyword) {
         return consoleInternMapper.selectInternByCompany(companyId, criteria, status, keyword);
     }
 
@@ -46,32 +46,32 @@ public class ConsoleInternNoticeDAO {
     }
 
 //    공고 등록
-    public void createNotice(ConsoleInternListRequestDTO noticeRequestDTO) {
+    public void createNotice(ConsoleInternNoticeRequestDTO noticeRequestDTO) {
         consoleInternMapper.insertNotice(noticeRequestDTO);
     }
 
 //    직군 등록
-    public void createNoticeJobCategory(ConsoleInternListRequestDTO noticeRequestDTO) {
+    public void createNoticeJobCategory(ConsoleInternNoticeRequestDTO noticeRequestDTO) {
         consoleInternMapper.insertNoticeJobCategory(noticeRequestDTO);
     }
 
 //    공고 상세
-    public ConsoleInternListRequestDTO findDetailById(Long id) {
+    public ConsoleInternNoticeRequestDTO findDetailById(Long id) {
         return consoleInternMapper.selectInternDetailById(id);
     }
 
 //    공고 수정 등록
-    public void editNotice(ConsoleInternListRequestDTO noticeRequestDTO) {
+    public void editNotice(ConsoleInternNoticeRequestDTO noticeRequestDTO) {
         consoleInternMapper.updateNotice(noticeRequestDTO);
     }
 
 //    직군 수정
-public void editNoticeJobCategory(ConsoleInternListRequestDTO noticeRequestDTO) {
+public void editNoticeJobCategory(ConsoleInternNoticeRequestDTO noticeRequestDTO) {
     consoleInternMapper.updateNoticeJobCategory(noticeRequestDTO);
 }
 
 //    공고 수정 상세
-    public ConsoleInternListRequestDTO findById(Long id) {
+    public ConsoleInternNoticeRequestDTO findById(Long id) {
         return consoleInternMapper.selectById(id);
     }
 

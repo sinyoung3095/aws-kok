@@ -47,6 +47,8 @@ const adService = (() => {
             body: formData,
         });
 
+        console.log(response)
+
         if (!response.ok) {
             console.error("광고 수정 실패:", response.status);
             throw new Error("광고 수정 실패");

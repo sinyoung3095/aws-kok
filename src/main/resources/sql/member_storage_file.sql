@@ -6,3 +6,5 @@ CREATE TABLE tbl_member_storage_file (
     constraint fk_member_storage_file_member foreign key(member_id)
         references tbl_member(user_id)
 );
+
+select * from tbl_member_storage_file;

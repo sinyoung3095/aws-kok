@@ -16,4 +16,9 @@
         on m.user_id=s.member_id
         where s.member_id=#{memberId}
     </select>
+<!--    파일id로 보관함에서 삭제-->
+    <delete id="deleteStorageFileByFileId">
+        delete from tbl_member_storage_file
+        where file_id=#{fileId}
+    </delete>
 </mapper>

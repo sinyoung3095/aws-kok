@@ -1,7 +1,7 @@
 package com.example.kok.mapper;
 
-import com.example.kok.dto.ConsoleInternListRequestDTO;
-import com.example.kok.dto.ConsoleInternListDTO;
+import com.example.kok.dto.ConsoleInternNoticeRequestDTO;
+import com.example.kok.dto.ConsoleInternNoticeDTO;
 import com.example.kok.enumeration.Status;
 import com.example.kok.util.Criteria;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,10 +13,10 @@ import java.util.List;
 public interface ConsoleInternNoticeMapper {
 
 //    공고 목록
-    public List<ConsoleInternListDTO> selectInternByCompany(@Param("companyId") Long companyId,
-                                                            @Param("criteria") Criteria criteria,
-                                                            @Param("status") Status status,
-                                                            @Param("keyword") String keyword);
+    public List<ConsoleInternNoticeDTO> selectInternByCompany(@Param("companyId") Long companyId,
+                                                              @Param("criteria") Criteria criteria,
+                                                              @Param("status") Status status,
+                                                              @Param("keyword") String keyword);
 
 //    공고 개수(전체, 모집중)
     public int selectCountByCompany(@Param("companyId") Long companyId,
@@ -32,22 +32,22 @@ public interface ConsoleInternNoticeMapper {
                                            @Param("active") boolean active);
 
 //    공고 등록
-    public void insertNotice(ConsoleInternListRequestDTO noticeRequestDTO);
+    public void insertNotice(ConsoleInternNoticeRequestDTO noticeRequestDTO);
 
 //    직군 등록
-    public void insertNoticeJobCategory(ConsoleInternListRequestDTO noticeRequestDTO);
+    public void insertNoticeJobCategory(ConsoleInternNoticeRequestDTO noticeRequestDTO);
 
 //    공고 상세
-    public ConsoleInternListRequestDTO selectInternDetailById(@Param("id") Long id);
+    public ConsoleInternNoticeRequestDTO selectInternDetailById(@Param("id") Long id);
 
 //    공고 수정 등록
-    public void updateNotice(ConsoleInternListRequestDTO noticeRequestDTO);
+    public void updateNotice(ConsoleInternNoticeRequestDTO noticeRequestDTO);
 
 //    공고 수정 상세
-    ConsoleInternListRequestDTO selectById(@Param("id") Long id);
+    ConsoleInternNoticeRequestDTO selectById(@Param("id") Long id);
 
 //    직군 수정
-    public void updateNoticeJobCategory(ConsoleInternListRequestDTO noticeRequestDTO);
+    public void updateNoticeJobCategory(ConsoleInternNoticeRequestDTO noticeRequestDTO);
 
 //    지원서 삭제
     public void deleteRequestInternByNoticeId(Long id);

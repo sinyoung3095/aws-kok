@@ -164,9 +164,10 @@ if(btnUpdate){
             }
 
             try {
-                const result = await internRegisterService.update(id, data);
-                console.log("수정 성공이당", result);
+                await internRegisterService.update(id, data);
                 alert("공고가 수정되었습니다.");
+
+                window.location.href = "/enterprise-console/intern/list";
             } catch (err) {
                 console.error(err);
                 alert("수정 중 오류가 발생했습니다.");
@@ -199,9 +200,10 @@ if(btnYegister) {
             }
 
             try {
-                const result = await internRegisterService.register(data);
-                console.log("등록 성공이당", result);
+                await internRegisterService.register(data);
                 alert("공고가 등록되었습니다.");
+
+                window.location.href = "/enterprise-console/intern/list";
             } catch (err) {
                 console.error(err);
                 alert("등록 중 오류가 발생했습니다.");

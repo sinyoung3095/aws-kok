@@ -1,5 +1,6 @@
 package com.example.kok.controller;
 
+import com.example.kok.aop.aspect.annotation.LogReturnStatus;
 import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.AdvertisementDTO;
 import com.example.kok.dto.CompanyDTO;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -29,9 +31,15 @@ public class CommunityController {
     private final CompanyService companyService;
 
     @GetMapping("/page")
+    @LogReturnStatus
     public String goToCommunityPage(Model model,
+                                    @RequestParam(required = false) String sharedPostId,
                                     @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
+        if(sharedPostId!=null){
+            model.addAttribute("sharedPostId", sharedPostId);
+            System.out.println("sharedPostId: "+sharedPostId);
+        }
         Long memberId = null;
 
         if (customUserDetails != null) {

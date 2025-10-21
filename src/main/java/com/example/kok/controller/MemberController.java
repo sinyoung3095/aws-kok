@@ -8,6 +8,7 @@ import com.example.kok.dto.UserDTO;
 import com.example.kok.service.MemberService;
 import com.example.kok.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,15 @@ public class MemberController {
     public List<FileDTO> loadStorageFile(@AuthenticationPrincipal CustomUserDetails customUserDetails){
         Long memberId = customUserDetails.getId();
         List<FileDTO> files=memberService.findFilesByMemberId(memberId);
+        System.out.println("컨트롤러 files: "+files);
         return files;
+    }
+
+//    보관함 목록 삭제
+    @DeleteMapping("/storage/delete")
+    public ResponseEntity<?> deleteSorageFile(@RequestParam(value="fileId") Long fileId){
+        memberService.deleteFileByFileId(fileId);
+        return ResponseEntity.ok().build();
     }
 
 }

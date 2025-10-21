@@ -20,8 +20,9 @@ CREATE TABLE tbl_experience_notice (
 select * from tbl_experience_notice;
 
 update tbl_experience_notice
-set experience_notice_status = 'active'
-where experience_notice_end_date >= current_date;
+set experience_start_date='2025-10-01',
+    experience_end_date='2025-10-01'
+where id=24;
 
 -- 컬럼 삭제
 alter table tbl_experience_notice drop experience_notice_notes;

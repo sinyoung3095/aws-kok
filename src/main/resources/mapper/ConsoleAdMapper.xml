@@ -71,7 +71,7 @@
         values (
             #{advertisementMainText},
             #{advertisementSubText},
-            'await',
+            'active',
             'await',
             #{advertiseStartDatetime}::date,
             #{advertiseEndDatetime}::date,
@@ -88,7 +88,7 @@
         )
         values (
             #{paymentPrice},
-            'await',
+            'active',
             #{advertisementId},
             #{userId}
         )
@@ -99,8 +99,8 @@
         set
             advertisement_main_text = #{advertisementMainText},
             advertisement_sub_text = #{advertisementSubText},
-            advertise_start_datetime = #{advertiseStartDatetime},
-            advertise_end_datetime = #{advertiseEndDatetime},
+            advertise_start_datetime = #{advertiseStartDatetime}::date,
+            advertise_end_datetime = #{advertiseEndDatetime}::date,
             updated_datetime = now()
         where id = #{id}
     </update>

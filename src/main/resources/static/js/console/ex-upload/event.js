@@ -166,9 +166,10 @@ if(btnUpdate){
             }
 
             try {
-                const result = await experienceRegisterService.update(id, data);
-                console.log("수정 성공이당", result);
+                await experienceRegisterService.update(id, data);
                 alert("공고가 수정되었습니다.");
+
+                window.location.href = "/enterprise-console/experience/list";
             } catch (err) {
                 console.error(err);
                 alert("수정 중 오류가 발생했습니다.");
@@ -201,9 +202,16 @@ if(btnYegister) {
                 experienceNoticeStartDate: document.querySelector("#experience-notice-start-date").value,
                 experienceNoticeEndDate: document.querySelector("#experience-notice-end-date").value,
             }
-            console.log("여기 확인",data);
 
-            const result = await experienceRegisterService.register(data);
+            try {
+                await experienceRegisterService.register(data);
+                alert("공고가 등록되었습니다.");
+
+                window.location.href = "/enterprise-console/experience/list";
+            } catch (err) {
+                console.error(err);
+                alert("수정 중 오류가 발생했습니다.");
+            }
         } else {
             console.log("유효성 실패!!!!!");
         }
