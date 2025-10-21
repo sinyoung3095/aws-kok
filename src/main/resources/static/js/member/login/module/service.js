@@ -18,6 +18,12 @@ const memberService = (()=>{
 
             return await response.json();
         }
+        const reset = async ()=>{
+            const response = fetch("/api/auth/reset-cookies",{
+                method:'POST',
+            })
+            return await response.json();
+        }
 
-        return {login:login}
+        return {login:login,reset:reset}
 })();

@@ -1,3 +1,5 @@
+memberService.reset();
+
 // 로그인 방법 선택
 const inputContainer = document.querySelector('.input-container');
 const generalMember = document.querySelector('.general-member');
