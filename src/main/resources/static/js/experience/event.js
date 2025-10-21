@@ -1536,7 +1536,8 @@ document.addEventListener("DOMContentLoaded", () => {
 // JS
 function bannerActiveFn() {
     const banners = document.querySelectorAll(".banner-list .ad-banner");
-    let timer = null;
+    if(banners.length>0){
+        let timer = null;
     let currentIndex = -1;
 
     if (!banners) return;
@@ -1563,6 +1564,8 @@ function bannerActiveFn() {
 
     // 3초마다 랜덤 배너 변경
     timer = setInterval(showRandomBanner, 5000);
+    }
+
 }
 bannerActiveFn();
 

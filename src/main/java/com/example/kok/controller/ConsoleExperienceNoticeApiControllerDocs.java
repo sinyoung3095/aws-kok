@@ -68,4 +68,22 @@ public interface ConsoleExperienceNoticeApiControllerDocs {
             @Parameter(description = "지원자 ID") @PathVariable("id") Long userId,
             @RequestBody ConsoleExperienceApplicantDTO applicantDTO
     );
+
+    @Operation(summary = "평가 가능 여부 판별",
+            description = "해당 체험자의 체험일이 지났는지, 합격인지 조회",
+            parameters = {
+                @Parameter(name = "experienceNoticeId", description = "체험자가 체험한 공고 id"),
+                @Parameter(name="memberId", description = "체험자 id")
+            }
+    )
+    public ResponseEntity<Boolean> isEvalOk(@RequestParam("experienceNoticeId") Long experienceNoticeId,
+                                            @RequestParam("memberId") Long memberId);
+
+    @Operation(summary = "평가 완료",
+            description = "평가서에 쓴 내용 insert",
+            parameters = {
+                @Parameter(name = "evaluation", description = "평점 평균, 체험자 id, 회사 id, 평가 text의 정보를 담고 있음")
+            }
+    )
+    public void goReview(@RequestBody EvaluationDTO evaluation);
 }

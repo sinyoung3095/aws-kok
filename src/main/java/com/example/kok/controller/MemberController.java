@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/member/**")
 @RequiredArgsConstructor
-public class MemberController {
+public class MemberController implements MemberControllerDocs {
     private final MemberService memberService;
     private final UserService userService;
 
