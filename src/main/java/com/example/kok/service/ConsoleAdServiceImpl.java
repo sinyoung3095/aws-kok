@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -69,9 +70,13 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
         List<FileDTO> files = consoleAdFileDAO.findAllByAdvertisementId(consoleAdDTO.getId());
 
         files.forEach(file -> {
-            file.setFilePath(
-                    s3Service.getPreSignedUrl(file.getFilePath(), Duration.ofMinutes(5))
-            );
+            if (file.getFilePath().contains("/images/experience/ad_bg_img.jpg")) {
+                file.setFilePath("/images/experience/ad_bg_img.jpg");
+            } else {
+                file.setFilePath(
+                        s3Service.getPreSignedUrl(file.getFilePath(), Duration.ofMinutes(5))
+                );
+            }
         });
 
         consoleAdDTO.setUploadedFiles(files);
@@ -84,36 +89,52 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
         consoleAdDAO.createAdvertisement(consoleAdDTO);
 
         // 파일 업로드
-        multipartFiles.forEach(multipartFile -> {
-            if (multipartFile.isEmpty()) return;
+        if (multipartFiles != null && !multipartFiles.isEmpty()) {
+            multipartFiles.forEach(multipartFile -> {
+                if (multipartFile.isEmpty()) return;
 
-            try {
-                // S3 업로드
-                String s3Key = s3Service.uploadFile(multipartFile, getPath());
+                try {
+                    // S3 업로드
+                    String s3Key = s3Service.uploadFile(multipartFile, getPath());
 
-                // 파일 DTO 구성
-                FileDTO fileDTO = new FileDTO();
-                fileDTO.setFileOriginName(multipartFile.getOriginalFilename());
-                fileDTO.setFileName(UUID.randomUUID().toString());
-                fileDTO.setFilePath(s3Key);
-                fileDTO.setFileSize(String.valueOf(multipartFile.getSize()));
-                fileDTO.setFileContentType(multipartFile.getContentType());
+                    // 파일 DTO 구성
+                    FileDTO fileDTO = new FileDTO();
+                    fileDTO.setFileOriginName(multipartFile.getOriginalFilename());
+                    fileDTO.setFileName(UUID.randomUUID().toString());
+                    fileDTO.setFilePath(s3Key);
+                    fileDTO.setFileSize(String.valueOf(multipartFile.getSize()));
+                    fileDTO.setFileContentType(multipartFile.getContentType());
 
-                // tbl_file 저장
-                consoleAdFileDAO.saveFile(fileDTO);
+                    // tbl_file 저장
+                    consoleAdFileDAO.saveFile(fileDTO);
 
-                ConsoleAdNoticeFileDTO consoleFileDTO = new ConsoleAdNoticeFileDTO();
-                consoleFileDTO.setFileId(fileDTO.getId());
-                consoleFileDTO.setAdvertisementId(consoleAdDTO.getId());
+                    ConsoleAdNoticeFileDTO consoleFileDTO = new ConsoleAdNoticeFileDTO();
+                    consoleFileDTO.setFileId(fileDTO.getId());
+                    consoleFileDTO.setAdvertisementId(consoleAdDTO.getId());
 
 
-                // 광고-파일 연결
-                consoleAdFileDAO.linkFileToAdvertisement(consoleFileDTO);
+                    // 광고-파일 연결
+                    consoleAdFileDAO.linkFileToAdvertisement(consoleFileDTO);
 
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            FileDTO defaultFile = new FileDTO();
+            defaultFile.setFileOriginName("ad_bg_img.jpg");
+            defaultFile.setFileName("ad_bg_img.jpg");
+            defaultFile.setFilePath("/images/experience/ad_bg_img.jpg");
+            defaultFile.setFileSize("0");
+            defaultFile.setFileContentType("image/jpeg");
+
+            consoleAdFileDAO.saveFile(defaultFile);
+
+            ConsoleAdNoticeFileDTO consoleFileDTO = new ConsoleAdNoticeFileDTO();
+            consoleFileDTO.setFileId(defaultFile.getId());
+            consoleFileDTO.setAdvertisementId(consoleAdDTO.getId());
+            consoleAdFileDAO.linkFileToAdvertisement(consoleFileDTO);
+        }
 
         Long advertisementId = consoleAdDTO.getId();
 

@@ -73,7 +73,7 @@ public class ConsoleInternNoticeController {
         model.addAttribute("companyName", companyName);
         model.addAttribute("memberName", memberName);
 
-        return "enterprise-console/console-intern-update";
+        return "enterprise-console/intern/console-intern-update";
     }
 
 
