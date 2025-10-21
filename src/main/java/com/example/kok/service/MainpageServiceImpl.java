@@ -77,6 +77,7 @@ public class MainpageServiceImpl implements MainpageService {
                 }else{
                     customUserDetails.setMemberProfileUrl("/images/main-page/image3.png");
                 }
+                customUserDetails.setCompanyName(companyDAO.findCompanyById(customUserDetails.getId()).getCompanyName());
             }else{
                 return customUserDetails;
             }
