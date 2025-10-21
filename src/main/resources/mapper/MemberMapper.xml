@@ -58,7 +58,7 @@
     from view_user_with_evaluation_and_job v
     join tbl_member m
     on v.id=m.user_id
-    where user_status = 'active' and user_role = 'member' and id = #{id}
+    where v.user_status = 'active' and v.user_role = 'member' and v.id = #{id}
 </select>
 
 <!--    회원 id로 지원한 체험 공고 목록 조회-->

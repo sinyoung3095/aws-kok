@@ -51,5 +51,5 @@ FROM tbl_advertisement
 WHERE advertisement_status IS NULL;
 
 update tbl_advertisement
-set advertisement_request_status='accept'
-where id>0;
+set advertisement_status='inactive'
+where id=8;
