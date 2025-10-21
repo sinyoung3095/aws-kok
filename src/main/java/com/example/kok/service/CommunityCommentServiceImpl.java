@@ -9,6 +9,7 @@ import com.example.kok.util.Criteria;
 import com.example.kok.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.util.List;
@@ -41,6 +42,8 @@ public class CommunityCommentServiceImpl implements CommunityCommentService {
 
 //    게시글 내 댓글 목록
     @Override
+    @Transactional(rollbackFor = Exception.class)
+//    실행되는 동안 오류 발생 시 롤백하기 위한 선언
     public List<CommentDTO> getComments(Long postId, Long memberId) {
         List<CommentDTO> comments = communityCommentDAO.findAll(postId);
 
