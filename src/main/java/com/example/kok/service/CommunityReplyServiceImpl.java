@@ -5,6 +5,7 @@ import com.example.kok.repository.CommunityReplyDAO;
 import com.example.kok.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.util.List;
@@ -35,6 +36,8 @@ public class CommunityReplyServiceImpl implements CommunityReplyService {
 
 //    댓글 내 대댓글 목록
     @Override
+    @Transactional(rollbackFor = Exception.class)
+//    실행되는 동안 오류 발생 시 롤백하기 위한 선언
     public List<ReplyDTO> getReplies(Long commentId, Long memberId) {
         List<ReplyDTO> replies = communityReplyDAO.findAll(commentId);
 
