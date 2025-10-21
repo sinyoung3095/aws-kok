@@ -23,6 +23,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,8 +39,22 @@ public class AuthController implements AuthControllerDocs{
 
 //    로그인
     @PostMapping("login")
-    public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
-            log.info(userDTO.toString());
+    public ResponseEntity<?> login(@RequestBody UserDTO userDTO,HttpServletRequest request ,HttpServletResponse response) {
+
+//        if(request.getCookies()!=null){
+//            for (Cookie cookie : request.getCookies()) {
+//
+//                    Cookie cookie1 = new Cookie(cookie.getName(), null);
+//                    cookie1.setHttpOnly(true);
+//                    cookie1.setSecure(false);
+//                    cookie1.setPath("/");
+//                    cookie1.setMaxAge(0);
+//
+//                    response.addCookie(cookie1);
+//
+//
+//            }
+//        }
         try {
             log.info("login 들어옴");
             Authentication authentication =
