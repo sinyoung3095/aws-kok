@@ -14,6 +14,7 @@ import com.example.kok.repository.UserDAO;
 import com.example.kok.service.S3Service;
 import com.example.kok.service.UserService;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -121,7 +122,21 @@ public class UserController {
     }
 
     @GetMapping("login")
-    public String goToLoginPage(UserDTO userDTO, Model model) {
+    public String goToLoginPage(UserDTO userDTO, Model model, HttpServletRequest request , HttpServletResponse response) {
+        if(request.getCookies()!=null){
+            for (Cookie cookie : request.getCookies()) {
+
+                Cookie cookie1 = new Cookie(cookie.getName(), null);
+                cookie1.setHttpOnly(true);
+                cookie1.setSecure(false);
+                cookie1.setPath("/");
+                cookie1.setMaxAge(0);
+
+                response.addCookie(cookie1);
+
+
+            }
+        }
         model.addAttribute("userDTO", userDTO);
         return "member/login";
     }
