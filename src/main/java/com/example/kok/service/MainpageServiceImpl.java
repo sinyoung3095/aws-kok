@@ -72,7 +72,7 @@ public class MainpageServiceImpl implements MainpageService {
                     customUserDetails.setMemberProfileUrl("/images/main-page/image3.png");
                 }
             }else if(customUserDetails.getUserRole()== UserRole.COMPANY) {
-                if(companyProfileFileDAO.findFileByCompanyId(customUserDetails.getId()).getFilePath()!=null){
+                if(companyProfileFileDAO.findCountByCompanyId(customUserDetails.getId()) > 0) {
                     customUserDetails.setMemberProfileUrl(s3Service.getPreSignedUrl(companyProfileFileDAO.findFileByCompanyId(customUserDetails.getId()).getFilePath(), Duration.ofMinutes(10)));
                 }else{
                     customUserDetails.setMemberProfileUrl("/images/main-page/image3.png");
