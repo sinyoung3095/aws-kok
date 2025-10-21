@@ -72,7 +72,7 @@ public class ConsoleExperienceNoticeController {
         model.addAttribute("companyName", companyName);
         model.addAttribute("memberName", memberName);
 
-        return "enterprise-console/console-experience-update";
+        return "enterprise-console/experience/console-experience-update";
     }
 
 //    기업 콘솔 체험 지원서 목록
