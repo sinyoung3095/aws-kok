@@ -35,6 +35,7 @@ public class ConsoleInternNoticeController {
         Long companyId = customUserDetails.getId();
         String companyName = customUserDetails.getCompanyName();
         String memberName = customUserDetails.getUsername();
+        log.info("companyName={}", companyName);
 
         model.addAttribute("companyId", companyId);
         model.addAttribute("companyName", companyName);
