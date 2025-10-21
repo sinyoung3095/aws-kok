@@ -5,16 +5,13 @@ import com.example.kok.dto.*;
 import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.enumeration.Status;
 import com.example.kok.mapper.RequestExperienceFileMapper;
-import com.example.kok.service.ConsoleExperienceApplicationService;
-import com.example.kok.service.ConsoleExperienceDetailService;
-import com.example.kok.service.ConsoleExperienceNoticeService;
+import com.example.kok.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.example.kok.service.S3Service;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -30,6 +27,7 @@ public class ConsoleExperienceNoticeApiController implements ConsoleExperienceNo
     private final ConsoleExperienceApplicationService consoleExperienceApplicationService;
     private final RequestExperienceFileMapper requestExperienceFileMapper;
     private final S3Service s3Service;
+    private final EvaluationService evaluationService;
 
 
 //    공고 목록
@@ -152,6 +150,21 @@ public class ConsoleExperienceNoticeApiController implements ConsoleExperienceNo
 
         consoleExperienceApplicationService.updateApplicantStatus(userId, applicantDTO.getExperienceNoticeId(), applicantDTO.getRequestExperienceStatus());
         return ResponseEntity.ok("지원자 상태가 변경되었습니다.");
+    }
+
+    //    평가할 수 있는지 여부
+    @GetMapping("/isEvalOk")
+    public ResponseEntity<Boolean> isEvalOk(@RequestParam("experienceNoticeId") Long experienceNoticeId,
+                                            @RequestParam("memberId") Long memberId) {
+        boolean result=consoleExperienceApplicationService.isEvalOk(experienceNoticeId, memberId);
+        return ResponseEntity.ok(result);
+    }
+
+//    평가하기
+    @PostMapping("/go-review")
+    @ResponseBody
+    public void goReview(@RequestBody EvaluationDTO evaluation) {
+        evaluationService.review(evaluation);
     }
 
 }

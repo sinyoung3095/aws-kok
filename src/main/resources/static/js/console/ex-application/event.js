@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //     평가하기 버튼
     evalBtn.addEventListener("click", async () => {
-        const evalPre = await fetch(`/enterprise-console/experience/isEvalOk?experienceNoticeId=${experienceNoticeId}&memberId=${memberId}`);
+        const evalPre = await fetch(`/api/enterprise-console/experience/isEvalOk?experienceNoticeId=${experienceNoticeId}&memberId=${memberId}`);
         const evalOk=await evalPre.json();
         const eval=evalOk;
 

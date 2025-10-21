@@ -49,3 +49,7 @@ WHERE advertisement_status IS NULL;
 SELECT id, advertisement_status
 FROM tbl_advertisement
 WHERE advertisement_status IS NULL;
+
+update tbl_advertisement
+set advertisement_request_status='accept'
+where id>0;

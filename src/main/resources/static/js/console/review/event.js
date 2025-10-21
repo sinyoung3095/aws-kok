@@ -26,7 +26,7 @@ submitBtn.addEventListener("click", async () => {
                 evaluationContent: text.value,
                 evaluationAvgScore: avg
             };
-            const response = await fetch(`/enterprise-console/experience/go-review`, {
+            const response = await fetch(`/api/enterprise-console/experience/go-review`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

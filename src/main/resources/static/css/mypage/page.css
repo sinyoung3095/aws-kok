@@ -2645,6 +2645,19 @@ table {
     margin-top: 20px;
 }
 
+.ad-banner {
+    position: relative;
+    max-width: 287px;
+    max-height: 143px;
+    background-color: #eee;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.ad-banner + .banner-list {
+    margin-top: 20px;
+}
+
 .ad-text-box {
     position: absolute;
     top: 0;

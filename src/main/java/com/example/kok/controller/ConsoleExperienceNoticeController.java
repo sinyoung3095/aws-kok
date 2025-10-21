@@ -145,20 +145,4 @@ public class ConsoleExperienceNoticeController {
         return "enterprise-console/experience/console-review";
     }
 
-//    평가할 수 있는지 여부
-    @GetMapping("/isEvalOk")
-    public ResponseEntity<Boolean> isEvalOk(@RequestParam("experienceNoticeId") Long experienceNoticeId,
-                                            @RequestParam("memberId") Long memberId) {
-        boolean result=consoleExperienceApplicationService.isEvalOk(experienceNoticeId, memberId);
-        return ResponseEntity.ok(result);
-    }
-
-//    평가하기
-    @PostMapping("/go-review")
-    @ResponseBody
-    public void goReview(@RequestBody EvaluationDTO evaluation) {
-        evaluationService.review(evaluation);
-    }
-
-
 }
