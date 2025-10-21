@@ -209,7 +209,7 @@ public class MemberServiceImpl implements MemberService {
 //        System.out.println("서비스 인포: " + dto.getMemberInfo());
 //        System.out.println("서비스 직군: " + dto.getJobName());
 //        System.out.println("서비스 프사 empty: "+profile.isEmpty());
-        if(originJobCate==null){
+        if(originJobCate==null&&dto.getJobName()!=null){
             memberDAO.plusJob(id, dto.getJobName());
         } else{
             memberDAO.updateJob(id, dto.getJobName());
