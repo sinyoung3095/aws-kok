@@ -213,8 +213,8 @@
                         <li class="side-prof-li">
                             <button class="side-prof-button side-hov">
                                 <div class="side-prof-div">
-                                    <span th:text="${memberName}" class="side-name"></span>
-                                    <span class="side-job">회사 산업 분야</span>
+                                    <span th:text="${userDTO.companyName}" class="side-name"></span>
+                                    <span class="side-job">콕 기업용 콘솔</span>
                                 </div>
                             </button>
                         </li>
@@ -232,9 +232,4 @@
     </div>
     <!-- 사이드바 끝 -->
 </body>
-<script th:inline="javascript">
-    const companyName = [[${companyName}]];
-    const memberName = [[${memberName}]];
-</script>
-<!--<script src="/js/console/sidebar/event.js"></script>-->
 </html>
