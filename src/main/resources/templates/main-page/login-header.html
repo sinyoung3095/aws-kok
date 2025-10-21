@@ -21,7 +21,17 @@
                 <!-- 프로필 드롭다운 -->
                 <div class="profile-modal">
                     <div class="profile-modal-header">
+                        <th:block>
+                            <th:replace th:if="${userDTO.userRole.getValue()=='member'}">
                         <div class="member-name" th:text="${userDTO.username}+' 님'"></div>
+                            </th:replace>
+                        </th:block>
+                        <th:block>
+                            <th:replace th:if="${userDTO.userRole.getValue()=='company'}">
+                                <div class="member-name" th:text="${userDTO.companyName}+' 님'"></div>
+                            </th:replace>
+                        </th:block>
+
                     </div>
                     <div class="profile-modal-body">
                         <div class="list-wrap">
