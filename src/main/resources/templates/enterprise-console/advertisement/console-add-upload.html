@@ -54,17 +54,20 @@
                                                     <div class="preview-head">2:1 (300x150)</div>
                                                     <div class="preview-main">
                                                         <div class="preview-img-wrap">
-                                                            <img th:if="${notice.uploadedFiles != null and !notice.uploadedFiles.isEmpty()}"
+                                                            <img th:if="${notice.uploadedFiles != null and !notice.uploadedFiles.isEmpty()
+             and !notice.uploadedFiles[0].filePath.contains('/images/experience/ad_bg_img.jpg')}"
                                                                  th:src="${notice.uploadedFiles[0].filePath}"
                                                                  alt="등록된 광고 배경 이미지"
                                                                  class="preview-img"
                                                                  id="add-back">
 
-                                                            <img th:unless="${notice.uploadedFiles != null and !notice.uploadedFiles.isEmpty()}"
+                                                            <img th:unless="${notice.uploadedFiles != null and !notice.uploadedFiles.isEmpty()
+                and !notice.uploadedFiles[0].filePath.contains('/images/experience/ad_bg_img.jpg')}"
                                                                  src="/images/experience/ad_bg_img.jpg"
                                                                  alt="기본 이미지"
                                                                  class="preview-img"
                                                                  id="add-back">
+
                                                         </div>
                                                         <div class="preview-text-wrap">
                                                             <div class="pre-text-main">

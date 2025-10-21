@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     } else {
                         resultDate.innerText = diffDays + "일";
                         const price = diffDays * 200000;
-                        resultPrice.innerText = price;
+                        resultPrice.innerText = price.toLocaleString();
                         date2.innerText = "광고 기간: " + diffDays + "일";
                         okcheck = true;
                     }
