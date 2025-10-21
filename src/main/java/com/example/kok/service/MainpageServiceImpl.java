@@ -64,6 +64,9 @@ public class MainpageServiceImpl implements MainpageService {
     @Override
     public CustomUserDetails findProfile(CustomUserDetails customUserDetails) {
         if(customUserDetails.getMemberProfileUrl()!=null){
+            if(userProfileService.findProfileById(customUserDetails.getId()) != null){
+                customUserDetails.setMemberProfileUrl(userProfileService.findProfileById(customUserDetails.getId()));
+            }
         }else {
             if(customUserDetails.getUserRole()== UserRole.MEMBER) {
                 if (userProfileService.findProfileById(customUserDetails.getId()) != null) {
