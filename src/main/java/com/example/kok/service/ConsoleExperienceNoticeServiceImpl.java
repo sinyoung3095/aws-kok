@@ -19,8 +19,7 @@ import java.util.List;
 @Slf4j
 public class ConsoleExperienceNoticeServiceImpl implements ConsoleExperienceNoticeService {
     private final ConsoleExperienceNoticeDAO consoleExperienceDAO;
-    private final MemberAlarmSettingMapper memberAlarmSettingMapper;
-    private final MailService mailService;
+    private final memberAlarmService memberAlarmService;
 
     @Override
     public ConsoleExperienceNoticeCriteriaDTO getList(Long companyId, int page, Status status, String keyword) {
@@ -70,6 +69,10 @@ public class ConsoleExperienceNoticeServiceImpl implements ConsoleExperienceNoti
 
 //        직군 등록
         consoleExperienceDAO.createNoticeJobCategory(noticeRequestDTO);
+
+//        알림
+        Long noticeId = noticeRequestDTO.getId();
+        memberAlarmService.experienceAlarm(noticeId);
     }
 
     @Override
