@@ -169,7 +169,7 @@ MySql과는 다르게 PostgreSql은 enum을 객체로 인식하기 때문에 재
  <br><br>
 🚀해결 방법🚀<br>
 <img width="1394" height="561" alt="enum오류-해결" src="https://github.com/user-attachments/assets/10a4120d-624f-4fa4-bdec-63c2b6faa33a" />
-핸들러에서 객체로 셋팅해주어 인식의 오류를 해결했습니다.
+핸들러에서 객체로 세팅해주어 인식의 오류를 해결했습니다.
 
 
 
