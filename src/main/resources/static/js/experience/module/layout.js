@@ -1,5 +1,5 @@
 const experienceLayout = (() => {
-    const showList = async (experiences) => {   // 👈 async 붙임
+    const showList = async (experiences) => {
         const container = document.querySelector('.list-container');
         if (!container) return;
 
