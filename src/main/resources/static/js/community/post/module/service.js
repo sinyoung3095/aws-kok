@@ -63,8 +63,8 @@ const postService = (() => {
     };
 
     // 삭제
-    const remove = async (id) => {
-        const response = await fetch(`/api/community/${id}`, { method: "DELETE" });
+    const remove = async (postId) => {
+        const response = await fetch(`/api/community/${postId}`, { method: "DELETE" });
         return response.ok;
     };
 
