@@ -1,5 +1,6 @@
 package com.example.kok.controller;
 
+import com.example.kok.aop.aspect.annotation.LogReturnStatus;
 import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.ConsoleExperienceMemberDTO;
 import com.example.kok.service.ConsoleMainService;
@@ -22,6 +23,7 @@ public class ConsoleMainController {
 
 //    기업 콘솔 홈
     @GetMapping
+    @LogReturnStatus
     public String goToHome(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
         Long companyId = customUserDetails.getId();
         String companyName = customUserDetails.getCompanyName();

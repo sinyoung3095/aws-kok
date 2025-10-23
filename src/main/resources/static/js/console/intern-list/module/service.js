@@ -1,7 +1,7 @@
 const internNoticeService = (() => {
     // 목록
-    const getList = async (companyId, page, status, keyword, callback) => {
-        const response = await fetch(`/api/enterprise-console/intern/list/${companyId}/${page}?status=${status ?? ""}&keyword=${keyword ?? ""}`);
+    const getList = async (page, status, keyword, callback) => {
+        const response = await fetch(`/api/enterprise-console/intern/list/${page}?status=${status ?? ""}&keyword=${keyword ?? ""}`);
         const data = await response.json();
 
         if (callback) {
@@ -33,8 +33,6 @@ const internNoticeService = (() => {
             },
             body: JSON.stringify(data)
         });
-
-        console.log("보내는 데이터",data)
 
         if(response.ok) {
             console.log("상태변경 성공")

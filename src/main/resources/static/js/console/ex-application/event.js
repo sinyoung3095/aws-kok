@@ -64,6 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             await applicationExperienceService.updateStatus(memberId, experienceNoticeId, statusValue);
+            const statusMarkSpan = document.querySelector(".status-mark-span");
+            statusMarkSpan.textContent = confirmedStatus;
         } catch (error) {
             alert("상태 변경에 실패했습니다.");
         }
@@ -105,18 +107,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     downloadBtn.addEventListener("click", async () => {
         try {
-            // 백엔드로 presigned URL 요청
-            const response = await fetch(`/files/experience/download/${experienceNoticeId}/${memberId}`);
+            const response = await fetch(`/api/enterprise-console/experience/${experienceNoticeId}/applications/files`, {
+                method: 'POST',
+                body: JSON.stringify([memberId]),
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                }
+            });
 
             if (!response.ok) {
                 alert("이력서 파일을 찾을 수 없습니다.");
                 return;
             }
 
-            // presigned URL 문자열 반환
-            const downloadUrl = await response.text();
+            const requestExperienceDownloadUrlDTO = await response.json();
+            const downloadUrl = requestExperienceDownloadUrlDTO.urls[0];
 
-            // 새 창에서 다운로드 실행
             window.open(downloadUrl, "_blank");
         } catch (error) {
             console.error("다운로드 중 오류 발생:", error);

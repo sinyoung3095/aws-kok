@@ -3,12 +3,13 @@ package com.example.kok.service;
 import com.example.kok.dto.ConsoleExperienceApplicantDTO;
 import com.example.kok.dto.FileDTO;
 import com.example.kok.dto.RequestExperienceDTO;
+import com.example.kok.dto.RequestDownloadUrlDTO;
 import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.repository.ConsoleExperienceApplicationDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,32 +19,22 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ConsoleExperienceApplicationServiceImpl implements ConsoleExperienceApplicationService {
     private final ConsoleExperienceApplicationDAO consoleExperienceApplicationDAO;
+    private final S3Service s3Service;
 
     @Override
-    public ConsoleExperienceApplicantDTO getApplicantDetail(Long memberId, Long experienceNoticeId) {
-        ConsoleExperienceApplicantDTO applicantDetail =
-                consoleExperienceApplicationDAO.findApplicantDetail(memberId, experienceNoticeId);
-
-        // 파일 정보 조회 (Optional)
-        Optional<FileDTO> fileInfo = consoleExperienceApplicationDAO.findResumeFileByMemberId(memberId, experienceNoticeId);
-
-        // 파일 있으면 세팅
-        fileInfo.ifPresent(file -> {
-            applicantDetail.setFilePath(file.getFilePath());
-            applicantDetail.setFileName(file.getFileOriginName());
-        });
-
-        return applicantDetail;
+    public ConsoleExperienceApplicantDTO getApplicationsDetail(Long memberId, Long experienceNoticeId) {
+        return consoleExperienceApplicationDAO.findApplicantDetail(memberId, experienceNoticeId);
     }
 
+//    목록
     @Override
-    public List<ConsoleExperienceApplicantDTO> getApplicantsByNoticeId(Long experienceNoticeId) {
-        return consoleExperienceApplicationDAO.findApplicantsByNoticeId(experienceNoticeId);
+    public List<ConsoleExperienceApplicantDTO> getApplicationsByNoticeId(Long experienceNoticeId) {
+        return consoleExperienceApplicationDAO.findApplicationsByNoticeId(experienceNoticeId);
     }
 
 //    여러 명의 지원자 상세 조회
     @Override
-    public List<ConsoleExperienceApplicantDTO> getApplicantsDetailsByMemberIds(Long experienceNoticeId, List<Long> memberIdList) {
+    public List<ConsoleExperienceApplicantDTO> getApplicationsDetailsByMemberIds(Long experienceNoticeId, List<Long> memberIdList) {
         List<ConsoleExperienceApplicantDTO> results = new ArrayList<>();
 
         for (Long memberId : memberIdList) {
@@ -86,4 +77,26 @@ public class ConsoleExperienceApplicationServiceImpl implements ConsoleExperienc
         consoleExperienceApplicationDAO.updateApplicantStatus(userId, experienceNoticeId, requestExperienceStatus);
     }
 
+    @Override
+    public RequestDownloadUrlDTO getApplicationFileInfo(List<Long> memberIdList, Long experienceNoticeId) {
+        RequestDownloadUrlDTO requestDownloadUrlDTO = new RequestDownloadUrlDTO();
+        List<String> downloadUrls = new ArrayList<>();
+        List<String> fileNames = new ArrayList<>();
+
+        getApplicationsDetailsByMemberIds(experienceNoticeId, memberIdList).forEach(applicantDetail -> {
+            if (applicantDetail.getFilePath() != null && applicantDetail.getFilePath() != null) {
+                String downloadUrl = s3Service.getPreSignedDownloadUrl(
+                        applicantDetail.getFilePath(),
+                        applicantDetail.getFileName(),
+                        Duration.ofMinutes(5)
+                );
+                downloadUrls.add(downloadUrl);
+                fileNames.add(applicantDetail.getFileName());
+            }
+        });
+
+        requestDownloadUrlDTO.setUrls(downloadUrls);
+        requestDownloadUrlDTO.setFileNames(fileNames);
+        return requestDownloadUrlDTO;
+    }
 }

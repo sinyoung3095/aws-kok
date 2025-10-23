@@ -18,7 +18,6 @@ import java.util.List;
 public interface ConsoleExperienceNoticeApiControllerDocs {
     @Operation(summary = "체험 공고 목록 조회", description = "기업 ID와 상태, 키워드 조건으로 체험 공고 목록을 페이지 단위로 조회합니다.")
     ResponseEntity<ConsoleExperienceNoticeCriteriaDTO> list(
-            @Parameter(description = "기업 ID") @PathVariable("companyId") Long companyId,
             @Parameter(description = "페이지 번호") @PathVariable("page") int page,
             @Parameter(description = "공고 상태") @RequestParam(value = "status", required = false) Status status,
             @Parameter(description = "검색 키워드") @RequestParam(required = false) String keyword,
@@ -32,16 +31,16 @@ public interface ConsoleExperienceNoticeApiControllerDocs {
             @RequestBody ConsoleExperienceNoticeDTO consoleExperienceDTO
     );
 
-    @Operation(summary = "체험 공고 등록", description = "새로운 체험 공고를 등록합니다.")
-    ResponseEntity<?> createNotice(
-            @RequestBody ConsoleExperienceNoticeRequestDTO noticeRequestDTO
-    );
-
-    @Operation(summary = "체험 공고 수정", description = "기존 체험 공고 정보를 수정합니다.")
-    ResponseEntity<?> updateNotice(
-            @Parameter(description = "공고 ID") @PathVariable("id") Long id,
-            @RequestBody ConsoleExperienceNoticeRequestDTO noticeRequestDTO
-    );
+//    @Operation(summary = "체험 공고 등록", description = "새로운 체험 공고를 등록합니다.")
+//    ResponseEntity<?> createNotice(
+//            @RequestBody ConsoleExperienceNoticeRequestDTO noticeRequestDTO
+//    );
+//
+//    @Operation(summary = "체험 공고 수정", description = "기존 체험 공고 정보를 수정합니다.")
+//    ResponseEntity<?> updateNotice(
+//            @Parameter(description = "공고 ID") @PathVariable("id") Long id,
+//            @RequestBody ConsoleExperienceNoticeRequestDTO noticeRequestDTO
+//    );
 
     @Operation(summary = "체험 공고 지원자 목록 조회", description = "특정 체험 공고의 지원자 목록을 페이지 단위로 조회합니다.")
     ResponseEntity<ConsoleExperienceApplicantCriteriaDTO> applicateList(
@@ -58,7 +57,7 @@ public interface ConsoleExperienceNoticeApiControllerDocs {
     );
 
     @Operation(summary = "여러 명의 지원자 파일 다운로드 URL 조회", description = "체험 공고에 지원한 여러 명의 지원자 파일 다운로드 URL을 조회합니다.")
-    ResponseEntity<RequestExperienceDownloadUrlDTO> getApplicantsFileUrls(
+    ResponseEntity<RequestDownloadUrlDTO> getApplicantsFileUrls(
             @Parameter(description = "체험 공고 ID") @PathVariable("experienceNoticeId") Long experienceNoticeId,
             @RequestBody List<Long> memberIdList
     );

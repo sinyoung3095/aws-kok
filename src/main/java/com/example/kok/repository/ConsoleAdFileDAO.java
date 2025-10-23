@@ -3,7 +3,7 @@ package com.example.kok.repository;
 
 import com.example.kok.dto.ConsoleAdNoticeFileDTO;
 import com.example.kok.dto.FileDTO;
-import com.example.kok.mapper.ConsoleAdNoticeFileMapper;
+import com.example.kok.mapper.ConsoleAdFileMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ConsoleAdFileDAO {
-    private final ConsoleAdNoticeFileMapper fileMapper;
+    private final ConsoleAdFileMapper fileMapper;
 
     // 광고 ID로 파일 목록 조회
     public List<FileDTO> findAllByAdvertisementId(Long advertisementId) {
