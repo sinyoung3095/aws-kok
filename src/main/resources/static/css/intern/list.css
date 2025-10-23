@@ -1936,6 +1936,10 @@ input:-internal-autofill-selected {
         width: 100%;
     }
 
+    .display-none-list{
+        display: none;
+    }
+
     .content-layout {
         width: 100%;
         padding: 0;
@@ -2028,6 +2032,7 @@ input:-internal-autofill-selected {
         left: 0;
         bottom: 0;
         width: 100%;
+        z-index: 9990;
     }
 
     .popup-container.pop-center {

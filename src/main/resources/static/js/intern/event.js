@@ -1,6 +1,8 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    const contentMainList=document.querySelector(".content-main");
+
     // 서치 드롭다운 옵션 버튼 클릭 시 active 클래스 토글 및 전체 선택 상태 업데이트
     function searchDropdownFn() {
         let isAllSelected = false;
@@ -360,6 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             </div>
                         </div>`;
         contentDetail.classList.add("active");
+        contentMainList.classList.add("display-none-list");
         if (contentSide) contentSide.style.display = "none";
     }
 
@@ -395,6 +398,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const inner = contentDetail.querySelector(".content-detail-inner");
         if (inner) inner.classList.remove("active");
         contentDetail.classList.remove("active");
+        contentMainList.classList.remove("display-none-list");
 
         if (contentSide) contentSide.style.display = "flex";
     });
