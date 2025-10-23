@@ -122,7 +122,7 @@ public class AuthController implements AuthControllerDocs{
 
         Cookie deleteAccessCookie = new Cookie("accessToken", null);
         deleteAccessCookie.setHttpOnly(true);
-        deleteAccessCookie.setSecure(true);
+        deleteAccessCookie.setSecure(false);
         deleteAccessCookie.setPath("/");
         deleteAccessCookie.setMaxAge(0);
 
@@ -130,7 +130,7 @@ public class AuthController implements AuthControllerDocs{
 
         Cookie deleteRefreshCookie = new Cookie("refreshToken", null);
         deleteRefreshCookie.setHttpOnly(true);
-        deleteRefreshCookie.setSecure(true);
+        deleteRefreshCookie.setSecure(false);
         deleteRefreshCookie.setPath("/");
         deleteRefreshCookie.setMaxAge(0);
 
@@ -138,7 +138,7 @@ public class AuthController implements AuthControllerDocs{
 
         Cookie memberNameCookie = new Cookie("memberName", null);
         memberNameCookie.setHttpOnly(true);
-        memberNameCookie.setSecure(true);
+        memberNameCookie.setSecure(false);
         memberNameCookie.setPath("/");
         memberNameCookie.setMaxAge(0);
 
@@ -147,7 +147,7 @@ public class AuthController implements AuthControllerDocs{
 
         Cookie userEmailCookie = new Cookie("userEmail", null);
         userEmailCookie.setHttpOnly(true);
-        userEmailCookie.setSecure(true);
+        userEmailCookie.setSecure(false);
         userEmailCookie.setPath("/");
         userEmailCookie.setMaxAge(0);
 
@@ -155,7 +155,7 @@ public class AuthController implements AuthControllerDocs{
 
         Cookie providerCookie = new Cookie("provider", null);
         providerCookie.setHttpOnly(true);
-        providerCookie.setSecure(true);
+        providerCookie.setSecure(false);
         providerCookie.setPath("/");
         providerCookie.setMaxAge(0);
 
@@ -163,7 +163,7 @@ public class AuthController implements AuthControllerDocs{
 
         Cookie profileCookie = new Cookie("profile", null);
         profileCookie.setHttpOnly(true);
-        profileCookie.setSecure(true);
+        profileCookie.setSecure(false);
         profileCookie.setPath("/");
         profileCookie.setMaxAge(0);
 
