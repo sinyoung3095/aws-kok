@@ -37,6 +37,7 @@ public class MemberServiceImpl implements MemberService {
     private final CommunityLikeDAO communityLikeDAO;
     private final CommunityCommentService communityCommentService;
     private final PaymentDAO paymentDAO;
+    private final CommunityCommentDAO communityCommentDAO;
 
     @Override
     public void joinMember(MemberVO memberVO) {
@@ -155,21 +156,21 @@ public class MemberServiceImpl implements MemberService {
         List<PostDTO> posts=memberDAO.findPostsByMemberId(memberId);
         posts.forEach(post -> {
             post.setRelativeDate(DateUtils.toRelativeTime(post.getCreatedDateTime()));
-            post.setCommentsCount(communityCommentService.commentsCountByPostId(post.getId()));
+            post.setCommentsCount(communityCommentDAO.getTotal(post.getId()));
             List<PostFileDTO> postFiles = communityPostFileDAO.findAllByPostId(post.getId());
             postFiles.forEach(postFile -> {
                 postFile.setPostFilePath(s3Service.getPreSignedUrl(postFile.getPostFilePath(), Duration.ofMinutes(10)));
             });
             post.setPostFiles(postFiles);
 
-            post.setLikesCount(communityLikeDAO.getPostLikeCount(post.getId()));
-            if (memberId != null) {
-                post.setOwner(memberId.equals(post.getMemberId()));
-                post.setLiked(communityLikeDAO.isexistLike(post.getId(), memberId));
-            } else {
-                post.setOwner(false);
-                post.setLiked(false);
-            }
+//            post.setLikesCount(communityLikeDAO.getPostLikeCount(post.getId()));
+//            if (memberId != null) {
+//                post.setOwner(memberId.equals(post.getMemberId()));
+//                post.setLiked(communityLikeDAO.isexistLike(post.getId(), memberId));
+//            } else {
+//                post.setOwner(false);
+//                post.setLiked(false);
+//            }
         });
         return posts;
     }

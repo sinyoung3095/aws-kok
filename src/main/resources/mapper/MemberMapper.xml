@@ -149,6 +149,7 @@
         join tbl_company c
         on c.user_id=e.company_id
         where u.id=#{memberId}
+        and e.experience_notice_status='active'
     </select>
 
     <!--    저장된 인턴 공고 조회-->
@@ -162,6 +163,7 @@
         join tbl_company c
         on c.user_id=i.company_id
         where u.id=#{memberId}
+        and i.intern_notice_status='active'
     </select>
 
 <!--    체험 지원 취소-->
