@@ -2,6 +2,7 @@
 
 
 const noData=document.querySelector(".no-data");
+const contentMainList=document.querySelector(".content-main");
 
 
 
@@ -423,6 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             </div>
                         </div>`;
         contentDetail.classList.add("active");
+        contentMainList.classList.add("display-none-list");
         if (contentSide) contentSide.style.display = "none";
     }
 
@@ -458,6 +460,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const inner = contentDetail.querySelector(".content-detail-inner");
         if (inner) inner.classList.remove("active");
         contentDetail.classList.remove("active");
+        contentMainList.classList.remove("display-none-list");
 
         if (contentSide) contentSide.style.display = "flex";
     });
