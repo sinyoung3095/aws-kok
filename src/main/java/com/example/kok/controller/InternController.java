@@ -25,14 +25,10 @@ public class InternController {
     private final AdvertisementService advertisementService;
     //    인턴 공고 목록으로 이동
     @GetMapping("list")
-    public String goToIntList(@RequestParam(defaultValue = "1") int page, Model model,
+    public String goToIntList(Model model,
                               @RequestParam(required = false) String sharedCompanyId,
                               @RequestParam(required = false) String sharedInternId,
-                              @AuthenticationPrincipal CustomUserDetails customUserDetails,
                               @ModelAttribute("search") Search search) {
-        InternNoticeCriteriaDTO dto =internNoticeService.selectAllInternNotice(page, search);
-        model.addAttribute("internNoticeCriteria", dto);
-//        model.addAttribute("userDTO", customUserDetails);
         model.addAttribute("search", search);
         model.addAttribute("sharedCompanyId", sharedCompanyId);
         model.addAttribute("sharedInternId", sharedInternId);

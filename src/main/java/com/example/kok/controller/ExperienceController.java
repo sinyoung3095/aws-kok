@@ -22,23 +22,14 @@ public class ExperienceController {
     private final AdvertisementService advertisementService;
 //    체험 목록으로 이동
     @GetMapping("list")
-    public String goToExpList(@RequestParam(defaultValue = "1") int page, Model model,
+    public String goToExpList(Model model,
                               @RequestParam(required = false) String sharedCompanyId,
                               @RequestParam(required = false) String sharedExperienceId,
-                              @AuthenticationPrincipal CustomUserDetails customUserDetails,
                               @ModelAttribute("search") Search search) {
-//        System.out.println("컨트롤러 실행해용");
-//        System.out.println("keyword = " + search.getKeyword());
-        ExperienceNoticeCriteriaDTO dto =experienceNoticeService.selectAllExperienceNotice(page, search);
-//        System.out.println(dto);
-        model.addAttribute("experienceNoticeCriteria", dto);
-//        model.addAttribute("userDTO", customUserDetails);
         model.addAttribute("search", search);
         model.addAttribute("sharedCompanyId", sharedCompanyId);
         model.addAttribute("sharedExperienceId", sharedExperienceId);
         List<AdvertisementDTO> advertisements = advertisementService.getAllAdvertisements();
-//        System.out.println("##############################################");
-//        System.out.println(advertisements);
         model.addAttribute("advertisements", advertisements);
         return "experience/list";
     }
