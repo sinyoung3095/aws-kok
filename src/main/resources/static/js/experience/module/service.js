@@ -55,6 +55,9 @@ const experienceService = (() => {
                         body: JSON.stringify(requestExperienceDTO)
                     });
 
+                    const result = await response.text(); // 또는 response.json()
+                    console.log("서버 응답:", result);
+
                     alert("결제 완료!");
 
                     break;
