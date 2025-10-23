@@ -23,3 +23,5 @@ alter table tbl_request_experience_file
 add constraint fk_request_experience_file_file
 foreign key(file_id)
 references tbl_file(id);
+
+delete from tbl_request_experience_file where id>0;

@@ -34,7 +34,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             jwtTokenProvider.createAccessToken(email,provider);
             jwtTokenProvider.createRefreshToken(email,provider);
 
-            path = "/community/page";
+            path = "/experience/list";
         }else{
             Cookie roleCookie = new Cookie("role", role);
             roleCookie.setHttpOnly(true);
