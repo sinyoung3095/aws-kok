@@ -56,7 +56,7 @@ const experienceDatailLayout = (() => {
             tbody.innerHTML = `
                 <tr class="body-tr no-data">
                     <td class="body-td" colspan="9">
-                        <div class="text">조건에 맞는 공고가 없습니다.</div>
+                        <div class="text">조건에 맞는 지원자가 없습니다.</div>
                     </td>
                 </tr>`;
             return;

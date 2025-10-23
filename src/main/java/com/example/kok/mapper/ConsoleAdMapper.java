@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface ConsoleAdNoticeMapper {
+public interface ConsoleAdMapper {
 
 //    목록
     public List<ConsoleAdNoticeDTO> selectAdByCompany(@Param("companyId") Long companyId,

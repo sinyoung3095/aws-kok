@@ -112,7 +112,6 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
                     consoleFileDTO.setFileId(fileDTO.getId());
                     consoleFileDTO.setAdvertisementId(consoleAdDTO.getId());
 
-
                     // 광고-파일 연결
                     consoleAdFileDAO.linkFileToAdvertisement(consoleFileDTO);
 
@@ -121,21 +120,6 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
                 }
             });
         }
-//        else {
-//            FileDTO defaultFile = new FileDTO();
-//            defaultFile.setFileOriginName("ad_bg_img.jpg");
-//            defaultFile.setFileName("ad_bg_img.jpg");
-//            defaultFile.setFilePath("/images/experience/ad_bg_img.jpg");
-//            defaultFile.setFileSize("0");
-//            defaultFile.setFileContentType("image/jpeg");
-//
-//            consoleAdFileDAO.saveFile(defaultFile);
-//
-//            ConsoleAdNoticeFileDTO consoleFileDTO = new ConsoleAdNoticeFileDTO();
-//            consoleFileDTO.setFileId(defaultFile.getId());
-//            consoleFileDTO.setAdvertisementId(consoleAdDTO.getId());
-//            consoleAdFileDAO.linkFileToAdvertisement(consoleFileDTO);
-//        }
 
         Long advertisementId = consoleAdDTO.getId();
 

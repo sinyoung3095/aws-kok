@@ -1,6 +1,5 @@
 package com.example.kok.mapper;
 
-import com.example.kok.dto.ConsoleAdNoticeDTO;
 import com.example.kok.dto.ConsoleAdNoticeFileDTO;
 import com.example.kok.dto.FileDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -9,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface ConsoleAdNoticeFileMapper {
+public interface ConsoleAdFileMapper {
 //    광고 ID로 파일 목록 조회
     List<FileDTO> selectAdBackgroundFileByAdId(@Param("advertisementId") Long advertisementId);
 

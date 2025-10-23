@@ -2,6 +2,11 @@ const searchBtn = document.querySelector(".search-btn");
 const searchSpan = document.querySelector(".search-span");
 const dropdownMenu = document.querySelector(".dropdown-menu");
 const jobButtons = document.querySelectorAll(".dropdown-btn");
+const dropdownContainer = document.querySelector(".dropdown-container");
+
+if(notice.internNoticeTitle) {
+    dropdownContainer.setAttribute("data-id", notice.jobCategoryId);
+}
 
 // 검색 버튼 클릭 시 드롭다운 열기/닫기
 searchBtn.addEventListener("click", (e) => {
@@ -27,6 +32,8 @@ jobButtons.forEach((btn) => {
         searchSpan.innerText = jobCategoryName;
         searchSpan.style.color = "#000";
         searchSpan.dataset.id = jobCategoryId;
+        dropdownContainer.dataset.id = jobCategoryId;
+
         // 드롭다운 닫기
         dropdownMenu.classList.remove("active");
     });
@@ -61,8 +68,7 @@ validateLengthInputs.forEach((input) => {
 const openBtn = document.querySelector(".popup-trigger"); // 팝업열기 하단 버튼
 const popup = document.querySelector(".popup-container"); // 팝업
 const btnNo = document.querySelector(".btn-no"); // 팝업 취소
-const btnYegister = document.querySelector("#btn-register-intern"); // 팝업 등록 확인
-const btnUpdate = document.querySelector("#btn-update-intern"); // 팝업 수정 확인
+const btnSubmit = document.querySelector(".btn-yes"); // 팝업 등록 확인
 const dateInputs = document.querySelectorAll(".date-input"); // 달력 인풋
 const textareas = document.querySelectorAll(".contents .textarea"); // 텍스트박스
 const dropdownBtns = document.querySelectorAll(".contents .dropdown-btn"); //드롭다운 버튼
@@ -82,7 +88,6 @@ btnNo.addEventListener("click", () => {
 });
 
 // 유효성 검사
-
 function formValidate(){
     let isValid = true;
 
@@ -147,74 +152,78 @@ function formValidate(){
 }
 
 // 팝업 수정 확인
-if(btnUpdate){
-    btnUpdate.addEventListener("click", async () => {
-        const isValid = formValidate();
+// if(btnUpdate){
+//     btnUpdate.addEventListener("click", async () => {
+//         const isValid = formValidate();
+//
+//         if (isValid) {
+//             const data = {
+//                 internNoticeTitle: document.querySelector("#content-title").value,
+//                 internNoticeSubtitle: document.querySelector("#content-subtitle").value,
+//                 jobCategoryId: document.querySelector("#job-category").dataset.id,
+//                 internNoticeIntroduceJob: document.querySelector("#introduce-job").value,
+//                 internMainTasks: document.querySelector("#main-tasks").value,
+//                 internNoticeEtc: document.querySelector("#notice-etc").value,
+//                 internNoticeStartDate: document.querySelector("#intern-notice-start-date").value,
+//                 internNoticeEndDate: document.querySelector("#intern-notice-end-date").value,
+//             }
+//
+//             try {
+//                 await internRegisterService.update(id, data);
+//                 alert("공고가 수정되었습니다.");
+//
+//                 window.location.href = "/enterprise-console/intern/list";
+//             } catch (err) {
+//                 console.error(err);
+//                 alert("수정 중 오류가 발생했습니다.");
+//             }
+//         } else {
+//             console.log("유효성 실패!!!!!");
+//         }
+//
+//         popup.style.display = "none";
+//
+//     });
+// }
 
-        if (isValid) {
-            const data = {
-                internNoticeTitle: document.querySelector("#content-title").value,
-                internNoticeSubtitle: document.querySelector("#content-subtitle").value,
-                jobCategoryId: document.querySelector("#job-category").dataset.id,
-                internNoticeIntroduceJob: document.querySelector("#introduce-job").value,
-                internMainTasks: document.querySelector("#main-tasks").value,
-                internNoticeEtc: document.querySelector("#notice-etc").value,
-                internNoticeStartDate: document.querySelector("#intern-notice-start-date").value,
-                internNoticeEndDate: document.querySelector("#intern-notice-end-date").value,
-            }
+// 팝업 등록 및 수정 확인
+btnSubmit.addEventListener("click", async () => {
+    const isValid = formValidate();
+    const jobCategoryId = document.querySelector("input[name=jobCategoryId]");
+    const internForm = document.querySelector("#intern-form");
+    const url = !notice.internNoticeTitle ? "/create" : `/edit`;
+    jobCategoryId.value = dropdownContainer.dataset.id;
 
-            try {
-                await internRegisterService.update(id, data);
-                alert("공고가 수정되었습니다.");
+    if (isValid) {
+        internForm.setAttribute("action", "/enterprise-console/intern" + url);
+        internForm.submit();
+        return;
+        // const data = {
+        //     companyId: companyId,
+        //     internNoticeTitle: document.querySelector("#content-title").value,
+        //     internNoticeSubtitle: document.querySelector("#content-subtitle").value,
+        //     jobCategoryId: document.querySelector("#job-category").dataset.id,
+        //     internNoticeIntroduceJob: document.querySelector("#introduce-job").value,
+        //     internMainTasks: document.querySelector("#main-tasks").value,
+        //     internNoticeEtc: document.querySelector("#notice-etc").value,
+        //     internNoticeStartDate: document.querySelector("#intern-notice-start-date").value,
+        //     internNoticeEndDate: document.querySelector("#intern-notice-end-date").value,
+        // }
+        //
+        // try {
+        //     await internRegisterService.register(data);
+        //     alert("공고가 등록되었습니다.");
+        //
+        //     window.location.href = "/enterprise-console/intern/list";
+        // } catch (err) {
+        //     console.error(err);
+        //     alert("등록 중 오류가 발생했습니다.");
+        // }
+    }
+    console.log("유효성 실패!!!!!");
 
-                window.location.href = "/enterprise-console/intern/list";
-            } catch (err) {
-                console.error(err);
-                alert("수정 중 오류가 발생했습니다.");
-            }
-        } else {
-            console.log("유효성 실패!!!!!");
-        }
-
-        popup.style.display = "none";
-
-    });
-}
-
-// 팝업 등록 확인
-if(btnYegister) {
-    btnYegister.addEventListener("click", async () => {
-        const isValid = formValidate();
-
-        if (isValid) {
-            const data = {
-                companyId: companyId,
-                internNoticeTitle: document.querySelector("#content-title").value,
-                internNoticeSubtitle: document.querySelector("#content-subtitle").value,
-                jobCategoryId: document.querySelector("#job-category").dataset.id,
-                internNoticeIntroduceJob: document.querySelector("#introduce-job").value,
-                internMainTasks: document.querySelector("#main-tasks").value,
-                internNoticeEtc: document.querySelector("#notice-etc").value,
-                internNoticeStartDate: document.querySelector("#intern-notice-start-date").value,
-                internNoticeEndDate: document.querySelector("#intern-notice-end-date").value,
-            }
-
-            try {
-                await internRegisterService.register(data);
-                alert("공고가 등록되었습니다.");
-
-                window.location.href = "/enterprise-console/intern/list";
-            } catch (err) {
-                console.error(err);
-                alert("등록 중 오류가 발생했습니다.");
-            }
-        } else {
-            console.log("유효성 실패!!!!!");
-        }
-
-        popup.style.display = "none";
-    });
-}
+    // popup.style.display = "none";
+});
 
 // 입력 중 border 해제 (실시간)
 contentInput.forEach(input => {
@@ -235,15 +244,6 @@ dropdownBtns.forEach(btn => {
 
         if (span) span.textContent = selectedText;
         searchBtn.style.border = "";
-    });
-});
-
-// 입력 중 border 해제 (textarea)
-document.querySelectorAll(".contents .textarea").forEach(textarea => {
-    textarea.addEventListener("input", () => {
-        if (textarea.value.trim() !== "") {
-            textarea.style.border = "";
-        }
     });
 });
 
@@ -272,7 +272,3 @@ dateInputs.forEach(input => {
         });
     });
 });
-
-// document.addEventListener("DOMContentLoaded", async () => {
-//     const data = await internRegisterService.detail(id);
-// });

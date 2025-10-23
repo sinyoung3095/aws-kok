@@ -61,28 +61,27 @@ public class ConsoleExperienceNoticeServiceImpl implements ConsoleExperienceNoti
         return consoleExperienceDAO.findDetailById(id);
     }
 
+//    공고 등록 밑 수정
     @Override
     @Transactional
-    public void registerNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
-//        공고 등록
-        consoleExperienceDAO.createNotice(noticeRequestDTO);
+    public void createOrEdit(boolean isCreate, ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
+        if (isCreate) {
+            //        공고 등록
+            consoleExperienceDAO.createNotice(noticeRequestDTO);
 
-//        직군 등록
-        consoleExperienceDAO.createNoticeJobCategory(noticeRequestDTO);
+            //        직군 등록
+            consoleExperienceDAO.createNoticeJobCategory(noticeRequestDTO);
 
-//        알림
-        Long noticeId = noticeRequestDTO.getId();
-        memberAlarmService.experienceAlarm(noticeId);
-    }
+            //        알림
+            Long noticeId = noticeRequestDTO.getId();
+            memberAlarmService.experienceAlarm(noticeId);
+        } else {
+            //        공고 수정
+            consoleExperienceDAO.editNotice(noticeRequestDTO);
 
-    @Override
-    @Transactional
-    public void modifyNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO) {
-//        공고 수정
-        consoleExperienceDAO.editNotice(noticeRequestDTO);
-
-//        직군 수정
-        consoleExperienceDAO.editNoticeJobCategory(noticeRequestDTO);
+            //        직군 수정
+            consoleExperienceDAO.editNoticeJobCategory(noticeRequestDTO);
+        }
     }
 
 //    공고 수정 상세

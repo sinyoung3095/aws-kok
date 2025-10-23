@@ -9,7 +9,7 @@ import java.util.List;
 
 @Component
 @Getter @Setter @ToString
-public class RequestExperienceDownloadUrlDTO {
+public class RequestDownloadUrlDTO {
     private List<String> urls;
     private List<String> fileNames;
 }

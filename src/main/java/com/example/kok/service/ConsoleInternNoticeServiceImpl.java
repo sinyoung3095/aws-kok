@@ -45,6 +45,7 @@ public class ConsoleInternNoticeServiceImpl implements ConsoleInternNoticeServic
         return consoleInternNoticeCriteriaDTO;
     }
 
+//    공고 상태 변경
     @Override
     public void updateListStatus(Long noticeId, Status status) {
         consoleInternDAO.updateNoticeStatus(noticeId, status);
@@ -56,24 +57,23 @@ public class ConsoleInternNoticeServiceImpl implements ConsoleInternNoticeServic
         return consoleInternDAO.findDetailById(id);
     }
 
+//    공고 등록 밑 수정
     @Override
     @Transactional
-    public void registerNotice(ConsoleInternNoticeRequestDTO noticeRequestDTO) {
+    public void createOrEdit(boolean isCreate, ConsoleInternNoticeRequestDTO noticeRequestDTO) {
+        if (isCreate) {
 //        공고 등록
         consoleInternDAO.createNotice(noticeRequestDTO);
 
 //        직군 등록
         consoleInternDAO.createNoticeJobCategory(noticeRequestDTO);
-    }
+        } else {
+            //        공고 수정
+            consoleInternDAO.editNotice(noticeRequestDTO);
 
-    @Override
-    @Transactional
-    public void modifyNotice(ConsoleInternNoticeRequestDTO noticeRequestDTO) {
-//        공고 수정
-        consoleInternDAO.editNotice(noticeRequestDTO);
-
-//        직군 수정
-        consoleInternDAO.editNoticeJobCategory(noticeRequestDTO);
+            //        직군 수정
+            consoleInternDAO.editNoticeJobCategory(noticeRequestDTO);
+        }
     }
 
 //    공고 수정 상세

@@ -49,6 +49,7 @@ const experienceLayout = (() => {
                         <div class="text">조건에 맞는 공고가 없습니다.</div>
                     </td>
                 </tr>`;
+            tbody.innerHTML = text;
             return;
         }
 
