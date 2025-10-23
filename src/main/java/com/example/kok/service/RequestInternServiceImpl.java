@@ -9,6 +9,7 @@ import com.example.kok.repository.RequestInternDAO;
 import com.example.kok.repository.RequestInternFileDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ public class RequestInternServiceImpl implements RequestInternService {
     private final MemberDAO memberDAO;
 
     @Override
+    @Transactional
     public void applyForIntern(RequestInternDTO requestInternDTO) {
         Long memberAlarmSettingId=memberAlarmSettingDAO.findByMemberId(requestInternDTO.getMemberId());
         requestInternDTO.setMemberAlarmSettingId(memberAlarmSettingId);

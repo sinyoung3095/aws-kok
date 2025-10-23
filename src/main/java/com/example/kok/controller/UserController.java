@@ -84,7 +84,7 @@ public class UserController {
         jwtTokenProvider.createAccessToken(userDTO.getSnsEmail(), kind);
         jwtTokenProvider.createRefreshToken(userDTO.getSnsEmail(), kind);
 
-        return new RedirectView("/community/page");
+        return new RedirectView("/experience/list");
     }
 
 
