@@ -56,6 +56,7 @@ public class ConsoleProfileController {
         }
 
         consoleProfileService.updateProfile(companyProfileDTO, multipartFiles);
+
         return "redirect:/enterprise-console/profile";
     }
 

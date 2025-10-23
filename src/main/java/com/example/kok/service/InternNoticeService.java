@@ -13,6 +13,7 @@ public interface InternNoticeService {
 
 //    기업별 인턴 공고 목록
     public CompanyInternNoticeCriteriaDTO getInternNoticesByCompanyId(int page, Long companyId, Search search);
+
 //    목록 조회
     public InternNoticeCriteriaDTO selectAllInternNotice(int page, Search search);
 

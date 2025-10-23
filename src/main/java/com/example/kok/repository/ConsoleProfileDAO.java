@@ -1,16 +1,10 @@
 package com.example.kok.repository;
 
 import com.example.kok.domain.ConsoleCompanyProfileVO;
-import com.example.kok.dto.ConsoleAdNoticeDTO;
 import com.example.kok.dto.ConsoleCompanyProfileDTO;
-import com.example.kok.enumeration.RequestStatus;
-import com.example.kok.mapper.ConsoleAdNoticeMapper;
 import com.example.kok.mapper.ConsoleProfileMapper;
-import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 @RequiredArgsConstructor

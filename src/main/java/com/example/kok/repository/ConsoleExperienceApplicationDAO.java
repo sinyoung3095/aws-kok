@@ -21,12 +21,13 @@ public class ConsoleExperienceApplicationDAO {
         return consoleExperienceMapper.selectApplicationDetail(memberId, experienceNoticeId);
     }
 
+//    이력서 단일 다운
     public Optional<FileDTO> findResumeFileByMemberId(Long memberId, Long experienceNoticeId) {
         return consoleExperienceMapper.selectResumeFileByMemberId(memberId, experienceNoticeId);
     }
 
 //    공고별 지원자 목록 조회
-    public List<ConsoleExperienceApplicantDTO> findApplicantsByNoticeId(Long experienceNoticeId) {
+    public List<ConsoleExperienceApplicantDTO> findApplicationsByNoticeId(Long experienceNoticeId) {
         return consoleExperienceMapper.selectApplicantsByNoticeId(experienceNoticeId);
     }
 

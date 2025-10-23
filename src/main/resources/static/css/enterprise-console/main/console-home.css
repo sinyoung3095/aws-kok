@@ -333,6 +333,10 @@ div.table-wrap{
     color: #0a0a0a;
 }
 
+div.table-content {
+    justify-content: flex-start;
+}
+
 table.card-table{
     font-size: 14px;
     line-height: 1.42857;
@@ -407,4 +411,8 @@ td.tbody-td2{
     line-height: 1.42857;
     caption-side: bottom;
     text-align: center;
+}
+
+td.tbody-td1.no-data {
+    padding: 30px 0;
 }

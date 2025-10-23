@@ -4,7 +4,7 @@ import com.example.kok.domain.ConsoleAdNoticeVO;
 import com.example.kok.dto.ConsoleAdNoticeDTO;
 import com.example.kok.enumeration.RequestStatus;
 import com.example.kok.enumeration.Status;
-import com.example.kok.mapper.ConsoleAdNoticeMapper;
+import com.example.kok.mapper.ConsoleAdMapper;
 import com.example.kok.util.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class ConsoleAdDAO {
-    private final ConsoleAdNoticeMapper consoleAdMapper;
+    private final ConsoleAdMapper consoleAdMapper;
 
 //    목록(전체)
     public List<ConsoleAdNoticeDTO> findAllByCompany(Long companyId, Criteria criteria, String keyword) {

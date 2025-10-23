@@ -104,7 +104,7 @@
                                         <div class="card-main-title">체험자</div>
                                         <div class="card-sub-title">우리 기업을 신청한 하이커들</div>
                                     </div>
-                                    <div class="card-content">
+                                    <div class="card-content table-content">
                                         <div class="table-wrap">
                                             <table class="card-table">
                                                 <thead class="table-head">
@@ -115,18 +115,18 @@
                                                 </tr>
                                                 </thead>
                                                 <!-- 데이터 없을 때 -->
-                                                <tbody class="table-body" th:if="${#lists.isEmpty(recentMembers)}">
-                                                <tr>
-                                                    <td colspan="3" class="tbody-td1">최근 체험자가 없습니다.</td>
-                                                </tr>
+                                                <tbody class="table-body" th:if="${recentMembers == null or recentMembers.size() == 0}">
+                                                    <tr>
+                                                        <td colspan="3" class="tbody-td1 no-data">최근 체험자가 없습니다.</td>
+                                                    </tr>
                                                 </tbody>
                                                 <!-- 데이터 있을 때 -->
-                                                <tbody class="table-body" th:if="${!#lists.isEmpty(recentMembers)}">
-                                                <tr class="tbody-tr" th:each="member : ${recentMembers}">
-                                                    <td class="tbody-td1" th:text="${member.userName}">홍길동</td>
-                                                    <td class="tbody-td2" th:text="${member.experienceNoticeTitle}">체험 공고 제목</td>
-                                                    <td class="tbody-td2" th:text="${member.requestDate}">2025-01-01</td>
-                                                </tr>
+                                                <tbody class="table-body" th:if="${recentMembers != null and recentMembers.size() > 0}">
+                                                    <tr class="tbody-tr" th:each="member : ${recentMembers}">
+                                                        <td class="tbody-td1" th:text="${member.userName}">홍길동</td>
+                                                        <td class="tbody-td2" th:text="${member.experienceNoticeTitle}">체험 공고 제목</td>
+                                                        <td class="tbody-td2" th:text="${member.requestDate}">2025-01-01</td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>

@@ -94,7 +94,14 @@ if (internTable) {
 
             if (result === "success") {
                 alert("공고가 삭제되었습니다!");
-                location.reload();
+                internNoticeService.getList(page, status, keyword,(data) => {
+                    internLayout.contentLayout();
+                    internLayout.rowTemplate(data.internLists);
+                    internLayout.totalCount(data);
+                    internLayout.listTotalCount(data);
+                    internLayout.renderPagination(data.criteria);
+                    bindPaginationEvent(status, keyword);
+                });
             } else {
                 alert("삭제 실패! 다시 시도해주세요.");
             }
@@ -116,7 +123,7 @@ const page = 1;
 let status = null;
 let keyword ="";
 
-const bindPaginationEvent = (companyId, status) => {
+const bindPaginationEvent = (status) => {
     const paginationArea = document.querySelector("#intern-list-table .page-ul");
     if (!paginationArea) return;
 
@@ -132,25 +139,25 @@ const bindPaginationEvent = (companyId, status) => {
 
         const page = parseInt(link.dataset.page, 10);
 
-        internNoticeService.getList(companyId, page, status, keyword,(data) => {
+        internNoticeService.getList(page, status, keyword,(data) => {
             internLayout.contentLayout();
             internLayout.rowTemplate(data.internLists);
             internLayout.totalCount(data);
             internLayout.listTotalCount(data);
             internLayout.renderPagination(data.criteria);
 
-            bindPaginationEvent(companyId, status, keyword);
+            bindPaginationEvent(status, keyword);
         });
     });
 };
 
-internNoticeService.getList(companyId, page, status, keyword,(data) => {
+internNoticeService.getList(page, status, keyword,(data) => {
     internLayout.contentLayout();
     internLayout.rowTemplate(data.internLists);
     internLayout.totalCount(data);
     internLayout.listTotalCount(data);
     internLayout.renderPagination(data.criteria);
-    bindPaginationEvent(companyId, status, keyword);
+    bindPaginationEvent(status, keyword);
 });
 
 
@@ -182,13 +189,13 @@ statusButtons.forEach(btn => {
 function doSearch(page = 1) {
     keyword = searchInput.value.trim();
 
-    internNoticeService.getList(companyId, page, status, keyword, (data) => {
+    internNoticeService.getList(page, status, keyword, (data) => {
         internLayout.contentLayout();
         internLayout.rowTemplate(data.internLists);
         internLayout.totalCount(data);
         internLayout.listTotalCount(data);
         internLayout.renderPagination(data.criteria);
-        bindPaginationEvent(companyId, page, status, keyword);
+        bindPaginationEvent(page, status, keyword);
     });
 }
 

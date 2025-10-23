@@ -1,5 +1,7 @@
 package com.example.kok.controller;
 
+import com.example.kok.aop.aspect.annotation.LogReturnStatus;
+import com.example.kok.aop.aspect.annotation.LogStatus;
 import com.example.kok.dto.*;
 import com.example.kok.service.ConsoleAdService;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,7 @@ public class ConsoleAdApiController implements ConsoleAdApiControllerDocs {
 
 //    등록
     @PostMapping("/create")
+    @LogStatus
     public ResponseEntity<?> registerAdvertisement(
             @ModelAttribute ConsoleAdNoticeDTO adNoticeDTO,
             @RequestParam(value = "files", required = false) List<MultipartFile> multipartFiles) {
@@ -68,7 +71,7 @@ public class ConsoleAdApiController implements ConsoleAdApiControllerDocs {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteAd(@PathVariable("id") Long advertisementId) {
         adService.deleteAdvertisement(advertisementId);
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok("success");
     }
 
 }

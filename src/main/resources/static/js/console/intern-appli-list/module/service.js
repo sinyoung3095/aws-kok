@@ -1,14 +1,8 @@
 const internDatailService = (() => {
     // 목록
     const getList = async (internNoticeId, page, status, callback) => {
-        const response = await fetch(`/api/enterprise-console/intern/applicate-list/${internNoticeId}/${page}?status=${status ?? ""}`);
+        const response = await fetch(`/api/enterprise-console/intern/applicate-list/${internNoticeId}/${page}?status=${status}`);
         const data = await response.json();
-
-        if (callback) {
-            setTimeout(() => {
-                callback(data);
-            }, 1000)
-        }
 
         if (response.ok) {
             console.log("지원자 목록 존재")
@@ -47,7 +41,23 @@ const internDatailService = (() => {
             return false;
         }
     };
-    return {getList:getList, updateStatus:updateStatus}
+
+    const downLoad = async (internNoticeId, memberIdList) => {
+        const response = await fetch(`/api/enterprise-console/intern/${internNoticeId}/applications/files`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(memberIdList)
+        });
+
+        if (!response.ok) {
+            console.error("다운로드 실패", response.status);
+        }
+
+        const urls = await response.json();
+        return urls;
+    }
+
+    return {getList:getList, updateStatus:updateStatus, downLoad:downLoad}
 })();
 
 

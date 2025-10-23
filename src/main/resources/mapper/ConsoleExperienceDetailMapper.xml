@@ -45,7 +45,7 @@
             on re.experience_notice_id = en.id
         where en.id = #{experienceNoticeId}
             and u.user_status = 'active'
-        <if test="status != null and status != ''">
+        <if test="status != null">
             and re.request_experience_status = #{status}
         </if>
         order by re.id desc
@@ -61,7 +61,7 @@
             on re.experience_notice_id = en.id
         where en.id = #{experienceNoticeId}
         and u.user_status = 'active'
-        <if test="status != null and status != ''">
+        <if test="status != null">
             and re.request_experience_status = #{status}
         </if>
     </select>
