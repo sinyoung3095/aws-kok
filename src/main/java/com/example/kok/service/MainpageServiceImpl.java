@@ -5,7 +5,9 @@ import com.example.kok.dto.*;
 import com.example.kok.enumeration.UserRole;
 import com.example.kok.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.util.List;
@@ -23,6 +25,7 @@ public class MainpageServiceImpl implements MainpageService {
     private final RequestInternDAO requestInternDAO;
     private final RequestExperienceDAO requestExperienceDAO;
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public List<CompanyDTO> findPopularCompanies() {
         List<CompanyDTO> companyDTOs = followDAO.selectPopularCompany();
         companyDTOs.forEach(companyDTO -> {
@@ -62,6 +65,8 @@ public class MainpageServiceImpl implements MainpageService {
     }
 
     @Override
+    @Cacheable
+    @Transactional(rollbackFor = Exception.class)
     public CustomUserDetails findProfile(CustomUserDetails customUserDetails) {
         if(customUserDetails.getMemberProfileUrl()!=null){
             if(userProfileService.findProfileById(customUserDetails.getId()) != null){
