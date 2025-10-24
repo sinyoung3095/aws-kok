@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -50,6 +51,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
     public void putFileAtStorage(List<MultipartFile> files, Long memberId) {
         files.forEach(file -> {
             try {
@@ -115,7 +117,6 @@ public class MemberServiceImpl implements MemberService {
 
 //    회원 아이디로 조회
     @Override
-    @Cacheable(value = "member", key="'member_' + #memberId")
     public Optional<UserMemberDTO> findMembersByMemberId(Long memberId) {
         return memberDAO.selectMember(memberId)
                 .map(userMemberDTO -> {
@@ -152,6 +153,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public List<PostDTO> findPostsByMemberId(Long memberId) {
         List<PostDTO> posts=memberDAO.findPostsByMemberId(memberId);
         posts.forEach(post -> {
@@ -265,6 +267,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Cacheable(value = "memberProfile", key="'member_' + #profileUrl")
     public Optional<UserMemberDTO> findProfileByMemberId(Long memberId) {
         Optional<UserMemberDTO> memberProfile=memberDAO.findMemberProfileEtc(memberId);
         if (memberProfile.isPresent()) {
@@ -285,7 +288,6 @@ public class MemberServiceImpl implements MemberService {
             System.out.println("#######################");
             System.out.println(preSignedUrl);
         }
-//        memberProfile.setMemberProfileUrl(preSignedUrl);
         return memberProfile;
     }
 

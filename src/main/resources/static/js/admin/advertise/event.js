@@ -167,7 +167,6 @@ advertiseListContainer.addEventListener("click",async (e)=>{
                 }, 100);
             });
         });
-
     }
 });
 

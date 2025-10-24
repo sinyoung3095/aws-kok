@@ -56,7 +56,7 @@ const internDatailLayout = (() => {
             tbody.innerHTML = `
                 <tr class="body-tr no-data">
                     <td class="body-td" colspan="9">
-                        <div class="text">조건에 맞는 공고가 없습니다.</div>
+                        <div class="text">조건에 맞는 지원자가 없습니다.</div>
                     </td>
                 </tr>`;
             return;
@@ -67,7 +67,7 @@ const internDatailLayout = (() => {
                 <tr class="body-tr" data-user-id="${list.userId}">
                     <td class="body-td">
                         <label style="display:block; width:100%; height:100%;">
-                            <input type="checkbox" name="" class="check-download">
+                            <input type="checkbox" name="" class="check-download" data-member-id="${list.userId}">
                         </label>
                     </td>
                     <td class="body-td">

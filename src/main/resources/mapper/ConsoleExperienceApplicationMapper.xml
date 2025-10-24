@@ -48,6 +48,7 @@
           and re.experience_notice_id = #{experienceNoticeId}
     </select>
 
+    <!-- 현재 공고에 지원한 지원자 상세 조회 -->
     <select id="selectApplicantsByNoticeId">
         select
             re.id as request_id,
@@ -78,7 +79,7 @@
     <!-- 지원자 상태 변경 -->
     <update id="updateApplicantStatus">
         update tbl_request_experience
-        set request_experience_status = #{requestExperienceStatus}::request_status,
+        set request_experience_status = #{requestExperienceStatus},
             updated_datetime = now()
         where member_id = #{userId}
             and experience_notice_id = #{experienceNoticeId};

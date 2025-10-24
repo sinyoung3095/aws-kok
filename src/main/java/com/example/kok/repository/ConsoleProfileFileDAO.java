@@ -17,7 +17,7 @@ import java.util.Optional;
 public class ConsoleProfileFileDAO {
     private final ConsoleProfileFileMapper fileMapper;
 
-//    광고 ID로 파일 목록 조회
+//    목록 조회
     public List<FileDTO> findAllByProfileId(Long companyId) {
         return fileMapper.selectProfileFileByCompanyId(companyId);
     }
@@ -27,13 +27,13 @@ public class ConsoleProfileFileDAO {
         fileMapper.insertFile(fileDTO);
     }
 
-//    광고-파일 연결
+//    파일 연결
     public void linkFileToProfile(ConsoleProfileFileDTO consoleFileDTO) {
         fileMapper.insertProfileFile(consoleFileDTO);
     }
 
     public void deleteAllFilesByProfileId(Long companyId) {
-        // 광고파일 연결 삭제
+        // 파일 연결 삭제
         fileMapper.deleteFilesByProfileId(companyId);
 
         // 파일 삭제

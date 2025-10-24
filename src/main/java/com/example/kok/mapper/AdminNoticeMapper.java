@@ -30,8 +30,7 @@ public interface AdminNoticeMapper {
     public void deleteNoticeFromId(Long id);
 
 //    지원 센터 - 목록
-    public List<AdminNoticeDTO> selectSupportNoticeAll (@Param("criteria") Criteria criteria,
-                                                        @Param("keyword") String keyword);
+    public List<AdminNoticeDTO> selectSupportNoticeAll (@Param("criteria") Criteria criteria);
 //    지원 센터 - 개수
-    public int countSupportNoticeAll(String keyword);
+    public int countSupportNoticeAll();
 }
