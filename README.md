@@ -7,7 +7,7 @@
 <img width="1280" height="720" alt="슬라이드2" src="https://github.com/user-attachments/assets/e6a3caee-0e17-4456-a567-f33c622f83ce" />
 
 
-현대 사회의 청년들은 <strong>실무 경험의 부족</strong>으로 취업 경쟁에서 여러움을 겪고 있다. 경력자인 50~60대의 취업률은 늘어나는 반면, 20~30대의 취업률은 떨어져만 가고 있다. 반대로 기업은 인재를 채용하기 전에 그들의 역량과 열정을 직접 확인하기 어려워 비경력직의 채용을 피하고 있다. <strong>또한, 기업 내 휴가·공백 기간이 발생해도 이를 효율적으로 채우기 위한 방법이 없다. </strong> 이러한 기회의 단절과 인재 탐색의 비효율성을 해결하기 위해, <strong>청년과 기업이 자연스럽게 연결되는 실무 체험 플랫폼</strong>을 제작했다.
+현대 사회의 청년들은 <strong>실무 경험의 부족</strong>으로 취업 경쟁에서 여러움을 겪고 있다. 경력자인 50-60대의 취업률은 늘어나는 반면, 20-30대의 취업률은 떨어져만 가고 있다. 반대로 기업은 인재를 채용하기 전에 그들의 역량과 열정을 직접 확인하기 어려워 비경력직의 채용을 피하고 있다. <strong>또한, 기업 내 휴가·공백 기간이 발생해도 이를 효율적으로 채우기 위한 방법이 없다. </strong> 이러한 기회의 단절과 인재 탐색의 비효율성을 해결하기 위해, <strong>청년과 기업이 자연스럽게 연결되는 실무 체험 플랫폼</strong>을 제작했다.
 
 
 <h2>2. 기대 효과</h2>
@@ -29,22 +29,18 @@
 <h2>3. 프로젝트 사용 툴</h2>
 - Java<br>
 - Java Spring Data<br>
-- QueryDSL<br>
 - Java Script<br>
 - tomcat<br>
-- jQuery<br>
-- ORACLE<br>
 - Spring Boot<br>
 - Visual Studio Code<br>
-- DBeaver<br>
 - Sourcetree<br>
 - git, github<br>
 - JSON<br>
-- Ajax<br>
-- JDK 11.0.15<br>
+- JDK 17.0.10<br>
 - Naver DEVELOPER API<br>
 - Kakao DEVELOPER API<br>
 - SMTP Gmail API<br>
+- S3<br>
 - Slack<br>
 
 <h2>4. ERD</h2>
