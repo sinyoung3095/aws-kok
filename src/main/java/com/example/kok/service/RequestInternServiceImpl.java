@@ -28,7 +28,7 @@ public class RequestInternServiceImpl implements RequestInternService {
         requestInternDTO.setMemberAlarmSettingId(memberAlarmSettingId);
         requestInternDAO.applyForIntern(requestInternDTO);
         System.out.println(requestInternDTO.getId());
-        Optional<UserMemberDTO> member=memberDAO.selectMember(requestInternDTO.getMemberId());
+//        Optional<UserMemberDTO> member=memberDAO.selectMember(requestInternDTO.getMemberId());
         Long reqId=requestInternDTO.getId();
         Long fileId=requestInternDTO.getFileId();
         RequestInternFileDTO file=new RequestInternFileDTO();
