@@ -9,6 +9,7 @@ import com.example.kok.util.CompanyNoticeCriteria;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -28,7 +29,6 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
 
     @Override
     public ExperienceNoticeCriteriaDTO selectAllExperienceNotice(int page, Search search) {
-//        System.out.println("서비스임플 실행해용");
         ExperienceNoticeCriteriaDTO experienceNoticeCriteriaDTO = new ExperienceNoticeCriteriaDTO();
         Criteria criteria = new Criteria(page, experienceNoticeDAO.findCountAll());
         List<ExperienceNoticeDTO> experiences=experienceNoticeDAO.findAll(criteria, search);
@@ -39,7 +39,7 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
                 long days = ChronoUnit.DAYS.between(today, endDate);
                 experience.setRemainingDays(days);
             } else {
-                experience.setRemainingDays(0L); // endDate보다 today가 이전일 경우 0
+                experience.setRemainingDays(0L);
             }
             fileService.findFileByCompanyId(experience.getCompanyId())
                     .ifPresentOrElse(fileDTO -> {
@@ -75,6 +75,7 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
 
 
     @Override
+    @Cacheable(value = "result", key = "experienceNoticeDTO")
     public ExperienceNoticeDTO findNoticeById(Long id) {
         ExperienceNoticeDTO result= experienceNoticeDAO.findById(id);
         System.out.println(id);
@@ -143,12 +144,14 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
     }
 
     @Override
+    @Cacheable(value = "result", key = "result")
     public boolean isSavedExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO) {
         boolean result=saveExperienceNoticeDAO.idSavedExp(saveExperienceNoticeDTO);
         return result;
     }
 
     @Override
+    @Cacheable(value = "result", key = "result")
     public boolean isRequested(RequestExperienceDTO requestExperienceDTO) {
         boolean result=requestExperienceDAO.isRequested(requestExperienceDTO);
         return result;
