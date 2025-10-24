@@ -8,7 +8,6 @@
     font-synthesis: none;
     margin: 0px;
     padding: 0px;
-
 }
 body, html {
   overflow-y: auto; /* 세로 스크롤 자동 */
@@ -2719,4 +2718,9 @@ table {
     line-height: 18px;
     margin-top: 16px;
     text-align: right;
+}
+
+
+.back-gray {
+    background-color: #ccc;
 }
