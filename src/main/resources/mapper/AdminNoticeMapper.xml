@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kok.mapper.AdminNoticeMapper">
-    <sql id="searchKeyword">
-        <if test="keyword != null and keyword != ''">
-            and
-            (
-            admin_notice_title like concat('%', #{keyword}, '%') or
-            admin_notice_content like concat('%', #{keyword}, '%')
-            )
-        </if>
-    </sql>
 
     <insert id="insertNotice" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_admin_notice (admin_notice_title, admin_notice_content)
@@ -52,7 +43,6 @@
         select id, admin_notice_title, admin_notice_content, created_datetime, updated_datetime
         from tbl_admin_notice
         where notice_status = 'active'
-        <include refid="searchKeyword"/>
         order by id desc
         limit #{criteria.count} offset #{criteria.offset}
     </select>
@@ -60,7 +50,6 @@
     <select id="countSupportNoticeAll">
         select count(*) from tbl_admin_notice
         where notice_status = 'active'
-        <include refid="searchKeyword"/>
     </select>
 
 </mapper>
