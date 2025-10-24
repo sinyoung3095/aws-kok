@@ -54,6 +54,7 @@ public class AdminAdvertisementServiceImpl implements AdminAdvertisementService 
 
 //    광고 상세
     @Override
+    @Cacheable(value = "adminAdvertisement", key = "'adminAdvertisement_' + #id")
     public AdminAdvertisementDTO advertisementDetail(Long id) {
         AdminAdvertisementDTO advertisementDTO = adminAdvertisementDAO.selectAdvertisement(id).orElseThrow(PostNotFoundException::new);
 
