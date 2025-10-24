@@ -28,8 +28,8 @@ public class AdminServiceImpl implements AdminService {
 //    지원 센터 - 목록
     public AdminNoticeCriteriaDTO supportList(int page, String keyword){
         AdminNoticeCriteriaDTO adminNoticeCriteriaDTO = new AdminNoticeCriteriaDTO();
-        Criteria criteria = new Criteria(page, adminNoticeDAO.supportNoticeCount(keyword));
-        List<AdminNoticeDTO> noticeList = adminNoticeDAO.supportNoticeList(criteria, keyword);
+        Criteria criteria = new Criteria(page, adminNoticeDAO.supportNoticeCount());
+        List<AdminNoticeDTO> noticeList = adminNoticeDAO.supportNoticeList(criteria);
 
         criteria.setHasMore(noticeList.size() > criteria.getRowCount());
 //        criteria.setHasPreviousPage(page > 1);

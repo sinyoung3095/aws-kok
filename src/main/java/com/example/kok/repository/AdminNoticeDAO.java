@@ -47,12 +47,11 @@ public class AdminNoticeDAO {
     }
 
 //    지원센터 - 목록
-    public List<AdminNoticeDTO> supportNoticeList(@Param("criteria") Criteria criteria,
-                                                  @Param("keyword") String keyword){
-        return adminNoticeMapper.selectSupportNoticeAll(criteria, keyword);
+    public List<AdminNoticeDTO> supportNoticeList(@Param("criteria") Criteria criteria){
+        return adminNoticeMapper.selectSupportNoticeAll(criteria);
     }
 //    지원센터 - 개수
-    public int supportNoticeCount (String keyword){
-        return adminNoticeMapper.countSupportNoticeAll(keyword);
+    public int supportNoticeCount (){
+        return adminNoticeMapper.countSupportNoticeAll();
     }
 }
