@@ -65,7 +65,6 @@ public class MainpageServiceImpl implements MainpageService {
     }
 
     @Override
-    @Cacheable
     @Transactional(rollbackFor = Exception.class)
     public CustomUserDetails findProfile(CustomUserDetails customUserDetails) {
         if(customUserDetails.getMemberProfileUrl()!=null){

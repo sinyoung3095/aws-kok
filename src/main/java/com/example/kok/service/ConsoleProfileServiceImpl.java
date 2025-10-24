@@ -30,6 +30,7 @@ public class ConsoleProfileServiceImpl implements ConsoleProfileService {
 
 //    조회
     @Override
+    @Cacheable(value = "profile", key = "'company_' + #companyId")
     public ConsoleCompanyProfileDTO getProfile(Long companyId) {
         // 기업 기본 정보 조회
         ConsoleCompanyProfileDTO profile = consoleProfileDAO.findCompanyProfileByUserId(companyId);
@@ -87,18 +88,21 @@ public class ConsoleProfileServiceImpl implements ConsoleProfileService {
     @Transactional(rollbackFor = Exception.class)
     @CacheEvict(value = "profile", key = "'company_' + #companyProfileDTO.companyId")
     public void updateProfile(ConsoleCompanyProfileDTO companyProfileDTO, List<MultipartFile> multipartFiles) {
-        log.info("=== [Service] updateProfile() 호출 ===");
-        log.info("companyId: {}", companyProfileDTO.getCompanyId());
-        log.info("산업 분야: {}", companyProfileDTO.getCompanySectorName());
-        log.info("기업 규모: {}", companyProfileDTO.getCompanyScaleName());
+//        기본 선택 값
+        if (companyProfileDTO.getCompanyScaleName() == null || companyProfileDTO.getCompanyScaleName().isBlank()) {
+            companyProfileDTO.setCompanyScaleName("미선택");
+        }
+        if (companyProfileDTO.getCompanySectorName() == null || companyProfileDTO.getCompanySectorName().isBlank()) {
+            companyProfileDTO.setCompanySectorName("미선택");
+        }
 
-        // 기본 기업 정보 수정
+//        기본 기업 정보 수정
         consoleProfileDAO.updateCompanyProfile(toConsoleProfileVO(companyProfileDTO));
         consoleProfileDAO.updateCeoName(toConsoleProfileVO(companyProfileDTO));
         consoleProfileDAO.updateCompanySector(toConsoleProfileVO(companyProfileDTO));
         consoleProfileDAO.updateCompanyScale(toConsoleProfileVO(companyProfileDTO));
 
-        // 이미지 업로드 처리 (프로필 + 배경)
+//        이미지 업로드 처리 (프로필 + 배경)
         if (multipartFiles != null && !multipartFiles.isEmpty()) {
 
             // 기존 파일 및 연결 삭제
@@ -137,12 +141,9 @@ public class ConsoleProfileServiceImpl implements ConsoleProfileService {
                     }
 
                 } catch (IOException e) {
-                    throw new RuntimeException("이미지 업로드 실패", e);
+                    throw new RuntimeException("이미지 업로드 실패");
                 }
             });
         }
-
-        ConsoleCompanyProfileDTO updatedProfile = getProfile(companyProfileDTO.getCompanyId());
     }
-
 }
