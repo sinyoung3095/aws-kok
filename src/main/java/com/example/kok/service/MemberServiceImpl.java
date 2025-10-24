@@ -153,7 +153,6 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public List<PostDTO> findPostsByMemberId(Long memberId) {
         List<PostDTO> posts=memberDAO.findPostsByMemberId(memberId);
         posts.forEach(post -> {

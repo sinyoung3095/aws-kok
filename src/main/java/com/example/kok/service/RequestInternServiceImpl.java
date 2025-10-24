@@ -8,6 +8,7 @@ import com.example.kok.repository.MemberDAO;
 import com.example.kok.repository.RequestInternDAO;
 import com.example.kok.repository.RequestInternFileDAO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,8 +39,10 @@ public class RequestInternServiceImpl implements RequestInternService {
     }
 
     @Override
+    @Cacheable(value = "result", key = "result")
     public boolean isRequested(RequestInternDTO requestInternDTO) {
-        System.out.println("서비스 임플: "+requestInternDAO.isRequested(requestInternDTO));
-        return requestInternDAO.isRequested(requestInternDTO);
+//        System.out.println("서비스 임플: "+requestInternDAO.isRequested(requestInternDTO));
+        boolean result=requestInternDAO.isRequested(requestInternDTO);
+        return result;
     }
 }

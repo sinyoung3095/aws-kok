@@ -12,6 +12,7 @@ import com.example.kok.repository.SaveInternNoticeDAO;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -78,6 +79,7 @@ public class InternNoticeServiceImpl implements InternNoticeService {
 
 
     @Override
+    @Cacheable(value = "result", key = "internNoticeDTO")
     public InternNoticeDTO findNoticeById(Long id) {
         InternNoticeDTO result= internNoticeDAO.findById(id);
         String jobName= internNoticeDAO.findJobNameByID(id);
@@ -143,6 +145,7 @@ public class InternNoticeServiceImpl implements InternNoticeService {
     }
 
     @Override
+    @Cacheable(value = "result", key = "result")
     public boolean isSavedInt(SaveInternNoticeDTO saveInternNoticeDTO) {
         boolean result=saveInternNoticeDAO.idSavedInt(saveInternNoticeDTO);
         return result;
