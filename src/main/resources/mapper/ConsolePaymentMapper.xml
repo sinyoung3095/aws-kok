@@ -8,10 +8,10 @@
             p.payment_paid_datetime::date,
             p.payment_status
         from tbl_payment_user pu
-                 join tbl_payment p
-                      on pu.payment_id = p.id
-                 join tbl_advertisement a
-                      on pu.advertisement_id = a.id
+             join tbl_payment p
+                  on pu.payment_id = p.id
+             join tbl_advertisement a
+                  on pu.advertisement_id = a.id
         where pu.user_id = #{companyId}
         order by p.payment_paid_datetime desc
         limit #{criteria.count} offset #{criteria.offset}

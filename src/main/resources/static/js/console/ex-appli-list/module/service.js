@@ -1,14 +1,8 @@
 const experienceDatailService = (() => {
     // 목록
-    const getList = async (experienceNoticeId, page, status, callback) => {
-        const response = await fetch(`/api/enterprise-console/experience/applicate-list/${experienceNoticeId}/${page}?status=${status ?? ""}`);
+    const getList = async (experienceNoticeId, page, status) => {
+        const response = await fetch(`/api/enterprise-console/experience/applicate-list/${experienceNoticeId}/${page}?status=${status}`);
         const data = await response.json();
-
-        if (callback) {
-            setTimeout(() => {
-                callback(data);
-            }, 1000)
-        }
 
         if (response.ok) {
             console.log("지원자 목록 존재")
@@ -49,7 +43,7 @@ const experienceDatailService = (() => {
     };
 
     const downLoad = async (experienceNoticeId, memberIdList) => {
-        const response = await fetch(`/api/enterprise-console/experience/${experienceNoticeId}/applicants/files`, {
+        const response = await fetch(`/api/enterprise-console/experience/${experienceNoticeId}/applications/files`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(memberIdList)

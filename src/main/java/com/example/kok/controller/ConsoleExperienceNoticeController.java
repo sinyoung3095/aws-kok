@@ -6,11 +6,11 @@ import com.example.kok.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -24,20 +24,15 @@ public class ConsoleExperienceNoticeController {
     private final ConsoleExperienceApplicationService consoleExperienceApplicationService;
     private final UserService userService;
     private final ExperienceNoticeService experienceNoticeService;
-    private final EvaluationService evaluationService;
+    private final HttpServletRequest request;
 
-    //    기업 콘솔 체험 공고 목록
+//    기업 콘솔 체험 공고 목록
     @GetMapping("/list")
     public String goToList(@AuthenticationPrincipal CustomUserDetails customUserDetails,
                            Model model) {
 
-        Long companyId = customUserDetails.getId();
         String companyName = customUserDetails.getCompanyName();
-        String memberName = customUserDetails.getUsername();
-
-        model.addAttribute("companyId", companyId);
         model.addAttribute("companyName", companyName);
-        model.addAttribute("memberName", memberName);
 
         return "enterprise-console/experience/console-experience-list";
     }
@@ -46,7 +41,7 @@ public class ConsoleExperienceNoticeController {
     @GetMapping(value = {"/create", "edit/{id}"})
     public String goToWrite(@PathVariable(required = false) Long id,
                             @AuthenticationPrincipal CustomUserDetails customUserDetails,
-                            HttpServletRequest request,
+                            @ModelAttribute("notice") ConsoleExperienceNoticeRequestDTO consoleExperienceNoticeRequestDTO,
                             Model model) {
 
         ConsoleExperienceNoticeRequestDTO notice = consoleExperienceNoticeService.getNotice(id);
@@ -57,10 +52,7 @@ public class ConsoleExperienceNoticeController {
 
         if(request.getRequestURI().contains("create")){
             model.addAttribute("page","create");
-            model.addAttribute("notice", new ConsoleExperienceNoticeRequestDTO());
-            model.addAttribute("companyId", companyId);
             model.addAttribute("companyName", companyName);
-            model.addAttribute("memberName", memberName);
 
             return "enterprise-console/experience/console-experience-update";
         }
@@ -70,7 +62,6 @@ public class ConsoleExperienceNoticeController {
         model.addAttribute("notice", notice);
         model.addAttribute("companyId", companyId);
         model.addAttribute("companyName", companyName);
-        model.addAttribute("memberName", memberName);
 
         return "enterprise-console/experience/console-experience-update";
     }
@@ -84,7 +75,7 @@ public class ConsoleExperienceNoticeController {
         ConsoleExperienceNoticeDTO experienceDetail = consoleExperienceDetailService.getDetail(experienceNoticeId);
 
         List<ConsoleExperienceApplicantDTO> applicants  =
-                consoleExperienceApplicationService.getApplicantsByNoticeId(experienceNoticeId);
+                consoleExperienceApplicationService.getApplicationsByNoticeId(experienceNoticeId);
 
         String companyName = customUserDetails.getCompanyName();
         String memberName = customUserDetails.getUsername();
@@ -92,7 +83,6 @@ public class ConsoleExperienceNoticeController {
         model.addAttribute("experienceDetail", experienceDetail);
         model.addAttribute("experienceNoticeId", experienceNoticeId);
         model.addAttribute("companyName", companyName);
-        model.addAttribute("memberName", memberName);
 
         if (applicants != null && !applicants.isEmpty()) {//지원자 id
             ConsoleExperienceApplicantDTO firstApplicant = applicants.get(0);
@@ -110,7 +100,7 @@ public class ConsoleExperienceNoticeController {
                                   Model model) {
 
         ConsoleExperienceApplicantDTO applicantDetail =
-                consoleExperienceApplicationService.getApplicantDetail(memberId, experienceNoticeId);
+                consoleExperienceApplicationService.getApplicationsDetail(memberId, experienceNoticeId);
 
         String companyName = customUserDetails.getCompanyName();
         String memberName = customUserDetails.getUsername();
@@ -118,7 +108,6 @@ public class ConsoleExperienceNoticeController {
         model.addAttribute("applicantDetail", applicantDetail);
         model.addAttribute("memberId", memberId); //지원자 id
         model.addAttribute("companyName", companyName);
-        model.addAttribute("memberName", memberName);
 
 
         return "enterprise-console/experience/console-experience-application";
@@ -144,5 +133,14 @@ public class ConsoleExperienceNoticeController {
 
         return "enterprise-console/experience/console-review";
     }
+
+    @PostMapping(value = {"/create", "/edit"})
+    public RedirectView write(ConsoleExperienceNoticeRequestDTO consoleExperienceNoticeRequestDTO,
+                              @AuthenticationPrincipal CustomUserDetails customUserDetails){
+        consoleExperienceNoticeRequestDTO.setCompanyId(customUserDetails.getId());
+        consoleExperienceNoticeService.createOrEdit(request.getRequestURI().contains("create"), consoleExperienceNoticeRequestDTO);
+        return new RedirectView("/enterprise-console/experience/list");
+    }
+
 
 }

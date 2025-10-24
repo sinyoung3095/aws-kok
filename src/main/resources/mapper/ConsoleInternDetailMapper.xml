@@ -43,7 +43,7 @@
             on re.intern_notice_id = en.id
         where en.id = #{internNoticeId}
             and u.user_status = 'active'
-        <if test="status != null and status != ''">
+        <if test="status != null">
             and re.request_intern_status = #{status}
         </if>
         order by re.id desc
@@ -59,7 +59,7 @@
             on re.intern_notice_id = en.id
         where en.id = #{internNoticeId}
         and u.user_status = 'active'
-        <if test="status != null and status != ''">
+        <if test="status != null">
             and re.request_intern_status = #{status}
         </if>
     </select>

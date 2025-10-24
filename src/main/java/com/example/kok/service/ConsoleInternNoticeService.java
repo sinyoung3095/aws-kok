@@ -1,7 +1,7 @@
 package com.example.kok.service;
 
-import com.example.kok.dto.ConsoleInternNoticeCriteriaDTO;
 import com.example.kok.dto.ConsoleInternNoticeRequestDTO;
+import com.example.kok.dto.ConsoleInternNoticeCriteriaDTO;
 import com.example.kok.enumeration.Status;
 
 public interface ConsoleInternNoticeService {
@@ -15,10 +15,7 @@ public interface ConsoleInternNoticeService {
     ConsoleInternNoticeRequestDTO getDetail(Long id);
 
 //    공고 등록
-    public void registerNotice(ConsoleInternNoticeRequestDTO noticeRequestDTO);
-
-//    공고 수정 등록
-    public void modifyNotice(ConsoleInternNoticeRequestDTO noticeRequestDTO);
+    public void createOrEdit(boolean isCreate, ConsoleInternNoticeRequestDTO noticeRequestDTO);
 
 //    공고 수정 상세
     ConsoleInternNoticeRequestDTO getNotice(Long id);

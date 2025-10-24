@@ -54,9 +54,6 @@ public class ConsoleAdController {
         ConsoleAdNoticeDTO notice = consoleAdService.getDetail(id);
         consoleAdService.setPreSignedUrl(notice);
 
-        log.info("광고 상세 = {}", notice.getUploadedFiles());
-        log.info("업로드 파일 존재 여부 = {}", (notice.getUploadedFiles() != null && !notice.getUploadedFiles().isEmpty()));
-
         Long companyId = customUserDetails.getId();
         String companyName = customUserDetails.getCompanyName();
         String memberName = customUserDetails.getUsername();

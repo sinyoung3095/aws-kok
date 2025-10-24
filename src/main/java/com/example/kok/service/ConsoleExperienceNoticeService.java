@@ -15,10 +15,7 @@ public interface ConsoleExperienceNoticeService {
     ConsoleExperienceNoticeRequestDTO getExperienceDetail(Long id);
 
 //    공고 등록
-    public void registerNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO);
-
-//    공고 수정 등록
-    public void modifyNotice(ConsoleExperienceNoticeRequestDTO noticeRequestDTO);
+    public void createOrEdit(boolean isCreate, ConsoleExperienceNoticeRequestDTO noticeRequestDTO);
 
 //    공고 수정 상세
     ConsoleExperienceNoticeRequestDTO getNotice(Long id);

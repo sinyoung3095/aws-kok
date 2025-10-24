@@ -3,18 +3,15 @@ package com.example.kok.controller;
 import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.*;
 import com.example.kok.dto.ConsoleInternApplicantDTO;
-import com.example.kok.service.ConsoleInternApplicationService;
-import com.example.kok.service.ConsoleInternDetailService;
-import com.example.kok.service.ConsoleInternNoticeService;
+import com.example.kok.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -26,20 +23,15 @@ public class ConsoleInternNoticeController {
     private final ConsoleInternNoticeService consoleInternNoticeService;
     private final ConsoleInternDetailService consoleInternDetailService;
     private final ConsoleInternApplicationService consoleInternApplicationService;
+    private final HttpServletRequest request;
 
     //    기업 콘솔 인턴 공고 목록
     @GetMapping("/list")
     public String goToList(@AuthenticationPrincipal CustomUserDetails customUserDetails,
                            Model model) {
 
-        Long companyId = customUserDetails.getId();
         String companyName = customUserDetails.getCompanyName();
-        String memberName = customUserDetails.getUsername();
-        log.info("companyName={}", companyName);
-
-        model.addAttribute("companyId", companyId);
         model.addAttribute("companyName", companyName);
-        model.addAttribute("memberName", memberName);
 
         return "enterprise-console/intern/console-intern-list";
     }
@@ -48,7 +40,7 @@ public class ConsoleInternNoticeController {
     @GetMapping(value = {"/create", "edit/{id}"})
     public String goToWrite(@PathVariable(required = false) Long id,
                             @AuthenticationPrincipal CustomUserDetails customUserDetails,
-                            HttpServletRequest request,
+                            @ModelAttribute("notice") ConsoleInternNoticeRequestDTO consoleInternNoticeRequestDTO,
                             Model model) {
 
         ConsoleInternNoticeRequestDTO notice = consoleInternNoticeService.getNotice(id);
@@ -59,10 +51,7 @@ public class ConsoleInternNoticeController {
 
         if(request.getRequestURI().contains("create")){
             model.addAttribute("page","create");
-            model.addAttribute("notice", new ConsoleInternNoticeRequestDTO());
-            model.addAttribute("companyId", companyId);
             model.addAttribute("companyName", companyName);
-            model.addAttribute("memberName", memberName);
 
             return "enterprise-console/intern/console-intern-update";
         }
@@ -72,7 +61,6 @@ public class ConsoleInternNoticeController {
         model.addAttribute("notice", notice);
         model.addAttribute("companyId", companyId);
         model.addAttribute("companyName", companyName);
-        model.addAttribute("memberName", memberName);
 
         return "enterprise-console/intern/console-intern-update";
     }
@@ -95,7 +83,6 @@ public class ConsoleInternNoticeController {
         model.addAttribute("internDetail", internDetail);
         model.addAttribute("internNoticeId", internNoticeId);
         model.addAttribute("companyName", companyName);
-        model.addAttribute("memberName", memberName);
 
         if (applicants != null && !applicants.isEmpty()) {//지원자 id
             ConsoleInternApplicantDTO firstApplicant = applicants.get(0);
@@ -121,9 +108,16 @@ public class ConsoleInternNoticeController {
         model.addAttribute("applicantDetail", applicantDetail);
         model.addAttribute("memberId", memberId); //지원자 id
         model.addAttribute("companyName", companyName);
-        model.addAttribute("memberName", memberName);
 
         return "enterprise-console/intern/console-intern-application";
+    }
+
+    @PostMapping(value = {"/create", "/edit"})
+    public RedirectView write(ConsoleInternNoticeRequestDTO consoleInternNoticeRequestDTO,
+                              @AuthenticationPrincipal CustomUserDetails customUserDetails){
+        consoleInternNoticeRequestDTO.setCompanyId(customUserDetails.getId());
+        consoleInternNoticeService.createOrEdit(request.getRequestURI().contains("create"), consoleInternNoticeRequestDTO);
+        return new RedirectView("/enterprise-console/intern/list");
     }
 
 }
