@@ -25,7 +25,7 @@ public class SideBarSupportController implements SideBarSupportControllerDocs{
 
     @GetMapping("side-bar/support/detail/{id}")
     public ResponseEntity<AdminNoticeDTO> goToSupportSideBarDetail (@PathVariable Long id) {
-        AdminNoticeDTO adminNoticeDTO = adminService.getNotice(id).orElseThrow(PostNotFoundException::new);
+        AdminNoticeDTO adminNoticeDTO = adminService.getNotice(id);
         return ResponseEntity.ok(adminNoticeDTO);
     }
 }

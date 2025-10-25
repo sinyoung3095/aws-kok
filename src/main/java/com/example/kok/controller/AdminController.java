@@ -170,7 +170,10 @@ public class AdminController {
     public String goToSupportDetailPage(@PathVariable Long id,
                                         Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
-        model.addAttribute("notice", adminService.getNotice(id).orElseThrow(PostNotFoundException::new));
+        log.info("customUserDetails 출력: {}", customUserDetails);
+        log.info("상세 페이지 아이디 출력: {}", id);
+        model.addAttribute("adminNotice", adminService.getNotice(id));
+        log.info("상세 페이지 서비스: {}", adminService.getNotice(id));
         return "admin/support-detail";
     }
 
@@ -179,13 +182,14 @@ public class AdminController {
     public String goToSupportUpdatePage(@PathVariable Long id,
                                         Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
-        model.addAttribute("adminNotice", adminService.getNotice(id).orElseThrow(PostNotFoundException::new));
+        model.addAttribute("adminNotice", adminService.getNotice(id));
         return "admin/support-update";
     }
 
     @PostMapping("support/update")
     public RedirectView update(AdminNoticeDTO adminNoticeDTO) {
         adminService.update(adminNoticeDTO);
+        log.info("수정된 게시글 아이디: {}", adminNoticeDTO.getId());
         return new RedirectView("/admin/support/detail/" + adminNoticeDTO.getId());
     }
 

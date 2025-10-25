@@ -21,7 +21,7 @@ public class AdminMainPageServiceImpl implements AdminMainPageService {
     private final AdminMainPageDAO adminMainPageDAO;
 
     @Override
-    @Cacheable(value = "adminTable")
+    @Cacheable(value = "adminTable", key="'adminTable'")
     public AdminMainPageDTO mainPage() {
         AdminMainPageDTO mainPageDTO = new AdminMainPageDTO();
         mainPageDTO.setMemberExperienceRequestAvg(adminMainPageDAO.experienceRequestAvg());
@@ -47,6 +47,7 @@ public class AdminMainPageServiceImpl implements AdminMainPageService {
     }
 
     @Override
+    @Cacheable(value = "adminChart", key = "'adminChart'")
     public List<ChartDTO> mainPageChart() {
         List<ChartDTO> chartDTOList = new ArrayList<>();
         LocalDateTime localDateTime = LocalDateTime.now();

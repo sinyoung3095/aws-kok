@@ -1,5 +1,6 @@
 package com.example.kok.service;
 
+import com.example.kok.common.exception.PostNotFoundException;
 import com.example.kok.domain.AdminNoticeVO;
 import com.example.kok.dto.*;
 import com.example.kok.repository.AdminExperienceDAO;
@@ -9,7 +10,11 @@ import com.example.kok.util.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,16 +29,15 @@ import java.util.Optional;
 public class AdminServiceImpl implements AdminService {
     private final AdminNoticeDAO adminNoticeDAO;
     private final AdminExperienceDAO adminExperienceDAO;
+    private final RedisTemplate<String, Object> redisTemplate;
 
-//    지원 센터 - 목록
+    //    지원 센터 - 목록
     public AdminNoticeCriteriaDTO supportList(int page, String keyword){
         AdminNoticeCriteriaDTO adminNoticeCriteriaDTO = new AdminNoticeCriteriaDTO();
         Criteria criteria = new Criteria(page, adminNoticeDAO.supportNoticeCount());
         List<AdminNoticeDTO> noticeList = adminNoticeDAO.supportNoticeList(criteria);
 
         criteria.setHasMore(noticeList.size() > criteria.getRowCount());
-//        criteria.setHasPreviousPage(page > 1);
-//        criteria.setHasNextPage(page < criteria.getRealEnd());
 
         //  11개 가져왔으면, 마지막 1개 삭제
         if(criteria.isHasMore()){
@@ -122,13 +126,21 @@ public class AdminServiceImpl implements AdminService {
 
 //    공지 상세
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public Optional<AdminNoticeDTO> getNotice (Long id) {
-        Optional<AdminNoticeDTO> foundNotice = adminNoticeDAO.selectNotice(id);
-        foundNotice.ifPresent((notice) -> {
-            notice.setCreatedDateTime(DateUtils.getCreatedDate(notice.getCreatedDateTime()));
-            notice.setUpdatedDateTime(DateUtils.getCreatedDate(notice.getUpdatedDateTime()));
-        });
+    @Cacheable(value = "adminNotice", key = "'adminNotice_' + #id")
+    public AdminNoticeDTO getNotice (Long id) {
+//        캐시 먼저 확인
+        AdminNoticeDTO cached = (AdminNoticeDTO) redisTemplate.opsForValue().get("adminNotice_" + id);
+        if(cached != null){
+//            캐시가 있으면 캐시 리턴
+            log.info("################### 캐시 있음 #################");
+            return cached;
+        }
+
+//        캐시 없으면 db조회
+        log.info("##################### 캐시 없음 ##################### ");
+        AdminNoticeDTO foundNotice = adminNoticeDAO.selectNotice(id).orElseThrow(PostNotFoundException::new);
+        foundNotice.setCreatedDateTime(DateUtils.getCreatedDate(foundNotice.getCreatedDateTime()));
+        foundNotice.setUpdatedDateTime(DateUtils.getCreatedDate(foundNotice.getUpdatedDateTime()));
         return foundNotice;
     }
 
@@ -161,6 +173,7 @@ public class AdminServiceImpl implements AdminService {
 
 //    공지 수정
     @Override
+    @CachePut(value = "adminNotice", key = "'adminNotice_' + #adminNoticeDTO.id")
     public void update(AdminNoticeDTO adminNoticeDTO) {
         AdminNoticeVO adminNoticeVO = toVO(adminNoticeDTO);
         adminNoticeDAO.updateNotice(adminNoticeVO);
@@ -169,7 +182,7 @@ public class AdminServiceImpl implements AdminService {
 
 //    공지 삭제
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @CacheEvict(value = "adminNotice", key = "'adminNotice_' + #id")
     public void delete(Long id) {
         adminNoticeDAO.deleteNotice(id);
     }

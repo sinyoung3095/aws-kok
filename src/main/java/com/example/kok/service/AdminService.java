@@ -18,7 +18,7 @@ public interface AdminService {
     public void write (AdminNoticeDTO adminNoticeDTO);
 
 //    공지 상세
-    public Optional<AdminNoticeDTO> getNotice (Long id);
+    public AdminNoticeDTO getNotice (Long id);
 
 //    공지 목록
     public AdminNoticeCriteriaDTO getList (int page);
