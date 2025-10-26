@@ -45,13 +45,4 @@ public class AdminNoticeDAO {
     public void deleteNotice (Long id){
         adminNoticeMapper.deleteNoticeFromId(id);
     }
-
-//    지원센터 - 목록
-    public List<AdminNoticeDTO> supportNoticeList(@Param("criteria") Criteria criteria){
-        return adminNoticeMapper.selectSupportNoticeAll(criteria);
-    }
-//    지원센터 - 개수
-    public int supportNoticeCount (){
-        return adminNoticeMapper.countSupportNoticeAll();
-    }
 }

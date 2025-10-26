@@ -17,7 +17,7 @@ import java.util.Optional;
 @Setter
 @ToString
 public class AdminExperienceDetailDTO {
-    private AdminExperienceDTO experience;
+//    private AdminExperienceDTO experience;
     private List<UserRequestExperienceDTO> userRequestExperience;
     private List<UserEvaluationDTO> userEvaluation;
 

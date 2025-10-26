@@ -9,6 +9,8 @@ import com.example.kok.util.Criteria;
 import com.example.kok.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +55,7 @@ public class AdminReportServiceImpl implements AdminReportService {
 //    신고 게시글 상세
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @Cacheable(value = "adminReport", key = "'adminReport_' + #id")
     public AdminReportDTO getReportDetail(Long id) {
         AdminReportDTO adminReportDTO = adminReportDAO.reportDetail(id);
 
@@ -70,6 +73,7 @@ public class AdminReportServiceImpl implements AdminReportService {
 
 //    신고 게시글 삭제
     @Override
+    @CacheEvict(value = "adminReport", key = "'adminReport_' + #id")
     public void deleteReportPost(Long id) {
         AdminReportDTO adminReportDTO = adminReportDAO.reportDetail(id);
 

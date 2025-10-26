@@ -5,6 +5,7 @@ import com.example.kok.dto.ChartDTO;
 import com.example.kok.repository.AdminMainPageDAO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class AdminMainPageServiceImpl implements AdminMainPageService {
     private final AdminMainPageDAO adminMainPageDAO;
 
     @Override
+    @Cacheable(value = "adminTable", key="'adminTable'")
     public AdminMainPageDTO mainPage() {
         AdminMainPageDTO mainPageDTO = new AdminMainPageDTO();
         mainPageDTO.setMemberExperienceRequestAvg(adminMainPageDAO.experienceRequestAvg());
@@ -45,6 +47,7 @@ public class AdminMainPageServiceImpl implements AdminMainPageService {
     }
 
     @Override
+    @Cacheable(value = "adminChart", key = "'adminChart'")
     public List<ChartDTO> mainPageChart() {
         List<ChartDTO> chartDTOList = new ArrayList<>();
         LocalDateTime localDateTime = LocalDateTime.now();

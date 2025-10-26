@@ -166,11 +166,10 @@ public class AdminController {
 
 //    고객지원 - 공지사항 상세
     @GetMapping("support/detail/{id}")
-    @LogReturnStatus
     public String goToSupportDetailPage(@PathVariable Long id,
                                         Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
-        model.addAttribute("notice", adminService.getNotice(id).orElseThrow(PostNotFoundException::new));
+        model.addAttribute("adminNotice", adminService.getNotice(id));
         return "admin/support-detail";
     }
 
@@ -179,7 +178,7 @@ public class AdminController {
     public String goToSupportUpdatePage(@PathVariable Long id,
                                         Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
-        model.addAttribute("adminNotice", adminService.getNotice(id).orElseThrow(PostNotFoundException::new));
+        model.addAttribute("adminNotice", adminService.getNotice(id));
         return "admin/support-update";
     }
 

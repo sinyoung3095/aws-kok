@@ -111,8 +111,7 @@ public class AdminExperienceTests {
 //    Service
     @Test
     public void testGetExperienceDetail() {
-        int page = 3;
         Long id = 55L;
-        log.info(adminService.getExperienceDetail(page, id).toString());
+        log.info(adminService.getExperienceDetail(id).toString());
     }
 }
