@@ -28,9 +28,4 @@ public interface AdminNoticeMapper {
 
 //    공지사항 삭제
     public void deleteNoticeFromId(Long id);
-
-//    지원 센터 - 목록
-    public List<AdminNoticeDTO> selectSupportNoticeAll (@Param("criteria") Criteria criteria);
-//    지원 센터 - 개수
-    public int countSupportNoticeAll();
 }

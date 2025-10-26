@@ -162,7 +162,7 @@
                                 <!-- 리스트가 보여질 때 -->
                                 <!-- <div class="user-menu-content dropdown-menu dropdown-menu-right show" style="position: absolute; transform: translate3d(1698px, 62px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-end"> -->
                                 <div class="user-menu-content dropdown-menu dropdown-menu-right">
-                                    <ul class="menu-body list-unstyled">     
+                                    <ul class="menu-body list-unstyled">
                                         <li>
                                             <a href="" class="d-block text-dark" id="logout">
                                                 <i class="mdi mdi-logout-variant mr-2 mdi-18px"></i>
@@ -190,46 +190,22 @@
                     <div class="page-content">
                         <div class="notice-layout">
                             <div class="header">
-                                <div class="title" th:text="${notice.adminNoticeTitle}"></div>
+                                <div class="title" th:text="${adminNotice.adminNoticeTitle}"></div>
                                 <div class="row pt-2">
                                     <div class="col">
                                         <div class="writer small-grey">주) 콕(KOK)</div>
                                     </div>
                                     <div class="col-auto">
-                                        <div class="date small-grey" th:text="${notice.createdDateTime}"></div>
+                                        <div class="date small-grey" th:text="${adminNotice.createdDateTime}"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="body">
                                 <div class="content">
-                                    <p th:text="${notice.adminNoticeContent}"></p>
-<!--                                    <p>안녕하세요. 콕(KOK) 관리자입니다.</p>-->
-<!--                                    <p>오는 -->
-<!--                                        <font color="#ff0000"><b>25년 7월 1일 (화) 02:00</b></font> 에 -->
-<!--                                        <font color="#0000ff"><b>kok.co.kr SSL 인증서</b></font>가 갱신될 예정입니다.-->
-<!--                                    </p>-->
-<!--                                    <p>SSL 인증서가 갱신이 되더라도 결제가 중단되지 않습니다.</p>-->
-<!--                                    <p><br></p>-->
-<!--                                    <p>기존 인증서 업체와 동일한 ROOT 인증서를 사용하기 때문에 큰 문제 없이 진행이 될 예정이나,</p>-->
-<!--                                    <p>SSL 인증서 변경으로 인해  결제 진행에 어려움을 겪으신다면 언제든 오른쪽 하단 채널톡으로 문의해주시기 바랍니다.</p>-->
-<!--                                    <p><br></p>-->
-<!--                                    <h3>-->
-<!--                                        <b>작업내용</b>-->
-<!--                                    </h3>-->
-<!--                                    <h3>-->
-<!--                                        <b><br></b>-->
-<!--                                    </h3>-->
-<!--                                    <p>- -->
-<!--                                        <b>25년 7월 1일 (화) 02:00 kok.co.kr SSL 인증서 갱신</b>-->
-<!--                                    </p>-->
-<!--                                    <p>- -->
-<!--                                        <b> 무중단으로 변경 예정</b>-->
-<!--                                    </p>-->
-<!--                                    <p><br></p>-->
-<!--                                    <p><br></p>-->
+                                    <p th:text="${adminNotice.adminNoticeContent}"></p>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                     <!-- 클릭 시 공지목록 페이지로 이동 -->
                     <div class="content-footer">
@@ -237,10 +213,10 @@
                             <button class="btn btn-default mr-4">돌아가기</button>
                         </a>
                         <div class="btn-group">
-                            <a th:href="@{/admin/support/update/{id}(id=${notice.id})}">
+                            <a th:href="@{/admin/support/update/{id}(id=${adminNotice.id})}">
                                 <button class="btn btn-default mr-4">수정</button>
                             </a>
-                            <a href="#" th:href="@{/admin/support/delete/{id}(id=${notice.id})}">
+                            <a href="#" th:href="@{/admin/support/delete/{id}(id=${adminNotice.id})}">
                                 <button onclick="alert('삭제하시겠습니까?')" class="btn btn-default mr-4">삭제</button>
                             </a>
                         </div>

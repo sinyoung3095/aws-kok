@@ -15,7 +15,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 public class AdminInternNoticeDetailCriteriaDTO {
-    private AdminInternNoticeDetailDTO internNoticeDetail;
+//    private AdminInternNoticeDetailDTO internNoticeDetail;
     private List<AdminInternNoticeDetailRequestDTO> internNoticeDetailRequests;
 
     private AdminExperienceCriteria internDetailCriteria;

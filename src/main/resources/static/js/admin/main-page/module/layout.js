@@ -114,7 +114,6 @@ const preMonth1 = preMonth - 1 > 0 ? preMonth - 1 : preMonth + 11;
 const preMonth2 = preMonth1 - 1 > 0 ? preMonth1 - 1 : preMonth1 + 11;
 
 google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(service.getChart(drawChart));
 
 function drawChart(chartDTO) {
 
@@ -191,3 +190,5 @@ function drawChart(chartDTO) {
     fourthChart.draw(fourthData, fourthOptions);
 
 }
+
+google.charts.setOnLoadCallback(service.getChart(drawChart));

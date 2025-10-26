@@ -30,6 +30,8 @@ public class AdminRestController implements AdminRestControllerDocs {
     private final AdminPaymentAdvertiseService adminPaymentAdvertiseService;
     private final AdminPaymentExperienceService adminPaymentExperienceService;
     private final AdminMainPageService adminMainPageService;
+    private final AdminExperienceService adminExperienceService;
+    private final AdminEmployDetailService adminEmployDetailService;
 
 //    메인 페이지
     @GetMapping("mainPage")
@@ -64,9 +66,17 @@ public class AdminRestController implements AdminRestControllerDocs {
     }
 
 //    체험 상세
-    @GetMapping("experience/detail/{id}/{page}")
-    public ResponseEntity<AdminExperienceDetailDTO> getExperienceDetail(@PathVariable("id")Long id, @PathVariable("page")int page){
-        AdminExperienceDetailDTO adminExperienceDetailDTO = adminService.getExperienceDetail(page, id);
+    @GetMapping("experience/detail/{id}")
+    public ResponseEntity<AdminExperienceDTO> getExperienceDetail(@PathVariable("id")Long id){
+        AdminExperienceDTO adminExperienceDTO = adminService.getExperienceDetail(id);
+        log.info("체험 상세: {}", adminExperienceDTO);
+        return ResponseEntity.ok(adminExperienceDTO);
+    }
+
+    @GetMapping("experience/detail/list/{id}/{page}")
+    public ResponseEntity<AdminExperienceDetailDTO> getExperienceDetailList(@PathVariable("page")int page, @PathVariable("id")Long id){
+        AdminExperienceDetailDTO adminExperienceDetailDTO = adminExperienceService.getDetailLists(page, id);
+        log.info("체험 상세 목록: {}", adminExperienceDetailDTO);
         return ResponseEntity.ok(adminExperienceDetailDTO);
     }
 
@@ -79,10 +89,15 @@ public class AdminRestController implements AdminRestControllerDocs {
     }
 
 //    인턴 상세
-    @GetMapping("employ/detail/{id}/{page}")
-    public ResponseEntity<AdminInternNoticeDetailCriteriaDTO> getInternNoticeDetail(@PathVariable("id")Long id,
-                                                                    @PathVariable("page")int page){
-        AdminInternNoticeDetailCriteriaDTO adminInternNoticeDetailCriteriaDTO = adminEmployService.getDetail(page, id);
+    @GetMapping("employ/detail/{id}")
+    public ResponseEntity<AdminInternNoticeDetailDTO> getInternNoticeDetail(@PathVariable("id")Long id){
+        AdminInternNoticeDetailDTO adminInternNoticeDetailDTO = adminEmployService.getDetail(id);
+        return ResponseEntity.ok(adminInternNoticeDetailDTO);
+    }
+
+    @GetMapping("employ/detail/list/{id}/{page}")
+    public ResponseEntity<AdminInternNoticeDetailCriteriaDTO> getInternNoticeDetailList(@PathVariable("page")int page, @PathVariable("id")Long id){
+        AdminInternNoticeDetailCriteriaDTO adminInternNoticeDetailCriteriaDTO = adminEmployDetailService.getDetailList(page, id);
         return ResponseEntity.ok(adminInternNoticeDetailCriteriaDTO);
     }
 
