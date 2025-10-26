@@ -18,11 +18,11 @@ const service = (() => {
         return adminInternNoticeListCriteriaDTO;
     }
 
-    const getEmployDetail = async (callback, page = 1, id = 1) => {
-        const response = await fetch(`/api/employ/detail/${id}/${page}`);
-        const adminInternNoticeDetailCriteriaDTO = await response.json();
+    const getEmployDetail = async (callback, id = 1) => {
+        const response = await fetch(`/api/employ/detail/${id}`);
+        const adminInternNoticeDetailDTO = await response.json();
         if(callback){
-            callback(adminInternNoticeDetailCriteriaDTO);
+            callback(adminInternNoticeDetailDTO);
         }
 
         if(response.ok) {
@@ -34,8 +34,27 @@ const service = (() => {
             console.log(error);
         }
 
+        return adminInternNoticeDetailDTO;
+    }
+
+    const getEmployDetailList = async (callback, page = 1, id = 1) => {
+        const response = await fetch(`/api/employ/detail/list/${id}/${page}`);
+        const adminInternNoticeDetailCriteriaDTO = await response.json();
+        if(callback){
+            callback(adminInternNoticeDetailCriteriaDTO);
+        }
+
+        if(response.ok) {
+            console.log("상세 목록 존재");
+        }else if(response.status === 404){
+            console.log("상세 목록 없음");
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+
         return adminInternNoticeDetailCriteriaDTO;
     }
 
-    return {getEmployList: getEmployList, getEmployDetail: getEmployDetail}
+    return {getEmployList: getEmployList, getEmployDetail: getEmployDetail, getEmployDetailList: getEmployDetailList}
 })();

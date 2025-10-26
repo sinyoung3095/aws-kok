@@ -12,7 +12,7 @@ public interface AdminService {
     public AdminExperienceListDTO getExperience(int page, String keyword);
 
 //    체험 상세
-    public AdminExperienceDetailDTO getExperienceDetail(int page, Long id);
+    public AdminExperienceDTO getExperienceDetail(Long id);
 
 //    공지 등록
     public void write (AdminNoticeDTO adminNoticeDTO);
@@ -24,7 +24,7 @@ public interface AdminService {
     public AdminNoticeCriteriaDTO getList (int page);
 
 //    공지 수정
-    public void update (AdminNoticeDTO adminNoticeDTO);
+    public AdminNoticeDTO update (AdminNoticeDTO adminNoticeDTO);
 
 //    공지 삭제
     public void delete (Long id);
@@ -40,6 +40,4 @@ public interface AdminService {
                 .build();
     }
 
-//    지원 센터 - 목록
-    public AdminNoticeCriteriaDTO supportList (int page, String keyword);
 }

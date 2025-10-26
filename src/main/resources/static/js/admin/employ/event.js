@@ -112,10 +112,10 @@ experienceListContainer.addEventListener("click",async (e)=>{
         console.log(id);
 
         // 체험공고 상세정보
-        await service.getEmployDetail(layout.showInfo, page, id);
+        await service.getEmployDetail(layout.showInfo, id);
 
         // 신청자 내역
-        await service.getEmployDetail(layout.showRequest, page, id);
+        await service.getEmployDetailList(layout.showRequest, page, id);
 
         const detailPagination = document.querySelector(".pagination.kok-pagination.detail-request");
         const firstNumber = detailPagination.querySelector("li.number");
@@ -129,7 +129,7 @@ experienceListContainer.addEventListener("click",async (e)=>{
             const clickNum = e.target.closest("a[data-page]");
             const pageNumber = Number(clickNum.dataset.page);
 
-            await service.getEmployDetail(layout.showRequest, pageNumber, id);
+            await service.getEmployDetailList(layout.showRequest, pageNumber, id);
 
             const pageNumsList = detailPagination.querySelectorAll("li.page-num");
             pageNumsList.forEach((pageNum) => {

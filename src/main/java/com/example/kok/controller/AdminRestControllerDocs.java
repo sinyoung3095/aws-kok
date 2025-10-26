@@ -42,11 +42,19 @@ public interface AdminRestControllerDocs {
     @Operation(summary = "체험 상세",
             description = "체험 목록의 각 상세 정보를 보여준다.",
             parameters = {
-                @Parameter(name = "id", description = "공고의 상세 정보를 출력할 아이디"),
-                @Parameter(name = "page", description = "상세 정보 안에서 목록을 출력할 페이지 번호")
+                @Parameter(name = "id", description = "공고의 상세 정보를 출력할 아이디")
             }
     )
-    public ResponseEntity<AdminExperienceDetailDTO> getExperienceDetail(@PathVariable("id")Long id, @PathVariable("page")int page);
+    public ResponseEntity<AdminExperienceDTO> getExperienceDetail(@PathVariable("id")Long id);
+
+    @Operation(summary = "체험 상세 목록",
+            description = "체험 상세 정보 아래로 신청과 평점 목록을 보여준다.",
+            parameters = {
+                @Parameter(name = "page", description = "상세 정보 안에서 목록을 출력할 페이지 번호"),
+                @Parameter(name = "id", description = "공고의 상세 정보를 출력할 아이디")
+            }
+    )
+    public ResponseEntity<AdminExperienceDetailDTO> getExperienceDetailList(@PathVariable("page")int page, @PathVariable("id")Long id);
 
     @Operation(summary = "인턴 목록",
             description = "인턴 공고 전체를 목록으로 보여준다.",
@@ -61,12 +69,19 @@ public interface AdminRestControllerDocs {
     @Operation(summary = "인턴 상세",
             description = "인턴 목록의 각 상세 정보를 보여준다.",
             parameters = {
+                @Parameter(name = "id", description = "공고의 상세 정보를 출력할 아이디")
+            }
+    )
+    public ResponseEntity<AdminInternNoticeDetailDTO> getInternNoticeDetail(@PathVariable("id")Long id);
+
+    @Operation(summary = "인턴 상세 목록",
+            description = "인턴 상세 정보 아래로 신청 목록을 보여준다.",
+            parameters = {
                 @Parameter(name = "id", description = "공고의 상세 정보를 출력할 아이디"),
                 @Parameter(name = "page", description = "상세 정보 안에서 목록을 출력할 페이지 번호")
             }
     )
-    public ResponseEntity<AdminInternNoticeDetailCriteriaDTO> getInternNoticeDetail(@PathVariable("id")Long id,
-                                                                    @PathVariable("page")int page);
+    public ResponseEntity<AdminInternNoticeDetailCriteriaDTO> getInternNoticeDetailList(@PathVariable("page")int page, @PathVariable("id")Long id);
 
     @Operation(summary = "신고 게시글 목록",
             description = "전체 신고 게시글을 목록으로 보여준다.",

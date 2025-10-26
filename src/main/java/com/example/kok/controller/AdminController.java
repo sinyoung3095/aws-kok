@@ -166,14 +166,10 @@ public class AdminController {
 
 //    고객지원 - 공지사항 상세
     @GetMapping("support/detail/{id}")
-    @LogReturnStatus
     public String goToSupportDetailPage(@PathVariable Long id,
                                         Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
-        log.info("customUserDetails 출력: {}", customUserDetails);
-        log.info("상세 페이지 아이디 출력: {}", id);
         model.addAttribute("adminNotice", adminService.getNotice(id));
-        log.info("상세 페이지 서비스: {}", adminService.getNotice(id));
         return "admin/support-detail";
     }
 
@@ -189,7 +185,6 @@ public class AdminController {
     @PostMapping("support/update")
     public RedirectView update(AdminNoticeDTO adminNoticeDTO) {
         adminService.update(adminNoticeDTO);
-        log.info("수정된 게시글 아이디: {}", adminNoticeDTO.getId());
         return new RedirectView("/admin/support/detail/" + adminNoticeDTO.getId());
     }
 

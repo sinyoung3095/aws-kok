@@ -18,8 +18,8 @@ public class AdminExperienceDTO {
     private String experienceNoticeSubtitle;
     private String experienceNoticeIntroduceJob;
     private String experienceNoticeEtc;
-    private LocalDate experienceStartDate;
-    private LocalDate experienceEndDate;
+    private String experienceStartDate;
+    private String experienceEndDate;
     private Status experienceNoticeStatus;
     private Long companyId;
     private String createdDatetime;

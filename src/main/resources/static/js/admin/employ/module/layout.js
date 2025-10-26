@@ -93,10 +93,10 @@ const layout = (() => {
         }
     }
 
-    const showInfo = (adminInternNoticeDetailCriteriaDTO) => {
+    const showInfo = (adminInternNoticeDetailDTO) => {
         const detailInfo = document.querySelector("#info-table tbody");
         const modalTitle = document.querySelector(".modal-title");
-        const employInfo = adminInternNoticeDetailCriteriaDTO.internNoticeDetail;
+        const employInfo = adminInternNoticeDetailDTO;
         let titleText = ``;
         let text = ``;
 

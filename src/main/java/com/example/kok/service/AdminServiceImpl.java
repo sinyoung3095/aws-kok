@@ -29,26 +29,6 @@ import java.util.Optional;
 public class AdminServiceImpl implements AdminService {
     private final AdminNoticeDAO adminNoticeDAO;
     private final AdminExperienceDAO adminExperienceDAO;
-    private final RedisTemplate<String, Object> redisTemplate;
-
-    //    지원 센터 - 목록
-    public AdminNoticeCriteriaDTO supportList(int page, String keyword){
-        AdminNoticeCriteriaDTO adminNoticeCriteriaDTO = new AdminNoticeCriteriaDTO();
-        Criteria criteria = new Criteria(page, adminNoticeDAO.supportNoticeCount());
-        List<AdminNoticeDTO> noticeList = adminNoticeDAO.supportNoticeList(criteria);
-
-        criteria.setHasMore(noticeList.size() > criteria.getRowCount());
-
-        //  11개 가져왔으면, 마지막 1개 삭제
-        if(criteria.isHasMore()){
-            noticeList.remove(noticeList.size() - 1);
-        }
-
-        adminNoticeCriteriaDTO.setNoticeList(noticeList);
-        adminNoticeCriteriaDTO.setNoticeCriteria(criteria);
-
-        return adminNoticeCriteriaDTO;
-    }
 
 //    체험
     @Override
@@ -75,45 +55,14 @@ public class AdminServiceImpl implements AdminService {
 
 //    체험 상세
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public AdminExperienceDetailDTO getExperienceDetail(int page, Long id) {
-        AdminExperienceDetailDTO adminExperienceDetailDTO = new AdminExperienceDetailDTO();
+    @Cacheable(value = "adminExperience", key = "'adminExperience_' + #id")
+    public AdminExperienceDTO getExperienceDetail(Long id) {
 
 //        체험공고 상세정보
         AdminExperienceDTO adminExperienceDTO = adminExperienceDAO.selectAdminExperience(id);
 
-//        신청자 내역
-        AdminExperienceRequestCriteria requestCriteria = new AdminExperienceRequestCriteria(page, adminExperienceDAO.countRequestUser(id));
-        List<UserRequestExperienceDTO> requestExperienceList = adminExperienceDAO.requestUser(requestCriteria, id);
-
-        requestCriteria.setHasMore(requestExperienceList.size() > requestCriteria.getRowCount());
-        requestCriteria.setHasPreviousPage(page > 1);
-        requestCriteria.setHasNextPage(5 < requestExperienceList.size());
-
-//        6개 가져왔으면, 마지막 1개 삭제
-        if(requestCriteria.isHasMore()){
-            requestExperienceList.remove(requestExperienceList.size()-1);
-        }
-        adminExperienceDetailDTO.setAdminExperienceRequestCriteria(requestCriteria);
-
-//        체험 회원 평가
-        AdminExperienceCriteria experienceCriteria = new AdminExperienceCriteria(page, adminExperienceDAO.countUserEvaluation(id));
-        List<UserEvaluationDTO> userEvaluationList = adminExperienceDAO.userEvaluation(experienceCriteria, id);
-
-        experienceCriteria.setHasMore(userEvaluationList.size() > experienceCriteria.getRowCount());
-        experienceCriteria.setHasPreviousPage(page > 1);
-        experienceCriteria.setHasNextPage(5 < userEvaluationList.size());
-
-//        6개 가져왔으면, 마지막 1개 삭제
-        if(experienceCriteria.isHasMore()){
-            userEvaluationList.remove(userEvaluationList.size()-1);
-        }
-        adminExperienceDetailDTO.setAdminExperienceCriteria(experienceCriteria);
-
-        adminExperienceDetailDTO.setExperience(adminExperienceDTO);
-        adminExperienceDetailDTO.setUserRequestExperience(requestExperienceList);
-        adminExperienceDetailDTO.setUserEvaluation(userEvaluationList);
-        return adminExperienceDetailDTO;
+        log.info("체험 상세1: {}", adminExperienceDTO);
+        return adminExperienceDTO;
     }
 
 //    공지 등록
@@ -128,16 +77,6 @@ public class AdminServiceImpl implements AdminService {
     @Override
     @Cacheable(value = "adminNotice", key = "'adminNotice_' + #id")
     public AdminNoticeDTO getNotice (Long id) {
-//        캐시 먼저 확인
-        AdminNoticeDTO cached = (AdminNoticeDTO) redisTemplate.opsForValue().get("adminNotice_" + id);
-        if(cached != null){
-//            캐시가 있으면 캐시 리턴
-            log.info("################### 캐시 있음 #################");
-            return cached;
-        }
-
-//        캐시 없으면 db조회
-        log.info("##################### 캐시 없음 ##################### ");
         AdminNoticeDTO foundNotice = adminNoticeDAO.selectNotice(id).orElseThrow(PostNotFoundException::new);
         foundNotice.setCreatedDateTime(DateUtils.getCreatedDate(foundNotice.getCreatedDateTime()));
         foundNotice.setUpdatedDateTime(DateUtils.getCreatedDate(foundNotice.getUpdatedDateTime()));
@@ -174,10 +113,12 @@ public class AdminServiceImpl implements AdminService {
 //    공지 수정
     @Override
     @CachePut(value = "adminNotice", key = "'adminNotice_' + #adminNoticeDTO.id")
-    public void update(AdminNoticeDTO adminNoticeDTO) {
+    public AdminNoticeDTO update(AdminNoticeDTO adminNoticeDTO) {
         AdminNoticeVO adminNoticeVO = toVO(adminNoticeDTO);
         adminNoticeDAO.updateNotice(adminNoticeVO);
         adminNoticeDTO.setId(adminNoticeVO.getId());
+
+        return adminNoticeDTO;
     }
 
 //    공지 삭제
