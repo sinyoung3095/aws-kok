@@ -19,8 +19,7 @@ public interface SideBarSupportControllerDocs {
                 @Parameter(name = "keyword", description = "목록을 출력할 키워드(필수X)")
             }
     )
-    public ResponseEntity<AdminNoticeCriteriaDTO> goToSupportSideBar (@PathVariable int page,
-                                                                      @RequestParam(required = false) String keyword);
+    public ResponseEntity<AdminNoticeCriteriaDTO> goToSupportSideBar (@PathVariable int page);
 
     @Operation(summary = "사이드 바 - 고객지원 상세",
             description = "사이드 바의 고객지원 상세 내용을 볼 수 있다.",

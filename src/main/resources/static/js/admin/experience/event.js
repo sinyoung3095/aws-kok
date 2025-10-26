@@ -88,10 +88,10 @@ experienceListContainer.addEventListener("click",async (e)=>{
         console.log(id);
 
         // 체험공고 상세정보
-        await service.getExperienceDetail(layout.showInfo, page, id);
+        await service.getExperienceDetail(layout.showInfo, id);
 
         // 신청자 내역
-        await service.getExperienceDetail(layout.showRequest, page, id);
+        await service.getExperienceDetailList(layout.showRequest, page, id);
 
         const detailPagination = document.querySelector(".pagination.kok-pagination.detail-request");
         const firstNumber = detailPagination.querySelector("li.number");
@@ -105,7 +105,7 @@ experienceListContainer.addEventListener("click",async (e)=>{
             const clickNum = e.target.closest("a[data-page]");
             const pageNumber = Number(clickNum.dataset.page);
 
-            await service.getExperienceDetail(layout.showRequest, pageNumber, id);
+            await service.getExperienceDetailList(layout.showRequest, pageNumber, id);
 
             const pageNumsList = detailPagination.querySelectorAll("li.page-num");
             pageNumsList.forEach((pageNum) => {
@@ -122,7 +122,7 @@ experienceListContainer.addEventListener("click",async (e)=>{
         }
 
         // 평가자 목록
-        await service.getExperienceDetail(layout.showEvaluation, page, id);
+        await service.getExperienceDetailList(layout.showEvaluation, page, id);
 
         const evaluationPagination = document.querySelector(".pagination.kok-pagination.detail-evaluation");
         const firstEvaluationNumber = evaluationPagination.querySelector("li.number");
@@ -136,7 +136,7 @@ experienceListContainer.addEventListener("click",async (e)=>{
             const clickNum = e.target.closest("a[data-page]");
             const pageNumber = Number(clickNum.dataset.page);
 
-            await service.getExperienceDetail(layout.showEvaluation, pageNumber, id);
+            await service.getExperienceDetailList(layout.showEvaluation, pageNumber, id);
 
             const pageNumsList = evaluationPagination.querySelectorAll("li.page-num");
             pageNumsList.forEach((pageNum) => {

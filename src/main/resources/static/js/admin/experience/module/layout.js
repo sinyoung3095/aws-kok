@@ -91,10 +91,10 @@ const layout = (() => {
         }
     }
 
-    const showInfo = (adminExperienceDetailDTO) => {
+    const showInfo = (adminExperienceDTO) => {
         const detailInfo = document.querySelector("#info-table tbody");
         const modalTitle = document.querySelector(".modal-title");
-        const experienceInfo = adminExperienceDetailDTO.experience;
+        const experienceInfo = adminExperienceDTO;
         let titleText = ``;
         let text = ``;
 

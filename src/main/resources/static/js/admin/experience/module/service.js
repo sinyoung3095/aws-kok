@@ -18,11 +18,11 @@ const service = (() => {
         return adminExperienceListDTO;
     }
 
-    const getExperienceDetail = async (callback, page = 1, id = 1) => {
-        const response = await fetch(`/api/experience/detail/${id}/${page}`);
-        const adminExperienceDetailDTO = await response.json();
+    const getExperienceDetail = async (callback, id = 1) => {
+        const response = await fetch(`/api/experience/detail/${id}`);
+        const adminExperienceDTO = await response.json();
         if(callback){
-            callback(adminExperienceDetailDTO);
+            callback(adminExperienceDTO);
         }
 
         if(response.ok) {
@@ -34,8 +34,27 @@ const service = (() => {
             console.log(error);
         }
 
+        return adminExperienceDTO;
+    }
+
+    const getExperienceDetailList = async (callback, page = 1, id = 1) => {
+        const response = await fetch(`/api/experience/detail/list/${id}/${page}`);
+        const adminExperienceDetailDTO = await response.json();
+        if(callback){
+            callback(adminExperienceDetailDTO);
+        }
+
+        if(response.ok) {
+            console.log("상세 목록 존재");
+        }else if(response.status === 404){
+            console.log("상세 목록 없음");
+        }else {
+            const error = await response.text()
+            console.log(error);
+        }
+
         return adminExperienceDetailDTO;
     }
 
-    return {getExperience: getExperience, getExperienceDetail: getExperienceDetail}
+    return {getExperience: getExperience, getExperienceDetail: getExperienceDetail, getExperienceDetailList: getExperienceDetailList}
 })();

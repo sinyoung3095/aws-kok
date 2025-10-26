@@ -7,6 +7,7 @@ import com.example.kok.dto.MemberDTO;
 import com.example.kok.dto.UserDTO;
 import com.example.kok.service.CustomUserDetailsService;
 import com.example.kok.service.MemberService;
+import com.example.kok.service.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -38,7 +39,7 @@ public class AuthController implements AuthControllerDocs{
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
     private final HttpServletResponse response;
-    private final MemberService memberService;
+    private final UserService userService;
     private final RedisTemplate redisTemplate;
 
 //    로그인
@@ -168,6 +169,7 @@ public class AuthController implements AuthControllerDocs{
         profileCookie.setMaxAge(0);
 
         response.addCookie(profileCookie);
+        userService.deleteCache("company");
     }
 }
 

@@ -17,15 +17,14 @@ public class SideBarSupportController implements SideBarSupportControllerDocs{
     private final AdminService adminService;
 
     @GetMapping("side-bar/support/{page}")
-    public ResponseEntity<AdminNoticeCriteriaDTO> goToSupportSideBar (@PathVariable int page,
-                                                      @RequestParam(required = false) String keyword){
-        AdminNoticeCriteriaDTO adminNoticeCriteriaDTO = adminService.supportList(page, keyword);
+    public ResponseEntity<AdminNoticeCriteriaDTO> goToSupportSideBar (@PathVariable int page){
+        AdminNoticeCriteriaDTO adminNoticeCriteriaDTO = adminService.getList(page);
         return ResponseEntity.ok(adminNoticeCriteriaDTO);
     }
 
     @GetMapping("side-bar/support/detail/{id}")
     public ResponseEntity<AdminNoticeDTO> goToSupportSideBarDetail (@PathVariable Long id) {
-        AdminNoticeDTO adminNoticeDTO = adminService.getNotice(id).orElseThrow(PostNotFoundException::new);
+        AdminNoticeDTO adminNoticeDTO = adminService.getNotice(id);
         return ResponseEntity.ok(adminNoticeDTO);
     }
 }

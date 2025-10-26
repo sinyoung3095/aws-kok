@@ -7,6 +7,7 @@ import com.example.kok.util.AdminExperienceCriteria;
 import com.example.kok.util.AdminExperienceListCriteria;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,30 +43,12 @@ public class AdminEmployServiceImpl implements AdminEmployService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public AdminInternNoticeDetailCriteriaDTO getDetail(int page, Long id) {
-        AdminInternNoticeDetailCriteriaDTO adminInternNoticeDetail = new AdminInternNoticeDetailCriteriaDTO();
+    @Cacheable(value = "adminEmploy", key = "'adminEmploy_' + #id")
+    public AdminInternNoticeDetailDTO getDetail(Long id) {
 
 //        인턴공고 - 상세정보
         AdminInternNoticeDetailDTO adminInternNoticeDetailDTO = adminEmployDAO.selectEmploy(id).orElseThrow(PostNotFoundException::new);
-
-//        인턴공고 - 신청자 정보
-        AdminExperienceCriteria requestCriteria = new AdminExperienceCriteria(page, adminEmployDAO.countRequest(id));
-        List<AdminInternNoticeDetailRequestDTO> internRequests = adminEmployDAO.selectRequest(requestCriteria, id);
-
-        requestCriteria.setHasMore(internRequests.size() > requestCriteria.getRowCount());
-        requestCriteria.setHasPreviousPage(page > 1);
-        requestCriteria.setHasNextPage(5 < internRequests.size());
-
-//        6개 가져왔으면, 마지막 1개 삭제
-        if(requestCriteria.isHasMore()){
-            internRequests.remove(internRequests.size()-1);
-        }
-
-        adminInternNoticeDetail.setInternNoticeDetail(adminInternNoticeDetailDTO);
-        adminInternNoticeDetail.setInternNoticeDetailRequests(internRequests);
-        adminInternNoticeDetail.setInternDetailCriteria(requestCriteria);
-        return adminInternNoticeDetail;
+        return adminInternNoticeDetailDTO;
     }
 }
 
