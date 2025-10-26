@@ -25,4 +25,5 @@ public interface UserService {
     }
 
     UserDTO findById(Long id);
+    public void deleteCache(String keyName);
 }
