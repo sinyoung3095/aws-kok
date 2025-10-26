@@ -79,7 +79,7 @@ public class InternNoticeServiceImpl implements InternNoticeService {
 
 
     @Override
-    @Cacheable(value = "result", key = "internNoticeDTO")
+    @Cacheable(value = "internNoticeDTO", key = "internNoticeDTO")
     public InternNoticeDTO findNoticeById(Long id) {
         InternNoticeDTO result= internNoticeDAO.findById(id);
         String jobName= internNoticeDAO.findJobNameByID(id);
@@ -145,7 +145,7 @@ public class InternNoticeServiceImpl implements InternNoticeService {
     }
 
     @Override
-    @Cacheable(value = "result", key = "result")
+    @Cacheable(value = "idSavedInt", key = "idSavedInt")
     public boolean isSavedInt(SaveInternNoticeDTO saveInternNoticeDTO) {
         boolean result=saveInternNoticeDAO.idSavedInt(saveInternNoticeDTO);
         return result;
