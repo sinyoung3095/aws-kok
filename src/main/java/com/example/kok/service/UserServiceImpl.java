@@ -8,6 +8,7 @@ import com.example.kok.dto.UserDTO;
 import com.example.kok.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +31,7 @@ public class UserServiceImpl implements UserService {
     private final S3Service s3Service;
     private final FileDAO fileDAO;
     private final CompanyLicenseFileDAO companyLicenseFileDAO;
+    private final RedisTemplate redisTemplate;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -97,5 +100,13 @@ public class UserServiceImpl implements UserService {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         return today.format(formatter);
+    }
+
+    public void deleteCache(String keyName){
+        String name = keyName+"*";
+        Set<String> keys = redisTemplate.keys(name);
+        for (String key : keys) {
+            redisTemplate.delete(key);
+        }
     }
 }
