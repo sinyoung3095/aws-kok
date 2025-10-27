@@ -18,7 +18,6 @@ public class ExperienceNoticeDAO {
 
 //    목록 조회
     public List<ExperienceNoticeDTO> findAll(Criteria criteria, Search search) {
-//        System.out.println("다오에 들어왔어용");
         return experienceNoticeMapper.selectAllExperienceNotice(criteria, search);
     }
 
