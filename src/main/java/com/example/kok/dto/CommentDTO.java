@@ -29,4 +29,5 @@ public class CommentDTO{
     private int totalReplyCount;
     private List<ReplyDTO> replies;
     private boolean owner;
+    private String snsProfile;
 }

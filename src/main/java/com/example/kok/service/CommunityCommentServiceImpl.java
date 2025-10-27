@@ -51,10 +51,19 @@ public class CommunityCommentServiceImpl implements CommunityCommentService {
             comment.setRelativeDate(DateUtils.toRelativeTime(comment.getCreatedDateTime()));
             comment.setOwner(memberId.equals(comment.getMemberId()));
 
-            if (comment.getMemberProfileUrl() != null && !comment.getMemberProfileUrl().isEmpty()) {
-                comment.setMemberProfileUrl(
-                        s3Service.getPreSignedUrl(comment.getMemberProfileUrl(), Duration.ofMinutes(10))
-                );
+            String fileProfile = comment.getMemberProfileUrl();
+            String snsProfile = comment.getSnsProfile();
+
+            if (fileProfile != null && !fileProfile.isEmpty()) {
+                try {
+                    comment.setMemberProfileUrl(
+                            s3Service.getPreSignedUrl(fileProfile, Duration.ofMinutes(10))
+                    );
+                } catch (Exception e) {
+                    comment.setMemberProfileUrl(fileProfile);
+                }
+            } else if (snsProfile != null && !snsProfile.isEmpty()) {
+                comment.setMemberProfileUrl(snsProfile);
             } else {
                 comment.setMemberProfileUrl("/images/main-page/image3.png");
             }
@@ -64,10 +73,19 @@ public class CommunityCommentServiceImpl implements CommunityCommentService {
                 reply.setRelativeDate(DateUtils.toRelativeTime(reply.getCreatedDateTime()));
                 reply.setOwner(memberId.equals(reply.getMemberId()));
 
-                if (reply.getMemberProfileUrl() != null && !reply.getMemberProfileUrl().isEmpty()) {
-                    reply.setMemberProfileUrl(
-                            s3Service.getPreSignedUrl(reply.getMemberProfileUrl(), Duration.ofMinutes(10))
-                    );
+                String replyFileProfile = reply.getMemberProfileUrl();
+                String replySnsProfile = reply.getSnsProfile();
+
+                if (replyFileProfile != null && !replyFileProfile.isEmpty()) {
+                    try {
+                        reply.setMemberProfileUrl(
+                                s3Service.getPreSignedUrl(replyFileProfile, Duration.ofMinutes(10))
+                        );
+                    } catch (Exception e) {
+                        reply.setMemberProfileUrl(replyFileProfile);
+                    }
+                } else if (replySnsProfile != null && !replySnsProfile.isEmpty()) {
+                    reply.setMemberProfileUrl(replySnsProfile);
                 } else {
                     reply.setMemberProfileUrl("/images/main-page/image3.png");
                 }

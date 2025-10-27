@@ -152,13 +152,14 @@
     <select id="selectAllByKeyword">
         select e.experience_notice_title,e.id,c.company_name,e.company_id from tbl_experience_notice e join tbl_company c
         on e.company_id = c.user_id
+        where e.experience_notice_status = 'active'
         <if test="keyword!=null">
-            where c.company_name like concat('%', #{keyword}, '%')
+            and( c.company_name like concat('%', #{keyword}, '%')
             or  e.experience_notice_title like concat('%', #{keyword}, '%')
             or  e.experience_main_tasks like concat('%', #{keyword}, '%')
             or  e.experience_notice_subtitle like concat('%', #{keyword}, '%')
             or  e.experience_notice_introduce_job like concat('%', #{keyword}, '%')
-            or  e.experience_notice_etc like concat('%', #{keyword}, '%')
+            or  e.experience_notice_etc like concat('%', #{keyword}, '%'))
         </if>
         order by created_datetime desc
     </select>
