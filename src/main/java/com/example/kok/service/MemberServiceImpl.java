@@ -48,6 +48,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void deleteProfile(Long id) {
         memberDAO.deleteProfile(id);
+        memberDAO.deleteProfileUrl(id);
     }
 
     @Override
@@ -266,12 +267,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    @Cacheable(value = "memberProfile", key="memberProfileUrl")
+    @Cacheable(value = "memberProfile", key="#memberId")
     public Optional<UserMemberDTO> findProfileByMemberId(Long memberId) {
         Optional<UserMemberDTO> memberProfile=memberDAO.findMemberProfileEtc(memberId);
         if (memberProfile.isPresent()) {
             UserMemberDTO member = memberProfile.get();
             String profileKey = member.getMemberProfileUrl();
+            System.out.println("#######################");
+            System.out.println(profileKey);
             String preSignedUrl = null;
 
             if (profileKey != null && !profileKey.isBlank() && !profileKey.startsWith("http")) {

@@ -11,6 +11,11 @@
         delete from tbl_user_profile_file
         where user_id=#{id}
     </delete>
+    <update id="deleteProfileUrl">
+        update tbl_member
+        set member_profile_url=null
+        where user_id=#{id}
+    </update>
 <!--    프로필 사진 추가-->
     <insert id="insertProfileFile">
         insert into tbl_user_profile_file(file_id, user_id)

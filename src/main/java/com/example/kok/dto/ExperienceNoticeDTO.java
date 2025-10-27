@@ -21,10 +21,10 @@ public class ExperienceNoticeDTO{
     private String experienceNoticeIntroduceJob;
     private String experienceNoticeEtc;
     private String experienceMainTasks;
-    private LocalDate experienceStartDate;
-    private LocalDate experienceEndDate;
-    private LocalDate experienceNoticeStartDate;
-    private LocalDate experienceNoticeEndDate;
+    private String experienceStartDate;
+    private String experienceEndDate;
+    private String experienceNoticeStartDate;
+    private String experienceNoticeEndDate;
     private Status experienceNoticeStatus;
     private Long companyId;
     private String createdDatetime;

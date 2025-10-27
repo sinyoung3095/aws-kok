@@ -27,7 +27,10 @@ public class RequestExperienceDAO {
     }
 //    지원 여부 판별
     public boolean isRequested(RequestExperienceDTO requestExperienceDTO){
-        if(requestExperienceMapper.countRequest(requestExperienceDTO)>0){
+        Long experienceNoticeId=requestExperienceDTO.getExperienceNoticeId();
+        Long memberId = requestExperienceDTO.getMemberId();
+        System.out.println("다오 experienceNoticeId:"+experienceNoticeId+" memberId:"+memberId);
+        if(requestExperienceMapper.countRequest(experienceNoticeId, memberId)>0){
             return true;
         } else{
             return false;

@@ -28,6 +28,9 @@ public class MemberDAO {
     public void deleteProfile(Long id){
         memberMapper.deleteProfile(id);
     }
+    public void deleteProfileUrl(Long id){
+        memberMapper.deleteProfileUrl(id);
+    }
 
 //    파일 등록
     public void saveFile(FileDTO fileDTO) {
