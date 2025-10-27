@@ -33,4 +33,3 @@ FROM tbl_user u
          LEFT JOIN tbl_company_scale_category cs
                    ON csb.company_scale_category_id = cs.id;
 
-select * from vw_user_company_job_follow_scale;

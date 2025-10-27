@@ -1,12 +1,10 @@
-CREATE TABLE tbl_advertisement_background_file (
-    file_id bigint primary key,
-    advertisement_id bigint not null,
-    constraint fk_advertisement_background_file foreign key(file_id)
-        references tbl_file(id),
-    constraint fk_advertisement_background_file_advertisement foreign key(advertisement_id)
-        references tbl_advertisement(id)
+create table tbl_advertisement_background_file
+(
+    file_id          bigint not null
+        primary key
+        constraint fk_advertisement_background_file
+            references tbl_file,
+    advertisement_id bigint not null
+        constraint fk_advertisement_background_file_advertisement
+            references tbl_advertisement
 );
-
-select * from tbl_advertisement_background_file;
-insert into tbl_advertisement_background_file(file_id,advertisement_id)
-values (11,1);
