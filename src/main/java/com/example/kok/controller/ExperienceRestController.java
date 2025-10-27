@@ -104,9 +104,9 @@ public class ExperienceRestController implements ExperienceRestControllerDocs{
             req.setExperienceNoticeId(experienceId);
             boolean result=experienceNoticeService.isRequested(req);
 
-            System.out.println("체험공고id: "+experienceId);
-            System.out.println("멤버id: "+customUserDetails.getId());
-            System.out.println(experienceNoticeService.isRequested(req));
+//            System.out.println("체험공고id: "+experienceId);
+//            System.out.println("멤버id: "+customUserDetails.getId());
+//            System.out.println(experienceNoticeService.isRequested(req));
             return result;
         }
         return false;
@@ -118,7 +118,7 @@ public class ExperienceRestController implements ExperienceRestControllerDocs{
                            @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
         if(customUserDetails!=null){
-            System.out.println(customUserDetails);
+//            System.out.println(customUserDetails);
             SaveExperienceNoticeDTO exp=new SaveExperienceNoticeDTO();
             exp.setExperienceNoticeId(experienceId);
             exp.setMemberId(customUserDetails.getId());
@@ -135,7 +135,7 @@ public class ExperienceRestController implements ExperienceRestControllerDocs{
         if(customUserDetails!=null){
             UserDTO user=new UserDTO();
             user=userService.findById(customUserDetails.getId());
-            System.out.println(user);
+//            System.out.println(user);
             return ResponseEntity.ok(user);
         }
         return ResponseEntity.notFound().build();
@@ -157,7 +157,7 @@ public class ExperienceRestController implements ExperienceRestControllerDocs{
         request.setFileId(requestExperienceDTO.getFileId());
         request.setMemberId(customUserDetails.getId());
         request.setExperienceNoticeId(requestExperienceDTO.getExperienceNoticeId());
-        System.out.println(request);
+//        System.out.println(request);
         requestExperienceService.applyForExperience(request);
     }
 }

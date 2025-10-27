@@ -292,6 +292,7 @@ const showProfileUpdate=async ()=>{
     const job = document.getElementsByClassName("setting-28")[0];
     const joblist = document.getElementsByClassName("job")[0];
     const listbtn = document.getElementById("list");
+    let profileDeleteReal=false;
     // const label = document.getElementsByClassName("label")[0];
     // const background = document.getElementById("background");
 
@@ -304,40 +305,7 @@ const showProfileUpdate=async ()=>{
     close.addEventListener("click", (e) => {
         setting.style.display = "none";
     });
-    // 프로필 편집 완료
-    submit.addEventListener("click", async (e) => {
-        e.preventDefault();
 
-        const profileImgInput = profileInput.files[0];
-        const namein = nameinput.value;
-        const job = jobInput.value;
-        const info = infoInput.value;
-        const form=new FormData();
-        if(profileImgInput){
-            form.append("profileImgInput", profileImgInput);
-        }
-        if(namein){
-            form.append("name", namein);
-        }
-        if(job){
-            form.append("job", job);
-        }
-        if(info){
-            form.append("info", info);
-        }
-
-        await myPageService.profileUpdate(form);
-        console.log("수정")
-
-        if(profileUpdate.ok){
-            location.reload();
-            setting.style.display = "none";
-        } else {
-            // alert("수정 실패"+profileUpdate.status);
-            setting.style.display = "none";
-            location.reload();
-        }
-    });
     profileWrapCircle.addEventListener("click", ()=>{
         profileImgPop.style.display="flex";
     })
@@ -358,11 +326,13 @@ const showProfileUpdate=async ()=>{
             profileImgRound.src=e2.target.result;
         }
         fileRead.readAsDataURL(file);
+        profileDeleteReal=false;
     }
     // 프로필 삭제
     profileDelete.addEventListener("click", ()=>{
         profileImgPop.style.display="none";
         profileImgRound.src='/images/main-page/image.png';
+        profileDeleteReal=true;
     })
     // 직군 변경 모달
     job.addEventListener("click", (e) => {
@@ -390,6 +360,44 @@ const showProfileUpdate=async ()=>{
             joblist.style.display = "none";
             listbtn.innerHTML = `<path clip-rule="evenodd" d="M6.434 9.435a.8.8 0 0 1 1.132 0L12 13.869l4.434-4.434a.8.8 0 1 1 1.132 1.13l-5 5a.8.8 0 0 1-1.132 0l-5-5a.8.8 0 0 1 0-1.13" fill-rule="evenodd"></path>`;
         });
+    });
+
+    // 프로필 편집 완료
+    submit.addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        const profileImgInput = profileInput.files[0];
+        const namein = nameinput.value;
+        const job = jobInput.value;
+        const info = infoInput.value;
+        const form=new FormData();
+        if(profileImgInput){
+            form.append("profileImgInput", profileImgInput);
+        }
+        if(namein){
+            form.append("name", namein);
+        }
+        if(job){
+            form.append("job", job);
+        }
+        if(info){
+            form.append("info", info);
+        }
+        if(profileDeleteReal){
+            await myPageService.profileDelete();
+        }
+
+        await myPageService.profileUpdate(form);
+        console.log("수정")
+
+        if(profileUpdate.ok){
+            location.reload();
+            setting.style.display = "none";
+        } else {
+            // alert("수정 실패"+profileUpdate.status);
+            setting.style.display = "none";
+            location.reload();
+        }
     });
 }
 

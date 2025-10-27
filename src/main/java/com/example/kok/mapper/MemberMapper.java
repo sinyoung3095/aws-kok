@@ -15,6 +15,7 @@ public interface MemberMapper {
 
 //    프로필 사진 삭제
     public void deleteProfile(Long id);
+    public void deleteProfileUrl(Long id);
 
 //    프로필 사진 추가
     public void insertProfileFile(UserProfileFileDTO userProfileFileDTO);

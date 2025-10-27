@@ -104,6 +104,14 @@ public class MyPageRestController implements MyPageRestControllerDocs {
         return ResponseEntity.ok(member.get());
     }
 
+//    프로필 삭제
+    @PostMapping("/profile-delete")
+    public ResponseEntity<?> deleteProfile(@AuthenticationPrincipal CustomUserDetails customUserDetails){
+        long memberId=customUserDetails.getId();
+        memberService.deleteProfile(memberId);
+        return ResponseEntity.ok().build();
+    }
+
 //    프로필 편집 완료
     @PostMapping("/profile-update")
     public void updateProfile(@AuthenticationPrincipal CustomUserDetails customUserDetails,

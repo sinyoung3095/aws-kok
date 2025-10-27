@@ -185,8 +185,15 @@ const myPageService = (() => {
 
         return response.ok;
     }
+
+    const profileDelete=async ()=>{
+        const response=await fetch(`/api/mypage/profile-delete`, {
+            method: "POST"
+        });
+        return response.ok;
+    }
     return { getProfile:getProfile, getPostsList:getPostsList, getPostDetail:getPostDetail, getExperienceList:getExperienceList, getComments:getComments, writeComment:writeComment, updateComment:updateComment, deleteComment:deleteComment,
     getReplies:getReplies, writeReply:writeReply, updateReply:updateReply, deleteReply:deleteReply, getInternList:getInternList, getPaymentList:getPaymentList,
     getSavedExperienceList:getSavedExperienceList, getSavedInternList:getSavedInternList, deleteRequestExperience:deleteRequestExperience, deleteRequestIntern:deleteRequestIntern,
-    profileUpdate:profileUpdate, loadStorage:loadStorage, deleteStorage:deleteStorage, saveStorage:saveStorage};
+    profileUpdate:profileUpdate, loadStorage:loadStorage, deleteStorage:deleteStorage, saveStorage:saveStorage, profileDelete:profileDelete};
 })();

@@ -33,7 +33,7 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
         Criteria criteria = new Criteria(page, experienceNoticeDAO.findCountAll());
         List<ExperienceNoticeDTO> experiences=experienceNoticeDAO.findAll(criteria, search);
         experiences.forEach(experience -> {
-            LocalDate endDate = experience.getExperienceEndDate();
+            LocalDate endDate = LocalDate.parse(experience.getExperienceEndDate());
             LocalDate today = LocalDate.now();
             if (endDate.isBefore(today)) {
                 long days = ChronoUnit.DAYS.between(today, endDate);
@@ -75,15 +75,15 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
 
 
     @Override
-    @Cacheable(value = "result", key = "experienceNoticeDTO")
+    @Cacheable(value = "experienceNoticeDTO", key = "#id")
     public ExperienceNoticeDTO findNoticeById(Long id) {
         ExperienceNoticeDTO result= experienceNoticeDAO.findById(id);
-        System.out.println(id);
-        System.out.println(result);
+//        System.out.println(id);
+//        System.out.println(result);
         String jobName= experienceNoticeDAO.findJobNameByID(id);
         result.setJobName(jobName);
-        System.out.println(result);
-        LocalDate endDate = result.getExperienceNoticeEndDate();
+//        System.out.println(result);
+        LocalDate endDate = LocalDate.parse(result.getExperienceNoticeEndDate());
             LocalDate today = LocalDate.now();
             if (!endDate.isBefore(today)) {
                 long days = ChronoUnit.DAYS.between(today, endDate);
@@ -117,7 +117,7 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
         List<ExperienceNoticeDTO> experiences = experienceNoticeDAO.findLatestFour();
 
         experiences.forEach(experience -> {
-            LocalDate endDate = experience.getExperienceEndDate();
+            LocalDate endDate = LocalDate.parse(experience.getExperienceEndDate());
             LocalDate today = LocalDate.now();
 
             if (endDate != null) {
@@ -144,16 +144,17 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
     }
 
     @Override
-    @Cacheable(value = "result", key = "result")
+    @Cacheable(value = "idSavedExp", key = "#saveExperienceNoticeDTO")
     public boolean isSavedExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO) {
         boolean result=saveExperienceNoticeDAO.idSavedExp(saveExperienceNoticeDTO);
         return result;
     }
 
     @Override
-    @Cacheable(value = "result", key = "result")
+    @Cacheable(value = "isRequested", key = "#requestExperienceDTO")
     public boolean isRequested(RequestExperienceDTO requestExperienceDTO) {
         boolean result=requestExperienceDAO.isRequested(requestExperienceDTO);
+//        System.out.println("서비스 experienceNoticeId: "+requestExperienceDTO.getExperienceNoticeId()+"memberId: "+requestExperienceDTO.getMemberId());
         return result;
     }
 

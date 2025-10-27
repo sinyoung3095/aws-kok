@@ -21,8 +21,8 @@ public class InternNoticeDTO {
     private String internNoticeMajorWork;
     private String internNoticeEtc;
     private String internMainTasks;
-    private LocalDate internStartDate;
-    private LocalDate internEndDate;
+    private String internStartDate;
+    private String internEndDate;
     private Status internNoticeStatus;
     private Long companyId;
     private String createdDatetime;
@@ -38,7 +38,7 @@ public class InternNoticeDTO {
     private String companyScaleName;
     private Long remainingDays;
     private String internNoticeStartDate;
-    private LocalDate internNoticeEndDate;
+    private String internNoticeEndDate;
     private String createdDateTime;
     private String updatedDateTime;
 }
