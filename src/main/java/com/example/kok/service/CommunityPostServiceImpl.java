@@ -57,10 +57,19 @@ public class CommunityPostServiceImpl implements CommunityPostService {
             post.setRelativeDate(DateUtils.toRelativeTime(post.getCreatedDateTime()));
             post.setCommentsCount(communityCommentService.commentsCountByPostId(post.getId()));
 
-            if (post.getMemberProfileUrl() != null && !post.getMemberProfileUrl().isEmpty()) {
-                post.setMemberProfileUrl(
-                        s3Service.getPreSignedUrl(post.getMemberProfileUrl(), Duration.ofMinutes(10))
-                );
+            String fileProfile = post.getMemberProfileUrl();
+            String snsProfile = post.getSnsProfile();
+
+            if (fileProfile != null && !fileProfile.isEmpty()) {
+                try {
+                    post.setMemberProfileUrl(
+                            s3Service.getPreSignedUrl(fileProfile, Duration.ofMinutes(10))
+                    );
+                } catch (Exception e) {
+                    post.setMemberProfileUrl(fileProfile);
+                }
+            } else if (snsProfile != null && !snsProfile.isEmpty()) {
+                post.setMemberProfileUrl(snsProfile);
             } else {
                 post.setMemberProfileUrl("/images/main-page/image3.png");
             }
@@ -100,10 +109,19 @@ public class CommunityPostServiceImpl implements CommunityPostService {
         postDTO.setRelativeDate(DateUtils.toRelativeTime(postDTO.getCreatedDateTime().split("\\.")[0]));
         postDTO.setCreatedDateTime(postDTO.getCreatedDateTime().split(" ")[0]);
 
-        if (postDTO.getMemberProfileUrl() != null && !postDTO.getMemberProfileUrl().isEmpty()) {
-            postDTO.setMemberProfileUrl(
-                    s3Service.getPreSignedUrl(postDTO.getMemberProfileUrl(), Duration.ofMinutes(10))
-            );
+        String fileProfile = postDTO.getMemberProfileUrl();
+        String snsProfile = postDTO.getSnsProfile();
+
+        if (fileProfile != null && !fileProfile.isEmpty()) {
+            try {
+                postDTO.setMemberProfileUrl(
+                        s3Service.getPreSignedUrl(fileProfile, Duration.ofMinutes(10))
+                );
+            } catch (Exception e) {
+                postDTO.setMemberProfileUrl(fileProfile);
+            }
+        } else if (snsProfile != null && !snsProfile.isEmpty()) {
+            postDTO.setMemberProfileUrl(snsProfile);
         } else {
             postDTO.setMemberProfileUrl("/images/main-page/image3.png");
         }
@@ -182,7 +200,6 @@ public class CommunityPostServiceImpl implements CommunityPostService {
 
         if (deleteFilesIds != null) {
             Arrays.stream(deleteFilesIds).forEach((id) -> {
-                System.out.println("🧪 Service.update() 삭제 대상 ID = " + id);
                 PostFileDTO postFile =
                         communityPostFileDAO.findPostFilePathByPostFileId(id)
                                 .orElseThrow(PostNotFoundException::new);
