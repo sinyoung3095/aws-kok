@@ -4,6 +4,7 @@ import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.AdvertisementDTO;
 import com.example.kok.dto.InternNoticeCriteriaDTO;
 import com.example.kok.service.AdvertisementService;
+import com.example.kok.service.ExperienceNoticeService;
 import com.example.kok.service.InternNoticeService;
 import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ import java.util.List;
 @RequestMapping("/intern/**")
 @RequiredArgsConstructor
 public class InternController {
-    private final InternNoticeService internNoticeService;
+    private final ExperienceNoticeService experienceNoticeService;
     private final AdvertisementService advertisementService;
     //    인턴 공고 목록으로 이동
     @GetMapping("list")
@@ -34,6 +35,8 @@ public class InternController {
         model.addAttribute("sharedInternId", sharedInternId);
         List<AdvertisementDTO> advertisements = advertisementService.getAllAdvertisements();
         model.addAttribute("advertisements", advertisements);
+        String banner=experienceNoticeService.getBanner();
+        model.addAttribute("banner",banner);
         return "intern/list";
     }
 }

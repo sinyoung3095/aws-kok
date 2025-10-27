@@ -2,6 +2,7 @@ package com.example.kok.controller;
 
 import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.AdvertisementDTO;
+import com.example.kok.dto.BannerFileDTO;
 import com.example.kok.dto.ExperienceNoticeCriteriaDTO;
 import com.example.kok.service.AdvertisementService;
 import com.example.kok.service.ExperienceNoticeService;
@@ -31,6 +32,8 @@ public class ExperienceController {
         model.addAttribute("sharedExperienceId", sharedExperienceId);
         List<AdvertisementDTO> advertisements = advertisementService.getAllAdvertisements();
         model.addAttribute("advertisements", advertisements);
+        String banner=experienceNoticeService.getBanner();
+        model.addAttribute("banner",banner);
         return "experience/list";
     }
 }
