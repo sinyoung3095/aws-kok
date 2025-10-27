@@ -252,7 +252,6 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    @Cacheable(value = "memberProfile", key="#memberId")
     public Optional<UserMemberDTO> findProfileByMemberId(Long memberId) {
         Optional<UserMemberDTO> memberProfile=memberDAO.findMemberProfileEtc(memberId);
         if (memberProfile.isPresent()) {
