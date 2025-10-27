@@ -43,14 +43,14 @@ public class ConsoleExperienceApplicationServiceImpl implements ConsoleExperienc
                     consoleExperienceApplicationDAO.findApplicantDetail(memberId, experienceNoticeId);
 
             // 파일 정보 조회
-            Optional<FileDTO> fileInfo =
-                    consoleExperienceApplicationDAO.findResumeFileByMemberId(memberId, experienceNoticeId);
+            FileDTO fileInfo = consoleExperienceApplicationDAO
+                    .findResumeFileByMemberId(memberId, experienceNoticeId)
+                    .orElse(null);
 
-            // 파일 있으면 DTO에 세팅
-            fileInfo.ifPresent(file -> {
-                applicantDetail.setFilePath(file.getFilePath());
-                applicantDetail.setFileName(file.getFileOriginName());
-            });
+            if (fileInfo != null) {
+                applicantDetail.setFilePath(fileInfo.getFilePath());
+                applicantDetail.setFileName(fileInfo.getFileOriginName());
+            }
 
             results.add(applicantDetail);
         }
