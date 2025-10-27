@@ -145,7 +145,6 @@ public class InternNoticeServiceImpl implements InternNoticeService {
     }
 
     @Override
-    @Cacheable(value = "idSavedInt", key = "#result")
     public boolean isSavedInt(SaveInternNoticeDTO saveInternNoticeDTO) {
         boolean result=saveInternNoticeDAO.idSavedInt(saveInternNoticeDTO);
         return result;

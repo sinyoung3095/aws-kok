@@ -131,7 +131,7 @@ public class ConsoleExperienceNoticeController {
         Long companyId=customUserDetails.getId();
         model.addAttribute("companyId", companyId);
 
-        return "enterprise-console/experience/console-review";
+        return "enterprise-console/review/console-review";
     }
 
     @PostMapping(value = {"/create", "/edit"})
