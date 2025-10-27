@@ -26,4 +26,5 @@ public class ReplyDTO {
     private String memberProfileUrl;
     private boolean liked;
     private boolean owner;
+    private String snsProfile;
 }
