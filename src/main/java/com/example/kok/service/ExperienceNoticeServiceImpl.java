@@ -78,11 +78,11 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
     @Cacheable(value = "experienceNoticeDTO", key = "#id")
     public ExperienceNoticeDTO findNoticeById(Long id) {
         ExperienceNoticeDTO result= experienceNoticeDAO.findById(id);
-        System.out.println(id);
-        System.out.println(result);
+//        System.out.println(id);
+//        System.out.println(result);
         String jobName= experienceNoticeDAO.findJobNameByID(id);
         result.setJobName(jobName);
-        System.out.println(result);
+//        System.out.println(result);
         LocalDate endDate = LocalDate.parse(result.getExperienceNoticeEndDate());
             LocalDate today = LocalDate.now();
             if (!endDate.isBefore(today)) {
@@ -154,7 +154,7 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
     @Cacheable(value = "isRequested", key = "#requestExperienceDTO")
     public boolean isRequested(RequestExperienceDTO requestExperienceDTO) {
         boolean result=requestExperienceDAO.isRequested(requestExperienceDTO);
-        System.out.println("서비스 experienceNoticeId: "+requestExperienceDTO.getExperienceNoticeId()+"memberId: "+requestExperienceDTO.getMemberId());
+//        System.out.println("서비스 experienceNoticeId: "+requestExperienceDTO.getExperienceNoticeId()+"memberId: "+requestExperienceDTO.getMemberId());
         return result;
     }
 
