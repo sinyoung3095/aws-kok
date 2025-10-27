@@ -1,7 +1,6 @@
 package com.example.kok.service;
 
 import com.example.kok.dto.ConsoleInternApplicantDTO;
-import com.example.kok.dto.ConsoleInternApplicantDTO;
 import com.example.kok.dto.FileDTO;
 import com.example.kok.dto.RequestDownloadUrlDTO;
 import com.example.kok.enumeration.RequestStatus;
@@ -10,10 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,23 +32,23 @@ public class ConsoleInternApplicationServiceImpl implements ConsoleInternApplica
 
 //    여러 명의 지원자 상세 조회
     @Override
-    public List<ConsoleInternApplicantDTO> getApplicationsDetailsByMemberIds(Long experienceNoticeId, List<Long> memberIdList) {
+    public List<ConsoleInternApplicantDTO> getApplicationsDetailsByMemberIds(Long internNoticeId, List<Long> memberIdList) {
         List<ConsoleInternApplicantDTO> results = new ArrayList<>();
 
         for (Long memberId : memberIdList) {
             // 기존 단일 조회 재활용
             ConsoleInternApplicantDTO applicantDetail =
-                    consoleInternApplicationDAO.findApplicantDetail(memberId, experienceNoticeId);
+                    consoleInternApplicationDAO.findApplicantDetail(memberId, internNoticeId);
 
             // 파일 정보 조회
-            Optional<FileDTO> fileInfo =
-                    consoleInternApplicationDAO.findResumeFileByMemberId(memberId, experienceNoticeId);
+            FileDTO fileInfo = consoleInternApplicationDAO
+                    .findResumeFileByMemberId(memberId, internNoticeId)
+                    .orElse(null);
 
-            // 파일 있으면 DTO에 세팅
-            fileInfo.ifPresent(file -> {
-                applicantDetail.setFilePath(file.getFilePath());
-                applicantDetail.setFileName(file.getFileOriginName());
-            });
+            if (fileInfo != null) {
+                applicantDetail.setFilePath(fileInfo.getFilePath());
+                applicantDetail.setFileName(fileInfo.getFileOriginName());
+            }
 
             results.add(applicantDetail);
         }
@@ -66,12 +63,12 @@ public class ConsoleInternApplicationServiceImpl implements ConsoleInternApplica
     }
 
     @Override
-    public RequestDownloadUrlDTO getApplicationFileInfo(List<Long> memberIdList, Long experienceNoticeId) {
+    public RequestDownloadUrlDTO getApplicationFileInfo(List<Long> memberIdList, Long internNoticeId) {
         RequestDownloadUrlDTO requestDownloadUrlDTO = new RequestDownloadUrlDTO();
         List<String> downloadUrls = new ArrayList<>();
         List<String> fileNames = new ArrayList<>();
 
-        getApplicationsDetailsByMemberIds(experienceNoticeId, memberIdList).forEach(applicantDetail -> {
+        getApplicationsDetailsByMemberIds(internNoticeId, memberIdList).forEach(applicantDetail -> {
             if (applicantDetail.getFilePath() != null && applicantDetail.getFilePath() != null) {
                 String downloadUrl = s3Service.getPreSignedDownloadUrl(
                         applicantDetail.getFilePath(),

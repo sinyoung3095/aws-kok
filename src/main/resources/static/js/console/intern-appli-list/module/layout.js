@@ -49,6 +49,7 @@ const internDatailLayout = (() => {
     // 리스트
     const rowTemplate = (lists) => {
         const tbody = document.querySelector("#detail-list-table .list-list-tbody");
+        const downloadBtn = document.querySelector(".download");
         if (!tbody) return;
 
         tbody.innerHTML = "";
@@ -59,8 +60,11 @@ const internDatailLayout = (() => {
                         <div class="text">조건에 맞는 지원자가 없습니다.</div>
                     </td>
                 </tr>`;
+            if (downloadBtn) downloadBtn.style.display = "none";
             return;
         }
+
+        if (downloadBtn) downloadBtn.style.display = "inline-flex";
 
         lists.forEach(list => {
             tbody.innerHTML += `
