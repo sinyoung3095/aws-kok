@@ -39,7 +39,6 @@ public class RequestInternServiceImpl implements RequestInternService {
     }
 
     @Override
-    @Cacheable(value = "isRequested", key = "isRequested")
     public boolean isRequested(RequestInternDTO requestInternDTO) {
 //        System.out.println("서비스 임플: "+requestInternDAO.isRequested(requestInternDTO));
         boolean result=requestInternDAO.isRequested(requestInternDTO);

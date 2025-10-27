@@ -139,14 +139,12 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
     }
 
     @Override
-    @Cacheable(value = "idSavedExp", key = "#saveExperienceNoticeDTO")
     public boolean isSavedExp(SaveExperienceNoticeDTO saveExperienceNoticeDTO) {
         boolean result=saveExperienceNoticeDAO.idSavedExp(saveExperienceNoticeDTO);
         return result;
     }
 
     @Override
-    @Cacheable(value = "isRequested", key = "#result")
     public boolean isRequested(RequestExperienceDTO requestExperienceDTO) {
         boolean result=requestExperienceDAO.isRequested(requestExperienceDTO);
 //        System.out.println("서비스 experienceNoticeId: "+requestExperienceDTO.getExperienceNoticeId()+"memberId: "+requestExperienceDTO.getMemberId());
