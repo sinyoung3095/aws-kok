@@ -29,4 +29,5 @@ public class PostDTO {
     private boolean liked;
     private List<CommentDTO> comments;
     private boolean owner;
+    private String snsProfile;
 }

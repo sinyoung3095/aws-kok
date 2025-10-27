@@ -23,7 +23,7 @@
 
 <!-- 댓글 목록 -->
     <select id="selectCommentsByPostId">
-        select c.id, c.comment_content, c.member_id, c.post_id, c.created_datetime, c.updated_datetime, u.user_name, f.file_path as memberProfileUrl, jc.job_name
+        select c.id, c.comment_content, c.member_id, c.post_id, c.created_datetime, c.updated_datetime, u.user_name, m.member_profile_url as snsProfile, f.file_path as memberProfileUrl, jc.job_name
         from tbl_comment c
         join tbl_member m on c.member_id = m.user_id
         join tbl_user u on m.user_id = u.id
