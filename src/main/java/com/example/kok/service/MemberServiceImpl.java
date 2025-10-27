@@ -209,9 +209,6 @@ public class MemberServiceImpl implements MemberService {
 
         memberDAO.updateInfo(id, dto.getMemberInfo());
         memberDAO.updateName(id, dto.getUserName());
-//        System.out.println("서비스 인포: " + dto.getMemberInfo());
-//        System.out.println("서비스 직군: " + dto.getJobName());
-//        System.out.println("서비스 프사 empty: "+profile.isEmpty());
         if(originJobCate==null&&dto.getJobName()!=null){
             memberDAO.plusJob(id, dto.getJobName());
         } else{
@@ -223,32 +220,21 @@ public class MemberServiceImpl implements MemberService {
             if(memberDAO.findMemberProfileEtc(id)!=null){
                 memberDAO.deleteProfile(id);
             }
-
-
             try {
                 String s3Key = s3Service.uploadFile(profile, getPath());
 
-//                String s3Url = s3Service.getPreSignedUrl(s3Key, Duration.ofMinutes(5));
-
-                // 파일 DTO 생성
                 FileDTO fileDTO = new FileDTO();
                 fileDTO.setFileOriginName(profile.getOriginalFilename());
                 fileDTO.setFileName(UUID.randomUUID().toString());
                 fileDTO.setFilePath(s3Key);
                 fileDTO.setFileSize(String.valueOf(profile.getSize()));
                 fileDTO.setFileContentType(profile.getContentType());
-
                 // tbl_file 등록
                 memberDAO.saveFile(fileDTO);
 
-//                System.out.println("saveFile"+fileDTO.getFileContentType());
-
-                // userProfileFile 등록
                 UserProfileFileDTO userProfileFileDTO = new UserProfileFileDTO();
                 userProfileFileDTO.setFileId(fileDTO.getId());
                 userProfileFileDTO.setId(dto.getId());
-
-                System.out.println("userProfileFile등록"+userProfileFileDTO.getFileId());
 
                 memberDAO.saveProfileFile(userProfileFileDTO);
                 memberDAO.updateProfileUrl(id, s3Key);
@@ -258,7 +244,6 @@ public class MemberServiceImpl implements MemberService {
                 throw new RuntimeException(e);
             }
         }
-//        UserProfileFileDTO updatedProfile = getProfile(dto.getId());
     }
 
     @Override
@@ -273,8 +258,6 @@ public class MemberServiceImpl implements MemberService {
         if (memberProfile.isPresent()) {
             UserMemberDTO member = memberProfile.get();
             String profileKey = member.getMemberProfileUrl();
-            System.out.println("#######################");
-            System.out.println(profileKey);
             String preSignedUrl = null;
 
             if (profileKey != null && !profileKey.isBlank() && !profileKey.startsWith("http")) {
@@ -287,8 +270,6 @@ public class MemberServiceImpl implements MemberService {
             }
 
             member.setFilePath(preSignedUrl);
-            System.out.println("#######################");
-            System.out.println(preSignedUrl);
         }
         return memberProfile;
     }

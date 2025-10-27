@@ -3,16 +3,14 @@ package com.example.kok.controller;
 import com.example.kok.auth.CustomUserDetails;
 import com.example.kok.dto.*;
 import com.example.kok.repository.CompanyProfileFileDAO;
-import com.example.kok.service.CompanyService;
-import com.example.kok.service.ExperienceNoticeService;
-import com.example.kok.service.RequestExperienceService;
-import com.example.kok.service.UserService;
+import com.example.kok.service.*;
 import com.example.kok.util.Search;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 
 import java.util.HashMap;
 import java.util.Map;

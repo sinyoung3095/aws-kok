@@ -36,4 +36,7 @@ public interface ExperienceNoticeService {
 
 //    커뮤니티 쪽 체험 공고 4개 조회
     public List<ExperienceNoticeDTO> findLatestFourExperience();
+
+//    가장 최근 배너 조회
+    public String getBanner();
 }

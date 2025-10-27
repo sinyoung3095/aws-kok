@@ -1,10 +1,7 @@
 package com.example.kok.service;
 
 import com.example.kok.dto.*;
-import com.example.kok.repository.CompanyProfileFileDAO;
-import com.example.kok.repository.ExperienceNoticeDAO;
-import com.example.kok.repository.RequestExperienceDAO;
-import com.example.kok.repository.SaveExperienceNoticeDAO;
+import com.example.kok.repository.*;
 import com.example.kok.util.CompanyNoticeCriteria;
 import com.example.kok.util.Criteria;
 import com.example.kok.util.Search;
@@ -26,6 +23,7 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
     private final S3Service s3Service;
     private final SaveExperienceNoticeDAO saveExperienceNoticeDAO;
     private final RequestExperienceDAO requestExperienceDAO;
+    private final BannerFileDAO bannerFileDAO;
 
     @Override
     public ExperienceNoticeCriteriaDTO selectAllExperienceNotice(int page, Search search) {
@@ -78,11 +76,8 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
     @Cacheable(value = "experienceNoticeDTO", key = "#id")
     public ExperienceNoticeDTO findNoticeById(Long id) {
         ExperienceNoticeDTO result= experienceNoticeDAO.findById(id);
-//        System.out.println(id);
-//        System.out.println(result);
         String jobName= experienceNoticeDAO.findJobNameByID(id);
         result.setJobName(jobName);
-//        System.out.println(result);
         LocalDate endDate = LocalDate.parse(result.getExperienceNoticeEndDate());
             LocalDate today = LocalDate.now();
             if (!endDate.isBefore(today)) {
@@ -151,7 +146,7 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
     }
 
     @Override
-    @Cacheable(value = "isRequested", key = "#requestExperienceDTO")
+    @Cacheable(value = "isRequested", key = "#result")
     public boolean isRequested(RequestExperienceDTO requestExperienceDTO) {
         boolean result=requestExperienceDAO.isRequested(requestExperienceDTO);
 //        System.out.println("서비스 experienceNoticeId: "+requestExperienceDTO.getExperienceNoticeId()+"memberId: "+requestExperienceDTO.getMemberId());
@@ -185,5 +180,12 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
         });
 
         return experienceNotices;
+    }
+
+    @Override
+    public String getBanner() {
+        return bannerFileDAO.getBannerFileDTO()
+                .map(banner -> s3Service.getPreSignedUrl(banner.getBannerFilePath(), Duration.ofMinutes(10)))
+                .orElse("/images/experience/banner1.jpg");
     }
 }
