@@ -1,11 +1,11 @@
-CREATE TABLE tbl_company_sector (
-    id bigint generated always as identity primary key,
+create table tbl_company_sector
+(
+    id                  bigint generated always as identity
+        primary key,
     company_sector_name varchar(255) not null,
-    created_datetime timestamp default now(),
-    updated_datetime timestamp default now()
+    created_datetime    timestamp default now(),
+    updated_datetime    timestamp default now()
 );
-
-select * from tbl_company_sector;
 
 insert into tbl_company_sector(company_sector_name)
 values
@@ -18,8 +18,9 @@ values
     ('건설업'),
     ('미디어/디자인'),
     ('은행/금융업'),
-    ('기관/협회'),
-    ('미선택');
+    ('기관/협회');
 
 insert into tbl_company_sector(company_sector_name)
-values('미선택');
+values ('미선택');
+
+select * from tbl_company_sector;

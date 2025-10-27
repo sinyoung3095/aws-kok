@@ -23,4 +23,16 @@ from tbl_user u
          left join tbl_job_category j
                    on ujc.job_category = j.id;
 
-select * from view_user_with_evaluation_and_job;
+
+create view view_member_with_evaluation(user_id, member_provider, member_profile_url, member_info, avg) as
+SELECT m1.user_id,
+       m1.member_provider,
+       m1.member_profile_url,
+       m1.member_info,
+       m2.avg
+FROM tbl_member m1
+         JOIN (SELECT m.user_id,
+                      avg(e.evaluation_avg_score) AS avg
+               FROM tbl_member m
+                        JOIN tbl_evaluation e ON m.user_id = e.member_id
+               GROUP BY m.user_id) m2 ON m1.user_id = m2.user_id;
