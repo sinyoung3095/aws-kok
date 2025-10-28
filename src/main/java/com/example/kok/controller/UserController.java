@@ -42,7 +42,7 @@ public class UserController {
 
     @GetMapping("join-member")
     public String goToJoinPage() {
-        return "/member/join-member";
+        return "member/join-member";
     }
 
     @PostMapping("join-member")

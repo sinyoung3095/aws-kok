@@ -38,7 +38,7 @@ public class AdminController {
     @GetMapping("join")
     public String joinAdmin(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         model.addAttribute("admin", customUserDetails);
-        return "/admin/join";
+        return "admin/join";
     }
 
     @PostMapping("join")

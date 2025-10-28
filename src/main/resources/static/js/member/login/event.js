@@ -162,7 +162,7 @@ kakaoLoginButton.addEventListener("click", (e) => {
     if(window.innerWidth<1023){
         console.log("모바일 로그인")
         window.location.href = "/oauth2/authorization/kakao";
-    }else{window.location.href = "http://localhost:10000/oauth2/authorization/kakao";}
+    }else{window.location.href = "http://54.180.112.3:10000/oauth2/authorization/kakao";}
 });
 // 네이버 로그인
 const naverLoginButton = document.getElementById("naver-login");

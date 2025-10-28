@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ServiceController {
     @GetMapping("kok-service")
     public String kokService(){
-        return "/service/kok-service";
+        return "service/kok-service";
     }
 }
