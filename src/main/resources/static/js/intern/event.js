@@ -546,6 +546,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            const isReviewedPre=await fetch(`/api/interns/is-reviewed`);
+            const isReviewed=await isReviewedPre;
+            const isReviewedDetail=isReviewed;
+
+            console.log(isReviewedDetail);
+
+            if(isReviewedDetail){
+                textBox.textContent="체험 합격 후 평가를 한 번 이상 받아야 인턴 공고에 지원 가능합니다."
+                requestToast.classList.add("show");
+                showingToast=true;
+                setTimeout(() => {
+                    requestToast.classList.remove("show");
+                    showingToast = false;
+                }, 2000);
+                // showingToast=true;
+                return;
+            }
+
             nowInternId=intId;
 
             // console.log(nowInternId);
@@ -798,7 +816,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 formFileLabel.textContent = "파일";
             }
         });
-    //     등록하기 눌렀을 때
+        //     등록하기 눌렀을 때
         const saveBtn=document.getElementById("pop-apply");
 
         saveBtn.addEventListener("click", async (e) => {
@@ -1475,32 +1493,32 @@ function bannerActiveFn() {
     const banners = document.querySelectorAll(".banner-list .ad-banner");
     if(banners.length>0){
         let timer = null;
-    let currentIndex = -1;
+        let currentIndex = -1;
 
-    if (!banners) return;
+        if (!banners) return;
 
-    // 모두 숨기기
-    function hideAll() {
-        banners.forEach((banner) => banner.classList.remove("active"));
-    }
+        // 모두 숨기기
+        function hideAll() {
+            banners.forEach((banner) => banner.classList.remove("active"));
+        }
 
-    // 랜덤 배너 보이기
-    function showRandomBanner() {
-        hideAll();
-        let randomIndex;
-        do {
-            randomIndex = Math.floor(Math.random() * banners.length);
-        } while (randomIndex === currentIndex && banners.length > 1);
-        // 직전 배너와 겹치지 않게 처리
-        banners[randomIndex].classList.add("active");
-        currentIndex = randomIndex;
-    }
+        // 랜덤 배너 보이기
+        function showRandomBanner() {
+            hideAll();
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * banners.length);
+            } while (randomIndex === currentIndex && banners.length > 1);
+            // 직전 배너와 겹치지 않게 처리
+            banners[randomIndex].classList.add("active");
+            currentIndex = randomIndex;
+        }
 
-    // 최초 실행
-    showRandomBanner();
+        // 최초 실행
+        showRandomBanner();
 
-    // 3초마다 랜덤 배너 변경
-    timer = setInterval(showRandomBanner, 5000);
+        // 3초마다 랜덤 배너 변경
+        timer = setInterval(showRandomBanner, 5000);
     }
 
 }

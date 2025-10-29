@@ -151,40 +151,11 @@ function formValidate(){
     return isValid;
 }
 
-// 팝업 수정 확인
-// if(btnUpdate){
-//     btnUpdate.addEventListener("click", async () => {
-//         const isValid = formValidate();
-//
-//         if (isValid) {
-//             const data = {
-//                 internNoticeTitle: document.querySelector("#content-title").value,
-//                 internNoticeSubtitle: document.querySelector("#content-subtitle").value,
-//                 jobCategoryId: document.querySelector("#job-category").dataset.id,
-//                 internNoticeIntroduceJob: document.querySelector("#introduce-job").value,
-//                 internMainTasks: document.querySelector("#main-tasks").value,
-//                 internNoticeEtc: document.querySelector("#notice-etc").value,
-//                 internNoticeStartDate: document.querySelector("#intern-notice-start-date").value,
-//                 internNoticeEndDate: document.querySelector("#intern-notice-end-date").value,
-//             }
-//
-//             try {
-//                 await internRegisterService.update(id, data);
-//                 alert("공고가 수정되었습니다.");
-//
-//                 window.location.href = "/enterprise-console/intern/list";
-//             } catch (err) {
-//                 console.error(err);
-//                 alert("수정 중 오류가 발생했습니다.");
-//             }
-//         } else {
-//             console.log("유효성 실패!!!!!");
-//         }
-//
-//         popup.style.display = "none";
-//
-//     });
-// }
+function parseYmd(str) {
+    const [y, m, d] = str.split("-").map(Number);
+    // 월은 0부터 시작
+    return new Date(y, m - 1, d, 0, 0, 0, 0).getTime();
+}
 
 // 팝업 등록 및 수정 확인
 btnSubmit.addEventListener("click", async () => {
@@ -194,35 +165,42 @@ btnSubmit.addEventListener("click", async () => {
     const url = !notice.internNoticeTitle ? "/create" : `/edit`;
     jobCategoryId.value = dropdownContainer.dataset.id;
 
+    const postStartInput = document.querySelector("#intern-notice-start-date");
+    const postEndInput = document.querySelector("#intern-notice-end-date");
+
+    const postStartTS = parseYmd(postStartInput.value);
+    const postEndTS   = parseYmd(postEndInput.value);
+
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    if (postStartTS < today.getTime()) {
+        alert("게시 시작일은 오늘 이후 날짜여야 합니다.");
+        document.querySelector("#intern-notice-start-date").style.border = "2px solid red";
+        return;
+    }
+
+    if (postEndTS < today.getTime()) {
+        alert("게시 종료일은 오늘 이후 날짜여야 합니다.");
+        document.querySelector("#intern-notice-end-date").style.border = "2px solid red";
+        return;
+    }
+
+    // 게시 시작 > 게시 종료
+    if (postStartTS > postEndTS) {
+        alert("게시 시작일은 게시 종료일과 같거나 이전이어야 합니다.");
+        postStartInput.style.border = "2px solid red";
+        postEndInput.style.border = "2px solid red";
+        return;
+    }
+
     if (isValid) {
         internForm.setAttribute("action", "/enterprise-console/intern" + url);
         internForm.submit();
         return;
-        // const data = {
-        //     companyId: companyId,
-        //     internNoticeTitle: document.querySelector("#content-title").value,
-        //     internNoticeSubtitle: document.querySelector("#content-subtitle").value,
-        //     jobCategoryId: document.querySelector("#job-category").dataset.id,
-        //     internNoticeIntroduceJob: document.querySelector("#introduce-job").value,
-        //     internMainTasks: document.querySelector("#main-tasks").value,
-        //     internNoticeEtc: document.querySelector("#notice-etc").value,
-        //     internNoticeStartDate: document.querySelector("#intern-notice-start-date").value,
-        //     internNoticeEndDate: document.querySelector("#intern-notice-end-date").value,
-        // }
-        //
-        // try {
-        //     await internRegisterService.register(data);
-        //     alert("공고가 등록되었습니다.");
-        //
-        //     window.location.href = "/enterprise-console/intern/list";
-        // } catch (err) {
-        //     console.error(err);
-        //     alert("등록 중 오류가 발생했습니다.");
-        // }
     }
     console.log("유효성 실패!!!!!");
 
-    // popup.style.display = "none";
 });
 
 // 입력 중 border 해제 (실시간)
@@ -253,15 +231,15 @@ dateInputs.forEach(input => {
         let value = e.target.value.replace(/[^0-9]/g, ""); // 숫자만 허용
         if (value.length > 8) value = value.substring(0, 8);
 
-    if (value.length >= 5) {
-        value = value.substring(0,4) + "-" + value.substring(4,6) +
-            (value.length > 6 ? "-" + value.substring(6) : "");
-    } else if (value.length >= 4) {
-        value = value.substring(0,4) + "-" + value.substring(4);
-    }
+        if (value.length >= 5) {
+            value = value.substring(0,4) + "-" + value.substring(4,6) +
+                (value.length > 6 ? "-" + value.substring(6) : "");
+        } else if (value.length >= 4) {
+            value = value.substring(0,4) + "-" + value.substring(4);
+        }
 
-    e.target.value = value;
-});
+        e.target.value = value;
+    });
 
 // 입력 중 border 해제 (textarea)
     textareas.forEach(textarea => {

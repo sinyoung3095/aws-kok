@@ -204,6 +204,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    if (page === "edit") {
+        calculatePeriod();
+    }
+
     // 달력 날짜 확인 버튼
     const checkBtn = document.querySelector(".confirm-btn");
     checkBtn.addEventListener("click", (e)=>{

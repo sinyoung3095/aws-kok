@@ -102,26 +102,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const downloadBtn = document.querySelector(".download-btn");
-
     if (!downloadBtn) return;
 
     downloadBtn.addEventListener("click", async () => {
         try {
-            const response = await fetch(`/api/enterprise-console/experience/${experienceNoticeId}/applications/files`, {
-                method: 'POST',
-                body: JSON.stringify([memberId]),
-                headers: {
-                    "Content-Type": "application/json; charset=utf-8"
-                }
-            });
+            const result = await applicationExperienceService.downloadResume(experienceNoticeId, memberId);
 
-            if (!response.ok) {
-                alert("이력서 파일을 찾을 수 없습니다.");
+            console.log(result);
+            const downloadUrl = result.urls[0];
+
+            if (!downloadUrl) {
+                alert("다운로드 가능한 파일이 없습니다.");
                 return;
             }
-
-            const requestExperienceDownloadUrlDTO = await response.json();
-            const downloadUrl = requestExperienceDownloadUrlDTO.urls[0];
 
             window.open(downloadUrl, "_blank");
         } catch (error) {

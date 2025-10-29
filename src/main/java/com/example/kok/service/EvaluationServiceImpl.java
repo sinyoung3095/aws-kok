@@ -13,4 +13,9 @@ public class EvaluationServiceImpl implements EvaluationService {
     public void review(EvaluationDTO evaluation) {
         evaluationDAO.insertEvaluation(evaluation);
     }
+
+    @Override
+    public boolean isReviewed(Long id) {
+        return (evaluationDAO.selectCount(id)>0);
+    }
 }

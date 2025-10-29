@@ -21,7 +21,7 @@ import java.util.List;
 public class ConsoleProfileController {
     private final ConsoleProfileService consoleProfileService;
 
-//    기업 콘솔 프로필 관리
+    //    기업 콘솔 프로필 관리
     @GetMapping("/profile")
     public String goToProfile(@AuthenticationPrincipal CustomUserDetails customUserDetails,
                               Model model) {
@@ -39,13 +39,14 @@ public class ConsoleProfileController {
         return "enterprise-console/profile/console-profile";
     }
 
-//    기업 프로필 수정
+    //    기업 프로필 수정
     @PostMapping("/profile/update")
     public String updateProfile(
             @ModelAttribute ConsoleCompanyProfileDTO companyProfileDTO,
             @RequestParam(value = "profileFile", required = false) MultipartFile profileFile,
             @RequestParam(value = "backgroundFile", required = false) MultipartFile backgroundFile
     ) {
+
         List<MultipartFile> multipartFiles = new ArrayList<>();
 
         if (profileFile != null && !profileFile.isEmpty()) {

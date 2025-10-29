@@ -58,17 +58,27 @@ document.addEventListener("click", async (e) => {
     const zip = new JSZip();
 
     for (let i = 0; i < urls.length; i++) {
-        const url = urls[i];
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`Failed to fetch: ${url}`);
-            const blob = await response.blob();
+        const imageUrl = urls[i];
+        const fileName = fileNames[i];
 
-            zip.file(fileNames[i], blob);
-        } catch (err) {
-            console.error(`Error fetching ${url}:`, err);
+        try {
+            const result = await fetch(imageUrl);
+
+            if (!result.ok) {
+                console.log("이미지 다운로드 실패:", imageUrl);
+                continue;
+            }
+
+            const imageFile = await result.blob();
+            zip.file(fileName, imageFile);
+
+            console.log(`이미지 추가 완료!: ${fileName}`);
+
+        } catch (error) {
+            console.log(`에러: ${imageUrl}`, error);
         }
     }
+
     const content = await zip.generateAsync({ type: 'blob' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(content);

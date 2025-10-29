@@ -21,32 +21,32 @@ function bannerActiveFn() {
     const banners = document.querySelectorAll(".banner-list .ad-banner");
     if(banners.length>0){
         let timer = null;
-    let currentIndex = -1;
+        let currentIndex = -1;
 
-    if (!banners) return;
+        if (!banners) return;
 
-    // 모두 숨기기
-    function hideAll() {
-        banners.forEach((banner) => banner.classList.remove("active"));
-    }
+        // 모두 숨기기
+        function hideAll() {
+            banners.forEach((banner) => banner.classList.remove("active"));
+        }
 
-    // 랜덤 배너 보이기
-    function showRandomBanner() {
-        hideAll();
-        let randomIndex;
-        do {
-            randomIndex = Math.floor(Math.random() * banners.length);
-        } while (randomIndex === currentIndex && banners.length > 1);
-        // 직전 배너와 겹치지 않게 처리
-        banners[randomIndex].classList.add("active");
-        currentIndex = randomIndex;
-    }
+        // 랜덤 배너 보이기
+        function showRandomBanner() {
+            hideAll();
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * banners.length);
+            } while (randomIndex === currentIndex && banners.length > 1);
+            // 직전 배너와 겹치지 않게 처리
+            banners[randomIndex].classList.add("active");
+            currentIndex = randomIndex;
+        }
 
-    // 최초 실행
-    showRandomBanner();
+        // 최초 실행
+        showRandomBanner();
 
-    // 3초마다 랜덤 배너 변경
-    timer = setInterval(showRandomBanner, 5000);
+        // 3초마다 랜덤 배너 변경
+        timer = setInterval(showRandomBanner, 5000);
     }
 }
 bannerActiveFn();
@@ -430,7 +430,7 @@ const showPosts=async ()=>{
             });
         });
     } else{
-         const goToCoBtn=document.querySelector(".go-to-commu");
+        const goToCoBtn=document.querySelector(".go-to-commu");
         goToCoBtn.addEventListener("click",()=>{
             window.location.href=`/community/page`;
         });
@@ -710,7 +710,7 @@ const showInternRequest=async ()=>{
                 reqId=bt.dataset.reqid;
                 // console.log(reqId);
                 cancleReq.addEventListener("click", ()=>{
-                // 지원 취소 fetch
+                    // 지원 취소 fetch
                     retract.style.display = "none";
                     myPageService.deleteRequestIntern(reqId);
                     tr.style.display="none";
@@ -812,7 +812,7 @@ const showExperienceRequest=async ()=>{
                 // console.log(reqId);
                 cancleReq.addEventListener("click", ()=>{
                     tr.style.display="none";
-                // 지원 취소 fetch
+                    // 지원 취소 fetch
                     retract.style.display = "none";
                     myPageService.deleteRequestExperience(reqId);
                 })
@@ -830,6 +830,17 @@ const showExperienceRequest=async ()=>{
 const showStorage=async ()=>{
     const request=await myPageService.loadStorage();
     await myPageLayout.showStorage(request);
+
+    // 팝업 닫기 버튼
+    const popupRemoves = document.querySelectorAll(".popup-close");
+    popupRemoves.forEach((closeBtn) => {
+        closeBtn.addEventListener("click", () => {
+            const popup = closeBtn.closest(".popup-container");
+            if (popup) {
+                popup.classList.remove("active");
+            }
+        });
+    });
 
     const deleteStorageBtns=document.querySelectorAll(".btn-check-container");
     deleteStorageBtns.forEach((btn)=>{
@@ -861,15 +872,16 @@ const showStorage=async ()=>{
 
         fileInput.addEventListener("change", () => {
             if (fileInput.files.length > 0&&fileInput.files.length<2) {
-                console.log("화면에 파일 이름 띄우기");
+                // console.log("화면에 파일 이름 띄우기");
                 formFileLabel.textContent = fileInput.files[0].name;
             }else if(fileInput.files.length>1){
                 formFileLabel.textContent=fileInput.files[0].name+" 외 "+(fileInput.files.length-1)+"개";
             } else {
                 formFileLabel.textContent = "파일";
             }
+            console.log("선택된 파일 수:", fileInput.files.length);
         });
-    //     등록하기 눌렀을 때
+        //     등록하기 눌렀을 때
         const saveBtn=document.getElementById("pop-apply");
 
         saveBtn.addEventListener("click", async (e) => {

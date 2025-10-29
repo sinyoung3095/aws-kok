@@ -151,42 +151,11 @@ function formValidate(){
     return isValid;
 }
 
-// 팝업 수정 확인
-// if(btnUpdate){
-//     btnUpdate.addEventListener("click", async () => {
-//         const isValid = formValidate();
-//
-//         if (isValid) {
-//             const data = {
-//                 experienceNoticeTitle: document.querySelector("#content-title").value,
-//                 experienceNoticeSubtitle: document.querySelector("#content-subtitle").value,
-//                 jobCategoryId: document.querySelector("#job-category").dataset.id,
-//                 experienceStartDate: document.querySelector("#experience-start-date").value,
-//                 experienceEndDate: document.querySelector("#experience-end-date").value,
-//                 experienceNoticeIntroduceJob: document.querySelector("#introduce-job").value,
-//                 experienceMainTasks: document.querySelector("#main-tasks").value,
-//                 experienceNoticeEtc: document.querySelector("#notice-etc").value,
-//                 experienceNoticeStartDate: document.querySelector("#experience-notice-start-date").value,
-//                 experienceNoticeEndDate: document.querySelector("#experience-notice-end-date").value,
-//             }
-//
-//             try {
-//                 await experienceRegisterService.update(id, data);
-//                 alert("공고가 수정되었습니다.");
-//
-//                 window.location.href = "/enterprise-console/experience/list";
-//             } catch (err) {
-//                 console.error(err);
-//                 alert("수정 중 오류가 발생했습니다.");
-//             }
-//         } else {
-//             console.log("유효성 실패!!!!!");
-//         }
-//
-//         popup.style.display = "none";
-//
-//     });
-// }
+function parseYmd(str) {
+    const [y, m, d] = str.split("-").map(Number);
+    // 월은 0부터 시작
+    return new Date(y, m - 1, d, 0, 0, 0, 0).getTime();
+}
 
 // 팝업 등록 및 수정 확인
 btnSubmit.addEventListener("click", async () => {
@@ -196,36 +165,75 @@ btnSubmit.addEventListener("click", async () => {
     const url = !notice.experienceNoticeTitle ? "/create" : `/edit`;
     jobCategoryId.value = dropdownContainer.dataset.id;
 
+    const expStartInput = document.querySelector("#experience-start-date");
+    const expEndInput = document.querySelector("#experience-end-date");
+    const postStartInput = document.querySelector("#experience-notice-start-date");
+    const postEndInput = document.querySelector("#experience-notice-end-date");
+
+    const expStartTS = parseYmd(expStartInput.value);
+    const expEndTS   = parseYmd(expEndInput.value);
+    const postStartTS = parseYmd(postStartInput.value);
+    const postEndTS   = parseYmd(postEndInput.value);
+
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    if (expStartTS < today.getTime()) {
+        alert("체험 시작일은 오늘 이후 날짜여야 합니다.");
+        document.querySelector("#experience-start-date").style.border = "2px solid red";
+        return;
+    }
+
+    if (expEndTS < today.getTime()) {
+        alert("체험 종료일은 오늘 이후 날짜여야 합니다.");
+        document.querySelector("#experience-end-date").style.border = "2px solid red";
+        return;
+    }
+
+    if (postStartTS < today.getTime()) {
+        alert("게시 시작일은 오늘 이후 날짜여야 합니다.");
+        document.querySelector("#experience-notice-start-date").style.border = "2px solid red";
+        return;
+    }
+
+    if (postEndTS < today.getTime()) {
+        alert("게시 종료일은 오늘 이후 날짜여야 합니다.");
+        document.querySelector("#experience-notice-end-date").style.border = "2px solid red";
+        return;
+    }
+
+    // 체험 시작 > 체험 종료
+    if (expStartTS > expEndTS) {
+        alert("체험 시작일은 체험 종료일과 같거나 이전이어야 합니다.");
+        expStartInput.style.border = "2px solid red";
+        expEndInput.style.border = "2px solid red";
+        return;
+    }
+
+    // 게시 시작 > 게시 종료
+    if (postStartTS > postEndTS) {
+        alert("게시 시작일은 게시 종료일과 같거나 이전이어야 합니다.");
+        postStartInput.style.border = "2px solid red";
+        postEndInput.style.border = "2px solid red";
+        return;
+    }
+
+    // 체험 시작 < 게시 시작
+    if (expStartTS < postStartTS) {
+        alert("체험 시작일은 게시 시작일 이후여야 합니다.");
+        expStartInput.style.border = "2px solid red";
+        postStartInput.style.border = "2px solid red";
+        return;
+    }
+
     if (isValid) {
         exForm.setAttribute("action", "/enterprise-console/experience" + url);
         exForm.submit();
         return;
-        // const data = {
-        //     companyId: companyId,
-        //     experienceNoticeTitle: document.querySelector("#content-title").value,
-        //     experienceNoticeSubtitle: document.querySelector("#content-subtitle").value,
-        //     jobCategoryId: document.querySelector("#job-category").dataset.id,
-        //     experienceStartDate: document.querySelector("#experience-start-date").value,
-        //     experienceEndDate: document.querySelector("#experience-end-date").value,
-        //     experienceNoticeIntroduceJob: document.querySelector("#introduce-job").value,
-        //     experienceMainTasks: document.querySelector("#main-tasks").value,
-        //     experienceNoticeEtc: document.querySelector("#notice-etc").value,
-        //     experienceNoticeStartDate: document.querySelector("#experience-notice-start-date").value,
-        //     experienceNoticeEndDate: document.querySelector("#experience-notice-end-date").value,
-        // }
-        // try {
-        //     await experienceRegisterService.register(data);
-        //     alert("공고가 등록되었습니다.");
-        //
-        //     window.location.href = "/enterprise-console/experience/list";
-        // } catch (err) {
-        //     console.error(err);
-        //     alert("수정 중 오류가 발생했습니다.");
-        // }
+
     }
     console.log("유효성 실패!!!!!");
 
-    // popup.style.display = "none";
 });
 
 // 입력 중 border 해제 (실시간)

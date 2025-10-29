@@ -36,9 +36,9 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
         buttonWrap.appendChild(saveBtn);
 
-        form.addEventListener("submit", function () {
-            setTimeout(() => toggleEditMode(false), 500);
-        });
+        // form.addEventListener("submit", function () {
+        //     setTimeout(() => toggleEditMode(false), 500);
+        // });
     }
 
     // 편집 모드 on/off 공통 함수
@@ -49,6 +49,10 @@ document.addEventListener("DOMContentLoaded", function () {
         nameInputs.forEach((input) => {
             input.classList.toggle("not-allowed", !isEditing);
             input.readOnly = !isEditing;
+        });
+
+        document.querySelectorAll("input[type='file']").forEach(input => {
+            input.disabled = !isEditing;
         });
 
         imgUpBtns.forEach((btn) => {

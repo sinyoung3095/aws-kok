@@ -26,5 +26,7 @@ public interface FollowMapper{
 
 //    회원 팔로잉 수
     public int selectFollowingCountByMemberId (Long memberId);
+//    팔로우 전체 수 확인
+    public int selectAllFollow();
 
 }

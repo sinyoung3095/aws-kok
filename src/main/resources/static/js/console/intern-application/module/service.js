@@ -17,5 +17,21 @@ const applicationInternService = (() => {
         }
     };
 
-    return { updateStatus:updateStatus };
+    const downloadResume = async (internNoticeId, memberId) => {
+        const response = await fetch(`/api/enterprise-console/intern/${internNoticeId}/applications/files`, {
+            method: 'POST',
+            body: JSON.stringify([memberId]),
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            }
+        });
+
+        if (!response.ok) {
+            alert("이력서 파일을 찾을 수 없습니다.");
+            return;
+        }
+        return response.json();
+    };
+
+    return { updateStatus:updateStatus, downloadResume:downloadResume };
 })();

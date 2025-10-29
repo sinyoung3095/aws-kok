@@ -60,7 +60,7 @@ const loginButton = document.querySelector('.login-button');
 
 emailInput.addEventListener("keyup", (e) => {
     if (emailInput.value.length > 0 && passwordInput.value.length > 0) {
-        loginButton.classList.remove('login-disabled'); 
+        loginButton.classList.remove('login-disabled');
     } else if (emailInput.value.length === 0 || passwordInput.value.length === 0) {
         loginButton.classList.add('login-disabled');
     }
@@ -81,11 +81,11 @@ loginButton.addEventListener("click",async (e)=>{
 
     const result = await memberService.login({userEmail:email,userPassword:password,userRole:role});
 
-        if(result.accessToken){
-            if(checkRole.value==='member'){location.href='/experience/list';}
-            else{location.href='/enterprise-console';}
+    if(result.accessToken){
+        if(checkRole.value==='member'){location.href='/experience/list';}
+        else{location.href='/enterprise-console';}
 
-        }
+    }
 
 });
 
@@ -138,7 +138,7 @@ loginButton.addEventListener("click", (e) => {
             toastEmail.classList.remove("show-red");
         });
 
-    // 비밀번호가 4자 미만일 때
+        // 비밀번호가 4자 미만일 때
     } else if (passwordInput.value.length < 4) {
         showLoginErrorToast();
 
@@ -154,7 +154,7 @@ loginButton.addEventListener("click", (e) => {
             toastPassword.classList.remove("show-red");
         });
     }
-    
+
 });
 // 카카오 로그인
 const kakaoLoginButton = document.getElementById("kakao-login");
@@ -162,20 +162,20 @@ kakaoLoginButton.addEventListener("click", (e) => {
     if(window.innerWidth<1023){
         console.log("모바일 로그인")
         window.location.href = "/oauth2/authorization/kakao";
-    }else{window.location.href = "http://54.180.112.3:10000/oauth2/authorization/kakao";}
+    }else{window.location.href = "/oauth2/authorization/kakao";}
 });
 // 네이버 로그인
 const naverLoginButton = document.getElementById("naver-login");
 naverLoginButton.addEventListener("click", (e) => {
     if(window.innerWidth<1023){
         window.location.href = "/oauth2/authorization/naver";
-    }else{window.location.href = "http://localhost:10000/oauth2/authorization/naver";}
+    }else{window.location.href = "/oauth2/authorization/naver";}
 });
 
 // 구글 로그인
-const googleLoginButton = document.getElementById("google-login");
-googleLoginButton.addEventListener("click", (e) => {
-    if(window.innerWidth<1023){
-        window.location.href = "/oauth2/authorization/google";
-    }else{window.location.href = "http://localhost:10000/oauth2/authorization/google";}
-});
+// const googleLoginButton = document.getElementById("google-login");
+// googleLoginButton.addEventListener("click", (e) => {
+//     if(window.innerWidth<1023){
+//         window.location.href = "/oauth2/authorization/google";
+//     }else{window.location.href = "/oauth2/authorization/google";}
+// });

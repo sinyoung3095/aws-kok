@@ -912,6 +912,7 @@ div.pop-head{
     line-height: 1.42857;
     padding-block: 6px;
     padding-inline: 8px;
+    text-align: center;
 }
 
 div.hambuger-list,

@@ -175,6 +175,7 @@ div.home-wrap-inner-2{
 
 div.home-top-wrap{
     display: flex;
+    height: 64px;
     margin-block-start: 0px;
     margin-block-end: 24px;
 }
@@ -439,7 +440,7 @@ svg.back-svg{
 }
 
 .job-3.selected {
-  background-color: #e5e5e5;
+    background-color: #e5e5e5;
 }
 
 .job-5 {

@@ -40,4 +40,8 @@ public class FollowDAO {
     public int selectFollowingCountByMemberId(Long memberId) {
         return followMapper.selectFollowingCountByMemberId(memberId);
     }
+//    팔로우 전체 수 조회
+    public int selectAllFollow() {
+        return followMapper.selectAllFollow();
+    }
 }

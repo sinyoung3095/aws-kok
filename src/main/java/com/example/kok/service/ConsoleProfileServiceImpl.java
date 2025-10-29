@@ -28,7 +28,7 @@ public class ConsoleProfileServiceImpl implements ConsoleProfileService {
     private final ConsoleBackgroundFileDAO consoleBackgroundFileDAO;
     private final S3Service s3Service;
 
-//    조회
+    //    조회
     @Override
     @Cacheable(value = "profile", key = "'company_' + #companyId")
     public ConsoleCompanyProfileDTO getProfile(Long companyId) {
@@ -76,14 +76,14 @@ public class ConsoleProfileServiceImpl implements ConsoleProfileService {
 
         files.forEach(file -> {
             file.setFilePath(
-                s3Service.getPreSignedUrl(file.getFilePath(), Duration.ofMinutes(5))
+                    s3Service.getPreSignedUrl(file.getFilePath(), Duration.ofMinutes(5))
             );
         });
 
         profileDTO.setUploadedFiles(files);
     }
 
-//    수정
+    //    수정
     @Override
     @Transactional(rollbackFor = Exception.class)
     @CacheEvict(value = "profile", key = "'company_' + #companyProfileDTO.companyId")
@@ -105,9 +105,27 @@ public class ConsoleProfileServiceImpl implements ConsoleProfileService {
 //        이미지 업로드 처리 (프로필 + 배경)
         if (multipartFiles != null && !multipartFiles.isEmpty()) {
 
+            boolean hasProfileFile = false;
+            boolean hasBackgroundFile = false;
+
+            for (MultipartFile multipartFile : multipartFiles) {
+                if (!multipartFile.isEmpty()) {
+                    if (multipartFile.getName().contains("background")) {
+                        hasBackgroundFile = true;
+                    } else {
+                        hasProfileFile = true;
+                    }
+                }
+            }
+
             // 기존 파일 및 연결 삭제
-            consoleProfileFileDAO.deleteAllFilesByProfileId(companyProfileDTO.getCompanyId());
-            consoleBackgroundFileDAO.deleteAllFilesByProfileId(companyProfileDTO.getCompanyId());
+            if (hasProfileFile) {
+                consoleProfileFileDAO.deleteAllFilesByProfileId(companyProfileDTO.getCompanyId());
+            }
+
+            if (hasBackgroundFile) {
+                consoleBackgroundFileDAO.deleteAllFilesByProfileId(companyProfileDTO.getCompanyId());
+            }
 
             multipartFiles.forEach(multipartFile -> {
                 if (multipartFile.isEmpty()) return;
