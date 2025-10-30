@@ -3,10 +3,11 @@ package com.example.kok.repository;
 import com.example.kok.dto.RequestExperienceDTO;
 import com.example.kok.mapper.RequestExperienceMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class RequestExperienceDAO {
@@ -23,6 +24,7 @@ public class RequestExperienceDAO {
     }
     //    지원 내역 목록 조회
     public List<RequestExperienceDTO> selectAllRequestByUserId(Long id,Long experienceId){
+        log.info("selectAllRequestByUserId id={}",requestExperienceMapper.selectRequestByUserId(id,experienceId).toString());
         return requestExperienceMapper.selectRequestByUserId(id,experienceId);
     }
 //    지원 여부 판별

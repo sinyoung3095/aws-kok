@@ -123,8 +123,25 @@ const postService = (() => {
         return true;
     };
 
+    // 취업률 api 요청
+    const employDataService = async () => {
+        try {
+            const response = await fetch(
+                "https://openapi.gg.go.kr/Grduemplymtgenrlgdhl?KEY=079b6d57592844d18ca18ac7cfbba648&Type=json&pIndex=1&pSize=1000"
+            );
+            const data = await response.json();
+            // return data.Grduemplymtgenrlgdhl[1].row;
+            return data.Grduemplymtgenrlgdhl[1].row.filter(
+                r => r.EMPLYMT_RT && r.EMPLYMT_RT > 0
+            );
+        } catch (err) {
+            console.error("취업률 데이터 불러오기 실패:", err);
+            throw err;
+        }
+    };
 
     return { getList : getList, getOne : getOne, write : write, update : update, remove : remove,
-        postLike : postLike, removeLike : removeLike, reportPost : reportPost};
+        postLike : postLike, removeLike : removeLike, reportPost : reportPost, employDataService : employDataService };
 
 })();
+

@@ -488,3 +488,44 @@ function bannerActiveFn() {
     timer = setInterval(showRandomBanner, 5000);
 }
 bannerActiveFn();
+
+// 취업률 모달창
+function initEmploymentModal() {
+    const employmentBtn = document.getElementById("employment-btn");
+    const modal = document.getElementById("employment-modal");
+    const closeBtn = document.querySelector(".employment-close");
+    const tbody = document.getElementById("employment-table-body");
+
+    if (!employmentBtn || !modal) return;
+
+    // 열기
+    employmentBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        modal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+        tbody.innerHTML = `<tr><td colspan="2">불러오는 중...</td></tr>`;
+
+        try {
+            const rows = await postService.employDataService();
+            employmentLayout.setEmployData(rows);
+        } catch (err) {
+            console.error("취업률 데이터 로딩 실패:", err);
+            tbody.innerHTML = `<tr><td colspan="2">데이터를 불러오는 중 오류가 발생했습니다.</td></tr>`;
+        }
+    });
+
+    // 닫기
+    closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+        document.body.style.overflow = "";
+    });
+
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = "";
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", initEmploymentModal);

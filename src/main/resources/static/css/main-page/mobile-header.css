@@ -155,7 +155,7 @@
 }
 
 /* 사이드바 */
-.mobile-sidebar {
+.sidebar-list {
     pointer-events: none;
     touch-action: none;
     transform: translateX(-100%);
@@ -168,14 +168,13 @@
     bottom: 0;
     flex-direction: column;
     z-index: 10000;
-    width: 280px;
+    /*width: 100%;*/
     position: fixed;
-    background: #ffffff;
     outline: none;
     display: flex;
 }
-.mobile-sidebar.active {
-    transform: translateX(0); 
+.sidebar-list.active {
+    transform: translateX(0);
     pointer-events: auto;
 }
 .sidebar-overlay {
@@ -195,6 +194,8 @@
     gap: 12px;
     height: 100%;
     display: flex;
+    background-color: #fff;
+    width: 85%;
 }
 .sidebar-list-logo-section {
     flex-direction: column;

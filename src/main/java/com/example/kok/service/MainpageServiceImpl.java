@@ -76,13 +76,13 @@ public class MainpageServiceImpl implements MainpageService {
                 if (userProfileService.findProfileById(customUserDetails.getId()) != null) {
                     customUserDetails.setMemberProfileUrl(userProfileService.findProfileById(customUserDetails.getId()));
                 } else {
-                    customUserDetails.setMemberProfileUrl("/images/main-page/image3.png");
+                    customUserDetails.setMemberProfileUrl("/images/member/profile.png");
                 }
             }else if(customUserDetails.getUserRole()== UserRole.COMPANY) {
                 if(companyProfileFileDAO.findCountByCompanyId(customUserDetails.getId()) > 0) {
                     customUserDetails.setMemberProfileUrl(s3Service.getPreSignedUrl(companyProfileFileDAO.findFileByCompanyId(customUserDetails.getId()).getFilePath(), Duration.ofMinutes(10)));
                 }else{
-                    customUserDetails.setMemberProfileUrl("/images/main-page/image3.png");
+                    customUserDetails.setMemberProfileUrl("/images/member/profile.png");
                 }
                 customUserDetails.setCompanyName(companyDAO.findCompanyById(customUserDetails.getId()).getCompanyName());
             }else{
@@ -97,7 +97,7 @@ public class MainpageServiceImpl implements MainpageService {
     public List<RequestExperienceDTO> findRequestExperienceByCompanyId(Long companyId,Long experienceId) {
         List<RequestExperienceDTO> requestExperienceDTO = requestExperienceDAO.selectAllRequestByUserId(companyId, experienceId);
         requestExperienceDTO.forEach(experienceDTO -> {
-            if(companyProfileFileDAO.findFileByCompanyId(experienceDTO.getUserId()).getFilePath()!=null){
+            if(companyProfileFileDAO.findCountByCompanyId(experienceDTO.getUserId())>=1){
                 experienceDTO.setCompanyProfileUrl(s3Service.getPreSignedUrl(companyProfileFileDAO.findFileByCompanyId(experienceDTO.getUserId()).getFilePath(),Duration.ofMinutes(10)));
             }else{
                 experienceDTO.setCompanyProfileUrl("/images/main-page/image.png");

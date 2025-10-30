@@ -49,7 +49,7 @@ const myPageLayout = (() => {
                                                     <div class="setting-14">
                                                         <div class="setting-15 profileWrapCircle">
                                                             <input type="file" name="memberProfileUrl" style="display: none;" class="profile-input">
-                                                            <img alt="image" class="profile-img-round back-gray" draggable="false" loading="lazy" width="80" height="80" decoding="async" data-nimg="1" src="${profileFile||profileFile2 || '/images/main-page/image2.png'}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 80px; max-width: 80px; min-height: 80px; min-width: 80px; object-fit: contain;">
+                                                            <img alt="image" class="profile-img-round back-gray" draggable="false" loading="lazy" width="80" height="80" decoding="async" data-nimg="1" src="${profileFile||profileFile2 || '/images/member/profile.png'}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 80px; max-width: 80px; min-height: 80px; min-width: 80px; object-fit: contain;">
                                                             <div class="setting-16">
                                                                 <bytton class="setting-17">
                                                                     <div class="setting-18">
@@ -259,7 +259,7 @@ const myPageLayout = (() => {
         <div class="post-4">
             <div>
                 <img alt="image" class="back-gray" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1"
-                     src="${profileFile||profileFile2 || '/images/main-page/image2.png'}"
+                     src="${profileFile||profileFile2 || '/images/member/profile.png'}"
                      style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;"/>
             </div>
             <div class="post-5">
@@ -410,7 +410,7 @@ const myPageLayout = (() => {
                         <!-- 좌측상단 -->
                         <div class="reply-21">
                             <div>
-                                <img alt="image" class="back-gray" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="${post.memberProfileUrl || '/images/main-page/image2.png'}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                <img alt="image" class="back-gray" draggable="false" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" src="${post.memberProfileUrl || '/images/member/profile.png'}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
                             </div>
                             <div class="reply-22">
                                 <div class="reply-23">
@@ -522,7 +522,7 @@ const myPageLayout = (() => {
                                 <div class="post-8" style="padding: 8px; border-bottom:none; gap:5px;">
                                     <div class="reply-21">
                                         <div>
-                                            <img alt="image" draggable="false" loading="lazy" width="25" height="25" decoding="async" data-nimg="1" src="${comment.memberProfileUrl || '/images/main-page/image2.png'}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 25px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                            <img alt="image" draggable="false" loading="lazy" width="25" height="25" decoding="async" data-nimg="1" src="${comment.memberProfileUrl || '/images/member/profile.png'}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 25px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
                                         </div>
                                         <div class="reply-22">
                                             <div class="reply-23">
@@ -613,7 +613,7 @@ const myPageLayout = (() => {
                                             <div class="post-8" style="padding: 8px; data-reply-id="${reply.id}" border-bottom:none; gap:5px;">
                                                 <div class="reply-21">
                                                     <div>
-                                                        <img alt="image" draggable="false" loading="lazy" width="25" height="25" decoding="async" data-nimg="1" src="${reply.memberProfileUrl || '/images/main-page/image2.png'}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 25px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
+                                                        <img alt="image" draggable="false" loading="lazy" width="25" height="25" decoding="async" data-nimg="1" src="${reply.memberProfileUrl || '/images/member/profile.png'}" style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 25px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
                                                     </div>
                                                     <div class="reply-22">
                                                         <div class="reply-23">
@@ -722,11 +722,24 @@ const myPageLayout = (() => {
     }
 
     const showExperienceRequest = (request) => {
+        const noContainer=document.querySelector('.exp-request-div');
         const container = document.querySelector('.exp-request-container');
-        if (!container) return;
 
         if (!Array.isArray(request) || request.length === 0) {
-            container.innerHTML = '<p class="no-results">검색 결과가 없습니다.</p>';
+            noContainer.innerHTML = '<div class="post-3">\n' +
+                '                                        <div class="post-13" style="padding-right: 0;padding-left: 0; justify-content: center; display: flex;">\n' +
+                '                                            <div class="post-14" style="margin: 0 auto;">\n' +
+                '                                                <div class="post-15">\n' +
+                '                                                    <div class="post-8" style="margin: 0 auto;">\n' +
+                '                                                        <span>아직 지원한 체험 공고가 없습니다.</span>\n' +
+                '                                                    </div>\n' +
+                '                                                </div>\n' +
+                '                                                <div class="post-9" style="margin: 0 auto;">\n' +
+                '                                                    <p class="post-10">체험 공고에 지원하면 이곳에서 모아볼 수 있습니다.</p>\n' +
+                '                                                </div>\n' +
+                '                                            </div>\n' +
+                '                                        </div>\n' +
+                '                                    </div>';
             return;
         }
 
@@ -779,11 +792,24 @@ const myPageLayout = (() => {
     };
 
     const showInternRequest = (request) => {
+        const noContainer=document.querySelector('.int-request-div');
         const container = document.querySelector('.int-request-container');
-        if (!container) return;
 
         if (!Array.isArray(request) || request.length === 0) {
-            container.innerHTML = '<p class="no-results">검색 결과가 없습니다.</p>';
+            noContainer.innerHTML = '<div class="post-3">\n' +
+                '                                        <div class="post-13" style="padding-right: 0;padding-left: 0; justify-content: center; display: flex;">\n' +
+                '                                            <div class="post-14" style="margin: 0 auto;">\n' +
+                '                                                <div class="post-15">\n' +
+                '                                                    <div class="post-8" style="margin: 0 auto;">\n' +
+                '                                                        <span>아직 지원한 인턴 공고가 없습니다.</span>\n' +
+                '                                                    </div>\n' +
+                '                                                </div>\n' +
+                '                                                <div class="post-9" style="margin: 0 auto;">\n' +
+                '                                                    <p class="post-10">인턴 공고에 지원하면 이곳에서 모아볼 수 있습니다.</p>\n' +
+                '                                                </div>\n' +
+                '                                            </div>\n' +
+                '                                        </div>\n' +
+                '                                    </div>';
             return;
         }
 
@@ -833,11 +859,25 @@ const myPageLayout = (() => {
     };
 
     const showPaymentList=(payments)=>{
+        const noContainer=document.querySelector('.payment-wrap-div');
         const container=document.querySelector(".payment-tbody");
         if(!container) return;
 
         if (!Array.isArray(payments) || payments.length === 0) {
-            container.innerHTML = '<p class="no-results">검색 결과가 없습니다.</p>';
+            noContainer.innerHTML = '<div class="post-3">\n' +
+                '                                        <div class="post-13" style="padding-right: 0;padding-left: 0; justify-content: center; display: flex;">\n' +
+                '                                            <div class="post-14" style="margin: 0 auto;">\n' +
+                '                                                <div class="post-15">\n' +
+                '                                                    <div class="post-8" style="margin: 0 auto;">\n' +
+                '                                                        <span>아직 결제 내역이 없습니다.</span>\n' +
+                '                                                    </div>\n' +
+                '                                                </div>\n' +
+                '                                                <div class="post-9" style="margin: 0 auto;">\n' +
+                '                                                    <p class="post-10"></p>\n' +
+                '                                                </div>\n' +
+                '                                            </div>\n' +
+                '                                        </div>\n' +
+                '                                    </div>';
             return;
         }
 
@@ -1209,12 +1249,19 @@ const myPageLayout = (() => {
                     extension = "default";
                 }
                 html+=`<li class="form-item" data-file-id="${fileId}">
-                                            <div class="file-container">
+                                            <div class="file-container" style="width: 88%;">
                                                 <div class="file-icon">
                                                     <img src="/images/experience/icon_file_${extension}.svg" alt="">
                                                 </div>
-                                                <div class="file-info">
-                                                    <p class="file-label">${originName}</p>
+                                                <div class="file-info" style="width: 80%;">
+                                                    <p class="file-label" style="
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* width: 80%; */
+    display:  -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+">${originName}</p>
 <!--                                                    <span class="file-name">파일이름.xlsx</span>-->
                                                 </div>
                                             </div>

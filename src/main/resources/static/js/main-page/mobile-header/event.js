@@ -1,19 +1,20 @@
 const topLeftBtns = document.querySelectorAll(".top-left");
 const mobileSidebar = document.querySelector(".mobile-sidebar");
+const sidebarList = document.querySelector(".sidebar-list");
 
 const overlay = document.createElement("div");
 overlay.classList.add("sidebar-overlay");
-document.body.appendChild(overlay);
+mobileSidebar.appendChild(overlay);
 
 topLeftBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
-        mobileSidebar.classList.add("active");
+        sidebarList.classList.add("active");
         overlay.classList.add("active");
     });
 });
 
 overlay.addEventListener("click", () => {
-    mobileSidebar.classList.remove("active");
+    sidebarList.classList.remove("active");
     overlay.classList.remove("active");
 });
 

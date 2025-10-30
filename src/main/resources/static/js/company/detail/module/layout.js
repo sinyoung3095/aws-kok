@@ -50,7 +50,7 @@ const companyNoticeLayout = (() => {
                         <a href="/intern/list?sharedCompanyId=${intern.companyId}&sharedInternId=${intern.id}" class="card-link">
                             <div class="card-content">
                                 <p class="card-title">${intern.internNoticeTitle}</p>
-                                <p class="card-desc">${intern.internNoticeSubTitle}</p>
+                                <p class="card-desc">${intern.internNoticeSubtitle}</p>
                             </div>
                         </a>
                     </div>
