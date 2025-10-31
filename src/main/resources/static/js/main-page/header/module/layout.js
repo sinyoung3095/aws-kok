@@ -167,7 +167,7 @@ const headerLayout = (() => {
                                     </div>
                                     <div class="history-detail-modal-status-wrap">
                                         <div class="history-detail-modal-status">`
-            if(experienceDetailDTO[0].requestInternStatus === 'accept') {
+        if(experienceDetailDTO[0].requestExperienceStatus === 'accept') {
                 text += `<span class="history-detail-modal-status-text">합격</span>`
             }else {
                 text += `<span class="history-detail-modal-status-text">서류 접수</span>`

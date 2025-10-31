@@ -59,7 +59,7 @@
                         <div class="etc-1" th:if="${userDTO.userRole.getValue() == 'member' }">
                             <div class="etc-2">
                                 <div class="etc-3">
-                                    <img alt="" width="60" height="60" th:src="${userDTO.memberProfileUrl != null ? userDTO.memberProfileUrl : '/images/main-page/image2.png'}" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain; background-color: #ccc;">
+                                    <img alt="" width="60" height="60" th:src="${userDTO.memberProfileUrl != null ? userDTO.memberProfileUrl : '/images/member/profile.png'}" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain; background-color: #ccc;">
                                 </div>
                                 <div class="etc-4">
                                     <div class="etc-5">
@@ -86,7 +86,7 @@
                         <div class="etc-1" th:if="${userDTO.userRole.getValue() == 'company' }">
                             <div class="etc-2">
                                 <div class="etc-3">
-                                    <img alt="" width="60" height="60" th:src="${companyDTO.companyProfileFile != null ? companyDTO.companyProfileFile : '/images/main-page/image2.png'}" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
+                                    <img alt="" width="60" height="60" th:src="${companyDTO.companyProfileFile != null ? companyDTO.companyProfileFile : '/images/member/profile.png'}" style="color: transparent; border-radius: 999px; max-height: 60px; max-width: 60px; min-height: 60px; min-width: 60px; object-fit: contain;">
                                 </div>
                                 <div class="etc-4">
                                     <div class="etc-5">
@@ -131,7 +131,7 @@
                                     <div class="post-9">
                                         <div>
                                             <img alt="" width="40" height="40"
-                                                 th:src="${experience.filePath}"
+                                                 th:src="${experience.filePath != null ? experience.filePath : '/images/member/profile.png'}"
                                                  style="color: transparent; border-radius: 999px; cursor: pointer; max-height: 40px; max-width: 40px; min-height: 40px; min-width: 40px; object-fit: contain;">
                                         </div>
                                         <div class="post-10">
@@ -267,7 +267,7 @@
                         <div class="popup-header profile">
                             <div class="profile-header">
                                 <div class="profile-avatar">
-                                    <img alt="" th:src="${userDTO.memberProfileUrl != null ? userDTO.memberProfileUrl : '/images/main-page/image2.png'}">
+                                    <img alt="" th:src="${userDTO.memberProfileUrl != null ? userDTO.memberProfileUrl : '/images/member/profile.png'}">
                                 </div>
                                 <div class="profile-info">
                                     <div class="profile-name">

@@ -65,7 +65,7 @@ public class CommunityCommentServiceImpl implements CommunityCommentService {
             } else if (snsProfile != null && !snsProfile.isEmpty()) {
                 comment.setMemberProfileUrl(snsProfile);
             } else {
-                comment.setMemberProfileUrl("/images/main-page/image3.png");
+                comment.setMemberProfileUrl("/images/member/profile.png");
             }
 
             List<ReplyDTO> replies = communityReplyDAO.findAll(comment.getId());
@@ -87,7 +87,7 @@ public class CommunityCommentServiceImpl implements CommunityCommentService {
                 } else if (replySnsProfile != null && !replySnsProfile.isEmpty()) {
                     reply.setMemberProfileUrl(replySnsProfile);
                 } else {
-                    reply.setMemberProfileUrl("/images/main-page/image3.png");
+                    reply.setMemberProfileUrl("/images/member/profile.png");
                 }
             });
 

@@ -851,6 +851,11 @@ button.list-item-header .list-item-title {
     gap: 12px;
     margin-top: 12px;
     padding: 0 8px;
+    height: calc(var(--mobile-window) * 100);
+}
+
+:root {
+    --mobile-window: 1vh;
 }
 
 .detail-header {
@@ -1953,13 +1958,7 @@ input:-internal-autofill-selected {
 /* 반응형 */
 @media (max-width: 1023px) {
     .main-wrap .mob {
-        width: 100%;
-        height: calc(var(--mobile-window) * 100);
-    }
-
-    :root {
-        --mobile-window: 1vh;
-    }
+        width: 100%;}
 
 
     .display-none-list{
