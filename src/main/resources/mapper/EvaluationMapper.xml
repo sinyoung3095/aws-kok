@@ -12,4 +12,11 @@
         from tbl_evaluation
         where member_id=#{id}
     </select>
+    <!--    해당 체험의 평가 개수 조회-->
+    <select id="selectCountThis">
+        select count(*)
+        from tbl_evaluation
+        where member_id=#{memberId}
+          and request_experience_id=#{requestExperienceId}
+    </select>
 </mapper>

@@ -36,9 +36,9 @@ document.addEventListener("click", (e) => {
     }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     const page = 1;
-    memberService.memberList(page, layout.showList);
+    await memberService.memberList(page, layout.showList);
 
     const modal = document.querySelector(".member-modal.modal");
 
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    document.addEventListener("click", (e) => {
+    document.addEventListener("click", async (e) => {
         const pageButton = e.target.closest(".page-item-num");
         if (!pageButton) return;
 
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 parentLi.classList.add("active");
             }
 
-            memberService.memberList(page, layout.showList);
+            await memberService.memberList(page, layout.showList);
         }
     });
 
@@ -113,9 +113,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const searchBtn = document.querySelector(".btn-search");
 
-searchBtn.addEventListener("click", (e) => {
+searchBtn.addEventListener("click", async (e) => {
     const keyword = document.querySelector(".form-control").value.trim();
     const page = 1;
 
-    memberService.memberList(page, layout.showList, keyword);
+    await memberService.memberList(page, layout.showList, keyword);
 })

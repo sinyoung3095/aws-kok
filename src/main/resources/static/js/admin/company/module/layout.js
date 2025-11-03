@@ -44,7 +44,7 @@ const layout = (() => {
             companyListContainer.innerHTML = text;
 
         } else {
-        text = `<tr class="no-data">
+            text = `<tr class="no-data">
                     <td colspan="7">결과가 없습니다.</td>
                 </tr>`;
 
@@ -99,14 +99,11 @@ const layout = (() => {
 
         let experiencesText = ``;
         let internsText = ``;
-        let experiencesCount = 0;
-        let internsCount = 0;
         let text = ``;
 
         if (result.experienceNoticeDTO && result.experienceNoticeDTO.length > 0) {
             result.experienceNoticeDTO.forEach((experiences) => {
                 let status = ``;
-                experiencesCount++;
 
                 if (experiences.experienceNoticeStatus === "active") {
                     status = "모집중"
@@ -139,7 +136,6 @@ const layout = (() => {
         if (result.internNoticeDTO && result.internNoticeDTO.length > 0) {
             result.internNoticeDTO.forEach((requestIntern) => {
                 let status = ``;
-                internsCount++;
 
                 if (requestIntern.internNoticeStatus === "active") {
                     status = "모집중"
@@ -154,7 +150,7 @@ const layout = (() => {
                 internsText += `
                     <tr>
                         <td>${requestIntern.internNoticeTitle}</td>
-                        <td>${requestIntern.internNoticeSubTitle}</td>
+                        <td>${requestIntern.internNoticeSubtitle}</td>
                         <td>${status}</td>
                     </tr>
                 `
@@ -213,7 +209,7 @@ const layout = (() => {
                                                                         </tr> 
                                                                         <tr>
                                                                             <th>기업 링크</th>
-                                                                            <td>${result.companyUrl}</td>
+                                                                            <td>${result.companyUrl ?? '-'}</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>팔로워</th>
@@ -221,7 +217,7 @@ const layout = (() => {
                                                                         </tr>
                                                                         <tr>
                                                                             <th>체험공고 횟수</th>
-                                                                            <td>${experiencesCount}</td>
+                                                                            <td>${result.experienceNoticeCount}</td>
                                                                         </tr> 
                                                                     </tbody>
                                                                 </table>
@@ -244,11 +240,11 @@ const layout = (() => {
                                                                         </tr>
                                                                         <tr>
                                                                             <th>기업규모</th>
-                                                                            <td>${result.companyScaleName}</td>
+                                                                            <td>${result.companyScaleName ?? '-'}</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <th>인턴공고 횟수</th>
-                                                                            <td>${internsCount}</td>
+                                                                            <td>${result.internNoticeCount}</td>
                                                                         </tr> 
                                                                     </tbody>
                                                                 </table>

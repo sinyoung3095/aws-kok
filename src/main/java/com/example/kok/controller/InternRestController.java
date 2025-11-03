@@ -43,7 +43,7 @@ public class InternRestController implements InternRestControllerDocs {
     public String profile(Long companyId){
         CompanyProfileFileDTO profile=companyProfileFileDAO.findFileByCompanyId(companyId);
         if(profile==null){
-            return "/images/main-page/image.png";
+            return "/images/member/profile.png";
         }
         internNoticeService.setPreSignedUrl(profile);
         return profile.getFilePath();

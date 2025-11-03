@@ -53,6 +53,13 @@
         limit 3
     </select>
 
+    <!--  기업별 인턴 모집 총 개수  -->
+    <select id="selectListCountById">
+        select count(*)
+        from tbl_intern_notice
+        where company_id = #{userId}
+    </select>
+
     <sql id="search">
         <if test="search.keyword != null">
             and (

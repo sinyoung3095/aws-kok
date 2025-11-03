@@ -50,8 +50,7 @@ public class CommunityController {
                 model.addAttribute("companyDTO", companyDTO);
             }
 
-            memberService.findMembersByMemberId(memberId)
-                    .ifPresent(userMemberDTO -> model.addAttribute("member", userMemberDTO));
+            memberService.findMembersByMemberId(memberId);
         }
 
         model.addAttribute("posts", communityPostService.getList(1, memberId).getPosts());
